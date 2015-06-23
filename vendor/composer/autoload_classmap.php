@@ -514,4 +514,5 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
     'UnitTypeTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
 );

@@ -26,7 +26,7 @@ class CreateProductTable extends Migration
             $table->boolean('ProductOnlineSell');
             $table->boolean('ProductCanSellRunOut');
             $table->integer('UnitId');
-            $table->integer('PlaceId');
+            $table->integer('PlaceID');
             $table->integer('ProductWaranty');
             $table->timestamps();
         });
