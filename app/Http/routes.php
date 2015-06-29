@@ -11,6 +11,7 @@
 |
 */
 
+    Route::get('/test', 'HomeController@test');
 
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
