@@ -6,16 +6,19 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'CreateBandTable' => $baseDir . '/database/migrations/2015_06_21_170540_createBandTable.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreateProductTable' => $baseDir . '/database/migrations/2015_06_21_164703_create_product_table.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
     'CreateTableCourse' => $baseDir . '/database/migrations/2015_06_29_155426_create_table_course.php',
     'CreateTableCustomer' => $baseDir . '/database/migrations/2015_06_29_154030_create_table_customer.php',
     'CreateTableDoctor' => $baseDir . '/database/migrations/2015_06_29_155148_create_table_doctor.php',
-    'CreateTableEmployee' => $baseDir . '/database/migrations/2015_06_29_160947_create_table_employee.php',
+    'CreateTableEmployee' => $baseDir . '/database/migrations/2015_06_29_164401_create_table_employee.php',
+    'CreateTableOrder' => $baseDir . '/database/migrations/2015_06_30_105055_create_table_order.php',
+    'CreateTableProduct' => $baseDir . '/database/migrations/2015_06_30_104813_create_table_product.php',
+    'CreateTableProductGroup' => $baseDir . '/database/migrations/2015_06_30_104952_create_table_product_group.php',
     'CreateTableProductType' => $baseDir . '/database/migrations/2015_06_29_155848_create_table_product_type.php',
-    'CreateTableUnit' => $baseDir . '/database/migrations/2015_06_22_172547_create_table_unit.php',
+    'CreateTableQuotations' => $baseDir . '/database/migrations/2015_06_30_104558_create_table_quotations.php',
+    'CreateTableQuotationsDetail' => $baseDir . '/database/migrations/2015_06_30_105708_create_table_quotations_detail.php',
+    'CreateTableTreatment' => $baseDir . '/database/migrations/2015_06_30_105526_create_table_treatment.php',
     'CreateTableVendor' => $baseDir . '/database/migrations/2015_06_29_155559_create_table_vendor.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
