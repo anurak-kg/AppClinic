@@ -18,7 +18,6 @@ class CreateTableOrderDetail extends Migration
             $table->integer('order_de_qty_return');
             $table->string('order_de_text',50);
             $table->integer('order_de_price',10);
-            $table->timestamps();
         });
     }
 
