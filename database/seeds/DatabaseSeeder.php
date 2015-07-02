@@ -16,24 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-         $this->call('UnitTypeTableSeeder');
         $this->call('UserTableSeeder');
 
         Model::reguard();
     }
-}
-class UnitTypeTableSeeder extends Seeder {
-
-    public function run()
-    {
-        DB::table('unit')->delete();
-
-        Unit::create(['UnitName' => 'ชิ้น']);
-        Unit::create(['UnitName' => 'ลัง']);
-        Unit::create(['UnitName' => 'โหล']);
-
-    }
-
 }
 class UserTableSeeder extends Seeder {
 

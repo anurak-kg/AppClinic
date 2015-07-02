@@ -51,7 +51,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="skin-red sidebar-mini">
+<body class="skin-red sidebar-collapse ">
 <div class="wrapper">
 
     <!-- Main Header -->
