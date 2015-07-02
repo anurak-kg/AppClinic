@@ -20,6 +20,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
+    Route::get('/', 'HomeController@dashboard');
 
 });
 
@@ -30,4 +31,3 @@ Route::post('/auth',   'UserController@auth');
 
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
-Route::get('/', 'HomeController@dashboard');
