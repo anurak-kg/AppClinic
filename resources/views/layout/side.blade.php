@@ -15,15 +15,18 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">HEADER</li>
-            <li class="active"><a href="{{url('dashboard')}}"><i class='fa fa-link'></i> <span>Dashboard</span></a></li>
-
+            <li class="active"><a href="{{url('dashboard')}}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-users'></i> <span>จัดการพนักงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-database'></i> <span>Course</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">จัดการคอร์า</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-users'></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">จัดการหมอ</a></li>
                     <li><a href="#">จัดการพนักงาน</a></li>
-
-
                 </ul>
             </li>
 
