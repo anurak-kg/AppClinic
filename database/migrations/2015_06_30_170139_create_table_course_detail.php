@@ -15,8 +15,8 @@ class CreateTableCourseDetail extends Migration
         Schema::create('course_detail', function (Blueprint $table) {
             $table->increments('course_de_id');
             $table->string('course_de_name',20);
-            $table->integer('course_de_price',10);
-            $table->integer('course_de_qty',2);
+            $table->integer('course_de_price');
+            $table->integer('course_de_qty');
             $table->date('course_de_date_start');
             $table->date('course_de_date_end');
         });

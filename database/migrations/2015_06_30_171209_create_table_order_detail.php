@@ -13,11 +13,11 @@ class CreateTableOrderDetail extends Migration
     public function up()
     {
         Schema::create('order_detail', function (Blueprint $table) {
-            $table->integer('order_de_qty_buy',10);
-            $table->integer('order_de_qty_rev',10);
+            $table->integer('order_de_qty_buy');
+            $table->integer('order_de_qty_rev');
             $table->integer('order_de_qty_return');
             $table->string('order_de_text',50);
-            $table->integer('order_de_price',10);
+            $table->integer('order_de_price');
         });
     }
 

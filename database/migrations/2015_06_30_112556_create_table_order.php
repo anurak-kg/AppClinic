@@ -16,10 +16,10 @@ class CreateTableOrder extends Migration
             $table->date('order_date');
             $table->string('order_receive_id',4);
             $table->date('order_receive_date');
-            $table->integer('order_total',10);
+            $table->integer('order_total');
             $table->string('order_status',5);
-            $table->integer('order_de_discount',3);
-            $table->integer('order_de_disamount',10);
+            $table->integer('order_de_discount');
+            $table->integer('order_de_disamount');
         });
     }
 

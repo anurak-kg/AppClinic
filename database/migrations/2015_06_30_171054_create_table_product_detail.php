@@ -13,7 +13,7 @@ class CreateTableProductDetail extends Migration
     public function up()
     {
         Schema::create('product_detail', function (Blueprint $table) {
-            $table->integer('product_de_qty',10);
+            $table->integer('product_de_qty');
         });
     }
 
