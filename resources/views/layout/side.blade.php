@@ -17,13 +17,19 @@
             <li class="header">HEADER</li>
             <li class="active"><a href="{{url('dashboard')}}"><i class='fa fa-home'></i> <span>Dashboard</span></a></li>
             <li class="treeview">
-                            <a href="#"><i class='fa fa-edit'></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i></a>
-                            <ul class="treeview-menu">
-                                <li><a href="#">ลงทะเบียนคนไข้ใหม่</a></li>
-                                <li><a href="#">ซื้อคอร์ส</a></li>
-                                <li><a href="#">การรักษา</a></li>
-                            </ul>
-                        </li>
+                <a href="#"><i class='fa fa-edit'></i> <span>Customer</span> <i class="fa fa-angle-left pull-right"></i></a>
+                 <ul class="treeview-menu">
+                  <li><a href="#">ลงทะเบียนคนไข้ใหม่</a></li>
+                  <li><a href="#">ซื้อคอร์ส</a></li>
+                  <li><a href="#">การรักษา</a></li>
+                 </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-th'></i> <span>Medical history</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                   <li><a href="#">ประวัติการรักษา</a></li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-database'></i> <span>Course</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
