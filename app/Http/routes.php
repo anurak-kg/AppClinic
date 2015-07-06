@@ -12,7 +12,7 @@
 */
 
     Route::get('/test', 'HomeController@test');
-
+    Route::get('/course', 'HomeController@course');
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
