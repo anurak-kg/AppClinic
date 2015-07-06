@@ -19,7 +19,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>Customer</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="#">ลงทะเบียนคนไข้ใหม่</a></li>
+                  <li><a href="{{url('customer')}}">ลงทะเบียนคนไข้ใหม่</a></li>
                   <li><a href="#">ซื้อคอร์ส</a></li>
                   <li><a href="#">การรักษา</a></li>
                  </ul>

@@ -26,8 +26,8 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function course(){
-        return view("course");
+    public function manage(){
+        return view("manage");
     }
     public function create()
     {

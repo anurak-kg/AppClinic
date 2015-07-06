@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title','Course')
-@section('headText','Course')
+@section('title','การจัดการคอร์ส')
+@section('headText','Manage Course')
 @section('headDes','การจัดการคอร์ส')
 @section('content')
 
