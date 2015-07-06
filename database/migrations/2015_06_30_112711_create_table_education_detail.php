@@ -14,6 +14,7 @@ class CreateTableEducationDetail extends Migration
     {
         Schema::create('education_detail', function (Blueprint $table) {
             $table->increments('edu_de_id');
+            $table->string('dr_id',4);
             $table->text('edu_de_h');
         });
     }

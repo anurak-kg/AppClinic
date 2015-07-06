@@ -13,7 +13,8 @@ class CreateTableEmployess extends Migration
     public function up()
     {
         Schema::create('employess', function (Blueprint $table) {
-            $table->increments('emp_id');
+            $table->string('emp_id',4);
+            $table->string('branch_id',3);
             $table->string('emp_name',30);
             $table->string('emp_lastname',30);
             $table->string('emp_position',10);

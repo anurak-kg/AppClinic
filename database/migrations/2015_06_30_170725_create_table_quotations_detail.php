@@ -13,7 +13,8 @@ class CreateTableQuotationsDetail extends Migration
     public function up()
     {
         Schema::create('quotations_detail', function (Blueprint $table) {
-            $table->increments('quo_id');
+            $table->string('quo_id',4);
+            $table->string('course_id',5);
             $table->string('quo_t',2);
         });
     }

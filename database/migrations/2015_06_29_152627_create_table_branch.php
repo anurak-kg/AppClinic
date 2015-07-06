@@ -13,7 +13,7 @@ class CreateTableBranch extends Migration
     public function up()
     {
         Schema::create('branch', function (Blueprint $table) {
-            $table->increments('branch_id');
+            $table->string('branch_id',3);
             $table->string('branch_name',30);
             $table->text('branch_address');
             $table->string('branch_tel',10);

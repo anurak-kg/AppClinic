@@ -13,10 +13,10 @@ class CreateTableTreatment extends Migration
     public function up()
     {
         Schema::create('treatment', function (Blueprint $table) {
-            $table->increments('tre_id');
-            $table->integer('quo_id');
-            $table->integer('emp_id');
-            $table->integer('cus_id');
+            $table->string('tre_id',4);
+            $table->string('quo_id',4);
+            $table->string('emp_id',4);
+            $table->string('cus_id',4);
             $table->date('tre_date');
 
         });

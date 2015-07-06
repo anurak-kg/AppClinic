@@ -13,7 +13,7 @@ class CreateTableVendor extends Migration
     public function up()
     {
         Schema::create('vendor', function (Blueprint $table) {
-            $table->increments('ven_id');
+            $table->string('ven_id',4);
             $table->string('ven_name',30);
             $table->text('ven_address');
             $table->string('ven_sell_name',30);

@@ -13,8 +13,8 @@ class CreateTableProductGroup extends Migration
     public function up()
     {
         Schema::create('product_group', function (Blueprint $table) {
-            $table->increments('pg_id');
-            $table->integer('pt_id');
+            $table->string('pg_id',4);
+            $table->string('pt_id',4);
             $table->string('pg_name',30);
 
         });
