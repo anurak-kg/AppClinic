@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Bican\Roles\Models\Role;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdminController extends Controller
+class CustomerController extends Controller
 {
+    public function newcus(){
+        return view("customer/newcus");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +27,6 @@ class AdminController extends Controller
      *
      * @return Response
      */
-
     public function create()
     {
         //
@@ -84,26 +84,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function getAttact(){
-        $user = User::find(1);
-        $user->attachRole(Role::find(1));
-
-    }
-    public function getAddrole(){
-        $adminRole = Role::create([
-            'name' => 'Admin',
-            'slug' => 'admin',
-            'description' => '', // optional
-            'level' => 99, // optional, set to 1 by default
-        ]);
-        $managerRole = Role::create([
-            'name' => 'Manager',
-            'slug' => 'mgr',
-            'description' => '', // optional
-            'level' => 50, // optional, set to 1 by default
-        ]);
-        return "Ok!";
-
     }
 }

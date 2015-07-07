@@ -16,14 +16,14 @@
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
-    Route::post('course/manage', 'AdminController@manage');
-    Route::get('course/manage', 'AdminController@manage');
+    Route::post('course/manage', 'CourseController@manage');
+    Route::get('course/manage', 'CourseController@manage');
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
-    Route::get('customer/customer', 'HomeController@customer');
+    Route::get('customer/newcus', 'CustomerController@newcus');
 
 });
 
