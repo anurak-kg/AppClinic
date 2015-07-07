@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
-    Route::get('customer/newcus', 'CustomerController@newcus');
+    Route::get('customer/newcus', 'CustomerController@create');
 
 });
 
