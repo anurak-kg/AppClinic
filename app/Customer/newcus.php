@@ -4,8 +4,9 @@ namespace App\Customer;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Newcus extends Model
+class Newcus extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
     protected $table = 'customer';
     public function getSex(){
         return $this->getAttribute('sex');

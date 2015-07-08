@@ -46,10 +46,10 @@ class CustomerController extends Controller
     {
         $grid = $this->getCustomerDataGrid();
         $form = DataForm::create();
-        $form->text('cus_id','รหัส')->rule('required');
+        $form->text('cus_id','รหัส')->rule('required|max:8');
         $form->text('cus_name', 'ชื่อ')->rule('required');
         $form->text('cus_lastname', 'นามสกุล')->rule('required');
-        $form->date('cus_birthday','วันเดือนปีเกิด')->rule('required');
+        $form->add('cus_birthday','วันเดือนปีเกิด','date')->format('m/d/Y', 'en');;
         $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
         $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
         $form->text('cus_code','รหัสบัตรประชาชน')->rule('max:13');
@@ -72,8 +72,32 @@ class CustomerController extends Controller
         $form->saved(function () use ($form) {
             $new = new Customer();
             $new->cus_id = Input::get('cus_id');
-            
+            $new->cus_name = Input::get('cus_name');
+            $new->cus_lastname = Input::get('cus_lastname');
+            $new->cus_birthday = Input::get('cus_birthday');
+            $new->cus_sex = Input::get('cus_sex');
+            $new->cus_blood = Input::get('cus_blood');
+            $new->cus_tel = Input::get('cus_tel');
+            $new->cus_phone = Input::get('cus_phone');
+            $new->cus_email = Input::get('cus_email');
+            $new->cus_reg = Input::get('cus_reg');
+            $new->cus_height = Input::get('cus_height');
+            $new->cus_weight = Input::get('cus_weight');
+            $new->cus_hno = Input::get('cus_hno');
+            $new->cus_moo = Input::get('cus_moo');
+            $new->cus_soi = Input::get('cus_soi');
+            $new->cus_alley = Input::get('cus_alley');
+            $new->cus_road = Input::get('cus_road');
+            $new->cus_subdis = Input::get('cus_subdis');
+            $new->cus_district = Input::get('cus_district');
+            $new->cus_province = Input::get('cus_province');
+            $new->cus_postal = Input::get('cus_postal');
+            $new->save();
+            $form->message("ลงทะเบียนเสร็จสิ้น");
+            $form->link("customer/buycourse", "ชื้อคอร์ส");
+            $form->link("#", "กลับสู่หน้าหลัก");
         });
+        $form->build();
         return view('customer/newcus', compact('form','grid'));
     }
 
