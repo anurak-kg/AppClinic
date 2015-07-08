@@ -51,7 +51,7 @@ class CustomerController extends Controller
         $form->text('cus_lastname', 'นามสกุล')->rule('required');
         $form->date('cus_birthday','วันเดือนปีเกิด')->rule('required');
         $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
-        $form->add('cus_blood','กรุ๊ปเลือด','select')->options('A','B','AB','O');
+        $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
         $form->text('cus_code','รหัสบัตรประชาชน')->rule('max:13');
         $form->text('cus_tel','เบอร์โทรศัพทมือถือ์')->rule('max:10');
         $form->text('cus_phone','เบอร์โทรศัพท์บ้าน');
@@ -69,6 +69,11 @@ class CustomerController extends Controller
         $form->text('cus_province','จังหวัด');
         $form->text('cus_postal','รหัสไปรษณีย์');
         $form->submit('Save');
+        $form->saved(function () use ($form) {
+            $new = new Customer();
+            $new->cus_id = Input::get('cus_id');
+            
+        });
         return view('customer/newcus', compact('form','grid'));
     }
 

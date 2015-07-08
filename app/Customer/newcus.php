@@ -13,5 +13,11 @@ class Newcus extends Model
     public function getSexName(){
         return config('sex.sex'.$this->getSex());
     }
+    public function getBlood(){
+        return $this->getAttribute('blood');
+    }
+    public function getBloodName(){
+        return config('sex.blood'.$this->getBlood());
+    }
 }
 
