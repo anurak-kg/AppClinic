@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Lang;
 use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
@@ -49,7 +46,7 @@ class CustomerController extends Controller
         $form->text('cus_id','รหัส')->rule('required|max:8');
         $form->text('cus_name', 'ชื่อ')->rule('required');
         $form->text('cus_lastname', 'นามสกุล')->rule('required');
-        $form->add('cus_birthday','วันเดือนปีเกิด','date')->format('m/d/Y', 'en');;
+        $form->text('cus_birthday','วันเดือนปีเกิด');
         $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
         $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
         $form->text('cus_code','รหัสบัตรประชาชน')->rule('max:13');
@@ -70,7 +67,7 @@ class CustomerController extends Controller
         $form->text('cus_postal','รหัสไปรษณีย์');
         $form->submit('Save');
         $form->saved(function () use ($form) {
-            $new = new Customer();
+            $new = new Customer\newcus();
             $new->cus_id = Input::get('cus_id');
             $new->cus_name = Input::get('cus_name');
             $new->cus_lastname = Input::get('cus_lastname');
