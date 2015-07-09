@@ -18,6 +18,7 @@ class CreateTableDoctor extends Migration
             $table->string('dr_lastname',50);
             $table->string('dr_tel',10);
             $table->string('dr_sex',5);
+            $table->timestamps();
         });
     }
 

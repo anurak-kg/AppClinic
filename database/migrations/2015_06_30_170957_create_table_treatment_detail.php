@@ -16,6 +16,7 @@ class CreateTableTreatmentDetail extends Migration
             $table->string('tre_id',4);
             $table->string('dr_id',4);
             $table->text('tre_de_cm');
+            $table->timestamps();
         });
     }
 

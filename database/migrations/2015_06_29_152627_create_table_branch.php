@@ -18,6 +18,7 @@ class CreateTableBranch extends Migration
             $table->text('branch_address');
             $table->string('branch_tel',10);
             $table->string('branch_code',13);
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class CreateTableDoctorDetail extends Migration
             $table->string('dr_id',4);
             $table->time('dr_de_time');
             $table->date('dr_de_date');
+            $table->timestamps();
         });
     }
 

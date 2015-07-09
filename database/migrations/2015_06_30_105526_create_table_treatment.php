@@ -18,7 +18,7 @@ class CreateTableTreatment extends Migration
             $table->string('emp_id',4);
             $table->string('cus_id',4);
             $table->date('tre_date');
-
+            $table->timestamps();
         });
     }
 

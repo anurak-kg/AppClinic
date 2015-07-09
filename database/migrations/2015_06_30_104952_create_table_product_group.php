@@ -16,7 +16,7 @@ class CreateTableProductGroup extends Migration
             $table->string('pg_id',4);
             $table->string('pt_id',4);
             $table->string('pg_name',30);
-
+            $table->timestamps();
         });
     }
 

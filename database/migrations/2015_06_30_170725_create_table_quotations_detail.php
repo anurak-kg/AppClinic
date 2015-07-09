@@ -16,6 +16,7 @@ class CreateTableQuotationsDetail extends Migration
             $table->string('quo_id',4);
             $table->string('course_id',5);
             $table->string('quo_t',2);
+            $table->timestamps();
         });
     }
 

@@ -18,6 +18,7 @@ class CreateTableQuotations extends Migration
             $table->string('emp_id',4);
             $table->date('quo_date');
             $table->string('quo_status',20);
+            $table->timestamps();
         });
     }
 

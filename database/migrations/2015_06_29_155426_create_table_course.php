@@ -16,6 +16,7 @@ class CreateTableCourse extends Migration
             $table->string('course_id',5);
             $table->string('course_name',50);
             $table->string('course_type',20);
+            $table->timestamps();
         });
     }
 

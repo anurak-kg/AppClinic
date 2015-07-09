@@ -20,6 +20,7 @@ class CreateTableCourseDetail extends Migration
             $table->integer('course_de_qty');
             $table->date('course_de_date_start');
             $table->date('course_de_date_end');
+            $table->timestamps();
         });
     }
 

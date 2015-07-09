@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateTableAllergicDetail' => $baseDir . '/database/migrations/2015_06_30_170622_create_table_allergic_detail.php',
+    'CreateTableAsd' => $baseDir . '/database/migrations/2015_07_09_132330_create_table_asd.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
     'CreateTableCourse' => $baseDir . '/database/migrations/2015_06_29_155426_create_table_course.php',
     'CreateTableCourseDetail' => $baseDir . '/database/migrations/2015_06_30_170139_create_table_course_detail.php',
@@ -17,7 +18,6 @@ return array(
     'CreateTableDoctorDetail' => $baseDir . '/database/migrations/2015_06_30_112644_create_table_doctor_detail.php',
     'CreateTableEducationDetail' => $baseDir . '/database/migrations/2015_06_30_112711_create_table_education_detail.php',
     'CreateTableEmployee' => $baseDir . '/database/migrations/2015_06_29_164401_create_table_employee.php',
-    'CreateTableEmployess' => $baseDir . '/database/migrations/2015_06_30_112107_create_table_employess.php',
     'CreateTableOrder' => $baseDir . '/database/migrations/2015_06_30_105055_create_table_order.php',
     'CreateTableOrderDetail' => $baseDir . '/database/migrations/2015_06_30_171209_create_table_order_detail.php',
     'CreateTableProduct' => $baseDir . '/database/migrations/2015_06_30_104813_create_table_product.php',

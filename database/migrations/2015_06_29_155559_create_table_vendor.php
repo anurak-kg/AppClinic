@@ -20,7 +20,7 @@ class CreateTableVendor extends Migration
             $table->string('ven_sell_tel',10);
             $table->integer('ven_discount_per');
             $table->integer('ven_discount_amount');
-
+            $table->timestamps();
         });
     }
 

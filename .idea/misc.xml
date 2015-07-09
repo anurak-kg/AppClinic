@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/database/migrations/2015_07_09_132253_create_table_asd.php" />
+  </component>
   <component name="ProjectRootManager" version="2" />
 </project>
 

@@ -20,7 +20,7 @@ class CreateTableEmployee extends Migration
             $table->string('emp_position',10);
             $table->string('emp_tel',10);
             $table->string('emp_sex',5);
-
+            $table->timestamps();
         });
     }
 

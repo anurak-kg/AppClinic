@@ -35,6 +35,7 @@ class CreateTableCustomer extends Migration
             $table->string('cus_province',30);
             $table->string('cus_postal',10);
             $table->string('cus_email',60);
+            $table->timestamps();
         });
     }
 

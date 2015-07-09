@@ -22,7 +22,7 @@ class CreateTableProduct extends Migration
             $table->date('product_date_end');
             $table->integer('product_price');
             $table->string('product_unit',10);
-
+            $table->timestamps();
 
         });
     }

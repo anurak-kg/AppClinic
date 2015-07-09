@@ -16,6 +16,7 @@ class CreateTableAllergicDetail extends Migration
             $table->increments('gic_de_id');
             $table->string('cus_id',4);
             $table->text('gic_de_dis');
+            $table->timestamps();
         });
     }
 

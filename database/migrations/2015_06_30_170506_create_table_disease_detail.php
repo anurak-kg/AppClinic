@@ -16,6 +16,7 @@ class CreateTableDiseaseDetail extends Migration
             $table->increments('dis_de_id');
             $table->string('cus_id',4);
             $table->text('dis_de_dis');
+            $table->timestamps();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateTableTrainDetail extends Migration
             $table->date('tra_de_date');
             $table->date('tra_de_end');
             $table->string('tra_de_location',50);
+            $table->timestamps();
         });
     }
 

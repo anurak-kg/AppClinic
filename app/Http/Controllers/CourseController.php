@@ -52,7 +52,7 @@ class CourseController extends Controller
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
         $form->submit('Save');
         $form->saved(function () use ($form) {
-            $user = new User();
+            $user = new Course\newcourse();
             $user->course_id = Input::get('course_id');
             $user->course_name = Input::get('course_name');
             $user->course_type = Input::get('course_type');
