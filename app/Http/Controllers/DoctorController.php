@@ -45,6 +45,7 @@ class DoctorController extends Controller
         $grid->paginate(10);
         return $grid;
     }
+
     public function create()
     {
 
