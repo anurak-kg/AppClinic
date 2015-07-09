@@ -24,7 +24,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
     Route::get('customer/newcus', 'CustomerController@create');
-
+    Route::post('branch/manage', 'BranchController@create');
+    Route::get('branch/manage', 'BranchController@create');
+    Route::post('dr/manage', 'DoctorController@create');
+    Route::get('dr/manage', 'DoctorController@create');
+    Route::post('vendor/manage', 'VendorController@create');
+    Route::get('vendor/manage', 'VendorController@create');
+    Route::post('product_type/manage', 'ProducttypeController@create');
+    Route::get('product_type/manage', 'ProducttypeController@create');
 });
 
 Route::get('/login',    'UserController@getLogin');

@@ -19,7 +19,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>Customer</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="{{url('customer/newcus')}}">ลงทะเบียนคนไข้ใหม่</a></li>
+                  <li><a href="{{url('customer/newcus')}}"><i class='fa fa-user-plus'></i>ลงทะเบียนคนไข้</a></li>
                   <li><a href="#">ซื้อคอร์ส</a></li>
                   <li><a href="#">การรักษา</a></li>
                  </ul>
@@ -33,13 +33,22 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-database'></i> <span>Course</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('course/manage')}}">จัดการคอร์ส</a></li>
+                    <li><a href="{{url('course/manage')}}"><i class='fa fa-plus'></i>จัดการ ข้อมูลคอร์ส</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-users'></i> <span>Users</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-truck'></i> <span>Product</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">จัดการหมอ</a></li>
+                    <li><a href="{{url('product_type/manage')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#"><i class='fa fa-wrench'></i> <span>Manage</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('branch/manage')}}"><i class='fa fa-list'></i>จัดการ ข้อมูลสาขา</a></li>
+                    <li><a href="{{url('dr/manage')}}"><i class='fa fa-user'></i>จัดการ ข้อมูลหมอ</a></li>
+                    <li><a href="{{url('vendor/manage')}}"><i class='fa fa-tag'></i>จัดการ ข้อมูลร้านค้า</a></li>
                     <li><a href="#">จัดการพนักงาน</a></li>
                 </ul>
             </li>
