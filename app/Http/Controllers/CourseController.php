@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
