@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Zofe\Rapyd\Facades\DataForm;
+use Zofe\Rapyd\Facades\DataGrid;
 
 class CourseController extends Controller
 {
@@ -27,9 +32,35 @@ class CourseController extends Controller
      *
      * @return Response
      */
+    public function getUserDataGrid(){
+        $grid = DataGrid::source('course');
+        $grid->add('course_id', 'รหัส');
+        $grid->add('course_name', 'ชื่อคอร์ส');
+        $grid->add('course_type', 'ประเภทคอร์ส');
+        $grid->edit('/rapyd-demo/edit', 'Edit','show|modify');
+        $grid->paginate(10);
+        return $grid;
+    }
     public function create()
     {
-        //
+        //User Table
+        $grid = $this->getUserDataGrid();
+        //User Create
+        $form = DataForm::create();
+        $form->text('course_id', 'รหัส')->rule('required');
+        $form->text('course_name', 'ชื่อคอร์ส')->rule('required');
+        $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
+        $form->submit('Save');
+        $form->saved(function () use ($form) {
+            $user = new User();
+            $user->course_id = Input::get('course_id');
+            $user->course_name = Input::get('course_name');
+            $user->course_type = Input::get('course_type');
+            $user->save();
+            $form->message("ok");
+            $form->link("course/manage", "back to the form");
+        });
+        return view('course/manage', compact('form','grid'));
     }
 
     /**
