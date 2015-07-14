@@ -23,9 +23,35 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
+
+    Route::get('test', 'TestController@index');
+
     Route::get('customer/newcus', 'CustomerController@create');
-    Route::post('branch/manage', 'BranchController@create');
-    Route::get('branch/manage', 'BranchController@create');
+
+
+    //Branch
+    Route::post('branch/manage', 'BranchController@grid');
+    Route::get('branch/manage', 'BranchController@grid');
+
+    Route::post('branch/create', 'BranchController@create');
+    Route::get('branch/create', 'BranchController@create');
+
+    Route::post('branch/edit', 'BranchController@edit');
+    Route::get('branch/edit', 'BranchController@edit');
+    //End Branch
+
+    //Employee
+    Route::post('employee/index', 'EmployeeController@grid');
+    Route::get('employee/index', 'EmployeeController@grid');
+
+    Route::post('employee/create', 'EmployeeController@create');
+    Route::get('employee/create', 'EmployeeController@create');
+
+    Route::post('employee/edit', 'EmployeeController@edit');
+    Route::get('employee/edit', 'EmployeeController@edit');
+
+    //End Employee
+
     Route::post('dr/manage', 'DoctorController@create');
     Route::get('dr/manage', 'DoctorController@create');
     Route::post('vendor/manage', 'VendorController@create');
@@ -35,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/login',    'UserController@getLogin');
-Route::controller('product','ProductController');
+
 
 Route::post('/auth',   'UserController@auth');
 

@@ -4,5 +4,6 @@
 @section('headDes','รายละเอียด')
 @section('content')
 
-    asdkasdjl
+
+
 @stop

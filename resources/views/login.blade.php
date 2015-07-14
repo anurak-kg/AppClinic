@@ -15,7 +15,7 @@
 body, html {
     height: 100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+
 }
 
 .card-container.card {
@@ -36,7 +36,7 @@ body, html {
  * Card component
  */
 .card {
-    background-color: #F7F7F7;
+    background-color: #f2f2f2;
     /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
@@ -172,10 +172,10 @@ body, html {
 
             @endif
 
-            {!! Form::open(['action' => 'UserController@auth', 'method' => 'post', 'class' => 'form-signin']) !!}
+             {!! Form::open(['action' => 'UserController@auth', 'method' => 'post', 'class' => 'form-signin']) !!}
                 <span id="reauth-email" class="reauth-email"></span>
-            {!! Form::input('text', 'username', null, ['class' => 'form-control','id'=>'inputEmail']) !!}
-            {!! Form::input('password', 'password', null, ['class' => 'form-control','id'=>'inputPassword']) !!}
+            {!! Form::input('text', 'username', null, ['class' => 'form-control','id'=>'inputEmail','placeholder'=>'Username...']) !!}
+            {!! Form::input('password', 'password', null, ['class' => 'form-control','id'=>'inputPassword','placeholder'=>'Password...']) !!}
 
                 <div id="remember" class="checkbox">
                     <label>

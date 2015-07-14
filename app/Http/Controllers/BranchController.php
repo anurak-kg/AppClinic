@@ -13,50 +13,56 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 
 class BranchController extends Controller
 {
     public function branch(){
         return view("branch/manage");
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function getDataGrid(){
         $grid = DataGrid::source('branch');
-        $grid->add('branch_id', 'รหัสสาขา');
-        $grid->add('branch_name', 'ชื่อสาขา');
+        $grid->attributes(array("class"=>"table table-striped"));
+        $grid->add('branch_id', 'รหัสสาขา',true);
+        $grid->add('branch_name', 'ชื่อสาขา',true);
         $grid->add('branch_address', 'ที่อยู่สาขา');
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
-        $grid->edit('/rapyd-demo/edit', 'Edit','show|modify');
+        $grid->edit('/branch/edit', 'การกระทำ','modify|delete');
+        $grid->link('branch/create',"เพิ่มข้อมูลใหม่", "TR");
+
         $grid->paginate(10);
+
+
         return $grid;
     }
+
+    public function grid(){
+
+        $grid = $this->getDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('branch_id')) {
+                $row->style("background-color:#EEEEEE");
+            }
+        });
+
+        return view('branch/manage', compact('grid'));
+    }
+
+
     public function create()
     {
 
-        $grid = $this->getDataGrid();
-
         $form = DataForm::create();
-        $form->text('branch_id', 'รหัสสาขา')->rule('required');
-        $form->text('branch_name', 'ชื่อสาขา')->rule('required');
-        $form->text('branch_address', 'ที่อยู่สาขา')->rule('required');
-        $form->text('branch_tel', 'เบอร์โทร')->rule('required');
-        $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required');
-        $form->submit('Save');
+        $form->text('branch_id', 'รหัสสาขา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
+        $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
+        $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
+        $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
+        $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+
+        $form->submit('บันทึก');
+        $form->reset('รีเซ็ต');
         $form->saved(function () use ($form) {
             $user = new Branch\branch();
             $user->branch_id = Input::get('branch_id');
@@ -66,62 +72,29 @@ class BranchController extends Controller
             $user->branch_code = Input::get('branch_code');
             $user->save();
             $form->message("Success");
-            $form->link("course/manage", "Back");
+            $form->link("branch/manage", "Back");
         });
-        return view('branch/manage', compact('form','grid'));
+
+
+
+        return view('branch/create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+    public function edit() {
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source('branch');
+        $edit->link("branch/manage","บันทึก", "TR")->back();
+
+
+        $edit->add('branch_id', 'รหัสสาขา','text');
+        $edit->add('branch_name', 'ชื่อสาขา','text');
+        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
+        $edit->add('branch_tel', 'เบอร์โทร','text');
+        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
+
+
+        return $edit->view('branch/edit', compact('edit'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
