@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Doctor;
 use App\Dr;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
@@ -62,7 +63,7 @@ class DoctorController extends Controller
         $form->link("dr/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
-            $user = new Dr\doctor();
+            $user = new Doctor();
             $user->dr_id = Input::get('dr_id');
             $user->dr_name = Input::get('dr_name');
             $user->dr_lastname = Input::get('dr_lastname');

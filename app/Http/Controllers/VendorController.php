@@ -62,7 +62,7 @@ class VendorController extends Controller
         $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required');
         $form->submit('Save');
         $form->saved(function () use ($form) {
-            $user = new Vendor\vendor();
+            $user = new Vendor();
             $user->ven_id = Input::get('ven_id');
             $user->ven_name = Input::get('ven_name');
             $user->ven_address = Input::get('ven_address');

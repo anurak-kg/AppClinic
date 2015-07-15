@@ -67,7 +67,7 @@ class CustomerController extends Controller
         $form->text('cus_postal','รหัสไปรษณีย์');
         $form->submit('Save');
         $form->saved(function () use ($form) {
-            $new = new Customer\newcus();
+            $new = new Customer();
             $new->cus_id = Input::get('cus_id');
             $new->cus_name = Input::get('cus_name');
             $new->cus_lastname = Input::get('cus_lastname');

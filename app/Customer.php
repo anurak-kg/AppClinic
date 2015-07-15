@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Newcus extends Model implements AuthenticatableContract
+class Customer extends Model implements AuthenticatableContract
 {
     use Authenticatable;
     protected $table = 'customer';

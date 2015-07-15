@@ -66,7 +66,7 @@ class BranchController extends Controller
         $form->link("branch/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
-            $user = new Branch\branch();
+            $user = new Branch();
             $user->branch_id = Input::get('branch_id');
             $user->branch_name = Input::get('branch_name');
             $user->branch_address = Input::get('branch_address');
