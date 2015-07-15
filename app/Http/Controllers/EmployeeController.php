@@ -24,7 +24,7 @@ class EmployeeController extends Controller
 
 
     public function getDataGrid(){
-        $grid = DataGrid::source(\App\employee\employee::with('branch'));
+        $grid = DataGrid::source(Employee::with('branch'));
         $grid->attributes(array("class"=>"table table-striped"));
         $grid->add('emp_id', 'รหัสพนักงาน',true);
         $grid->add('{{ $branch->branch_name }}', 'สาขา','branch_id');
@@ -61,7 +61,7 @@ class EmployeeController extends Controller
 
         $form = DataForm::create();
         $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
-        $form->text('branch_id', 'ชื่อสาขา','select')->options(\App\branch\branch::lists('branch_name','branch_id'));
+        $form->text('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id'));
         $form->textarea('emp_name', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
         $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
