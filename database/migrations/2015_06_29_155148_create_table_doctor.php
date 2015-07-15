@@ -13,11 +13,12 @@ class CreateTableDoctor extends Migration
     public function up()
     {
         Schema::create('doctor', function (Blueprint $table) {
-            $table->increments('dr_id');
+            $table->string('dr_id',4);
             $table->string('dr_name',50);
             $table->string('dr_lastname',50);
             $table->string('dr_tel',10);
             $table->string('dr_sex',5);
+            $table->timestamps();
         });
     }
 

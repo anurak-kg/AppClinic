@@ -21,7 +21,7 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link href="/dist/css/skins/skin-red.min.css" rel="stylesheet" type="text/css" />
+    <link href="/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,16 +51,16 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="skin-red sidebar-collapse sidebar-mini">
+<body class="skin-blue  sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
-            <span class="logo-mini"><b>U</b>S</span>
-            <span class="logo-lg"><b>Ultra System</b></span>
+        <a class="logo">
+            <span class="logo-mini"><b>C</b>n</span>
+            <span class="logo-lg"><b>Clinic</b></span>
         </a>
 
         <!-- Header Navbar -->
@@ -69,14 +69,8 @@ desired effect
    @include('layout.side')
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>
-                @yield('headText')
-                <small>@yield('headDes')</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">Here</li>
-            </ol>
+
+
         </section>
 
         <!-- Main content -->

@@ -13,7 +13,10 @@ class CreateTableProductDetail extends Migration
     public function up()
     {
         Schema::create('product_detail', function (Blueprint $table) {
+            $table->string('tre_id',4);
+            $table->string('product_id',4);
             $table->integer('product_de_qty');
+            $table->timestamps();
         });
     }
 

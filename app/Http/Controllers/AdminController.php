@@ -26,6 +26,7 @@ class AdminController extends Controller
      *
      * @return Response
      */
+
     public function create()
     {
         //

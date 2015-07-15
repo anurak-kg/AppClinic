@@ -13,7 +13,7 @@ class CreateTableCustomer extends Migration
     public function up()
     {
         Schema::create('customer', function (Blueprint $table) {
-            $table->increments('cus_id');
+            $table->string('cus_id',4);
             $table->string('cus_name',50);
             $table->string('cus_lastname',50);
             $table->date('cus_birthday');
@@ -22,6 +22,7 @@ class CreateTableCustomer extends Migration
             $table->string('cus_code',18);
             $table->string('cus_tel',10);
             $table->string('cus_phone',10);
+            $table->string('cus_email',60);
             $table->date('cus_reg');
             $table->integer('cus_height');
             $table->integer('cus_weight');
@@ -34,7 +35,7 @@ class CreateTableCustomer extends Migration
             $table->string('cus_district',30);
             $table->string('cus_province',30);
             $table->string('cus_postal',10);
-            $table->string('cus_email',60);
+            $table->timestamps();
         });
     }
 
