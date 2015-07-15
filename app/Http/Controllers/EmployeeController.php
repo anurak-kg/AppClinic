@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $form->submit('บันทึก');
         $form->link("employee/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
-            $user = new Employee\employee();
+            $user = new Employee();
             $user->emp_id = Input::get('emp_id');
            $user->branch_id = Input::get('branch_id');
             $user->emp_name = Input::get('emp_name');
