@@ -1,0 +1,72 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/encodings.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
++++ .idea/encodings.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+-</project>
+-
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
++++ .idea/misc.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
+@@ -1,5 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectRootManager" version="2" />
+-</project>
+-
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
++++ .idea/vcs.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
+@@ -1,7 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+-
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
++++ .idea/modules.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/AppClinic.iml" filepath="$PROJECT_DIR$/.idea/AppClinic.iml" />
+-    </modules>
+-  </component>
+-</project>
+-
+Index: .idea/scopes/scope_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/scopes/scope_settings.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
++++ .idea/scopes/scope_settings.xml	(revision f0de63389e5d065a77343e9dcc996ba504f6316b)
+@@ -1,5 +0,0 @@
+-<component name="DependencyValidationManager">
+-  <state>
+-    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+-  </state>
+-</component>
+\ No newline at end of file
