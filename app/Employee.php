@@ -10,7 +10,7 @@ class employee extends Model
 
     public function branch()
     {
-        return $this->hasOne('Appclinic\Appclinic\app\branch', 'branch_id');
+        return $this->hasOne('\App\Branch', 'branch_id');
     }
 
 }
