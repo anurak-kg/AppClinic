@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-3">
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -17,7 +17,7 @@
 
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-9">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">{{Lang::get('customer.create')}}</h3>
