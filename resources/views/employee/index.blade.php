@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title','ข้อมูลพนักงาน')
 
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="box box-warning">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลสาขา</h2>
+                    <h2 class="box-title">ข้อมูลพนักงาน</h2>
                 </div>
 
                 <div class="box-body">
