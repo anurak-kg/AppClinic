@@ -18,7 +18,7 @@ use Zofe\Rapyd\Facades\DataEdit;
 class BranchController extends Controller
 {
     public function branch(){
-        return view("branch/manage");
+        return view("branch/index");
     }
 
     public function getDataGrid(){
@@ -47,7 +47,7 @@ class BranchController extends Controller
             }
         });
 
-        return view('branch/manage', compact('grid'));
+        return view('branch/index', compact('grid'));
     }
 
 
@@ -62,7 +62,8 @@ class BranchController extends Controller
         $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
 
         $form->submit('บันทึก');
-        $form->reset('รีเซ็ต');
+        $form->link("branch/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
             $user = new Branch\branch();
             $user->branch_id = Input::get('branch_id');
@@ -71,8 +72,8 @@ class BranchController extends Controller
             $user->branch_tel = Input::get('branch_tel');
             $user->branch_code = Input::get('branch_code');
             $user->save();
-            $form->message("Success");
-            $form->link("branch/manage", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("branch/index", "ย้อนกลับ");
         });
 
 
@@ -84,7 +85,7 @@ class BranchController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source('branch');
-        $edit->link("branch/manage","บันทึก", "TR")->back();
+        $edit->link("branch/index","บันทึก", "TR")->back();
 
 
         $edit->add('branch_id', 'รหัสสาขา','text');

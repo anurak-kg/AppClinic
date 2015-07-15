@@ -44,6 +44,7 @@
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>กลุ่มสินค้า</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-cart-plus'></i>สั่งซื้อ สินค้า</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-money'></i>ชำระเงิน</a></li>
                 </ul>
             </li>
 

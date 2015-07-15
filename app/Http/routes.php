@@ -24,14 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
 
-    Route::get('test', 'TestController@index');
-
     Route::get('customer/newcus', 'CustomerController@create');
 
 
     //Branch
-    Route::post('branch/manage', 'BranchController@grid');
-    Route::get('branch/manage', 'BranchController@grid');
+    Route::post('branch/index', 'BranchController@grid');
+    Route::get('branch/index', 'BranchController@grid');
 
     Route::post('branch/create', 'BranchController@create');
     Route::get('branch/create', 'BranchController@create');

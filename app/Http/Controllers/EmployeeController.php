@@ -69,7 +69,7 @@ class EmployeeController extends Controller
         $form->text('emp_sex', 'เพศ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
 
         $form->submit('บันทึก');
-        $form->reset('รีเซ็ต');
+        $form->link("employee/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
             $user = new Employee\employee();
             $user->emp_id = Input::get('emp_id');
@@ -80,11 +80,9 @@ class EmployeeController extends Controller
             $user->emp_tel = Input::get('emp_tel');
             $user->emp_sex = Input::get('emp_sex');
             $user->save();
-            $form->message("Success");
-            $form->link("employee/index", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("employee/index", "ย้อนกลับ");
         });
-
-
 
         return view("employee/create", compact('form'));
     }
@@ -94,7 +92,6 @@ class EmployeeController extends Controller
 
         $edit = DataEdit::source('branch');
         $edit->link("branch/manage","บันทึก", "TR")->back();
-
 
         $edit->add('branch_id', 'รหัสสาขา','text');
         $edit->add('branch_name', 'ชื่อสาขา','text');
