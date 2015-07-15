@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title','ข้อมูลหมอ')
 
 
 @section('content')
@@ -7,15 +7,15 @@
     <div class="row">
 
         <div class="col-md-5">
-            <div class="box box-solid box-success">
+            <div class="box box-solid box-info">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                    <h2 class="box-title">แก้ไขข้อมูล</h2>
                 </div>
 
                 <div class="box-body" >
 
-                    {!! $form !!}
+                    {!! $edit !!}
                 </div>
 
             </div>

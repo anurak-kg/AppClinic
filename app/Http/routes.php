@@ -50,8 +50,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     //End Employee
 
-    Route::post('dr/manage', 'DoctorController@create');
-    Route::get('dr/manage', 'DoctorController@create');
+
+    //Dr
+    Route::post('dr/index', 'DoctorController@grid');
+    Route::get('dr/index', 'DoctorController@grid');
+
+    Route::post('dr/create', 'DoctorController@create');
+    Route::get('dr/create', 'DoctorController@create');
+
+    Route::post('dr/edit', 'DoctorController@edit');
+    Route::get('dr/edit', 'DoctorController@edit');
+    //End Dr
+
     Route::post('vendor/manage', 'VendorController@create');
     Route::get('vendor/manage', 'VendorController@create');
     Route::post('product_type/manage', 'ProducttypeController@create');

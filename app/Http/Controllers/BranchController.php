@@ -60,6 +60,7 @@ class BranchController extends Controller
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
         $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->attributes(array("class" => " "));
 
         $form->submit('บันทึก');
         $form->link("branch/index", "ย้อนกลับ");

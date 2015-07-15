@@ -1,16 +1,16 @@
 @extends('layout.master')
-@section('title','¢ÈÕ¡Ÿ≈ “¢“')
+@section('title','‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏™‡∏≤‡∏Ç‡∏≤')
 
 
 @section('content')
 
     <div class="row">
 
-        <div class="col-md-5">
-            <div class="box box-warning">
+        <div class="col-md-12">
+            <div class="box box-solid box-primary">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">¢ÈÕ¡Ÿ≈ “¢“</h2>
+                    <h2 class="box-title">‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏™‡∏≤‡∏Ç‡∏≤</h2>
                 </div>
 
                 <div class="box-body">

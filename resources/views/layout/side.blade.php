@@ -22,6 +22,7 @@
                   <li><a href="{{url('customer/newcus')}}"><i class='fa fa-plus'></i>ลงทะเบียน</a></li>
                      <li><a href="{{url('')}}"><i class='fa fa-shopping-cart'></i>ซื้อ คอร์ส</a></li>
                      <li><a href="{{url('')}}"><i class='fa fa-stethoscope'></i>การรักษา</a></li>
+                      <li><a href="{{url('')}}"><i class='fa fa-money'></i>ชำระเงิน</a></li>
                  </ul>
             </li>
             <li class="treeview">
@@ -44,14 +45,14 @@
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>กลุ่มสินค้า</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-cart-plus'></i>สั่งซื้อ สินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-money'></i>ชำระเงิน</a></li>
+
                 </ul>
             </li>
 
             <li class="treeview">
                 <a href="#"><i class='fa fa-user-md'></i> <span>หมอ</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('dr/manage')}}"><i class='fa fa-user'></i>ข้อมูลหมอ</a></li>
+                    <li><a href="{{url('dr/index')}}"><i class='fa fa-user'></i>ข้อมูลหมอ</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-table'></i>ตารางการทำงาน หมอ</a></li>
                 </ul>
             </li>
@@ -59,7 +60,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-gears'></i> <span>การจัดการ</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('branch/manage')}}"><i class='fa fa-list'></i>จัดการ ข้อมูลสาขา</a></li>
+                    <li><a href="{{url('branch/index')}}"><i class='fa fa-list'></i>จัดการ ข้อมูลสาขา</a></li>
 
                     <li><a href="{{url('vendor/manage')}}"><i class='fa fa-tag'></i>จัดการ ข้อมูลร้านค้า</a></li>
                     <li><a href="{{url('employee/index')}}"><i class='fa fa-users'></i>จัดการ ข้อมูลพนักงาน</a></li>
@@ -69,9 +70,9 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-line-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('')}}"><i class='fa fa-area-chart'></i>สรุปประเภทสินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-area-chart'></i>สรุปยอดขายประจำเดือน</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-area-chart'></i>สรุปยอดขายประจำปี</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปประเภทสินค้า</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปยอดขายประจำเดือน</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปยอดขายประจำปี</a></li>
                 </ul>
             </li>
 

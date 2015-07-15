@@ -17,34 +17,35 @@ use Zofe\Rapyd\Facades\DataGrid;
 class DoctorController extends Controller
 {
     public function doctor(){
-        return view("dr/manage");
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
+        return view("dr/index");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+
     public function getDataGrid(){
         $grid = DataGrid::source('doctor');
-        $grid->add('dr_id', 'รหัสหมอ');
+        $grid->add('dr_id', 'รหัสหมอ',true)->style("width:110px");
         $grid->add('dr_name', 'ชื่อหมอ');
         $grid->add('dr_lastname', 'นามสกุล');
         $grid->add('dr_tel', 'เบอร์โทรศัพท์มือถือ');
-        $grid->add('dr_sex', 'เพศ');
-        $grid->edit('/rapyd-demo/edit', 'Edit','show|modify|delete');
+        $grid->add('dr_sex', 'เพศ')->style("width:80x");
+        $grid->edit('/dr/edit', 'การกระทำ','modify|delete');
+        $grid->link('dr/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }
+
+    public function grid(){
+
+        $grid = $this->getDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('dr_id')) {
+                $row->style("background-color:#EEEEEE");
+            }
+        });
+
+        return view('dr/index', compact('grid'));
+    }
+
 
     public function create()
     {
@@ -56,7 +57,10 @@ class DoctorController extends Controller
         $form->text('dr_lastname', 'นามสกุล')->rule('required');
         $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');
         $form->text('dr_sex', 'เพศ')->rule('required');
-        $form->submit('Save');
+        $form->attributes(array("class" => " "));
+        $form->submit('บันทึก');
+        $form->link("dr/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
             $user = new Dr\doctor();
             $user->dr_id = Input::get('dr_id');
@@ -65,63 +69,28 @@ class DoctorController extends Controller
             $user->dr_tel = Input::get('dr_tel');
             $user->dr_sex = Input::get('dr_sex');
             $user->save();
-            $form->message("Success");
-            $form->link("dr/manage", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("dr/manage", "ย้อนกลับ");
         });
-        return view('dr/manage', compact('form','grid'));
+        return view('dr/create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
+   /* public function edit() {
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source('branch');
+        $edit->link("branch/index","บันทึก", "TR")->back();
+
+
+        $edit->add('branch_id', 'รหัสสาขา','text');
+        $edit->add('branch_name', 'ชื่อสาขา','text');
+        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
+        $edit->add('branch_tel', 'เบอร์โทร','text');
+        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
+
+
+        return $edit->view('branch/edit', compact('edit'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   */
 }

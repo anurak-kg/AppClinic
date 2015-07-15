@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title','ข้อมูลหมอ')
 
 
 @section('content')
@@ -13,8 +13,7 @@
                     <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
 
-                <div class="box-body" >
-
+                <div class="box-body">
                     {!! $form !!}
                 </div>
 

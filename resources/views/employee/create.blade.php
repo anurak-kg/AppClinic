@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','¢ÈÕ¡Ÿ≈æπ—°ß“π')
+@section('title','‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏û‡∏ô‡∏±‡∏Å‡∏á‡∏≤‡∏ô')
 
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="box box-warning">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">‡æ‘Ë¡¢ÈÕ¡Ÿ≈ æπ—°ß“π</h2>
+                    <h2 class="box-title">‡πÄ‡∏û‡∏¥‡πà‡∏°‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•</h2>
                 </div>
 
                 <div class="box-body">

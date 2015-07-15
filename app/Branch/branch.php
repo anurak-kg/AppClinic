@@ -20,14 +20,5 @@ class branch extends Model
         return $this->hasOne('Appclinic\Appclinic\app\employee', 'emp_id');
     }
 
-    public function scopeFreesearch($query, $value)
-    {
-        return $query->where('branch_name','like','%'.$value.'%')
-            ->orWhere('branch_code','like','%'.$value.'%')
-            ->orWhereHas('employee', function ($q) use ($value) {
-                $q->whereRaw(" CONCAT(emp_name, ' ', emp_lastname) like ?", array("%".$value."%"));
-            });
-
-    }
 
 }
