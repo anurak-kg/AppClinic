@@ -61,12 +61,13 @@ class EmployeeController extends Controller
 
         $form = DataForm::create();
         $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
-        $form->text('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id'));
-        $form->textarea('emp_name', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
+        $form->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id'));
+        $form->textarea('emp_name', 'ชื่อพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
-        $form->text('emp_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
-        $form->text('emp_sex', 'เพศ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุตำแหน่ง....'));
+        $form->text('emp_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุเบอร์โทร....'));
+        $form->add('emp_sex', 'เพศ','select')->rule('required')->attributes(array('maxlength'=>13))->option('A','โปรดเลือก...')->option('M','ชาย')->option('F','หญิง');
+        $form->attributes(array("class" => " "));
 
         $form->submit('บันทึก');
         $form->link("employee/index", "ย้อนกลับ");
@@ -90,7 +91,7 @@ class EmployeeController extends Controller
     public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $edit = DataEdit::source('branch');
+        $edit = DataEdit::source('employee');
         $edit->link("branch/manage","บันทึก", "TR")->back();
 
         $edit->add('branch_id', 'รหัสสาขา','text');
