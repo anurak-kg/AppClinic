@@ -19,7 +19,8 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>ลูกค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="{{url('customer/newcus')}}"><i class='fa fa-plus'></i>ลงทะเบียน</a></li>
+                  <li><a href="{{url('customer/index')}}"><i class='fa fa-user'></i>ข้อมูลลูกค้า</a></li>
+                  <li><a href="{{url('customer/create')}}"><i class='fa fa-user-plus'></i>ลงทะเบียน</a></li>
                      <li><a href="{{url('')}}"><i class='fa fa-shopping-cart'></i>ซื้อ คอร์ส</a></li>
                      <li><a href="{{url('')}}"><i class='fa fa-stethoscope'></i>การรักษา</a></li>
                       <li><a href="{{url('')}}"><i class='fa fa-money'></i>ชำระเงิน</a></li>
@@ -39,13 +40,20 @@
             </li>
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-medkit'></i> <span>สินค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('product_type/manage')}}"><i class='fa fa-minus'></i>สินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>กลุ่มสินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-cart-plus'></i>สั่งซื้อ สินค้า</a></li>
 
+                <a href="#"><i class='fa fa-medkit'></i> <span>สินค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
+
+                <ul class="treeview-menu">
+                                    <li>
+                                      <a href="#"><i class="fa fa-circle-o"></i> สินค้า <i class="fa fa-angle-left pull-right"></i></a>
+                                      <ul class="treeview-menu">
+                                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'></i>ข้อมูลสินค้า</a></li>
+                                        <li><a href="{{url('product_type/manage')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
+                                        <li><a href="{{url('product_group/index')}}"><i class='fa fa-minus'></i>กลุ่มสินค้า</a></li>
+
+                                      </ul>
+                                    </li>
+                          <li><a href="{{url('order/index')}}"><i class='fa fa-shopping-cart'></i>สั่งซื้อสินค้า</a></li>
                 </ul>
             </li>
 
@@ -68,11 +76,11 @@
             </li>
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-line-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปประเภทสินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปยอดขายประจำเดือน</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-line-chart'></i>สรุปยอดขายประจำปี</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปประเภทสินค้า</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำเดือน</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำปี</a></li>
                 </ul>
             </li>
 

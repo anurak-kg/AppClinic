@@ -29,7 +29,7 @@ class BranchController extends Controller
         $grid->add('branch_address', 'ที่อยู่สาขา');
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
-        $grid->edit('/branch/edit', 'การกระทำ','modify|delete');
+        $grid->edit('/branch/edit', 'กระทำ','modify|delete');
         $grid->link('branch/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
@@ -53,7 +53,6 @@ class BranchController extends Controller
 
     public function create()
     {
-
         $form = DataForm::create();
         $form->text('branch_id', 'รหัสสาขา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
         $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
@@ -76,8 +75,6 @@ class BranchController extends Controller
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("branch/index", "ย้อนกลับ");
         });
-
-
 
         return view('branch/create', compact('form'));
     }

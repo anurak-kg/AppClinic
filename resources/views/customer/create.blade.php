@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลหมอ')
+@section('title','ลงทะเบียน')
 
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="box box-solid box-success">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                    <h2 class="box-title">ลงทะเบียน</h2>
                 </div>
 
                 <div class="box-body">

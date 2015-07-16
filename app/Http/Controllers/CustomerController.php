@@ -11,18 +11,10 @@ use Zofe\Rapyd\Facades\DataGrid;
 
 class CustomerController extends Controller
 {
-    public function newcus(){
-        return view("customer/newcus");
+    public function customer (){
+        return view("customer/index");
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
+
     public function getCustomerDataGrid()
     {
         $grid = DataGrid::source('customer');
@@ -34,14 +26,22 @@ class CustomerController extends Controller
         $grid->paginate(10);
         return $grid;
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+
+    public function grid(){
+
+        $grid = $this->getDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('cus_id')) {
+                $row->style("background-color:#EEEEEE");
+            }
+        });
+
+        return view('customer/index', compact('grid'));
+    }
+
     public function create()
     {
-        $grid = $this->getCustomerDataGrid();
+
         $form = DataForm::create();
         $form->text('cus_id','รหัส')->rule('required|max:8');
         $form->text('cus_name', 'ชื่อ')->rule('required');
@@ -65,7 +65,11 @@ class CustomerController extends Controller
         $form->text('cus_district','อำเภอ/เขต');
         $form->text('cus_province','จังหวัด');
         $form->text('cus_postal','รหัสไปรษณีย์');
+        $form->attributes(array("class" => " "));
+
         $form->submit('Save');
+        $form->link("customer/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
             $new = new Customer();
             $new->cus_id = Input::get('cus_id');
@@ -92,63 +96,11 @@ class CustomerController extends Controller
             $new->save();
             $form->message("ลงทะเบียนเสร็จสิ้น");
             $form->link("customer/buycourse", "ชื้อคอร์ส");
-            $form->link("#", "กลับสู่หน้าหลัก");
+
         });
-        $form->build();
-        return view('customer/newcus', compact('form','grid'));
+
+        return view('customer/create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
