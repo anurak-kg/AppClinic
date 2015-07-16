@@ -5,7 +5,7 @@
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-solid box-primary">
+            <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">ข้อมูลลูกค้า</h2>

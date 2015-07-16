@@ -15,14 +15,15 @@ class CustomerController extends Controller
         return view("customer/index");
     }
 
-    public function getCustomerDataGrid()
+    public function getDataGrid()
     {
         $grid = DataGrid::source('customer');
-        $grid->add('cus_id', 'รหัสลูกค้า');
+        $grid->add('cus_id', 'รหัสลูกค้า',true);
         $grid->add('cus_name', 'ชื่อลูกค้า');
         $grid->add('cus_lastname', 'นามสกุลลูกค้า');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์ลูกค้า');
-        $grid->edit('/rapyd-demo/edit', 'Edit', 'show|modify');
+        $grid->edit('/customer/edit', 'กระทำ','modify|delete');
+        $grid->link('customer/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }

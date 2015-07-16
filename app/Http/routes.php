@@ -26,8 +26,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Customer
+    Route::post('customer/index', 'CustomerController@grid');
+    Route::get('customer/index', 'CustomerController@grid');
+
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
+
 
 
 
@@ -53,7 +57,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('employee/edit', 'EmployeeController@edit');
     Route::get('employee/edit', 'EmployeeController@edit');
-
     //End Employee
 
 
