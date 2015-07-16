@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('dr/edit', 'DoctorController@edit');
     Route::get('dr/edit', 'DoctorController@edit');
+
+    Route::post('dr/calender', 'DoctorController@calender');
+    Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
 
     Route::post('vendor/manage', 'VendorController@create');

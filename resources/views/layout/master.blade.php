@@ -59,8 +59,8 @@ desired effect
 
         <!-- Logo -->
         <a class="logo">
-            <span class="logo-mini"><b>C</b>n</span>
-            <span class="logo-lg"><b>Clinic</b></span>
+            <span class="logo-mini"><b>C</b>D</span>
+            <span class="logo-lg"><b>Clinic</b> Demo</span>
         </a>
 
         <!-- Header Navbar -->

@@ -21,6 +21,9 @@ class DoctorController extends Controller
         return view("dr/index");
     }
 
+    public function calender(){
+        return view("dr/calender");
+    }
 
     public function getDataGrid(){
         $grid = DataGrid::source('doctor');
