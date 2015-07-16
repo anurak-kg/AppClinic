@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890e298c-ce11-4ae0-a0cf-2f3d4b057c4a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Employee.php" afterPath="$PROJECT_DIR$/app/Employee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/employee/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/employee/create.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layout/master.blade.php" afterPath="$PROJECT_DIR$/resources/views/layout/master.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -43,10 +39,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmployeeController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmployeeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5471264" vertical-offset="51" max-vertical-offset="1836">
+            <state vertical-scroll-proportion="-18.307692" vertical-offset="51" max-vertical-offset="1836">
               <caret line="36" column="64" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
               <folding>
                 <element signature="e#121#138#0#PHP" expanded="true" />
@@ -95,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.0" vertical-offset="1676" max-vertical-offset="6868">
-              <caret line="120" column="136" selection-start-line="120" selection-start-column="136" selection-end-line="120" selection-end-column="136" />
+            <state vertical-scroll-proportion="0.62310386" vertical-offset="4634" max-vertical-offset="6851">
+              <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
               <folding>
                 <element signature="e#9536#9558#0#HTML" expanded="true" />
               </folding>
@@ -636,7 +632,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437025129357</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="แก้ไขหน้า home แก้ไข หน้า พนักงาน">
+      <created>1437045414597</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1437045414597</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -724,7 +726,8 @@
     <MESSAGE value="แก้ไข ร้านค้า / แก้ไข เมนู" />
     <MESSAGE value="แก้ไข สินค้า / เมนู" />
     <MESSAGE value="แก้ไขหน้า home" />
-    <option name="LAST_COMMIT_MESSAGE" value="แก้ไขหน้า home" />
+    <MESSAGE value="แก้ไขหน้า home แก้ไข หน้า พนักงาน" />
+    <option name="LAST_COMMIT_MESSAGE" value="แก้ไขหน้า home แก้ไข หน้า พนักงาน" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1133,16 +1136,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.0" vertical-offset="1676" max-vertical-offset="6868">
-          <caret line="120" column="136" selection-start-line="120" selection-start-column="136" selection-end-line="120" selection-end-column="136" />
-          <folding>
-            <element signature="e#9536#9558#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/product/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="561">
@@ -1153,10 +1146,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EmployeeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5471264" vertical-offset="51" max-vertical-offset="1836">
+        <state vertical-scroll-proportion="-18.307692" vertical-offset="51" max-vertical-offset="1836">
           <caret line="36" column="64" selection-start-line="36" selection-start-column="64" selection-end-line="36" selection-end-column="64" />
           <folding>
             <element signature="e#121#138#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62310386" vertical-offset="4634" max-vertical-offset="6851">
+          <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+          <folding>
+            <element signature="e#9536#9558#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
