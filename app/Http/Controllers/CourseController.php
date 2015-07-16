@@ -11,43 +11,44 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
-    public function manage(){
-        return view("course/manage");
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
+    public function course(){
+        return view("course/index");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function getUserDataGrid(){
+    public function getDataGrid(){
         $grid = DataGrid::source('course');
-        $grid->add('course_id', 'รหัส');
+        $grid->add('course_id', 'รหัส',true);
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_type', 'ประเภทคอร์ส');
-        $grid->edit('/rapyd-demo/edit', 'Edit','show|modify');
+        $grid->edit('/course/edit', 'กระทำ','modify|delete');
+        $grid->link('course/create',"เพิ่มข้อมูลใหม่", "TR");
+
         $grid->paginate(10);
         return $grid;
     }
+
+    public function grid(){
+
+        $grid = $this->getDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('course_id')) {
+                $row->style("background-color:#EEEEEE");
+            }
+        });
+
+        return view('course/index', compact('grid'));
+    }
+
     public function create()
     {
-        //User Table
-        $grid = $this->getUserDataGrid();
-        //User Create
         $form = DataForm::create();
         $form->text('course_id', 'รหัส')->rule('required');
         $form->text('course_name', 'ชื่อคอร์ส')->rule('required');
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
-        $form->submit('Save');
+        $form->attributes(array("class" => " "));
+
+        $form->submit('บันทึก');
+        $form->link("course/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
             $user = new Course();
             $user->course_id = Input::get('course_id');
@@ -55,62 +56,9 @@ class CourseController extends Controller
             $user->course_type = Input::get('course_type');
             $user->save();
             $form->message("ok");
-            $form->link("course/manage", "back to the form");
+
         });
-        return view('course/manage', compact('form','grid'));
+        return view('course/create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -16,8 +16,16 @@
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
-    Route::post('course/manage', 'CourseController@create');
-    Route::get('course/manage', 'CourseController@create');
+
+    //Course
+    Route::post('course/index', 'CourseController@grid');
+    Route::get('course/index', 'CourseController@grid');
+
+    Route::post('course/create', 'CourseController@create');
+    Route::get('course/create', 'CourseController@create');
+
+    //End Course
+
 });
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
@@ -31,10 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
-
-
-
-
     //End Customer
 
     //Branch

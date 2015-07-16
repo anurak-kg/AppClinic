@@ -32,7 +32,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-database'></i> <span>คอร์ส</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('course/manage')}}"><i class='fa fa-plus'></i>จัดการ ข้อมูลคอร์ส</a></li>
+                    <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>ข้อมูลคอร์ส</a></li>
                 </ul>
             </li>
 

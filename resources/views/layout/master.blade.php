@@ -56,9 +56,9 @@ desired effect
 
     <!-- Main Header -->
     <header class="main-header">
-
+        <a href="{{url('dashboard')}}" class="logo">
         <!-- Logo -->
-        <a class="logo">
+
             <span class="logo-mini"><b>C</b>D</span>
             <span class="logo-lg"><b>Clinic</b> Demo</span>
         </a>

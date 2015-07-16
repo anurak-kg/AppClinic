@@ -68,7 +68,7 @@ class CustomerController extends Controller
         $form->text('cus_postal','รหัสไปรษณีย์');
         $form->attributes(array("class" => " "));
 
-        $form->submit('Save');
+        $form->submit('บันทึก');
         $form->link("customer/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
