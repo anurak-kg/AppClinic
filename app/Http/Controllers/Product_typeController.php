@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use app\product_type;
+use App\Product_type;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
@@ -28,7 +28,7 @@ class Product_typeController extends Controller
      */
     public function index()
     {
-        //
+        return view("product_type/index");
     }
 
     /**
@@ -56,7 +56,7 @@ class Product_typeController extends Controller
             }
         });
 
-        return view('product_type/manage', compact('grid'));
+        return view('product_type/index', compact('grid'));
     }
 
 
@@ -107,7 +107,11 @@ class Product_typeController extends Controller
      */
     public function edit($id)
     {
-        //
+        //find customer
+        $product_type = Product_type::find($id);
+        //show the edit form
+        return View::make('product_type.edit')->with('product_type', $product_type);
+
     }
 
     /**

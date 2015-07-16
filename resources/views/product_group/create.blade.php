@@ -1,8 +1,9 @@
 @extends('layout.master')
-@section('title','ประเภทสินค้า')
-@section('headText','Product type')
-@section('headDes','ประเภทสินค้า')
+@section('title','กลุ่มสินค้า')
+@section('headText','Product group')
+@section('headDes','กลุ่มสินค้า')
 @section('content')
+
 
     <div class="row">
         <div class="col-md-3">
@@ -13,7 +14,6 @@
                 </div>
                 <div class="box-body">
                     {!! $form !!}
-                    //{{ Form::hidden('id', $product_type->id) }}
                 </div>
 
             </div>
