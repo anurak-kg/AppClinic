@@ -141,10 +141,10 @@
                <div class="row">
 
                  <div class="col-md-12">
-                   <div class="box box-solid box-default">
+                   <div class="box box-solid box-success">
                    <div class="box-header with-border" align="middle">
 
-                                       <h3>ตารางหมอ</h3>
+                                       <h3 class="box-title">ตารางหมอ</h3>
                                        <div class="box-tools pull-right">
                                              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="ย่อ" ><i class="fa fa-minus"></i></button>
                                              <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="ลบ"><i class="fa fa-times"></i></button>
