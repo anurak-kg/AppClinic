@@ -78,8 +78,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
 
-    Route::post('vendor/manage', 'VendorController@create');
-    Route::get('vendor/manage', 'VendorController@create');
+    //Vendor
+    Route::post('vendor/index', 'VendorController@grid');
+    Route::get('vendor/index', 'VendorController@grid');
+
+    Route::post('vendor/create', 'VendorController@create');
+    Route::get('vendor/create', 'VendorController@create');
+
+    //End Vendor
+
+
+
     Route::post('product_type/manage', 'ProducttypeController@create');
     Route::get('product_type/manage', 'ProducttypeController@create');
 });

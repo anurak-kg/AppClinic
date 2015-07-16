@@ -17,40 +17,39 @@ use Zofe\Rapyd\Facades\DataGrid;
 class VendorController extends Controller
 {
     public function vendor(){
-        return view("vendor/manage");
-    }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
+        return view("vendor/index");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function getDataGrid(){
         $grid = DataGrid::source('vendor');
-        $grid->add('ven_id', 'รหัสร้านค้า');
+        $grid->add('ven_id', 'รหัสร้านค้า',true);
         $grid->add('ven_name', 'ชื่อร้านค้า');
         $grid->add('ven_address', 'ที่อยู่ร้านค้า');
         $grid->add('ven_sell_name', 'ชื่อพนักงานขาย');
         $grid->add('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
         $grid->add('ven_discount_per', 'ส่วนลด %');
         $grid->add('ven_discount_amount', 'ส่วนลด บาท');
-        $grid->edit('/rapyd-demo/edit', 'Edit','show|modify|delete');
+        $grid->edit('/vendor/edit', 'กระทำ','modify|delete');
+        $grid->link('vendor/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }
-    public function create()
-    {
+
+    public function grid(){
 
         $grid = $this->getDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('ven_id')) {
+                $row->style("background-color:#EEEEEE");
+            }
+        });
+
+        return view('vendor/index', compact('grid'));
+    }
+
+
+    public function create()
+    {
 
         $form = DataForm::create();
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required');
@@ -60,7 +59,11 @@ class VendorController extends Controller
         $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required');
         $form->text('ven_discount_per', 'ส่วนลด %')->rule('required');
         $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required');
-        $form->submit('Save');
+        $form->attributes(array("class" => " "));
+
+        $form->submit('บันทึก');
+        $form->link("vendor/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
             $user = new Vendor();
             $user->ven_id = Input::get('ven_id');
@@ -71,63 +74,10 @@ class VendorController extends Controller
             $user->ven_discount_per = Input::get('ven_discount_per');
             $user->ven_discount_amount = Input::get('ven_discount_amount');
             $user->save();
-            $form->message("Success");
-            $form->link("vendor/manage", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
         });
-        return view('vendor/manage', compact('form','grid'));
+        return view('vendor/create', compact('form'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
