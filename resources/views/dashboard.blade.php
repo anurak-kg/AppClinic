@@ -130,6 +130,7 @@
                                             </div><!-- /.col -->
                                             <div class="col-md-4">
                                               <ul class="chart-legend clearfix">
+                                              <hr>
                                                 <li><i class="fa fa-circle-o text-red"></i> MELASMA WHITENING</li>
                                                 <li><i class="fa fa-circle-o text-green"></i> ACNE</li>
                                                 <li><i class="fa fa-circle-o text-yellow"></i> AGE REVERSE</li>
