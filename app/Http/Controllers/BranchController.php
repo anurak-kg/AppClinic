@@ -73,7 +73,7 @@ class BranchController extends Controller
             $user->branch_code = Input::get('branch_code');
             $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-            $form->link("branch/index", "ย้อนกลับ");
+
         });
 
         return view('branch/create', compact('form'));

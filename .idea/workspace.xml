@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890e298c-ce11-4ae0-a0cf-2f3d4b057c4a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Product.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/product/create.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/product/edit.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/product/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Quotations.php" afterPath="$PROJECT_DIR$/app/Quotations.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/BranchController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/BranchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -35,11 +30,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49195403" vertical-offset="235" max-vertical-offset="1853">
+            <state vertical-scroll-proportion="-16.461538" vertical-offset="235" max-vertical-offset="1853">
               <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BranchController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BranchController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-26.807692" vertical-offset="408" max-vertical-offset="1615">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="side.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layout/side.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-51.0" vertical-offset="0" max-vertical-offset="1564">
+              <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7034483" vertical-offset="1190" max-vertical-offset="5780">
+              <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -74,7 +99,6 @@
       <list>
         <option value="$PROJECT_DIR$/app/Http/Controllers/DoctorController.php" />
         <option value="$PROJECT_DIR$/resources/views/dr/calender.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/BranchController.php" />
         <option value="$PROJECT_DIR$/resources/views/dr/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/index.blade.php" />
@@ -87,7 +111,6 @@
         <option value="$PROJECT_DIR$/resources/views/course/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/course/manage.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/course/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/vendor/create.blade.php" />
@@ -101,6 +124,8 @@
         <option value="$PROJECT_DIR$/resources/views/product/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/resources/views/product/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/BranchController.php" />
+        <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
       </list>
     </option>
   </component>
@@ -515,7 +540,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437023006148</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="แก้ไข สินค้า / เมนู">
+      <created>1437024532318</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1437024532318</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -576,7 +607,8 @@
     <MESSAGE value="แก้ไข ลูกค้า" />
     <MESSAGE value="แก้ไข คอร์ส" />
     <MESSAGE value="แก้ไข ร้านค้า / แก้ไข เมนู" />
-    <option name="LAST_COMMIT_MESSAGE" value="แก้ไข ร้านค้า / แก้ไข เมนู" />
+    <MESSAGE value="แก้ไข สินค้า / เมนู" />
+    <option name="LAST_COMMIT_MESSAGE" value="แก้ไข สินค้า / เมนู" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -846,14 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.384615" vertical-offset="1394" max-vertical-offset="5780">
-          <caret line="104" column="52" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/warehouse/dashboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="896">
@@ -944,14 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BranchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.576923" vertical-offset="408" max-vertical-offset="1615">
-          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.730769" vertical-offset="714" max-vertical-offset="1972">
@@ -967,14 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="561">
           <caret line="12" column="54" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layout/side.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0781609" vertical-offset="388" max-vertical-offset="1564">
-          <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -997,8 +1005,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49195403" vertical-offset="235" max-vertical-offset="1853">
+        <state vertical-scroll-proportion="-16.461538" vertical-offset="235" max-vertical-offset="1853">
           <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BranchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.807692" vertical-offset="408" max-vertical-offset="1615">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/side.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-51.0" vertical-offset="0" max-vertical-offset="1564">
+          <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7034483" vertical-offset="1190" max-vertical-offset="5780">
+          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
           <folding />
         </state>
       </provider>

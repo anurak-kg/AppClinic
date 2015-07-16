@@ -76,7 +76,7 @@
                                  <div class="icon">
                                    <i class="ion ion-ios-cart"></i>
                                  </div>
-                              <a href="{{url('customer/create')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
+                              <a href="{{url('')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
                               </div>
                           </div><!-- ./col -->
 
@@ -90,7 +90,7 @@
                             <div class="icon">
                                <i class="ion ion-heart"></i>
                              </div>
-                            <a href="{{url('customer/create')}}" class="small-box-footer">การรักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('')}}" class="small-box-footer">การรักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 
@@ -104,7 +104,7 @@
                             <div class="icon">
                                <i class="fa fa-money"></i>
                              </div>
-                            <a href="{{url('customer/create')}}" class="small-box-footer">ชำระเงิน   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('')}}" class="small-box-footer">ชำระเงิน   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 
