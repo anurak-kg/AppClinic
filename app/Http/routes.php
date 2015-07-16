@@ -57,6 +57,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //End Product
 
+    //Product_detail
+    Route::post('product_detail/index', 'Product_detailController@grid');
+    Route::get('product_detail/index', 'Product_detailController@grid');
+
+
+    //End Product_detail
+
 
     //Branch
     Route::post('branch/index', 'BranchController@grid');
