@@ -33,13 +33,9 @@ class ProductController extends Controller
         $grid->add('product_date_end', 'วันที่หมดอายุ',true);
         $grid->add('product_price', 'ราคา/หน่วย');
         $grid->add('product_unit', 'หน่วยนับ',true);
-
         $grid->edit('/product/edit', 'กระทำ','modify|delete');
         $grid->link('product/create',"เพิ่มข้อมูลใหม่", "TR");
-
         $grid->paginate(10);
-
-
         return $grid;
     }
 

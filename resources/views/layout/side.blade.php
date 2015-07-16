@@ -45,8 +45,8 @@
                                       <a href="#"><i class="fa fa-circle-o"></i> สินค้า <i class="fa fa-angle-left pull-right"></i></a>
                                       <ul class="treeview-menu">
                                         <li><a href="{{url('product/index')}}"><i class='fa fa-minus'></i>ข้อมูลสินค้า</a></li>
-                                        <li><a href="{{url('product_type/manage')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
                                         <li><a href="{{url('product_group/index')}}"><i class='fa fa-minus'></i>กลุ่มสินค้า</a></li>
+                                        <li><a href="{{url('product_type/create')}}"><i class='fa fa-minus'></i>ประเภทสินค้า</a></li>
 
                                       </ul>
                                     </li>

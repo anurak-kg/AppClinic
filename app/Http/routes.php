@@ -25,6 +25,13 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('course/create', 'CourseController@create');
 
     //End Course
+    //Product Type
+    Route::post('product_type/index', 'Product_typeController@grid');
+    Route::get('product_type/index', 'Product_typeController@grid');
+
+    Route::post('product_type/create', 'Product_typeController@create');
+    Route::get('product_type/create', 'Product_typeController@create');
+    //End Product Type
 
 });
 Route::group(['middleware' => 'auth'], function () {
@@ -97,10 +104,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //End Vendor
 
-
-
-    Route::post('product_type/manage', 'ProducttypeController@create');
-    Route::get('product_type/manage', 'ProducttypeController@create');
 });
 
 Route::get('/login',    'UserController@getLogin');
