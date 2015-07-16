@@ -20,10 +20,7 @@
                 <a href="#"><i class='fa fa-edit'></i> <span>ลูกค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
                   <li><a href="{{url('customer/index')}}"><i class='fa fa-user'></i>ข้อมูลลูกค้า</a></li>
-                  <li><a href="{{url('customer/create')}}"><i class='fa fa-user-plus'></i>ลงทะเบียน</a></li>
-                     <li><a href="{{url('')}}"><i class='fa fa-shopping-cart'></i>ซื้อ คอร์ส</a></li>
-                     <li><a href="{{url('')}}"><i class='fa fa-stethoscope'></i>การรักษา</a></li>
-                      <li><a href="{{url('')}}"><i class='fa fa-money'></i>ชำระเงิน</a></li>
+
                  </ul>
             </li>
             <li class="treeview">
