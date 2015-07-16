@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890e298c-ce11-4ae0-a0cf-2f3d4b057c4a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -638,7 +637,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437045414597</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="แก้ไข error home">
+      <created>1437045656054</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1437045656054</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -727,7 +732,8 @@
     <MESSAGE value="แก้ไข สินค้า / เมนู" />
     <MESSAGE value="แก้ไขหน้า home" />
     <MESSAGE value="แก้ไขหน้า home แก้ไข หน้า พนักงาน" />
-    <option name="LAST_COMMIT_MESSAGE" value="แก้ไขหน้า home แก้ไข หน้า พนักงาน" />
+    <MESSAGE value="แก้ไข error home" />
+    <option name="LAST_COMMIT_MESSAGE" value="แก้ไข error home" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
