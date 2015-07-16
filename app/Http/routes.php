@@ -41,6 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/create', 'CustomerController@create');
     //End Customer
 
+    //Course_detail
+    Route::post('course_detail/index', 'Course_detailController@grid');
+    Route::get('course_detail/index', 'Course_detailController@grid');
+
+    //End Course_detail
+
+
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');

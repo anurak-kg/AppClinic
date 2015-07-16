@@ -26,12 +26,12 @@
                                  <div class="small-box bg-aqua">
                                     <div class="inner">
                                         <h4>ซื้อคอร์ส</h4>
-                                        <p>สำหรับลูกค้า</p>
+                                        <p>สำหรับสมาชิก</p>
                                     </div>
                                  <div class="icon">
                                    <i class="ion ion-ios-cart"></i>
                                  </div>
-                              <a href="{{url('')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
+                              <a href="{{url('course_detail/index')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
                               </div>
                           </div><!-- ./col -->
 
@@ -39,13 +39,13 @@
                               <!-- small box -->
                            <div class="small-box bg-yellow">
                             <div class="inner">
-                              <h4>รักษา</h4>
-                              <p>สำหรับลูกค้า</p>
+                              <h4>ซื้อสินค้า</h4>
+                              <p>สำหรับลูกค้าทั่วไป</p>
                              </div>
                             <div class="icon">
-                               <i class="ion ion-heart"></i>
+                                        <i class="fa fa-cart-plus"></i>
                              </div>
-                            <a href="{{url('')}}" class="small-box-footer">การรักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 
@@ -53,13 +53,13 @@
                               <!-- small box -->
                            <div class="small-box bg-red">
                             <div class="inner">
-                              <h4>ชำระเงิน</h4>
-                              <p>สำหรับลูกค้า</p>
+                              <h4>รักษา</h4>
+                              <p>สำหรับสมาชิก</p>
                              </div>
                             <div class="icon">
-                               <i class="fa fa-money"></i>
+                                <i class="ion ion-heart"></i>
                              </div>
-                            <a href="{{url('')}}" class="small-box-footer">ชำระเงิน   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 
@@ -116,7 +116,7 @@
 
                                 <div class="box box-solid box-default">
                                         <div class="box-header with-border">
-                                          <h3 class="box-title">คอร์ส</h3>
+                                          <h3 class="box-title">ประเภทคอร์ส</h3>
                                           <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                           </div>
