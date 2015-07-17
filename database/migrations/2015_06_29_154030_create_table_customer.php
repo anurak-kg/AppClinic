@@ -16,7 +16,9 @@ class CreateTableCustomer extends Migration
             $table->increments('cus_id');
             $table->string('cus_name',50);
             $table->string('cus_lastname',50);
-            $table->date('cus_birthday');
+            $table->string('cus_birthday_day',20);
+            $table->string('cus_birthday_month',20);
+            $table->string('cus_birthday_year',20);
             $table->string('cus_sex',5);
             $table->string('cus_blood',3);
             $table->string('cus_code',18);
@@ -29,7 +31,6 @@ class CreateTableCustomer extends Migration
             $table->string('cus_hno',10);
             $table->string('cus_moo',2);
             $table->string('cus_soi',30);
-            $table->string('cus_alley',30);
             $table->string('cus_road',30);
             $table->string('cus_subdis',30);
             $table->string('cus_district',30);

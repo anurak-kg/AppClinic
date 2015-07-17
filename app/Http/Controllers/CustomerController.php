@@ -41,29 +41,30 @@ class CustomerController extends Controller
     {
 
         $form = DataEdit::source(new Customer());
-        $form->text('cus_name', 'ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
-        $form->text('cus_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
-        $form->date('cus_birthday','วันเดือนปีเกิด')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันเดือนปีเกิด....'));
-        $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
-        $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
+        $form->text('cus_name','ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
+        $form->text('cus_lastname','นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
+        $form->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'))->rule('required');
+        $form->add('cus_birthday_month',' ','select')->options(Config::get('sex.month'))->rule('required');
+        $form->add('cus_birthday_year',' ','select')->options(Config::get('sex.year'))->rule('required');
+        $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
+        $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'))->rule('required');
         $form->text('cus_code','รหัสบัตรประชาชน')->rule('required|integer')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
 
-        $form->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุ เบอร์โทรศัพท์มือถือ....'));
-        $form->text('cus_phone','เบอร์โทรศัพท์บ้าน')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุ เบอร์โทรศัพท์บ้าน....'));
-        $form->text('cus_email','E-mail')->rule('required|email')->attributes(array('maxlength'=>200,'placeholder'=>'โปรดระบุ E-mail....'));
+        $form->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'0xxxxxxxxxx'));
+        $form->text('cus_phone','เบอร์โทรศัพท์บ้าน')->attributes(array('maxlength'=>10,'placeholder'=>'xxxxxx'));
+        $form->text('cus_email','E-mail')->rule('required|email')->attributes(array('maxlength'=>200,'placeholder'=>'demo@demo.com'));
         $form->date('cus_reg','วันที่ลงทะเบียน')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันที่ลงทะเบียน....'));
-        $form->text('cus_height','ส่วนสูง')->rule('required|intger')->attributes(array('placeholder'=>'โปรดระบุ ส่วนสูง....'));
-        $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ น้ำหนัก....'));
+        $form->text('cus_height','ส่วนสูง')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ ส่วนสูง....'));
+        $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ น้ำหนัก....'));
 
         $form->text('cus_hno','บ้านเลขที่')->attributes(array('placeholder'=>'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo','หมู่')->attributes(array('placeholder'=>'โปรดระบุ หมู่....'));
-        $form->text('cus_soi','ซอย')->attributes(array('placeholder'=>'โปรดระบุ ซอย....'));
-        $form->text('cus_alley','ตรอก')->attributes(array('placeholder'=>'โปรดระบุ ตรอก....'));
+        $form->text('cus_soi','ซอย/ตรอก')->attributes(array('placeholder'=>'โปรดระบุ ซอย....'));
         $form->text('cus_road','ถนน')->attributes(array('placeholder'=>'โปรดระบุ ถนน....'));
         $form->text('cus_subdis','ตำบล/แขวง')->attributes(array('placeholder'=>'โปรดระบุ ตำบล/แขวง....'));
         $form->text('cus_district','อำเภอ/เขต')->attributes(array('placeholder'=>'โปรดระบุ อำเภอ/เขต....'));
-        $form->text('cus_province','จังหวัด')->attributes(array('placeholder'=>'โปรดระบุ จังหวัด....'));
-        $form->text('cus_postal','รหัสไปรษณีย์')->attributes(array('placeholder'=>'โปรดระบุ รหัสไปรษณีย์....'));
+        $form->add('cus_province','จังหวัด','select')->options(Config::get('sex.province'))->rule('required');
+        $form->text('cus_postal','รหัสไปรษณีย์')->attributes(array('placeholder'=>'โปรดระบุ รหัสไปรษณีย์....'))->rule('required');
 
         $form->attributes(array("class" => " "));
 

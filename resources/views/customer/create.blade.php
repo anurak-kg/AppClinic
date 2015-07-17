@@ -36,17 +36,29 @@
                         </div>
 
 
-
                         <div class="col-md-6">
                             {!! $form->render('cus_code') !!}
                             <br>
                         </div>
 
 
-                        <div class="col-md-6">
-                            {!! $form->render('cus_birthday') !!}
+
+                        <div class="col-md-2">
+                            {!! $form->render('cus_birthday_day') !!}
                             <br>
                         </div>
+
+                        <div class="col-md-2">
+                            {!! $form->render('cus_birthday_month') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-2">
+                            {!! $form->render('cus_birthday_year') !!}
+                            <br>
+                        </div>
+
+
 
 
                         <div class="col-md-6">

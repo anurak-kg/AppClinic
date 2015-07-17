@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'save'    => 'Save',
+    'save'    => 'บันทึก',
     'undo'    => 'Undo',
     'show'    => 'Show',
     'modify'  => 'Modify',
