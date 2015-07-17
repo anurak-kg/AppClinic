@@ -38,12 +38,12 @@
         <span id="reauth-email" class="reauth-email"></span>
 
         <div class="form-group has-feedback">
-        {!! Form::input('text', 'username', null, ['class' => 'form-control','id'=>'inputEmail','placeholder'=>'Username...']) !!}
+        {!! Form::input('text', 'username', null, ['class' => 'form-control','id'=>'inputEmail','placeholder'=>'โปรดระบุ Username...']) !!}
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
 
         <div class="form-group has-feedback">
-        {!! Form::input('password', 'password', null, ['class' => 'form-control','id'=>'inputPassword','placeholder'=>' Password...']) !!}
+        {!! Form::input('password', 'password', null, ['class' => 'form-control','id'=>'inputPassword','placeholder'=>'โปรดระบุ Password...']) !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
 

@@ -4,26 +4,172 @@
 
 @section('content')
 
+    {!! Rapyd::scripts() !!}
+
+ 
+
+    <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
+
     <div class="row">
 
-        <div class="col-md-12">
-            <div class="box box-solid box-success">
+        <div class="col-md-8">
+            <div class="box box-solid box-default">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">ลงทะเบียน</h2>
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title">ข้อมูลลูกค้า</h2>
                 </div>
+                {!! $form->header !!}
+
+                {!! $form->message !!}
+
+                @if(!$form->message)
 
                 <div class="box-body">
-                    <div class="row">
+
+
                         <div class="col-md-6"> {!! $form->render('cus_name') !!}
                         </div>
-                        <div class="col-md-6"></div>
 
-                    </div>
+                        <div class="col-md-6">
+                            {!! $form->render('cus_lastname') !!}
+                        <br>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_code') !!}
+                            <br>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_birthday') !!}
+                            <br>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_sex') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_blood') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_height') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_weight') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_tel') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_phone') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_email') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('cus_reg') !!}
+                            <br>
+                        </div>
+
+
+
+
+
                 </div>
 
             </div>
 
+
+            <div class="box box-solid box-default" >
+
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title" >ที่อยู่</h2>
+                </div>
+
+                <div class="box-body">
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_province') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_district') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_subdis') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_hno') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_moo') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_soi') !!}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_road') !!}
+                        <br>
+                    </div>
+
+
+
+
+
+                    <div class="col-md-6">
+                        {!! $form->render('cus_postal') !!}
+                        <br>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="box box-solid box-default" >
+
+                <div class="box-body">
+
+                    <div class="col-xs-" >
+
+
+                        @endif
+                        {!! $form->footer !!}
+                    </div><!-- /.col -->
+
+
+
+                </div>
+            </div>
 
         </div>
     </div>

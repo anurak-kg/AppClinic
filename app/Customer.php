@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model implements AuthenticatableContract
+class Customer extends Model
 {
-    use Authenticatable;
+
     protected $table = 'customer';
+
+
     public function getSex(){
         return $this->getAttribute('sex');
     }

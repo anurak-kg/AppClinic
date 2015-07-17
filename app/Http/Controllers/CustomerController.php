@@ -5,15 +5,12 @@ namespace App\Http\Controllers;
 use App\Customer;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
-use Zofe\Rapyd\Facades\DataForm;
+use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
 
 class CustomerController extends Controller
 {
-    public function customer (){
-        return view("customer/index");
-    }
 
     public function getDataGrid()
     {
@@ -43,60 +40,37 @@ class CustomerController extends Controller
     public function create()
     {
 
-        $form = DataForm::create();
-        $form->text('cus_id','รหัส')->rule('required|max:8');
-        $form->text('cus_name', 'ชื่อ')->rule('required');
-        $form->text('cus_lastname', 'นามสกุล')->rule('required');
-        $form->text('cus_birthday','วันเดือนปีเกิด');
+        $form = DataEdit::source(new Customer());
+        $form->text('cus_name', 'ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
+        $form->text('cus_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
+        $form->date('cus_birthday','วันเดือนปีเกิด')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันเดือนปีเกิด....'));
         $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
         $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
-        $form->text('cus_code','รหัสบัตรประชาชน')->rule('max:13');
-        $form->text('cus_tel','เบอร์โทรศัพทมือถือ์')->rule('max:10');
-        $form->text('cus_phone','เบอร์โทรศัพท์บ้าน');
-        $form->text('cus_email','E-mail');
-        $form->date('cus_reg','วันที่ลงทะเบียน');
-        $form->text('cus_height','ส่วนสูง');
-        $form->text('cus_weight','น้ำหนัก');
-        $form->text('cus_hno','บ้านเลขที่');
-        $form->text('cus_moo','หมู่');
-        $form->text('cus_soi','ซอย');
-        $form->text('cus_alley','ตรอก');
-        $form->text('cus_road','ถนน');
-        $form->text('cus_subdis','ตำบล/แขวง');
-        $form->text('cus_district','อำเภอ/เขต');
-        $form->text('cus_province','จังหวัด');
-        $form->text('cus_postal','รหัสไปรษณีย์');
+        $form->text('cus_code','รหัสบัตรประชาชน')->rule('required|integer')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
+
+        $form->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุ เบอร์โทรศัพท์มือถือ....'));
+        $form->text('cus_phone','เบอร์โทรศัพท์บ้าน')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุ เบอร์โทรศัพท์บ้าน....'));
+        $form->text('cus_email','E-mail')->rule('required|email')->attributes(array('maxlength'=>200,'placeholder'=>'โปรดระบุ E-mail....'));
+        $form->date('cus_reg','วันที่ลงทะเบียน')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันที่ลงทะเบียน....'));
+        $form->text('cus_height','ส่วนสูง')->rule('required|intger')->attributes(array('placeholder'=>'โปรดระบุ ส่วนสูง....'));
+        $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ น้ำหนัก....'));
+
+        $form->text('cus_hno','บ้านเลขที่')->attributes(array('placeholder'=>'โปรดระบุ บ้านเลขที่....'));
+        $form->text('cus_moo','หมู่')->attributes(array('placeholder'=>'โปรดระบุ หมู่....'));
+        $form->text('cus_soi','ซอย')->attributes(array('placeholder'=>'โปรดระบุ ซอย....'));
+        $form->text('cus_alley','ตรอก')->attributes(array('placeholder'=>'โปรดระบุ ตรอก....'));
+        $form->text('cus_road','ถนน')->attributes(array('placeholder'=>'โปรดระบุ ถนน....'));
+        $form->text('cus_subdis','ตำบล/แขวง')->attributes(array('placeholder'=>'โปรดระบุ ตำบล/แขวง....'));
+        $form->text('cus_district','อำเภอ/เขต')->attributes(array('placeholder'=>'โปรดระบุ อำเภอ/เขต....'));
+        $form->text('cus_province','จังหวัด')->attributes(array('placeholder'=>'โปรดระบุ จังหวัด....'));
+        $form->text('cus_postal','รหัสไปรษณีย์')->attributes(array('placeholder'=>'โปรดระบุ รหัสไปรษณีย์....'));
+
         $form->attributes(array("class" => " "));
 
-        $form->submit('บันทึก');
-        $form->link("customer/index", "ย้อนกลับ");
+
 
         $form->saved(function () use ($form) {
-            $new = new Customer();
-            $new->cus_id = Input::get('cus_id');
-            $new->cus_name = Input::get('cus_name');
-            $new->cus_lastname = Input::get('cus_lastname');
-            $new->cus_birthday = Input::get('cus_birthday');
-            $new->cus_sex = Input::get('cus_sex');
-            $new->cus_blood = Input::get('cus_blood');
-            $new->cus_tel = Input::get('cus_tel');
-            $new->cus_phone = Input::get('cus_phone');
-            $new->cus_email = Input::get('cus_email');
-            $new->cus_reg = Input::get('cus_reg');
-            $new->cus_height = Input::get('cus_height');
-            $new->cus_weight = Input::get('cus_weight');
-            $new->cus_hno = Input::get('cus_hno');
-            $new->cus_moo = Input::get('cus_moo');
-            $new->cus_soi = Input::get('cus_soi');
-            $new->cus_alley = Input::get('cus_alley');
-            $new->cus_road = Input::get('cus_road');
-            $new->cus_subdis = Input::get('cus_subdis');
-            $new->cus_district = Input::get('cus_district');
-            $new->cus_province = Input::get('cus_province');
-            $new->cus_postal = Input::get('cus_postal');
-            $new->save();
             $form->message("ลงทะเบียนเสร็จสิ้น");
-            $form->link("customer/buycourse", "ชื้อคอร์ส");
 
         });
         $form->build();

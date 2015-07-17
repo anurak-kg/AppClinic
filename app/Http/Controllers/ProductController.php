@@ -70,16 +70,6 @@ class ProductController extends Controller
         $form->link("product/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
-            $user = new Product();
-            $user->product_id = Input::get('product_id');
-            $user->pg_id = Input::get('pg_id');
-            $user->product_name = Input::get('product_name');
-            $user->product_qty = Input::get('product_qty');
-            $user->product_qty_order = Input::get('product_qty_order');
-            $user->product_date_end = Input::get('product_date_end');
-            $user->product_price = Input::get('product_price');
-            $user->product_unit = Input::get('product_unit');
-            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
         });
 
