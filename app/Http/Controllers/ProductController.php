@@ -58,7 +58,7 @@ class ProductController extends Controller
         $form->text('product_id', 'รหัสสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสินค้า....'));
         $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
-        $form->text('product_qty', 'จำนวนสินค้าที่มี')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุจำนวนสินค้าที่มี....'));
+        $form->text('product_qty', 'จำนวนสินค้าที่มี')->rule('required','integer')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุจำนวนสินค้าที่มี....'));
         $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
         $form->text('product_date_start', 'วันที่ผลิต')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบวันที่ผลิต....'));
         $form->text('product_date_end', 'วันที่หมดอายุ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่หมดอายุ....'));

@@ -6,7 +6,7 @@
 
     <div class="row">
 
-        <div class="col-md-5" >
+        <div class="col-md-12">
             <div class="box box-solid box-success">
 
                 <div class="box-header with-border">
@@ -14,11 +14,15 @@
                 </div>
 
                 <div class="box-body">
-                    {!! $form !!}
+                    <div class="row">
+                        <div class="col-md-6"> {!! $form->render('cus_name') !!}
+                        </div>
+                        <div class="col-md-6"></div>
+
+                    </div>
                 </div>
 
             </div>
-
 
 
         </div>

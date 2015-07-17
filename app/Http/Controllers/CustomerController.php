@@ -99,6 +99,7 @@ class CustomerController extends Controller
             $form->link("customer/buycourse", "ชื้อคอร์ส");
 
         });
+        $form->build();
 
         return view('customer/create', compact('form'));
     }

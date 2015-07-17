@@ -62,9 +62,9 @@ class Product_typeController extends Controller
 
     public function create()
     {
-
+        $grid = $this->getDataGrid();
         $form = DataForm::create();
-        $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
+        $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required|unique:product_type,pt_name')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
         $form->submit('Save');
         $form->link("product_type/create", "Back");
         $form->attributes(array("class" => " "));
@@ -76,7 +76,7 @@ class Product_typeController extends Controller
             $user->save();
             $form->message("Success");
         });
-        return view('product_type/create', compact('form'));
+        return view('product_type/create', compact('form','grid'));
     }
 
     /**
