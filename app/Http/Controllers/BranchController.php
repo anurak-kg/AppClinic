@@ -22,19 +22,17 @@ class BranchController extends Controller
     }
 
     public function getDataGrid(){
-        $grid = DataGrid::source('branch');
+        $grid = DataGrid::source(new Branch());
         $grid->attributes(array("class"=>"table table-striped"));
         $grid->add('branch_id', 'รหัสสาขา',true);
         $grid->add('branch_name', 'ชื่อสาขา',true);
         $grid->add('branch_address', 'ที่อยู่สาขา');
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
-        $grid->edit('/branch/edit', 'กระทำ','modify|delete');
+        $grid->edit('/branch/edit', 'กระทำ','show|modify|delete');
         $grid->link('branch/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
-
-
         return $grid;
     }
 
@@ -55,7 +53,7 @@ class BranchController extends Controller
     {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $form = DataForm::source(new Branch());
+        $form = DataEdit::source(new Branch());
         $form->text('branch_id', 'รหัสสาขา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
         $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
