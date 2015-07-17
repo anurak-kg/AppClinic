@@ -11,6 +11,10 @@ class Customer extends Model
     protected $table = 'customer';
     protected $primarykey = 'cus_id';
 
+    public function Quotations()
+    {
+        return $this->hasmany('\App\Quotations','cus_id');
+    }
     public function Treatment()
     {
         return $this->hasmany('\App\Treatment','cus_id');
