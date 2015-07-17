@@ -9,6 +9,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Controllers\Controller;
 
 class Product_groupController extends Controller
@@ -55,10 +56,9 @@ class Product_groupController extends Controller
     public function create()
     {
 
-        $form = DataForm::source(Product_type::find(1));
+        $form = DataEdit::source(new Product_group());
         $form->add('pt_id','ประเภทสินค้า','select')->options(product_type::lists('pt_name')->toArray());
-        $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
-        $form->submit('Save');
+        $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required|unique:product_group,pg_name')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
         $form->link("product_group/create", "Back");
         $form->attributes(array("class" => " "));
 
