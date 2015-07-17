@@ -89,8 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('branch/create', 'BranchController@create');
     Route::get('branch/create', 'BranchController@create');
 
-    Route::post('branch/edit', 'BranchController@edit');
-    Route::get('branch/edit', 'BranchController@edit');
+    Route::post('branch/edit', 'BranchController@create');
+    Route::get('branch/edit', 'BranchController@create');
     //End Branch
 
     //Employee

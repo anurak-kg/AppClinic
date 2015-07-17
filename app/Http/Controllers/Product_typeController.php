@@ -64,10 +64,11 @@ class Product_typeController extends Controller
     {
 
         $form = DataForm::create();
-        $form->text('pt_id', 'รหัสประเภทสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสประเภทสินค้า....'));
         $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
         $form->submit('Save');
         $form->link("product_type/create", "Back");
+        $form->attributes(array("class" => " "));
+
         $form->saved(function () use ($form) {
             $user = new Product_type();
             $user->pt_id = Input::get('pt_id');

@@ -14,7 +14,7 @@ class CreateTableProductType extends Migration
     {
         Schema::create('product_type', function (Blueprint $table) {
             $table->increments('pt_id');
-            $table->integer('pt_name');
+            $table->string('pt_name');
             $table->timestamps();
         });
     }

@@ -53,7 +53,9 @@ class BranchController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $form = DataForm::source(new Branch());
         $form->text('branch_id', 'รหัสสาขา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
         $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));

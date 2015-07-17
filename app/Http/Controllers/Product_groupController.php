@@ -32,11 +32,12 @@ class Product_groupController extends Controller
     {
         $grid = DataGrid::source('product_group');
         $grid->attributes(array("class"=>"table table-striped"));
-        $grid->add('');
+        $grid->add('pt_name', 'ชื่อประเภท');
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
         $grid->link('product_group/create',"เพิ่มข้อมูลใหม่", "TR");
+
         $grid->paginate(10);
         return $grid;
     }
@@ -59,6 +60,8 @@ class Product_groupController extends Controller
         $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
         $form->submit('Save');
         $form->link("product_group/create", "Back");
+        $form->attributes(array("class" => " "));
+
         $form->saved(function () use ($form) {
             $user = new Product_group();
             $user->pg_id = Input::get('pg_id');

@@ -13,7 +13,7 @@
                 </div>
                 <div class="box-body">
                     {!! $form !!}
-                    //{{ Form::hidden('id', $product_type->id) }}
+
                 </div>
 
             </div>

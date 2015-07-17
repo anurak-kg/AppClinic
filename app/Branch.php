@@ -10,10 +10,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class branch extends Model
+class Branch extends Model
 {
 
     protected $table = 'branch';
+    protected $primaryKey = 'branch_id';
 
     public function employee()
     {
