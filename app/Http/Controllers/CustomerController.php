@@ -48,7 +48,7 @@ class CustomerController extends Controller
         $form->add('cus_birthday_year',' ','select')->options(Config::get('sex.year'))->rule('required');
         $form->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'))->rule('required');
-        $form->text('cus_code','รหัสบัตรประชาชน')->rule('required|integer')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
+        $form->text('cus_code','รหัสบัตรประชาชน')->rule('required|numeric')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
 
         $form->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'0xxxxxxxxxx'));
         $form->text('cus_phone','เบอร์โทรศัพท์บ้าน')->attributes(array('maxlength'=>10,'placeholder'=>'xxxxxx'));
