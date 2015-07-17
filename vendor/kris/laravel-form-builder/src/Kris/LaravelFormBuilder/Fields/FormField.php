@@ -106,7 +106,7 @@ abstract class FormField
             $this->valueClosure = $value;
         }
 
-        if (($value === false || $value === null || $value instanceof \Closure) && !$isChild) {
+        if (($value === null || $value instanceof \Closure) && !$isChild) {
             $this->setValue($this->getModelValueAttribute($this->parent->getModel(), $this->name));
         } elseif (!$isChild) {
             $this->hasDefault = true;
@@ -328,7 +328,7 @@ abstract class FormField
      */
     public function setOption($name, $value)
     {
-        $this->options[$name] = $value;
+        array_set($this->options, $name, $value);
 
         return $this;
     }
@@ -403,7 +403,7 @@ abstract class FormField
             'default_value' => null,
             'label' => $this->formHelper->formatLabel($this->getRealName()),
             'is_child' => false,
-            'label_attr' => ['class' => $this->formHelper->getConfig('defaults.label_class'), 'for' => $this->name],
+            'label_attr' => ['class' => $this->formHelper->getConfig('defaults.label_class')],
             'errors' => ['class' => $this->formHelper->getConfig('defaults.error_class')]
         ];
     }
@@ -499,5 +499,29 @@ abstract class FormField
         }
 
         return true;
+    }
+
+    /**
+     * Disable field
+     *
+     * @return $this
+     */
+    public function disable()
+    {
+        $this->setOption('attr.disabled', 'disabled');
+
+        return $this;
+    }
+
+    /**
+     * Enable field
+     *
+     * @return $this
+     */
+    public function enable()
+    {
+        array_forget($this->options, 'attr.disabled');
+
+        return $this;
     }
 }

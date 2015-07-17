@@ -6,11 +6,18 @@
 
 # Laravel 5 form builder
 
+[![Join the chat at https://gitter.im/kristijanhusak/laravel-form-builder](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kristijanhusak/laravel-form-builder?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Form builder for Laravel 5 inspired by Symfony's form builder. With help of Laravels FormBuilder class creates forms that can be easy modified and reused.
 By default it supports Bootstrap 3.
 
 ## Laravel 4
 For laravel 4 version check [laravel4-form-builder](https://github.com/kristijanhusak/laravel4-form-builder)
+
+## Upgrade to 1.6
+If you upgraded to `1.6.0`, and having problems with form value binding, rename `default_value` to `value`.
+
+More info in [changelog](https://github.com/kristijanhusak/laravel-form-builder/blob/master/CHANGELOG.md)
 
 ## Documentation
 For detailed documentation refer to [http://kristijanhusak.github.io/laravel-form-builder/](http://kristijanhusak.github.io/laravel-form-builder/).
@@ -49,7 +56,7 @@ And Facade (also in `config/app.php`)
 
 ```
 
-**Notice**: This package will add `illuminate/html` package and load Aliases (Form, Html) if they do not exist in the IoC container
+**Notice**: This package will add `laravelcollective/html` package and load Aliases (Form, Html) if they do not exist in the IoC container
 
 
 ### Quick start
@@ -82,7 +89,7 @@ class SongForm extends Form
 If you want to instantiate empty form without any fields, just skip passing `--fields` parameter:
 
 ```sh
-    php artisan make:form Forms/PostForm
+php artisan make:form Forms/PostForm
 ```
 
 Gives:
@@ -104,7 +111,7 @@ class PostForm extends Form
 After that instantiate the class in the controller and pass it to view:
 
 ```php
-<?php namespace App/Http/Controllers;
+<?php namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -123,19 +130,29 @@ class SongsController extends BaseController {
 }
 ```
 
+Create the routes
+
+```php
+// app/Http/routes.php
+Route::match(['get','post'], 'songs/create', [
+	'uses' => 'SongsController@create',
+	'as' => 'song.create'
+]);
+```
+
 Print the form in view with `form()` helper function:
 
 ```html
 <!-- resources/views/song/create.blade.php -->
 
-@extend('layouts.master')
+@extends('app')
 
 @section('content')
     {!! form($form) !!}
 @endsection
 ```
 
-Above code will generate this html:
+Go to `/songs/create`; above code will generate this html:
 
 ```html
 <form method="POST" action="http://example.dev/songs">

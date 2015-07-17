@@ -204,7 +204,7 @@ if (!function_exists('csrf_field')) {
      */
     function csrf_field()
     {
-        return '<input type="hidden" name="_token" value="'.csrf_token().'">';
+        return new Illuminate\View\Expression('<input type="hidden" name="_token" value="'.csrf_token().'">');
     }
 }
 
@@ -321,6 +321,19 @@ if (!function_exists('logger')) {
         }
 
         return app('log')->debug($message, $context);
+    }
+}
+
+if (!function_exists('method_field')) {
+    /**
+     * Generate a form field to spoof the HTTP verb used by forms.
+     *
+     * @param  string  $method
+     * @return string
+     */
+    function method_field($method)
+    {
+        return new Illuminate\View\Expression('<input type="hidden" name="_method" value="'.$method.'">');
     }
 }
 

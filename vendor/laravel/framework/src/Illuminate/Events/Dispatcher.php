@@ -4,6 +4,7 @@ namespace Illuminate\Events;
 
 use Exception;
 use ReflectionClass;
+use Illuminate\Support\Str;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
@@ -76,7 +77,7 @@ class Dispatcher implements DispatcherContract
     public function listen($events, $listener, $priority = 0)
     {
         foreach ((array) $events as $event) {
-            if (str_contains($event, '*')) {
+            if (Str::contains($event, '*')) {
                 $this->setupWildcardListen($event, $listener);
             } else {
                 $this->listeners[$event][$priority][] = $this->makeListener($listener);
@@ -288,7 +289,7 @@ class Dispatcher implements DispatcherContract
         $wildcards = [];
 
         foreach ($this->wildcards as $key => $listeners) {
-            if (str_is($key, $eventName)) {
+            if (Str::is($key, $eventName)) {
                 $wildcards = array_merge($wildcards, $listeners);
             }
         }
@@ -463,7 +464,7 @@ class Dispatcher implements DispatcherContract
     public function forgetPushed()
     {
         foreach ($this->listeners as $key => $value) {
-            if (ends_with($key, '_pushed')) {
+            if (Str::endsWith($key, '_pushed')) {
                 $this->forget($key);
             }
         }

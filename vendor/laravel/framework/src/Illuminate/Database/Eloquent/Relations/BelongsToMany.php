@@ -2,6 +2,8 @@
 
 namespace Illuminate\Database\Eloquent\Relations;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Expression;
@@ -564,7 +566,7 @@ class BelongsToMany extends Relation
     public function saveMany(array $models, array $joinings = [])
     {
         foreach ($models as $key => $model) {
-            $this->save($model, (array) array_get($joinings, $key), false);
+            $this->save($model, (array) Arr::get($joinings, $key), false);
         }
 
         $this->touchIfTouching();
@@ -712,7 +714,7 @@ class BelongsToMany extends Relation
         $instances = [];
 
         foreach ($records as $key => $record) {
-            $instances[] = $this->create($record, (array) array_get($joinings, $key), false);
+            $instances[] = $this->create($record, (array) Arr::get($joinings, $key), false);
         }
 
         $this->touchIfTouching();
@@ -830,7 +832,7 @@ class BelongsToMany extends Relation
      * @param  mixed  $id
      * @param  array  $attributes
      * @param  bool   $touch
-     * @return void
+     * @return int
      */
     public function updateExistingPivot($id, array $attributes, $touch = true)
     {
@@ -1001,14 +1003,14 @@ class BelongsToMany extends Relation
             $query->whereIn($this->otherKey, (array) $ids);
         }
 
-        if ($touch) {
-            $this->touchIfTouching();
-        }
-
         // Once we have all of the conditions set on the statement, we are ready
         // to run the delete on the pivot table. Then, if the touch parameter
         // is true, we will go ahead and touch all related models to sync.
         $results = $query->delete();
+
+        if ($touch) {
+            $this->touchIfTouching();
+        }
 
         return $results;
     }
@@ -1046,7 +1048,7 @@ class BelongsToMany extends Relation
      */
     protected function guessInverseRelation()
     {
-        return camel_case(str_plural(class_basename($this->getParent())));
+        return Str::camel(Str::plural(class_basename($this->getParent())));
     }
 
     /**

@@ -19,9 +19,11 @@ This package is created to handle [server-side](https://www.datatables.net/manua
 - Works with **ALL the DATABASE** supported by Laravel
 - Works with **Oracle Database** using [Laravel-OCI8](https://github.com/yajra/laravel-oci8) package
 - Works with [DataTables](http://datatables.net) v1.10++.
-	- **Note:** DT Legacy code is not supported on v5.x
+    - **Note:** DT Legacy code is not supported on v5.x
 - Works with [DataTables](http://datatables.net) v1.9 and v1.10 legacy code.
-	- **Note:** Use [v4.x](https://github.com/yajra/laravel-datatables-oracle/tree/v4.3.2) for Laravel 5 and [v3.x](https://github.com/yajra/laravel-datatables-oracle/tree/L4) for Laravel 4
+    - **Note:** Use [v4.x](https://github.com/yajra/laravel-datatables-oracle/tree/v4.3.2) for Laravel 5 and [v3.x](https://github.com/yajra/laravel-datatables-oracle/tree/L4) for Laravel 4
+- Extended column filtering via [`filterColumn`](http://yajra.github.io/laravel-datatables/api/source-class-yajra.Datatables.Engines.BaseEngine.html#489-503) API.
+- Extended column ordering via [`orderColumn`](http://yajra.github.io/laravel-datatables/api/source-class-yajra.Datatables.Engines.BaseEngine.html#505-519) API.
 - Extended Query Builder functionality allowing you to filter using Datatables class directly.
 - Decorate your data output using [`league\fractal`](https://github.com/thephpleague/fractal) Transformer.
 - Works with Laravel Dependency Injection and IoC Container.
@@ -45,13 +47,13 @@ This package is created to handle [server-side](https://www.datatables.net/manua
 
 #### Facade
 **Laravel 4**
-`'Datatables'      => 'yajra\Datatables\Datatables',`
-
-**Laravel 5**
 `'Datatables'      => 'yajra\Datatables\Facades\Datatables',`
 
+**Laravel 5**
+`'Datatables'      => 'yajra\Datatables\Datatables',`
+
 **Laravel 5.1**
-`'Datatables'      => yajra\Datatables\Facades\Datatables::class,`
+`'Datatables'      => yajra\Datatables\Datatables::class,`
 
 #### Configuration
 **Laravel 5:** `$ php artisan vendor:publish`

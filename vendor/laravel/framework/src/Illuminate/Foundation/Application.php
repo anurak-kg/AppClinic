@@ -5,6 +5,7 @@ namespace Illuminate\Foundation;
 use Closure;
 use RuntimeException;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
@@ -24,7 +25,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      *
      * @var string
      */
-    const VERSION = '5.1.2 (LTS)';
+    const VERSION = '5.1.7 (LTS)';
 
     /**
      * The base path for the Laravel installation.
@@ -109,6 +110,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * @var string
      */
     protected $storagePath;
+
+    /**
+     * The custom environment path defined by the developer.
+     *
+     * @var string
+     */
+    protected $environmentPath;
 
     /**
      * The environment file to load during bootstrapping.
@@ -375,6 +383,29 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     }
 
     /**
+     * Get the path to the environment file directory.
+     *
+     * @return string
+     */
+    public function environmentPath()
+    {
+        return $this->environmentPath ?: $this->basePath;
+    }
+
+    /**
+     * Set the directory for the environment file.
+     *
+     * @param  string  $path
+     * @return $this
+     */
+    public function useEnvironmentPath($path)
+    {
+        $this->environmentPath = $path;
+
+        return $this;
+    }
+
+    /**
      * Set the environment file to be loaded during bootstrapping.
      *
      * @param  string  $file
@@ -409,7 +440,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             $patterns = is_array(func_get_arg(0)) ? func_get_arg(0) : func_get_args();
 
             foreach ($patterns as $pattern) {
-                if (str_is($pattern, $this['env'])) {
+                if (Str::is($pattern, $this['env'])) {
                     return true;
                 }
             }
@@ -1004,7 +1035,6 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             'translator'           => ['Illuminate\Translation\Translator', 'Symfony\Component\Translation\TranslatorInterface'],
             'log'                  => ['Illuminate\Log\Writer', 'Illuminate\Contracts\Logging\Log', 'Psr\Log\LoggerInterface'],
             'mailer'               => ['Illuminate\Mail\Mailer', 'Illuminate\Contracts\Mail\Mailer', 'Illuminate\Contracts\Mail\MailQueue'],
-            'paginator'            => 'Illuminate\Pagination\Factory',
             'auth.password'        => ['Illuminate\Auth\Passwords\PasswordBroker', 'Illuminate\Contracts\Auth\PasswordBroker'],
             'queue'                => ['Illuminate\Queue\QueueManager', 'Illuminate\Contracts\Queue\Factory', 'Illuminate\Contracts\Queue\Monitor'],
             'queue.connection'     => 'Illuminate\Contracts\Queue\Queue',
