@@ -49,6 +49,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
 
+    //Treatment
+    Route::post('treatment/index','TreatmentController@grid');
+    Route::get('treatment/index','TreatmentController@grid');
+
+    Route::post('treatment/create','TreatmentController@create');
+    Route::get('treatment/create','TreatmentController@create');
+    //End Treatment
 
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
