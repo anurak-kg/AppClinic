@@ -19,8 +19,8 @@ class CustomerController extends Controller
         $grid->add('cus_name', 'ชื่อลูกค้า');
         $grid->add('cus_lastname', 'นามสกุลลูกค้า');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์ลูกค้า');
-        $grid->edit('/customer/edit', 'กระทำ','modify|delete');
-        $grid->link('customer/create',"เพิ่มข้อมูลใหม่", "TR");
+        $grid->edit('/customer/edit', 'กระทำ','show|modify|delete');
+
         $grid->paginate(10);
         return $grid;
     }

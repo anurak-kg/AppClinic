@@ -6,7 +6,7 @@
 
     {!! Rapyd::scripts() !!}
 
- 
+
 
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
@@ -159,19 +159,16 @@
 
                 <div class="box-body">
 
-                    <div class="col-xs-" >
 
 
-                        @endif
-                        {!! $form->footer !!}
-                    </div><!-- /.col -->
-
-
+                    @endif
+                    {!! $form->footer !!}
 
                 </div>
             </div>
 
         </div>
+        
     </div>
 
 @stop
