@@ -13,7 +13,7 @@ class CreateTableOrder extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
-            $table->string('order_id',4);
+            $table->increments('order_id');
             $table->string('ven_id',4);
             $table->string('emp_id_order',4);
             $table->string('emp_id_receive',4);

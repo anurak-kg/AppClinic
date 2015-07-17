@@ -32,6 +32,7 @@ class Product_groupController extends Controller
     {
         $grid = DataGrid::source('product_group');
         $grid->attributes(array("class"=>"table table-striped"));
+        $grid->add('');
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
@@ -54,8 +55,7 @@ class Product_groupController extends Controller
     {
 
         $form = DataForm::source(Product_type::find(1));
-        $form->add('pt_id','ประเภทสินค้า','select')->options(product_type::lists('pt_name'));
-        $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
+        $form->add('pt_id','ประเภทสินค้า','select')->options(product_type::lists('pt_name')->toArray());
         $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
         $form->submit('Save');
         $form->link("product_group/create", "Back");

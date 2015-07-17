@@ -10,7 +10,6 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-
                 </div>
                 <div class="box-body">
                     {!! $form !!}
