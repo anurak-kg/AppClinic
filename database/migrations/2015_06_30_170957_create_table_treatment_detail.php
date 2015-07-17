@@ -13,8 +13,8 @@ class CreateTableTreatmentDetail extends Migration
     public function up()
     {
         Schema::create('treatment_detail', function (Blueprint $table) {
-            $table->increments('tre_id');
-            $table->string('dr_id',4);
+            $table->integer('tre_id');
+            $table->integer('dr_id');
             $table->text('tre_de_cm');
             $table->timestamps();
         });

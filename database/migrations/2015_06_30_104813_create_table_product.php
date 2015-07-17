@@ -14,7 +14,7 @@ class CreateTableProduct extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->increments('product_id');
-            $table->string('pg_id',4);
+            $table->integer('pg_id');
             $table->string('product_name',30);
             $table->integer('product_qty');
             $table->integer('product_qty_order');

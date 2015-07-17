@@ -14,7 +14,7 @@ class CreateTableProductGroup extends Migration
     {
         Schema::create('product_group', function (Blueprint $table) {
             $table->increments('pg_id');
-            $table->string('pt_id',4);
+            $table->integer('pt_id');
             $table->string('pg_name',30);
             $table->timestamps();
         });

@@ -14,9 +14,9 @@ class CreateTableTreatment extends Migration
     {
         Schema::create('treatment', function (Blueprint $table) {
             $table->increments('tre_id');
-            $table->string('quo_id',4);
-            $table->string('emp_id',4);
-            $table->string('cus_id',4);
+            $table->integer('quo_id');
+            $table->integer('emp_id');
+            $table->integer('cus_id');
             $table->date('tre_date');
             $table->timestamps();
         });

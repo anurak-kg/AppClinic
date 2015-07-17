@@ -14,8 +14,8 @@ class CreateTableQuotations extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->increments('quo_id');
-            $table->string('cus_id',4);
-            $table->string('emp_id',4);
+            $table->integer('cus_id');
+            $table->integer('emp_id');
             $table->date('quo_date');
             $table->string('quo_status',20);
             $table->timestamps();

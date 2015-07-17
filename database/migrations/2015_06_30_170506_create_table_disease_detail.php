@@ -14,7 +14,7 @@ class CreateTableDiseaseDetail extends Migration
     {
         Schema::create('disease_detail', function (Blueprint $table) {
             $table->increments('dis_de_id');
-            $table->string('cus_id',4);
+            $table->integer('cus_id');
             $table->text('dis_de_dis');
             $table->timestamps();
         });

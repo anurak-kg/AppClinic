@@ -14,7 +14,7 @@ class CreateTableTrainDetail extends Migration
     {
         Schema::create('train_detail', function (Blueprint $table) {
             $table->increments('tra_de_id');
-            $table->string('dr_id',4);
+            $table->integer('dr_id');
             $table->text('tra_de_h');
             $table->date('tra_de_date');
             $table->date('tra_de_end');

@@ -14,9 +14,9 @@ class CreateTableOrder extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->increments('order_id');
-            $table->string('ven_id',4);
-            $table->string('emp_id_order',4);
-            $table->string('emp_id_receive',4);
+            $table->integer('ven_id');
+            $table->integer('emp_id_order');
+            $table->integer('emp_id_receive');
             $table->date('order_date');
             $table->string('order_receive_id',4);
             $table->date('order_receive_date');
