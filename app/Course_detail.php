@@ -14,8 +14,9 @@ class course_detail extends Model
 {
 
     protected $table = 'course_detail';
+    protected $primarykey = 'course_de_id';
 
-    public function course_detail()
+    public function course()
     {
         return $this->belongsTo('App\Course', 'course_id');
     }

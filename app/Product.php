@@ -3,10 +3,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
 
     protected $table = 'product';
+    protected $primarykey = 'product_id';
+
 
     public function product_group()
     {
