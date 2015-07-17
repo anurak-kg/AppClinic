@@ -10,7 +10,7 @@ class product_type extends Model
 
     public function product_group()
     {
-        return $this->hasMany('\App\Product_group');
+        return $this->hasMany('\App\Product_group','pt_id');
     }
 
 }

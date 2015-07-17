@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product_group;
-use App\Product_type;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataForm;
@@ -30,9 +29,10 @@ class Product_groupController extends Controller
      */
     public function getDataGrid()
     {
-        $grid = DataGrid::source('product_group');
+        $grid = DataGrid::source(Product_group::with('product_type'));
         $grid->attributes(array("class"=>"table table-striped"));
-        $grid->add('pt_name', 'ชื่อประเภท');
+        $grid->add('{{ $product_type->pt_name }}', 'ชื่อประเภท','pt_id');
+
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
