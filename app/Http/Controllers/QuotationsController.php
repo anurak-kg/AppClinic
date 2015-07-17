@@ -8,7 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Branch;
+use App\Quotations;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
@@ -51,7 +51,7 @@ class BranchController extends Controller
 
     public function create()
     {
-        $form = DataEdit::source(new Branch);
+        $form = DataForm::create();
         $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
         $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
