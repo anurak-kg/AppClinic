@@ -33,8 +33,6 @@ class BranchController extends Controller
         $grid->link('branch/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
-
-
         return $grid;
     }
 
