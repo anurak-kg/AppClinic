@@ -79,6 +79,7 @@
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำปี</a></li>
                 </ul>
             </li>
+            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>Logout</span></a></li>
 
         </ul><!-- /.sidebar-menu -->
     </section>

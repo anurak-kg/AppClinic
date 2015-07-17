@@ -118,6 +118,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/login',    'UserController@getLogin');
+Route::get('user/logout',    'UserController@getLogout');
 
 
 Route::post('/auth',   'UserController@auth');
