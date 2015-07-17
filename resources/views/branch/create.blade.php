@@ -16,6 +16,7 @@
                 <div class="box-body" >
 
                     {!! $form !!}
+
                 </div>
 
             </div>

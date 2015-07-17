@@ -36,11 +36,11 @@
                         </div>
 
 
+
                         <div class="col-md-6">
                             {!! $form->render('cus_code') !!}
                             <br>
                         </div>
-
 
 
                         <div class="col-md-2">
@@ -57,8 +57,6 @@
                             {!! $form->render('cus_birthday_year') !!}
                             <br>
                         </div>
-
-
 
 
                         <div class="col-md-6">
@@ -167,13 +165,10 @@
 
             </div>
 
-            <div class="box box-solid box-default" >
+            <div class="box box-solid box-default">
 
                 <div class="box-body">
-
-
-
-                    @endif
+                          @endif
                     {!! $form->footer !!}
 
                 </div>
