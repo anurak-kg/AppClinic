@@ -34,14 +34,14 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('/product_type/{id}/edit', array(
         'as' => 'product_type-edit', 'productController@edit'));
     //End Product Type
-    //Product
-    Route::post('product_group/index', 'Product_groupController@grid');
-    Route::get('product_group/index', 'Product_groupController@grid');
+    //Product group
+    Route::post('product_group/index', 'Product_groupController@create');
+    Route::get('product_group/index', 'Product_groupController@create');
 
     Route::post('product_group/create', 'Product_groupController@create');
     Route::get('product_group/create', 'Product_groupController@create');
 
-    //End Product
+    //End Product group
 
 });
 Route::group(['middleware' => 'auth'], function () {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product_group;
+use App\Product_type;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataForm;
@@ -32,12 +33,12 @@ class Product_groupController extends Controller
     {
         $grid = DataGrid::source(Product_group::with('product_type'));
         $grid->attributes(array("class"=>"table table-striped"));
+        $grid->add('{{ $product_type->pt_id }}', 'รหัสประเภท','pt_id');
         $grid->add('{{ $product_type->pt_name }}', 'ชื่อประเภท','pt_id');
-
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
-        $grid->link('product_group/create',"เพิ่มข้อมูลใหม่", "TR");
+        $grid->link('product_group/index',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
         return $grid;
@@ -51,26 +52,22 @@ class Product_groupController extends Controller
             }
         });
 
-        return view('product_group/index', compact('grid'));
+        return view('product_group/index', compact('form','grid'));
     }
     public function create()
     {
-
+        $grid = $this->getDataGrid();
         $form = DataEdit::source(new Product_group());
-        $form->add('pt_id','ประเภทสินค้า','select')->options(product_type::lists('pt_name')->toArray());
+        $form->add('pt_id','ประเภทสินค้า','select')->options(Product_type::lists('pt_name','pt_id')->toArray());
         $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required|unique:product_group,pg_name')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
-        $form->link("product_group/create", "Back");
+        $form->link("product_group/index", "Back");
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
-            $user = new Product_group();
-            $user->pg_id = Input::get('pg_id');
-            $user->pt_id = Input::get('pt_id');
-            $user->pg_name = Input::get('pg_name');
-            $user->save();
+
             $form->message("Success");
         });
-        return view('product_group/create', compact('form'));
+        return view('product_group/index', compact('form','grid'));
     }
 
     /**

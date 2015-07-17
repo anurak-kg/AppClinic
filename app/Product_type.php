@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class product_type extends Model
+class Product_type extends Model
 {
     protected $table = 'product_type';
     protected $primaryKey = 'pt_id';

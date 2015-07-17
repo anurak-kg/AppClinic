@@ -71,10 +71,7 @@ class Product_typeController extends Controller
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
-            $user = new Product_type();
-            $user->pt_id = Input::get('pt_id');
-            $user->pt_name = Input::get('pt_name');
-            $user->save();
+
             $form->message("Success");
         });
         return view('product_type/create', compact('form','grid'));
