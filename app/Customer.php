@@ -9,7 +9,12 @@ class Customer extends Model
 {
 
     protected $table = 'customer';
+    protected $primarykey = 'cus_id';
 
+    public function Treatment()
+    {
+        return $this->hasmany('\App\Treatment','cus_id');
+    }
 
     public function getSex(){
         return $this->getAttribute('sex');

@@ -7,6 +7,7 @@ class quotations extends Model
 {
 
     protected $table = 'quotations';
+    protected $primarykey = 'quo_id';
 
     public function Employess()
     {
@@ -20,7 +21,7 @@ class quotations extends Model
 
     public function Treatment()
     {
-        return $this->hasMany('\App\Treatment', 'tre_id');
+        return $this->hasmany('\App\Treatment','quo_id');
     }
 
 }

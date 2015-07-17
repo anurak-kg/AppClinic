@@ -9,7 +9,7 @@ class Product_group extends Model
     protected $table = 'product_group';
     protected $primaryKey = 'pg_id';
 
-    public function product_type()
+    public function Product_type()
     {
         return $this->belongsTo('\App\Product_type', 'pt_id');
     }
