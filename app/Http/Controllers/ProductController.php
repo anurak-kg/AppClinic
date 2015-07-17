@@ -15,6 +15,7 @@ use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
 
+
 class ProductController extends Controller
 {
     public function product(){
@@ -54,32 +55,24 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
+        $form = DataEdit::create();
         $form->text('product_id', 'รหัสสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสินค้า....'));
         $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
         $form->text('product_qty', 'จำนวนสินค้าที่มี')->rule('required|integer')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุจำนวนสินค้าที่มี....'));
         $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
-        $form->text('product_date_start', 'วันที่ผลิต')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบวันที่ผลิต....'));
-        $form->text('product_date_end', 'วันที่หมดอายุ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่หมดอายุ....'));
+        $form->date('product_date_start', 'วันที่ผลิต')->format('d/m/Y', 'th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบวันที่ผลิต....'));
+        $form->date('product_date_end', 'วันที่หมดอายุ')->format('d/m/Y', 'th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่หมดอายุ....'));
         $form->text('product_price', 'ราคา/หน่วย')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุราคา/หน่วย....'));
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหน่วยนับ....'));
         $form->attributes(array("class" => " "));
 
-        $form->submit('บันทึก');
-        $form->link("product/index", "ย้อนกลับ");
+
+
+        $form->back();
 
         $form->saved(function () use ($form) {
-            $user = new Product();
-            $user->product_id = Input::get('product_id');
-            $user->pg_id = Input::get('pg_id');
-            $user->product_name = Input::get('product_name');
-            $user->product_qty = Input::get('product_qty');
-            $user->product_qty_order = Input::get('product_qty_order');
-            $user->product_date_end = Input::get('product_date_end');
-            $user->product_price = Input::get('product_price');
-            $user->product_unit = Input::get('product_unit');
-            $user->save();
+
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
         });
 
