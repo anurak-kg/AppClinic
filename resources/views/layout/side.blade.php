@@ -17,9 +17,9 @@
 
             <li class="active"><a href="{{url('dashboard')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-edit'></i> <span>ลูกค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="{{url('customer/index')}}"><i class='fa fa-user'></i>ข้อมูลลูกค้า</a></li>
+                  <li><a href="{{url('customer/index')}}"><i class='fa fa-user'></i>ข้อมูล สมาชิก</a></li>
 
                  </ul>
             </li>

@@ -58,6 +58,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/create', 'CustomerController@create');
     //End Customer
 
+    //Course_detail
+    Route::post('course_detail/index', 'Course_detailController@grid');
+    Route::get('course_detail/index', 'Course_detailController@grid');
+
+    //End Course_detail
+
+
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
@@ -66,6 +73,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product/create', 'ProductController@create');
 
     //End Product
+
+    //Product_detail
+    Route::post('product_detail/index', 'Product_detailController@grid');
+    Route::get('product_detail/index', 'Product_detailController@grid');
+
+
+    //End Product_detail
 
 
     //Branch

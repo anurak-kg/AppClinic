@@ -10,7 +10,17 @@ class employee extends Model
 
     public function branch()
     {
-        return $this->hasOne('\App\Branch', 'branch_id');
+        return $this->belongsTo('\App\Branch', 'branch_id');
+    }
+
+    public function scopeFreesearch($query, $value)
+    {
+        return $query->where('emp_id','like','%'.$value.'%')
+            ->orWhere('emp_name','like','%'.$value.'%')
+            ->orWhereHas('branch', function ($q) use ($value) {
+                $q->whereRaw(" CONCAT(branch_id, ' ', branch_name) like ?", array("%".$value."%"));
+            });
+
     }
 
 }
