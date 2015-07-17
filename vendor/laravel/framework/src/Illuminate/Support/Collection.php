@@ -38,7 +38,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      * @param  mixed  $items
      * @return static
      */
-    public static function make($items = null)
+    public static function make($items = [])
     {
         return new static($items);
     }
@@ -192,7 +192,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function flatten()
     {
-        return new static(array_flatten($this->items));
+        return new static(Arr::flatten($this->items));
     }
 
     /**

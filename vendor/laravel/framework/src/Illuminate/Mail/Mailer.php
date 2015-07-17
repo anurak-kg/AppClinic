@@ -5,6 +5,8 @@ namespace Illuminate\Mail;
 use Closure;
 use Swift_Mailer;
 use Swift_Message;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use SuperClosure\Serializer;
 use Psr\Log\LoggerInterface;
 use InvalidArgumentException;
@@ -170,12 +172,12 @@ class Mailer implements MailerContract, MailQueueContract
 
         $data['message'] = $message = $this->createMessage();
 
-        $this->callMessageBuilder($callback, $message);
-
         // Once we have retrieved the view content for the e-mail we will set the body
         // of this message using the HTML type, which will provide a simple wrapper
         // to creating view based emails that are able to receive arrays of data.
         $this->addContent($message, $view, $plain, $raw, $data);
+
+        $this->callMessageBuilder($callback, $message);
 
         if (isset($this->to['address'])) {
             $message->to($this->to['address'], $this->to['name'], true);
@@ -285,7 +287,7 @@ class Mailer implements MailerContract, MailQueueContract
      */
     protected function getQueuedCallable(array $data)
     {
-        if (str_contains($data['callback'], 'SerializableClosure')) {
+        if (Str::contains($data['callback'], 'SerializableClosure')) {
             return unserialize($data['callback'])->getClosure();
         }
 
@@ -355,9 +357,9 @@ class Mailer implements MailerContract, MailQueueContract
         // named keys instead, allowing the developers to use one or the other.
         if (is_array($view)) {
             return [
-                array_get($view, 'html'),
-                array_get($view, 'text'),
-                array_get($view, 'raw'),
+                Arr::get($view, 'html'),
+                Arr::get($view, 'text'),
+                Arr::get($view, 'raw'),
             ];
         }
 

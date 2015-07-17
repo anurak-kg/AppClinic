@@ -4,6 +4,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Debug\Dumper;
+use Illuminate\Contracts\Support\Htmlable;
 
 if (!function_exists('append_config')) {
     /**
@@ -288,6 +289,19 @@ if (!function_exists('array_sort')) {
     }
 }
 
+if (!function_exists('array_sort_recursive')) {
+    /**
+     * Recursively sort an array by keys and values.
+     *
+     * @param  array  $array
+     * @return array
+     */
+    function array_sort_recursive($array)
+    {
+        return Arr::sortRecursive($array);
+    }
+}
+
 if (!function_exists('array_where')) {
     /**
      * Filter the array using the given callback.
@@ -416,7 +430,9 @@ if (!function_exists('dd')) {
      */
     function dd()
     {
-        array_map(function ($x) { (new Dumper)->dump($x); }, func_get_args());
+        array_map(function ($x) {
+            (new Dumper)->dump($x);
+        }, func_get_args());
 
         die(1);
     }
@@ -426,11 +442,15 @@ if (!function_exists('e')) {
     /**
      * Escape HTML entities in a string.
      *
-     * @param  string  $value
+     * @param  \Illuminate\Support\Htmlable|string  $value
      * @return string
      */
     function e($value)
     {
+        if ($value instanceof Htmlable) {
+            return $value->toHtml();
+        }
+
         return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
     }
 }
@@ -519,29 +539,6 @@ if (!function_exists('preg_replace_sub')) {
             }
 
         }, $subject);
-    }
-}
-
-if (!function_exists('array_sort_recursive')) {
-    /**
-     * Recursively sort an array by keys and values.
-     *
-     * @param  array  $array
-     * @return array
-     */
-    function array_sort_recursive($array)
-    {
-        foreach ($array as &$value) {
-            if (is_array($value) && isset($value[0])) {
-                sort($value);
-            } elseif (is_array($value)) {
-                array_sort_recursive($value);
-            }
-        }
-
-        ksort($array);
-
-        return $array;
     }
 }
 

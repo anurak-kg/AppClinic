@@ -42,6 +42,7 @@ class Repository implements CacheContract, ArrayAccess
      * Create a new cache repository instance.
      *
      * @param  \Illuminate\Contracts\Cache\Store  $store
+     * @return void
      */
     public function __construct(Store $store)
     {
@@ -152,7 +153,7 @@ class Repository implements CacheContract, ArrayAccess
     public function add($key, $value, $minutes)
     {
         if (method_exists($this->store, 'add')) {
-            return $this->store->add($key, $value, $minutes);
+            return $this->store->add($key, $value, $this->getMinutes($minutes));
         }
 
         if (is_null($this->get($key))) {
@@ -355,5 +356,15 @@ class Repository implements CacheContract, ArrayAccess
         }
 
         return call_user_func_array([$this->store, $method], $parameters);
+    }
+
+    /**
+     * Clone cache repository instance.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        $this->store = clone $this->store;
     }
 }

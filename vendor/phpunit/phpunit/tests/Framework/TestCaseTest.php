@@ -22,10 +22,6 @@ $_REQUEST['h'] = 'h';
 $GLOBALS['i']  = 'i';
 
 /**
- * @author     Sebastian Bergmann <sebastian@phpunit.de>
- * @copyright  Sebastian Bergmann <sebastian@phpunit.de>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  * @covers     PHPUnit_Framework_TestCase
  */
@@ -508,5 +504,15 @@ class Framework_TestCaseTest extends PHPUnit_Framework_TestCase
         $test->run();
 
         $this->assertSame($expectedCwd, getcwd());
+    }
+
+    /**
+     * @requires PHP 7
+     * @expectedException TypeError
+     */
+    public function testTypeErrorCanBeExpected()
+    {
+        $o = new ClassWithScalarTypeDeclarations;
+        $o->foo(null, null);
     }
 }

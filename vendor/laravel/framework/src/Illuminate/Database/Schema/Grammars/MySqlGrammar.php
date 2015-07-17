@@ -13,7 +13,7 @@ class MySqlGrammar extends Grammar
      *
      * @var array
      */
-    protected $modifiers = ['Unsigned', 'Charset', 'Collate', 'Nullable', 'Default', 'Increment', 'Comment', 'After'];
+    protected $modifiers = ['Unsigned', 'Charset', 'Collate', 'Nullable', 'Default', 'Increment', 'Comment', 'After', 'First'];
 
     /**
      * The possible column serials.
@@ -642,6 +642,20 @@ class MySqlGrammar extends Grammar
     }
 
     /**
+     * Get the SQL for a "first" column modifier.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $column
+     * @return string|null
+     */
+    protected function modifyFirst(Blueprint $blueprint, Fluent $column)
+    {
+        if (!is_null($column->first)) {
+            return ' first';
+        }
+    }
+
+    /**
      * Get the SQL for an "after" column modifier.
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
@@ -656,7 +670,7 @@ class MySqlGrammar extends Grammar
     }
 
     /**
-     * Get the SQL for an "comment" column modifier.
+     * Get the SQL for a "comment" column modifier.
      *
      * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
      * @param  \Illuminate\Support\Fluent  $column

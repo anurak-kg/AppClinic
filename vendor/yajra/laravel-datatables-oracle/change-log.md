@@ -8,6 +8,69 @@
 
 ##Change Log
 
+###v5.8.0
+    - Fix compatiblity with PHP 5.4.
+
+###v5.8.0
+    - Enhanced html builder class.
+    - Added function to load html builder `columns` via mixed array.
+        - Automatic resolution of qualified title based on field name.
+        - Overriding of column attributes.
+    - Added html builder and request object getter from main Datatables class.
+    - Added more unit tests.
+
+###v5.7.0
+    - Added orderColumn feature.
+
+###v5.6.1
+    - Make BaseEngine $request property public.
+    - Fix global searching when search value is zero (0).
+    - Refactor methods from v5.6.0.
+
+###v5.6.0
+    - Re-implement filterColumn function with special variable $1.
+    - Fix filterColumn not getting included on OR statements within global search.
+    - Fix #115.
+
+###v5.5.11
+    - Fix ordering for when using column alias and make(false). Fix #103.
+
+###v5.5.10
+    - Fix casting specific to stdClass only. Fix #114.
+
+###v5.5.9
+    - Fix ordering of collection when data is stdClass.
+
+###v5.5.8
+    - Fix issue when converting object to array. Fix #108.
+
+###v5.5.7
+    - Fix and enhance support when passing object variables using blade templating approach.
+    - Random code clean-up.
+
+###v5.5.6
+    - Fix eager loading of hasOne and hasMany relationships. Issue #105.
+
+###v5.5.5
+    - Fix collection engine sorting when columns is not defined
+
+###v5.5.4
+    - Fix support for collection of objects
+
+###v5.5.3
+    - Fix total filtered records count when overriding global search.
+    - Fix implementation of PR #95 on Collection Engine.
+
+###v5.5.2
+    - Fix database driver detection on Eloquent Engine.
+
+###v5.5.1
+    - Fix missing import of Helper class.
+
+###v5.5.0
+    - Refactor classes to improve code quality.
+    - Implemented PR #95.
+
 ###v5.4.4
     - Added column wrapper for SQLITE.
 
@@ -63,6 +126,6 @@
 
 ###v3.6.x
     - Stable version for Laravel 4.2.
-    
+
 ###v2.x
     - Stable version for Laravel 4.0 and 4.1

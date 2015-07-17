@@ -1,6 +1,7 @@
 
 @section('df.header')
     {!! $df->open !!}
+
 @show
 
 @if ($df->message != '')
