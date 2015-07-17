@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890e298c-ce11-4ae0-a0cf-2f3d4b057c4a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/customer/create.blade.php" afterPath="$PROJECT_DIR$/resources/views/customer/create.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -35,6 +32,8 @@
               <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
               <folding>
                 <element signature="e#40#57#0#PHP" expanded="true" />
+                <marker date="1437138355406" expanded="true" signature="3611:3810" placeholder="{...}" />
+                <marker date="1437138355406" expanded="true" signature="3611:3814" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -83,8 +82,8 @@
       <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/customer/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8241379">
-              <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
+            <state vertical-scroll-proportion="3.145977">
+              <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1620,12 +1619,18 @@
       <option name="project" value="LOCAL" />
       <updated>1437137794572</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="ปรับแต่ง สมัครสมาชิก">
+      <created>1437138325403</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1437138325403</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1713,7 +1718,8 @@
     <MESSAGE value="แก้ไข เมนู" />
     <MESSAGE value="แก้ การแสดงผลตาราง ของ มือถือ" />
     <MESSAGE value="แก้ error วันเกิด จัดฟอม สมัครสมาชิก" />
-    <option name="LAST_COMMIT_MESSAGE" value="แก้ error วันเกิด จัดฟอม สมัครสมาชิก" />
+    <MESSAGE value="ปรับแต่ง สมัครสมาชิก" />
+    <option name="LAST_COMMIT_MESSAGE" value="ปรับแต่ง สมัครสมาชิก" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2107,14 +2113,16 @@
           <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
           <folding>
             <element signature="e#40#57#0#PHP" expanded="true" />
+            <marker date="1437138355406" expanded="true" signature="3611:3810" placeholder="{...}" />
+            <marker date="1437138355406" expanded="true" signature="3611:3814" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8241379">
-          <caret line="170" column="8" selection-start-line="170" selection-start-column="8" selection-end-line="170" selection-end-column="8" />
+        <state vertical-scroll-proportion="3.145977">
+          <caret line="161" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
           <folding />
         </state>
       </provider>
