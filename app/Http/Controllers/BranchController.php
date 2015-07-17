@@ -51,27 +51,17 @@ class BranchController extends Controller
 
     public function create()
     {
-        if (Input::get('do_delete')==1) return  "not the first";
 
-        $form = DataEdit::source(new Branch());
-        $form->text('branch_id', 'รหัสสาขา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
+        $form = DataForm::source(new Branch());
         $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
         $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
         $form->attributes(array("class" => " "));
-
         $form->submit('บันทึก');
         $form->link("branch/index", "ย้อนกลับ");
-
         $form->saved(function () use ($form) {
-            $user = new Branch();
-            $user->branch_id = Input::get('branch_id');
-            $user->branch_name = Input::get('branch_name');
-            $user->branch_address = Input::get('branch_address');
-            $user->branch_tel = Input::get('branch_tel');
-            $user->branch_code = Input::get('branch_code');
-            $user->save();
+
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
 
         });
@@ -82,15 +72,13 @@ class BranchController extends Controller
     public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $edit = DataEdit::source('branch');
-        $edit->link("branch/index","บันทึก", "TR")->back();
-
-
-        $edit->add('branch_id', 'รหัสสาขา','text');
-        $edit->add('branch_name', 'ชื่อสาขา','text');
-        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
-        $edit->add('branch_tel', 'เบอร์โทร','text');
-        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
+        $edit = DataEdit::source(new Branch());
+        $edit->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
+        $edit->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
+        $edit->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
+        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $edit->attributes(array("class" => " "));
+        $edit->link("branch/index", "ย้อนกลับ");
 
 
         return $edit->view('branch/edit', compact('edit'));
