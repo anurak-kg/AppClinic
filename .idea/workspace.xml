@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890e298c-ce11-4ae0-a0cf-2f3d4b057c4a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Allergic_detailController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Disease_detailController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Education_detailController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/Train_detailController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -1598,7 +1594,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437140267569</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="เพิ่ม controller">
+      <created>1437140394778</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1437140394778</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1668,7 +1670,8 @@
     <MESSAGE value="แก้ error วันเกิด จัดฟอม สมัครสมาชิก" />
     <MESSAGE value="ปรับแต่ง สมัครสมาชิก" />
     <MESSAGE value="เพิ่ม model  / เชื่อม FK" />
-    <option name="LAST_COMMIT_MESSAGE" value="เพิ่ม model  / เชื่อม FK" />
+    <MESSAGE value="เพิ่ม controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="เพิ่ม controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
