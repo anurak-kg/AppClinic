@@ -13,7 +13,7 @@
                     <h2 class="box-title">ข้อมูลสินค้า</h2>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body table-responsive no-padding">
                     {!! $grid !!}
                 </div>
 
