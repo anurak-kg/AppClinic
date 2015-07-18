@@ -87,6 +87,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     //End Product
 
+    //Order
+    Route::post('order/index', 'OrderController@grid');
+    Route::get('order/index', 'OrderController@grid');
+
+    Route::post('order/create', 'OrderController@create');
+    Route::get('order/create', 'OrderController@create');
+
+    //End Order
+
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
@@ -137,7 +146,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
-
     //End Vendor
 
 });

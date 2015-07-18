@@ -17,9 +17,6 @@ use Zofe\Rapyd\Facades\DataEdit;
 
 class BranchController extends Controller
 {
-    public function branch(){
-        return view("branch/index");
-    }
 
     public function getDataGrid(){
         $grid = DataGrid::source(new Branch());

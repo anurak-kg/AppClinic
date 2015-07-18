@@ -55,6 +55,7 @@
 
                                       </ul>
                                     </li>
+
                           <li><a href="{{url('order/index')}}"><i class='fa fa-minus'></i>สั่งซื้อสินค้า</a></li>
                 </ul>
             </li>
