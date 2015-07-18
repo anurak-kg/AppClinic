@@ -72,7 +72,6 @@ class CustomerController extends Controller
 
         $form->saved(function () use ($form) {
             $form->message("ลงทะเบียนเสร็จสิ้น");
-
         });
         $form->build();
 

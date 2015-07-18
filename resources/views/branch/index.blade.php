@@ -9,11 +9,13 @@
         <div class="col-md-12">
             <div class="box box-solid box-default">
 
-                <div class="box-header with-border">
+                <div class="box-header ">
                     <h2 class="box-title">ข้อมูลสาขา</h2>
+
                 </div>
 
                 <div class="box-body table-responsive no-padding">
+
                     {!! $grid !!}
                 </div>
 
@@ -23,5 +25,6 @@
 
         </div>
     </div>
+
 
 @stop
