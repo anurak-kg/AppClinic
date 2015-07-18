@@ -32,8 +32,9 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::post('product_type/create', 'Product_typeController@create');
     Route::get('product_type/create', 'Product_typeController@create');
-    Route::get('/product_type/{id}/edit', array(
-        'as' => 'product_type-edit', 'productController@edit'));
+
+    Route::any('product_type/edit', 'Product_typeController@edit');
+
     //End Product Type
 
     //Product group
