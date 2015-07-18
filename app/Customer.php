@@ -2,23 +2,23 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
 
     protected $table = 'customer';
-    protected $primarykey = 'cus_id';
+    protected $primaryKey = 'cus_id';
 
     public function Quotations()
     {
-        return $this->hasmany('\App\Quotations','cus_id');
+        return $this->hasmany('\App\Quotations','quo_id');
     }
 
     public function Treatment()
     {
-        return $this->hasmany('\App\Treatment','cus_id');
+        return $this->hasmany('\App\Treatment','tre_id');
     }
 
     public function Disease_detail ()

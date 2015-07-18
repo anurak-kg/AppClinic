@@ -25,6 +25,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('course/create', 'CourseController@create');
 
     //End Course
+
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
     Route::get('product_type/index', 'Product_typeController@grid');
@@ -34,6 +35,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('/product_type/{id}/edit', array(
         'as' => 'product_type-edit', 'productController@edit'));
     //End Product Type
+
     //Product group
     Route::post('product_group/index', 'Product_groupController@create');
     Route::get('product_group/index', 'Product_groupController@create');
@@ -45,6 +47,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
 });
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
@@ -63,6 +66,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
+
+    Route::post('customer/edit', 'CustomerController@edit');
+    Route::get('customer/edit', 'CustomerController@edit');
     //End Customer
 
     //Course_detail
