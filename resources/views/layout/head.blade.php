@@ -12,7 +12,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                     <span class="hidden-xs">{{Auth::user()->name}} ({{Auth::user()->getRoleName()}})</span>
-                    <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
+
                 </a>
 
             </li>

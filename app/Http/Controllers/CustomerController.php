@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
+use yajra\Datatables\Datatables;
 
 class CustomerController extends Controller
 {
+
+    public function anyData()
+    {
+        return Datatables::of(Customer::select('*'))->make(true);
+    }
 
     public function getDataGrid()
     {
