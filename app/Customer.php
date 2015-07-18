@@ -15,22 +15,21 @@ class Customer extends Model
     {
         return $this->hasmany('\App\Quotations','cus_id');
     }
+
     public function Treatment()
     {
         return $this->hasmany('\App\Treatment','cus_id');
     }
 
-    public function getSex(){
-        return $this->getAttribute('sex');
+    public function Disease_detail ()
+    {
+        return $this->hasmany('\App\Disease_detail','dis_de_id');
     }
-    public function getSexName(){
-        return config('sex.sex'.$this->getSex());
+
+    public function Allergic_detail ()
+    {
+        return $this->hasmany('\App\Allergic_detail','gic_de_id');
     }
-    public function getBlood(){
-        return $this->getAttribute('blood');
-    }
-    public function getBloodName(){
-        return config('sex.blood'.$this->getBlood());
-    }
+
 }
 

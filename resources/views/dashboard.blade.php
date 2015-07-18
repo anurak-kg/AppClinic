@@ -59,7 +59,7 @@
                             <div class="icon">
                                 <i class="ion ion-heart"></i>
                              </div>
-                            <a href="{{url('')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('treatment/index')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 

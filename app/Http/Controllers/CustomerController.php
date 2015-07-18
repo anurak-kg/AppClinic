@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Allergic_detail;
 use App\Customer;
+use App\Disease_detail;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataEdit;
@@ -56,6 +58,9 @@ class CustomerController extends Controller
         $form->date('cus_reg','วันที่ลงทะเบียน')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันที่ลงทะเบียน....'));
         $form->text('cus_height','ส่วนสูง')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ ส่วนสูง....'));
         $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ น้ำหนัก....'));
+
+        $form->add('dis_de_id','โรคประจำตัว','text')->options(Disease_detail::lists('dis_de_dis','dis_de_id')->toArray())->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
+        $form->add('gic_de_id','แพ้ยา','text')->options(Allergic_detail::lists('gic_de_id','gic_de_dis')->toArray())->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ยาที่แพ้....'));
 
         $form->text('cus_hno','บ้านเลขที่')->attributes(array('placeholder'=>'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo','หมู่')->attributes(array('placeholder'=>'โปรดระบุ หมู่....'));
