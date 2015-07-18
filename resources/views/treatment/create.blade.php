@@ -9,7 +9,9 @@
 
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <div class="row">
+        <div class="col-md-3">
 
+        </div>
         <div class="col-md-6">
 
             <div class="box box-solid box-default">

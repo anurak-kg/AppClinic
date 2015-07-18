@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Product_type;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
+use Zofe\Rapyd\Facades\DataEdit;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 
@@ -21,119 +22,59 @@ class Product_typeController extends Controller
         return view("product_type/index");
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return view("product_type/index");
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Product_type());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('pt_id', 'รหัสประเภทสินค้า');
-
         $grid->add('pt_name', 'ชื่อประเภทสินค้า');
-        $grid->edit('/product_type/edit', 'กระทำ','modify|delete');
-        $grid->link('product_type/create',"เพิ่มข้อมูลใหม่", "TR");
+        $grid->edit('/product_type/edit', 'กระทำ','show|modify|delete');
         $grid->paginate(10);
         return $grid;
     }
     public function grid(){
 
         $grid = $this->getDataGrid();
+        $form = $this->create();
         $grid->row(function ($row) {
             if ($row->cell('product_type_id')) {
                 $row->style("background-color:#EEEEEE");
             }
         });
 
-        return view('product_type/index', compact('grid'));
+        return view('product_type/index', compact('form','grid'));
     }
 
 
     public function create()
     {
-        $grid = $this->getDataGrid();
-        $form = DataForm::create();
+        $form = DataForm::source(new Product_type());
         $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required|unique:product_type,pt_name')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
-        $form->submit('Save');
-        $form->link("product_type/create", "Back");
         $form->attributes(array("class" => " "));
-
+        $form->submit('บันทึก');
         $form->saved(function () use ($form) {
 
             $form->message("Success");
+            $form->link("product_type/index", "Back");
         });
-        return view('product_type/create', compact('form','grid'));
+
+        return $form;
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
+    public function edit()
     {
-        //
-    }
+        if (Input::get('do_delete')==1) return  "not the first";
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $edit = DataEdit::source(new Product_type());
+        $edit->text('pt_name', 'ชื่อประเภทสินค้า');
+        $edit->attributes(array("class" => " "));
+        $edit->link("product_type/index", "ย้อนกลับ");
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //find customer
-        $product_type = Product_type::find($id);
-        //show the edit form
-        return View::make('product_type.edit')->with('product_type', $product_type);
+        return view('product_type/edit', compact('edit'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function update($id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
 }

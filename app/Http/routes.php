@@ -32,17 +32,18 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::post('product_type/create', 'Product_typeController@create');
     Route::get('product_type/create', 'Product_typeController@create');
-    Route::get('/product_type/{id}/edit', array(
-        'as' => 'product_type-edit', 'productController@edit'));
+
+    Route::any('product_type/edit', 'Product_typeController@edit');
     //End Product Type
 
     //Product group
-    Route::post('product_group/index', 'Product_groupController@create');
-    Route::get('product_group/index', 'Product_groupController@create');
+    Route::post('product_group/index', 'Product_groupController@grid');
+    Route::get('product_group/index', 'Product_groupController@grid');
 
     Route::post('product_group/create', 'Product_groupController@create');
     Route::get('product_group/create', 'Product_groupController@create');
 
+    Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
 
 });

@@ -1,13 +1,13 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title','สินค้า')
 
 
 @section('content')
 
     <div class="row">
 
-        <div class="col-md-3">
-            <div class="box box-warning">
+        <div class="col-md-12">
+            <div class="box box-solid box-warning">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">แก้ไขข้อมูล</h2>

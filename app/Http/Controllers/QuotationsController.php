@@ -60,13 +60,6 @@ class QuotationsController extends Controller
         $form->link("quotations/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
-            $user = new Branch();
-            $user->branch_id = Input::get('branch_id');
-            $user->branch_name = Input::get('branch_name');
-            $user->branch_address = Input::get('branch_address');
-            $user->branch_tel = Input::get('branch_tel');
-            $user->branch_code = Input::get('branch_code');
-            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("quotations/index", "ย้อนกลับ");
         });
@@ -74,7 +67,7 @@ class QuotationsController extends Controller
         return view('quotations/create', compact('form'));
     }
 
-    /*public function edit() {
+    public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source('branch');
@@ -90,5 +83,5 @@ class QuotationsController extends Controller
 
         return $edit->view('branch/edit', compact('edit'));
     }
- */
+
 }
