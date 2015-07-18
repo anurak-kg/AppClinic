@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class quotations extends Model
+class Quotations extends Model
 {
 
     protected $table = 'quotations';
