@@ -25,7 +25,8 @@ class EmployeeController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source(Employee::with('branch'));
-        $grid->attributes(array("class"=>"table table-striped"));
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('emp_id', 'รหัสพนักงาน',true);
         $grid->add('{{ $branch->branch_name }}', 'สาขา','branch_id');
         $grid->add('emp_name', 'ชื่อพนักงาน',true);

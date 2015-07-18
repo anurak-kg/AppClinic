@@ -20,7 +20,8 @@ class Course_detailController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source('course_detail');
-        $grid->attributes(array("class"=>"table table-striped"));
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('course_de_id', 'ลำดับที่',true);
         $grid->add('course_name', 'ชื่อคอร์ส',true);
         $grid->add('course_de_name', 'รายละเอียดคอร์ส');

@@ -15,11 +15,8 @@ use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
 
-class BranchController extends Controller
+class QuotationsController extends Controller
 {
-    public function quotations(){
-        return view("quotations/index");
-    }
 
     public function getDataGrid(){
         $grid = DataGrid::source('quotations');
@@ -56,7 +53,7 @@ class BranchController extends Controller
         $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('quo_date', 'วันที่เสนอ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('quo_status', 'สถานะ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->text('quo_status', 'สถานะ')->rule('required')->options();
         $form->attributes(array("class" => " "));
 
         $form->submit('บันทึก');

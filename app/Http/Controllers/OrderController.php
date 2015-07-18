@@ -56,6 +56,8 @@ class OrderController extends Controller
     public function create()
     {
         $form = DataForm::source(new Order());
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
         $form->text('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ')->rule('required');
         $form->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th')->rule('required');

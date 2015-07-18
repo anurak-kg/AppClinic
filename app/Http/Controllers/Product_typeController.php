@@ -39,7 +39,8 @@ class Product_typeController extends Controller
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Product_type());
-        $grid->attributes(array("class"=>"table table-striped"));
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('pt_id', 'รหัสประเภทสินค้า');
 
         $grid->add('pt_name', 'ชื่อประเภทสินค้า');

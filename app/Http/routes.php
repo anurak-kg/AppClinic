@@ -60,6 +60,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('treatment/create','TreatmentController@create');
     //End Treatment
 
+    //Quotations
+    Route::post('quotations/index','QuotationsController@grid');
+    Route::get('quotations/index','QuotationsController@grid');
+
+    Route::post('quotations/create','QuotationsController@create');
+    Route::get('quotations/create','QuotationsController@create');
+    //End Quotations
+
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');

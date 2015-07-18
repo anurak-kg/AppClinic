@@ -25,7 +25,7 @@
                      <li>
                          <a href="#"><i class="fa fa-minus"></i>การรักษา<i class="fa fa-angle-left pull-right"></i></a>
                          <ul class="treeview-menu">
-                             <li><a href="{{url('treatment/index')}}">ประวัติการรักษา</a>
+                             <li><a href="{{url('treatment/index')}}"><i class='fa fa-angle-double-right'></i>ประวัติการรักษา</a>
                          </ul>
                      </li>
 

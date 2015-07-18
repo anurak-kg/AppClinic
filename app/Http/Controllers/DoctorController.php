@@ -17,9 +17,6 @@ use Zofe\Rapyd\Facades\DataGrid;
 
 class DoctorController extends Controller
 {
-    public function doctor(){
-        return view("dr/index");
-    }
 
     public function calender(){
         return view("dr/calender");
@@ -27,6 +24,8 @@ class DoctorController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source('doctor');
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('dr_id', 'รหัสหมอ',true)->style("width:110px");
         $grid->add('dr_name', 'ชื่อหมอ');
         $grid->add('dr_lastname', 'นามสกุล');

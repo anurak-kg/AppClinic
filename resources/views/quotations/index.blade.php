@@ -1,7 +1,5 @@
 @extends('layout.master')
-@section('title','คอร์ส')
-
-
+@section('title','ใบเสนอราคา')
 @section('content')
 
     <div class="row">
@@ -10,7 +8,7 @@
             <div class="box box-solid box-default table-responsive no-padding">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลคอร์ส</h2>
+                    <h2 class="box-title">ใบเสนอราคา</h2>
                 </div>
 
                 <div class="box-body table-responsive no-padding">

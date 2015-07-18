@@ -25,6 +25,8 @@ class CustomerController extends Controller
     public function getDataGrid()
     {
         $grid = DataGrid::source('customer');
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('cus_id', 'รหัสลูกค้า',true);
         $grid->add('cus_name', 'ชื่อลูกค้า');
         $grid->add('cus_lastname', 'นามสกุลลูกค้า');

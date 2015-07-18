@@ -1,20 +1,18 @@
 @extends('layout.master')
-@section('title','คอร์ส')
-
-
+@section('title','ซื้อคอร์ส')
 @section('content')
 
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-solid box-default table-responsive no-padding">
+            <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลคอร์ส</h2>
+                    <h2 class="box-title">ซื้อคอร์ส</h2>
                 </div>
 
                 <div class="box-body table-responsive no-padding">
-                    {!! $grid !!}
+                    {!! $form !!}
                 </div>
 
             </div>
