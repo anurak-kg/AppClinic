@@ -17,7 +17,9 @@
 
                 <div class="box-header with-border" align="middle">
                     <h2 class="box-title">ข้อมูลลูกค้า</h2>
+
                 </div>
+
                 {!! $form->header !!}
 
                 {!! $form->message !!}
