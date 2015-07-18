@@ -11,11 +11,11 @@
 
             <div class="box box-solid box-default table-responsive no-padding">
 
-                <div class="box-header with-border">
+                <div class="box-header ">
                     <h2 class="box-title">ซื้อสินค้า</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

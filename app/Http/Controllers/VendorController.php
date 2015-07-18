@@ -24,6 +24,7 @@ class VendorController extends Controller
         $grid = DataGrid::source('vendor');
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
+
         $grid->add('ven_id', 'รหัสร้านค้า',true);
         $grid->add('ven_name', 'ชื่อร้านค้า');
         $grid->add('ven_address', 'ที่อยู่ร้านค้า');

@@ -13,7 +13,7 @@
                     <h2 class="box-title">ข้อมูลหมอ</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

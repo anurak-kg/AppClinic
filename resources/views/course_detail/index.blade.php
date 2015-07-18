@@ -24,7 +24,7 @@
                     <h2 class="box-title">ซื้อคอร์ส</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

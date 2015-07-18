@@ -11,7 +11,7 @@
                     <h2 class="box-title">ข้อมูลสมาชิก</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

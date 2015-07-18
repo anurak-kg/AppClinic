@@ -11,7 +11,7 @@
                     <h2 class="box-title">ใบสั่งซื้อ</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

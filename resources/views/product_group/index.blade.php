@@ -18,7 +18,7 @@
             <div class="box box-primary table-responsive no-padding">
                 <div class="box-header with-border">
                 </div>
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body ">
                     {!! $grid !!}
                 </div>
             </div>

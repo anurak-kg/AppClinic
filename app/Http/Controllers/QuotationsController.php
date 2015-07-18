@@ -48,12 +48,12 @@ class QuotationsController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
-        $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
-        $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
-        $form->textarea('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
+        $form = DataForm::create(new Quotations());
+        $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ รหัสใบเสนอราคา....'));
+        $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุ รหัสสมาชิก....'));
+        $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุ รหัสพนักงาน....'));
         $form->text('quo_date', 'วันที่เสนอ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('quo_status', 'สถานะ')->rule('required')->options();
+        $form->text('quo_status', 'สถานะ')->rule('required');
         $form->attributes(array("class" => " "));
 
         $form->submit('บันทึก');
