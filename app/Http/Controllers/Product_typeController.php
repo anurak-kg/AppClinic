@@ -30,7 +30,6 @@ class Product_typeController extends Controller
         $grid->add('pt_id', 'รหัสประเภทสินค้า');
         $grid->add('pt_name', 'ชื่อประเภทสินค้า');
         $grid->edit('/product_type/edit', 'กระทำ','show|modify|delete');
-        $grid->link('product_type/index',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }
@@ -60,7 +59,6 @@ class Product_typeController extends Controller
             $form->link("product_type/index", "Back");
         });
 
-        $form->build();
         return $form;
 
     }
