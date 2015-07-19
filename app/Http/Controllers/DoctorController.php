@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Doctor;
 use App\Dr;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Config;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
@@ -58,7 +59,7 @@ class DoctorController extends Controller
         $form->text('dr_name', 'ชื่อหมอ')->rule('required');
         $form->text('dr_lastname', 'นามสกุล')->rule('required');
         $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');
-        $form->text('dr_sex', 'เพศ')->rule('required');
+        $form->text('dr_sex', 'เพศ')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->link("dr/index", "ย้อนกลับ");
@@ -78,7 +79,7 @@ class DoctorController extends Controller
         $edit->text('dr_name', 'ชื่อหมอ');
         $edit->text('dr_lastname', 'นามสกุล');
         $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ');
-        $edit->text('dr_sex', 'เพศ');
+        $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'))->rule('required');
         $edit->attributes(array("class" => " "));
         $edit->link("dr/index", "ย้อนกลับ");
         return $edit->view('dr/edit', compact('edit'));
