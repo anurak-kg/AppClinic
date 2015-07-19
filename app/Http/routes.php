@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
@@ -45,15 +43,14 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
 });
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/', 'HomeController@dashboard');
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
 
-
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');
-
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
     //End Customer
@@ -61,26 +58,20 @@ Route::group(['middleware' => 'auth'], function () {
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
-
+    Route::get('course_detail/query','Course_detailController@getCustomerList');
     //End Course_detail
-
 
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
-
     Route::post('product/create', 'ProductController@create');
     Route::get('product/create', 'ProductController@create');
-
     //End Product
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
-
-
     //End Product_detail
-
 
     //Branch
     Route::post('branch/index', 'BranchController@grid');
