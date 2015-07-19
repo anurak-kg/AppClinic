@@ -17,7 +17,7 @@ class CreateTableQuotations extends Migration
             $table->integer('cus_id');
             $table->integer('emp_id');
             $table->date('quo_date');
-            $table->string('quo_status',20);
+            $table->integer('quo_status');
             $table->timestamps();
         });
     }

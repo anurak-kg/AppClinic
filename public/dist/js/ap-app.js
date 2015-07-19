@@ -1,10 +1,9 @@
 (function () {
     'use strict'
     var app = angular.module('application', ['ngTable']);
-    app.controller('courseController', function ($scope, $http, ngTableParams) {
+    app.controller('quotationsController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
-        $scope.customer.tel = "asdasd";
 
         $scope.dataLoading = false;
         $scope.boxSearch = false;
@@ -49,17 +48,11 @@
 
         $scope.getAddProduct = function (id) {
             $scope.dataLoading = true;
-            $http.get('/pos/add?id=' + id).
+            $http.get('/quotations/add?id=' + id).
                 success(function (data, status, headers, config) {
-                    console.log(data)
-                    if (data.status == "OutOfStock") {
-                        alert("สินค้าหมด ไม่สามารถขายได้");
-                        $scope.deleteById(id);
-                    }
                     $scope.dataLoading = false;
                 }).
                 error(function (data, status, headers, config) {
-                    console.log(status)
                     $scope.dataLoading = false;
                 });
         }
@@ -68,7 +61,7 @@
             $scope.dataLoading = true;
             console.log(item);
 
-            $http.get('/pos/update?id=' + item.id + '&qty=' + item.qty + "&discount_price=" + item.discount_price).
+            $http.get('/course_detail/update?id=' + item.id + '&qty=' + item.qty + "&discount_price=" + item.discount_price).
                 success(function (data, status, headers, config) {
                     //console.log(data)
                     $scope.dataLoading = false;

@@ -17,6 +17,8 @@ class CreateTableQuotationsDetail extends Migration
             $table->integer('course_id');
             $table->string('quo_t',2);
             $table->timestamps();
+            $table->primary(['quo_id','course_id']);
+
         });
     }
 

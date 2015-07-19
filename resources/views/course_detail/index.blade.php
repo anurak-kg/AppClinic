@@ -51,10 +51,33 @@
                     <div class="box-header with-border">
                         <h2 class="box-title">ซื้อคอร์ส</h2>
                     </div>
+                    <div class="div row">
+                        <div class="col-md-5">
+                            <input class="form-control typeahead input-lg courseBtn"
+                                   type="search"
+                                   id="course"
+                                   placeholder="พืมชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค็ด "      >
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-app" href="{{url('product/update')}}">
+                                <i class="fa fa-plus-circle"></i> จัดการคอร์ส
+                            </a>
+                        </div>
 
-                    <div class="box-body table-responsive no-padding">
-                        {!! $grid !!}
+                        <div class="col-md-1">
+                            <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
+
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-body table-responsive no-padding">
+                            </div>
+                        </div>
+                    </div>
+
+
 
                 </div>
 
@@ -71,26 +94,23 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var mySearch = new Bloodhound({
+            var courseDb = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                //prefetch: 'data.php',
                 remote: {
-                    url: 'sale/query?q=%QUERY',
+                    url: '/course_detail/course_query?q=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
-            mySearch.initialize();
-
             var customerDb = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
-                //prefetch: 'data.php',
                 remote: {
                     url: '/course_detail/query?q=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
+
             customerDb.initialize();
             $('.customer-input').typeahead({
                         hint: true,
@@ -129,41 +149,33 @@
                         }
                     });
 
-
-            $('.course').typeahead({
+            courseDb.initialize();
+            $('.courseBtn').typeahead({
                         hint: true,
                         highlight: true,
                         minLength: 1
                     },
                     {
-                        displayKey: 'ProductName',
-                        source: mySearch.ttAdapter(),
+                        displayKey: 'course_name',
+                        source: courseDb.ttAdapter(),
                         templates: {
                             empty: [
                                 '<div class="empty-message">',
                                 'ไม่พบข้อมูลสินค้า',
                                 '</div>'
                             ].join('\n'),
-                            suggestion: Handlebars.compile('<div>@{{ProductBarcodeId}} – @{{ProductName}}</div>')
+                            suggestion: Handlebars.compile('<div>@{{course_id}} – @{{course_name}}</div>')
                         }
                     })
                     .on('typeahead:selected', function ($e, datum) {
                         //console.log(datum);
-                        product =
+                        course =
                         {
-                            id: datum.id,
-                            ProductBarcodeId: datum.ProductBarcodeId,
-                            ProductName: datum.ProductName,
-                            qty: 1,
-                            UnitName: datum.UnitName,
-                            ProductSellPrice: datum.ProductSellPrice,
-                            tax: '7',
-                            discount_price: 0,
-                            ProductBandName: datum.ProductBandName,
-                            cost_price: datum.ProductSellPrice
+                            id: datum.course_id,
+                            course_name: datum.course_name
                         }
                         console.log(product);
-                        angular.element(document.getElementById('pos')).scope().pushProduct(product);
+                        angular.element(document.getElementById('course')).scope().pushProduct(course);
 
                     })
                     .on('keyup', function (e) {
