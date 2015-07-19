@@ -8,7 +8,7 @@ class Allergic_detail extends Model
 {
 
     protected $table = 'allergic_detail';
-    protected $primarykey = 'gic_de_id';
+    protected $primaryKey = 'gic_de_id';
 
     public function Customer()
     {

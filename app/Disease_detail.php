@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Disease_detail extends Model
 {
     protected $table = 'disease_detail';
-    protected $primarykey = 'dis_de_id';
+    protected $primaryKey = 'dis_de_id';
 
     public function Customer()
     {

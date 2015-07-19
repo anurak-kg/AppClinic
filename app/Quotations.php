@@ -7,7 +7,7 @@ class Quotations extends Model
 {
 
     protected $table = 'quotations';
-    protected $primarykey = 'quo_id';
+    protected $primaryKey = 'quo_id';
 
 
 
@@ -18,7 +18,7 @@ class Quotations extends Model
 
     public function Customer()
     {
-        return $this->hasOne('\App\Customer', 'cus_id');
+        return $this->belongsTo('\App\Customer', 'cus_id');
     }
 
     public function Quotations_detail()
