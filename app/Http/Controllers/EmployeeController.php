@@ -31,7 +31,7 @@ class EmployeeController extends Controller
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('emp_id', 'รหัสพนักงาน',true);
         $grid->add('{{ $branch->branch_name }}', 'สาขา','branch_id');
-        $grid->add('emp_name', 'ชื่อพนักงาน',true);
+        $grid->add('emp_name', 'ชื่อ',true);
         $grid->add('emp_lastname', 'นามสกุล',true);
         $grid->add('emp_position', 'ตำแหน่ง ',true);
         $grid->add('emp_tel', 'เบอร์โทร  ',true);

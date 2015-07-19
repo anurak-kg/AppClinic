@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Config;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 
 class DoctorController extends Controller
 {
@@ -28,12 +29,12 @@ class DoctorController extends Controller
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('dr_id', 'รหัสหมอ',true)->style("width:110px");
-        $grid->add('dr_name', 'ชื่อหมอ');
+        $grid->add('dr_name', 'ชื่อ');
         $grid->add('dr_lastname', 'นามสกุล');
-        $grid->add('dr_tel', 'เบอร์โทรศัพท์มือถือ');
+        $grid->add('dr_tel', 'เบอร์โทรศัพท์');
         $grid->add('dr_sex', 'เพศ')->style("width:80x");
         $grid->edit('/dr/edit','กระทำ','show|modify|delete');
-        $grid->link('dr/index',"เพิ่มข้อมูลใหม่", "TR");
+        $grid->link('dr/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }
