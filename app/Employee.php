@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $table = 'employee';
-    protected $primarykey = 'emp_id';
+    protected $primaryKey = 'emp_id';
 
     public function Quotations()
     {

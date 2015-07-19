@@ -12,8 +12,10 @@ use App\Employee;
 use App\Branch;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Config;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 
 
 class EmployeeController extends Controller
@@ -34,7 +36,7 @@ class EmployeeController extends Controller
         $grid->add('emp_position', 'ตำแหน่ง ',true);
         $grid->add('emp_tel', 'เบอร์โทร  ',true);
         $grid->add('emp_sex', 'เพศ ',true);
-        $grid->edit('/employee/edit', 'การกระทำ','modify|delete');
+        $grid->edit('/employee/edit', 'การกระทำ','show|modify|delete');
         $grid->link('/employee/create',"เพิ่มข้อมูลใหม่", "TR");
 
 
@@ -62,13 +64,12 @@ class EmployeeController extends Controller
 
         $form = DataEdit::source(new Employee());
         $form->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $form->textarea('emp_name', 'ชื่อพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
-        $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุตำแหน่ง....'));
-        $form->text('emp_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุเบอร์โทร....'));
-        $form->add('emp_sex', 'เพศ','select')->rule('required')->attributes(array('maxlength'=>13))->option('A','โปรดเลือก...')->option('M','ชาย')->option('F','หญิง');
+        $form->text('emp_name', 'ชื่อพนักงาน')->rule('required');
+        $form->text('emp_lastname', 'นามสกุล')->rule('required');
+        $form->text('emp_position', 'ตำแหน่ง')->rule('required');
+        $form->text('emp_tel', 'เบอร์โทร')->rule('required|numeric');
+        $form->add('emp_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
-        $form->link("employee/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("employee/index", "ย้อนกลับ");
@@ -82,11 +83,11 @@ class EmployeeController extends Controller
 
         $edit = DataEdit::source(new Employee());
         $edit->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $edit->textarea('emp_name', 'ชื่อพนักงาน');
+        $edit->text('emp_name', 'ชื่อพนักงาน');
         $edit->text('emp_lastname', 'นามสกุล');
         $edit->text('emp_position', 'ตำแหน่ง');
         $edit->text('emp_tel', 'เบอร์โทร');
-        $edit->add('emp_sex', 'เพศ','select');
+        $edit->add('emp_sex', 'เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $edit->attributes(array("class" => " "));
         $edit->link("employee/index", "ย้อนกลับ");
         return $edit->view('employee/edit', compact('edit'));
