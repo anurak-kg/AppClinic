@@ -20,13 +20,13 @@
                 <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
                   <li><a href="{{url('customer/index')}}"><i class='fa fa-minus'></i>ข้อมูลสมาชิก</a></li>
-                  <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
-                  <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ซื้อคอร์ส</a></li>
+                  <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
+                  <li><a href="{{url('quotations/create')}}"><i class='fa fa-minus'></i>ซื้อคอร์ส</a></li>
+
                      <li>
                          <a href="#"><i class="fa fa-minus"></i>การรักษา<i class="fa fa-angle-left pull-right"></i></a>
                          <ul class="treeview-menu">
-                             <li><a href="{{url('product/index')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลการรักษา</a></li>
-                             <li><a href="{{url('product/index')}}"><i class='fa fa-angle-double-right'></i>ประวัติการรักษา</a></li>
+                             <li><a href="{{url('treatment/index')}}"><i class='fa fa-angle-double-right'></i>ประวัติการรักษา</a>
                          </ul>
                      </li>
 
@@ -56,6 +56,7 @@
 
                                       </ul>
                                     </li>
+
                           <li><a href="{{url('order/index')}}"><i class='fa fa-minus'></i>สั่งซื้อสินค้า</a></li>
                 </ul>
             </li>
@@ -64,7 +65,7 @@
                 <a href="#"><i class='fa fa-user-md'></i> <span>หมอ</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{url('dr/index')}}"><i class='fa fa-minus'></i>ข้อมูลหมอ</a></li>
-                    <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>ตารางการทำงาน หมอ</a></li>
+                    <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>ตารางการทำงาน</a></li>
                 </ul>
             </li>
 
@@ -85,7 +86,8 @@
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำปี</a></li>
                 </ul>
             </li>
-            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>Logout</span></a></li>
+
+            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
 
         </ul><!-- /.sidebar-menu -->
     </section>

@@ -8,4 +8,13 @@ class Treatment_detail extends Model
 {
     protected $table = 'treatment_detail';
 
+    public function Treatment()
+    {
+        return $this->belongsTo('\App\Treatment', 'tre_id');
+    }
+    public function Doctor()
+    {
+        return $this->belongsTo('\App\Doctor', 'dr_id');
+    }
+
 }

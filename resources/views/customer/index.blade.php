@@ -5,13 +5,13 @@
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-solid box-default">
+            <div class="box box-solid box-default table-responsive no-padding">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">ข้อมูลสมาชิก</h2>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body">
                     {!! $grid !!}
                 </div>
 

@@ -10,7 +10,7 @@
     <div class="row">
 
         <div class="col-md-6">
-            <div class="box box-solid box-success">
+            <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">เพิ่มข้อมูล</h2>

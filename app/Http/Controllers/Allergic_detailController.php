@@ -26,7 +26,20 @@ class Allergic_detailController extends Controller
      */
     public function create()
     {
-        //
+
+        $form = DataEdit::source(new Customer());
+        $form->text('cus_name','ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
+      
+        $form->attributes(array("class" => " "));
+
+
+
+        $form->saved(function () use ($form) {
+            $form->message("ลงทะเบียนเสร็จสิ้น");
+        });
+        $form->build();
+
+        return view('customer/create', compact('form'));
     }
 
     /**

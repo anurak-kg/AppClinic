@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
@@ -22,24 +24,51 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
 
+    Route::any('course/edit', 'CourseController@edit');
     //End Course
+
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
     Route::get('product_type/index', 'Product_typeController@grid');
 
     Route::post('product_type/create', 'Product_typeController@create');
     Route::get('product_type/create', 'Product_typeController@create');
-    Route::get('/product_type/{id}/edit', array(
-        'as' => 'product_type-edit', 'productController@edit'));
+
+    Route::any('product_type/edit', 'Product_typeController@edit');
     //End Product Type
+
     //Product group
-    Route::post('product_group/index', 'Product_groupController@create');
-    Route::get('product_group/index', 'Product_groupController@create');
+    Route::post('product_group/index', 'Product_groupController@grid');
+    Route::get('product_group/index', 'Product_groupController@grid');
 
     Route::post('product_group/create', 'Product_groupController@create');
     Route::get('product_group/create', 'Product_groupController@create');
 
+    Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
+
+    //Dr
+    Route::post('dr/index', 'DoctorController@grid');
+    Route::get('dr/index', 'DoctorController@grid');
+
+    Route::post('dr/create', 'DoctorController@create');
+    Route::get('dr/create', 'DoctorController@create');
+
+    Route::any('dr/edit', 'DoctorController@edit');
+
+    Route::post('dr/calender', 'DoctorController@calender');
+    Route::get('dr/calender', 'DoctorController@calender');
+    //End Dr
+
+    //Employee
+    Route::post('employee/index', 'EmployeeController@grid');
+    Route::get('employee/index', 'EmployeeController@grid');
+
+    Route::post('employee/create', 'EmployeeController@create');
+    Route::get('employee/create', 'EmployeeController@create');
+
+    Route::any('employee/edit', 'EmployeeController@edit');
+    //End Employee
 
 });
 Route::group(['middleware' => 'auth'], function () {
@@ -48,30 +77,65 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard');
     Route::get('/', 'HomeController@dashboard');
 
+    //Treatment
+    Route::post('treatment/index','TreatmentController@grid');
+    Route::get('treatment/index','TreatmentController@grid');
+
+    Route::post('treatment/create','TreatmentController@create');
+    Route::get('treatment/create','TreatmentController@create');
+    //End Treatment
+
+    //Quotations
+    Route::post('quotations/index','QuotationsController@grid');
+    Route::get('quotations/index','QuotationsController@grid');
+
+    Route::post('quotations/create','QuotationsController@create');
+    Route::get('quotations/create','QuotationsController@create');
+    //End Quotations
+
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');
+
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
+
+    Route::post('customer/edit', 'CustomerController@edit');
+    Route::get('customer/edit', 'CustomerController@edit');
     //End Customer
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
-    Route::get('course_detail/query','Course_detailController@getCustomerList');
+
     //End Course_detail
+
 
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
+
     Route::post('product/create', 'ProductController@create');
     Route::get('product/create', 'ProductController@create');
+
     //End Product
+
+    //Order
+    Route::post('order/index', 'OrderController@grid');
+    Route::get('order/index', 'OrderController@grid');
+
+    Route::post('order/create', 'OrderController@create');
+    Route::get('order/create', 'OrderController@create');
+
+    //End Order
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
+
+
     //End Product_detail
+
 
     //Branch
     Route::post('branch/index', 'BranchController@grid');
@@ -83,31 +147,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('branch/edit', 'BranchController@edit');
     //End Branch
 
-    //Employee
-    Route::post('employee/index', 'EmployeeController@grid');
-    Route::get('employee/index', 'EmployeeController@grid');
-
-    Route::post('employee/create', 'EmployeeController@create');
-    Route::get('employee/create', 'EmployeeController@create');
-
-    Route::post('employee/edit', 'EmployeeController@edit');
-    Route::get('employee/edit', 'EmployeeController@edit');
-    //End Employee
 
 
-    //Dr
-    Route::post('dr/index', 'DoctorController@grid');
-    Route::get('dr/index', 'DoctorController@grid');
 
-    Route::post('dr/create', 'DoctorController@create');
-    Route::get('dr/create', 'DoctorController@create');
-
-    Route::post('dr/edit', 'DoctorController@edit');
-    Route::get('dr/edit', 'DoctorController@edit');
-
-    Route::post('dr/calender', 'DoctorController@calender');
-    Route::get('dr/calender', 'DoctorController@calender');
-    //End Dr
 
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
@@ -115,7 +157,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
-
     //End Vendor
 
 });

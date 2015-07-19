@@ -10,24 +10,27 @@
 
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
+
+
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
                     <h2 class="box-title">ข้อมูลลูกค้า</h2>
+
                 </div>
-                {!! $form->header !!}
-
-                {!! $form->message !!}
-
-                @if(!$form->message)
 
                 <div class="box-body">
 
 
-                        <div class="col-md-6"> {!! $form->render('cus_name') !!}
+                        <div class="col-md-6">
+                            {!! $form->render('cus_name') !!}
                         </div>
 
                         <div class="col-md-6">
@@ -37,34 +40,34 @@
 
 
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_code') !!}
                             <br>
                         </div>
 
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             {!! $form->render('cus_birthday_day') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             {!! $form->render('cus_birthday_month') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             {!! $form->render('cus_birthday_year') !!}
                             <br>
                         </div>
 
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_sex') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_blood') !!}
                             <br>
                         </div>
@@ -80,32 +83,41 @@
                         </div>
 
                         <div class="col-md-6">
+                            {!! $form->render('dis_de_id') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-6">
+                            {!! $form->render('gic_de_id') !!}
+                            <br>
+                        </div>
+
+                        <div class="col-md-12">
                             {!! $form->render('cus_tel') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_phone') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_email') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_reg') !!}
                             <br>
                         </div>
 
 
-
-
-
                 </div>
 
             </div>
+
+
 
 
             <div class="box box-solid box-default" >
@@ -116,7 +128,7 @@
 
                 <div class="box-body">
 
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         {!! $form->render('cus_province') !!}
                         <br>
                     </div>
@@ -151,11 +163,7 @@
                         <br>
                     </div>
 
-
-
-
-
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         {!! $form->render('cus_postal') !!}
                         <br>
                     </div>
@@ -163,19 +171,21 @@
 
                 </div>
 
+
+
             </div>
 
             <div class="box box-solid box-default">
+                <div class="col-xs-" >
+                    <button class="btn  btn-success btn-block btn-signin" type="submit">ยืนยัน การสมัครสมาชิก</button>
+                </div><!-- /.col -->
 
-                <div class="box-body">
-                          @endif
-                    {!! $form->footer !!}
-
-                </div>
             </div>
 
+
+
         </div>
-        
+
     </div>
 
 @stop

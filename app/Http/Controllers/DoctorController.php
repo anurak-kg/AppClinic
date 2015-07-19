@@ -11,15 +11,14 @@ namespace App\Http\Controllers;
 use App\Doctor;
 use App\Dr;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Config;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 
 class DoctorController extends Controller
 {
-    public function doctor(){
-        return view("dr/index");
-    }
 
     public function calender(){
         return view("dr/calender");
@@ -27,12 +26,14 @@ class DoctorController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source('doctor');
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('dr_id', 'รหัสหมอ',true)->style("width:110px");
-        $grid->add('dr_name', 'ชื่อหมอ');
+        $grid->add('dr_name', 'ชื่อ');
         $grid->add('dr_lastname', 'นามสกุล');
-        $grid->add('dr_tel', 'เบอร์โทรศัพท์มือถือ');
+        $grid->add('dr_tel', 'เบอร์โทรศัพท์');
         $grid->add('dr_sex', 'เพศ')->style("width:80x");
-        $grid->edit('/dr/edit', 'การกระทำ','modify|delete');
+        $grid->edit('/dr/edit','กระทำ','show|modify|delete');
         $grid->link('dr/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
@@ -41,60 +42,48 @@ class DoctorController extends Controller
     public function grid(){
 
         $grid = $this->getDataGrid();
+        $form = $this->create();
         $grid->row(function ($row) {
             if ($row->cell('dr_id')) {
                 $row->style("background-color:#EEEEEE");
             }
         });
 
-        return view('dr/index', compact('grid'));
+        return view('dr/index', compact('grid','form'));
     }
 
 
     public function create()
     {
 
-        $grid = $this->getDataGrid();
-        $form = DataForm::create();
-        $form->text('dr_id', 'รหัสหมอ')->rule('required');
+        $form = DataEdit::source(new Doctor());
         $form->text('dr_name', 'ชื่อหมอ')->rule('required');
         $form->text('dr_lastname', 'นามสกุล')->rule('required');
         $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');
-        $form->text('dr_sex', 'เพศ')->rule('required');
+        $form->text('dr_sex', 'เพศ')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->link("dr/index", "ย้อนกลับ");
-
         $form->saved(function () use ($form) {
-            $user = new Doctor();
-            $user->dr_id = Input::get('dr_id');
-            $user->dr_name = Input::get('dr_name');
-            $user->dr_lastname = Input::get('dr_lastname');
-            $user->dr_tel = Input::get('dr_tel');
-            $user->dr_sex = Input::get('dr_sex');
-            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-            $form->link("dr/manage", "ย้อนกลับ");
+            $form->link("dr/index", "ย้อนกลับ");
         });
-        return view('dr/create', compact('form'));
+        return $form;
     }
 
-   /* public function edit() {
+   public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $edit = DataEdit::source('branch');
+        $edit = DataEdit::source(new Doctor());
         $edit->link("branch/index","บันทึก", "TR")->back();
-
-
-        $edit->add('branch_id', 'รหัสสาขา','text');
-        $edit->add('branch_name', 'ชื่อสาขา','text');
-        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
-        $edit->add('branch_tel', 'เบอร์โทร','text');
-        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
-
-
-        return $edit->view('branch/edit', compact('edit'));
+        $edit->text('dr_id', 'รหัสหมอ');
+        $edit->text('dr_name', 'ชื่อหมอ');
+        $edit->text('dr_lastname', 'นามสกุล');
+        $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ');
+        $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'))->rule('required');
+        $edit->attributes(array("class" => " "));
+        $edit->link("dr/index", "ย้อนกลับ");
+        return $edit->view('dr/edit', compact('edit'));
     }
 
-   */
 }

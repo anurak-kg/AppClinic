@@ -15,11 +15,8 @@ use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
 
-class BranchController extends Controller
+class QuotationsController extends Controller
 {
-    public function quotations(){
-        return view("quotations/index");
-    }
 
     public function getDataGrid(){
         $grid = DataGrid::source('quotations');
@@ -51,25 +48,18 @@ class BranchController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
-        $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
-        $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
-        $form->textarea('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
+        $form = DataForm::create(new Quotations());
+        $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ รหัสใบเสนอราคา....'));
+        $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุ รหัสสมาชิก....'));
+        $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุ รหัสพนักงาน....'));
         $form->text('quo_date', 'วันที่เสนอ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('quo_status', 'สถานะ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->text('quo_status', 'สถานะ')->rule('required');
         $form->attributes(array("class" => " "));
 
         $form->submit('บันทึก');
         $form->link("quotations/index", "ย้อนกลับ");
 
         $form->saved(function () use ($form) {
-            $user = new Branch();
-            $user->branch_id = Input::get('branch_id');
-            $user->branch_name = Input::get('branch_name');
-            $user->branch_address = Input::get('branch_address');
-            $user->branch_tel = Input::get('branch_tel');
-            $user->branch_code = Input::get('branch_code');
-            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("quotations/index", "ย้อนกลับ");
         });
@@ -77,7 +67,7 @@ class BranchController extends Controller
         return view('quotations/create', compact('form'));
     }
 
-    /*public function edit() {
+    public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source('branch');
@@ -93,5 +83,5 @@ class BranchController extends Controller
 
         return $edit->view('branch/edit', compact('edit'));
     }
- */
+
 }

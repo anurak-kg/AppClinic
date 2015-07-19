@@ -20,7 +20,8 @@ class Product_detailController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source('product_detail');
-        $grid->attributes(array("class"=>"table table-striped"));
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('product_id', 'รหัสสินค้า',true);
         $grid->add('product_name', 'ชื่อสินค้า');
         $grid->add('product_de_qty', 'จำนวน');

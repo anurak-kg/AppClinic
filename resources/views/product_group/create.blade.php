@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-5">
             <!-- general form elements -->
-            <div class="box box-primary">
+            <div class="box box-solid box-default">
                 <div class="box-body">
                     {!! $form !!}
                 </div>
@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-7">
             <!-- general form elements -->
-            <div class="box box-primary">
+            <div class="box box-solid box-default">
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">

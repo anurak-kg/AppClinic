@@ -19,5 +19,9 @@ class product_detail extends Model
     {
         return $this->belongsTo('\App\Product', 'product_id');
     }
+    public function Treatment()
+    {
+        return $this->belongsTo('\App\Treatment', 'tre_id');
+    }
 
 }

@@ -12,18 +12,9 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                     <span class="hidden-xs">{{Auth::user()->name}} ({{Auth::user()->getRoleName()}})</span>
+
                 </a>
-                <ul class="dropdown-menu">
-                    <!-- The user image in the menu -->
 
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <div class="pull-right">
-                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                        </div>
-                    </li>
-
-                </ul>
             </li>
           
         </ul>
