@@ -54,7 +54,7 @@ class DoctorController extends Controller
     public function create()
     {
 
-        $form = DataForm::create();
+        $form = DataEdit::source(new Doctor());
         $form->text('dr_name', 'ชื่อหมอ')->rule('required');
         $form->text('dr_lastname', 'นามสกุล')->rule('required');
         $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');

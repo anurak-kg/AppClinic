@@ -71,6 +71,7 @@ class TreatmentController extends Controller
         $form->saved(function () use ($form) {
 
             $form->message("Success");
+            $form->link("treatment/index", "Back");
         });
         $form->build();
         return view('treatment/create', compact('form'));

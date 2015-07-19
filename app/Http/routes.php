@@ -59,6 +59,17 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('dr/calender', 'DoctorController@calender');
     Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
+
+    //Employee
+    Route::post('employee/index', 'EmployeeController@grid');
+    Route::get('employee/index', 'EmployeeController@grid');
+
+    Route::post('employee/create', 'EmployeeController@create');
+    Route::get('employee/create', 'EmployeeController@create');
+
+    Route::any('employee/edit', 'EmployeeController@edit');
+    //End Employee
+
 });
 Route::group(['middleware' => 'auth'], function () {
 
@@ -136,16 +147,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('branch/edit', 'BranchController@edit');
     //End Branch
 
-    //Employee
-    Route::post('employee/index', 'EmployeeController@grid');
-    Route::get('employee/index', 'EmployeeController@grid');
-
-    Route::post('employee/create', 'EmployeeController@create');
-    Route::get('employee/create', 'EmployeeController@create');
-
-    Route::post('employee/edit', 'EmployeeController@edit');
-    Route::get('employee/edit', 'EmployeeController@edit');
-    //End Employee
 
 
 

@@ -60,28 +60,16 @@ class EmployeeController extends Controller
     public function create()
     {
 
-        $form = DataForm::create();
-        $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสาขา....'));
-        $form->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id'));
+        $form = DataEdit::source(new Employee());
+        $form->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
         $form->textarea('emp_name', 'ชื่อพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
         $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุตำแหน่ง....'));
         $form->text('emp_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุเบอร์โทร....'));
         $form->add('emp_sex', 'เพศ','select')->rule('required')->attributes(array('maxlength'=>13))->option('A','โปรดเลือก...')->option('M','ชาย')->option('F','หญิง');
         $form->attributes(array("class" => " "));
-
-        $form->submit('บันทึก');
         $form->link("employee/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
-            $user = new Employee();
-            $user->emp_id = Input::get('emp_id');
-           $user->branch_id = Input::get('branch_id');
-            $user->emp_name = Input::get('emp_name');
-            $user->emp_lastname = Input::get('emp_lastname');
-            $user->emp_position = Input::get('emp_position');
-            $user->emp_tel = Input::get('emp_tel');
-            $user->emp_sex = Input::get('emp_sex');
-            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("employee/index", "ย้อนกลับ");
         });
@@ -92,17 +80,16 @@ class EmployeeController extends Controller
     public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $edit = DataEdit::source('employee');
-        $edit->link("branch/manage","บันทึก", "TR")->back();
-
-        $edit->add('branch_id', 'รหัสสาขา','text');
-        $edit->add('branch_name', 'ชื่อสาขา','text');
-        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
-        $edit->add('branch_tel', 'เบอร์โทร','text');
-        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
-
-
-        return $edit->view('branch/edit', compact('edit'));
+        $edit = DataEdit::source(new Employee());
+        $edit->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
+        $edit->textarea('emp_name', 'ชื่อพนักงาน');
+        $edit->text('emp_lastname', 'นามสกุล');
+        $edit->text('emp_position', 'ตำแหน่ง');
+        $edit->text('emp_tel', 'เบอร์โทร');
+        $edit->add('emp_sex', 'เพศ','select');
+        $edit->attributes(array("class" => " "));
+        $edit->link("employee/index", "ย้อนกลับ");
+        return $edit->view('employee/edit', compact('edit'));
     }
 
 }
