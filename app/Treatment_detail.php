@@ -12,5 +12,9 @@ class Treatment_detail extends Model
     {
         return $this->belongsTo('\App\Treatment', 'tre_id');
     }
+    public function Doctor()
+    {
+        return $this->belongsTo('\App\Doctor', 'dr_id');
+    }
 
 }

@@ -11,6 +11,6 @@ class Doctor extends Model
 
     public function Treatment_detail()
     {
-        return $this->hasmany('\App\Treatment','tre_id');
+        return $this->hasmany('\App\Treatment_detail','dr_id');
     }
 }
