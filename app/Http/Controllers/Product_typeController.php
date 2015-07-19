@@ -58,9 +58,7 @@ class Product_typeController extends Controller
             $form->message("Success");
             $form->link("product_type/index", "Back");
         });
-
         return $form;
-
     }
 
     public function edit()
@@ -72,7 +70,7 @@ class Product_typeController extends Controller
         $edit->attributes(array("class" => " "));
         $edit->link("product_type/index", "ย้อนกลับ");
 
-        return view('product_type/edit', compact('edit'));
+        return $edit->view('product_type/edit', compact('edit'));
 
     }
 

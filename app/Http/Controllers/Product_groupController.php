@@ -57,7 +57,7 @@ class Product_groupController extends Controller
     }
     public function create()
     {
-        $form = DataEdit::source(new Product_group());
+        $form = DataForm::source(new Product_group());
         $form->add('pt_id','ประเภทสินค้า','select')->options(Product_type::lists('pt_name','pt_id')->toArray());
         $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required|unique:product_group,pg_name')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
         $form->attributes(array("class" => " "));
@@ -77,7 +77,7 @@ class Product_groupController extends Controller
         $edit->attributes(array("class" => " "));
         $edit->link("product_group/index", "ย้อนกลับ");
 
-        return view('product_group/index', compact('edit'));
+        return $edit->view('product_group/edit', compact('edit'));
 
 
     }

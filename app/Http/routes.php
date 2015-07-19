@@ -24,6 +24,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
 
+    Route::any('course/edit', 'CourseController@edit');
     //End Course
 
     //Product Type
@@ -46,6 +47,18 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
 
+    //Dr
+    Route::post('dr/index', 'DoctorController@grid');
+    Route::get('dr/index', 'DoctorController@grid');
+
+    Route::post('dr/create', 'DoctorController@create');
+    Route::get('dr/create', 'DoctorController@create');
+
+    Route::any('dr/edit', 'DoctorController@edit');
+
+    Route::post('dr/calender', 'DoctorController@calender');
+    Route::get('dr/calender', 'DoctorController@calender');
+    //End Dr
 });
 Route::group(['middleware' => 'auth'], function () {
 
@@ -135,19 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
     //End Employee
 
 
-    //Dr
-    Route::post('dr/index', 'DoctorController@grid');
-    Route::get('dr/index', 'DoctorController@grid');
 
-    Route::post('dr/create', 'DoctorController@create');
-    Route::get('dr/create', 'DoctorController@create');
-
-    Route::post('dr/edit', 'DoctorController@edit');
-    Route::get('dr/edit', 'DoctorController@edit');
-
-    Route::post('dr/calender', 'DoctorController@calender');
-    Route::get('dr/calender', 'DoctorController@calender');
-    //End Dr
 
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
