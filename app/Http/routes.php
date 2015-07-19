@@ -16,46 +16,33 @@
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
-
     //Course
     Route::post('course/index', 'CourseController@grid');
     Route::get('course/index', 'CourseController@grid');
-
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
-
     Route::any('course/edit', 'CourseController@edit');
-    //End Course
-
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
     Route::get('product_type/index', 'Product_typeController@grid');
-
     Route::post('product_type/create', 'Product_typeController@create');
     Route::get('product_type/create', 'Product_typeController@create');
-
     Route::any('product_type/edit', 'Product_typeController@edit');
-    //End Product Type
 
     //Product group
     Route::post('product_group/index', 'Product_groupController@grid');
     Route::get('product_group/index', 'Product_groupController@grid');
-
     Route::post('product_group/create', 'Product_groupController@create');
     Route::get('product_group/create', 'Product_groupController@create');
-
     Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
 
     //Dr
     Route::post('dr/index', 'DoctorController@grid');
     Route::get('dr/index', 'DoctorController@grid');
-
     Route::post('dr/create', 'DoctorController@create');
     Route::get('dr/create', 'DoctorController@create');
-
     Route::any('dr/edit', 'DoctorController@edit');
-
     Route::post('dr/calender', 'DoctorController@calender');
     Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
@@ -86,29 +73,26 @@ Route::group(['middleware' => 'auth'], function () {
     //End Treatment
 
     //Quotations
-    Route::post('quotations/index','QuotationsController@grid');
-    Route::get('quotations/index','QuotationsController@grid');
-
-    Route::post('quotations/create','QuotationsController@create');
-    Route::get('quotations/create','QuotationsController@create');
-    //End Quotations
+    Route::post('quotations','QuotationsController@index');
+    Route::get('quotations','QuotationsController@index');
+    Route::get('quotations/query', 'QuotationsController@getCustomerList');
+    Route::get('quotations/course_query', 'QuotationsController@getCourseList');
+    Route::get('quotations/update', 'QuotationsController@update');
+    Route::get('quotations/add', 'QuotationsController@add');
+    Route::get('quotations/delete', 'QuotationsController@delete');
+    Route::get('quotations/data', 'QuotationsController@getData');
 
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');
-
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
-
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
-    //End Customer
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
-
-    //End Course_detail
 
 
     //Product
@@ -123,27 +107,21 @@ Route::group(['middleware' => 'auth'], function () {
     //Order
     Route::post('order/index', 'OrderController@grid');
     Route::get('order/index', 'OrderController@grid');
-
     Route::post('order/create', 'OrderController@create');
     Route::get('order/create', 'OrderController@create');
-
     //End Order
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
-
-
     //End Product_detail
 
 
     //Branch
     Route::post('branch/index', 'BranchController@grid');
     Route::get('branch/index', 'BranchController@grid');
-
     Route::post('branch/create', 'BranchController@create');
     Route::get('branch/create', 'BranchController@create');
-
     Route::any('branch/edit', 'BranchController@edit');
     //End Branch
 
@@ -154,7 +132,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
     Route::get('vendor/index', 'VendorController@grid');
-
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
     //End Vendor

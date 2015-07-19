@@ -19,13 +19,13 @@
             return total;
         }
 
-        /*$http.get('/pos/data').
+        $http.get('/quotations/data').
             success(function (data, status, headers, config) {
                 $scope.product = data;
             }).
             error(function (data, status, headers, config) {
             });
-        */
+
         $scope.customerSelect = function (customer) {
             $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
             $scope.customer.tel = customer.cus_tel;

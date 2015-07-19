@@ -24,17 +24,6 @@ class Course_detailController extends Controller
 
     }
 
-    public function getCustomerList()
-    {
-        $query = '%' . \Input::get('q') . '%';
-
-        $customer = Customer::select('cus_id', 'cus_phone', 'cus_lastname', 'cus_name','cus_tel')
-            ->where('cus_name', 'LIKE', $query)
-            ->orWhere('cus_lastname', 'LIKE', $query)
-            ->orWhere('cus_phone', 'LIKE', $query)
-            ->get();
-        return response()->json($customer);
-    }
 
     public function getDataGrid()
     {

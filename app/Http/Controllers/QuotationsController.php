@@ -8,7 +8,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use App\Customer;
 use App\Quotations;
+use App\Quotations_detail;
+use Auth;
+use DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
@@ -17,71 +22,105 @@ use Zofe\Rapyd\Facades\DataEdit;
 
 class QuotationsController extends Controller
 {
-
-    public function getDataGrid(){
-        $grid = DataGrid::source('quotations');
-        $grid->attributes(array("class"=>"table table-striped"));
-        $grid->add('quo_id', 'รหัสใบเสนอราคา',true);
-        $grid->add('cus_id', 'รหัสสมาชิก',true);
-        $grid->add('emp_id', 'รหัสพนักงาน');
-        $grid->add('quo_date', 'วันที่เสนอ');
-        $grid->add('quo_status', 'สถานะ');
-        $grid->edit('/quotations/edit', 'กระทำ','modify|delete');
-        $grid->link('quotations/create',"เพิ่มข้อมูลใหม่", "TR");
-        $grid->paginate(10);
-
-        return $grid;
-    }
-
-    public function grid(){
-
-        $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('quo_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
-
-        return view('quotations/index', compact('grid'));
-    }
-
-
-    public function create()
+    public function index()
     {
-        $form = DataForm::create(new Quotations());
-        $form->text('quo_id', 'รหัสใบเสนอราคา')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ รหัสใบเสนอราคา....'));
-        $form->text('cus_id', 'รหัสสมาชิก')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุ รหัสสมาชิก....'));
-        $form->text('emp_id', 'รหัสพนักงาน')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุ รหัสพนักงาน....'));
-        $form->text('quo_date', 'วันที่เสนอ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('quo_status', 'สถานะ')->rule('required');
-        $form->attributes(array("class" => " "));
-
-        $form->submit('บันทึก');
-        $form->link("quotations/index", "ย้อนกลับ");
-
-        $form->saved(function () use ($form) {
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-            $form->link("quotations/index", "ย้อนกลับ");
-        });
-
-        return view('quotations/create', compact('form'));
+        if (Quotations::where('quo_status', -1)->count() == 0) {
+            $quotation = new Quotations();
+            //$quotation->cus_id = null;
+            $quotation->emp_id = Auth::user()->getAuthIdentifier();
+            $quotation->quo_status = -1;
+            // $quotation->branch_id = Branch::getId();
+            $quotation->save();
+            return $this->quoRender();
+        } else {
+            return $this->quoRender();
+        }
     }
 
-    public function edit() {
-        if (Input::get('do_delete')==1) return  "not the first";
-
-        $edit = DataEdit::source('branch');
-        $edit->link("branch/index","บันทึก", "TR")->back();
-
-
-        $edit->add('branch_id', 'รหัสสาขา','text');
-        $edit->add('branch_name', 'ชื่อสาขา','text');
-        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
-        $edit->add('branch_tel', 'เบอร์โทร','text');
-        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
-
-
-        return $edit->view('branch/edit', compact('edit'));
+    public function quoRender()
+    {
+        return view('quotations/create', [
+            'quo' => Quotations::find($this->getQuoId())
+        ]);
     }
+
+    public function getCustomerList()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $customer = Customer::select('cus_id', 'cus_phone', 'cus_lastname', 'cus_name', 'cus_tel')
+            ->where('cus_name', 'LIKE', $query)
+            ->orWhere('cus_lastname', 'LIKE', $query)
+            ->orWhere('cus_phone', 'LIKE', $query)
+            ->get();
+        return response()->json($customer);
+    }
+
+    public function getCourseList()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $course = Course::
+        with('detail')
+            ->where('course_name', 'LIKE', $query)
+            ->orWhere('course_id', 'LIKE', $query)
+            ->get();
+
+        //$course = Course::find(2);
+        //dd($course);
+        return response()->json($course);
+    }
+
+    public function add()
+    {
+        $id = \Input::get('id');
+        $rec = Quotations::find($this->getQuoId());
+        $product = Course::find($id);
+        $rec->course()->attach($product, [
+            'quo_t' => 1,
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+
+        ]);
+        $status = "ok";
+
+        return response()->json([
+            'status' => $status,
+        ]);
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
+
+    public function save()
+    {
+
+    }
+
+    public function getData()
+    {
+        /*$receivedItem = DB::table('quotations_detail')
+            ->select('course.course_id', 'course_name')
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->where('quo_id', "=", $this->getQuoId())
+            ->get();*/
+        $receivedItem = Quotations_detail::with(['Course.detail'])->
+        where('quo_id', "=", $this->getQuoId())->get();
+        // dd($receivedItem);
+        return response()->json($receivedItem);
+    }
+
+    private function getQuoId()
+    {
+        $quo = \App\Quotations::where('quo_status', -1)->where('emp_id', Auth::user()->getAuthIdentifier())->firstOrFail();
+        return $quo->quo_id;
+    }
+
 
 }

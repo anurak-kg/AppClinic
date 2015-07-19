@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="row">
                                     <table class="table table-bordered" ng-table="tableParams" ng-init="">
-                                        <tr ng-repeat="item in product">
+                                        <tr data-ng-repeat="item in product">
                                             <td>
                                                 <button class="btn btn-box-tool" data-widget="remove"
                                                         ng-click="deleteById(item.id)"><i class="fa fa-times"></i>
@@ -85,8 +85,12 @@
                                                 @{{$index+1}}
                                             </td>
 
-                                            <td data-title="'คอร์ส'" nowrap>
-                                                @{{item.course_name}}
+                                            <td data-title="'คอร์ส'">
+                                                @{{item.course.course_name}}<br>
+                                            <strong>รายละเอียดคอร์ส</strong>
+                                               <ul>
+                                                   <li ng-repeat="c in item.course.detail">@{{c.course_de_name}}: ราคา <strong>@{{c.course_de_price}}</strong> บาท</li>
+                                               </ul>
                                             </td>
                                             <td data-title="'จำนวน'">
                                                 <div>
@@ -94,7 +98,7 @@
                                                            ng-model="item.qty"
                                                            ng-change="update(item)"
                                                            ng-model-options="{debounce: 750}">
-                                                    @{{item.t}}
+                                                    @{{item.course_type}}
 
                                                 </div>
 
@@ -174,12 +178,7 @@
                         angular.element(document.getElementById('course')).scope().customerSelect(customer);
 
                     })
-                    .on('keyup', function (e) {
-                        if (e.which == 13) {
-                            $(".tt-suggestion:first-child").trigger('click');
-                            //$(".typehahead").val('');
-                        }
-                    });
+
 
             courseDb.initialize();
             $('.courseBtn').typeahead({
@@ -203,18 +202,16 @@
                         course =
                         {
                             id: datum.course_id,
-                            course_name: datum.course_name
+                            course :{
+                                course_name: datum.course_name,
+                                detail: datum.detail
+                            }
                         }
                         console.log(course);
                         angular.element(document.getElementById('course')).scope().pushProduct(course);
 
                     })
-                    .on('keyup', function (e) {
-                        if (e.which == 13) {
-                            $(".tt-suggestion:first-child").trigger('click');
-                            //$(".typehahead").val('');
-                        }
-                    });
+
         });
     </script>
 @stop
