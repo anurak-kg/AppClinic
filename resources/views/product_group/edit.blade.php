@@ -7,7 +7,7 @@
     <div class="row">
 
         <div class="col-md-5">
-            <div class="box ">
+            <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">แก้ไขข้อมูล</h2>
