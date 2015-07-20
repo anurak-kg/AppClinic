@@ -24,7 +24,7 @@ class TreatmentController extends Controller
     }
     public function getDataGrid()
     {
-        $grid = DataGrid::source((Quotations::with('quotations')),(Employee::with('employee')),(Customer::with('customer')));
+        $grid = DataGrid::source(Treatment::with('quotations','employee','customer'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('{{ $quotations->quo_id }}', 'ใบเสนอราคาเลขที่','quo_id');
