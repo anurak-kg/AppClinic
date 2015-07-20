@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title','ลูกค้ารับการรักษา')
+@section('title','การรักษา')
 
 
 @section('content')
-    {!! Rapyd::scripts() !!}
+
 
 
 
@@ -23,7 +23,7 @@
                 <div class="box-body">
 
 
-
+                    {!! Rapyd::scripts() !!}
                     {!! $form !!}
 
                 </div>

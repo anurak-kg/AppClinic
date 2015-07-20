@@ -6,8 +6,8 @@
 
     <div class="row">
 
-        <div class="col-md-12">
-            <div class="box box-solid box-success">
+        <div class="col-md-5">
+            <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">เพิ่มข้อมูล</h2>

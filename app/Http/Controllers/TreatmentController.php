@@ -64,7 +64,7 @@ class TreatmentController extends Controller
         $form->add('cus_id','ชื่อลูกค้า','select')->options(Customer::lists('cus_name','cus_id')->toArray());
         $form->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
         $form->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required');
+        $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่เข้ามารับบริการ....'));;
 
         $form->attributes(array("class" => " "));
 
@@ -78,59 +78,21 @@ class TreatmentController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function edit()
     {
-        //
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new Treatment());
+        $edit->add('cus_id','ชื่อลูกค้า','select')->options(Customer::lists('cus_name','cus_id')->toArray());
+        $edit->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
+        $edit->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
+        $edit->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th');
+
+        $edit->attributes(array("class" => " "));
+
+
+        return $edit->view('treatment/edit', compact('edit'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
