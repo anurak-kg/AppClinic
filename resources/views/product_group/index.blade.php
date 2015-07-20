@@ -7,7 +7,10 @@
     <div class="row">
         <div class="col-md-4">
             <!-- general form elements -->
-            <div class="box box-primary table-responsive no-padding">
+            <div class="box box-solid box-default table-responsive no-padding">
+                <div class="box-header">
+                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                </div>
                 <div class="box-body">
                     {!! $form !!}
                 </div>
@@ -15,9 +18,12 @@
         </div>
         <div class="col-md-8">
             <!-- general form elements -->
-            <div class="box box-primary table-responsive no-padding">
-                <div class="box-header with-border">
-                </div>
+            <div class="box box-solid box-default table-responsive no-padding">
+
+                    <div class="box-header ">
+                        <h2 class="box-title">ข้อมูลกลุ่มสินค้า</h2>
+                    </div>
+
                 <div class="box-body ">
                     {!! $grid !!}
                 </div>

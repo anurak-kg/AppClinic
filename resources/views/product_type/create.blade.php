@@ -9,6 +9,7 @@
             <!-- general form elements -->
             <div class="box box-solid box-default">
                 <div class="box-header with-border">
+                    <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
                 <div class="box-body">
                     {!! $form !!}
@@ -19,6 +20,7 @@
             <!-- general form elements -->
             <div class="box box-solid box-default">
                 <div class="box-header with-border">
+                    <h2 class="box-title">ข้อมูลประเภทสินค้า</h2>
                 </div>
                 <div class="box-body">
                     {!! $grid !!}
