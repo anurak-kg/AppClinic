@@ -12,12 +12,12 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">ข้อมูลการสั่งซื้อ</h2>
+                    <h2 class="box-title">แก้ไขข้อมูล</h2>
 
                 </div>
 
                 <div class="box-body">
-                    {!! $form !!}
+                    {!! $edit !!}
                     {!! Rapyd::scripts() !!}
                 </div>
 
@@ -25,7 +25,7 @@
 
         </div>
 
-        </div>
+    </div>
 
 
 

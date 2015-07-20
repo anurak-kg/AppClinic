@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ใบสั่งซื้อ')
+@section('title','การสั่งซื้อสินค้า')
 @section('content')
 
     <div class="row">

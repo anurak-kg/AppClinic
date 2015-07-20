@@ -58,6 +58,7 @@ class OrderController extends Controller
 
     public function create()
     {
+
         $form = DataEdit::source(new Order());
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
         $form->add('emp_id_order', 'รหัสพนักงานสั่งซื้อ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสพนักงานที่สั่งซื้อ....'));
@@ -69,8 +70,6 @@ class OrderController extends Controller
         $form->add('emp_id_receive', 'รหัสพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสพนักงานที่รับ....'));
         $form->date('order_receive_date', 'วันที่รับ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุวันที่รับ....'));
         $form->add('order_status', 'สถานะ','select')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'))->options(\Config::get('sex.status'));
-
-
 
         $form->attributes(array("class" => " "));
 
@@ -88,7 +87,25 @@ class OrderController extends Controller
 
     public function edit()
     {
-        //
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new Order());
+
+        $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
+        $edit->add('emp_id_order', 'รหัสพนักงานสั่งซื้อ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'));
+        $edit->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th');
+        $edit->text('order_total', 'ราคารวม');
+        $edit->text('order_de_discount', 'ส่วนลด %');
+        $edit->text('order_de_disamount', 'ส่วนลดจำนวนเงิน');
+        $edit->text('order_receive_id', 'เลขที่การรับ');
+        $edit->add('emp_id_receive', 'รหัสพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'));
+        $edit->date('order_receive_date', 'วันที่รับ')->format('d/m/Y','th');
+        $edit->add('order_status', 'สถานะ','select')->options(\Config::get('sex.status'));
+
+        $edit->attributes(array("class" => " "));
+
+
+        return $edit->view('order/edit', compact('edit'));
     }
 
 
