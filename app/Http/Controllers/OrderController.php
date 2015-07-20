@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Order;
 use ClassesWithParents\D;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class OrderController extends Controller
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('order_id', 'เลขที่ใบสั่งซื้อ',true);
+
         $grid->add('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ');
         $grid->add('order_date', 'วันที่สั่งซื้อ');
         $grid->add('order_total', 'ราคารวมที่สั่งซื้อ');
@@ -58,15 +60,15 @@ class OrderController extends Controller
     {
         $form = DataEdit::source(new Order());
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
-        $form->text('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ')->rule('required');
-        $form->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th')->rule('required');
-        $form->text('order_total', 'ราคารวมที่สั่งซื้อ')->rule('required');
-        $form->text('order_de_discount', 'ส่วนลด %')->rule('required');
-        $form->text('order_de_disamount', 'ส่วนลดจำนวนเงิน')->rule('required');
-        $form->text('order_receive_id', 'เลขที่การรับ')->rule('required');
-        $form->text('emp_id_receive', 'รหัสพนักงานที่รับ')->rule('required');
-        $form->text('order_receive_date', 'วันที่รับ')->rule('required');
-        $form->text('order_status', 'สถานะ')->rule('required');
+        $form->add('emp_id_order', 'รหัสพนักงานสั่งซื้อ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสพนักงานที่สั่งซื้อ....'));
+        $form->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุวันที่สั่งซื้อ....'));
+        $form->text('order_total', 'ราคารวม')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุราคารวม....'));
+        $form->text('order_de_discount', 'ส่วนลด %')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุส่วนลด %....'));
+        $form->text('order_de_disamount', 'ส่วนลดจำนวนเงิน')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุส่วนลดจำนวนเงิน....'));
+        $form->text('order_receive_id', 'เลขที่การรับ')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่การรับ....'));
+        $form->add('emp_id_receive', 'รหัสพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสพนักงานที่รับ....'));
+        $form->date('order_receive_date', 'วันที่รับ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุวันที่รับ....'));
+        $form->add('order_status', 'สถานะ','select')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'))->options(\Config::get('sex.status'));
 
 
 
@@ -79,7 +81,7 @@ class OrderController extends Controller
             $form->link("order/index", "ย้อนกลับ");
         });
 
-        $form->build();
+
         return view('order/create', compact('form'));
     }
 
