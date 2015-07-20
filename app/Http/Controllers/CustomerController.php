@@ -97,6 +97,7 @@ class CustomerController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Customer());
+        
         $edit->text('cus_name','ชื่อ')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
         $edit->text('cus_lastname','นามสกุล')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
         $edit->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'));
