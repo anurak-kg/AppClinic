@@ -34,7 +34,7 @@ class DoctorController extends Controller
         $grid->add('dr_tel', 'เบอร์โทรศัพท์');
         $grid->add('dr_sex', 'เพศ')->style("width:80x");
         $grid->edit('/dr/edit','กระทำ','show|modify|delete');
-        $grid->link('dr/create',"เพิ่มข้อมูลใหม่", "TR");
+
         $grid->paginate(10);
         return $grid;
     }
@@ -55,26 +55,28 @@ class DoctorController extends Controller
 
     public function create()
     {
+        $grid = $this->getDataGrid();
 
         $form = DataEdit::source(new Doctor());
-        $form->text('dr_name', 'ชื่อหมอ')->rule('required');
-        $form->text('dr_lastname', 'นามสกุล')->rule('required');
-        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');
-        $form->text('dr_sex', 'เพศ')->rule('required')->options(Config::get('sex.sex'))->rule('required');
+        $form->text('dr_name', 'ชื่อหมอ')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุชื่อหมอ....'));;
+        $form->text('dr_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุนามสกุล....'));;
+        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทร....'));;
+        $form->add('dr_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("dr/index", "ย้อนกลับ");
         });
-        return $form;
+
+        return view('dr/index', compact('grid','form'));
     }
 
    public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Doctor());
-        $edit->link("branch/index","บันทึก", "TR")->back();
+
         $edit->text('dr_id', 'รหัสหมอ');
         $edit->text('dr_name', 'ชื่อหมอ');
         $edit->text('dr_lastname', 'นามสกุล');
@@ -82,6 +84,7 @@ class DoctorController extends Controller
         $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'))->rule('required');
         $edit->attributes(array("class" => " "));
         $edit->link("dr/index", "ย้อนกลับ");
+
         return $edit->view('dr/edit', compact('edit'));
     }
 

@@ -43,9 +43,12 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     //Dr
     Route::post('dr/index', 'DoctorController@grid');
     Route::get('dr/index', 'DoctorController@grid');
+
     Route::post('dr/create', 'DoctorController@create');
     Route::get('dr/create', 'DoctorController@create');
+
     Route::any('dr/edit', 'DoctorController@edit');
+    
     Route::post('dr/calender', 'DoctorController@calender');
     Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
