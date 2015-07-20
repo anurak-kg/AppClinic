@@ -45,9 +45,9 @@ class CourseController extends Controller
     public function create()
     {
         $form = DataEdit::create();
-        $form->text('course_id', 'รหัส')->rule('required');
-        $form->text('course_name', 'ชื่อคอร์ส')->rule('required');
-        $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
+        $form->text('course_id', 'รหัส')->rule('required')->attributes(array('maxlength'=>4,'placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
+        $form->text('course_name', 'ชื่อคอร์ส')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
+        $form->text('course_type', 'ประเภทคอร์ส')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุประเภทคอร์ส....'));;
         $form->attributes(array("class" => " "));
 
 
@@ -58,5 +58,20 @@ class CourseController extends Controller
         });
         return view('course/create', compact('form'));
     }
+
+
+    public function edit() {
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new Course());
+
+        $edit->text('course_id', 'รหัส');
+        $edit->text('course_name', 'ชื่อคอร์ส');
+        $edit->text('course_type', 'ประเภทคอร์ส');
+        $edit->attributes(array("class" => " "));
+
+        return $edit->view('course/edit', compact('edit'));
+    }
+
 
 }

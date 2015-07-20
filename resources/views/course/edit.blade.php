@@ -1,7 +1,27 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Salmon
- * Date: 16/7/2558
- * Time: 11:57
- */ 
+@extends('layout.master')
+@section('title','ข้อมูลคอร์ส')
+
+@section('content')
+
+    <div class="row">
+
+        <div class="col-md-5">
+            <div class="box box-solid box-default">
+
+                <div class="box-header with-border">
+                    <h2 class="box-title">แก้ไขข้อมูล</h2>
+                </div>
+
+                <div class="box-body" >
+
+                    {!! $edit !!}
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+@stop
