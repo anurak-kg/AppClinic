@@ -55,17 +55,14 @@ class VendorController extends Controller
     {
 
         $form = DataEdit::create();
-        $form->text('ven_id', 'รหัสร้านค้า')->rule('required');
-        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required');
-        $form->text('ven_address', 'ที่อยู่ร้านค้า')->rule('required');
-        $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required');
-        $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required');
-        $form->text('ven_discount_per', 'ส่วนลด %')->rule('required');
-        $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required');
+        $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('maxlength'=>5,'placeholder'=>'โปรดระบุรหัสร้านค้า....'));
+        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_discount_per', 'ส่วนลด %')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุส่วนลด %....'));
+        $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุส่วนลด บาท....'));
         $form->attributes(array("class" => " "));
-
-
-
 
         $form->saved(function () use ($form) {
 
@@ -74,6 +71,23 @@ class VendorController extends Controller
 
         });
         return view('vendor/create', compact('form'));
+    }
+
+    public function edit() {
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new Vendor());
+        $edit->text('ven_id', 'รหัสร้านค้า');
+        $edit->text('ven_name', 'ชื่อร้านค้า');
+        $edit->textarea('ven_address', 'ที่อยู่ร้านค้า');
+        $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
+        $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
+        $edit->text('ven_discount_per', 'ส่วนลด %');
+        $edit->text('ven_discount_amount', 'ส่วนลด บาท');
+        $edit->attributes(array("class" => " "));
+
+
+        return $edit->view('vendor/edit', compact('edit'));
     }
 
 

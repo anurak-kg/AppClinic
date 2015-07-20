@@ -48,7 +48,7 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('dr/create', 'DoctorController@create');
 
     Route::any('dr/edit', 'DoctorController@edit');
-    
+
     Route::post('dr/calender', 'DoctorController@calender');
     Route::get('dr/calender', 'DoctorController@calender');
     //End Dr
@@ -134,8 +134,11 @@ Route::group(['middleware' => 'auth'], function () {
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
     Route::get('vendor/index', 'VendorController@grid');
+
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
+
+    Route::any('vendor/edit', 'VendorController@edit');
     //End Vendor
 
 });
