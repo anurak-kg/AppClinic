@@ -97,21 +97,21 @@ class CustomerController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Customer());
-        $edit->text('cus_name','ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
-        $edit->text('cus_lastname','นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
-        $edit->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'))->rule('required');
-        $edit->add('cus_birthday_month',' ','select')->options(Config::get('sex.month'))->rule('required');
-        $edit->add('cus_birthday_year',' ','select')->options(Config::get('sex.year'))->rule('required');
-        $edit->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
-        $edit->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'))->rule('required');
-        $edit->text('cus_code','รหัสบัตรประชาชน')->rule('required|numeric')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
+        $edit->text('cus_name','ชื่อ')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
+        $edit->text('cus_lastname','นามสกุล')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
+        $edit->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'));
+        $edit->add('cus_birthday_month',' ','select')->options(Config::get('sex.month'));
+        $edit->add('cus_birthday_year',' ','select')->options(Config::get('sex.year'));
+        $edit->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
+        $edit->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
+        $edit->text('cus_code','รหัสบัตรประชาชน')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุ เลขประจำตัวประชาชน....'));
 
-        $edit->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'0xxxxxxxxxx'));
+        $edit->text('cus_tel','เบอร์โทรศัพทมือถือ')->attributes(array('maxlength'=>10,'placeholder'=>'0xxxxxxxxxx'));
         $edit->text('cus_phone','เบอร์โทรศัพท์บ้าน')->attributes(array('maxlength'=>10,'placeholder'=>'xxxxxx'));
-        $edit->text('cus_email','E-mail')->rule('required|email')->attributes(array('maxlength'=>200,'placeholder'=>'demo@demo.com'));
+        $edit->text('cus_email','E-mail')->attributes(array('maxlength'=>200,'placeholder'=>'demo@demo.com'));
         $edit->date('cus_reg','วันที่ลงทะเบียน')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดเลือก วันที่ลงทะเบียน....'));
-        $edit->text('cus_height','ส่วนสูง')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ ส่วนสูง....'));
-        $edit->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ น้ำหนัก....'));
+        $edit->text('cus_height','ส่วนสูง')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ ส่วนสูง....'));
+        $edit->text('cus_weight','น้ำหนัก')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุ น้ำหนัก....'));
 
         $edit->add('dis_de_id','โรคประจำตัว','text')->options(Disease_detail::lists('dis_de_dis','dis_de_id')->toArray())->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
         $edit->add('gic_de_id','แพ้ยา','text')->options(Allergic_detail::lists('gic_de_id','gic_de_dis')->toArray())->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ยาที่แพ้....'));
@@ -122,8 +122,8 @@ class CustomerController extends Controller
         $edit->text('cus_road','ถนน')->attributes(array('placeholder'=>'โปรดระบุ ถนน....'));
         $edit->text('cus_subdis','ตำบล/แขวง')->attributes(array('placeholder'=>'โปรดระบุ ตำบล/แขวง....'));
         $edit->text('cus_district','อำเภอ/เขต')->attributes(array('placeholder'=>'โปรดระบุ อำเภอ/เขต....'));
-        $edit->add('cus_province','จังหวัด','select')->options(Config::get('sex.province'))->rule('required');
-        $edit->text('cus_postal','รหัสไปรษณีย์')->attributes(array('placeholder'=>'โปรดระบุ รหัสไปรษณีย์....'))->rule('required');
+        $edit->add('cus_province','จังหวัด','select')->options(Config::get('sex.province'));
+        $edit->text('cus_postal','รหัสไปรษณีย์')->attributes(array('placeholder'=>'โปรดระบุ รหัสไปรษณีย์....'));
 
         $edit->attributes(array("class" => " "));
 
