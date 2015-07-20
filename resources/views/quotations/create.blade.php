@@ -77,7 +77,7 @@
                                         <tr data-ng-repeat="item in product">
                                             <td>
                                                 <button class="btn btn-box-tool" data-widget="remove"
-                                                        ng-click="deleteById(item.id)"><i class="fa fa-times"></i>
+                                                        ng-click="deleteById(item.course_id)"><i class="fa fa-times"></i>
                                                 </button>
 
                                             </td>

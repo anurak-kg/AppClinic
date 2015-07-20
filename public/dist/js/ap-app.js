@@ -61,7 +61,7 @@
             $scope.dataLoading = true;
             console.log(item);
 
-            $http.get('/course_detail/update?id=' + item.id + '&qty=' + item.qty + "&discount_price=" + item.discount_price).
+            $http.get('/quotations/update?id=' + item.id + '&qty=' + item.qty + "&discount_price=" + item.discount_price).
                 success(function (data, status, headers, config) {
                     //console.log(data)
                     $scope.dataLoading = false;
@@ -74,10 +74,10 @@
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
-                    return el.id !== id;
+                    return el.course_id !== id;
                 });
             $scope.dataLoading = true;
-            $http.get('/pos/delete?id=' + id).
+            $http.get('/quotations/delete?id=' + id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                 }).

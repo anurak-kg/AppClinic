@@ -95,7 +95,12 @@ class QuotationsController extends Controller
 
     public function delete()
     {
-
+        $id = \Input::get('id');
+        DB::table('quotations_detail')
+            ->where('quo_id', "=", $this->getQuoId())
+            ->where('course_id', "=", \Input::get('id'))
+            ->delete();
+        ;
     }
 
     public function save()
