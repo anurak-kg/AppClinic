@@ -22,9 +22,11 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
     Route::any('course/edit', 'CourseController@edit');
+
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
     Route::get('product_type/index', 'Product_typeController@grid');
+
     Route::post('product_type/create', 'Product_typeController@create');
     Route::get('product_type/create', 'Product_typeController@create');
     Route::any('product_type/edit', 'Product_typeController@edit');
@@ -124,10 +126,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('branch/create', 'BranchController@create');
     Route::any('branch/edit', 'BranchController@edit');
     //End Branch
-
-
-
-
 
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');

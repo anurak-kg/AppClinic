@@ -27,9 +27,10 @@ class Product_typeController extends Controller
         $grid = DataGrid::source(new Product_type());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('pt_id', 'รหัสประเภทสินค้า');
-        $grid->add('pt_name', 'ชื่อประเภทสินค้า');
+        $grid->add('pt_id', 'รหัสประเภทสินค้า',true);
+        $grid->add('pt_name', 'ชื่อประเภทสินค้า',true);
         $grid->edit('/product_type/edit', 'กระทำ','show|modify|delete');
+
         $grid->paginate(10);
         return $grid;
     }
@@ -49,6 +50,7 @@ class Product_typeController extends Controller
 
     public function create()
     {
+        $grid = $this->getDataGrid();
         $form = DataEdit::source(new Product_type());
         $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required|unique:product_type,pt_name')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
         $form->attributes(array("class" => " "));
@@ -58,7 +60,8 @@ class Product_typeController extends Controller
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("product_type/index", "ย้อนกลับ");
         });
-        return $form;
+
+        return view('product_type/create', compact('form','grid'));
     }
 
     public function edit()

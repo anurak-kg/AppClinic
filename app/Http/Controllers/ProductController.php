@@ -60,10 +60,10 @@ class ProductController extends Controller
         $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
         $form->text('product_qty', 'จำนวนสินค้าที่มี')->rule('required|integer')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุจำนวนสินค้าที่มี....'));
-        $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
-        $form->text('product_date_start', 'วันที่ผลิต')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบวันที่ผลิต....'));
-        $form->text('product_date_end', 'วันที่หมดอายุ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่หมดอายุ....'));
-        $form->text('product_price', 'ราคา/หน่วย')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุราคา/หน่วย....'));
+        $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required|integer')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
+        $form->date('product_date_start', 'วันที่ผลิต')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบวันที่ผลิต....'));
+        $form->date('product_date_end', 'วันที่หมดอายุ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่หมดอายุ....'));
+        $form->text('product_price', 'ราคา/หน่วย')->rule('required|integer')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุราคา/หน่วย....'));
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหน่วยนับ....'));
         $form->attributes(array("class" => " "));
 
@@ -78,21 +78,25 @@ class ProductController extends Controller
         return view('product/create', compact('form'));
     }
 
-   /* public function edit() {
+    public function edit() {
         if (Input::get('do_delete')==1) return  "not the first";
 
-        $edit = DataEdit::source('branch');
+        $edit = DataEdit::source(new Product());
         $edit->link("branch/index","บันทึก", "TR")->back();
 
+        $edit->text('product_id', 'รหัสสินค้า');
+        $edit->text('pg_id', 'รหัสกลุ่มสินค้า');
+        $edit->text('product_name', 'ชื่อสินค้า');
+        $edit->text('product_qty', 'จำนวนสินค้าที่มี');
+        $edit->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
+        $edit->date('product_date_start', 'วันที่ผลิต');
+        $edit->date('product_date_end', 'วันที่หมดอายุ');
+        $edit->text('product_price', 'ราคา/หน่วย');
+        $edit->text('product_unit', 'หน่วยนับ');
+        $edit->attributes(array("class" => " "));
 
-        $edit->add('branch_id', 'รหัสสาขา','text');
-        $edit->add('branch_name', 'ชื่อสาขา','text');
-        $edit->add('branch_address', 'ที่อยู่สาขา','textarea');
-        $edit->add('branch_tel', 'เบอร์โทร','text');
-        $edit->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี','text');
 
-
-        return $edit->view('branch/edit', compact('edit'));
-    }*/
+        return $edit->view('product/edit', compact('edit'));
+    }
 
 }

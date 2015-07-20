@@ -71,6 +71,7 @@ class Product_groupController extends Controller
     public function edit()
     {
         if (Input::get('do_delete')==1) return  "not the first";
+
         $edit = DataEdit::source(new Product_group());
         $edit->add('pt_id','ประเภทสินค้า','select')->options(Product_type::lists('pt_name','pt_id')->toArray());
         $edit->text('pg_name', 'ชื่อกลุ่มสินค้า');

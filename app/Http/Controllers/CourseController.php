@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
@@ -43,17 +44,17 @@ class CourseController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
+        $form = DataEdit::create();
         $form->text('course_id', 'รหัส')->rule('required');
         $form->text('course_name', 'ชื่อคอร์ส')->rule('required');
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
         $form->attributes(array("class" => " "));
 
-        $form->link("course/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
 
-            $form->message("ok");
-
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("course/index", "ย้อนกลับ");
         });
         return view('course/create', compact('form'));
     }
