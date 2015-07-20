@@ -65,13 +65,13 @@ class TreatmentController extends Controller
         $form->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
         $form->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
         $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required');
-        $form->link("treatment/index", "Back");
+
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
 
-            $form->message("Success");
-            $form->link("treatment/index", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("treatment/index", "ย้อนกลับ");
         });
         $form->build();
         return view('treatment/create', compact('form'));

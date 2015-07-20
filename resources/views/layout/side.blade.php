@@ -22,14 +22,7 @@
                   <li><a href="{{url('customer/index')}}"><i class='fa fa-minus'></i>ข้อมูลสมาชิก</a></li>
                   <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
                   <li><a href="{{url('quotations')}}"><i class='fa fa-minus'></i>ซื้อคอร์ส</a></li>
-
-                     <li>
-                         <a href="#"><i class="fa fa-minus"></i>การรักษา<i class="fa fa-angle-left pull-right"></i></a>
-                         <ul class="treeview-menu">
-                             <li><a href="{{url('treatment/index')}}"><i class='fa fa-angle-double-right'></i>ประวัติการรักษา</a>
-                         </ul>
-                     </li>
-
+                  <li><a href="{{url('treatment/index')}}"><i class='fa fa-minus'></i>การรักษา</a>
                   <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ตารางนัด</a></li>
 
                  </ul>

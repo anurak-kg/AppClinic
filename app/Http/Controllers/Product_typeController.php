@@ -49,14 +49,14 @@ class Product_typeController extends Controller
 
     public function create()
     {
-        $form = DataForm::source(new Product_type());
+        $form = DataEdit::source(new Product_type());
         $form->text('pt_name', 'ชื่อประเภทสินค้า')->rule('required|unique:product_type,pt_name')->attributes(array('placeholder'=>'โปรดระบุชื่อประเภทสินค้า....'));
         $form->attributes(array("class" => " "));
-        $form->submit('บันทึก');
+
         $form->saved(function () use ($form) {
 
-            $form->message("Success");
-            $form->link("product_type/index", "Back");
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("product_type/index", "ย้อนกลับ");
         });
         return $form;
     }

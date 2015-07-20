@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use ClassesWithParents\D;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -55,7 +56,7 @@ class OrderController extends Controller
 
     public function create()
     {
-        $form = DataForm::source(new Order());
+        $form = DataEdit::source(new Order());
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
         $form->text('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ')->rule('required');
         $form->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th')->rule('required');
@@ -70,12 +71,12 @@ class OrderController extends Controller
 
 
         $form->attributes(array("class" => " "));
-        $form->submit('บันทึก');
-        $form->link("order/index", "ย้อนกลับ");
+
+
         $form->saved(function () use ($form) {
 
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("order/index", "ย้อนกลับ");
         });
 
         $form->build();

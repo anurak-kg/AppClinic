@@ -54,7 +54,7 @@ class VendorController extends Controller
     public function create()
     {
 
-        $form = DataForm::create();
+        $form = DataEdit::create();
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required');
         $form->text('ven_name', 'ชื่อร้านค้า')->rule('required');
         $form->text('ven_address', 'ที่อยู่ร้านค้า')->rule('required');
@@ -64,20 +64,14 @@ class VendorController extends Controller
         $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required');
         $form->attributes(array("class" => " "));
 
-        $form->submit('บันทึก');
-        $form->link("vendor/index", "ย้อนกลับ");
+
+
 
         $form->saved(function () use ($form) {
-            $user = new Vendor();
-            $user->ven_id = Input::get('ven_id');
-            $user->ven_name = Input::get('ven_name');
-            $user->ven_address = Input::get('ven_address');
-            $user->ven_sell_name = Input::get('ven_sell_name');
-            $user->ven_sell_tel = Input::get('ven_sell_tel');
-            $user->ven_discount_per = Input::get('ven_discount_per');
-            $user->ven_discount_amount = Input::get('ven_discount_amount');
-            $user->save();
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("vendor/index", "ย้อนกลับ");
+
         });
         return view('vendor/create', compact('form'));
     }

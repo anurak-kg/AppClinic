@@ -62,10 +62,9 @@ class DoctorController extends Controller
         $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required');
         $form->text('dr_sex', 'เพศ')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
-        $form->submit('บันทึก');
-        $form->link("dr/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("dr/index", "ย้อนกลับ");
         });
         return $form;

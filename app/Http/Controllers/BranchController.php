@@ -50,18 +50,17 @@ class BranchController extends Controller
     public function create()
     {
 
-        $form = DataForm::source(new Branch());
+        $form = DataEdit::source(new Branch());
         $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
         $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
         $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
         $form->attributes(array("class" => " "));
-        $form->submit('บันทึก');
-        $form->link("branch/index", "ย้อนกลับ");
+
         $form->saved(function () use ($form) {
 
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("branch/index", "ย้อนกลับ");
         });
 
         return view('branch/create', compact('form'));

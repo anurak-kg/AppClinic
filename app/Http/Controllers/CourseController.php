@@ -49,14 +49,9 @@ class CourseController extends Controller
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required');
         $form->attributes(array("class" => " "));
 
-        $form->submit('บันทึก');
         $form->link("course/index", "ย้อนกลับ");
         $form->saved(function () use ($form) {
-            $user = new Course();
-            $user->course_id = Input::get('course_id');
-            $user->course_name = Input::get('course_name');
-            $user->course_type = Input::get('course_type');
-            $user->save();
+
             $form->message("ok");
 
         });

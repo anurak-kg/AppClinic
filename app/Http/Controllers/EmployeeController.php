@@ -71,7 +71,7 @@ class EmployeeController extends Controller
         $form->add('emp_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
         $form->saved(function () use ($form) {
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("employee/index", "ย้อนกลับ");
         });
 

@@ -55,7 +55,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = DataForm::create();
+        $form = DataEdit::create();
         $form->text('product_id', 'รหัสสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสินค้า....'));
         $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
@@ -67,11 +67,12 @@ class ProductController extends Controller
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหน่วยนับ....'));
         $form->attributes(array("class" => " "));
 
-        $form->submit('บันทึก');
-        $form->link("product/index", "ย้อนกลับ");
+
+
 
         $form->saved(function () use ($form) {
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->message("เพิ่มข้อมูลเรียบร้อย");
+            $form->link("product/index", "ย้อนกลับ");
         });
 
         return view('product/create', compact('form'));
