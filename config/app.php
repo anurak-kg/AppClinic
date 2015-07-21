@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Bangkok',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +148,8 @@ return [
         'Zofe\Rapyd\RapydServiceProvider',
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         'yajra\Datatables\DatatablesServiceProvider',
+        'Jenssegers\Date\DateServiceProvider',
+
     ],
 
     /*
