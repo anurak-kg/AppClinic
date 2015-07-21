@@ -13,7 +13,7 @@ class CreateTableReceiveDetail extends Migration
     public function up()
     {
         Schema::create('receive_detail', function (Blueprint $table) {
-            $table->increments('receive_de_id');
+            $table->integer('receive_id');
             $table->string('product_id');
             $table->integer('receive_de_qty');//รับสินค้า
             $table->integer('receive_de_qty_return');//คืนสินค้า
@@ -22,6 +22,7 @@ class CreateTableReceiveDetail extends Migration
             $table->integer('receive_de_discount');
             $table->decimal('receive_de_disamount',6,2);
             $table->timestamps();
+            $table->primary(['receive_id','product_id']);
         });
     }
 

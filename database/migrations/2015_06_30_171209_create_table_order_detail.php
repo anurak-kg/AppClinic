@@ -20,6 +20,7 @@ class CreateTableOrderDetail extends Migration
             $table->integer('order_de_discount');
             $table->decimal('order_de_disamount',6,2);
             $table->timestamps();
+            $table->primary(['order_id','product_id']);
         });
     }
 
