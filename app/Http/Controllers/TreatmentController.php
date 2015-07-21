@@ -65,7 +65,7 @@ class TreatmentController extends Controller
         $form->add('cus_id','ชื่อลูกค้า','select')->options(Customer::lists('cus_name','cus_id')->toArray());
         $form->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
         $form->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุวันที่เข้ามารับบริการ....'));;
+        $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบุวันที่เข้ามารับบริการ....'));;
 
         $form->attributes(array("class" => " "));
 

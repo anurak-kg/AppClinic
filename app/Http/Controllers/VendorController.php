@@ -56,13 +56,13 @@ class VendorController extends Controller
     {
 
         $form = DataEdit::create(new Vendor());
-        $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('maxlength'=>5,'placeholder'=>'โปรดระบุรหัสร้านค้า....'));
-        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
+        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
-        $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
-        $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
-        $form->text('ven_discount_per', 'ส่วนลด %')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุส่วนลด %....'));
-        $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุส่วนลด บาท....'));
+        $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_discount_per', 'ส่วนลด %')->rule('required')->attributes(array('placeholder'=>'โปรดระบุส่วนลด %....'));
+        $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required')->attributes(array('placeholder'=>'โปรดระบุส่วนลด บาท....'));
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {

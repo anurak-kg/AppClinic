@@ -64,10 +64,10 @@ class EmployeeController extends Controller
 
         $form = DataEdit::source(new Employee());
         $form->add('branch_id', 'ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $form->text('emp_name', 'ชื่อพนักงาน')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุชื่อพนักงาน....'));;
-        $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุนามสกุล....'));;
-        $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุตำแหน่ง....'));;
-        $form->text('emp_tel', 'เบอร์โทร')->rule('required|numeric')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทร....'));;
+        $form->text('emp_name', 'ชื่อพนักงาน')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อพนักงาน....'));;
+        $form->text('emp_lastname', 'นามสกุล')->rule('required')->attributes(array('placeholder'=>'โปรดระบุนามสกุล....'));;
+        $form->text('emp_position', 'ตำแหน่ง')->rule('required')->attributes(array('placeholder'=>'โปรดระบุตำแหน่ง....'));;
+        $form->text('emp_tel', 'เบอร์โทร')->rule('required|numeric')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทร....'));;
         $form->add('emp_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
 
