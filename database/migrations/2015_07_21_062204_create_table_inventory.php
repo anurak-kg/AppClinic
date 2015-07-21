@@ -12,14 +12,15 @@ class CreateTableInventory extends Migration
      */
     public function up()
     {
-        Schema::create('inventory',function (Blueprint $table){
+        Schema::create('inventory_transaction',function (Blueprint $table){
             $table->increments('inv_id');
             $table->string('product_id');//รหัสสินค้า
-            $table->integer('tre_id');//รหัสการรักษา
-            $table->integer('order_id');//รหัสใบสั่งซื้อสินค้าจากร้านขายยา
-            $table->integer('order_de_qty_rev');//สินค้าที่ได้รับมาจากร้านยา
-            $table->integer('product_de_qty');//จำนวนยาที่ใช้
-            $table->integer('product_balance');//สินค้าคงเหลือในสต๊อก
+            $table->integer('treatment_id')->unsigned()->nullable();//รหัสการรักษา
+            $table->integer('order_id')->unsigned()->nullable();//รหัสใบสั่งซื้อสินค้าจากร้านขายยา
+            $table->integer('received_id')->unsigned()->nullable();//สินค้าที่ได้รับมาจากร้านยา
+            $table->integer('qty');//จำนวนยาที่ใช้
+            $table->timestamps();
+
         });
     }
 
@@ -30,6 +31,6 @@ class CreateTableInventory extends Migration
      */
     public function down()
     {
-        Schema::drop('inventory');
+        Schema::drop('inventory_transaction');
     }
 }

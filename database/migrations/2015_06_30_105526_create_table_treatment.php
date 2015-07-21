@@ -19,6 +19,7 @@ class CreateTableTreatment extends Migration
             $table->integer('cus_id');
             $table->date('tre_date');
             $table->timestamps();
+
         });
     }
 

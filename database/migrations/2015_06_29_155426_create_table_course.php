@@ -16,6 +16,7 @@ class CreateTableCourse extends Migration
             $table->string('course_id');
             $table->string('course_name',50);
             $table->string('course_type',20);
+            $table->integer('course_price');//ราคาคอร์ส
             $table->timestamps();
         });
     }

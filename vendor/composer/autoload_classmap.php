@@ -19,6 +19,7 @@ return array(
     'CreateTableEmployee' => $baseDir . '/database/migrations/2015_06_29_164401_create_table_employee.php',
     'CreateTableInstallment' => $baseDir . '/database/migrations/2015_07_21_061618_create_table_installment.php',
     'CreateTableInventory' => $baseDir . '/database/migrations/2015_07_21_062204_create_table_inventory.php',
+    'CreateTableMedicine' => $baseDir . '/database/migrations/2015_07_21_081457_create_table_medicine.php',
     'CreateTableOrder' => $baseDir . '/database/migrations/2015_06_30_105055_create_table_order.php',
     'CreateTableOrderDetail' => $baseDir . '/database/migrations/2015_06_30_171209_create_table_order_detail.php',
     'CreateTableProduct' => $baseDir . '/database/migrations/2015_06_30_104813_create_table_product.php',

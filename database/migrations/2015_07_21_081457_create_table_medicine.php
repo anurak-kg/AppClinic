@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableCourseDetail extends Migration
+class CreateTableMedicine extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateTableCourseDetail extends Migration
      */
     public function up()
     {
-        Schema::create('course_detail', function (Blueprint $table) {
-            $table->increments('course_de_id');
+        Schema::create('medicine', function (Blueprint $table) {
+            $table->increments('med_id');
             $table->integer('course_id');
-            $table->string('course_de_name',20);
-            $table->integer('course_de_qty');
+            $table->string('product_id');
+            $table->string('product_name');
+            $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateTableCourseDetail extends Migration
      */
     public function down()
     {
-        Schema::drop('course_detail');
+        Schema::drop('medicine');
     }
 }
