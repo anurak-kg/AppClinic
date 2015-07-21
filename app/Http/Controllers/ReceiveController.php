@@ -22,7 +22,7 @@ class ReceiveController extends Controller
         $grid->add('{{ $vendor->ven_name }}', 'ร้านค้า','ven_id');
         $grid->add('{{ $employee->emp_name }}', 'ชื่อพนักงาน','emp_id');
         $grid->add('receive_date', 'วันที่รับ');
-        $grid->add('receive_total', 'ราคารวม');
+
 
         $grid->edit('/receive/edit', 'กระทำ','modify|delete');
         $grid->link('receive/create',"เพิ่มข้อมูลใหม่", "TR");
@@ -47,8 +47,8 @@ class ReceiveController extends Controller
         $form->text('receive_id', 'เลขที่รับสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่รับสินค้า....'));
         $form->add('ven_id', 'ชื่อร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id')->toArray());
         $form->add('emp_id', 'ชื่อพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $form->date('receive_date', 'วันที่รับ')->rule('required')->format('d/m/Y','th');
-        $form->text('receive_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
+        $form->date('receive_date', 'วันที่รับ')->rule('required')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดระบุวันที่รับสินค้า....'));;
+
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
@@ -70,7 +70,7 @@ class ReceiveController extends Controller
         $edit->text('ven_id', 'รหัสร้านค้า')->options(Vendor::lists('ven_name','ven_id')->toArray());
         $edit->text('emp_id', 'ชื่อพนักงานที่รับ')->options(Employee::lists('emp_name','emp_id')->toArray());
         $edit->date('receive_date', 'วันที่รับ');
-        $edit->text('receive_total', 'ราคารวม');
+
         $edit->attributes(array("class" => " "));
         $edit->link("receive/index", "ย้อนกลับ");
 
