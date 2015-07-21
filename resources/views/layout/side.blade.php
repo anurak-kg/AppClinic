@@ -45,7 +45,7 @@
                                         <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i class="fa fa-angle-left pull-right"></i></a>
                                         <ul class="treeview-menu">
                                             <li><a href="{{url('order/index')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อ สินค้า</a></li>
-                                            <li><a href="{{url('/index')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
+                                            <li><a href="{{url('receive/index')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
 
                                         </ul>
                                     </li>
