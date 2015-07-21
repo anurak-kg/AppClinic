@@ -1,4 +1,7 @@
-## Extra Shop
-Solution For Small Shop 
-
-By FIIN TECH
+# AppClinic#
+## เสร็จสมบูนย์แล้ ว !!##
+1. ไม่มีที
+## ยังไม่เสร็จ##
+1. ปลิ้นบิล
+2. เมนูตั้งค่า
+3.   
