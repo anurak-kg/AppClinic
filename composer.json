@@ -10,7 +10,8 @@
         "kris/laravel-form-builder": "1.6.*",
         "zofe/rapyd": "2.0.*",
         "barryvdh/laravel-ide-helper": "^2.0@dev",
-        "yajra/laravel-datatables-oracle": "~5.0"
+        "yajra/laravel-datatables-oracle": "~5.0",
+        "jenssegers/date": "^3.0@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -59,6 +59,7 @@
                                         <input class="form-control typeahead input-lg courseBtn"
                                                type="search"
                                                id="course"
+                                               ng-model="courseSearchBox"
                                                placeholder="พืมชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค็ด ">
                                     </div>
                                     <div class="col-md-6">
