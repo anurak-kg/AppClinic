@@ -22,7 +22,7 @@ class VendorController extends Controller
     }
 
     public function getDataGrid(){
-        $grid = DataGrid::source('vendor');
+        $grid = DataGrid::source(new Vendor());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
 
@@ -55,7 +55,7 @@ class VendorController extends Controller
     public function create()
     {
 
-        $form = DataEdit::create();
+        $form = DataEdit::create(new Vendor());
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('maxlength'=>5,'placeholder'=>'โปรดระบุรหัสร้านค้า....'));
         $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));

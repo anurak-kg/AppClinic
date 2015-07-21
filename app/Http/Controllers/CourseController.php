@@ -17,13 +17,13 @@ class CourseController extends Controller
     }
 
     public function getDataGrid(){
-        $grid = DataGrid::source('course');
+        $grid = DataGrid::source(new Course());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('course_id', 'รหัส',true);
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_type', 'ประเภทคอร์ส');
-        $grid->edit('/course/edit', 'กระทำ','modify|delete');
+        $grid->edit('/course/edit', 'กระทำ','show|modify|delete');
         $grid->link('course/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
@@ -50,7 +50,6 @@ class CourseController extends Controller
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุประเภทคอร์ส....'));;
         $form->attributes(array("class" => " "));
 
-
         $form->saved(function () use ($form) {
 
             $form->message("เพิ่มข้อมูลเรียบร้อย");
@@ -69,6 +68,8 @@ class CourseController extends Controller
         $edit->text('course_name', 'ชื่อคอร์ส');
         $edit->text('course_type', 'ประเภทคอร์ส');
         $edit->attributes(array("class" => " "));
+
+        $edit->link("course/index", "ย้อนกลับ");
 
         return $edit->view('course/edit', compact('edit'));
     }
