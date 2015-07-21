@@ -1179,6 +1179,8 @@ return array(
     'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+    'Jenssegers\\Date\\Date' => $vendorDir . '/jenssegers/date/src/Date.php',
+    'Jenssegers\\Date\\DateServiceProvider' => $vendorDir . '/jenssegers/date/src/DateServiceProvider.php',
     'Kris\\LaravelFormBuilder\\Console\\FormGenerator' => $vendorDir . '/kris/laravel-form-builder/src/Kris/LaravelFormBuilder/Console/FormGenerator.php',
     'Kris\\LaravelFormBuilder\\Console\\FormMakeCommand' => $vendorDir . '/kris/laravel-form-builder/src/Kris/LaravelFormBuilder/Console/FormMakeCommand.php',
     'Kris\\LaravelFormBuilder\\Facades\\FormBuilder' => $vendorDir . '/kris/laravel-form-builder/src/Kris/LaravelFormBuilder/Facades/FormBuilder.php',

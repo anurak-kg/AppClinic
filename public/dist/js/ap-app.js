@@ -43,7 +43,7 @@
             $scope.clearSearch();
         }
         $scope.clearSearch = function () {
-            $scope.searchBarcode = ""
+            $scope.courseSearchBox = ""
         }
 
         $scope.getAddProduct = function (id) {
