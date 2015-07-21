@@ -13,7 +13,6 @@ use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
 
 
-
 class CustomerController extends Controller
 {
 
@@ -26,7 +25,7 @@ class CustomerController extends Controller
         $grid->add('cus_name', 'ชื่อ');
         $grid->add('cus_lastname', 'นามสกุล');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์');
-        $grid->add('created_at','วัที่ลงทะเบียน');
+        $grid->add('created_at','วันที่ลงทะเบียน');
         $grid->edit('/customer/edit', 'กระทำ','modify|delete');
 
         $grid->paginate(10);
@@ -65,8 +64,8 @@ class CustomerController extends Controller
         $form->text('cus_height','ส่วนสูง')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ ส่วนสูง....'));
         $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ น้ำหนัก....'));
 
-        $form->add('allergic','โรคประจำตัว','text')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
-        $form->add('disease','แพ้ยา','text')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ ยาที่แพ้....'));
+        $form->text('allergic','โรคประจำตัว')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
+        $form->text('disease','แพ้ยา')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ ยาที่แพ้....'));
 
         $form->text('cus_hno','บ้านเลขที่')->attributes(array('placeholder'=>'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo','หมู่')->attributes(array('placeholder'=>'โปรดระบุ หมู่....'));
@@ -82,15 +81,6 @@ class CustomerController extends Controller
 
 
         $form->saved(function () use ($form) {
-            $al = explode(',',Input::get('gic_de_id'));
-            foreach($al as $var){
-                $allergic = Allergic_detail::create([
-
-                    ['gic_de_dis'] => $var
-
-                ]);
-                $allergic->save();
-            }
 
             $form->message("ลงทะเบียนเสร็จสิ้น");
         });
@@ -120,8 +110,8 @@ class CustomerController extends Controller
         $edit->text('cus_height','ส่วนสูง');
         $edit->text('cus_weight','น้ำหนัก');
 
-        $edit->add('dis_de_id','โรคประจำตัว','text')->options(Disease_detail::lists('dis_de_dis','dis_de_id')->toArray());
-        $edit->add('gic_de_id','แพ้ยา','text')->options(Allergic_detail::lists('gic_de_id','gic_de_dis')->toArray());
+        $edit->add('allergic','โรคประจำตัว','text')->attributes(array('data-role'=>"tagsinput"));
+        $edit->add('disease','แพ้ยา','text')->attributes(array('data-role'=>"tagsinput"));
 
         $edit->text('cus_hno','บ้านเลขที่');
         $edit->text('cus_moo','หมู่');
