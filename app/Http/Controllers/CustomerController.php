@@ -27,10 +27,10 @@ class CustomerController extends Controller
         $grid = DataGrid::source(new Customer());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('cus_id', 'รหัสลูกค้า',true);
-        $grid->add('cus_name', 'ชื่อลูกค้า');
-        $grid->add('cus_lastname', 'นามสกุลลูกค้า');
-        $grid->add('cus_tel', 'เบอร์โทรศัพท์ลูกค้า');
+        $grid->add('cus_id', 'รหัสสมาชิก',true);
+        $grid->add('cus_name', 'ชื่อ');
+        $grid->add('cus_lastname', 'นามสกุล');
+        $grid->add('cus_tel', 'เบอร์โทรศัพท์');
         $grid->edit('/customer/edit', 'กระทำ','show|modify|delete');
 
         $grid->paginate(10);
