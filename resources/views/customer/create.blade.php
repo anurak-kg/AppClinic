@@ -88,10 +88,12 @@
                         <div class="col-md-6">
                             {!! $form->render('allergic') !!}
                             <br>
+                            <br>
                         </div>
 
                         <div class="col-md-6">
                             {!! $form->render('disease') !!}
+                            <br>
                             <br>
                         </div>
 
