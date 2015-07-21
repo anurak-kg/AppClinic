@@ -25,7 +25,7 @@ class OrderController extends Controller
 
         $grid->add('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ');
         $grid->add('order_date', 'วันที่สั่งซื้อ');
-        $grid->add('order_total', 'ราคารวมที่สั่งซื้อ');
+        $grid->add('order_total', 'ราคารวม');
         $grid->add('order_de_discount', 'ส่วนลด %');
         $grid->add('order_de_disamount', 'ส่วนลดจำนวนเงิน');
 
