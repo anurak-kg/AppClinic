@@ -31,8 +31,7 @@ class VendorController extends Controller
         $grid->add('ven_address', 'ที่อยู่ร้านค้า');
         $grid->add('ven_sell_name', 'ชื่อพนักงานขาย');
         $grid->add('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
-        $grid->add('ven_discount_per', 'ส่วนลด %');
-        $grid->add('ven_discount_amount', 'ส่วนลด บาท');
+
         $grid->edit('/vendor/edit', 'กระทำ','modify|delete');
         $grid->link('vendor/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
@@ -55,14 +54,13 @@ class VendorController extends Controller
     public function create()
     {
 
-        $form = DataEdit::create(new Vendor());
+        $form = DataEdit::source(new Vendor());
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
         $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
-        $form->text('ven_discount_per', 'ส่วนลด %')->rule('required')->attributes(array('placeholder'=>'โปรดระบุส่วนลด %....'));
-        $form->text('ven_discount_amount', 'ส่วนลด บาท')->rule('required')->attributes(array('placeholder'=>'โปรดระบุส่วนลด บาท....'));
+
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
@@ -83,8 +81,7 @@ class VendorController extends Controller
         $edit->textarea('ven_address', 'ที่อยู่ร้านค้า');
         $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
         $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
-        $edit->text('ven_discount_per', 'ส่วนลด %');
-        $edit->text('ven_discount_amount', 'ส่วนลด บาท');
+
         $edit->attributes(array("class" => " "));
 
 

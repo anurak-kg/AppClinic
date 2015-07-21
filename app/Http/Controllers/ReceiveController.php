@@ -10,16 +10,17 @@ use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class ReceiveController extends Controller
 {
     public function getDataGrid(){
-        $grid = DataGrid::source(new Receive());
+        $grid = DataGrid::source(Receive::with('employee','vendor'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('receive_id', 'เลขที่รับสินค้า',true);
         $grid->add('{{ $vendor->ven_name }}', 'ร้านค้า','ven_id');
-        $grid->add('{{ $employee->emp_name }}', 'ร้านค้า','emp_id');
+        $grid->add('{{ $employee->emp_name }}', 'ชื่อพนักงาน','emp_id');
         $grid->add('receive_date', 'วันที่รับ');
         $grid->add('receive_total', 'ราคารวม');
 
@@ -44,8 +45,8 @@ class ReceiveController extends Controller
     {
         $form = DataEdit::source(new Receive());
         $form->text('receive_id', 'เลขที่รับสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่รับสินค้า....'));
-        $form->add('ven_id', 'รหัสร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id'));
-        $form->add('emp_id', 'รหัสพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_name','emp_id'));
+        $form->add('ven_id', 'ชื่อร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id')->toArray());
+        $form->add('emp_id', 'ชื่อพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_name','emp_id')->toArray());
         $form->date('receive_date', 'วันที่รับ')->rule('required')->format('d/m/Y','th');
         $form->text('receive_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
         $form->attributes(array("class" => " "));
@@ -66,8 +67,8 @@ class ReceiveController extends Controller
 
         $edit = DataEdit::source(new Receive());
         $edit->text('receive_id', 'เลขที่รับสินค้า');
-        $edit->text('ven_id', 'รหัสร้านค้า');
-        $edit->text('emp_id', 'รหัสพนักงานที่รับ');
+        $edit->text('ven_id', 'รหัสร้านค้า')->options(Vendor::lists('ven_name','ven_id')->toArray());
+        $edit->text('emp_id', 'ชื่อพนักงานที่รับ')->options(Employee::lists('emp_name','emp_id')->toArray());
         $edit->date('receive_date', 'วันที่รับ');
         $edit->text('receive_total', 'ราคารวม');
         $edit->attributes(array("class" => " "));
