@@ -36,6 +36,8 @@ class CreateTableCustomer extends Migration
             $table->string('cus_district',30);
             $table->string('cus_province',30);
             $table->string('cus_postal',10);
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
         });
     }

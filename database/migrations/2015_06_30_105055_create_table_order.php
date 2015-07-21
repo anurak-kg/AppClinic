@@ -24,6 +24,8 @@ class CreateTableOrder extends Migration
             $table->string('order_status',5);
             $table->integer('order_de_discount');
             $table->integer('order_de_disamount');
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
 
         });

@@ -18,6 +18,8 @@ class CreateTableInventory extends Migration
             $table->integer('treatment_id')->unsigned()->nullable();//รหัสการรักษา
             $table->integer('order_id')->unsigned()->nullable();//รหัสใบสั่งซื้อสินค้าจากร้านขายยา
             $table->integer('received_id')->unsigned()->nullable();//สินค้าที่ได้รับมาจากร้านยา
+            $table->integer('branch_id')->unsigned()->nullable();
+
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();
 

@@ -16,7 +16,6 @@ class CreateTableMedicine extends Migration
             $table->increments('med_id');
             $table->integer('course_id');
             $table->string('product_id');
-            $table->string('product_name');
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();
         });

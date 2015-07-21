@@ -6,6 +6,8 @@ use Mockery as m;
 use yajra\Datatables\Datatables;
 use yajra\Datatables\Request;
 
+require_once 'helper.php';
+
 class TestDatatablesQueryBuilderEngine extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -23,6 +25,21 @@ class TestDatatablesQueryBuilderEngine extends PHPUnit_Framework_TestCase
         m::close();
     }
 
+    public function test_datatables_make_with_data_using_of_method()
+    {
+        $builder = $this->setupBuilder();
+        // set Input variables
+        $this->setupInputVariables();
+
+        $response = Datatables::of($builder)->make();
+
+        $actual   = $response->getContent();
+        $expected = '{"draw":1,"recordsTotal":2,"recordsFiltered":2,"data":[[1,"foo"],[2,"bar"]]}';
+
+        $this->assertInstanceOf('Illuminate\Http\JsonResponse', $response);
+        $this->assertEquals($expected, $actual);
+    }
+
     public function test_datatables_make_with_data()
     {
         $builder = $this->setupBuilder();
@@ -32,6 +49,23 @@ class TestDatatablesQueryBuilderEngine extends PHPUnit_Framework_TestCase
         $datatables = new Datatables(Request::capture());
 
         $response = $datatables->usingQueryBuilder($builder)->make();
+
+        $actual   = $response->getContent();
+        $expected = '{"draw":1,"recordsTotal":2,"recordsFiltered":2,"data":[[1,"foo"],[2,"bar"]]}';
+
+        $this->assertInstanceOf('Illuminate\Http\JsonResponse', $response);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_datatables_make_with_data_using_alias()
+    {
+        $builder = $this->setupBuilder();
+        // set Input variables
+        $this->setupInputVariables();
+
+        $datatables = new Datatables(Request::capture());
+
+        $response = $datatables->queryBuilder($builder)->make();
 
         $actual   = $response->getContent();
         $expected = '{"draw":1,"recordsTotal":2,"recordsFiltered":2,"data":[[1,"foo"],[2,"bar"]]}';
@@ -63,7 +97,7 @@ class TestDatatablesQueryBuilderEngine extends PHPUnit_Framework_TestCase
         $builder->select(['id', 'name'])->from('users');
 
         // count total records
-        $builder->shouldReceive('toSql')->times(2)->andReturn('select id, name from users');
+        $builder->shouldReceive('toSql')->times(1)->andReturn('select id, name from users');
         $builder->shouldReceive('select')->once()->andReturn($builder);
         $builder->getConnection()->shouldReceive('raw')->once()->andReturn('select \'1\' as row_count');
         $builder->getConnection()->shouldReceive('table')->once()->andReturn($builder);
