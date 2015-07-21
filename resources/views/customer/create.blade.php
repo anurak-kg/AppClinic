@@ -6,7 +6,6 @@
 
     {!! Rapyd::scripts() !!}
 
-    <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -110,12 +109,6 @@
                             {!! $form->render('cus_email') !!}
                             <br>
                         </div>
-
-                        <div class="col-md-12">
-                            {!! $form->render('cus_reg') !!}
-                            <br>
-                        </div>
-
 
                 </div>
 

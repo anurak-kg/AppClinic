@@ -23,6 +23,15 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
     Route::any('course/edit', 'CourseController@edit');
+    //End Course
+
+    //Course
+    Route::post('receive/index', 'ReceiveController@grid');
+    Route::get('receive/index', 'ReceiveController@grid');
+    Route::post('receive/create', 'ReceiveController@create');
+    Route::get('receive/create', 'ReceiveController@create');
+    Route::any('receive/edit', 'ReceiveController@edit');
+    //End Course
 
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
