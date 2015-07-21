@@ -28,12 +28,12 @@ class Quotations extends Model
 
     public function Quotations_detail()
     {
-        return $this->hasmany('\App\Quotations_detail','quo_id');
+        return $this->hasmany('\App\Quotations_detail');
     }
 
     public function Treatment()
     {
-        return $this->hasmany('\App\Treatment','quo_id');
+        return $this->hasmany('\App\Treatment');
     }
 
 }

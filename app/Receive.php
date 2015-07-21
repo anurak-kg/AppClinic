@@ -18,5 +18,9 @@ class Receive extends Model
     {
         return $this->belongsTo('\App\Vendor', 'ven_id');
     }
+    public function Order()
+    {
+        return $this->belongsTo('\App\Order', 'order_id');
+    }
 
 }

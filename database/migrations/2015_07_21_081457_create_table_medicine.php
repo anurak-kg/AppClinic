@@ -13,8 +13,7 @@ class CreateTableMedicine extends Migration
     public function up()
     {
         Schema::create('medicine', function (Blueprint $table) {
-            $table->increments('med_id');
-            $table->integer('course_id');
+            $table->string('course_id');
             $table->string('product_id');
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();

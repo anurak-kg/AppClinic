@@ -18,7 +18,7 @@ class Branch extends Model
 
     public function employee()
     {
-        return $this->hasMany('App\Employee', 'emp_id');
+        return $this->hasMany('App\Employee');
     }
 
 
