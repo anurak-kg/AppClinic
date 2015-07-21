@@ -19,6 +19,8 @@ class CreateCourseSystem extends Migration
             $table->string('course_type',20);
             $table->integer('course_price');//ราคาคอร์ส
             $table->timestamps();
+            $table->primary(['course_id']);
+
         });
         Schema::create('course_detail', function (Blueprint $table) {
             $table->increments('course_detail_id');
@@ -32,6 +34,8 @@ class CreateCourseSystem extends Migration
             $table->string('product_id');
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();
+            $table->primary(['course_detail_id','product_id']);
+
         });
     }
 
