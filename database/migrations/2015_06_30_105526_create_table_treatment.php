@@ -18,6 +18,8 @@ class CreateTableTreatment extends Migration
             $table->integer('emp_id');
             $table->integer('cus_id');
             $table->date('tre_date');
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
 
         });

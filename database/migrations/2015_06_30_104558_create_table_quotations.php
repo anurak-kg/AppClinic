@@ -22,6 +22,7 @@ class CreateTableQuotations extends Migration
             //สถานะ
             // -1 = อยุ่ในหน้าจอการซื้อ
             // 1 = ซื้อสำเร็จ
+            $table->integer('branch_id')->nullable();
             $table->timestamps();
         });
     }
