@@ -23,10 +23,10 @@ class Treatment extends Model
     }
     public function Treatment_detail()
     {
-        return $this->hasmany('\App\Treatment_detail','tre_id');
+        return $this->hasmany('\App\Treatment_detail');
     }
     public function Product_detail()
     {
-        return $this->hasmany('\App\Product_detail','tre_id');
+        return $this->hasmany('\App\Product_detail');
     }
 }

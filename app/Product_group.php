@@ -11,7 +11,7 @@ class Product_group extends Model
 
     public function Product()
     {
-        return $this->hasmany('\App\Product','pg_id');
+        return $this->hasmany('\App\Product');
     }
     public function Product_type()
     {

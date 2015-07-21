@@ -10,11 +10,11 @@ class Employee extends Model
 
     public function Quotations()
     {
-        return $this->hasmany('\App\Quotations','emp_id');
+        return $this->hasmany('\App\Quotations');
     }
     public function Treatment()
     {
-        return $this->hasmany('\App\Treatment','emp_id');
+        return $this->hasmany('\App\Treatment');
     }
     public function Branch()
     {

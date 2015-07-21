@@ -15,4 +15,10 @@ class Vendor extends Model
 
     protected $table = 'vendor';
     protected $primaryKey = 'ven_id';
+    public function Order() {
+        return $this->hasmany('\App\Order');
+    }
+    public function Receive() {
+        return $this->hasmany('\App\Receive');
+    }
 }

@@ -11,18 +11,18 @@ class Doctor extends Model
 
     public function Treatment_detail()
     {
-        return $this->hasmany('\App\Treatment_detail','dr_id');
+        return $this->hasmany('\App\Treatment_detail');
     }
     public function Doctor_detail()
     {
-        return $this->hasmany('\App\Doctor_detail','dr_id');
+        return $this->hasmany('\App\Doctor_detail');
     }
     public function Train_detail()
     {
-        return $this->hasmany('\App\Train_detail','dr_id');
+        return $this->hasmany('\App\Train_detail');
     }
     public function Education_detail()
     {
-        return $this->hasmany('\App\Education_detail','dr_id');
+        return $this->hasmany('\App\Education_detail');
     }
 }

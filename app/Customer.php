@@ -13,12 +13,12 @@ class Customer extends Model
 
     public function Quotations()
     {
-        return $this->hasmany('\App\Quotations','quo_id');
+        return $this->hasmany('\App\Quotations');
     }
 
     public function Treatment()
     {
-        return $this->hasmany('\App\Treatment','tre_id');
+        return $this->hasmany('\App\Treatment');
     }
 
 
