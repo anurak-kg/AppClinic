@@ -14,7 +14,7 @@ class CreateTableQuotationsDetail extends Migration
     {
         Schema::create('quotations_detail', function (Blueprint $table) {
             $table->integer('quo_id');
-            $table->integer('course_id');
+            $table->string('course_id');
             $table->integer('quo_t');
             $table->timestamps();
             $table->primary(['quo_id','course_id']);

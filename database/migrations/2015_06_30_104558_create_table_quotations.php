@@ -20,8 +20,7 @@ class CreateTableQuotations extends Migration
             $table->integer('quo_status');
             $table->decimal('price',6,2);
             //สถานะ
-            // -1 = อยุ่ในหน้าจอการซื้อ
-            // 1 = ซื้อสำเร็จ
+            // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ
             $table->integer('branch_id')->nullable();
             $table->timestamps();
         });
