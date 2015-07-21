@@ -14,4 +14,5 @@ class Vendor extends Model
 {
 
     protected $table = 'vendor';
+    protected $primaryKey = 'ven_id';
 }
