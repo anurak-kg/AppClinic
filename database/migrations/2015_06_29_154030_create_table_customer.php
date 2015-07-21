@@ -26,6 +26,8 @@ class CreateTableCustomer extends Migration
             $table->string('cus_phone',10);
             $table->string('cus_email',60);
             $table->date('cus_reg');
+            $table->text('allergic');
+            $table->text('disease');
             $table->integer('cus_height');
             $table->integer('cus_weight');
             $table->string('cus_hno',10);
