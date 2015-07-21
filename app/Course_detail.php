@@ -14,7 +14,7 @@ class Course_detail extends Model
 {
 
     protected $table = 'course_detail';
-    protected $primarykey = 'course_de_id';
+    protected $primarykey = 'course_detail_id';
 
     public function course()
     {

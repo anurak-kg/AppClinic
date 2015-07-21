@@ -16,7 +16,7 @@ class Quotations_detail extends Model
     {
         return $this->belongsTo('\App\Course', 'course_id','course_id');
     }
-    public function couse_detail()
+    public function course_detail()
     {
         return $this->hasManyThrough('App\Course_detail', 'App\Course','course_id');
     }

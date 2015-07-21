@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
-    protected $table = 'medicine';
-    protected $primaryKey = 'med_id';
+    protected $table = 'course_medicine';
 
     public function course()
     {

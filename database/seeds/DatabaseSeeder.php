@@ -1,5 +1,8 @@
 <?php
 
+use App\Course;
+use App\Course_detail;
+use App\Medicine;
 use App\Unit;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -74,14 +77,48 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
         DB::table('course')->delete();
-
-        \App\Course::create(['course_id' => 'A001', 'course_name' => 'Advence Growth Factors รายครั้ง', 'course_price' => '10000',]);
-
         DB::table('course_detail')->delete();
-        \App\Course_detail::create(['course_de_id' => '1', 'course_id' => 'A001', 'course_de_qty' => '1']);
+        DB::table('course_medicine')->delete();
 
-        DB::table('medicine')->delete();
-        \App\Medicine::create(['course_id' => 'A001', 'product_id' => 'A01', 'qty' => '20']);
+        Course::create(
+            ['course_id' => 'A001',
+                'course_name' => 'Advence Growth Factors รายครั้ง',
+                'course_price' => '10000',]);
+       Course_detail::create(
+            [
+                'course_id' => 'A001',
+                'course_detail_name' =>'Laser',
+                'course_detail_qty' => '1']);
+        Medicine::create(
+            [   'course_detail_id' => '1',
+                'product_id' => 'A01',
+                'qty' => '20'
+            ]);
+
+
+        Course::create(
+            ['course_id' => 'A002',
+                'course_name' => 'นวดและนาบ',
+                'course_detail' => 'เป็นการนวดที่ผสมการนาบที่ลงตัวลึกสุดใจ',
+                'course_price' => '2400',]);
+
+        Course_detail::create(
+            [
+                'course_id' => 'A002',
+                'course_detail_name' =>'นวด',
+                'course_detail_qty' => '2']);
+
+        Course_detail::create(
+            [
+                'course_id' => 'A002',
+                'course_detail_name' =>'นาบ',
+                'course_detail_qty' => '1']);
+
+       Course_detail::create(
+            [
+                'course_id' => 'A002',
+                'course_detail_name' =>'อาบน้ำ',
+                'course_detail_qty' => '1']);
 
     }
 
