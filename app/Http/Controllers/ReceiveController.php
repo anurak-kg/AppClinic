@@ -44,6 +44,7 @@ class ReceiveController extends Controller
     public function create()
     {
         $form = DataEdit::source(new Receive());
+        $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขใบสั่งซื้อสินค้า....'));
         $form->text('receive_id', 'เลขที่รับสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่รับสินค้า....'));
         $form->add('ven_id', 'ชื่อร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id')->toArray());
         $form->add('emp_id', 'ชื่อพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_name','emp_id')->toArray());
