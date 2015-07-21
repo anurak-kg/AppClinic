@@ -30,6 +30,6 @@ class CreateTableInventory extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('inventory');
     }
 }

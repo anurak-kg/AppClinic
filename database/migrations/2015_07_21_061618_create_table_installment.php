@@ -26,6 +26,6 @@ class CreateTableInstallment extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('installment');
     }
 }
