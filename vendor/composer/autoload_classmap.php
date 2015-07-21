@@ -28,6 +28,8 @@ return array(
     'CreateTableProductType' => $baseDir . '/database/migrations/2015_06_29_155848_create_table_product_type.php',
     'CreateTableQuotations' => $baseDir . '/database/migrations/2015_06_30_104558_create_table_quotations.php',
     'CreateTableQuotationsDetail' => $baseDir . '/database/migrations/2015_06_30_170725_create_table_quotations_detail.php',
+    'CreateTableReceive' => $baseDir . '/database/migrations/2015_07_21_090738_create_table_receive.php',
+    'CreateTableReceiveDetail' => $baseDir . '/database/migrations/2015_07_21_090755_create_table_receive_detail.php',
     'CreateTableTrainDetail' => $baseDir . '/database/migrations/2015_06_30_112844_create_table_train_detail.php',
     'CreateTableTreatment' => $baseDir . '/database/migrations/2015_06_30_105526_create_table_treatment.php',
     'CreateTableTreatmentDetail' => $baseDir . '/database/migrations/2015_06_30_170957_create_table_treatment_detail.php',
