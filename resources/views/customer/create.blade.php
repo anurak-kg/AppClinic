@@ -6,8 +6,6 @@
 
     {!! Rapyd::scripts() !!}
 
-
-
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
 
@@ -25,6 +23,12 @@
                     <h2 class="box-title">ข้อมูลลูกค้า</h2>
 
                 </div>
+
+                {!! $form->header !!}
+
+                {!! $form->message !!}
+
+                @if(!$form->message)
 
                 <div class="box-body">
 
@@ -176,12 +180,13 @@
             </div>
 
             <div class="box box-solid box-default">
-                <div class="col-xs-" >
-                    <button class="btn  btn-success btn-block btn-signin" type="submit">ยืนยัน การสมัครสมาชิก</button>
-                </div><!-- /.col -->
+
+                <div class="box-body">
+                @endif
+                {!! $form->footer !!}
+                </div>
 
             </div>
-
 
 
         </div>

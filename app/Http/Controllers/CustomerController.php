@@ -11,16 +11,11 @@ use Zofe\Rapyd\Facades\DataEdit;
 use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
-use yajra\Datatables\Datatables;
+
 
 
 class CustomerController extends Controller
 {
-
-    public function anyData()
-    {
-        return Datatables::of(Customer::select('*'))->make(true);
-    }
 
     public function getDataGrid()
     {
@@ -52,7 +47,7 @@ class CustomerController extends Controller
     public function create()
     {
 
-        $form = DataForm::source(new Customer());
+        $form = DataEdit::source(new Customer());
         $form->text('cus_name','ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
         $form->text('cus_lastname','นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
         $form->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'))->rule('required');
