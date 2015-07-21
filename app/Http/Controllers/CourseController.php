@@ -20,10 +20,10 @@ class CourseController extends Controller
         $grid = DataGrid::source(new Course());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('course_id', 'รหัส',true);
+        $grid->add('course_id', 'รหัสคอร์ส',true);
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_type', 'ประเภทคอร์ส');
-        $grid->edit('/course/edit', 'กระทำ','show|modify|delete');
+        $grid->edit('/course/edit', 'กระทำ','modify|delete');
         $grid->link('course/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);

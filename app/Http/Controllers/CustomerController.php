@@ -31,7 +31,7 @@ class CustomerController extends Controller
         $grid->add('cus_name', 'ชื่อ');
         $grid->add('cus_lastname', 'นามสกุล');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์');
-        $grid->edit('/customer/edit', 'กระทำ','show|modify|delete');
+        $grid->edit('/customer/edit', 'กระทำ','modify|delete');
 
         $grid->paginate(10);
         return $grid;

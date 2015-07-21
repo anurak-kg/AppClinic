@@ -29,7 +29,7 @@ class Product_typeController extends Controller
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('pt_id', 'รหัสประเภทสินค้า',true);
         $grid->add('pt_name', 'ชื่อประเภทสินค้า',true);
-        $grid->edit('/product_type/edit', 'กระทำ','show|modify|delete');
+        $grid->edit('/product_type/edit', 'กระทำ','modify|delete');
 
         $grid->paginate(10);
         return $grid;

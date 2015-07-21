@@ -30,10 +30,10 @@ class ProductController extends Controller
         $grid->add('product_name', 'ชื่อสินค้า',true);
         $grid->add('product_qty', 'จำนวนสินค้าที่มี');
         $grid->add('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
-        $grid->add('product_date_start', 'วันที่ผลิต',true);
-        $grid->add('product_date_end', 'วันที่หมดอายุ',true);
+        $grid->add('product_date_start', 'วันที่ผลิต');
+        $grid->add('product_date_end', 'วันที่หมดอายุ');
         $grid->add('product_price', 'ราคา/หน่วย');
-        $grid->add('product_unit', 'หน่วยนับ',true);
+        $grid->add('product_unit', 'หน่วยนับ');
         $grid->edit('/product/edit', 'กระทำ','modify|delete');
         $grid->link('product/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);

@@ -36,7 +36,7 @@ class OrderController extends Controller
 
         $grid->add('order_status', 'สถานะ');
 
-        $grid->edit('/order/edit', 'กระทำ','show|modify|delete');
+        $grid->edit('/order/edit', 'กระทำ','modify|delete');
         $grid->link('order/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
