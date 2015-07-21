@@ -33,7 +33,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="/app.css" rel="stylesheet" type="text/css"/>
+    <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <script src="/dist/js/ap-app.js"></script>
+    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
 
 </head>
 

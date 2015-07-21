@@ -6,17 +6,16 @@
 
     {!! Rapyd::scripts() !!}
 
-    <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
 
 
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-2">
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
@@ -87,12 +86,12 @@
                         </div>
 
                         <div class="col-md-6">
-                            {!! $form->render('dis_de_id') !!}
+                            {!! $form->render('allergic') !!}
                             <br>
                         </div>
 
                         <div class="col-md-6">
-                            {!! $form->render('gic_de_id') !!}
+                            {!! $form->render('disease') !!}
                             <br>
                         </div>
 
@@ -110,12 +109,6 @@
                             {!! $form->render('cus_email') !!}
                             <br>
                         </div>
-
-                        <div class="col-md-12">
-                            {!! $form->render('cus_reg') !!}
-                            <br>
-                        </div>
-
 
                 </div>
 
