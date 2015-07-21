@@ -249,3 +249,9 @@ input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
     color: #fff;
 }
+
+
+.total-price{
+    font-weight: bolder;
+    text-align: right;
+}

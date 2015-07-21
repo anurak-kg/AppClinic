@@ -13,6 +13,20 @@
                     </div>
                 </div>
             @endif
+                <div class="col-md-4">
+                    <div class="box box-solid box-success">
+                        <div class="box-header with-border">
+                            <h2 class="box-title">รายละเอียด</h2>
+                        </div>
+
+                        <div class="box-body">
+                            เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
+                                สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
+                                พนักงาน : <strong>{{Auth::user()->name}}</strong>
+                        </div>
+
+                    </div>
+                </div>
 
             <div class="col-md-4">
                 <div class="box box-solid box-success">
@@ -78,7 +92,8 @@
                                         <tr data-ng-repeat="item in product">
                                             <td>
                                                 <button class="btn btn-box-tool" data-widget="remove"
-                                                        ng-click="deleteById(item.course_id)"><i class="fa fa-times"></i>
+                                                        ng-click="deleteById(item.course_id)"><i
+                                                            class="fa fa-times"></i>
                                                 </button>
 
                                             </td>
@@ -88,24 +103,30 @@
 
                                             <td data-title="'คอร์ส'">
                                                 @{{item.course.course_name}}<br>
-                                            <strong>รายละเอียดคอร์ส</strong>
-                                               <ul>
-                                                   <li ng-repeat="c in item.course.detail">@{{c.course_de_name}}: ราคา <strong>@{{c.course_de_price}}</strong> บาท</li>
-                                               </ul>
+                                                <strong>รายละเอียดคอร์ส</strong>
+                                                <ul>
+                                                    <li ng-repeat="c in item.course.detail">
+                                                        @{{c.course_detail_name}} <strong>@{{c.course_detail_qty}}</strong> ครั้ง
+                                                    </li>
+                                                </ul>
                                             </td>
-                                            <td data-title="'จำนวน'">
-                                                <div>
-                                                    <input type="number"                                                           style="width: 5em"
-                                                           ng-model="item.qty"
-                                                           ng-change="update(item)"
-                                                           ng-model-options="{debounce: 750}">
-                                                    @{{item.course_type}}
-
-                                                </div>
-
+                                            <td data-title="'ราคา'">
+                                                @{{item.course.course_price | number }}
                                             </td>
 
 
+                                        </tr>
+                                        <tr >
+                                            <td colspan="3" class="total-price">Subtotal:</td>
+                                            <td >@{{ getTotal() | number }} บาท</td>
+                                        </tr>
+                                        <tr >
+                                            <td colspan="3" class="total-price">Tax(7%):</td>
+                                            <td >@{{ getTotal()*7/100 | number }} บาท</td>
+                                        </tr>
+                                        <tr >
+                                            <td colspan="3" class="total-price">Total:</td>
+                                            <td >@{{ getTotal()*107/100 | number }} บาท</td>
                                         </tr>
 
                                     </table>
@@ -203,8 +224,9 @@
                         course =
                         {
                             id: datum.course_id,
-                            course :{
+                            course: {
                                 course_name: datum.course_name,
+                                course_price:datum.course_price,
                                 detail: datum.detail
                             }
                         }

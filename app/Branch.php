@@ -21,5 +21,11 @@ class Branch extends Model
         return $this->hasMany('App\Employee');
     }
 
-
+    static  public  function  getCurrentId(){
+        return 1;
+    }
+    static public function getCurrentName(){
+       $branch = Branch::select('branch_name')->find(Branch::getCurrentId())->get()->first();
+        return $branch->branch_name;
+    }
 }
