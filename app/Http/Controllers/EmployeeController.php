@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         $grid->add('emp_position', 'ตำแหน่ง ',true);
         $grid->add('emp_tel', 'เบอร์โทร  ',true);
         $grid->add('emp_sex', 'เพศ ',true);
-        $grid->edit('/employee/edit', 'การกระทำ','show|modify|delete');
+        $grid->edit('/employee/edit', 'การกระทำ','modify|delete');
         $grid->link('/employee/create',"เพิ่มข้อมูลใหม่", "TR");
 
 

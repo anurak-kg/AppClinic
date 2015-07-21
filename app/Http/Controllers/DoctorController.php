@@ -33,7 +33,7 @@ class DoctorController extends Controller
         $grid->add('dr_lastname', 'นามสกุล');
         $grid->add('dr_tel', 'เบอร์โทรศัพท์');
         $grid->add('dr_sex', 'เพศ')->style("width:80x");
-        $grid->edit('/dr/edit','กระทำ','show|modify|delete');
+        $grid->edit('/dr/edit','กระทำ','modify|delete');
 
         $grid->paginate(10);
         return $grid;

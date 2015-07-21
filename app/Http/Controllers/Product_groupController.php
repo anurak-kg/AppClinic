@@ -38,7 +38,7 @@ class Product_groupController extends Controller
         $grid->add('{{ $product_type->pt_name }}', 'ชื่อประเภท','pt_id');
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
-        $grid->edit('/product_group/edit', 'กระทำ','show|modify|delete');
+        $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
 
         $grid->paginate(10);
         return $grid;

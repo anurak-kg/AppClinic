@@ -11,27 +11,22 @@ use Zofe\Rapyd\Facades\DataEdit;
 use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
-use yajra\Datatables\Datatables;
+
 
 
 class CustomerController extends Controller
 {
-
-    public function anyData()
-    {
-        return Datatables::of(Customer::select('*'))->make(true);
-    }
 
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Customer());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('cus_id', 'รหัสลูกค้า',true);
-        $grid->add('cus_name', 'ชื่อลูกค้า');
-        $grid->add('cus_lastname', 'นามสกุลลูกค้า');
-        $grid->add('cus_tel', 'เบอร์โทรศัพท์ลูกค้า');
-        $grid->edit('/customer/edit', 'กระทำ','show|modify|delete');
+        $grid->add('cus_id', 'รหัสสมาชิก',true);
+        $grid->add('cus_name', 'ชื่อ');
+        $grid->add('cus_lastname', 'นามสกุล');
+        $grid->add('cus_tel', 'เบอร์โทรศัพท์');
+        $grid->edit('/customer/edit', 'กระทำ','modify|delete');
 
         $grid->paginate(10);
         return $grid;
@@ -52,7 +47,7 @@ class CustomerController extends Controller
     public function create()
     {
 
-        $form = DataForm::source(new Customer());
+        $form = DataEdit::source(new Customer());
         $form->text('cus_name','ชื่อ')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ ชื่อ....'));
         $form->text('cus_lastname','นามสกุล')->rule('required')->attributes(array('maxlength'=>100,'placeholder'=>'โปรดระบุ นามสกุล....'));
         $form->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'))->rule('required');
