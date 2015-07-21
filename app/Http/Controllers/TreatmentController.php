@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Query;
 use App\Quotations;
 use App\Employee;
 use App\Customer;

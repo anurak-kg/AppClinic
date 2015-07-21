@@ -44,7 +44,7 @@ class CourseController extends Controller
 
     public function create()
     {
-        $form = DataEdit::create();
+        $form = DataEdit::source(new Course());
         $form->text('course_id', 'รหัส')->rule('required')->attributes(array('maxlength'=>4,'placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
         $form->text('course_name', 'ชื่อคอร์ส')->rule('required')->attributes(array('maxlength'=>255,'placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุประเภทคอร์ส....'));;
