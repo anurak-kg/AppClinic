@@ -65,8 +65,8 @@ class CustomerController extends Controller
         $form->text('cus_height','ส่วนสูง')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ ส่วนสูง....'));
         $form->text('cus_weight','น้ำหนัก')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุ น้ำหนัก....'));
 
-        $form->add('dis_de_id','โรคประจำตัว','text')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
-        $form->add('gic_de_id','แพ้ยา','text')->attributes(array('placeholder'=>'โปรดระบุ ยาที่แพ้....'));
+        $form->add('allergic','โรคประจำตัว','text')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ โรคประจำตัว....'));
+        $form->add('disease','แพ้ยา','text')->attributes(array('data-role'=>"tagsinput",'placeholder'=>'โปรดระบุ ยาที่แพ้....'));
 
         $form->text('cus_hno','บ้านเลขที่')->attributes(array('placeholder'=>'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo','หมู่')->attributes(array('placeholder'=>'โปรดระบุ หมู่....'));
