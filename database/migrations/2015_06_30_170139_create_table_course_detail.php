@@ -16,7 +16,6 @@ class CreateTableCourseDetail extends Migration
             $table->increments('course_de_id');
             $table->integer('course_id');
             $table->string('course_de_name',20);
-            $table->integer('course_de_price');
             $table->integer('course_de_qty');
             $table->timestamps();
         });
