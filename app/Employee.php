@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $table = 'employee';
+    protected $table = 'users';
     protected $primaryKey = 'emp_id';
 
     public function Quotations()

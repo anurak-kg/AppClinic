@@ -16,9 +16,7 @@ use Auth;
 use DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
-use Zofe\Rapyd\Facades\DataForm;
-use Zofe\Rapyd\Facades\DataGrid;
-use Zofe\Rapyd\Facades\DataEdit;
+
 
 class QuotationsController extends Controller
 {
