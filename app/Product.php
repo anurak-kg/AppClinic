@@ -14,5 +14,7 @@ class Product extends Model
     {
         return $this->belongsTo('\App\Product_group', 'pg_id');
     }
-
+    public function medicine(){
+        return $this->hasMany('\App\Medicine','product_id');
+    }
 }

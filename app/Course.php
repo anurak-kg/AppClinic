@@ -12,5 +12,9 @@ class Course extends Model
     {
         return $this->hasMany('App\Course_detail');
     }
+    public function medicine(){
+        return $this->hasMany('App\Medicine');
+    }
+
 
 }
