@@ -20,7 +20,9 @@ class Customer extends Model
     {
         return $this->hasmany('\App\Treatment');
     }
-
+    public function Branch(){
+        return $this->belongsTo('\App\Branch','branch_id');
+    }
 
 }
 
