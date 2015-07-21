@@ -25,7 +25,7 @@ class DoctorController extends Controller
     }
 
     public function getDataGrid(){
-        $grid = DataGrid::source('doctor');
+        $grid = DataGrid::source(new Doctor());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('dr_id', 'รหัสหมอ',true)->style("width:110px");

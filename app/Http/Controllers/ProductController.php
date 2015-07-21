@@ -22,7 +22,7 @@ class ProductController extends Controller
     }
 
     public function getDataGrid(){
-        $grid = DataGrid::source('product');
+        $grid = DataGrid::source(new Product());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('product_id', 'รหัสสินค้า',true);
@@ -55,7 +55,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = DataEdit::create();
+        $form = DataEdit::create(new Product());
         $form->text('product_id', 'รหัสสินค้า')->rule('required')->attributes(array('maxlength'=>3,'placeholder'=>'โปรดระบุรหัสสินค้า....'));
         $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
