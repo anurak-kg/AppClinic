@@ -45,7 +45,7 @@ class UserController extends Controller
         $grid = $this->getUserDataGrid();
         //User Create
         $form = DataForm::create();
-        $form->text('name', 'Name')->rule('required');
+        $form->text('name', 'Name')->rule('required|unique:user,name');
         $form->text('username', 'Username')->rule('required|unique:users');
         $form->text('password', 'Password', 'password')->rule('required');
         $form->add('role', 'ตำแหน่ง', 'select')->options(Config::get('shop.role'));
