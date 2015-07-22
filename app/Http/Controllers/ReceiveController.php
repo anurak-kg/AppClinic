@@ -77,9 +77,7 @@ class ReceiveController extends Controller
         $edit->attributes(array("class" => " "));
         $edit->link("receive/index", "ย้อนกลับ");
 
-
         return $edit->view('receive/edit', compact('edit'));
     }
-
 
 }
