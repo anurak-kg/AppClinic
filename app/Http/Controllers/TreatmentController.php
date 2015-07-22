@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Query;
 use App\Quotations;
-use App\Employee;
 use App\Customer;
 use App\Treatment;
 use App\Http\Requests;
@@ -25,14 +26,15 @@ class TreatmentController extends Controller
     }
     public function getDataGrid()
     {
-        $grid = DataGrid::source(Treatment::with('quotations','employee','customer'));
+        $grid = DataGrid::source(Treatment::with('course','user','customer'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('{{ $quotations->quo_id }}', 'ใบเสนอราคาเลขที่','quo_id');
-        $grid->add('{{ $employee->emp_name }}', 'ชื่อพนักงาน','emp_id');
-        $grid->add('{{ $customer->cus_name }}', 'ชื่อลูกค้า','cus_id');
-        $grid->add('tre_id', 'เลขที่การรักษา');
-        $grid->add('tre_date', 'วันที่รับการรักษา');
+
+        $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
+        $grid->add('{{ $customer->cus_name }}', 'ชื่อลูกค้า','emp_id');
+        $grid->add('{{ $course->course_name }}', 'ชื่อคอร์ส','course_id');
+        $grid->add('tre_qty', 'จำนวนครั้งที่รักษา');
+        $grid->add('created_at', 'วันที่รับการรักษา');
         $grid->link('treatment/create',"เข้ารับการรักษา", "TR");
 
         $grid->paginate(10);
@@ -63,9 +65,9 @@ class TreatmentController extends Controller
     {
         $form = DataEdit::source(new Treatment());
         $form->add('cus_id','ชื่อลูกค้า','select')->options(Customer::lists('cus_name','cus_id')->toArray());
-        $form->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
-        $form->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $form->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบุวันที่เข้ามารับบริการ....'));;
+        $form->add('id','พนักงาน','select')->options(User::lists('name','id')->toArray());
+        $form->add('course_id','ชื่อคอร์ส','select')->options(Course::lists('course_name','course_id')->toArray());
+        $form->text('tre_qty','จำนวนครั้งที่รักษา')->rule('required|numeric');
 
         $form->attributes(array("class" => " "));
 
@@ -85,9 +87,10 @@ class TreatmentController extends Controller
 
         $edit = DataEdit::source(new Treatment());
         $edit->add('cus_id','ชื่อลูกค้า','select')->options(Customer::lists('cus_name','cus_id')->toArray());
-        $edit->add('quo_id','เลขที่ใบเสนอราคา','select')->options(Quotations::lists('quo_id','quo_id')->toArray());
-        $edit->add('emp_id','พนักงาน','select')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $edit->date('tre_date', 'วันที่มารับบริการ')->format('d/m/Y','th');
+        $edit->add('course_id','ชื่อคอร์ส','select')->options(Course::lists('course_name','course_id')->toArray());
+        $edit->text('tre_qty','จำนวนครั้งที่รักษา')->rule('required|numeric');
+        $edit->add('id','พนักงาน','select')->options(User::lists('name','id')->toArray());
+
 
         $edit->attributes(array("class" => " "));
 

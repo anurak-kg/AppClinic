@@ -18,6 +18,18 @@
                 </div>
 
             </div>
+
+            <div class="box box-solid box-default table-responsive no-padding">
+                <div class="box-header with-border">
+                    <h2 class="box-title">ข้อมูล คอร์ส</h2>
+                </div>
+
+                <div class="box-body">
+                    <p>คอร์ส</p>
+                </div>
+
+            </div>
+
             <div class="box box-solid box-default table-responsive no-padding">
 
                 <div class="box-header with-border">
