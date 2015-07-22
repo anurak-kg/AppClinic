@@ -50,6 +50,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create(['username' => 'admin',
+            'branch_id'=>'1',
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'role' => 99, 'password' => bcrypt('1234')]);
