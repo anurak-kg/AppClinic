@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
 class CustomerTableSeeder extends Seeder
 {
     public function run(){
+        DB::table('customer')->delete();
+
         \App\Customer::create([
             'cus_name' => 'อนุรักษ์ ',
             'cus_lastname' => 'กิ่งแก้ว',
@@ -53,7 +55,7 @@ class UserTableSeeder extends Seeder
             'role' => 99, 'password' => bcrypt('1234')]);
 
         DB::table('branch')->delete();
-        \App\Branch::create(['branch_id'=>'99',
+        \App\Branch::create(['branch_id'=>'1',
             'branch_name'=>'Tokyo',
             'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
             'branch_tel'=>'ไม่ระบุ',
@@ -68,6 +70,7 @@ class BranchTableSeeder extends Seeder
     {
           DB::table('branch')->delete();
         \App\Branch::create([
+            'branch_id'=>'1',
             'branch_name'=>'Tokyo',
             'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
             'branch_tel'=>'ไม่ระบุ',
