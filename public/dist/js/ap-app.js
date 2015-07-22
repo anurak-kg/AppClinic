@@ -71,6 +71,9 @@
                     $scope.dataLoading = false;
                 });
         }
+        $scope.getVat = function(vat){
+            return $scope.getTotal() * vat /100;
+        }
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
