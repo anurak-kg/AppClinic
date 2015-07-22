@@ -9,9 +9,9 @@ class Treatment extends Model
     protected $table = 'treatment';
     protected $primaryKey = 'tre_id';
 
-    public function Employee()
+    public function User()
     {
-        return $this->belongsTo('\App\Employee', 'emp_id');
+        return $this->belongsTo('\App\User', 'id');
     }
     public function Customer()
     {
@@ -25,8 +25,14 @@ class Treatment extends Model
     {
         return $this->hasmany('\App\Treatment_detail');
     }
+
     public function Product_detail()
     {
         return $this->hasmany('\App\Product_detail');
+    }
+
+    public function Course()
+    {
+        return $this->belongsTo('\App\Course','course_id');
     }
 }

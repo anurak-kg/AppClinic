@@ -15,8 +15,10 @@ class CreateTableTreatment extends Migration
         Schema::create('treatment', function (Blueprint $table) {
             $table->increments('tre_id');
             $table->integer('quo_id');
-            $table->integer('emp_id');
+            $table->integer('id');
+            $table->string('course_id');
             $table->integer('cus_id');
+            $table->integer('tre_qty');
             $table->date('tre_date');
             $table->integer('branch_id')->nullable();
 
