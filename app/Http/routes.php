@@ -18,6 +18,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
 
+    Route::post('user/edit', 'UserController@edit');
+    Route::get('user/edit', 'UserController@edit');
     //Course
     Route::post('course/index', 'CourseController@grid');
     Route::get('course/index', 'CourseController@grid');
@@ -99,6 +101,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/add', 'QuotationsController@add');
     Route::get('quotations/delete', 'QuotationsController@delete');
     Route::get('quotations/data', 'QuotationsController@getData');
+    Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
+    Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
+    Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
+    Route::get('quotations/save', 'QuotationsController@save');
 
     //Customer
     Route::post('customer/index', 'CustomerController@grid');

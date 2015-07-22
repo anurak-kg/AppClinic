@@ -96,18 +96,18 @@ class CustomerController extends Controller
 
         $edit = DataEdit::source(new Customer());
         
-        $edit->text('cus_name','ชื่อ')->rule('unique:customer,cus_name');
+        $edit->text('cus_name','ชื่อ');
         $edit->text('cus_lastname','นามสกุล');
         $edit->add('cus_birthday_day','วันเกิด','select')->options(Config::get('sex.day'));
         $edit->add('cus_birthday_month',' ','select')->options(Config::get('sex.month'));
         $edit->add('cus_birthday_year',' ','select')->options(Config::get('sex.year'));
         $edit->add('cus_sex','เพศ','select')->options(Config::get('sex.sex'));
         $edit->add('cus_blood','กรุ๊ปเลือด','select')->options(Config::get('sex.blood'));
-        $edit->text('cus_code','รหัสบัตรประชาชน')->rule('numeric|unique:customer,cus_code');
+        $edit->text('cus_code','รหัสบัตรประชาชน')->rule('numeric');
 
         $edit->text('cus_tel','เบอร์โทรศัพทมือถือ')->rule('numeric');
         $edit->text('cus_phone','เบอร์โทรศัพท์บ้าน')->rule('numeric');
-        $edit->text('cus_email','E-mail')->rule('email|unique:customer,cus_email');
+        $edit->text('cus_email','E-mail')->rule('email');
 
         $edit->text('cus_height','ส่วนสูง')->rule('numeric');
         $edit->text('cus_weight','น้ำหนัก')->rule('numeric');

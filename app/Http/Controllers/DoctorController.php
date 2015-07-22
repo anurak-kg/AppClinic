@@ -79,7 +79,7 @@ class DoctorController extends Controller
 
         $edit = DataEdit::source(new Doctor());
 
-        $edit->text('dr_name', 'ชื่อหมอ')->rule('unique:doctor,dr_name');
+        $edit->text('dr_name', 'ชื่อหมอ');
         $edit->text('dr_lastname', 'นามสกุล');
         $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('numeric');
         $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'));

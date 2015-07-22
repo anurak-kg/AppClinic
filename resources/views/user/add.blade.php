@@ -5,6 +5,7 @@
 @section('content')
 
     <div class="row">
+
         <div class="col-md-3">
             <!-- general form elements -->
             <div class="box box-primary">

@@ -22,7 +22,6 @@ class CourseController extends Controller
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('course_id', 'รหัสคอร์ส',true);
         $grid->add('course_name', 'ชื่อคอร์ส');
-        $grid->add('course_type', 'ประเภทคอร์ส');
         $grid->edit('/course/edit', 'กระทำ','modify|delete');
         $grid->link('course/create',"เพิ่มข้อมูลใหม่", "TR");
 
@@ -47,7 +46,6 @@ class CourseController extends Controller
         $form = DataEdit::source(new Course());
         $form->text('course_id', 'รหัส')->rule('required|unique:course,course_id')->attributes(array('placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
         $form->text('course_name', 'ชื่อคอร์ส')->rule('required|unique:course,course_name')->attributes(array('placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
-        $form->text('course_type', 'ประเภทคอร์ส')->rule('required')->attributes(array('placeholder'=>'โปรดระบุประเภทคอร์ส....'));;
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
@@ -64,9 +62,8 @@ class CourseController extends Controller
 
         $edit = DataEdit::source(new Course());
 
-        $edit->text('course_id', 'รหัส')->rule('unique:course,course_id');
-        $edit->text('course_name', 'ชื่อคอร์ส')->rule('unique:course,course_name');
-        $edit->text('course_type', 'ประเภทคอร์ส');
+        $edit->text('course_id', 'รหัส');
+        $edit->text('course_name', 'ชื่อคอร์ส');
         $edit->attributes(array("class" => " "));
 
         $edit->link("course/index", "ย้อนกลับ");

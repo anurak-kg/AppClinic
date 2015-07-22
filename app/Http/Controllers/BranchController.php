@@ -70,10 +70,10 @@ class BranchController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Branch());
-        $edit->text('branch_name', 'ชื่อสาขา')->rule('unique:branch,branch_name');
+        $edit->text('branch_name', 'ชื่อสาขา');
         $edit->textarea('branch_address', 'ที่อยู่สาขา')->attributes(array('rows'=>4));
         $edit->text('branch_tel', 'เบอร์โทร')->rule('numeric');
-        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('numeric|unique:branch,branch_code')->attributes(array('maxlength'=>13,'minlength'=>13));
+        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('numeric')->attributes(array('maxlength'=>13,'minlength'=>13));
         $edit->attributes(array("class" => " "));
         $edit->link("branch/index", "ย้อนกลับ");
 

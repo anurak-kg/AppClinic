@@ -1,7 +1,5 @@
 @extends('layout.master')
 @section('title','ข้อมูลพนักงาน')
-@section('headText',Lang::get('user.create'))
-@section('headDes','รายละเอียด')
 @section('content')
 
 <div class="row">
