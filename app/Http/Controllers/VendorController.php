@@ -78,10 +78,10 @@ class VendorController extends Controller
         $edit = DataEdit::source(new Vendor());
         $edit->text('ven_id', 'รหัสร้านค้า');
         $edit->text('ven_name', 'ชื่อร้านค้า');
-        $edit->textarea('ven_address', 'ที่อยู่ร้านค้า');
+        $edit->textarea('ven_address', 'ที่อยู่ร้านค้า')->attributes(array('rows'=>4));
         $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
         $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
-
+        $edit->link("vendor/index", "ย้อนกลับ");
         $edit->attributes(array("class" => " "));
 
 
