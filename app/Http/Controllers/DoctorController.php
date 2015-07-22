@@ -79,10 +79,9 @@ class DoctorController extends Controller
 
         $edit = DataEdit::source(new Doctor());
 
-        $edit->text('dr_id', 'รหัสหมอ');
-        $edit->text('dr_name', 'ชื่อหมอ');
+        $edit->text('dr_name', 'ชื่อหมอ')->rule('unique:doctor,dr_name');
         $edit->text('dr_lastname', 'นามสกุล');
-        $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ');
+        $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('numeric');
         $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'));
         $edit->textarea('education','ประวัติการศึกษา')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));
         $edit->textarea('train','ประวัติการอบรม')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));

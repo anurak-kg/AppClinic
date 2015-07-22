@@ -51,10 +51,10 @@ class BranchController extends Controller
     {
 
         $form = DataEdit::source(new Branch());
-        $form->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
+        $form->text('branch_name', 'ชื่อสาขา')->rule('required|unique:branch,branch_name')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
-        $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
+        $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required|numeric|unique:branch,branch_code')->attributes(array('maxlength'=>13,'minlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
@@ -70,10 +70,10 @@ class BranchController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Branch());
-        $edit->text('branch_name', 'ชื่อสาขา')->rule('required')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
-        $edit->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
-        $edit->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('maxlength'=>10,'placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required')->attributes(array('maxlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $edit->text('branch_name', 'ชื่อสาขา')->rule('unique:branch,branch_name');
+        $edit->textarea('branch_address', 'ที่อยู่สาขา')->attributes(array('rows'=>4));
+        $edit->text('branch_tel', 'เบอร์โทร')->rule('numeric');
+        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('numeric|unique:branch,branch_code')->attributes(array('maxlength'=>13,'minlength'=>13));
         $edit->attributes(array("class" => " "));
         $edit->link("branch/index", "ย้อนกลับ");
 
