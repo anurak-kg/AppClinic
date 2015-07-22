@@ -20,10 +20,26 @@ class CreateTableQuotations extends Migration
             $table->integer('quo_status');
             $table->decimal('price',6,2);
             //สถานะ
-            // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ
+            // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ ,
+            // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
+            $table->decimal('payment',10,2);
+            $table->char('payment_type');
             $table->integer('branch_id')->nullable();
             $table->timestamps();
         });
+        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 5800000;");
+        Schema::create('quotations_detail', function (Blueprint $table) {
+            $table->integer('quo_id');
+            $table->string('course_id');
+            $table->integer('qty');
+            $table->timestamps();
+            $table->primary(['quo_id','course_id']);
+
+        });
+
+
+
+
     }
 
     /**
@@ -33,6 +49,7 @@ class CreateTableQuotations extends Migration
      */
     public function down()
     {
+        Schema::drop('quotations_detail');
         Schema::drop('quotations');
     }
 }

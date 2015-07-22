@@ -22,6 +22,8 @@ class CreateTableDoctor extends Migration
             $table->text('train');
             $table->timestamps();
         });
+        DB::unprepared("ALTER TABLE doctor AUTO_INCREMENT = 510000;");
+
     }
 
     /**

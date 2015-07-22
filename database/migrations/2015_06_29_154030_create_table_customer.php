@@ -42,7 +42,9 @@ class CreateTableCustomer extends Migration
 
             $table->timestamps();
         });
+          DB::unprepared("ALTER TABLE customer AUTO_INCREMENT = 510000;");
     }
+
 
     /**
      * Reverse the migrations.

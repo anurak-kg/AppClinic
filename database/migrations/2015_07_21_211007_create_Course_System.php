@@ -17,11 +17,9 @@ class CreateCourseSystem extends Migration
             $table->string('course_id');
             $table->string('course_name',50);
             $table->text('course_detail');//รายละเอียดคอร์ส
-
             $table->integer('course_price');//ราคาคอร์ส
             $table->timestamps();
             $table->primary(['course_id']);
-
         });
         Schema::create('course_detail', function (Blueprint $table) {
             $table->increments('course_detail_id');
