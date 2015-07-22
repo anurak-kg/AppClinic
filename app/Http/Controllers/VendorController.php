@@ -55,8 +55,8 @@ class VendorController extends Controller
     {
 
         $form = DataEdit::source(new Vendor());
-        $form->text('ven_id', 'รหัสร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
-        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_id', 'รหัสร้านค้า')->rule('required|unique:vendor,ven_id')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
+        $form->text('ven_name', 'ชื่อร้านค้า')->rule('required|unique:vendor,ven_name')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
@@ -76,12 +76,12 @@ class VendorController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Vendor());
-        $edit->text('ven_id', 'รหัสร้านค้า');
-        $edit->text('ven_name', 'ชื่อร้านค้า');
-        $edit->textarea('ven_address', 'ที่อยู่ร้านค้า');
+        $edit->text('ven_id', 'รหัสร้านค้า')->rule('unique:vendor,ven_id');
+        $edit->text('ven_name', 'ชื่อร้านค้า')->rule('unique:vendor,ven_name');
+        $edit->textarea('ven_address', 'ที่อยู่ร้านค้า')->attributes(array('rows'=>4));
         $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
         $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
-
+        $edit->link("vendor/index", "ย้อนกลับ");
         $edit->attributes(array("class" => " "));
 
 

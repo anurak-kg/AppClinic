@@ -45,8 +45,8 @@ class CourseController extends Controller
     public function create()
     {
         $form = DataEdit::source(new Course());
-        $form->text('course_id', 'รหัส')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
-        $form->text('course_name', 'ชื่อคอร์ส')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
+        $form->text('course_id', 'รหัส')->rule('required|unique:course,course_id')->attributes(array('placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
+        $form->text('course_name', 'ชื่อคอร์ส')->rule('required|unique:course,course_name')->attributes(array('placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
         $form->text('course_type', 'ประเภทคอร์ส')->rule('required')->attributes(array('placeholder'=>'โปรดระบุประเภทคอร์ส....'));;
         $form->attributes(array("class" => " "));
 
@@ -64,8 +64,8 @@ class CourseController extends Controller
 
         $edit = DataEdit::source(new Course());
 
-        $edit->text('course_id', 'รหัส');
-        $edit->text('course_name', 'ชื่อคอร์ส');
+        $edit->text('course_id', 'รหัส')->rule('unique:course,course_id');
+        $edit->text('course_name', 'ชื่อคอร์ส')->rule('unique:course,course_name');
         $edit->text('course_type', 'ประเภทคอร์ส');
         $edit->attributes(array("class" => " "));
 

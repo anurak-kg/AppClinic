@@ -4,7 +4,7 @@ return array(
     'save'    => 'บันทึก',
     'undo'    => 'Undo',
     'show'    => 'แสดง',
-    'modify'  => 'แก้ไช',
+    'modify'  => 'แก้ไข',
     'delete'  => 'ลบ',
     'add'     => 'เพิ่ม',
     'reset'   => 'Reset',

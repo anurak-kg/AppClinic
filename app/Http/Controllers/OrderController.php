@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Order;
+use App\User;
 use ClassesWithParents\D;
 use Illuminate\Http\Request;
 
@@ -13,28 +14,20 @@ use App\Http\Controllers\Controller;
 use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
-
+use Illuminate\Support\Facades\Input;
 class OrderController extends Controller
 {
 
     public function getDataGrid(){
-        $grid = DataGrid::source(new Order());
+        $grid = DataGrid::source(Order::with('user'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('order_id', 'เลขที่ใบสั่งซื้อ',true);
 
-        $grid->add('emp_id_order', 'รหัสพนักงานที่สั่งซื้อ');
-        $grid->add('order_date', 'วันที่สั่งซื้อ');
+        $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
+        $grid->add('created_at', 'วันที่สั่งซื้อ');
         $grid->add('order_total', 'ราคารวม');
-        $grid->add('order_de_discount', 'ส่วนลด %');
-        $grid->add('order_de_disamount', 'ส่วนลดจำนวนเงิน');
 
-
-        $grid->add('order_receive_id', 'เลขที่การรับ');
-        $grid->add('emp_id_receive', 'รหัสพนักงานที่รับ');
-        $grid->add('order_receive_date', 'วันที่รับ');
-
-        $grid->add('order_status', 'สถานะ');
 
         $grid->edit('/order/edit', 'กระทำ','modify|delete');
         $grid->link('order/create',"เพิ่มข้อมูลใหม่", "TR");
@@ -61,15 +54,8 @@ class OrderController extends Controller
 
         $form = DataEdit::source(new Order());
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
-        $form->add('emp_id_order', 'รหัสพนักงานสั่งซื้อ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('placeholder'=>'โปรดระบุรหัสพนักงานที่สั่งซื้อ....'));
-        $form->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบุวันที่สั่งซื้อ....'));
+        $form->add('id', 'ชื่อพนักงานสั่งซื้อ','select')->rule('required')->options(User::lists('name','id')->toArray());
         $form->text('order_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
-        $form->text('order_de_discount', 'ส่วนลด %')->attributes(array('placeholder'=>'โปรดระบุส่วนลด %....'));
-        $form->text('order_de_disamount', 'ส่วนลดจำนวนเงิน')->attributes(array('placeholder'=>'โปรดระบุส่วนลดจำนวนเงิน....'));
-        $form->text('order_receive_id', 'เลขที่การรับ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่การรับ....'));
-        $form->add('emp_id_receive', 'รหัสพนักงานที่รับ','select')->rule('required')->options(Employee::lists('emp_id','emp_id'))->attributes(array('placeholder'=>'โปรดระบุรหัสพนักงานที่รับ....'));
-        $form->date('order_receive_date', 'วันที่รับ')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบุวันที่รับ....'));
-        $form->add('order_status', 'สถานะ','select')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'))->options(\Config::get('sex.status'));
 
         $form->attributes(array("class" => " "));
 
@@ -92,15 +78,8 @@ class OrderController extends Controller
         $edit = DataEdit::source(new Order());
 
         $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
-        $edit->add('emp_id_order', 'รหัสพนักงานสั่งซื้อ','select')->options(Employee::lists('emp_id','emp_id'));
-        $edit->date('order_date', 'วันที่สั่งซื้อ')->format('d/m/Y','th');
+        $edit->add('id', 'พนักงานสั่งซื้อ','select')->options(User::lists('name','id')->toArray());
         $edit->text('order_total', 'ราคารวม');
-        $edit->text('order_de_discount', 'ส่วนลด %');
-        $edit->text('order_de_disamount', 'ส่วนลดจำนวนเงิน');
-        $edit->text('order_receive_id', 'เลขที่การรับ');
-        $edit->add('emp_id_receive', 'รหัสพนักงานที่รับ','select')->options(Employee::lists('emp_id','emp_id'));
-        $edit->date('order_receive_date', 'วันที่รับ')->format('d/m/Y','th');
-        $edit->add('order_status', 'สถานะ','select')->options(\Config::get('sex.status'));
 
         $edit->attributes(array("class" => " "));
 

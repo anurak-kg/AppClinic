@@ -16,9 +16,9 @@ class Branch extends Model
     protected $table = 'branch';
     protected $primaryKey = 'branch_id';
 
-    public function employee()
+    public function user()
     {
-        return $this->hasMany('App\Employee');
+        return $this->hasMany('App\User');
     }
 
     static  public  function  getCurrentId(){
