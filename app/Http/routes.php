@@ -17,6 +17,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
 
+    Route::post('user/edit', 'UserController@edit');
+    Route::get('user/edit', 'UserController@edit');
     //Course
     Route::post('course/index', 'CourseController@grid');
     Route::get('course/index', 'CourseController@grid');

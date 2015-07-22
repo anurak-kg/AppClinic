@@ -1,11 +1,9 @@
 @extends('layout.master')
 @section('title','ข้อมูลพนักงาน')
-@section('headText',Lang::get('user.create'))
-@section('headDes','รายละเอียด')
 @section('content')
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <!-- general form elements -->
         <div class="box box-solid box-default">
             <div class="box-header with-border">

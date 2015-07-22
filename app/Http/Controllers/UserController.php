@@ -47,7 +47,7 @@ class UserController extends Controller
         $grid = $this->getUserDataGrid();
         //User Create
         $form = DataEdit::source(new User());
-        $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
+        $form->add('branch_id','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
         $form->text('name', 'Name')->rule('required|unique:user,name');
         $form->text('username', 'Username')->rule('required|unique:users');
         $form->text('password', 'Password', 'password')->rule('required');
