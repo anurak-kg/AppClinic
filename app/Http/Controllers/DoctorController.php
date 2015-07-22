@@ -58,9 +58,9 @@ class DoctorController extends Controller
         $grid = $this->getDataGrid();
 
         $form = DataEdit::source(new Doctor());
-        $form->text('dr_name', 'ชื่อหมอ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อหมอ....'));;
+        $form->text('dr_name', 'ชื่อหมอ')->rule('required|unique:doctor,dr_name')->attributes(array('placeholder'=>'โปรดระบุชื่อหมอ....'));;
         $form->text('dr_lastname', 'นามสกุล')->rule('required')->attributes(array('placeholder'=>'โปรดระบุนามสกุล....'));;
-        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทร....'));;
+        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required|numeric')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทร....'));;
         $form->add('dr_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->attributes(array("class" => " "));
 
