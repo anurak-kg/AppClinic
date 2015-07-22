@@ -1,12 +1,8 @@
 @extends('layout.master')
 @section('title','ลงทะเบียน')
-
-
 @section('content')
 
     {!! Rapyd::scripts() !!}
-
-
 
 
     <div class="row">

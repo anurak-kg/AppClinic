@@ -9,9 +9,9 @@ class Order extends Model
     protected $table = 'order';
     protected $primarykey = 'order_id';
 
-    public function employee()
+    public function user()
     {
-        return $this->belongsTo('\App\Employee', 'emp_id');
+        return $this->belongsTo('\App\User', 'id');
     }
 
     public function vendor()
