@@ -9,9 +9,9 @@ class Receive extends Model
     protected $table = 'receive';
     protected $primaryKey = 'receive_id';
 
-    public function Employee()
+    public function User()
     {
-        return $this->belongsTo('App\Employee', 'emp_id');
+        return $this->belongsTo('App\User', 'id');
     }
 
     public function Vendor()

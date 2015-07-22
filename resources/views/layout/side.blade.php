@@ -66,7 +66,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลสาขา</a></li>
                     <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลร้านค้า</a></li>
-                    <li><a href="{{url('employee/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลพนักงาน</a></li>
+                    <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลพนักงาน</a></li>
                 </ul>
             </li>
 
