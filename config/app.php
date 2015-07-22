@@ -149,7 +149,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         'yajra\Datatables\DatatablesServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
-        'MaddHatter\LaravelFullcalendar\ServiceProvider',
+        //'MaddHatter\LaravelFullcalendar\ServiceProvider',
 
     ],
 
@@ -201,7 +201,7 @@ return [
         'Form' => 'Illuminate\Html\FormFacade',
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Datatables' => yajra\Datatables\Facades\Datatables::class,
-        'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
+        //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
 
     ],
 
