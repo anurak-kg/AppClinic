@@ -132,7 +132,9 @@ class QuotationsController extends Controller
 
     public function getDataCustomer()
     {
-        $quo = Quotations::find($this->getQuoId())->first();
+        //echo $this->getQuoId();
+        $quo = Quotations::find($this->getQuoId());
+       // dd($quo);
         $data = null;
         if ($quo->cus_id == 0) {
             $data['status'] = null;

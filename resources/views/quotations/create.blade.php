@@ -2,7 +2,6 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-
     <div ng-controller="quotationsController" id="course">
         <div class="row">
             @if( Session::get('message') != null )
