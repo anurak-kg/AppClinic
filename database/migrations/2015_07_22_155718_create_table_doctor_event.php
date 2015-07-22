@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableDoctorDetail extends Migration
+class CreateTableDoctorEvent extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,15 @@ class CreateTableDoctorDetail extends Migration
      */
     public function up()
     {
-        Schema::create('doctor_detail', function (Blueprint $table) {
-            $table->increments('dr_de_id');
+        Schema::create('doctor_event', function (Blueprint $table) {
+            $table->increments('event_id');
             $table->integer('dr_id');
-            $table->time('dr_de_time');
-            $table->dateTime('dr_de_date');
+            $table->string('event_name');
+            $table->dateTime('event_start');
+            $table->dateTime('event_end');
+            $table->string('event_status');
             $table->timestamps();
+
         });
     }
 
@@ -28,6 +31,6 @@ class CreateTableDoctorDetail extends Migration
      */
     public function down()
     {
-        Schema::drop('doctor_detail');
+        Schema::drop('doctor_event');
     }
 }
