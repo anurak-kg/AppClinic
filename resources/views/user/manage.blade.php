@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title',Lang::get('user.create'))
+@section('title','ข้อมูลพนักงาน')
 @section('headText',Lang::get('user.create'))
 @section('headDes','รายละเอียด')
 @section('content')
