@@ -8,7 +8,6 @@ class Doctor extends Model
 {
     protected $table = 'doctor';
     protected $primaryKey = 'dr_id';
-
     public function Treatment_detail()
     {
         return $this->hasmany('\App\Treatment_detail');
