@@ -7,9 +7,9 @@
 <div class="row">
     <div class="col-md-3">
         <!-- general form elements -->
-        <div class="box box-primary">
+        <div class="box box-solid box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">{{Lang::get('user.create')}}</h3>
+                <h3 class="box-title">เพิ่มข้อมูล</h3>
             </div>
             <div class="box-body">
                 {!! $form !!}
@@ -20,9 +20,9 @@
 
     </div>
     <div class="col-md-8">
-        <div class="box box-primary">
+        <div class="box box-solid box-default">
             <div class="box-header with-border">
-                <h3 class="box-title">{{Lang::get('user.create')}}</h3>
+                <h3 class="box-title">ข้อมูลพนักงาน</h3>
             </div>
 
             <div class="box-body">

@@ -31,7 +31,7 @@ class UserController extends Controller
     public function getUserDataGrid(){
         $grid = DataGrid::source('users');
         $grid->add('name','Name');
-        $grid->add('username','Name');
+        $grid->add('username','Username');
         $grid->add('email','Email');
         $grid->add('role','Role');
         $grid->edit('/rapyd-demo/edit', 'Edit','show|modify');

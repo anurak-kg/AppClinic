@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
+
 use App\Receive;
 use App\User;
 use App\Vendor;
@@ -16,13 +16,14 @@ use Illuminate\Support\Facades\Input;
 class ReceiveController extends Controller
 {
     public function getDataGrid(){
-        $grid = DataGrid::source(Receive::with('employee','vendor'));
+        $grid = DataGrid::source(Receive::with('user','vendor','order'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('receive_id', 'เลขที่รับสินค้า',true);
+        $grid->add('{{ $order->order_id }}', 'เลขที่ใบสั่งซื้อ','order_id');
         $grid->add('{{ $vendor->ven_name }}', 'ร้านค้า','ven_id');
         $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
-        $grid->add('receive_date', 'วันที่รับ');
+        $grid->add('created_at', 'วันที่รับ');
 
 
         $grid->edit('/receive/edit', 'กระทำ','modify|delete');
@@ -49,7 +50,7 @@ class ReceiveController extends Controller
         $form->text('receive_id', 'เลขที่รับสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่รับสินค้า....'));
         $form->add('ven_id', 'ชื่อร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id')->toArray());
         $form->add('id', 'ชื่อพนักงานที่รับ','select')->rule('required')->options(User::lists('name','id')->toArray());
-        $form->date('receive_date', 'วันที่รับ')->rule('required')->format('d/m/Y','th')->attributes(array('placeholder'=>'โปรดระบุวันที่รับสินค้า....'));;
+
 
         $form->attributes(array("class" => " "));
 
@@ -69,9 +70,9 @@ class ReceiveController extends Controller
 
         $edit = DataEdit::source(new Receive());
         $edit->text('receive_id', 'เลขที่รับสินค้า');
+        $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
         $edit->text('ven_id', 'รหัสร้านค้า')->options(Vendor::lists('ven_name','ven_id')->toArray());
-        $edit->text('emp_id', 'ชื่อพนักงานที่รับ')->options(Employee::lists('emp_name','emp_id')->toArray());
-        $edit->date('receive_date', 'วันที่รับ');
+        $edit->add('id', 'ชื่อพนักงานที่รับ','select')->options(User::lists('name','id')->toArray());
 
         $edit->attributes(array("class" => " "));
         $edit->link("receive/index", "ย้อนกลับ");
