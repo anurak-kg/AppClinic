@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
-use Zofe\Rapyd\Facades\DataForm;
+use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
 
@@ -24,12 +25,13 @@ class UserController extends Controller
         \Auth::logout();
         return  redirect('');
     }
-     public function getLogin()
+    public function getLogin()
     {
         return view('login');
     }
     public function getUserDataGrid(){
-        $grid = DataGrid::source('users');
+        $grid = DataGrid::source(User::with('branch'));
+        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา','branch_id');
         $grid->add('name','Name');
         $grid->add('username','Username');
         $grid->add('email','Email');
@@ -44,22 +46,19 @@ class UserController extends Controller
         //User Table
         $grid = $this->getUserDataGrid();
         //User Create
-        $form = DataForm::create();
-        $form->text('name', 'Name')->rule('required');
+        $form = DataEdit::source(new User());
+        $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
+        $form->text('name', 'Name')->rule('required|unique:user,name');
         $form->text('username', 'Username')->rule('required|unique:users');
         $form->text('password', 'Password', 'password')->rule('required');
-        $form->add('role', 'ตำแหน่ง', 'select')->options(Config::get('shop.role'));
+        $form->text('name', 'ชื่อ-สกุล')->rule('required');
+        $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
+        $form->text('tel','เบอร์โทรศัพท์');
         $form->text('email', 'Email')->rule('required|email|unique:users');
+        $form->add('role', 'ตำแหน่ง', 'select')->options(Config::get('shop.role'));
         $form->attributes(array("class" => " "));
-        $form->submit('Save');
+
         $form->saved(function () use ($form) {
-            $user = new User();
-            $user->name = Input::get('name');
-            $user->username = Input::get('username');
-            $user->password = bcrypt(Input::get('password'));
-            $user->email = Input::get('email');
-            $user->role = Input::get('role');
-            $user->save();
             $form->message("ok record saved");
             $form->link("user/manage", "back to the form");
         });
