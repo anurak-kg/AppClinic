@@ -28,6 +28,7 @@ return [
         50 => "MIS",
         'ADMIN' => 99
     ),
+    'vat'   => '7',
     'web_title' => "EX-SHOP",
     'currency'  => " บาท"
 ];
