@@ -3790,5 +3790,44 @@
             "time",
             "translation"
         ]
+    },
+    {
+        "name": "maddhatter/laravel-fullcalendar",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maddhatter/laravel-fullcalendar.git",
+            "reference": "edc2dd61a618fb1c43768d562a6cb754649f34f0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maddhatter/laravel-fullcalendar/zipball/edc2dd61a618fb1c43768d562a6cb754649f34f0",
+            "reference": "edc2dd61a618fb1c43768d562a6cb754649f34f0",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5.0",
+            "php": ">=5.4.0"
+        },
+        "time": "2015-07-06 15:30:52",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "MaddHatter\\LaravelFullcalendar": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Shawn Tunney",
+                "email": "shawn.tunney@gmail.com"
+            }
+        ],
+        "description": "Laravel helper for FullCalendar.io"
     }
 ]

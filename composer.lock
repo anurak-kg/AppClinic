@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48973981fb7e1ba9ac1b935751062e6a",
+    "hash": "98740b88c4dd133dcfc04b6a5a6f13ce",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1020,6 +1020,43 @@
                 "rest"
             ],
             "time": "2015-03-19 15:16:43"
+        },
+        {
+            "name": "maddhatter/laravel-fullcalendar",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maddhatter/laravel-fullcalendar.git",
+                "reference": "edc2dd61a618fb1c43768d562a6cb754649f34f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maddhatter/laravel-fullcalendar/zipball/edc2dd61a618fb1c43768d562a6cb754649f34f0",
+                "reference": "edc2dd61a618fb1c43768d562a6cb754649f34f0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MaddHatter\\LaravelFullcalendar": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shawn Tunney",
+                    "email": "shawn.tunney@gmail.com"
+                }
+            ],
+            "description": "Laravel helper for FullCalendar.io",
+            "time": "2015-07-06 15:30:52"
         },
         {
             "name": "monolog/monolog",
@@ -3674,6 +3711,7 @@
     "stability-flags": {
         "barryvdh/laravel-ide-helper": 20,
         "jenssegers/date": 20,
+        "maddhatter/laravel-fullcalendar": 20,
         "laracasts/generators": 20
     },
     "prefer-stable": true,
