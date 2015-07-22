@@ -122,11 +122,11 @@
                                         </tr>
                                         <tr >
                                             <td colspan="3" class="total-price">Tax(7%):</td>
-                                            <td >@{{ getTotal()*7/100 | number }} บาท</td>
+                                            <td ><?php echo "{{ getVat(".config('shop.vat').") | number }} ";?> บาท</td>
                                         </tr>
                                         <tr >
                                             <td colspan="3" class="total-price">Total:</td>
-                                            <td >@{{ getTotal()*107/100 | number }} บาท</td>
+                                            <td ><?php echo "{{ getTotal() + getVat(".config('shop.vat').") | number }} ";?> บาท</td>
                                         </tr>
 
                                     </table>
