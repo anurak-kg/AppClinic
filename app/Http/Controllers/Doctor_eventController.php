@@ -39,7 +39,6 @@ class Doctor_eventController extends Controller
     {
         //
     }
-
     /**
      * Display the specified resource.
      *
