@@ -6,7 +6,7 @@
 
     <div class="row">
 
-        <div class="col-md-4" >
+        <div class="col-md-5" >
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="box box-solid box-default table-responsive no-padding">
 
                 <div class="box-header with-border">
