@@ -143,7 +143,7 @@
 
                 <div align="right">
 
-                      <a href="{{url('quotations/save')}}" class="btn btn-lg btn-success pull-right"><i class="fa fa-credit-card "> ยืนยัน
+                      <a href="#" ng-click="save()" class="btn btn-lg btn-success pull-right"><i class="fa fa-credit-card "> ยืนยัน
                             การชำระเงิน </i></a>
                 </div>
                 <!-- /.col -->

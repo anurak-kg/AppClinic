@@ -60,6 +60,15 @@
             });
 
         }
+        $scope.save = function(){
+            if($scope.product.length ==0){
+                alert("ยังไม่มีการเพิ่มคอร์ส");
+            }
+            else
+            {
+                window.location.href ='/quotations/save';
+            }
+        }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
             $scope.product = $scope.pushDuplicateCheck();
