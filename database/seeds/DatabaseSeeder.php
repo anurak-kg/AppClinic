@@ -48,7 +48,20 @@ class UserTableSeeder extends Seeder
     }
 
 }
+class BranchTableSeeder extends Seeder
+{
 
+    public function run()
+    {
+          DB::table('branch')->delete();
+        \App\Branch::create([
+            'branch_name'=>'Tokyo',
+            'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
+            'branch_tel'=>'ไม่ระบุ',
+            'branch_code'=>'4257893625145']);
+    }
+
+}
 class ProductTableSeeder extends Seeder
 {
 
