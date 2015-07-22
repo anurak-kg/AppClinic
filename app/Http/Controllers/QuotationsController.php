@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\Course;
 use App\Customer;
 use App\Quotations;
@@ -22,10 +23,11 @@ class QuotationsController extends Controller
 {
     public function index()
     {
-        if (Quotations::where('quo_status', -1)->count() == 0) {
+        if (Quotations::where('quo_status', -1)->where('branch_id',Branch::getCurrentId())->count() == 0) {
             $quotation = new Quotations();
             //$quotation->cus_id = null;
             $quotation->emp_id = Auth::user()->getAuthIdentifier();
+            $quotation->branch_id =  Branch::getCurrentId();
             $quotation->quo_status = -1;
             // $quotation->branch_id = Branch::getId();
             $quotation->save();
@@ -87,24 +89,32 @@ class QuotationsController extends Controller
 
     }
 
-    public function update()
-    {
-
-    }
-
-    public function delete()
-    {
-        $id = \Input::get('id');
-        DB::table('quotations_detail')
-            ->where('quo_id', "=", $this->getQuoId())
-            ->where('course_id', "=", \Input::get('id'))
-            ->delete();
-        ;
-    }
-
     public function save()
     {
 
+        $quo = Quotations::find($this->getQuoId());
+        $quo->price = $this->getCurrentSum();
+        $quo->quo_status = 1;
+        $quo->quo_date = null;
+        $quo->save();
+        return redirect('quotations')->with('message','ลงบันทึกเรียบร้อยแล้ว');
+
+    }
+    public function getCurrentSum()
+    {
+        $sum = DB::select(
+            DB::raw("    SELECT quotations_detail.quo_id, SUM(course_price) as Total
+                        FROM quotations_detail
+                        INNER JOIN course ON quotations_detail.course_id = course.course_id
+                        WHERE quo_id = ".$this->getQuoId()."")   );
+        return $sum[0]->Total;
+    }
+    public function delete()
+    {
+        DB::table('quotations_detail')
+            ->where('quo_id', "=", $this->getQuoId())
+            ->where('course_id', "=", \Input::get('id'))
+            ->delete();;
     }
 
     public function getData()
@@ -120,9 +130,47 @@ class QuotationsController extends Controller
         return response()->json($receivedItem);
     }
 
+    public function getDataCustomer()
+    {
+        $quo = Quotations::find($this->getQuoId())->first();
+        $data = null;
+        if ($quo->cus_id == 0) {
+            $data['status'] = null;
+        } else {
+            $data['status'] = 'success';
+            $customer = Customer::find($quo->cus_id);
+            $data['full_name'] = $customer->cus_name . ' ' . $customer->cus_lastname;
+            $data['tel'] = $customer->cus_tel;
+        }
+
+        return response()->json($data);
+    }
+
+    public function setCustomer()
+    {
+        $cus_id = \Input::get('id');
+        $quo = Quotations::findOrFail($this->getQuoId());
+        $quo->cus_id = $cus_id;
+        $quo->save();
+        //dd($quo);
+        return response()->json(['status' => 'success']);
+
+    }
+
+    public function removeCustomer()
+    {
+        $quo = Quotations::findOrFail($this->getQuoId());
+        $quo->cus_id = 0;
+        $quo->save();
+        return redirect('quotations');
+    }
+
     private function getQuoId()
     {
-        $quo = \App\Quotations::where('quo_status', -1)->where('emp_id', Auth::user()->getAuthIdentifier())->firstOrFail();
+        $quo = \App\Quotations::where('quo_status', -1)
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
+            ->where('branch_id',Branch::getCurrentId())
+            ->firstOrFail();
         return $quo->quo_id;
     }
 

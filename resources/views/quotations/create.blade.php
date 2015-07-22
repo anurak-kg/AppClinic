@@ -22,7 +22,7 @@
                         <div class="box-body">
                             เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                                 สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
-                                พนักงาน : <strong>{{Auth::user()->name}}</strong>
+                                พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
                         </div>
 
                     </div>
@@ -46,7 +46,9 @@
                             <ul>
                                 <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.fullname}}</strong></span>
                                 </li>
-                                <li>ชื่อเบอร์โทร | <span class="customer"><strong>@{{ customer.tel }}</strong></span>
+                                <li>ชื่อเบอร์โทร | <span class="customer"><strong>@{{ customer.tel }}</strong></span><br>
+                                    <span><strong><a href="{{url('quotations/remove_customer')}}"> เปลียนลูกค้า</a></strong></span>
+
                                 </li>
                             </ul>
                         </div>
@@ -140,9 +142,9 @@
                 </div>
 
                 <div align="right">
-                    <button class="btn btn-lg btn-success pull-right"><i class="fa fa-credit-card "> ยืนยัน
-                            การชำระเงิน </i>
-                    </button>
+
+                      <a href="{{url('quotations/save')}}" class="btn btn-lg btn-success pull-right"><i class="fa fa-credit-card "> ยืนยัน
+                            การชำระเงิน </i></a>
                 </div>
                 <!-- /.col -->
 

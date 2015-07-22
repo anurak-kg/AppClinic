@@ -100,6 +100,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/add', 'QuotationsController@add');
     Route::get('quotations/delete', 'QuotationsController@delete');
     Route::get('quotations/data', 'QuotationsController@getData');
+    Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
+    Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
+    Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
+    Route::get('quotations/save', 'QuotationsController@save');
 
     //Customer
     Route::post('customer/index', 'CustomerController@grid');

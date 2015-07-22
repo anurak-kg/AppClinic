@@ -24,16 +24,41 @@
                 $scope.product = data;
             }).
             error(function (data, status, headers, config) {
+
+            });
+
+        $http.get('/quotations/data_customer').
+            success(function (data, status, headers, config) {
+                if(data.status == 'success'){
+                    $scope.customer.fullname = data.full_name;
+                    $scope.customer.tel = data.tel;
+                    $scope.boxSearch = true;
+
+                    console.log('update customer success');
+                 }
+            }).
+            error(function (data, status, headers, config) {
+
             });
 
         $scope.customerSelect = function (customer) {
             $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
             $scope.customer.tel = customer.cus_tel;
+            $scope.dataLoading = true;
+            console.log(customer)
+            $http.get('/quotations/set_customer?id=' + customer.cus_id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    console.log('error' + headers)
 
-            console.info($scope.customer);
-            $scope.$apply(function() {
+                });
+            $scope.$apply(function () {
                 $scope.boxSearch = true;
             });
+
         }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
@@ -71,8 +96,8 @@
                     $scope.dataLoading = false;
                 });
         }
-        $scope.getVat = function(vat){
-            return $scope.getTotal() * vat /100;
+        $scope.getVat = function (vat) {
+            return $scope.getTotal() * vat / 100;
         }
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
