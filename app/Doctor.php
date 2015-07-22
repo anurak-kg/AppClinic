@@ -13,9 +13,9 @@ class Doctor extends Model
     {
         return $this->hasmany('\App\Treatment_detail');
     }
-    public function Doctor_detail()
+    public function Doctor_event()
     {
-        return $this->hasmany('\App\Doctor_detail');
+        return $this->hasmany('\App\Doctor_event');
     }
     public function Train_detail()
     {
