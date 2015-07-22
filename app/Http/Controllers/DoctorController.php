@@ -58,9 +58,9 @@ class DoctorController extends Controller
         $grid = $this->getDataGrid();
 
         $form = DataEdit::source(new Doctor());
-        $form->text('dr_name', 'ชื่อหมอ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุชื่อหมอ....'));;
+        $form->text('dr_name', 'ชื่อหมอ')->rule('required|unique:doctor,dr_name')->attributes(array('placeholder'=>'โปรดระบุชื่อหมอ....'));;
         $form->text('dr_lastname', 'นามสกุล')->rule('required')->attributes(array('placeholder'=>'โปรดระบุนามสกุล....'));;
-        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทร....'));;
+        $form->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('required|numeric')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทร....'));;
         $form->add('dr_sex', 'เพศ','select')->rule('required')->options(Config::get('sex.sex'))->rule('required');
         $form->textarea('education','ประวัติการศึกษา')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));
         $form->textarea('train','ประวัติการอบรม')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));
@@ -79,10 +79,9 @@ class DoctorController extends Controller
 
         $edit = DataEdit::source(new Doctor());
 
-        $edit->text('dr_id', 'รหัสหมอ');
-        $edit->text('dr_name', 'ชื่อหมอ');
+        $edit->text('dr_name', 'ชื่อหมอ')->rule('unique:doctor,dr_name');
         $edit->text('dr_lastname', 'นามสกุล');
-        $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ');
+        $edit->text('dr_tel', 'เบอร์โทรศัพท์มือถือ')->rule('numeric');
         $edit->text('dr_sex', 'เพศ')->options(Config::get('sex.sex'));
         $edit->textarea('education','ประวัติการศึกษา')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));
         $edit->textarea('train','ประวัติการอบรม')->attributes(array('rows'=>4,'data-role'=>"tagsinput"));

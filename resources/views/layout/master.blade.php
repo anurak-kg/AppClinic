@@ -61,7 +61,7 @@
                               @yield('headText')
                                <small>@yield('headDes')</small>
                            </h1>
-                      
+
 
         </section>
 

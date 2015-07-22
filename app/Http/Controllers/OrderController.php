@@ -27,8 +27,7 @@ class OrderController extends Controller
         $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
         $grid->add('created_at', 'วันที่สั่งซื้อ');
         $grid->add('order_total', 'ราคารวม');
-        $grid->add('order_de_discount', 'ส่วนลด %');
-        $grid->add('order_de_disamount', 'ส่วนลดจำนวนเงิน');
+
 
         $grid->edit('/order/edit', 'กระทำ','modify|delete');
         $grid->link('order/create',"เพิ่มข้อมูลใหม่", "TR");
@@ -57,8 +56,6 @@ class OrderController extends Controller
         $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
         $form->add('id', 'ชื่อพนักงานสั่งซื้อ','select')->rule('required')->options(User::lists('name','id')->toArray());
         $form->text('order_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
-        $form->text('order_de_discount', 'ส่วนลด %')->attributes(array('placeholder'=>'โปรดระบุส่วนลด %....'));
-        $form->text('order_de_disamount', 'ส่วนลดจำนวนเงิน')->attributes(array('placeholder'=>'โปรดระบุส่วนลดจำนวนเงิน....'));
 
         $form->attributes(array("class" => " "));
 
@@ -83,9 +80,6 @@ class OrderController extends Controller
         $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
         $edit->add('id', 'พนักงานสั่งซื้อ','select')->options(User::lists('name','id')->toArray());
         $edit->text('order_total', 'ราคารวม');
-        $edit->text('order_de_discount', 'ส่วนลด %');
-        $edit->text('order_de_disamount', 'ส่วนลดจำนวนเงิน');
-
 
         $edit->attributes(array("class" => " "));
 
