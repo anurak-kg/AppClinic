@@ -52,4 +52,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     private function getLevel($level){
         return config('shop.roleCon.'.$level);
     }
+    public function Branch(){
+        return $this->belongsTo('\App\Branch', 'branch_id');
+    }
 }
