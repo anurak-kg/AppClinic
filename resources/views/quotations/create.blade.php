@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title','ซื้อคอร์ส')
+@section('headText','ซื้อคอร์ส')
 @section('content')
 
     <div ng-controller="quotationsController" id="course">
@@ -39,7 +40,7 @@
                                 >
                             <input class="form-control typeahead input-lg customer-input "
                                    type="search"
-                                   placeholder="พืมชื่อหรือรหัสลูกค้า ">
+                                   placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า">
                         </div>
 
                         <div class="customer" ng-show="boxSearch">
@@ -65,7 +66,7 @@
                 <div class="box box-solid box-info">
 
                     <div class="box-header with-border">
-                        <h2 class="box-title">ซื้อคอร์ส</h2>
+                        <h2 class="box-title">คอร์ส</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -76,7 +77,7 @@
                                                type="search"
                                                id="course"
                                                ng-model="courseSearchBox"
-                                               placeholder="พืมชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค็ด ">
+                                               placeholder="ระบุ ชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค้ด ">
                                     </div>
                                     <div class="col-md-6">
                                         <a class="btn btn-app" href="{{url('product/update')}}">
