@@ -62,8 +62,8 @@ class CourseController extends Controller
 
         $edit = DataEdit::source(new Course());
 
-        $edit->text('course_id', 'รหัส')->rule('unique:course,course_id');
-        $edit->text('course_name', 'ชื่อคอร์ส')->rule('unique:course,course_name');
+        $edit->text('course_id', 'รหัส');
+        $edit->text('course_name', 'ชื่อคอร์ส');
         $edit->attributes(array("class" => " "));
 
         $edit->link("course/index", "ย้อนกลับ");

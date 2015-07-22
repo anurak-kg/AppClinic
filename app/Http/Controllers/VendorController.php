@@ -76,8 +76,8 @@ class VendorController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Vendor());
-        $edit->text('ven_id', 'รหัสร้านค้า')->rule('unique:vendor,ven_id');
-        $edit->text('ven_name', 'ชื่อร้านค้า')->rule('unique:vendor,ven_name');
+        $edit->text('ven_id', 'รหัสร้านค้า');
+        $edit->text('ven_name', 'ชื่อร้านค้า');
         $edit->textarea('ven_address', 'ที่อยู่ร้านค้า')->attributes(array('rows'=>4));
         $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
         $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
