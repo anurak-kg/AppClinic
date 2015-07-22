@@ -39,7 +39,12 @@ class UserTableSeeder extends Seeder
             'email' => 'admin@fiin.in.th',
             'role' => 99, 'password' => bcrypt('1234')]);
 
-
+        DB::table('branch')->delete();
+        \App\Branch::create(['branch_id'=>'99',
+        'branch_name'=>'Tokyo',
+        'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
+        'branch_tel'=>'ไม่ระบุ',
+        'branch_code'=>'4257893625145']);
     }
 
 }
