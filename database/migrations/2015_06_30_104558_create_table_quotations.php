@@ -27,7 +27,7 @@ class CreateTableQuotations extends Migration
             $table->integer('branch_id')->nullable();
             $table->timestamps();
         });
-        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 5800000;");
+        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
         Schema::create('quotations_detail', function (Blueprint $table) {
             $table->integer('quo_id');
             $table->string('course_id');
