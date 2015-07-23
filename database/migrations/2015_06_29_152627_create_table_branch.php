@@ -17,6 +17,7 @@ class CreateTableBranch extends Migration
             $table->string('branch_name',30);
             $table->text('branch_address');
             $table->string('branch_tel',10);
+            $table->string('branch_email',255);
             $table->string('branch_code',13);
             $table->timestamps();
 
