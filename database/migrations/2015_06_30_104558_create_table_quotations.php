@@ -19,6 +19,7 @@ class CreateTableQuotations extends Migration
             $table->date('quo_date');
             $table->integer('quo_status');
             $table->decimal('price',14,2);
+            $table->decimal('discount',14,2);
             //สถานะ
             // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ ,
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว

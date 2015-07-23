@@ -14,11 +14,11 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations::find(1)->with('course','Customer','User','Branch')->get();
+        $bill = Quotations::find(580000)->with('course','Customer','User','Branch')->get();
 
-        //return response()->json($bill);
+       // return response()->json($bill);
 
-         return view("bill/bill",['bill' => $bill[0]]);
+        return view("bill/bill",['bill' => $bill[0]]);
     }
 
 }
