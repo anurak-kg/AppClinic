@@ -8,6 +8,7 @@
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
     <link href="../plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media="print" />
+
         <!-- Main content -->
           <div class="row">
             <div class="col-md-3">
