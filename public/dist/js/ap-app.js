@@ -14,8 +14,9 @@
             var total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                total += (product.course.course_price);
+                total +=parseInt(product.course.course_price) ;
             }
+
             return total;
         }
 
