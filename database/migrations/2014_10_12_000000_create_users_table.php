@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
         });
-        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 100000;");
+        DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 100000;");
 
     }
 

@@ -34,8 +34,10 @@ class CreateTableQuotations extends Migration
             $table->integer('quo_id');
             $table->string('course_id');
             $table->integer('treat_status');
+            //สถานะ
+            // 0 = ไม่เริ่ม,
+            // 1 = อยุ่ในระหว่างการรักษา ,5 = เรียบร้อยแล้ว -99 = ยกเลิก
             $table->integer('qty');
-
             $table->timestamps();
             $table->primary(['quo_id','course_id']);
 

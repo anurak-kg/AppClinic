@@ -174,7 +174,7 @@
             if (status == 1){
                 text = "<span class=\"label label-info\">อยุ่ในการรักษา</span>";
             }
-            if (status == 2){
+            if (status == 5){
                 text = "<span class=\"label label-success\">เสร็จแล้ว</span>";
             }
             return  $sce.trustAsHtml(text);

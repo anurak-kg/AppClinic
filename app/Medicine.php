@@ -14,6 +14,6 @@ class Medicine extends Model
     }
     public function product()
     {
-        return $this->belongsTo('App\Product', 'Product_id');
+        return $this->belongsTo('App\Product', 'product_id');
     }
 }

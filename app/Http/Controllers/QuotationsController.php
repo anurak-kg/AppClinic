@@ -75,7 +75,7 @@ class QuotationsController extends Controller
          $rec = Quotations::find($this->getQuoId());
         $product = Course::find($id);
         $rec->course()->attach($product, [
-            'qty' => 1,
+            'qty' => 0,
             'treat_status'=>0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -114,7 +114,7 @@ class QuotationsController extends Controller
         DB::table('quotations_detail')
             ->where('quo_id', "=", $this->getQuoId())
             ->where('course_id', "=", \Input::get('id'))
-            ->delete();;
+            ->delete();
     }
 
     public function getData()

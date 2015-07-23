@@ -21,9 +21,16 @@ class CreateTreatHistory extends Migration
             $table->integer('bt_user_id1');
             $table->integer('bt_user_id2');
             $table->text('comment');
-            $table->dateTime('treat_date');
-            $table->integer('course_detail_qty');
+            $table->date('treat_date');
+            $table->integer('branch_id')->unsigned()->nullable();
             $table->unique(array('course_id', 'quo_id'));
+            $table->timestamps();
+        });
+        Schema::create('treat_has_medicine', function (Blueprint $table) {
+            $table->increments('treat_medicine_id');
+            $table->integer('treat_id');
+            $table->string('product_id');
+            $table->integer('qty');
             $table->timestamps();
         });
     }
@@ -35,6 +42,7 @@ class CreateTreatHistory extends Migration
      */
     public function down()
     {
+        Schema::drop('treat_has_medicine');
         Schema::drop('treat_history');
     }
 }

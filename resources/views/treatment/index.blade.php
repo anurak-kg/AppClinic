@@ -7,6 +7,15 @@
     <div ng-controller="treatController" id="treat">
 
         <div class="row">
+            @if( Session::get('message') != null )
+                <div class="col-md-12">
+                    <div class="callout callout-success">
+                        <h4>Success!</h4>
+
+                        <p>{{Session::get('message')}}.</p>
+                    </div>
+                </div>
+            @endif
             <div class="col-md-12">
                 <div class="box box-solid box-default ">
                     <div class="box-header with-border">
@@ -77,10 +86,10 @@
                                     </td>
 
                                     <td data-title="'จำนวน'">
-                                        2
+                                        @{{item.course_qty}}
                                     </td>
 
-                                    <td data-title="'จำนวนครั้งที่รักษาแล้ว'">
+                                    <td style="width: 45px" data-title="'รักษาแล้ว'">
                                         @{{item.pivot.qty}}
                                     </td>
 
@@ -89,7 +98,7 @@
 
                                     </td>
                                     <td data-title="'Action'">
-                                        <a class="btn btn-success" ng-href="add?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}" target="_blank">เข้ารับการรักษา</a>
+                                        <a class="btn btn-success" ng-href="{{url('treatment/add')}}?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}" target="_blank">เข้ารับการรักษา</a>
                                     </td>
                                 </tr>
 
