@@ -109,23 +109,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/create', 'CustomerController@create');
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
-
     Route::any('customer/edit', 'CustomerController@edit');
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
 
-
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
-
     Route::post('product/create', 'ProductController@create');
     Route::get('product/create', 'ProductController@create');
-
     Route::any('product/edit', 'ProductController@edit');
-    //End Product
 
     //Order
     Route::post('order/index', 'OrderController@grid');
@@ -138,7 +133,6 @@ Route::group(['middleware' => 'auth'], function () {
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
-    //End Product_detail
 
 
     //Branch
@@ -147,20 +141,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('branch/create', 'BranchController@create');
     Route::get('branch/create', 'BranchController@create');
     Route::any('branch/edit', 'BranchController@edit');
-    //End Branch
+
 
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
     Route::get('vendor/index', 'VendorController@grid');
-
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
-
     Route::any('vendor/edit', 'VendorController@edit');
-    //End Vendor
+
 
     Route::post('bill/bill', 'BillController@index');
     Route::get('bill/bill', 'BillController@index');
+
+    // Ajax Data Controller
+    Route::get('data/customer_search', 'DataController@getCustomerList');
 
 
 });
@@ -174,6 +169,6 @@ Route::post('/auth',   'UserController@auth');
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
 Route::get('faker', function () {
- factory('App\Customer',10)->create();
- factory('App\Doctor',10)->create();
+ echo factory('App\Customer',10)->create();
+ echo factory('App\Doctor',10)->create();
 });
