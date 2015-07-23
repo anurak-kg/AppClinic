@@ -36,6 +36,7 @@
     <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <script src="/dist/js/ap-app.js"></script>
     <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
 
 </head>
 
