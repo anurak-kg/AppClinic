@@ -16,6 +16,7 @@ class CreateTableQuotationsDetail extends Migration
             $table->integer('quo_id');
             $table->string('course_id');
             $table->integer('quo_t');
+            $table->decimal('quo_discount',10,2);
             $table->timestamps();
             $table->primary(['quo_id','course_id']);
 

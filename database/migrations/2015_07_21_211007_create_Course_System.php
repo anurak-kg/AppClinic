@@ -18,7 +18,7 @@ class CreateCourseSystem extends Migration
             $table->string('course_name',50);
             $table->text('course_detail');//รายละเอียดคอร์ส
 
-            $table->integer('course_price');//ราคาคอร์ส
+            $table->decimal('course_price',14,2);//ราคาคอร์ส
             $table->timestamps();
             $table->primary(['course_id']);
 

@@ -18,10 +18,11 @@ class CreateTableQuotations extends Migration
             $table->integer('emp_id');
             $table->date('quo_date');
             $table->integer('quo_status');
-            $table->decimal('price',6,2);
+            $table->decimal('price',14,2);
             //สถานะ
             // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ
             $table->integer('branch_id')->nullable();
+            $table->increments('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
         });
     }
