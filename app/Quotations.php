@@ -11,9 +11,14 @@ class Quotations extends Model
 
 
 
-    public function Employess()
+    public function User()
     {
-        return $this->belongsTo('\App\Employess', 'emp_id');
+        return $this->belongsTo('\App\User', 'emp_id');
+    }
+
+    public function Branch()
+    {
+        return $this->belongsTo('\App\Branch', 'branch_id');
     }
 
     public function Customer()
@@ -22,6 +27,7 @@ class Quotations extends Model
     }
 
     public function course(){
+
         return $this->belongsToMany('App\Course','quotations_detail','quo_id','course_id')
             ->withPivot('qty','treat_status','created_at','updated_at');
     }

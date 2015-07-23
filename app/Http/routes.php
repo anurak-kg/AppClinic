@@ -155,6 +155,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/customer_search', 'DataController@getCustomerList');
 
 
+    Route::post('bill/bill', 'BillController@index');
+    Route::get('bill/bill', 'BillController@index');
 });
 
 Route::get('/login',    'UserController@getLogin');

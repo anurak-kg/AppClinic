@@ -10,6 +10,7 @@ return array(
     'CourseTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'CreateCourseSystem' => $baseDir . '/database/migrations/2015_07_21_211007_create_Course_System.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateTableBin' => $baseDir . '/database/migrations/2015_07_23_125947_create_table_bin.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
     'CreateTableCustomer' => $baseDir . '/database/migrations/2015_06_29_154030_create_table_customer.php',
     'CreateTableDoctor' => $baseDir . '/database/migrations/2015_06_29_155148_create_table_doctor.php',
