@@ -54,6 +54,11 @@ class UserTableSeeder extends Seeder
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'role' => 99, 'password' => bcrypt('1234')]);
+        User::create(['username' => 'sale',
+            'branch_id'=>'1',
+            'name' => 'นางยิงลักษณ์ ชินวัต',
+            'email' => 'sale@fiin.in.th',
+            'role' => 1, 'password' => bcrypt('1234')]);
     }
 
 }
@@ -96,6 +101,26 @@ class ProductTableSeeder extends Seeder
             'product_date_end' => '2012-02-03',
             'product_price' => '200',
             'product_unit' => 'CC']);
+
+        \App\Product::create(['product_id' => 'b021',
+            'pg_id' => '1001',
+            'product_name' => 'Cellulite',
+            'product_qty' => '80',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2012-02-03',
+            'product_price' => '7000',
+            'product_unit' => 'ขวด']);
+
+        \App\Product::create(['product_id' => 'ad02',
+            'pg_id' => '1001',
+            'product_name' => 'Treatment',
+            'product_qty' => '99',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2012-02-03',
+            'product_price' => '7000',
+            'product_unit' => 'เข็ม']);
     }
 
 }
@@ -106,49 +131,45 @@ class CourseTableSeeder extends Seeder
     public function run()
     {
         DB::table('course')->delete();
-        DB::table('course_detail')->delete();
         DB::table('course_medicine')->delete();
 
         Course::create(
-            ['course_id' => 'A001',
+            ['course_id' => 'a001',
                 'course_name' => 'Advence Growth Factors รายครั้ง',
-                'course_price' => '10000',]);
-       Course_detail::create(
-            [
-                'course_id' => 'A001',
-                'course_detail_name' =>'Laser',
-                'course_detail_qty' => '1']);
+                'course_detail'=>'บริการหน้าขาว ใส ไร้สิว',
+                'course_price' => '10000.00',
+                'course_qty'=>'1']);
+
         Medicine::create(
-            [   'course_detail_id' => '1',
-                'product_id' => 'A01',
+            ['course_id' => 'A001',
+                'product_id' => 'b011',
                 'qty' => '20'
             ]);
-
 
         Course::create(
             ['course_id' => 'A002',
                 'course_name' => 'นวดและนาบ',
                 'course_detail' => 'เป็นการนวดที่ผสมการนาบที่ลงตัวลึกสุดใจ',
-                'course_price' => '2400',]);
+                'course_price' => '2400',
+                'course_qty'=>'1']);
+        Medicine::create(
+            ['course_id' => 'A002',
+                'product_id' => 'ab02',
+                'qty' => '5'
+            ]);
 
-        Course_detail::create(
-            [
-                'course_id' => 'A002',
-                'course_detail_name' =>'นวด',
-                'course_detail_qty' => '2']);
+        Course::create(
+            ['course_id' => 'A003',
+                'course_name' => 'Fake body',
+                'course_detail' => 'กำลังอัพเดรต',
+                'course_price' => '70000',
+                'course_qty'=>'5']);
 
-        Course_detail::create(
-            [
-                'course_id' => 'A002',
-                'course_detail_name' =>'นาบ',
-                'course_detail_qty' => '1']);
-
-       Course_detail::create(
-            [
-                'course_id' => 'A002',
-                'course_detail_name' =>'อาบน้ำ',
-                'course_detail_qty' => '1']);
-
+        Medicine::create(
+            ['course_id' => 'A003',
+                'product_id' => 'ab02',
+                'qty' => '3'
+            ]);
     }
 
 }

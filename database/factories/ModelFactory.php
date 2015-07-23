@@ -19,3 +19,28 @@ $factory->define(App\User::class, function ($faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\Customer::class, function ($faker) {
+    return [
+        'cus_name' => $faker->firstName,
+        'cus_lastname' => $faker->lastName,
+        'cus_phone' => $faker->phoneNumber,
+        'cus_email' => $faker->email,
+        'cus_hno' => $faker->buildingNumber,
+        'cus_moo' => $faker->buildingNumber,
+        'cus_soi' => $faker->streetSuffix,
+        'cus_road' => $faker->streetName,
+        'cus_subdis' => $faker->citySuffix,
+        'cus_district' => $faker->stateAbbr,
+        'cus_province' => $faker->state,
+        'cus_postal' => $faker->postcode,
+        'branch_id' => '1'
+    ];
+});
+$factory->define(App\Doctor::class, function ($faker) {
+    return [
+        'dr_name' => $faker->firstName,
+        'dr_lastname' => $faker->lastName,
+        'dr_tel' => $faker->phoneNumber,
+        'dr_sex' => $faker->randomElement($array = array ('M','F')) ,
+    ];
+});

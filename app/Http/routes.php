@@ -83,10 +83,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
 
     //Treatment
-    Route::get('treatment/index','TreatmentController@treatment');
-    Route::get('treatment/course_data','TreatmentController@getCourseData');
-    Route::get('treatment/add','TreatmentController@add');
+    Route::post('treatment/index','TreatmentController@grid');
+    Route::get('treatment/index','TreatmentController@grid');
 
+    Route::post('treatment/create','TreatmentController@create');
+    Route::get('treatment/create','TreatmentController@create');
+
+    Route::any('treatment/edit', 'TreatmentController@edit');
+    //End Treatment
 
     //Quotations
     Route::post('quotations','QuotationsController@index');
@@ -101,7 +105,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
     Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
     Route::get('quotations/save', 'QuotationsController@save');
-
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');
@@ -109,18 +112,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/create', 'CustomerController@create');
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
+
     Route::any('customer/edit', 'CustomerController@edit');
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
 
+
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
+
     Route::post('product/create', 'ProductController@create');
     Route::get('product/create', 'ProductController@create');
+
     Route::any('product/edit', 'ProductController@edit');
+    //End Product
 
     //Order
     Route::post('order/index', 'OrderController@grid');
@@ -147,16 +155,13 @@ Route::group(['middleware' => 'auth'], function () {
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
     Route::get('vendor/index', 'VendorController@grid');
+
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
+
     Route::any('vendor/edit', 'VendorController@edit');
-    // Ajax Data Controller
+    //End Vendor
 
-    Route::get('data/customer_search', 'DataController@getCustomerList');
-
-
-    Route::post('bill/bill', 'BillController@index');
-    Route::get('bill/bill', 'BillController@index');
 });
 
 Route::get('/login',    'UserController@getLogin');
@@ -167,3 +172,7 @@ Route::post('/auth',   'UserController@auth');
 
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
+Route::get('faker', function () {
+ factory('App\Customer',10)->create();
+ factory('App\Doctor',10)->create();
+});
