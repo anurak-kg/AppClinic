@@ -24,11 +24,11 @@ class CreateCourseSystem extends Migration
 
         });
         Schema::create('course_medicine', function (Blueprint $table) {
-            $table->integer('course_detail_id');
+            $table->string('course_id');
             $table->string('product_id');
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->timestamps();
-            $table->primary(['course_detail_id','product_id']);
+            $table->primary(['course_id','product_id']);
         });
 
 
