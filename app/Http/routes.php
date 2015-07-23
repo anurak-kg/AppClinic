@@ -83,13 +83,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
 
     //Treatment
-    Route::post('treatment/index','TreatmentController@grid');
-    Route::get('treatment/index','TreatmentController@grid');
+    Route::get('treatment/index','TreatmentController@treatment');
+    Route::get('treatment','TreatmentController@treatment');
 
-    Route::post('treatment/create','TreatmentController@create');
-    Route::get('treatment/create','TreatmentController@create');
-
-    Route::any('treatment/edit', 'TreatmentController@edit');
+    Route::any('treatment/add', 'TreatmentController@add');
     //End Treatment
 
     //Quotations
