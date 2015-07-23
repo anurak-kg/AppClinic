@@ -68,6 +68,7 @@ class BranchTableSeeder extends Seeder
             'branch_name'=>'Tokyo',
             'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
             'branch_tel'=>'ไม่ระบุ',
+            'branch_email'=>'AV-JP@jp.com',
             'branch_code'=>'4257893625145']);
     }
 
