@@ -5,9 +5,19 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
     <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="/dist/js/angular.min.js"></script>
     <script src="/dist/js/angular-route.min.js"></script>
+    <script src="/dist/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
+    <script src="/dist/js/ng-table.js"></script>
+    <script src="/dist/js/typeahead.bundle.min.js"></script>
+    <script src="/dist/js/ap-app.js"></script>
+    <script src="/dist/js/select2.min.js"></script>
+
+    <script src="/dist/js/app.min.js" type="text/javascript"></script>
+
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
@@ -16,15 +26,20 @@
           type="text/css"/>
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link href="/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
 
     <script src="/dist/js/typeahead.bundle.min.js"></script>
-
-    <script src="/dist/js/ng-table.js"></script>
+    <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/dist/js/ng-table.css">
-
-
     <link href="/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css"/>
     <link href="/dist/css/typeahead.css" rel="stylesheet" type="text/css" />
+    <link href="/app.css" rel="stylesheet" type="text/css"/>
+
+    <link media="all" type="text/css" rel="stylesheet"
+          href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,11 +47,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="/app.css" rel="stylesheet" type="text/css"/>
-    <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
-    <script src="/dist/js/ap-app.js"></script>
-    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
-    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
+
+
+
 
 </head>
 

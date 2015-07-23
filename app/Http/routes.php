@@ -83,14 +83,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
 
     //Treatment
-    Route::post('treatment/index','TreatmentController@grid');
-    Route::get('treatment/index','TreatmentController@grid');
+    Route::get('treatment/index','TreatmentController@treatment');
+    Route::get('treatment/course_data','TreatmentController@getCourseData');
+    Route::get('treatment/add','TreatmentController@add');
 
-    Route::post('treatment/create','TreatmentController@create');
-    Route::get('treatment/create','TreatmentController@create');
-
-    Route::any('treatment/edit', 'TreatmentController@edit');
-    //End Treatment
 
     //Quotations
     Route::post('quotations','QuotationsController@index');
@@ -113,23 +109,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('customer/create', 'CustomerController@create');
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
-
     Route::any('customer/edit', 'CustomerController@edit');
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
 
-
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');
-
     Route::post('product/create', 'ProductController@create');
     Route::get('product/create', 'ProductController@create');
-
     Route::any('product/edit', 'ProductController@edit');
-    //End Product
 
     //Order
     Route::post('order/index', 'OrderController@grid');
@@ -156,12 +147,13 @@ Route::group(['middleware' => 'auth'], function () {
     //Vendor
     Route::post('vendor/index', 'VendorController@grid');
     Route::get('vendor/index', 'VendorController@grid');
-
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
-
     Route::any('vendor/edit', 'VendorController@edit');
-    //End Vendor
+    // Ajax Data Controller
+
+    Route::get('data/customer_search', 'DataController@getCustomerList');
+
 
 });
 

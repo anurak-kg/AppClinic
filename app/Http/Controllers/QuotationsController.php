@@ -76,7 +76,8 @@ class QuotationsController extends Controller
         $rec = Quotations::find($this->getQuoId());
         $product = Course::find($id);
         $rec->course()->attach($product, [
-            'quo_t' => 1,
+            'qty_remain' => 1,
+            'treat_status'=>0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 

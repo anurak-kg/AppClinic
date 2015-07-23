@@ -29,13 +29,13 @@
 
         $http.get('/quotations/data_customer').
             success(function (data, status, headers, config) {
-                if(data.status == 'success'){
+                if (data.status == 'success') {
                     $scope.customer.fullname = data.full_name;
                     $scope.customer.tel = data.tel;
                     $scope.boxSearch = true;
 
                     console.log('update customer success');
-                 }
+                }
             }).
             error(function (data, status, headers, config) {
 
@@ -60,13 +60,12 @@
             });
 
         }
-        $scope.save = function(){
-            if($scope.product.length ==0){
+        $scope.save = function () {
+            if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเพิ่มคอร์ส");
             }
-            else
-            {
-                window.location.href ='/quotations/save';
+            else {
+                window.location.href = '/quotations/save';
             }
         }
         $scope.pushProduct = function (product) {
@@ -139,7 +138,50 @@
             return results;
         }
     });
-})();
+    app.controller('treatController', function ($scope, $http, ngTableParams,$sce) {
+        $scope.customer = [];
+        $scope.course = [];
+
+        $scope.customerSelect = function (customer) {
+
+            $scope.$apply(function () {
+                $scope.customer = customer;
+                $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
+
+            });
+            $scope.getCourseData();
+            console.log($scope.customer);
+        }
+        $scope.getCourseData = function () {
+            $http.get('/treatment/course_data?id=' + $scope.customer.cus_id).
+                success(function (data, status, headers, config) {
+                    $scope.course = data;
+                    console.log($scope.course);
+
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status)
+                    $scope.dataLoading = false;
+                });
+        }
+        $scope.getTreatStatus = function (status) {
+            var text;
+            if (status == 0){
+                text = "<span class=\"label label-danger\">ไม่เริ่ม</span>";
+            }
+            if (status == 1){
+                text = "<span class=\"label label-info\">อยุ่ในการรักษา</span>";
+            }
+            if (status == 2){
+                text = "<span class=\"label label-success\">เสร็จแล้ว</span>";
+            }
+            return  $sce.trustAsHtml(text);
+        }
+    });
+})
+
+();
 /**
  * Created by Anurak on 26/06/58.
  */
