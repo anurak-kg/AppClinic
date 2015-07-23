@@ -159,6 +159,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('vendor/edit', 'VendorController@edit');
     //End Vendor
 
+    Route::post('bill/bill', 'BillController@index');
+    Route::get('bill/bill', 'BillController@index');
+
+
 });
 
 Route::get('/login',    'UserController@getLogin');
