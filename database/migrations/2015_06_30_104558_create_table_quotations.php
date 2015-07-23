@@ -25,7 +25,7 @@ class CreateTableQuotations extends Migration
             $table->decimal('payment',10,2);
             $table->char('payment_type');
             $table->integer('branch_id')->nullable();
-            $table->increments('bill_number');//เลขที่ใบเสร้จ
+            $table->integer('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
         });
         DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
