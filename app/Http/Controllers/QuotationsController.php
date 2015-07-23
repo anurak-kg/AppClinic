@@ -124,7 +124,7 @@ class QuotationsController extends Controller
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->where('quo_id', "=", $this->getQuoId())
             ->get();*/
-        $receivedItem = Quotations_detail::with(['Course.detail'])->
+        $receivedItem = Quotations_detail::with(['Course'])->
         where('quo_id', "=", $this->getQuoId())->get();
         // dd($receivedItem);
         return response()->json($receivedItem);
