@@ -176,7 +176,7 @@
 
         <div class="row no-print">
             <div class="col-xs-12">
-                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                <a href="{{url('bill/bill_print')}}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
                 <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
             </div>
         </div>
