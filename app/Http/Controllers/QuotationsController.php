@@ -60,8 +60,7 @@ class QuotationsController extends Controller
     {
         $query = '%' . \Input::get('q') . '%';
         $course = Course::
-        with('detail')
-            ->where('course_name', 'LIKE', $query)
+                where('course_name', 'LIKE', $query)
             ->orWhere('course_id', 'LIKE', $query)
             ->get();
 
@@ -73,10 +72,10 @@ class QuotationsController extends Controller
     public function add()
     {
         $id = \Input::get('id');
-        $rec = Quotations::find($this->getQuoId());
+         $rec = Quotations::find($this->getQuoId());
         $product = Course::find($id);
         $rec->course()->attach($product, [
-            'qty_remain' => 1,
+            'qty' => 1,
             'treat_status'=>0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()

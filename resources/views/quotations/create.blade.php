@@ -92,14 +92,14 @@
                                 <div class="row">
                                     <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                         <tr data-ng-repeat="item in product">
-                                            <td>
+                                            <td  style="width: 5px">
                                                 <button class="btn btn-box-tool" data-widget="remove"
                                                         ng-click="deleteById(item.course_id)"><i
                                                             class="fa fa-times"></i>
                                                 </button>
 
                                             </td>
-                                            <td data-title="'#'">
+                                            <td data-title="'#'"  style="width: 10px">
                                                 @{{$index+1}}
                                             </td>
 
