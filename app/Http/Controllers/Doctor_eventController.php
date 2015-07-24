@@ -15,40 +15,66 @@ use Zofe\Rapyd\Facades\DataForm;
 class Doctor_eventController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
 
         //return view("dr/calender");
-        $event = Doctor_event::find(1)->with('doctor_event','doctor')->get();
+        $event = Doctor_event::find(1)->with('doctor_event', 'doctor')->get();
 
-         //return response()->json($event);
+        //return response()->json($event);
 
-        return view("dr/calender",['doctor_event' => $event[0]]);
+        return view("dr/calender", ['doctor_event' => $event[0]]);
     }
-    public function fetch(){
+
+    public function fetch()
+    {
         $events = [];
-        $dr_event = Doctor_event::all();
-        foreach($dr_event as $event){
+        $dr_event = Doctor_event::with(['User'])->get();
+        // dd($dr_event);
+        foreach ($dr_event as $event) {
             $e = array();
             $e['id'] = $event->event_id;
-            $e['title'] = $event->event_name;
+            $e['title'] = $event->User->name . ' -' . $event->event_name;
             $e['start'] = $event->event_start;
             $e['end'] = $event->event_end;
             $e['allDay'] = false;
+            $e['color'] = '#512DA8';
             array_push($events, $e);
         }
         return response()->json($events);
     }
 
+    public function update()
+    {
+        $input = Input::all();
+
+        $event = Doctor_event::findOrFail($input['eventid']);
+        $event->event_name = $input['title'];
+        $event->event_start = $input['start'];
+        $event->event_end = $input['end'];
+        $event->save();
+        return response()->json(['status' => 'success']);
+    }
+
+    public function delete()
+    {
+        $event = Doctor_event::findOrFail(Input::get('id'));
+        $event->delete();
+        return response()->json(['status' => 'success']);
+
+    }
 
     public function create()
     {
-       /* dd(User::where('position_id','=',4)->lists('name','id')->toArray());*/
+        /* dd(User::where('position_id','=',4)->lists('name','id')->toArray());*/
         $form = DataForm::create('doctor_event');
-        $form->add('name','ชื่อแพทย์','select')->options(User::where('position_id','=',4)->lists('name','id')->toArray());
+        $form->add('name', 'ชื่อแพทย์', 'select')->options(User::where('position_id', '=', 4)->lists('name', 'id')->toArray());
         $form->text('event_name', 'event_name');
-        $form->add('event_start','Start', 'datetime')->format('Y-m-d H:i:s', 'th')->rule( 'required' );
-        $form->add('event_end','End', 'datetime')->format('Y-m-d H:i:s', 'th')->rule( 'required' );
-        $form->text('event_status','สถานะ');
+        $form->add('event_start', 'Start', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
+        $form->add('event_end', 'End', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
+        // $form->text('event_status', 'สถานะ');
+        //$form->add('color','Color','colorpicker');
+
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
@@ -57,7 +83,7 @@ class Doctor_eventController extends Controller
             $user->event_name = Input::get('event_name');
             $user->event_start = Input::get('event_start');
             $user->event_end = Input::get('event_end');
-            $user->event_status = Input::get('event_status');
+            // $user->event_status = Input::get('event_status');
             $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("dr/calender", "ย้อนกลับ");
@@ -66,18 +92,4 @@ class Doctor_eventController extends Controller
         return view('dr/calender', compact('form'));
     }
 
-    public function edit() {
-        if (Input::get('do_delete')==1) return  "not the first";
-
-        $edit = DataEdit::source(new Doctor_event());
-        $edit->add('name','ชื่อแพทย์','select')->options(User::where('position_id','=',4)->lists('name','id')->toArray());
-        $edit->text('event_name', 'event_name');
-        $edit->datetime('event_start', 'วัน/เวลาเริ่ม Y-m-d HH:mm:ss');
-        $edit->datetime('event_end', 'วัน/เวลาสิ้นสุด Y-m-d HH:mm:ss');
-        $edit->text('event_status','สถานะ');
-        $edit->attributes(array("class" => " "));
-        $edit->link("dr/calender", "ย้อนกลับ");
-
-        return $edit->view('dr/edit-event', compact('edit'));
-    }
 }

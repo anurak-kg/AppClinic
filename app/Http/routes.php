@@ -64,6 +64,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('dr/calender', 'Doctor_eventController@create');
     //Doctor calender
     Route::get('doctor_calender/fetch/', 'Doctor_eventController@fetch');
+    Route::get('doctor_calender/update/', 'Doctor_eventController@update');
+    Route::get('doctor_calender/delete/', 'Doctor_eventController@delete');
 
     //Employee
     Route::post('employee/index', 'EmployeeController@grid');
