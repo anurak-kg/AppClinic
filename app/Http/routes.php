@@ -159,7 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/customer_search', 'DataController@getCustomerList');
 
     //Rport
-    Route::get('report', 'BillController@index');
+    Route::get('report', 'ReportController@reportDoctorTest');
 
 });
 
