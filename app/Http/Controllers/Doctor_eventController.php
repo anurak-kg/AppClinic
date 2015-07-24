@@ -24,7 +24,20 @@ class Doctor_eventController extends Controller
 
         return view("dr/calender",['doctor_event' => $event[0]]);
     }
-
+    public function fetch(){
+        $events = [];
+        $dr_event = Doctor_event::all();
+        foreach($dr_event as $event){
+            $e = array();
+            $e['id'] = $event->event_id;
+            $e['title'] = $event->event_name;
+            $e['start'] = $event->event_start;
+            $e['end'] = $event->event_end;
+            $e['allDay'] = false;
+            array_push($events, $e);
+        }
+        return response()->json($events);
+    }
 
 
     public function create()

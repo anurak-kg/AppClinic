@@ -57,15 +57,13 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     //Dr
     Route::post('dr/index', 'DoctorController@grid');
     Route::get('dr/index', 'DoctorController@grid');
-
     Route::post('dr/create', 'DoctorController@create');
     Route::get('dr/create', 'DoctorController@create');
-
     Route::any('dr/edit', 'DoctorController@edit');
-
     Route::post('dr/calender', 'Doctor_eventController@create');
     Route::get('dr/calender', 'Doctor_eventController@create');
-    //End Dr
+    //Doctor calender
+    Route::get('doctor_calender/fetch/', 'Doctor_eventController@fetch');
 
     //Employee
     Route::post('employee/index', 'EmployeeController@grid');

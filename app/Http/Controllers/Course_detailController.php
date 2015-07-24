@@ -20,7 +20,7 @@ class Course_detailController extends Controller
 {
     public function index()
     {
-
+        return view('course_detail/index');
 
     }
 
