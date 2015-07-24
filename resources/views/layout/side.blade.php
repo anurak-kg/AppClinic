@@ -73,9 +73,13 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปประเภทสินค้า</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำเดือน</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปยอดขายประจำปี</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายพวกคอร์ต่างๆ</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สรุปคอร์ส</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดี</a></li>
+
                 </ul>
             </li>
 
