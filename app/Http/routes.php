@@ -18,8 +18,10 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
 
-    Route::post('user/edit', 'UserController@edit');
-    Route::get('user/edit', 'UserController@edit');
+    Route::post('user/adddoctor', 'UserController@adddoctor');
+    Route::get('user/adddoctor', 'UserController@adddoctor');
+
+    Route::any('user/editdoc', 'UserController@editdoc');
     //Course
     Route::post('course/index', 'CourseController@grid');
     Route::get('course/index', 'CourseController@grid');
@@ -61,8 +63,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::any('dr/edit', 'DoctorController@edit');
 
-    Route::post('dr/calender', 'DoctorController@calender');
-    Route::get('dr/calender', 'DoctorController@calender');
+    Route::post('dr/calender', 'Doctor_eventController@create');
+    Route::get('dr/calender', 'Doctor_eventController@create');
     //End Dr
 
     //Employee
@@ -171,7 +173,7 @@ Route::controller('admin','AdminController');
 Route::controller('user','UserController');
 Route::get('faker', function () {
  echo factory('App\Customer',10)->create();
- echo factory('App\Doctor',10)->create();
+
 });
 Route::get('test', function () {
 
