@@ -14,7 +14,7 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations::orderBy('quo_id')->with('course','Customer','User','Branch')->get();
+        $bill = Quotations::orderBy('quo_id')->with('course','Customer','User','Branch','Treatment')->get();
 
        // return response()->json($bill);
 

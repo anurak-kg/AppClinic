@@ -9,12 +9,8 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
+
+    public function reportsales()
     {
         $data = \DB::select((\DB::raw("
 			SELECT  DAY(created_at) as 'Day',sale_price,cost_price,sale_price-cost_price as profit ,
@@ -28,71 +24,34 @@ class ReportController extends Controller
 			DAY(created_at)")));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
+    public function reportCourse(){
+        $data = \DB::select((\DB::raw("
+                    SELECT
+                    DAY(quotations_detail.created_at),
+                    SUM(course_price) as Total
+                    FROM
+                    quotations_detail
+                    INNER JOIN course ON course.course_id =quotations_detail.course_id
+                    WHERE MONTH(quotations_detail.created_at) = 7
+                    GROUP BY
+                    DAY(quotations_detail.created_at) ")));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function reportCourseMonth() {
+        $data = \DB::select((\DB::raw("
+                SELECT
+                course.course_name,
+                SUM(course_price) as Total
+                FROM
+                quotations_detail
+                INNER JOIN course ON course.course_id =quotations_detail.course_id
+                WHERE MONTH(quotations_detail.created_at) = 7
+                GROUP BY
+                course.course_name
+                   ")));
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function arrayToChartData($array,$name){
         $text = "[";
         foreach($array as $row ){
