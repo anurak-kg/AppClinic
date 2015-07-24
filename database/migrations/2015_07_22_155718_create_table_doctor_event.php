@@ -19,6 +19,7 @@ class CreateTableDoctorEvent extends Migration
             $table->dateTime('event_start');
             $table->dateTime('event_end');
             $table->string('event_status');
+            $table->string('color');
             $table->timestamps();
 
         });
