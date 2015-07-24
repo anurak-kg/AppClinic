@@ -12,10 +12,10 @@
         </div>
 
         <div class="col-md-8">
-            <div class="box box-solid box-default">
+            <div class="panel panel-primary">
 
-                <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                <div class="panel-heading with-border" align="middle">
+                    <h2 class="panel-title">ข้อมูลลูกค้า</h2>
 
                 </div>
 
@@ -115,13 +115,13 @@
 
 
 
-            <div class="box box-solid box-default" >
+            <div class="panel panel-primary" >
 
-                <div class="box-header with-border" align="middle">
-                    <h2 class="box-title" >ที่อยู่</h2>
+                <div class="panel-heading with-border" align="middle">
+                    <h2 class="panel-title" >ที่อยู่</h2>
                 </div>
 
-                <div class="box-body">
+                <div class="panel-body">
 
                     <div class="col-md-12">
                         {!! $form->render('cus_province') !!}
@@ -170,9 +170,9 @@
 
             </div>
 
-            <div class="box box-solid box-default">
+            <div class="panel panel-default">
 
-                <div class="box-body">
+                <div class="panel-body">
                 @endif
                 {!! $form->footer !!}
                 </div>

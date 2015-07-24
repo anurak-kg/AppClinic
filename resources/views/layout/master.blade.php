@@ -72,9 +72,9 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                              @yield('headText')
-                               <small>@yield('headDes')</small>
-                           </h1>
+              @yield('headText')
+              <small>@yield('headDes')</small>
+            </h1>
 
 
         </section>
