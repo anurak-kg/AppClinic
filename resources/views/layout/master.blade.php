@@ -18,8 +18,6 @@
     <script src="/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="/locales/bootstrap-datepicker.th.min.js"></script>
 
-    <script src="/dist/js/app.min.js" type="text/javascript"></script>
-
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
