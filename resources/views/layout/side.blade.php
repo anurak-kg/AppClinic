@@ -73,7 +73,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
+                    <li><a href="{{url('report/sale')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                     <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>

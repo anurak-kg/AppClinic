@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
+
     //ยอดขาย Sale
     public function reportsales()
     {
@@ -28,39 +29,45 @@ class ReportController extends Controller
                 quotations.sale_id
                 ORDER BY Total DESC
                    ")));
+
     }
 
     //ยอดขาย Sale
-    public function reportSalesTest(){
+    public function reportSalesTest()
+    {
 
         $sales = DB::table('quotations_detail')
-            ->select('users.id','users.name',DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course','course.course_id','=','quotations_detail.course_id')
-            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id')
-            ->join('users','quotations.sale_id','=','users.id')
+            ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
+            ->join('users', 'quotations.sale_id', '=', 'users.id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->where('users.position_id','=',1)
+            ->where('users.position_id', '=', 1)
             ->groupBy('quotations.sale_id')
-            ->orderBy('Total','desc')
+            ->orderBy('Total', 'desc')
             ->get();
 
-        return response()->json($sales);
+        $this->arrayToChartData($sales,'Total');
+
+        return view('report/sale');
+
+        //return response()->json($sales);
     }
 
 
     public function reportCourseProduct()
     {
-      /*  $data = \DB::select((\DB::raw("
-                    SELECT
-                    DAY(quotations_detail.created_at),
-                    SUM(course_price) as Total
-                    FROM
-                    quotations_detail
-                    INNER JOIN course ON course.course_id =quotations_detail.course_id
-                    WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015
-                    GROUP BY
-                    DAY(quotations_detail.created_at) ")));*/
+        /*  $data = \DB::select((\DB::raw("
+                      SELECT
+                      DAY(quotations_detail.created_at),
+                      SUM(course_price) as Total
+                      FROM
+                      quotations_detail
+                      INNER JOIN course ON course.course_id =quotations_detail.course_id
+                      WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015
+                      GROUP BY
+                      DAY(quotations_detail.created_at) ")));*/
     }
 
 
@@ -82,16 +89,20 @@ class ReportController extends Controller
     }
 
     //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
-    public function reportCourseMonthTest(){
+    public function reportCourseMonthTest()
+    {
 
         $coursemonth = DB::table('quotations_detail')
-            ->select(' course.course_id','course.course_name',DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course','course.course_id','=','quotations_detail.course_id')
+            ->select(' course.course_id', 'course.course_name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
             ->groupBy('course.course_name')
             ->get();
-       // return response()->json($coursemonth);
+
+        $this->arrayToChartData($coursemonth,'Total');
+        return view('report/coursemonth');
+        // return response()->json($coursemonth);
     }
 
     //สรุปคอร์สที่ขายดีที่สุด
@@ -114,21 +125,23 @@ class ReportController extends Controller
 
 
     //สรุปคอร์สที่ขายดีที่สุด
-    public function reportCourseHotTest(){
+    public function reportCourseHotTest()
+    {
 
         $coursehot = DB::table('quotations_detail')
-            ->select(' course.course_id','course.course_name',DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course','course.course_id','=','quotations_detail.course_id')
+            ->select(' course.course_id', 'course.course_name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
             ->groupBy('course.course_name')
-            ->orderBy('Total','desc')
+            ->orderBy('Total', 'desc')
             ->get();
         //return response()->json($coursehot);
     }
 
     //ยอดขายแพทย์
-    public function reportDoctor() {
+    public function reportDoctor()
+    {
         $data = \DB::select((\DB::raw("
                 SELECT
                 users.id,
@@ -148,19 +161,21 @@ class ReportController extends Controller
     }
 
     //ยอดขายแพทย์
-    public function reportDoctorTest() {
+    public function reportDoctorTest()
+    {
         $doctor = DB::table('quotations_detail')
-            ->select('users.id','users.name',DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course','course.course_id','=','quotations_detail.course_id')
-            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id')
-            ->join('users','quotations.sale_id','=','users.id')
+            ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
+            ->join('users', 'quotations.sale_id', '=', 'users.id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->where('users.position_id','=',4)
+            ->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')
-            ->orderBy('Total','desc')
+            ->orderBy('Total', 'desc')
             ->get();
-       // return response()->json($doctor);
+        // return response()->json($doctor);
+
     }
 
     public function arrayToChartData($array, $name)

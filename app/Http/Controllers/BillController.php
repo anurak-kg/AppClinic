@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Quotations;
+
 use App\User;
 use Illuminate\Http\Request;
 
