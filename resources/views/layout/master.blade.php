@@ -105,7 +105,7 @@
 
 
 <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="/dist/js/app.min.js" type="text/javascript"></script>
+<script src="/dist/js/app.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="http://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
 <script src="http://datatables.yajrabox.com/js/handlebars.js"></script>
