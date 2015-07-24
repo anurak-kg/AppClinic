@@ -45,15 +45,15 @@ class CustomerTableSeeder extends Seeder
 class PositionTableSeeder extends Seeder{
     public function run(){
         DB::table('position')->delete();
-        \App\Position::create(['position_name'=>'admin',
+        \App\Position::create(['position_id'=>1,'position_name'=>'admin',
         'role'=>99]);
-        \App\Position::create(['position_name'=>'IT',
+        \App\Position::create(['position_id'=>2,'position_name'=>'IT',
             'role'=>80]);
-        \App\Position::create(['position_name'=>'Manager',
+        \App\Position::create(['position_id'=>3,'position_name'=>'Manager',
             'role'=>60]);
-        \App\Position::create(['position_name'=>'Doctor',
+        \App\Position::create(['position_id'=>4,'position_name'=>'Doctor',
             'role'=>40]);
-        \App\Position::create(['position_name'=>'Human resources officer',
+        \App\Position::create(['position_id'=>5,'position_name'=>'Human resources officer',
             'role'=>50]);
         \App\Position::create(['position_name'=>'Reception',
             'role'=>1]);
