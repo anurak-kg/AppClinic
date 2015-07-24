@@ -35,9 +35,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    public function position(){
+        return $this->belongsTo('App\Position','position_id');
+    }
 
     public function getRole(){
-        return $this->getAttribute('role');
+        $position = Position::find($this->getAttribute('position_id'));
+                    return $position->role;
+
     }
     public function getRoleName(){
         return config('shop.role.'.$this->getRole());

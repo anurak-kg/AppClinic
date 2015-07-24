@@ -24,7 +24,7 @@ class Permission
             }
         }
         $user = $this->auth->user();
-        if($user->getAttribute('role') < $this->getLevel($level)  ){
+        if($user->getRole() < $this->getLevel($level)  ){
             return response('Unauthorized.', 401);
         }
         return $next($request);

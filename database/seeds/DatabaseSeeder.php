@@ -45,8 +45,8 @@ class CustomerTableSeeder extends Seeder
 class PositionTableSeeder extends Seeder{
     public function run(){
         DB::table('position')->delete();
-        \App\Position::create(['position_id'=>1,'position_name'=>'admin',
-        'role'=>99]);
+        \App\Position::create(['position_id'=>1,'position_name'=>'General',
+            'role'=>10]);
         \App\Position::create(['position_id'=>2,'position_name'=>'IT',
             'role'=>80]);
         \App\Position::create(['position_id'=>3,'position_name'=>'Manager',
@@ -55,6 +55,8 @@ class PositionTableSeeder extends Seeder{
             'role'=>40]);
         \App\Position::create(['position_id'=>5,'position_name'=>'Human resources officer',
             'role'=>50]);
+        \App\Position::create(['position_id'=>99,'position_name'=>'admin',
+            'role'=>99]);
         \App\Position::create(['position_name'=>'Reception',
             'role'=>1]);
         \App\Position::create(['position_name'=>'Sale',
@@ -73,12 +75,12 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create(['username' => 'admin',
-            'branch_id'=>'1','position_id'=>1,
+            'branch_id'=>'1','position_id'=>99,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
         User::create(['username' => 'sale',
-            'branch_id'=>'1','position_id'=>7,
+            'branch_id'=>'1','position_id'=>1,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'sale@fiin.in.th',
             'password' => bcrypt('1234')]);

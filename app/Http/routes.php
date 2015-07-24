@@ -173,3 +173,8 @@ Route::get('faker', function () {
  echo factory('App\Customer',10)->create();
  echo factory('App\Doctor',10)->create();
 });
+Route::get('test', function () {
+
+    $user = Auth::user()->getRole();
+    return response()->json($user);
+});
