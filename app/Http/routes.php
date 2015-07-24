@@ -128,7 +128,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('order/create', 'OrderController@create');
     Route::get('order/create', 'OrderController@create');
     Route::any('order/edit', 'OrderController@edit');
-    //End Order
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
@@ -157,6 +156,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
 
+    //Rport
+    Route::get('report', 'BillController@index');
 
 });
 
