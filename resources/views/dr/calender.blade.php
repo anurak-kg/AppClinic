@@ -3,9 +3,9 @@
 
 
 @section('content')
-    <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>
 
-    <link href="/packages/zofe/rapyd/assets/datetimepicker/datetimepicker3.css" rel="stylesheet" type="text/css"/>
+    <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>
+    <link href="/packages/zofe/rapyd/assets/datetimepicker/datetimepicker3.css" rel="stylesheet" type="text/css" />
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
     <link href="../plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media="print"/>
@@ -16,7 +16,7 @@
             <div class="box  box-danger">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                  <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
 
                 <div class="box-body">
@@ -191,8 +191,10 @@
                 return false;
             }
 
+          }
         });
 
+            });
     </script>
 
 @stop

@@ -158,8 +158,11 @@ Route::group(['middleware' => 'auth'], function () {
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
 
-    //Rport
+    //Report
     Route::get('report', 'ReportController@reportDoctorTest');
+
+    Route::post('report/sale', 'ReportController@reportSalesTest');
+    Route::get('report/sale', 'ReportController@reportSalesTest');
 
 });
 
