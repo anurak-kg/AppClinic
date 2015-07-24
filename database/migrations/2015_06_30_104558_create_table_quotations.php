@@ -16,6 +16,7 @@ class CreateTableQuotations extends Migration
             $table->increments('quo_id');
             $table->integer('cus_id');
             $table->integer('emp_id');
+            $table->integer('sale_id');
             $table->date('quo_date');
             $table->integer('quo_status');
             $table->decimal('price',14,2);
@@ -38,6 +39,7 @@ class CreateTableQuotations extends Migration
             // 0 = ไม่เริ่ม,
             // 1 = อยุ่ในระหว่างการรักษา ,5 = เรียบร้อยแล้ว -99 = ยกเลิก
             $table->integer('qty');
+            $table->decimal('quo_de_price',12,2);
             $table->timestamps();
             $table->primary(['quo_id','course_id']);
 
