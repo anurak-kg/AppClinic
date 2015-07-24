@@ -93,4 +93,12 @@ class ReportController extends Controller
     {
         //
     }
+    public function arrayToChartData($array,$name){
+        $text = "[";
+        foreach($array as $row ){
+            $text .=  $row->$name .',';
+        }
+        $text .= ']';
+        return $text;
+    }
 }
