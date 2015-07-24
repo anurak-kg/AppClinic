@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลพนักงาน')
+@section('title','ข้อมูลหมอ')
 
 @section('headDes','รายละเอียด')
 @section('content')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Position;
 use App\User;
 use App\Branch;
 use Illuminate\Http\Request;
@@ -31,17 +32,17 @@ class UserController extends Controller
         return view('login');
     }
     public function getUserDataGrid(){
-        $grid = DataGrid::source(User::with('branch'));
+        $grid = DataGrid::source(User::with('branch','position'));
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา','branch_id');
         $grid->add('name','Name');
-        $grid->add('username','Username');
         $grid->add('email','Email');
-        $grid->add('role','Role');
+        $grid->add('{{ $position->position_name }}', 'ตำแหน่ง','position_id');
         $grid->edit('/user/edit', 'Edit','show|modify');
         $grid->orderBy('id','desc');
         $grid->paginate(10);
         return $grid;
     }
+
     public function manage (){
 
         //User Table
@@ -55,7 +56,7 @@ class UserController extends Controller
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์');
         $form->text('email', 'Email')->rule('required|email|unique:users');
-        $form->add('role', 'ตำแหน่ง', 'select')->options(Config::get('shop.role'));
+        $form->add('position_id', 'ตำแหน่ง','select')->options(Position::lists('position_name','position_id')->toArray());
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
@@ -67,7 +68,7 @@ class UserController extends Controller
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
-            $user->role = Input::get('role');
+            $user->position_id = Input::get('position_id');
             $user->save();
             $form->message("ok record saved");
             $form->link("user/manage", "back to the form");
@@ -80,11 +81,67 @@ class UserController extends Controller
 
         $edit = DataEdit::source(new User());
         $edit->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $edit->text('name', 'ชื่อ-สกุล')->rule('required');
+        $edit->text('name', 'ชื่อ-สกุล');
         $edit->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $edit->text('tel','เบอร์โทรศัพท์');
         $edit->text('email', 'Email');
-        $edit->add('role', 'ตำแหน่ง', 'select')->options(Config::get('shop.role'));
+        $edit->attributes(array("class" => " "));
+        $edit->link("user/manage", "ย้อนกลับ");
+        return $edit->view('user/edit', compact('edit'));
+    }
+    public function getUserDataGridDoctor(){
+        $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
+        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา','branch_id');
+        $grid->add('name','Name');
+        $grid->add('email','Email');
+        $grid->add('license','เลขใบประกอบวิชาชีพ');
+        $grid->edit('/user/editdoc', 'Edit','show|modify');
+        $grid->orderBy('id','desc');
+        $grid->paginate(10);
+        return $grid;
+    }
+    public function adddoctor (){
+
+        //User Table
+        $grid = $this->getUserDataGridDoctor();
+        //User Create
+        $form = DataForm::create('user');
+        $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
+        $form->text('username', 'Username')->rule('required|unique:users');
+        $form->text('password', 'Password', 'password')->rule('required');
+        $form->text('name', 'ชื่อ-สกุล')->rule('required');
+        $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
+        $form->text('tel','เบอร์โทรศัพท์');
+        $form->text('email', 'Email')->rule('required|email|unique:users');
+        $form->text('license','เลขใบประกอบวิชาชีพ');
+        $form->attributes(array("class" => " "));
+        $form->submit('บันทึก');
+        $form->saved(function () use ($form) {
+            $user = new User();
+            $user->branch_id = Input::get('branch');
+            $user->username = Input::get('username');
+            $user->password = bcrypt(Input::get('password'));
+            $user->name = Input::get('name');
+            $user->sex = Input::get('sex');
+            $user->tel = Input::get('tel');
+            $user->email = Input::get('email');
+            $user->position_id = Input::get('4');
+            $user->save();
+            $form->message("ok record saved");
+            $form->link("user/adddoctor", "back to the form");
+        });
+        return view('user/adddoctor', compact('form','grid'));
+    }
+    public function editdoc(){
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new User());
+        $edit->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
+        $edit->text('name', 'ชื่อ-สกุล');
+        $edit->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
+        $edit->text('tel','เบอร์โทรศัพท์');
+        $edit->text('email', 'Email');
+        $edit->text('license','เลขใบประกอบวิชาชีพ');
         $edit->attributes(array("class" => " "));
         $edit->link("user/manage", "ย้อนกลับ");
         return $edit->view('user/edit', compact('edit'));

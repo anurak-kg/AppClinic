@@ -36,11 +36,4 @@ $factory->define(App\Customer::class, function ($faker) {
         'branch_id' => '1'
     ];
 });
-$factory->define(App\Doctor::class, function ($faker) {
-    return [
-        'dr_name' => $faker->firstName,
-        'dr_lastname' => $faker->lastName,
-        'dr_tel' => $faker->phoneNumber,
-        'dr_sex' => $faker->randomElement($array = array ('M','F')) ,
-    ];
-});
+

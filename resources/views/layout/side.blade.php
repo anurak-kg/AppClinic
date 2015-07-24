@@ -56,7 +56,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-user-md'></i> <span>หมอ</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('dr/index')}}"><i class='fa fa-minus'></i>ข้อมูลหมอ</a></li>
+                    <li><a href="{{url('user/adddoctor')}}"><i class='fa fa-minus'></i>ข้อมูลหมอ</a></li>
                     <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>ตารางการทำงาน</a></li>
                 </ul>
             </li>

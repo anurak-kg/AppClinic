@@ -35,9 +35,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-    public function position(){
-        return $this->belongsTo('App\Position','position_id');
-    }
 
     public function getRole(){
         $position = Position::find($this->getAttribute('position_id'));
@@ -59,5 +56,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
     public function Branch(){
         return $this->belongsTo('\App\Branch', 'branch_id');
+    }
+    public function Position(){
+        return $this->belongsTo('\App\Position', 'position_id');
     }
 }
