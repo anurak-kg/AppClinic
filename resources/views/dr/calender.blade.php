@@ -12,8 +12,8 @@
 
         <!-- Main content -->
           <div class="row">
-            <div class="col-md-4" >
-              <div class="box box-solid box-default">
+            <div class="col-md-2" >
+              <div class="box  box-danger">
 
                 <div class="box-header with-border">
                   <h2 class="box-title">เพิ่มข้อมูล</h2>
@@ -26,8 +26,8 @@
 
               </div>
             </div>
-            <div class="col-md-8">
-              <div class="box box-default">
+            <div class="col-md-10">
+              <div class="box box-success">
                 <div class="box-body no-padding">
                   <!-- THE CALENDAR -->
                   <div id="calendar"></div>
@@ -42,7 +42,7 @@
     <!-- fullCalendar 2.2.5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
     <script src="/dist/js/fullcalendar.min.js" type="text/javascript"></script>
-    <script src='/dist/js/lang-all.js'></script>
+    <script src='/locales/th.js'></script>
 
     <!-- Page specific script -->
     <script type="text/javascript">
@@ -101,6 +101,8 @@
             week: 'สัปดาห์',
             day: 'วัน'
           },
+          axisFormat: 'HH:mm',
+          timeFormat:  'HH:mm',
           events: json_events,
           editable: true,
           droppable: true, // this allows things to be dropped onto the calendar !!!
