@@ -65,6 +65,9 @@
             if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเพิ่มคอร์ส");
             }
+            else if( $scope.boxSearch == false){
+                alert("ยังไม่เลือกลูกค้า");
+            }
             else {
                 window.location.href = '/quotations/save';
             }
