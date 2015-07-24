@@ -15,17 +15,23 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('branch_id');
+            $table->integer('position_id');
             $table->string('username');
             $table->string('name');
-            $table->string('position');
             $table->string('tel');
             $table->string('sex');
             $table->string('email')->unique();
+            $table->string('license');
             $table->string('password', 60);
-            $table->integer('role')->unsigned();
             $table->rememberToken();
             $table->timestamps();
 
+        });
+        Schema::create('position', function (Blueprint $table) {
+            $table->increments('position_id');
+            $table->string('position_name');
+            $table->integer('role')->unsigned();
+            $table->timestamps();
         });
         DB::unprepared("ALTER TABLE users AUTO_INCREMENT = 100000;");
 
@@ -38,5 +44,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::drop('users');
+        Schema::drop('position');
     }
 }

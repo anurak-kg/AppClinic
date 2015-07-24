@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('CourseTableSeeder');
         $this->call('BranchTableSeeder');
         $this->call('CustomerTableSeeder');
-
+        $this->call('PositionTableSeeder');
         Model::reguard();
     }
 }
@@ -42,6 +42,29 @@ class CustomerTableSeeder extends Seeder
         ]);
     }
 }
+class PositionTableSeeder extends Seeder{
+    public function run(){
+        DB::table('position')->delete();
+        \App\Position::create(['position_name'=>'admin',
+        'role'=>99]);
+        \App\Position::create(['position_name'=>'IT',
+            'role'=>80]);
+        \App\Position::create(['position_name'=>'Manager',
+            'role'=>60]);
+        \App\Position::create(['position_name'=>'Doctor',
+            'role'=>40]);
+        \App\Position::create(['position_name'=>'Human resources officer',
+            'role'=>50]);
+        \App\Position::create(['position_name'=>'Reception',
+            'role'=>1]);
+        \App\Position::create(['position_name'=>'Sale',
+            'role'=>1]);
+        \App\Position::create(['position_name'=>'Marketing',
+            'role'=>5]);
+        \App\Position::create(['position_name'=>'Stock',
+            'role'=>6]);
+    }
+}
 class UserTableSeeder extends Seeder
 {
 
@@ -50,15 +73,20 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         User::create(['username' => 'admin',
-            'branch_id'=>'1',
+            'branch_id'=>'1','position_id'=>1,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
-            'role' => 99, 'password' => bcrypt('1234')]);
+            'password' => bcrypt('1234')]);
         User::create(['username' => 'sale',
-            'branch_id'=>'1',
+            'branch_id'=>'1','position_id'=>7,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'sale@fiin.in.th',
-            'role' => 1, 'password' => bcrypt('1234')]);
+            'password' => bcrypt('1234')]);
+        User::create(['username' => 'doctor',
+            'branch_id'=>'1','position_id'=>4,
+            'name' => 'นายชูวิทย์ กมลวิศิษฎ์',
+            'email' => 'doctor@fiin.in.th',
+            'password' => bcrypt('1234')]);
     }
 
 }
