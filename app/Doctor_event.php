@@ -10,6 +10,6 @@ class Doctor_event extends Model
     protected $primaryKey = 'event_id';
 
     public function User(){
-        return $this->belongsTo('/App/User','dr_id');
+        return $this->belongsTo('\App\User','dr_id');
     }
 }
