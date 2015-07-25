@@ -159,10 +159,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/customer_search', 'DataController@getCustomerList');
 
     //Report
-    Route::get('report', 'ReportController@reportDoctorTest');
-
-    Route::post('report/sale', 'ReportController@reportSalesTest');
+    Route::get('report/doctor', 'ReportController@reportDoctorTest');
     Route::get('report/sale', 'ReportController@reportSalesTest');
+    Route::get('report/coursemonth', 'ReportController@reportCourseMonthTest');
+    Route::get('report/coursehot', 'ReportController@reportCourseHotTest');
+
 
 });
 

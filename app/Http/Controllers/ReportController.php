@@ -93,16 +93,16 @@ class ReportController extends Controller
     {
 
         $coursemonth = DB::table('quotations_detail')
-            ->select(' course.course_id', 'course.course_name', DB::raw('SUM(quo_de_price) as Total'))
+            ->select('course.course_id','course.course_name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
             ->groupBy('course.course_name')
             ->get();
 
-        $this->arrayToChartData($coursemonth,'Total');
-        return view('report/coursemonth');
-        // return response()->json($coursemonth);
+       $this->arrayToChartData($coursemonth,'Total');
+         return view('report/coursemonth');
+      //   return response()->json($coursemonth);
     }
 
     //สรุปคอร์สที่ขายดีที่สุด
@@ -129,13 +129,16 @@ class ReportController extends Controller
     {
 
         $coursehot = DB::table('quotations_detail')
-            ->select(' course.course_id', 'course.course_name', DB::raw('SUM(quo_de_price) as Total'))
+            ->select('course.course_id','course.course_name',DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
             ->groupBy('course.course_name')
             ->orderBy('Total', 'desc')
             ->get();
+
+        $this->arrayToChartData($coursehot,'Total');
+        return view('report/coursehot');
         //return response()->json($coursehot);
     }
 
@@ -174,6 +177,9 @@ class ReportController extends Controller
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc')
             ->get();
+
+        $this->arrayToChartData($doctor,'Total');
+        return view('report/doctor');
         // return response()->json($doctor);
 
     }
