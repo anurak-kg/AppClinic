@@ -21,11 +21,11 @@ class OrderController extends Controller
 
     public function index()
     {
-        $order = Order::orderBy()->with('course','Customer','User','Branch')->get();
+        $order = Order::orderBy('order_id')->with('branch','user','vendor','product')->get();
 
-         return response()->json($order);
+        // return response()->json($order);
 
-       // return view("order/index",['order' => $order[0]]);
+       return view("order/index",['order' => $order]);
     }
 
     public function getDataGrid(){

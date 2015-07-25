@@ -23,10 +23,14 @@ class Order extends Model
     {
         return $this->hasMany('\App\Product');
     }
+
     public function Receive()
     {
         return $this->hasMany('\App\Receive');
     }
 
-
+    public function branch()
+    {
+        return $this->belongsTo('\App\Branch', 'branch_id');
+    }
 }

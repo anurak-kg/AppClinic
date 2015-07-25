@@ -3,7 +3,7 @@
 @section('content')
 
 
-        <section class="invoice">
+        <section class="invoice ">
 
             <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
@@ -17,6 +17,11 @@
 
                 <div class="col-sm-4 invoice-col">
                     <address>
+                        <br><br>
+                        <b> สาขา {{ $order->branch->branch_name }}</b>
+                        {{ $order->branch->branch_address }}<br>
+                        โทร : {{ $order->branch->branch_tel }}
+
 
                     </address>
                 </div>
