@@ -302,6 +302,7 @@
         <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
         <!-- SlimScroll 1.3.0 -->
         <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+
          <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
      <script src="../../plugins/morris/morris.min.js" type="text/javascript"></script>
@@ -325,6 +326,24 @@
                              color: "#f56954",
                              highlight: "#f56954",
                              label: "Chrome"
+                           },
+                           {
+                             value: 500,
+                             color: "#00a65a",
+                             highlight: "#00a65a",
+                             label: "IE"
+                           },
+                           {
+                             value: 400,
+                             color: "#f39c12",
+                             highlight: "#f39c12",
+                             label: "FireFox"
+                           },
+                           {
+                             value: 600,
+                             color: "#00c0ef",
+                             highlight: "#00c0ef",
+                             label: "Safari"
                            },
 
                          ];

@@ -118,6 +118,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
     Route::any('customer/edit', 'CustomerController@edit');
+    Route::post('customer/calendar', 'Customer_eventController@create');
+    Route::get('customer/calendar', 'Customer_eventController@create');
+    //Customer calender
+    Route::get('customer_calendar/fetch/', 'Customer_eventController@fetch');
+    Route::get('customer_calendar/update/', 'Customer_eventController@update');
+    Route::get('customer_calendar/delete/', 'Customer_eventController@delete');
 
     //Course_detail
     Route::post('course_detail/index', 'Course_detailController@grid');
