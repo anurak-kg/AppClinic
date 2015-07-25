@@ -84,18 +84,9 @@
 
 
             var areaChartData = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: {!! $name !!},
                 datasets: [
-                    {
-                        label: "Electronics",
-                        fillColor: "rgba(210, 214, 222, 1)",
-                        strokeColor: "rgba(210, 214, 222, 1)",
-                        pointColor: "rgba(210, 214, 222, 1)",
-                        pointStrokeColor: "#c1c7d1",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: []
-                    },
+
                     {
                         label: "Digital Goods",
                         fillColor: "rgba(60,141,188,0.9)",
@@ -104,7 +95,7 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: {!! $total !!}
                     }
                 ]
             };
@@ -116,9 +107,9 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = areaChartData;
-            barChartData.datasets[1].fillColor = "#00a65a";
-            barChartData.datasets[1].strokeColor = "#00a65a";
-            barChartData.datasets[1].pointColor = "#00a65a";
+            barChartData.datasets[0].fillColor = "#00a65a";
+            barChartData.datasets[0].strokeColor = "#00a65a";
+            barChartData.datasets[0].pointColor = "#00a65a";
             var barChartOptions = {
                 //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
                 scaleBeginAtZero: true,

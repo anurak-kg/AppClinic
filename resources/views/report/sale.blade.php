@@ -82,7 +82,7 @@
 
 
             var areaChartData = {
-                labels: {!! $name !!},
+                labels:{!! $name !!},
                 datasets: [
                     {
                         label: "Electronics",
