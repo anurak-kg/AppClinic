@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Order;
+use App\Quotations;
 use App\User;
 use ClassesWithParents\D;
 use Illuminate\Http\Request;
@@ -17,6 +18,15 @@ use Zofe\Rapyd\Facades\DataEdit;
 use Illuminate\Support\Facades\Input;
 class OrderController extends Controller
 {
+
+    public function index()
+    {
+        $order = Quotations::orderBy('quo_id')->with('course','Customer','User','Branch','Treatment')->get();
+
+         return response()->json($order);
+
+       // return view("order/index",['order' => $order[0]]);
+    }
 
     public function getDataGrid(){
         $grid = DataGrid::source(Order::with('user'));
