@@ -24,7 +24,7 @@ class ReportController extends Controller
                 INNER JOIN course ON course.course_id = quotations_detail.course_id
                 INNER JOIN quotations ON quotations.quo_id = quotations_detail.quo_id
                 INNER JOIN users ON quotations.sale_id = users.id
-                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015 AND users.position_id = 1
+                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015 AND users.position_id = 6
                 GROUP BY
                 quotations.sale_id
                 ORDER BY Total DESC
@@ -43,7 +43,7 @@ class ReportController extends Controller
             ->join('users', 'quotations.sale_id', '=', 'users.id')
             ->whereRaw('MONTH(quotations_detail.created_at) = 7')
             ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->where('users.position_id', '=', 1)
+            ->where('users.position_id', '=', 6)
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc')
             ->get();
