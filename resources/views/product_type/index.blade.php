@@ -1,19 +1,18 @@
 @extends('layout.master')
 @section('title','ประเภทสินค้า')
 
-
 @section('content')
 
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-solid box-default table-responsive no-padding">
+            <div class="panel panel-primary table-responsive no-padding">
 
-                <div class="box-header">
+                <div class="panel-heading">
                     <h2 class="box-title">ข้อมูลประเภทสินค้า</h2>
                 </div>
 
-                <div class="box-body ">
+                <div class="panel-body ">
                     {!! $grid !!}
                 </div>
 

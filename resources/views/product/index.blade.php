@@ -7,13 +7,13 @@
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-solid box-default table-responsive no-padding">
+            <div class="panel panel-primary table-responsive no-padding">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลสินค้า</h2>
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title">ข้อมูลสินค้า</h2>
                 </div>
 
-                <div class="box-body ">
+                <div class="panel-body ">
                     {!! $grid !!}
                 </div>
 

@@ -12,7 +12,7 @@
 
     <!-- Main content -->
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="panel panel-success">
 
                 <div class="panel-heading with-border">
@@ -42,7 +42,7 @@
 
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body no-padding">
                     <!-- THE CALENDAR -->

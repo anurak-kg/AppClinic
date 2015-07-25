@@ -14,12 +14,12 @@
                 </div>
             @endif
             <div class="col-md-4">
-                <div class="box  box-success">
-                    <div class="box-header with-border">
-                        <h2 class="box-title">รายละเอียด</h2>
+                <div class="panel  panel-success">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title">รายละเอียด</h2>
                     </div>
 
-                    <div class="box-body">
+                    <div class="panel-body">
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
@@ -29,12 +29,12 @@
             </div>
 
             <div class="col-md-4">
-                <div class="box box-success">
-                    <div class="box-header with-border">
-                        <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                <div class="panel panel-success">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title">ข้อมูลลูกค้า</h2>
                     </div>
 
-                    <div class="box-body">
+                    <div class="panel-body">
                         <div class="customerSearchBox" ng-hide="boxSearch"
                                 >
                             <input class="form-control typeahead input-lg customer-input "
@@ -60,12 +60,12 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box  box-danger">
-                    <div class="box-header with-border">
-                        <h2 class="box-title">พนักงานขาย</h2>
+                <div class="panel  panel-warning">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title">พนักงานขาย</h2>
                     </div>
 
-                    <div class="box-body">
+                    <div class="panel-body">
                         <div class="saleSearchBox" ng-hide="SaleBoxSearch"
                                 >
                             <input class="form-control typeahead input-lg sale-input "
@@ -91,14 +91,14 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="box box-info">
+                <div class="panel panel-info">
 
-                    <div class="box-header with-border">
-                        <h2 class="box-title">คอร์ส</h2>
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title">คอร์ส</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="box-body">
+                            <div class="panel-body">
                                 <div class="div row">
                                     <div class="col-md-5">
                                         <input class="form-control typeahead input-lg courseBtn"
@@ -166,20 +166,25 @@
 
                                     </table>
 
+                                    <div class="col-md-10">
+                                    <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
+                                                class="fa fa-credit-card "> ยืนยัน
+                                            การชำระเงิน </i></a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
+
+
+
                     </div>
 
 
                 </div>
 
-                <div align="right">
 
-                    <a href="#" ng-click="save()" class="btn btn-lg btn-success pull-right"><i
-                                class="fa fa-credit-card "> ยืนยัน
-                            การชำระเงิน </i></a>
-                </div>
                 <!-- /.col -->
 
             </div>
