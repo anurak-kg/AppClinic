@@ -5,7 +5,7 @@
 
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="box box-solid box-default">
                 <div class="box-body">
                     <div class="form-group">
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-9">
 
 
             <!-- BAR CHART -->
@@ -34,7 +34,7 @@
                     <h4 align="middle">คอร์สที่ขายดีที่สุด</h4>
 
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -51,12 +51,11 @@
     </div>
     </div> <!-- /.row -->
 
-    <!-- daterange picker -->
-    <link href="/dist/js/daterangepicker.css" rel="stylesheet" type="text/css"/>
 
-    <!-- date-range-picker -->
-    <script src="/dist/js/moment.min.js" type="text/javascript"></script>
-    <script src="/dist/js/daterangepicker.js" type="text/javascript"></script>
+    <!-- date-picker -->
+    <script src="/dist/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="/dist/css/bootstrap-datepicker.css" type="text/javascript"></script>
+    <script src='/locales/bootstrap-datepicker.th.min.js'></script>
 
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
@@ -65,23 +64,18 @@
     <script>
         $(function () {
 
-            //Date range picker
-
-            $('#reservation').daterangepicker({
-                "timePickerIncrement": 1,
-                "autoApply": true,
-                "startDate": "07/01/2015",
-                "endDate": "07/15/2015",
-                "opens": "left",
-                "drops": "down",
-                "buttonClasses": "btn btn-sm",
-                "applyClass": "btn-success",
-                "cancelClass": "btn-default"
-            }, function(start, end, label) {
-                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-            });
-
-
+                    $('#reservation').datepicker({
+                        todayBtn: "linked",
+                        language: "th",
+                        autoclose: true,
+                        todayHighlight: true,
+                        beforeShowMonth: function (date){
+                            switch (date.getMonth()){
+                                case 8:
+                                    return false;
+                            }
+                        }
+                    });
 
             var areaChartData = {
                 labels: {!! $name !!},
@@ -99,7 +93,6 @@
                     }
                 ]
             };
-
 
             //-------------
             //- BAR CHART -

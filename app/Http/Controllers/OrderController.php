@@ -21,7 +21,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $order = Quotations::orderBy('quo_id')->with('course','Customer','User','Branch','Treatment')->get();
+        $order = Order::orderBy()->with('course','Customer','User','Branch')->get();
 
          return response()->json($order);
 
