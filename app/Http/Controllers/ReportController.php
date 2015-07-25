@@ -140,7 +140,7 @@ class ReportController extends Controller
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
            // ->whereRaw('MONTH(quotations_detail.created_at) = 7')
            // ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->whereBetween('quotations_detail.created_at', ['2015-07-11 00:00:00','2015-08-11 00:00:00'])
+            ->whereBetween('quotations_detail.created_at', ['startDate','endDate'])
             ->groupBy('coursename')
             ->orderBy('Total', 'desc')
             ->get();
