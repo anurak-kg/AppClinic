@@ -1,18 +1,25 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable']);
-    app.controller('quotationsController', function ($scope, $http, ngTableParams, $modal) {
+    var app = angular.module('application', ['ngTable','ui.bootstrap']);
+    app.controller('quotationsController', function ($scope, $http, ngTableParams,$modal) {
         $scope.product = [];
         $scope.customer = [];
         $scope.sale = [];
-
+        $scope.quo_id = null;
+        $scope.cashInput= 0;
+        $scope.CashTotal =0;
         $scope.dataLoading = false;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
-
+        $scope.Vat = 7;
+        //$scope.modalInstance = null;
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
+        $scope.init = function(vat,quo_id) {
+            $scope.quo_id = quo_id;
+            $scope.Vat= vat;
+        }
         $scope.getTotal = function () {
             var total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
@@ -37,9 +44,7 @@
                     $scope.customer.fullname = data.full_name;
                     $scope.customer.tel = data.tel;
                     $scope.customer.cus_id = data.cus_id;
-
                     $scope.boxSearch = true;
-
                     console.log('update customer success');
                 }
             }).
@@ -101,17 +106,14 @@
             if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเพิ่มคอร์ส");
             }
-
             else if ($scope.boxSearch == false) {
                 alert("ยังไม่เลือกลูกค้า");
             }
-
             else if ($scope.SaleBoxSearch == false) {
                 alert("ยังไม่เลือกพนักงานขาย");
             }
-
             else {
-                window.location.href = '/quotations/save';
+                $scope.open();
             }
         }
         $scope.pushProduct = function (product) {
@@ -135,7 +137,9 @@
                     $scope.dataLoading = false;
                 });
         }
-
+        $scope.cashAdd =function(cash){
+            $scope.cashInput += cash ;
+        }
         $scope.update = function (item) {
             $scope.dataLoading = true;
             console.log(item);
@@ -150,9 +154,12 @@
                     $scope.dataLoading = false;
                 });
         }
-        $scope.getVat = function (vat) {
-            return $scope.getTotal() * vat / 100;
+        $scope.getVat = function () {
+            //console.log($scope.Vat );
+            return $scope.getTotal() * $scope.Vat / 100;
+
         }
+
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
@@ -169,6 +176,36 @@
                 });
             $scope.tableParams.reload();
 
+        }
+        $scope.open = function () {
+
+            $scope.modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'payment.html',
+                controller: 'quotationsController',
+                scope:$scope
+
+            });
+
+            $scope.modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+            });
+        };
+
+        $scope.cancel = function () {
+            $scope.modalInstance.dismiss();
+        };
+
+        $scope.payment = function(){
+            window.location.href = '/quotations/save';
+        }
+        $scope.paymentAndPrint = function(id){
+            window.open(
+                '/bill/bill?quo_id='+id,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+            window.location.href = '/quotations/save';
         }
         $scope.pushDuplicateCheck = function () {
             var arr = $scope.product;
@@ -208,6 +245,7 @@
                     $scope.dataLoading = false;
                 });
         }
+
         $scope.getTreatStatus = function (status) {
             var text;
             if (status == 0) {

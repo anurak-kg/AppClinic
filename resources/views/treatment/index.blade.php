@@ -16,29 +16,7 @@
                     </div>
                 </div>
             @endif
-                    <script type="text/ng-template" id="myModalContent.html">
-                        <div class="modal-header">
-                            <h3 class="modal-title">I'm a modal!</h3>
-                        </div>
-                        <div class="modal-body">
-                            <ul>
-                                <li ng-repeat="item in items">
-                                    <a ng-click="selected.item = item">@{{ item }}</a>
-                                </li>
-                            </ul>
-                            Selected: <b>@{{ selected.item }}</b>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" ng-click="ok()">OK</button>
-                            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                        </div>
-                    </script>
 
-                    <button class="btn btn-default" ng-click="open()">Open me!</button>
-                    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-                    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
-                    <button class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation (@{{ animationsEnabled }})</button>
-                    <div ng-show="selected">Selection from a modal: @{{ selected }}</div>
             <div class="col-md-12">
                 <div class="panel panel-success ">
                     <div class="panel-heading with-border">
@@ -100,8 +78,8 @@
                     </div>
 
                     <div class="panel-body">
-                           <div ng-repeat="order in course">
-                           รหัสการซื้อ @{{order.quo_id}} ราคา @{{order.price}} ชำระแล้ว ....  บาท   สถาน ....
+                        <div ng-repeat="order in course">
+                            รหัสการซื้อ @{{order.quo_id}} ราคา @{{order.price}} ชำระแล้ว .... บาท สถาน ....
                             <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                 <tr data-ng-repeat=" item in order.course">
 
@@ -110,7 +88,8 @@
                                     </td>
 
                                     <td data-title="'คอร์ส'">
-                                        <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>  - @{{item.course_detail}}
+                                        <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
+                                        - @{{item.course_detail}}
                                     </td>
 
                                     <td data-title="'จำนวน'">
@@ -121,12 +100,14 @@
                                         @{{item.pivot.qty}}
                                     </td>
 
-                                    <td data-title="'สถานะ'" >
+                                    <td data-title="'สถานะ'">
                                         <div ng-bind-html="getTreatStatus(item.pivot.treat_status)"></div>
 
                                     </td>
                                     <td data-title="'Action'">
-                                        <a class="btn btn-success" ng-href="{{url('treatment/add')}}?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}" target="_blank">เข้ารับการรักษา</a>
+                                        <a class="btn btn-success"
+                                           ng-href="{{url('treatment/add')}}?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}"
+                                           target="_blank">เข้ารับการรักษา</a>
                                     </td>
                                 </tr>
 
