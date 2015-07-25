@@ -19,14 +19,14 @@ use Illuminate\Support\Facades\Input;
 class OrderController extends Controller
 {
 
-  /*  public function index()
+    public function index()
     {
-        $order = Order::find(0)->with('branch','user','vendor','product')->get();
+        $order = Order::find(1)->with('branch','user','vendor','product')->get();
 
         // return response()->json($order);
 
        return view("order/index",['order' => $order]);
-    }*/
+    }
 
     public function getDataGrid(){
         $grid = DataGrid::source(Order::with('user'));

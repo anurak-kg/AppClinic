@@ -23,8 +23,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::any('user/editdoc', 'UserController@editdoc');
     //Course
-    Route::post('course/index', 'CourseController@grid');
-    Route::get('course/index', 'CourseController@grid');
+    Route::post('course/index', 'CourseController@create');
+    Route::get('course/index', 'CourseController@create');
     Route::post('course/create', 'CourseController@create');
     Route::get('course/create', 'CourseController@create');
     Route::any('course/edit', 'CourseController@edit');
@@ -142,16 +142,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Branch
-    Route::post('branch/index', 'BranchController@grid');
-    Route::get('branch/index', 'BranchController@grid');
+    Route::post('branch/index', 'BranchController@create');
+    Route::get('branch/index', 'BranchController@create');
     Route::post('branch/create', 'BranchController@create');
     Route::get('branch/create', 'BranchController@create');
     Route::any('branch/edit', 'BranchController@edit');
 
 
     //Vendor
-    Route::post('vendor/index', 'VendorController@grid');
-    Route::get('vendor/index', 'VendorController@grid');
+    Route::post('vendor/index', 'VendorController@create');
+    Route::get('vendor/index', 'VendorController@create');
     Route::post('vendor/create', 'VendorController@create');
     Route::get('vendor/create', 'VendorController@create');
     Route::any('vendor/edit', 'VendorController@edit');

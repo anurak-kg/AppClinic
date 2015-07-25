@@ -53,7 +53,7 @@ class VendorController extends Controller
 
     public function create()
     {
-
+        $grid = $this->getDataGrid();
         $form = DataEdit::source(new Vendor());
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required|unique:vendor,ven_id')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
         $form->text('ven_name', 'ชื่อร้านค้า')->rule('required|unique:vendor,ven_name')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
@@ -69,7 +69,7 @@ class VendorController extends Controller
             $form->link("vendor/index", "ย้อนกลับ");
 
         });
-        return view('vendor/create', compact('form'));
+        return view('vendor/index', compact('form','grid'));
     }
 
     public function edit() {

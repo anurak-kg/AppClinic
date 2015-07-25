@@ -43,6 +43,8 @@ class CourseController extends Controller
 
     public function create()
     {
+        $grid = $this->getDataGrid();
+
         $form = DataEdit::source(new Course());
         $form->text('course_id', 'รหัส')->rule('required|unique:course,course_id')->attributes(array('placeholder'=>'โปรดระบุรหัสคอร์ส....'));;
         $form->text('course_name', 'ชื่อคอร์ส')->rule('required|unique:course,course_name')->attributes(array('placeholder'=>'โปรดระบุชื่อคอร์ส....'));;
@@ -53,7 +55,7 @@ class CourseController extends Controller
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("course/index", "ย้อนกลับ");
         });
-        return view('course/create', compact('form'));
+        return view('course/index', compact('form','grid'));
     }
 
 

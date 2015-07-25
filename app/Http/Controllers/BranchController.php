@@ -49,7 +49,7 @@ class BranchController extends Controller
 
     public function create()
     {
-
+        $grid = $this->getDataGrid();
         $form = DataEdit::source(new Branch());
         $form->text('branch_name', 'ชื่อสาขา')->rule('required|unique:branch,branch_name')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
         $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
@@ -63,7 +63,7 @@ class BranchController extends Controller
             $form->link("branch/index", "ย้อนกลับ");
         });
 
-        return view('branch/create', compact('form'));
+        return view('branch/index', compact('form','grid'));
     }
 
     public function edit() {

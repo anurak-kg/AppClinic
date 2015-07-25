@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','การสั่งซื้อสินค้า')
+@section('title','ใบสั่งซื้อสินค้า')
 @section('content')
 
     <section class="invoice">
