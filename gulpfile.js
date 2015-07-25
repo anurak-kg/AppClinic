@@ -13,4 +13,14 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less('app.less');
+    mix.scripts(
+        [
+            'angular.min.js',
+            'angular-route.min.js',
+            'ng-table.js',
+            'jQuery-2.1.4.min.js',
+            'bootstrap.min.js'
+        ],
+        'public/js/app.js'
+    );
 });
