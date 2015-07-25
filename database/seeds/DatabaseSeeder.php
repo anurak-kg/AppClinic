@@ -55,6 +55,8 @@ class PositionTableSeeder extends Seeder{
             'role'=>40]);
         \App\Position::create(['position_id'=>5,'position_name'=>'Human resources officer',
             'role'=>50]);
+        \App\Position::create(['position_id'=>6,'position_name'=>'Sale',
+            'role'=>1]);
         \App\Position::create(['position_id'=>99,'position_name'=>'admin',
             'role'=>99]);
         \App\Position::create(['position_name'=>'Reception',
