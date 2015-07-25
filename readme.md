@@ -12,6 +12,7 @@
 - ใบสั่งซื้อ
 - ซือสินค้า POS
 - เลือกสาขา
+- เพิ่ม sale ในการขาย
 - Refactor code
 - minify Code
 - Test Code
