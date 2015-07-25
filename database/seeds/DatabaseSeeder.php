@@ -166,7 +166,7 @@ class CourseTableSeeder extends Seeder
         DB::table('course_medicine')->delete();
 
         Course::create(
-            ['course_id' => 'a001',
+            ['course_id' => 'A001',
                 'course_name' => 'Advence Growth Factors รายครั้ง',
                 'course_detail'=>'บริการหน้าขาว ใส ไร้สิว',
                 'course_price' => '10000.00',
@@ -186,7 +186,7 @@ class CourseTableSeeder extends Seeder
                 'course_qty'=>'1']);
         Medicine::create(
             ['course_id' => 'A002',
-                'product_id' => 'ab02',
+                'product_id' => 'ad02',
                 'qty' => '5'
             ]);
 
@@ -199,7 +199,7 @@ class CourseTableSeeder extends Seeder
 
         Medicine::create(
             ['course_id' => 'A003',
-                'product_id' => 'ab02',
+                'product_id' => 'ad02',
                 'qty' => '3'
             ]);
     }
