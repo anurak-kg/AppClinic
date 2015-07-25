@@ -4,22 +4,27 @@
 
 
     <div class="row">
+
         <div class="col-md-3">
             <div class="box box-solid box-default">
                 <div class="box-body">
                     <div class="form-group">
+
                         <div class="input-group">
-                            <button class="btn btn-default pull-right" id="daterange">
-                                <i class="fa fa-calendar"></i> &nbsp; กำหนดระยะเวลา &nbsp;
+                            <button class="btn btn-default pull-right" id="daterange-btn">
+                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
                                 <i class="fa fa-caret-down"></i>
                             </button>
                         </div>
                     </div>
                     <!-- /.form group -->
+
                 </div>
             </div>
         </div>
+
         <div class="col-md-9">
+
             <!-- BAR CHART -->
             <div class="box box-solid box-default">
                 <div class="box-header with-border">
@@ -37,24 +42,30 @@
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
+
         </div>
         <!-- /.col (RIGHT) -->
     </div>
     </div> <!-- /.row -->
+
+
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+
     <!-- daterange picker -->
     <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
+
     <!-- page script -->
     <script>
-        var startDate;
-        var endDate;
         $(function () {
+                    var startDate;
+                    var endDate;
                     //Date range as a button
-                    $('#daterange').daterangepicker(
+                    $('#daterange-btn').daterangepicker(
                             {
                                 ranges: {
                                     'Today': [moment(), moment()],
@@ -68,11 +79,33 @@
                                 endDate: moment()
                             },
                             function (start, end) {
-                                $('#daterange').html (start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                                 startDate = start;
                                 endDate = end;
                             }
                     );
+
+
+                    $('#IDOfDateRangePicker').data('daterangepicker').startDate;
+                    $('#IDOfDateRangePicker').data('daterangepicker').endDate;
+
+
+                    var areaChartData = {
+                labels: {!! $name !!},
+                datasets: [
+
+                    {
+                        label: "Digital Goods",
+                        fillColor: "rgba(60,141,188,0.9)",
+                        strokeColor: "rgba(60,141,188,0.8)",
+                        pointColor: "#3b8bba",
+                        pointStrokeColor: "rgba(60,141,188,1)",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(60,141,188,1)",
+                        data: {!! $total !!}
+                    }
+                ]
+            };
             //-------------
             //- BAR CHART -
             //-------------
