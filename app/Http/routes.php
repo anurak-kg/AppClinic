@@ -100,10 +100,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/add', 'QuotationsController@add');
     Route::get('quotations/delete', 'QuotationsController@delete');
     Route::get('quotations/data', 'QuotationsController@getData');
-    Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
-    Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
-    Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
+        //---customer script
+        Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
+        Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
+        Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
+        //---sale script
+        Route::get('quotations/data_sale', 'QuotationsController@getDataSale');
+        Route::get('quotations/set_sale', 'QuotationsController@setSale');
+        Route::get('quotations/remove_sale', 'QuotationsController@removeSale');
     Route::get('quotations/save', 'QuotationsController@save');
+
     //Customer
     Route::post('customer/index', 'CustomerController@grid');
     Route::get('customer/index', 'CustomerController@grid');
@@ -157,6 +163,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
+    Route::get('data/user_search', 'DataController@getUserList');
 
     //Report
     Route::get('report/doctor', 'ReportController@reportDoctorTest');

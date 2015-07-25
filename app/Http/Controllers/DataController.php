@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Customer;
 use App\Http\Requests;
+use App\User;
 
 class DataController extends Controller
 {
@@ -21,6 +22,15 @@ class DataController extends Controller
         return response()->json($customer);
     }
 
+    public function getUserList()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $customer = User::select(['id','name'])
+            ->where('id', 'LIKE', $query)
+            ->orWhere('name', 'LIKE', $query)
+            ->get();
+        return response()->json($customer);
+    }
     public function getCourseList()
     {
         $query = '%' . \Input::get('q') . '%';

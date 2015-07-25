@@ -13,6 +13,7 @@ use App\Course;
 use App\Customer;
 use App\Quotations;
 use App\Quotations_detail;
+use App\User;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\Input;
@@ -145,7 +146,6 @@ class QuotationsController extends Controller
             $data['full_name'] = $customer->cus_name . ' ' . $customer->cus_lastname;
             $data['tel'] = $customer->cus_tel;
         }
-
         return response()->json($data);
     }
 
@@ -168,6 +168,41 @@ class QuotationsController extends Controller
         return redirect('quotations');
     }
 
+    public function getDataSale()
+    {
+        //echo $this->getQuoId();
+        $quo = Quotations::find($this->getQuoId());
+        // dd($quo);
+        $data = null;
+        if ($quo->sale_id == 0) {
+            $data['status'] = null;
+        } else {
+            $data['status'] = 'success';
+            $user = User::find($quo->sale_id);
+            $data['name'] = $user->name;
+            $data['id'] = $user->id;
+        }
+        return response()->json($data);
+    }
+
+    public function setSale()
+    {
+        $sale_id = \Input::get('id');
+        $quo = Quotations::findOrFail($this->getQuoId());
+        $quo->sale_id = $sale_id;
+        $quo->save();
+        //dd($quo);
+        return response()->json(['status' => 'success']);
+
+    }
+
+    public function removeSale()
+    {
+        $quo = Quotations::findOrFail($this->getQuoId());
+        $quo->sale_id = 0;
+        $quo->save();
+        return redirect('quotations');
+    }
     private function getQuoId()
     {
         $quo = \App\Quotations::where('quo_status', -1)
