@@ -138,8 +138,9 @@ class ReportController extends Controller
         $coursehot = DB::table('quotations_detail')
             ->select('course.course_id',DB::raw('course.course_name as coursename'),DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
-            ->whereRaw('MONTH(quotations_detail.created_at) = 7')
-            ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
+           // ->whereRaw('MONTH(quotations_detail.created_at) = 7')
+           // ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
+            ->whereBetween('quotations_detail.created_at', ['2015-07-11 00:00:00','2015-08-11 00:00:00'])
             ->groupBy('coursename')
             ->orderBy('Total', 'desc')
             ->get();

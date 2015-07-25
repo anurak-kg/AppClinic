@@ -5,15 +5,14 @@
 
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="box box-solid box-default">
                 <div class="box-body">
                     <div class="form-group">
-                        <label>เลือกเดือน :</label>
 
                         <div class="input-group">
                             <button class="btn btn-default pull-right" id="daterange-btn">
-                                <i class="fa fa-calendar"></i> Date range picker
+                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
                                 <i class="fa fa-caret-down"></i>
                             </button>
                         </div>
@@ -25,7 +24,6 @@
         </div>
 
         <div class="col-md-9">
-
 
             <!-- BAR CHART -->
             <div class="box box-solid box-default">
@@ -58,8 +56,6 @@
     <!-- daterange picker -->
     <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 
-
-
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
@@ -82,7 +78,7 @@
                                 endDate: moment()
                             },
                             function (start, end) {
-                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                             }
                     );
 
