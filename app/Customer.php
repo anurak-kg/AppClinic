@@ -23,6 +23,11 @@ class Customer extends Model
     public function Branch(){
         return $this->belongsTo('\App\Branch','branch_id');
     }
+    public function customer(){
+
+        return $this->belongsToMany('App\Course','quotations_detail','quo_id','course_id')
+            ->withPivot('qty','treat_status','created_at','updated_at');
+    }
 
 }
 

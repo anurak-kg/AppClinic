@@ -87,7 +87,7 @@ class TreatmentController extends Controller
             ->where('quo_id', '=', $quo_id)
             ->where('course_id', '=', $course_id)
             ->get();
-        $dr = Doctor::all();
+        $dr = User::where('position_id', '=', 4)->get();
         $user = User::all();
         // return response()->json($quo);
         return view('treatment.add',
