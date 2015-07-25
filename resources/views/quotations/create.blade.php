@@ -44,6 +44,7 @@
 
                         <div class="customer" ng-show="boxSearch">
                             <ul>
+                                <li>รหัสลูกค้า  | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
                                 <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.fullname}}</strong></span>
                                 </li>
                                 <li>ชื่อเบอร์โทร | <span
@@ -76,7 +77,7 @@
                             <ul>
                                 <li>รหัสพนักงาน  | <span class="sale"><strong>@{{sale.id}}</strong></span>.</li>
                                 <li>ชื่อลูกค้า | <span class="sale"><strong>@{{sale.name}}</strong></span>.
-                                <span><strong><a href="{{url('quotations/remove_sale')}}">
+                                <span><br><strong><a href="{{url('quotations/remove_sale')}}">
                                             เปลียนพนักงานขาย</a></strong></span>
                                 </li>
                                </ul>
@@ -298,6 +299,7 @@
                         {
                             id: datum.course_id,
                             course: {
+
                                 course_name: datum.course_name,
                                 course_price: datum.course_price,
                                 detail: datum.detail
