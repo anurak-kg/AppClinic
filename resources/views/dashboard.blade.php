@@ -67,10 +67,6 @@
 
 
 
-         <!-- fullCalendar 2.2.5-->
-         <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
-         <link href="../plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media="print" />
-
 
              <!-- Main content -->
                <div class="row">
@@ -82,7 +78,6 @@
                                        <h3 class="box-title">ตารางการทำงานหมอ</h3>
                                        <div class="box-tools pull-right">
                                              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-
                                            </div><!-- /.box-tools -->
                                    </div>
                      <div class="box-body no-padding">
@@ -145,141 +140,168 @@
 
                </div><!-- /.row -->
 
-         <!-- jQuery 2.1.4 -->
-         <script src="../plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
-         <!-- Bootstrap 3.3.2 JS -->
-         <script src="../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-         <!-- jQuery UI 1.11.4 -->
-         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- fullCalendar 2.2.5-->
+    <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media="print"/>
 
-         <!-- FastClick -->
-         <script src="../plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+    <!-- fullCalendar 2.2.5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="/dist/js/fullcalendar.min.js" type="text/javascript"></script>
+    <script src='/dist/calendar-lang/th.js'></script>
 
-         <!-- AdminLTE for demo purposes -->
-         <script src="../dist/js/demo.js" type="text/javascript"></script>
-         <!-- fullCalendar 2.2.5 -->
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
-         <script src="../plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
-         <!-- Page specific script -->
-         <script type="text/javascript">
-           $(function () {
+        {{--calendar--}}
+    <script type="text/javascript">
+        $(function () {
+            var currentMousePos = {
+                x: -1,
+                y: -1
+            };
+            jQuery(document).on("mousemove", function (event) {
+                currentMousePos.x = event.pageX;
+                currentMousePos.y = event.pageY;
+            });
 
-             /* initialize the external events
-              -----------------------------------------------------------------*/
-             function ini_events(ele) {
-               ele.each(function () {
 
-                 // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-                 // it doesn't need to have a start or end
-                 var eventObject = {
-                   title: $.trim($(this).text()) // use the element's text as the event title
-                 };
+            var json_events;
 
-                 // store the Event Object in the DOM element so we can get to it later
-                 $(this).data('eventObject', eventObject);
+            $.ajax({
+                url: '{{url('doctor_calender/fetch/')}}',
+                type: 'GET',
+                async: false,
+                success: function (response) {
+                    json_events = response;
 
-                 // make the event draggable using jQuery UI
-                 $(this).draggable({
-                   zIndex: 1070,
-                   revert: true, // will cause the event to go back to its
-                   revertDuration: 0  //  original position after the drag
-                 });
+                }
+            });
+            function freshData() {
+                data = null;
+                $.ajax({
+                    url: '{{url('doctor_calender/fetch/')}}',
+                    type: 'GET',
+                    async: false,
+                    success: function (response) {
+                        data = response;
 
-               });
-             }
-             ini_events($('#external-events div.external-event'));
+                    }
+                });
+                return data;
+            }
 
-             /* initialize the calendar
-              -----------------------------------------------------------------*/
-             //Date for the calendar events (dummy data)
-             var date = new Date();
-             var d = date.getDate(),
-                     m = date.getMonth(),
-                     y = date.getFullYear();
-             $('#calendar').fullCalendar({
-               header: {
-                 left: 'prev,next today',
-                 center: 'title',
-                 right: 'month,agendaWeek,agendaDay'
-               },
-               buttonText: {
-                 today: 'วันนี้',
-                 month: 'เดือน',
-                 week: 'สัปดาห์',
-                 day: 'วัน'
-               },
-               //Random default events
+            var date = new Date();
+            var d = date.getDate(),
+                    m = date.getMonth(),
+                    y = date.getFullYear();
 
-               editable: true,
-               droppable: true, // this allows things to be dropped onto the calendar !!!
-               drop: function (date, allDay) { // this function is called when something is dropped
+            $('#calendar').fullCalendar({
+                lang: 'th',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'วันนี้',
+                    month: 'เดือน',
+                    week: 'สัปดาห์',
+                    day: 'วัน'
+                },
+                axisFormat: 'HH:mm',
+                timeFormat: 'HH:mm',
+                events: json_events,
+                slotDuration: '00:30:00',
 
-                 // retrieve the dropped element's stored Event Object
-                 var originalEventObject = $(this).data('eventObject');
+                editable: true,
+                droppable: true,
+                eventDragStop: function (event, jsEvent, ui, view) {
+                    if (isElemOverDiv()) {
+                        var con = confirm('คุณแน่ใจว่าต้องการลบเหตุการณ์นี้');
+                        if (con == true) {
+                            $.ajax({
+                                url: '{{url('doctor_calender/delete/')}}',
+                                type: 'GET',
+                                data: '&id=' + event.id,
+                                dataType: 'json',
+                                success: function (response) {
+                                    if (response.status == 'success')
+                                        $('#calendar').fullCalendar('removeEvents');
+                                    $('#calendar').fullCalendar('addEventSource', freshData);
+                                    window.location = "{{url('dr/calender')}}";
+                                },
+                                error: function (e) {
+                                    alert('Error processing your request: ' + e.responseText);
+                                }
+                            });
+                        }
+                    }
+                },
+                eventResize: function (event, delta, revertFunc) {
+                    console.log(event);
+                    var title = event.title;
+                    var end = event.end.format();
+                    var start = event.start.format();
+                    $.ajax({
+                        url: '{{url('doctor_calender/update/')}}',
+                        type: 'GET',
+                        data: 'title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status != 'success')
+                                revertFunc();
+                        },
+                        error: function (e) {
+                            revertFunc();
+                            alert('Error processing your request: ' + e.responseText);
+                        }
+                    });
+                },
+                eventDrop: function (event, delta, revertFunc) {
+                    console.log('dasd');
+                    var title = event.title;
+                    var start = event.start.format();
+                    var end = (event.end == null) ? start : event.end.format();
+                    $.ajax({
+                        url: '{{url('doctor_calender/update/')}}',
+                        type: 'GET',
+                        data: 'title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status != 'success')
+                                revertFunc();
+                        },
+                        error: function (e) {
+                            revertFunc();
+                            alert('Error processing your request: ' + e.responseText);
+                        }
+                    });
+                }
 
-                 // we need to copy it, so that multiple events don't have a reference to the same object
-                 var copiedEventObject = $.extend({}, originalEventObject);
+            });
+            function isElemOverDiv() {
+                var trashEl = jQuery('#trash');
+                var ofs = trashEl.offset();
+                var x1 = ofs.left;
+                var x2 = ofs.left + trashEl.outerWidth(true);
+                var y1 = ofs.top;
+                var y2 = ofs.top + trashEl.outerHeight(true);
+                if (currentMousePos.x >= x1 && currentMousePos.x <= x2 && currentMousePos.y >= y1 && currentMousePos.y <= y2) {
+                    return true;
+                }
+                return false;
+            }
 
-                 // assign it the date that was reported
-                 copiedEventObject.start = date;
-                 copiedEventObject.allDay = allDay;
-                 copiedEventObject.backgroundColor = $(this).css("background-color");
-                 copiedEventObject.borderColor = $(this).css("border-color");
+        });
 
-                 // render the event on the calendar
-                 // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                 $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+    </script>
 
-                 // is the "remove after drop" checkbox checked?
-                 if ($('#drop-remove').is(':checked')) {
-                   // if so, remove the element from the "Draggable Events" list
-                   $(this).remove();
-                 }
 
-               }
-             });
-
-             /* ADDING EVENTS */
-             var currColor = "#3c8dbc"; //Red by default
-             //Color chooser button
-             var colorChooser = $("#color-chooser-btn");
-             $("#color-chooser > li > a").click(function (e) {
-               e.preventDefault();
-               //Save color
-               currColor = $(this).css("color");
-               //Add color effect to button
-               $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
-             });
-             $("#add-new-event").click(function (e) {
-               e.preventDefault();
-               //Get value and make sure it is not null
-               var val = $("#new-event").val();
-               if (val.length == 0) {
-                 return;
-               }
-
-               //Create events
-               var event = $("<div />");
-               event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
-               event.html(val);
-               $('#external-events').prepend(event);
-
-               //Add draggable funtionality
-               ini_events(event);
-
-               //Remove event from text input
-               $("#new-event").val("");
-             });
-           });
-         </script>
          <!-- ChartJS 1.0.1 -->
             <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
-     <!-- jvectormap -->
+
+        <!-- jvectormap -->
         <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
         <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
         <!-- SlimScroll 1.3.0 -->
         <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-
          <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
      <script src="../../plugins/morris/morris.min.js" type="text/javascript"></script>
@@ -303,24 +325,6 @@
                              color: "#f56954",
                              highlight: "#f56954",
                              label: "Chrome"
-                           },
-                           {
-                             value: 500,
-                             color: "#00a65a",
-                             highlight: "#00a65a",
-                             label: "IE"
-                           },
-                           {
-                             value: 400,
-                             color: "#f39c12",
-                             highlight: "#f39c12",
-                             label: "FireFox"
-                           },
-                           {
-                             value: 600,
-                             color: "#00c0ef",
-                             highlight: "#00c0ef",
-                             label: "Safari"
                            },
 
                          ];
