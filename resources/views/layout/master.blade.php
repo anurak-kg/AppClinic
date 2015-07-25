@@ -5,19 +5,13 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-
-    <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <script src="/dist/js/angular.min.js"></script>
-    <script src="/dist/js/angular-route.min.js"></script>
-    <script src="/dist/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="/js/app.js"></script>
     <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
-    <script src="/dist/js/ng-table.js"></script>
     <script src="/dist/js/typeahead.bundle.min.js"></script>
     <script src="/dist/js/ap-app.js"></script>
     <script src="/dist/js/select2.min.js"></script>
     <script src="/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="/locales/bootstrap-datepicker.th.min.js"></script>
-
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
@@ -104,7 +98,6 @@
 </div>
 
 
-<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/dist/js/app.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="http://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>

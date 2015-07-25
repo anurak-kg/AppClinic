@@ -1,7 +1,7 @@
 (function () {
     'use strict'
     var app = angular.module('application', ['ngTable']);
-    app.controller('quotationsController', function ($scope, $http, ngTableParams) {
+    app.controller('quotationsController', function ($scope, $http, ngTableParams, $modal) {
         $scope.product = [];
         $scope.customer = [];
         $scope.sale = [];
