@@ -4,9 +4,12 @@
     app.controller('quotationsController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
+        $scope.sale = [];
 
         $scope.dataLoading = false;
         $scope.boxSearch = false;
+        $scope.SaleBoxSearch = false;
+
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
@@ -59,7 +62,37 @@
             $scope.$apply(function () {
                 $scope.boxSearch = true;
             });
+        }
 
+        $http.get('/quotations/data_sale').
+            success(function (data, status, headers, config) {
+                if (data.status == 'success') {
+                    $scope.sale.id = data.id;
+                    $scope.sale.name = data.name;
+                    $scope.SaleBoxSearch = true;
+                    console.log('update sale success');
+                }
+            }).
+            error(function (data, status, headers, config) {
+
+            });
+
+        $scope.saleSelect = function (sale) {
+            $scope.sale.id = sale.id;
+            $scope.sale.name = sale.name;
+            $scope.dataLoading = true;
+            $http.get('/quotations/set_sale?id=' + sale.id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    console.log('error' + headers)
+
+                });
+            $scope.$apply(function () {
+                $scope.SaleBoxSearch = true;
+            });
         }
         $scope.save = function () {
             if ($scope.product.length == 0) {
