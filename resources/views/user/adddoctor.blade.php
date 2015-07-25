@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-md-4">
             <!-- general form elements -->
-            <div class="box box-solid box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">เพิ่มข้อมูล</h3>
+            <div class="panel panel-primary">
+                <div class="panel-heading with-border">
+                    <h3 class="panel-title">เพิ่มข้อมูล</h3>
                 </div>
-                <div class="box-body">
+                <div class="panel-body">
                     {!! $form !!}
                 </div>
 
@@ -18,12 +18,12 @@
 
         </div>
         <div class="col-md-8">
-            <div class="box box-solid box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">ข้อมูลหมอ</h3>
+            <div class="panel panel-primary">
+                <div class="panel-heading with-border">
+                    <h3 class="panel-title">ข้อมูลหมอ</h3>
                 </div>
 
-                <div class="box-body">
+                <div class="panel-body">
                     {!! $grid !!}
                 </div>
             </div>

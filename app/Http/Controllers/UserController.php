@@ -37,7 +37,7 @@ class UserController extends Controller
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('{{ $position->position_name }}', 'ตำแหน่ง','position_id');
-        $grid->edit('/user/edit', 'Edit','show|modify');
+        $grid->edit('/user/edit', 'กระทำ','show|modify');
         $grid->orderBy('id','desc');
         $grid->paginate(10);
         return $grid;
@@ -95,7 +95,7 @@ class UserController extends Controller
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('license','เลขใบประกอบวิชาชีพ');
-        $grid->edit('/user/editdoc', 'Edit','show|modify');
+        $grid->edit('/user/editdoc', 'กระทำ','show|modify');
         $grid->orderBy('id','desc');
         $grid->paginate(10);
         return $grid;
