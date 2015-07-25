@@ -46,7 +46,7 @@
             <div class="panel panel-default">
                 <div class="panel-body no-padding">
                     <!-- THE CALENDAR -->
-                    <div id="calendar"></div>
+                    <div id="calendar_customer"></div>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -106,7 +106,7 @@
                     m = date.getMonth(),
                     y = date.getFullYear();
 
-            $('#calendar').fullCalendar({
+            $('#calendar_customer').fullCalendar({
                 lang: 'th',
                 header: {
                     left: 'prev,next today',
@@ -137,8 +137,8 @@
                                 dataType: 'json',
                                 success: function (response) {
                                     if (response.status == 'success')
-                                        $('#calendar').fullCalendar('removeEvents');
-                                    $('#calendar').fullCalendar('addEventSource', freshData);
+                                        $('#calendar_customer').fullCalendar('removeEvents');
+                                    $('#calendar_customer').fullCalendar('addEventSource', freshData);
                                     window.location = "{{url('customer/calendar')}}";
                                 },
                                 error: function (e) {
