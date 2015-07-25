@@ -143,6 +143,8 @@ class QuotationsController extends Controller
         } else {
             $data['status'] = 'success';
             $customer = Customer::find($quo->cus_id);
+            $data['cus_id'] = $customer->cus_id;
+
             $data['full_name'] = $customer->cus_name . ' ' . $customer->cus_lastname;
             $data['tel'] = $customer->cus_tel;
         }

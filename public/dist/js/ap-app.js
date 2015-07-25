@@ -17,7 +17,7 @@
             var total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                total +=parseInt(product.course.course_price) ;
+                total += parseInt(product.course.course_price);
             }
 
             return total;
@@ -36,6 +36,8 @@
                 if (data.status == 'success') {
                     $scope.customer.fullname = data.full_name;
                     $scope.customer.tel = data.tel;
+                    $scope.customer.cus_id = data.cus_id;
+
                     $scope.boxSearch = true;
 
                     console.log('update customer success');
@@ -48,6 +50,7 @@
         $scope.customerSelect = function (customer) {
             $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
             $scope.customer.tel = customer.cus_tel;
+            $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
             console.log(customer)
             $http.get('/quotations/set_customer?id=' + customer.cus_id).
@@ -98,9 +101,15 @@
             if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเพิ่มคอร์ส");
             }
-            else if( $scope.boxSearch == false){
+
+            else if ($scope.boxSearch == false) {
                 alert("ยังไม่เลือกลูกค้า");
             }
+
+            else if ($scope.SaleBoxSearch == false) {
+                alert("ยังไม่เลือกพนักงานขาย");
+            }
+
             else {
                 window.location.href = '/quotations/save';
             }
@@ -175,16 +184,13 @@
             return results;
         }
     });
-    app.controller('treatController', function ($scope, $http, ngTableParams,$sce) {
+    app.controller('treatController', function ($scope, $http, ngTableParams, $sce) {
         $scope.customer = [];
         $scope.course = [];
-
         $scope.customerSelect = function (customer) {
-
             $scope.$apply(function () {
                 $scope.customer = customer;
                 $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
-
             });
             $scope.getCourseData();
             console.log($scope.customer);
@@ -204,16 +210,16 @@
         }
         $scope.getTreatStatus = function (status) {
             var text;
-            if (status == 0){
+            if (status == 0) {
                 text = "<span class=\"label label-danger\">ไม่เริ่ม</span>";
             }
-            if (status == 1){
+            if (status == 1) {
                 text = "<span class=\"label label-info\">อยุ่ในการรักษา</span>";
             }
-            if (status == 5){
+            if (status == 5) {
                 text = "<span class=\"label label-success\">เสร็จแล้ว</span>";
             }
-            return  $sce.trustAsHtml(text);
+            return $sce.trustAsHtml(text);
         }
     });
 })
