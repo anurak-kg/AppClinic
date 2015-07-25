@@ -19,7 +19,9 @@ elixir(function(mix) {
             'angular-route.min.js',
             'ng-table.js',
             'jQuery-2.1.4.min.js',
-            'bootstrap.min.js'
+            'bootstrap.min.js',
+            'ui-bootstrap-custom-0.13.1.min.js',
+            'ui-bootstrap-custom-tpls-0.13.1.min.js'
         ],
         'public/js/app.js'
     );

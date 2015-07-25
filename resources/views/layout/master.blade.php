@@ -6,7 +6,6 @@
     <title>@yield('title')</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <script src="/js/app.js"></script>
-    <script src="/dist/js/ui-bootstrap-tpls-0.13.0.min.js"></script>
     <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
     <script src="/dist/js/typeahead.bundle.min.js"></script>
     <script src="/dist/js/ap-app.js"></script>
