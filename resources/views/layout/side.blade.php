@@ -13,7 +13,7 @@
                   <li><a href="{{url('customer/index')}}"><i class='fa fa-minus'></i>ข้อมูลสมาชิก</a></li>
                   <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
                   <li><a href="{{url('quotations')}}"><i class='fa fa-minus'></i>ซื้อคอร์ส</a></li>
-                  <li><a href="{{url('treatment/index')}}"><i class='fa fa-minus'></i>การรักษา</a>
+                  <li><a href="{{url('treatment')}}"><i class='fa fa-minus'></i>การรักษา</a>
                   <li><a href="{{url('')}}"><i class='fa fa-minus'></i>ตารางนัด</a></li>
 
                  </ul>
