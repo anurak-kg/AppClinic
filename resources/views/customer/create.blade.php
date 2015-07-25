@@ -30,16 +30,10 @@
 
                         <div class="col-md-6">
                             {!! $form->render('cus_name') !!}
+                            <br>
                         </div>
 
                         <div class="col-md-6">
-                            {!! $form->render('cus_lastname') !!}
-                        <br>
-                        </div>
-
-
-
-                        <div class="col-md-12">
                             {!! $form->render('cus_code') !!}
                             <br>
                         </div>

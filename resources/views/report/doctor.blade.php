@@ -9,17 +9,13 @@
             <div class="box box-solid box-default">
                 <div class="box-body">
                     <div class="form-group">
-                        <label>เลือกเดือน :</label>
-
                         <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control pull-right" id="reservation"/>
+                            <button class="btn btn-default pull-right" id="daterange-btn">
+                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
+                                <i class="fa fa-caret-down"></i>
+                            </button>
                         </div>
-                        <!-- /.input group -->
                     </div>
-                    <!-- /.form group -->
 
                 </div>
             </div>
@@ -67,19 +63,25 @@
 
             //Date range picker
 
-            $('#reservation').daterangepicker({
-                "timePickerIncrement": 1,
-                "autoApply": true,
-                "startDate": "07/01/2015",
-                "endDate": "07/15/2015",
-                "opens": "left",
-                "drops": "down",
-                "buttonClasses": "btn btn-sm",
-                "applyClass": "btn-success",
-                "cancelClass": "btn-default"
-            }, function(start, end, label) {
-                console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-            });
+                    $('#daterange-btn').daterangepicker(
+                            {
+                                ranges: {
+                                    'Today': [moment(), moment()],
+                                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                },
+                                startDate: moment().subtract(29, 'days'),
+                                endDate: moment()
+                            },
+                            function (start, end) {
+                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                startDate = start;
+                                endDate = end;
+                            }
+                    );
 
 
             var areaChartData = {

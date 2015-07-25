@@ -15,7 +15,6 @@ class CreateTableCustomer extends Migration
         Schema::create('customer', function (Blueprint $table) {
             $table->increments('cus_id');
             $table->string('cus_name',50);
-            $table->string('cus_lastname',50);
             $table->string('cus_birthday_day',20);
             $table->string('cus_birthday_month',20);
             $table->string('cus_birthday_year',20);

@@ -106,7 +106,6 @@ class CustomerController extends Controller
         $grid->attributes(array("class" => "table table-bordered"));
         $grid->add('cus_id', 'รหัสสมาชิก', true);
         $grid->add('cus_name', 'ชื่อ');
-        $grid->add('cus_lastname', 'นามสกุล');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์');
         $grid->add('created_at', 'วันที่ลงทะเบียน');
         $grid->edit('/customer/edit', 'กระทำ', 'modify|delete');
@@ -132,8 +131,7 @@ class CustomerController extends Controller
     {
 
         $form = DataEdit::source(new Customer());
-        $form->text('cus_name', 'ชื่อ')->rule('required|unique:customer,cus_name')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ....'));
-        $form->text('cus_lastname', 'นามสกุล')->rule('required')->attributes(array('placeholder' => 'โปรดระบุ นามสกุล....'));
+        $form->text('cus_name', 'ชื่อ-นามสกุล')->rule('required|unique:customer,cus_name')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
         $form->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'))->rule('required');
         $form->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'))->rule('required');
         $form->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'))->rule('required');
@@ -180,8 +178,7 @@ class CustomerController extends Controller
 
         $edit = DataEdit::source(new Customer());
 
-        $edit->text('cus_name', 'ชื่อ');
-        $edit->text('cus_lastname', 'นามสกุล');
+        $edit->text('cus_name', 'ชื่อ-นามสกุล');
         $edit->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'));
         $edit->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'));
         $edit->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'));

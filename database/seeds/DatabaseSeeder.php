@@ -35,8 +35,7 @@ class CustomerTableSeeder extends Seeder
         DB::table('customer')->delete();
 
         \App\Customer::create([
-            'cus_name' => 'อนุรักษ์ ',
-            'cus_lastname' => 'กิ่งแก้ว',
+            'cus_name' => 'อนุรักษ์ กิ่งแก้ว',
             'cus_tel' => '0875430262',
             'cus_email' => 'imannn.99@gmail.com',
         ]);

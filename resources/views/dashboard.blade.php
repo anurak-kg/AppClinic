@@ -72,7 +72,7 @@
                <div class="row">
 
                  <div class="col-md-6">
-                   <div class="box box-solid box-success">
+                   <div class="box  box-success">
                    <div class="box-header with-border" align="middle">
 
                                        <h3 class="box-title">ตารางการทำงานหมอ</h3>
@@ -87,9 +87,25 @@
                    </div><!-- /. box -->
                  </div><!-- /.col -->
 
+                   <div class="col-md-6">
+                       <div class="box box-primary">
+                           <div class="box-header with-border" align="middle">
+
+                               <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                               <div class="box-tools pull-right">
+                                   <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                               </div><!-- /.box-tools -->
+                           </div>
+                           <div class="box-body no-padding">
+                               <!-- THE CALENDAR -->
+                               <div id="calendar_customer"></div>
+                           </div><!-- /.box-body -->
+                       </div><!-- /. box -->
+                   </div><!-- /.col -->
+
                  <div class="col-md-6">
 
-                                <div class="box box-solid box-default">
+                                <div class="box  box-default">
                                         <div class="box-header with-border">
                                           <h3 class="box-title">สรุปคอร์ส</h3>
                                           <div class="box-tools pull-right">
@@ -123,8 +139,9 @@
                                           </ul>
                                         </div><!-- /.footer -->
                                       </div><!-- /.box -->
-
-                                              <div class="box box-solid box-default">
+                 </div>
+                   <div class="col-md-6">
+                                              <div class="box  box-default">
                                                                 <div class="box-header with-border">
                                                                   <h3 class="box-title">รายงานยอดขาย</h3>
                                                                   <div class="box-tools pull-right">
@@ -136,7 +153,7 @@
                                                                   <div class="chart" id="bar-chart" style="height: 300px;"></div>
                                                                 </div><!-- /.box-body -->
                                                               </div><!-- /.box -->
-              </div>
+                   </div>
 
                </div><!-- /.row -->
 
@@ -149,7 +166,7 @@
     <script src="/dist/js/fullcalendar.min.js" type="text/javascript"></script>
     <script src='/dist/calendar-lang/th.js'></script>
 
-        {{--calendar--}}
+        {{--calendar doctor--}}
     <script type="text/javascript">
         $(function () {
             var currentMousePos = {
@@ -293,8 +310,153 @@
 
     </script>
 
+    <!-- calendar customer -->
+    <script type="text/javascript">
+        $(function () {
+            var currentMousePos = {
+                x: -1,
+                y: -1
+            };
+            jQuery(document).on("mousemove", function (event) {
+                currentMousePos.x = event.pageX;
+                currentMousePos.y = event.pageY;
+            });
 
-         <!-- ChartJS 1.0.1 -->
+
+            var json_events;
+
+            $.ajax({
+                url: '{{url('customer_calendar/fetch/')}}',
+                type: 'GET',
+                async: false,
+                success: function (response) {
+                    json_events = response;
+
+                }
+            });
+            function freshData() {
+                data = null;
+                $.ajax({
+                    url: '{{url('customer_calendar/fetch/')}}',
+                    type: 'GET',
+                    async: false,
+                    success: function (response) {
+                        data = response;
+
+                    }
+                });
+                return data;
+            }
+
+            var date = new Date();
+            var d = date.getDate(),
+                    m = date.getMonth(),
+                    y = date.getFullYear();
+
+            $('#calendar_customer').fullCalendar({
+                lang: 'th',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'วันนี้',
+                    month: 'เดือน',
+                    week: 'สัปดาห์',
+                    day: 'วัน'
+                },
+                axisFormat: 'HH:mm',
+                timeFormat: 'HH:mm',
+                events: json_events,
+                slotDuration: '00:30:00',
+
+                editable: true,
+                droppable: true,
+                eventDragStop: function (event, jsEvent, ui, view) {
+                    if (isElemOverDiv()) {
+                        var con = confirm('คุณแน่ใจว่าต้องการลบเหตุการณ์นี้');
+                        if (con == true) {
+                            $.ajax({
+                                url: '{{url('customer_calendar/delete/')}}',
+                                type: 'GET',
+                                data: '&id=' + event.id,
+                                dataType: 'json',
+                                success: function (response) {
+                                    if (response.status == 'success')
+                                        $('#calendar_customer').fullCalendar('removeEvents');
+                                    $('#calendar_customer').fullCalendar('addEventSource', freshData);
+                                    window.location = "{{url('customer/calendar')}}";
+                                },
+                                error: function (e) {
+                                    alert('Error processing your request: ' + e.responseText);
+                                }
+                            });
+                        }
+                    }
+                },
+                eventResize: function (event, delta, revertFunc) {
+                    console.log(event);
+                    var title = event.title;
+                    var end = event.end.format();
+                    var start = event.start.format();
+                    $.ajax({
+                        url: '{{url('customer_calendar/update/')}}',
+                        type: 'GET',
+                        data: 'title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status != 'success')
+                                revertFunc();
+                        },
+                        error: function (e) {
+                            revertFunc();
+                            alert('Error processing your request: ' + e.responseText);
+                        }
+                    });
+                },
+                eventDrop: function (event, delta, revertFunc) {
+                    console.log('dasd');
+                    var title = event.title;
+                    var start = event.start.format();
+                    var end = (event.end == null) ? start : event.end.format();
+                    $.ajax({
+                        url: '{{url('customer_calendar/update/')}}',
+                        type: 'GET',
+                        data: 'title=' + title + '&start=' + start + '&end=' + end + '&eventid=' + event.id,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status != 'success')
+                                revertFunc();
+                        },
+                        error: function (e) {
+                            revertFunc();
+                            alert('Error processing your request: ' + e.responseText);
+                        }
+                    });
+                }
+
+            });
+            function isElemOverDiv() {
+                var trashEl = jQuery('#trash');
+                var ofs = trashEl.offset();
+                var x1 = ofs.left;
+                var x2 = ofs.left + trashEl.outerWidth(true);
+                var y1 = ofs.top;
+                var y2 = ofs.top + trashEl.outerHeight(true);
+                if (currentMousePos.x >= x1 && currentMousePos.x <= x2 && currentMousePos.y >= y1 && currentMousePos.y <= y2) {
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
+    </script>
+
+
+
+    <!-- ChartJS 1.0.1 -->
             <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
         <!-- jvectormap -->
@@ -302,6 +464,7 @@
         <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
         <!-- SlimScroll 1.3.0 -->
         <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+
          <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
      <script src="../../plugins/morris/morris.min.js" type="text/javascript"></script>
@@ -325,6 +488,24 @@
                              color: "#f56954",
                              highlight: "#f56954",
                              label: "Chrome"
+                           },
+                           {
+                             value: 500,
+                             color: "#00a65a",
+                             highlight: "#00a65a",
+                             label: "IE"
+                           },
+                           {
+                             value: 400,
+                             color: "#f39c12",
+                             highlight: "#f39c12",
+                             label: "FireFox"
+                           },
+                           {
+                             value: 600,
+                             color: "#00c0ef",
+                             highlight: "#00c0ef",
+                             label: "Safari"
                            },
 
                          ];

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลหมอ')
+@section('title','ตารางการทำงานหมอ')
 
 
 @section('content')
