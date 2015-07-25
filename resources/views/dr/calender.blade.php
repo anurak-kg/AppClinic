@@ -5,7 +5,7 @@
 @section('content')
 
     <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>
-    <link href="/packages/zofe/rapyd/assets/datetimepicker/datetimepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="/packages/zofe/rapyd/assets/datetimepicker/datetimepicker3.css" rel="stylesheet" type="text/css"/>
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
     <link href="../plugins/fullcalendar/fullcalendar.print.css" rel="stylesheet" type="text/css" media="print"/>
@@ -16,7 +16,7 @@
             <div class="box  box-danger">
 
                 <div class="box-header with-border">
-                  <h2 class="box-title">เพิ่มข้อมูล</h2>
+                    <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
 
                 <div class="box-body">
@@ -76,7 +76,7 @@
 
                 }
             });
-            function freshData(){
+            function freshData() {
                 data = null;
                 $.ajax({
                     url: '{{url('doctor_calender/fetch/')}}',
@@ -89,6 +89,7 @@
                 });
                 return data;
             }
+
             var date = new Date();
             var d = date.getDate(),
                     m = date.getMonth(),
@@ -127,7 +128,7 @@
                                     if (response.status == 'success')
                                         $('#calendar').fullCalendar('removeEvents');
                                     $('#calendar').fullCalendar('addEventSource', freshData);
-                                    window.location="{{url('dr/calender')}}";
+                                    window.location = "{{url('dr/calender')}}";
                                 },
                                 error: function (e) {
                                     alert('Error processing your request: ' + e.responseText);
@@ -191,10 +192,8 @@
                 return false;
             }
 
-          }
         });
 
-            });
     </script>
 
 @stop
