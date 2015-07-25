@@ -13,27 +13,38 @@
     <!-- Main content -->
     <div class="row">
         <div class="col-md-2">
-            <div class="box  box-danger">
+            <div class="panel panel-success">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
                 </div>
 
-                <div class="box-body">
-                    <div id='external-events'>
-                        <p>
-                            <img src="/images/trashcan.png" id="trash" alt="">
-                        </p>
-                    </div>
+                <div class="panel-body">
                     {!! $form !!}
                     {!! Rapyd::scripts() !!}
                 </div>
 
             </div>
+            <div class="panel  panel-danger">
+
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title" align="middle">ลบข้อมูล</h2>
+                </div>
+
+                <div class="panel-body">
+                    <div id='external-events' align="middle">
+                        <p>
+                            <img src="/images/trashcan.png" id="trash" alt="">
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
         <div class="col-md-10">
-            <div class="box box-success">
-                <div class="box-body no-padding">
+            <div class="panel panel-default">
+                <div class="panel-body no-padding">
                     <!-- THE CALENDAR -->
                     <div id="calendar"></div>
                 </div>
@@ -50,7 +61,7 @@
     <!-- fullCalendar 2.2.5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
     <script src="/dist/js/fullcalendar.min.js" type="text/javascript"></script>
-    <script src='/locales/th.js'></script>
+    <script src='/dist/calendar-lang/th.js'></script>
 
     <!-- Page specific script -->
     <script type="text/javascript">

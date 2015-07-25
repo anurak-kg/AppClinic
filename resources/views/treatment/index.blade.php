@@ -29,30 +29,35 @@
                                        type="search"
                                        placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า"
                                         >
+
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-3">
                             <span id="div_cus_name">
+                                 <br>
                                 <label for="cus_name" class=" required">ชื่อ - นามสกุล@{{tesf}}</label>
                                 <input class=" form-control" type="text" ng-model="customer.fullname">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
+                                 <br>
                                 <label for="cus_name" class=" required">แพ้ยา</label>
                                 <input class=" form-control" type="text">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
+                                 <br>
                                 <label for="cus_name" class=" required">โรคประจำตัว</label>
                                 <input class=" form-control" type="text">
                             </span>
                             </div>
                             <div class="col-md-1">
                             <span id="div_cus_name">
+                                 <br>
                                 <label for="cus_name" class=" required">อายุ</label>
                                 <input class=" form-control" type="text">
                             </span>

@@ -174,7 +174,7 @@ class DataForm extends Widget
      */
     public function submit($name, $position = "BL", $options = array())
     {
-        $options = array_merge(array("class" => "btn btn-primary"), $options);
+        $options = array_merge(array("class" => "btn btn-large btn-block btn-primary"), $options);
         $this->button_container[$position][] = Form::submit($name, $options);
 
         return $this;
