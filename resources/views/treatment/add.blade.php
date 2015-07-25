@@ -19,7 +19,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="cus_name" class=" required">ลูกค้า</label>
+
+                           <label for="cus_name" class=" required">ลูกค้า</label>
                             <input class=" form-control" type="text"
                                    value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}} {{$quo->quotations->customer->cus_lastname}}"
                                    disabled>

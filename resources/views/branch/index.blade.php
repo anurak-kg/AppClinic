@@ -6,13 +6,13 @@
 
     <div class="row">
         <div class="col-md-3">
-            <div class="box box-solid box-default">
+            <div class="panel panel-primary">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
                 </div>
 
-                <div class="box-body" >
+                <div class="panel-body" >
 
                     {!! $form !!}
 
@@ -25,14 +25,14 @@
         </div>
 
         <div class="col-md-9">
-            <div class="box box-solid box-default table-responsive no-padding  ">
+            <div class="panel panel-primary table-responsive no-padding  ">
 
-                <div class="box-header ">
-                    <h2 class="box-title">ข้อมูลสาขา</h2>
+                <div class="panel-heading ">
+                    <h2 class="panel-title">ข้อมูลสาขา</h2>
 
                 </div>
 
-                <div class="box-body ">
+                <div class="panel-body ">
 
                     {!! $grid !!}
                 </div>
