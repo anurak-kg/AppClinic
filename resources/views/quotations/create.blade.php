@@ -5,8 +5,7 @@
     <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}})">
         <script type="text/ng-template" id="payment.html">
             <div class="modal-header">
-                <h3 class="modal-title">ชำระเงิน                         @{{cashInput}}
-                </h3>
+                <h3 class="modal-title">ชำระเงิน</h3>
             </div>
             <div class="modal-body">
                 <div class="row">

@@ -12,6 +12,7 @@
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
+        //$scope.modalInstance = null;
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
@@ -154,7 +155,7 @@
                 });
         }
         $scope.getVat = function () {
-            console.log($scope.Vat );
+            //console.log($scope.Vat );
             return $scope.getTotal() * $scope.Vat / 100;
 
         }
@@ -178,18 +179,24 @@
         }
         $scope.open = function () {
 
-            var modalInstance = $modal.open({
+            $scope.modalInstance = $modal.open({
                 animation: $scope.animationsEnabled,
                 templateUrl: 'payment.html',
-                controller: 'quotationsController'
+                controller: 'quotationsController',
+                scope:$scope
+
             });
 
-            modalInstance.result.then(function (selectedItem) {
+            $scope.modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
             }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
             });
         };
+
+        $scope.cancel = function () {
+            $scope.modalInstance.dismiss();
+        };
+
         $scope.payment = function(){
             window.location.href = '/quotations/save';
         }
