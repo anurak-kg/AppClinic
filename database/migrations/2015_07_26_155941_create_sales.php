@@ -46,6 +46,7 @@ class CreateSales extends Migration
      */
     public function down()
     {
+        Schema::drop('sales_detail');
         Schema::drop('sales');
     }
 }
