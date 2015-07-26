@@ -11,7 +11,7 @@ class Receive extends Model
 
     public function User()
     {
-        return $this->belongsTo('App\User', 'id');
+        return $this->belongsTo('App\User', 'emp_id');
     }
 
     public function Vendor()
