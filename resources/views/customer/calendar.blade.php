@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title','ตารางนัดคิวลูกค้า')
+@section('headText','ตารางนัดคิวลูกค้า')
 
 
 @section('content')
