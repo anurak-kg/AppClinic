@@ -66,6 +66,7 @@
     <!-- Page specific script -->
     <script type="text/javascript">
         $(function () {
+            $("#cus_box").select2();
             var currentMousePos = {
                 x: -1,
                 y: -1

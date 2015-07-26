@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title','ตารางการทำงานหมอ')
-
+@section('headText','ตารางการทำงานหมอ')
 
 @section('content')
 

@@ -28,12 +28,12 @@
                 <div class="box-body">
 
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_name') !!}
                             <br>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             {!! $form->render('cus_code') !!}
                             <br>
                         </div>
