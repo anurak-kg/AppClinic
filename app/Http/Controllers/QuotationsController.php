@@ -48,10 +48,9 @@ class QuotationsController extends Controller
     public function getCustomerList()
     {
         $query = '%' . \Input::get('q') . '%';
-        $customer = Customer::select('cus_id', 'cus_phone', 'cus_lastname', 'cus_name', 'cus_tel')
+        $customer = Customer::select('cus_id', 'cus_phone', 'cus_name', 'cus_tel')
             ->where('cus_name', 'LIKE', $query)
             ->orWhere('cus_id', 'LIKE', $query)
-            ->orWhere('cus_lastname', 'LIKE', $query)
             ->orWhere('cus_phone', 'LIKE', $query)
             ->get();
         return response()->json($customer);
@@ -145,7 +144,7 @@ class QuotationsController extends Controller
             $customer = Customer::find($quo->cus_id);
             $data['cus_id'] = $customer->cus_id;
 
-            $data['full_name'] = $customer->cus_name . ' ' . $customer->cus_lastname;
+            $data['cus_name'] = $customer->cus_name;
             $data['tel'] = $customer->cus_tel;
         }
         return response()->json($data);

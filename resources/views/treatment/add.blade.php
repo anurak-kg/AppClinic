@@ -22,7 +22,7 @@
 
                            <label for="cus_name" class=" required">ลูกค้า</label>
                             <input class=" form-control" type="text"
-                                   value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}} {{$quo->quotations->customer->cus_lastname}}"
+                                   value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}}"
                                    disabled>
                         </div>
                         <div class="col-md-12">
@@ -38,7 +38,7 @@
                                         @foreach($doctor as $dr)
                                             <option value=""></option>
                                             <option value="{{$dr->dr_id}}">{{$dr->dr_id}}
-                                                : {{$dr->dr_name}} {{$dr->dr_lastname}}</option>
+                                                : {{$dr->name}}</option>
                                         @endforeach
                                     </select>
                             </span>

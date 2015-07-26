@@ -111,8 +111,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/save', 'QuotationsController@save');
 
     //Customer
-    Route::post('customer/index', 'CustomerController@grid');
-    Route::get('customer/index', 'CustomerController@grid');
+    Route::post('customer', 'CustomerController@grid');
+    Route::get('customer', 'CustomerController@grid');
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
     Route::post('customer/edit', 'CustomerController@edit');
@@ -169,6 +169,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
     Route::get('data/user_search', 'DataController@getUserList');
+    Route::get('data/customer', 'DataController@getCustomerData');
 
     //Report
     Route::get('report/doctor', 'ReportController@reportDoctorTest');
@@ -188,11 +189,6 @@ Route::post('/auth',   'UserController@auth');
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
 Route::get('faker', function () {
- echo factory('App\Customer',10)->create();
+ echo factory('App\Customer',50)->create();
 
-});
-Route::get('test', function () {
-
-    $user = Auth::user()->getRole();
-    return response()->json($user);
 });
