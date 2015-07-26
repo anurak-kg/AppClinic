@@ -18,7 +18,7 @@ class CreateTableReceive extends Migration
             $table->integer('emp_id');
             $table->integer('order_id');
             $table->date('receive_date');
-            $table->decimal('receive_total',6,2);
+            $table->decimal('receive_total',10,2);
             $table->enum('receive_status', array('WAITING','CLOSE'));
             $table->timestamps();
         });
