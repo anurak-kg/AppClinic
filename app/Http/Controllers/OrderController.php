@@ -21,11 +21,11 @@ class OrderController extends Controller
 
     public function index()
     {
-        $order = Order::find(1)->with('branch','user','vendor','product')->get();
+        $order = Order::orderBy('order_id')->with('branch','user','vendor','product')->get();
 
-        // return response()->json($order);
+     return response()->json($order);
 
-       return view("order/index",['order' => $order]);
+      // return view("order/index",['order' => $order]);
     }
 
     public function getDataGrid(){
@@ -63,7 +63,6 @@ class OrderController extends Controller
     {
 
         $form = DataEdit::source(new Order());
-        $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่ใบสั่งซื้อ....'));
         $form->add('id', 'ชื่อพนักงานสั่งซื้อ','select')->rule('required')->options(User::lists('name','id')->toArray());
         $form->text('order_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
 

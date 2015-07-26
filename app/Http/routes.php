@@ -137,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('product/edit', 'ProductController@edit');
 
     //Order
-    Route::get('order/index', 'OrderController@grid');
+    Route::get('order/index', 'OrderController@z');
     Route::post('order/create', 'OrderController@create');
     Route::get('order/create', 'OrderController@create');
     Route::any('order/edit', 'OrderController@edit');

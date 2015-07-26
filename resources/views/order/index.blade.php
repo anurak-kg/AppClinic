@@ -17,7 +17,8 @@
 
         <div align="right">
 
-            <b> เลขที่ใบสั่งซื้อ</b> #<br>
+            <b> เลขที่ใบสั่งซื้อ</b> # <br>
+
             <b>วันที่ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
         </div>
 
@@ -27,7 +28,7 @@
             <div align="middle">
 
                 <address>
-                {{--//   {{$order->branch->branch_address}}--}}
+                    <b>สาขา :</b>กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก<br>
                 </address>
 
             </div>
@@ -39,7 +40,8 @@
             <div class="col-sm-4 invoice-col">
                 <address>
                     <br><br>
-                    ร้านค้า
+                    <b>ร้านค้า :</b><br>
+                    <b>ที่อยู่ :</b><br>
                 </address>
             </div>
             <!-- /.col -->
@@ -47,7 +49,9 @@
             <div class="col-sm-4 invoice-col">
                 <address>
                     <br><br>
-                    พนักงาน
+                    <b>รหัสพนักงาน :</b><br>
+                    <b>พนักงาน :</b> {{Auth::user()->name}}<br>
+                    <b>เบอร์โทร :</b>
                 </address>
             </div>
             <!-- /.col -->
