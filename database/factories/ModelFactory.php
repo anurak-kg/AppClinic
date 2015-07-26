@@ -21,8 +21,10 @@ $factory->define(App\User::class, function ($faker) {
 });
 $factory->define(App\Customer::class, function ($faker) {
     return [
-        'cus_name' => $faker->firstName,
-        'cus_lastname' => $faker->lastName,
+        'cus_name' => $faker->name($gender = null | 'male' | 'female'),
+        'cus_birthday_day' => $faker->dayOfMonth($max = 'now'),
+        'cus_birthday_month' => $faker->month($max = 'now'),
+        'cus_birthday_year' => $faker->year($max = 'now'),
         'cus_phone' => $faker->phoneNumber,
         'cus_email' => $faker->email,
         'cus_hno' => $faker->buildingNumber,
