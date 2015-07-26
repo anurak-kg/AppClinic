@@ -7,156 +7,172 @@
 
 @extends('layout.master')
 @section('title','ข้อมูลลูกค้า')
-@section('headText','ข้อมูลลูกค้า')
 @section('content')
 
 
     <div class="row">
-        <div class="col-md-12">
+
+        <div class="col-md-6">
             <div class="box box-soild box-default">
 
-                <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">ข้อมูล</h2>
+                <div class="box-header with-border">
+                    <h2 class="box-title">ข้อมูลลูกค้า</h2>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
+
                 </div>
 
                 <div class="box-body">
 
                     <div class="col-md-12">
-                      <b>รหัสลูกค้า : </b> {{  $data->cus_id }}
-                        <br>
+                        <b>รหัสลูกค้า : </b> {{  $data->cus_id }}
+                        <br> <br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ชื่อลูกค้า : </b>   {{  $data->cus_name }}
-                        <br>
+                        <b>ชื่อลูกค้า : </b> {{  $data->cus_name }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>หมายเลขประจำตัวประชาชน : </b>   {{  $data->cus_code }}
-                        <br>
+                        <b>เลขประจำตัวประชาชน : </b> {{  $data->cus_code }}
+                        <br><br>
                     </div>
 
-                    <div class="col-md-1">
-                        <b>วันเกิด : </b>    {{  $data->cus_birthday_day }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-1">
-                        <b> </b>   {{  $data->cus_birthday_month }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-1">
+                    <div class="col-md-6">
+                        <b>วันเกิด : </b> {{  $data->cus_birthday_day }}
+                        {{  $data->cus_birthday_month }}
                         {{  $data->cus_birthday_year }}
-                        <br>
+                        <br><br>
                     </div>
 
-                    <div class="col-md-12">
-                        <b>เพศ : </b>  {{  $data->cus_sex }}
-                        <br>
+                    <div class="col-md-6">
+                        <b>เพศ : </b> {{  $data->cus_sex }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-12">
                         <b>กรุ๊ปเลือด : </b> {{  $data->cus_blood }}
-                        <br>
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>เบอร์โทร : </b>   {{  $data->cus_phone }}
-                        <br>
+                        <b>ส่วนสูง : </b> {{  $data->cus_height }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>E-mail : </b>  {{  $data->cus_email }}
-                        <br>
+                        <b>น้ำหนัก : </b> {{  $data->cus_weight }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ส่วนสูง : </b>  {{  $data->cus_height }}
-                        <br>
+                        <b>โรคประจำตัว : </b> {{  $data->allergic }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>น้ำหนัก : </b>  {{  $data->cus_weight }}
-                        <br>
+                        <b>แพ้ยา : </b> {{  $data->disease }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-12">
+                        <b>เบอร์โทร : </b> {{  $data->cus_phone }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-12">
+                        <b>E-mail : </b> {{  $data->cus_email }}
+                        <br><br>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="box box-soild box-default">
+
+                <div class="box-header with-border">
+                    <h2 class="box-title">&nbsp; ที่อยู่</h2>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
+
+                </div>
+
+                <div class="box-body">
+
+                    <div class="col-md-6">
+                        <b>บ้านเลขที่ : </b> {{  $data->cus_hno }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>โรคประจำตัว : </b>   {{  $data->allergic }}
-                        <br>
+                        <b>หมู่ : </b> {{  $data->cus_moo }}
+                        <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>แพ้ยา : </b>   {{  $data->disease }}
-                        <br>
+                        <b>ซอย/ตรอก : </b> {{  $data->cus_soi }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-6">
+                        <b>ถนน : </b> {{  $data->cus_road }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-6">
+                        <b>ตำบล/แขวง : </b> {{  $data->cus_subdis }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-6">
+                        <b>อำเภอ/เขต : </b> {{  $data->cus_district }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-6">
+                        <b>จังหวัด : </b> {{  $data->cus_province }}
+                        <br><br>
+                    </div>
+
+                    <div class="col-md-12">
+                        <b>รหัสไปรษณีย์ : </b> {{  $data->cus_postal }}
+                        <br><br>
                     </div>
 
                 </div>
             </div>
+        </div>
 
-            <div class="panel panel-primary">
+        <div class="col-md-12">
 
-                <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">ที่อยู่</h2>
+            <div class="box box-primary">
+
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title">ข้อมูลคอร์ส</h2>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
                 </div>
 
-                <div class="panel-body">
-
-                    <div class="col-md-12">
-                        z {{  $data->cus_hno }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_moo }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_soi }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_road }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_subdis }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_district }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-6">
-                        {{  $data->cus_province }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        {{  $data->cus_postal }}
-                        <br>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="panel panel-primary">
-
-                <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">คอร์ส</h2>
-                </div>
-
-                <div class="panel-body">
+                <div class="box-body">
 
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
                             @foreach($data->quotations as $quotations)
-                                รหัสการซื้อ {{ $quotations->quo_id }} ราคา {{ $quotations->price }} ชำระแล้ว .... บาท สถาน .... <br>
+                             <b> รหัสการซื้อ #{{ $quotations->quo_id }} / ราคา {{ $quotations->price }} บาท</b>
+                               <br>
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -167,9 +183,9 @@
                                     </thead>
                                     @foreach($quotations->course as $course)
                                         <tr>
-                                                <td>{{ $course->course_id }}</td>
-                                                <td>{{ $course->course_name }}</td>
-                                                <td>{{ $course->course_qty }}</td>
+                                            <td>{{ $course->course_id }}</td>
+                                            <td>{{ $course->course_name }}</td>
+                                            <td >{{ $course->course_qty }}</td>
                                         </tr>
                                     @endforeach
                                 </table>
@@ -180,14 +196,19 @@
                     <!-- /.row -->
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-primary">
 
-            <div class="panel panel-primary">
-
-                <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">ประวัติการรักษา</h2>
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title">ประวัติการรักษา</h2>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
                 </div>
 
-                <div class="panel-body">
+                <div class="box-body">
 
                     <div class="col-md-12">
                         <br>
@@ -211,8 +232,9 @@
 
                 </div>
             </div>
-
         </div>
+
+
     </div>
-    </div>
+
 @stop
