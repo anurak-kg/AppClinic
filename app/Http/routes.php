@@ -189,11 +189,6 @@ Route::post('/auth',   'UserController@auth');
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
 Route::get('faker', function () {
- echo factory('App\Customer',10)->create();
+ echo factory('App\Customer',50)->create();
 
-});
-Route::get('test', function () {
-
-    $user = Auth::user()->getRole();
-    return response()->json($user);
 });
