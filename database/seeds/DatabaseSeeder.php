@@ -60,8 +60,6 @@ class PositionTableSeeder extends Seeder{
             'role'=>99]);
         \App\Position::create(['position_name'=>'Reception',
             'role'=>1]);
-        \App\Position::create(['position_name'=>'Sale',
-            'role'=>1]);
         \App\Position::create(['position_name'=>'Marketing',
             'role'=>5]);
         \App\Position::create(['position_name'=>'Stock',
@@ -132,7 +130,60 @@ class ProductTableSeeder extends Seeder
             'product_date_end' => '2012-02-03',
             'product_price' => '200',
             'product_unit' => 'CC']);
-
+        \App\Product::create(['product_id' => 'b012',
+            'pg_id' => '1001',
+            'product_name' => 'LA MER Crème De La Mer 60 ml.',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '12700',
+            'product_unit' => 'กระปุ๊ก']);
+        \App\Product::create(['product_id' => 'b013',
+            'pg_id' => '1001',
+            'product_name' => 'Jeunesse Instantly Ageless เจอเนสส์ (50 ซอง/กล่อง)   ',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '14875',
+            'product_unit' => 'กล่อง']);
+        \App\Product::create(['product_id' => 'b014',
+            'pg_id' => '1001',
+            'product_name' => 'Lancome Genifique Youth Activating Concentrate 7ml',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '2800',
+            'product_unit' => 'ขวด']);
+        \App\Product::create(['product_id' => 'b015',
+            'pg_id' => '1001',
+            'product_name' => 'Mederma ครีมทาแผลเป็นหลังคลอด 20 กรัม',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '2400',
+            'product_unit' => 'กล่อง']);
+        \App\Product::create(['product_id' => 'b016',
+            'pg_id' => '1001',
+            'product_name' => 'อายไลเนอร์ Bisous Bisous 72 Hrs Pen Eyeliner',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '595',
+            'product_unit' => 'กล่อง']);
+        \App\Product::create(['product_id' => 'b017',
+            'pg_id' => '1001',
+            'product_name' => 'Bisous Bisous ครีมทาหน้า สูตรน้ำนมเข้มข้น - The White Queen Milky White Skin   ',
+            'product_qty' => '200',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2025-02-03',
+            'product_price' => '895',
+            'product_unit' => 'หลอด']);
         \App\Product::create(['product_id' => 'b021',
             'pg_id' => '1001',
             'product_name' => 'Cellulite',
@@ -152,6 +203,24 @@ class ProductTableSeeder extends Seeder
             'product_date_end' => '2012-02-03',
             'product_price' => '7000',
             'product_unit' => 'เข็ม']);
+        \App\Product::create(['product_id' => 'ad03',
+            'pg_id' => '1001',
+            'product_name' => 'Skin2u ครีมขาเนียน ผิวขาว (300ml)   ',
+            'product_qty' => '99',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2012-02-03',
+            'product_price' => '590',
+            'product_unit' => 'ขวด']);
+        \App\Product::create(['product_id' => 'ad04',
+            'pg_id' => '1001',
+            'product_name' => 'Beauty White Vampire Body Serum เซรั่มหัวเชื้อ ตัวขาว ผิวขาว เข้มข้น 10 เท่า',
+            'product_qty' => '99',
+            'product_qty_order' => '50',
+            'product_date_start' => '2002-02-03',
+            'product_date_end' => '2012-02-03',
+            'product_price' => '897',
+            'product_unit' => 'ขวด']);
     }
 
 }
@@ -170,7 +239,6 @@ class CourseTableSeeder extends Seeder
                 'course_detail'=>'บริการหน้าขาว ใส ไร้สิว',
                 'course_price' => '10000.00',
                 'course_qty'=>'1']);
-
         Medicine::create(
             ['course_id' => 'A001',
                 'product_id' => 'b011',
@@ -185,7 +253,7 @@ class CourseTableSeeder extends Seeder
                 'course_qty'=>'1']);
         Medicine::create(
             ['course_id' => 'A002',
-                'product_id' => 'ad02',
+                'product_id' => 'b016',
                 'qty' => '5'
             ]);
 
@@ -199,6 +267,38 @@ class CourseTableSeeder extends Seeder
         Medicine::create(
             ['course_id' => 'A003',
                 'product_id' => 'ad02',
+                'qty' => '3'
+            ]);
+        Course::create(
+            ['course_id' => 'A004',
+                'course_name' => 'body scrap',
+                'course_detail' => 'กำลังอัพเดรต',
+                'course_price' => '12000',
+                'course_qty'=>'5']);
+        Medicine::create(
+            ['course_id' => 'A004',
+                'product_id' => 'ad03',
+                'qty' => '3'
+            ]);
+        Medicine::create(
+            ['course_id' => 'A004',
+                'product_id' => 'ad04',
+                'qty' => '3'
+            ]);
+        Course::create(
+            ['course_id' => 'A005',
+                'course_name' => 'face scrap',
+                'course_detail' => 'กำลังอัพเดรต',
+                'course_price' => '12000',
+                'course_qty'=>'5']);
+        Medicine::create(
+            ['course_id' => 'A005',
+                'product_id' => 'b015',
+                'qty' => '3'
+            ]);
+        Medicine::create(
+            ['course_id' => 'A005',
+                'product_id' => 'b013',
                 'qty' => '3'
             ]);
     }
