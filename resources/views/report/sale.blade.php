@@ -5,23 +5,26 @@
 
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="box box-solid box-default">
                 <div class="box-body">
+                    {!! Form::open(array('url' => 'report/sale', 'class' => 'form')) !!}
                     <div class="form-group">
                         <div class="input-group">
-                            <button class="btn btn-default pull-right" id="daterange-btn">
-                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
-                                <i class="fa fa-caret-down"></i>
-                            </button>
+                            <label>กำหนดระยะเวลา</label><br>
+                            <input class="btn btn-default pull-right" id="daterange" name="rang">
+                            </input><br><br>
+                            <div align="left"> <input type="submit"  class="btn btn-primary" value="Report"></div>
                         </div>
                     </div>
+                    {!! Form::close() !!}
+                    <!-- /.form group -->
 
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-12">
 
 
             <!-- BAR CHART -->
@@ -46,23 +49,24 @@
         <!-- /.col (RIGHT) -->
     </div>
     </div> <!-- /.row -->
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 
     <!-- daterange picker -->
-    <link href="/dist/js/daterangepicker.css" rel="stylesheet" type="text/css"/>
-
-    <!-- date-range-picker -->
-    <script src="/dist/js/moment.min.js" type="text/javascript"></script>
-    <script src="/dist/js/daterangepicker.js" type="text/javascript"></script>
+    <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
-    <!-- page script -->
-    <script>
-        $(function () {
 
-            //Date range picker
-                    $('#daterange-btn').daterangepicker(
+    <!-- page script -->
+    <script type="text/javascript">
+        $(function () {
+                    var startDate;
+                    var endDate;
+                    //Date range as a button
+                    $('#daterange').daterangepicker(
                             {
                                 ranges: {
                                     'Today': [moment(), moment()],
@@ -76,7 +80,7 @@
                                 endDate: moment()
                             },
                             function (start, end) {
-                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                $('#daterange').html(start.format('YYYY MM DD') + ' - ' + end.format('YYYY MM DD'));
                                 startDate = start;
                                 endDate = end;
                             }

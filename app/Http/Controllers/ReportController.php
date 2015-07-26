@@ -35,25 +35,26 @@ class ReportController extends Controller
     //ยอดขาย Sale
     public function reportSalesTest()
     {
-
+        $rang = \Input::get('rang');
+        $date = explode('-', $rang);
+        //var_dump($date);
         $sales = DB::table('quotations_detail')
             ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
             ->join('users', 'quotations.sale_id', '=', 'users.id')
-            ->whereRaw('MONTH(quotations_detail.created_at) = ?', [7])
-            ->whereRaw('YEAR(quotations_detail.created_at) = ?', [2015])
-            ->where('users.position_id', '=',1)
+            ->where('users.position_id', '=', 1);
+        if($rang != null){
+            $sales->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+        }
+        $sales
             ->groupBy('quotations.sale_id')
-            ->orderBy('Total', 'desc')
-            ->get();
-
-
-        //return response()->json($sales);
-
+            ->orderBy('Total', 'desc');
+          $date = $sales->get();
+        //return response()->json($date);
         return view('report/sale', [
-            'name' => $this->arrayToChartData($sales, 'name'),
-            'total' => $this->arrayToChartData($sales, 'Total')
+            'name' => $this->arrayToChartData($date, 'name'),
+            'total' => $this->arrayToChartData($date, 'Total')
         ]);
 
     }
@@ -94,19 +95,22 @@ class ReportController extends Controller
     //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
     public function reportCourseMonthTest()
     {
-
+        $rang = \Input::get('rang');
+        $date = explode('-', $rang);
+        // var_dump($date);
         $coursemonth = DB::table('quotations_detail')
-            ->select('course.course_id',DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
-            //->whereRaw('MONTH(quotations_detail.created_at) = ?', [7])
-            //->whereRaw('YEAR(quotations_detail.created_at) = ?', [2015])
-               ->whereBetween('quotations_detail.created_at', ['2012-03-11 00:00:00','2014-03-11 00:00:00'])
-            ->groupBy('coursename')
-            ->get();
+            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
+        if ($rang != null) {
+            $coursemonth->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+        }
+        $coursemonth
+            ->groupBy('coursename')->orderBy('Total', 'desc');
+        $date = $coursemonth->get();
 
         return view('report/coursemonth', [
-            'name' => $this->arrayToChartData($coursemonth,'coursename'),
-            'total' => $this->arrayToChartData($coursemonth,'Total')
+            'name' => $this->arrayToChartData($date, 'coursename'),
+            'total' => $this->arrayToChartData($date, 'Total')
         ]);
 
         //   return response()->json($coursemonth);
@@ -135,25 +139,21 @@ class ReportController extends Controller
     public function reportCourseHotTest()
     {
         $rang = \Input::get('rang');
-        $date = explode( '-', $rang ) ;
-       // var_dump($date);
+        $date = explode('-', $rang);
+        // var_dump($date);
 
         $coursehot = DB::table('quotations_detail')
-            ->select('course.course_id',DB::raw('course.course_name as coursename'),DB::raw('SUM(quo_de_price) as Total'))
-            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
-            ->whereRaw('MONTH(quotations_detail.created_at) = 7')
-            ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            //->whereRaw("quotations_detail.created_at BETWEEN str_to_date('?','%m/%d/%Y') and str_to_date('?','%m/%d/%Y')  ",[trim($date[0]),trim($date[1])])
-            ->whereBetween('quotations_detail.created_at', [$date[0],$date[1]])
-            ->groupBy('coursename')
-            ->orderBy('Total', 'desc')
-            ->get();
-       //dd($coursehot);
-       // return response()->json($coursehot);
+            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
+        if ($rang != null) {
+            $coursehot->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+        }
+        $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
+        $data = $coursehot->take(10)->get();
 
         return view('report/coursehot', [
-            'name' => $this->arrayToChartData($coursehot, 'coursename'),
-            'total' => $this->arrayToChartData($coursehot, 'Total')
+            'name' => $this->arrayToChartData($data, 'coursename'),
+            'total' => $this->arrayToChartData($data, 'Total')
         ]);
     }
 
@@ -181,22 +181,24 @@ class ReportController extends Controller
     //ยอดขายแพทย์
     public function reportDoctorTest()
     {
-
+        $doc = \Input::get('doc');
+        $date = explode('-', $doc);
+        // var_dump($date);
         $doctor = DB::table('quotations_detail')
             ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
-            ->join('users', 'quotations.sale_id', '=', 'users.id')
-            ->whereRaw('MONTH(quotations_detail.created_at) = 7')
-            ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->where('users.position_id', '=', 4)
+            ->join('users', 'quotations.sale_id', '=', 'users.id');
+        if ($doc != null) {
+            $doctor->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+        }
+        $doctor->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')
-            ->orderBy('Total', 'desc')
-            ->get();
-
+            ->orderBy('Total', 'desc');
+        $date = $doctor->get();
         return view('report/doctor', [
-            'name' => $this->arrayToChartData($doctor, 'name'),
-            'total' => $this->arrayToChartData($doctor, 'Total')
+            'name' => $this->arrayToChartData($date, 'name'),
+            'total' => $this->arrayToChartData($date, 'Total')
         ]);
         // return response()->json($doctor);
 
