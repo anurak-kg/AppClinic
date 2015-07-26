@@ -22,74 +22,72 @@
                 <div class="box-body">
 
                     <div class="col-md-12">
-                        {{  $data->cus_id }}
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        {{  $data->cus_name }}
+                      <b>รหัสลูกค้า : </b> {{  $data->cus_id }}
                         <br>
                     </div>
 
                     <div class="col-md-6">
-                        {{  $data->cus_code }}
+                        <b>ชื่อลูกค้า : </b>   {{  $data->cus_name }}
                         <br>
                     </div>
 
-                    <div class="col-md-4">
-                        {{  $data->cus_birthday_day }}
+                    <div class="col-md-6">
+                        <b>หมายเลขประจำตัวประชาชน : </b>   {{  $data->cus_code }}
                         <br>
                     </div>
 
-                    <div class="col-md-4">
-                        {{  $data->cus_birthday_month }}
+                    <div class="col-md-1">
+                        <b>วันเกิด : </b>    {{  $data->cus_birthday_day }}
                         <br>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-1">
+                        <b> </b>   {{  $data->cus_birthday_month }}
+                        <br>
+                    </div>
+
+                    <div class="col-md-1">
                         {{  $data->cus_birthday_year }}
                         <br>
                     </div>
 
                     <div class="col-md-12">
-                        {{  $data->cus_sex }}
+                        <b>เพศ : </b>  {{  $data->cus_sex }}
                         <br>
                     </div>
 
                     <div class="col-md-12">
-                        {{  $data->cus_blood }}
+                        <b>กรุ๊ปเลือด : </b> {{  $data->cus_blood }}
                         <br>
                     </div>
 
                     <div class="col-md-6">
-                        {{  $data->cus_phone }}
-                        <br>
+                        <b>เบอร์โทร : </b>   {{  $data->cus_phone }}
                         <br>
                     </div>
 
                     <div class="col-md-6">
-                        {{  $data->cus_email }}
-                        <br>
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        {{  $data->cus_height }}
+                        <b>E-mail : </b>  {{  $data->cus_email }}
                         <br>
                     </div>
 
-                    <div class="col-md-12">
-                        {{  $data->cus_weight }}
+                    <div class="col-md-6">
+                        <b>ส่วนสูง : </b>  {{  $data->cus_height }}
                         <br>
                     </div>
 
-                    <div class="col-md-12">
-                        {{  $data->allergic }}
+                    <div class="col-md-6">
+                        <b>น้ำหนัก : </b>  {{  $data->cus_weight }}
                         <br>
                     </div>
 
-                    <div class="col-md-12">
-                        {{  $data->disease }}
+                    <div class="col-md-6">
+                        <b>โรคประจำตัว : </b>   {{  $data->allergic }}
+                        <br>
+                    </div>
+
+                    <div class="col-md-6">
+                        <b>แพ้ยา : </b>   {{  $data->disease }}
                         <br>
                     </div>
 

@@ -82,7 +82,7 @@
                                    </div>
                      <div class="box-body no-padding">
                        <!-- THE CALENDAR -->
-                       <div id="calendar"></div>
+                       <div id="calendar" height="150"></div>
                      </div><!-- /.box-body -->
                    </div><!-- /. box -->
                  </div><!-- /.col -->

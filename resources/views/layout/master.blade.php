@@ -50,7 +50,7 @@
 
 </head>
 
-<body class="skin-blue  sidebar-mini">
+<body class="skin-blue sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
