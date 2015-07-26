@@ -25,6 +25,9 @@ class DataController extends Controller
         $customer = Customer::select(['cus_id','cus_name','cus_tel'])->get();
 
         return Datatables::of($customer)
+            ->addColumn('action', function ($customer) {
+                return '<a href="'.url('customer/view').'?cus_id='.$customer->cus_id.'" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
+            })
             ->addColumn("รายละเอียด", "รายละเอียด",false)
             ->make();
 
