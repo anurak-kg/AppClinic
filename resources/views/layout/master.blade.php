@@ -28,6 +28,8 @@
     <link href="/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css"/>
     <link href="/dist/css/typeahead.css" rel="stylesheet" type="text/css" />
     <link href="/app.css" rel="stylesheet" type="text/css"/>
+    <link href="https://almsaeedstudio.com/themes/AdminLTE/plugins/datatables/dataTables.bootstrap.css
+" rel="stylesheet" type="text/css"/>
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
@@ -70,7 +72,6 @@
               <small>@yield('headDes')</small>
             </h1>
 
-
         </section>
 
         <!-- Main content -->
@@ -100,7 +101,7 @@
 
 <script src="/dist/js/app.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script src="http://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
+<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="http://datatables.yajrabox.com/js/handlebars.js"></script>
 <script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/jquery.browser.min.js"></script>
 <script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/redactor.min.js"></script>

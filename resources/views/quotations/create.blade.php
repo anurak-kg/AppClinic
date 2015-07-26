@@ -282,7 +282,7 @@
                                 'ไม่พบข้อมูลลูกค้า',
                                 '</div>'
                             ].join('\n'),
-                            suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}} @{{cus_lastname}}</div>')
+                            suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}}</div>')
                         }
                     })
                     .on('typeahead:selected', function ($e, datum) {
@@ -291,7 +291,6 @@
                         {
                             cus_id: datum.cus_id,
                             cus_name: datum.cus_name,
-                            cus_lastname: datum.cus_lastname,
                             cus_tel: datum.cus_tel
                         }
                         console.log(customer);

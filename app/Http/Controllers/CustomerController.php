@@ -18,34 +18,11 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return $this->quoRender();
-    }
-
-    public function quoRender()
-    {
         return view('customer/index', [
-            'cus' => Customer::find($this->getCusID())
         ]);
     }
 
-    private function getCusID()
-    {
-        $cus = Customer::where('cus_id');
-        return $cus->cus_id;
-    }
 
-    public function getCustomerList()
-    {
-        $query = '%' . \Input::get('q') . '%';
-        $customer = Customer::select('cus_id', 'cus_phone', 'cus_lastname', 'cus_name', 'cus_tel', 'cus_phone')
-            ->where('cus_name', 'LIKE', $query)
-            ->orWhere('cus_id', 'LIKE', $query)
-            ->orWhere('cus_lastname', 'LIKE', $query)
-            ->orWhere('cus_phone', 'LIKE', $query)
-            ->orWhere('cus_tel', 'LIKE', $query)
-            ->get();
-        return response()->json($customer);
-    }
 
     public function getDataCustomer()
     {
@@ -116,14 +93,12 @@ class CustomerController extends Controller
 
     public function grid()
     {
-
         $grid = $this->getDataGrid();
         $grid->row(function ($row) {
             if ($row->cell('cus_id')) {
                 $row->style("background-color:#EEEEEE");
             }
         });
-
         return view('customer/index', compact('grid'));
     }
 
