@@ -14,9 +14,9 @@ class BillController extends Controller
         $bill = Quotations::find(\Input::get('quo_id'))
             ->with('course','Customer','User','Branch')->get();
 
-       // return response()->json($bill);
+     return response()->json($bill);
 
-        return view("bill/bill",['bill' => $bill[0]]);
+         /*return view("bill/bill",['bill' => $bill[0]]);*/
     }
 
 }

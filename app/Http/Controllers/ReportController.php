@@ -134,22 +134,27 @@ class ReportController extends Controller
     //สรุปคอร์สที่ขายดีที่สุด
     public function reportCourseHotTest()
     {
+        $rang = \Input::get('rang');
+        $date = explode( '-', $rang ) ;
+       // var_dump($date);
 
         $coursehot = DB::table('quotations_detail')
             ->select('course.course_id',DB::raw('course.course_name as coursename'),DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
-           // ->whereRaw('MONTH(quotations_detail.created_at) = 7')
-           // ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
-            ->whereBetween('quotations_detail.created_at', ['',''])
+            ->whereRaw('MONTH(quotations_detail.created_at) = 7')
+            ->whereRaw('YEAR(quotations_detail.created_at) = 2015')
+            //->whereRaw("quotations_detail.created_at BETWEEN str_to_date('?','%m/%d/%Y') and str_to_date('?','%m/%d/%Y')  ",[trim($date[0]),trim($date[1])])
+            ->whereBetween('quotations_detail.created_at', [$date[0],$date[1]])
             ->groupBy('coursename')
             ->orderBy('Total', 'desc')
             ->get();
+       //dd($coursehot);
+       // return response()->json($coursehot);
 
         return view('report/coursehot', [
             'name' => $this->arrayToChartData($coursehot, 'coursename'),
             'total' => $this->arrayToChartData($coursehot, 'Total')
         ]);
-        //return response()->json($coursehot);
     }
 
     //ยอดขายแพทย์

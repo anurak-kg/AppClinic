@@ -8,21 +8,23 @@
         <div class="col-md-3">
             <div class="box box-solid box-default">
                 <div class="box-body">
+                    {!! Form::open(array('url' => 'report/coursehot', 'class' => 'form')) !!}
                     <div class="form-group">
                         <div class="input-group">
-                            <button class="btn btn-default pull-right" id="daterange-btn">
-                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
-                                <i class="fa fa-caret-down"></i>
-                            </button>
+                            <label>กำหนดระยะเวลา</label><br>
+                            <input class="btn btn-default pull-right" id="daterange" name="rang">
+                            </input><br><br>
+                           <div align="left"> <input type="submit"  class="btn btn-primary" value="Report"></div>
                         </div>
                     </div>
+                    {!! Form::close() !!}
                     <!-- /.form group -->
 
                 </div>
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-12">
 
             <!-- BAR CHART -->
             <div class="box box-solid box-default">
@@ -59,12 +61,12 @@
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
     <!-- page script -->
-    <script>
+    <script type="text/javascript">
         $(function () {
                     var startDate;
                     var endDate;
                     //Date range as a button
-                    $('#daterange-btn').daterangepicker(
+                    $('#daterange').daterangepicker(
                             {
                                 ranges: {
                                     'Today': [moment(), moment()],
@@ -78,16 +80,14 @@
                                 endDate: moment()
                             },
                             function (start, end) {
-                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                $('#daterange').html(start.format('YYYY MM DD') + ' - ' + end.format('YYYY MM DD'));
                                 startDate = start;
                                 endDate = end;
                             }
                     );
-
-
-                    $('#IDOfDateRangePicker').data('daterangepicker').startDate;
-                    $('#IDOfDateRangePicker').data('daterangepicker').endDate;
-
+                    /*$('#saveBtn').click(function(){
+                        console.log(startDate.format('YYYY MMMM D') + ' - ' + endDate.format('YYYY MMMM D'));
+                    });*/
 
                     var areaChartData = {
                 labels: {!! $name !!},
