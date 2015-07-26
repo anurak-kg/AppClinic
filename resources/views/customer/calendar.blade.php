@@ -1,7 +1,5 @@
 @extends('layout.master')
 @section('title','ตารางนัดคิวลูกค้า')
-
-
 @section('content')
 
     <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>

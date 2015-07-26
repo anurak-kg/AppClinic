@@ -37,9 +37,9 @@ class Quotations extends Model
         return $this->hasmany('\App\Quotations_detail');
     }
 
-    public function Treatment()
+    public function TreatHistory()
     {
-        return $this->hasmany('\App\Treatment','tre_id');
+        return $this->hasmany('\App\TreatHistory','emp_id');
     }
 
 }

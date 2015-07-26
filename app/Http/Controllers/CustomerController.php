@@ -18,8 +18,17 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return view('customer/index', [
-        ]);
+        return view('customer/index');
+    }
+
+    public function view()
+    {
+        $data = Customer::with('Quotations.course')->where('cus_id',\Input::get('cus_id'))->get()->first();
+
+
+        // return response()->json($data);
+
+         return view('customer/view',['data'=>$data]);
     }
 
 
