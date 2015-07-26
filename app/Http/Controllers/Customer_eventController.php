@@ -33,7 +33,7 @@ class Customer_eventController extends Controller
         foreach ($customer_event as $event) {
             $e = array();
             $e['id'] = $event->event_id;
-            $e['title'] = $event->Customer->cus_name . ' -' . $event->event_name;
+            $e['title'] = $event->event_name;
             $e['start'] = $event->event_start;
             $e['end'] = $event->event_end;
             $e['allDay'] = false;
@@ -67,7 +67,6 @@ class Customer_eventController extends Controller
     {
         /* dd(User::where('position_id','=',4)->lists('name','id')->toArray());*/
         $form = DataForm::create('customer_event');
-        $form->add('cus_name', 'ชื่อลูกค้า', 'select')->options(Customer::lists('cus_name','cus_id')->toArray());
         $form->text('event_name', 'รายละเอียด');
         $form->add('event_start', 'วันที่เริ่ม', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
         $form->add('event_end', 'วันที่สิ้นสุด', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
@@ -78,7 +77,6 @@ class Customer_eventController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new Customer_event();
-            $user->customer_id = Input::get('cus_name');
             $user->event_name = Input::get('event_name');
             $user->event_start = Input::get('event_start');
             $user->event_end = Input::get('event_end');
