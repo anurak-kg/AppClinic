@@ -25,6 +25,7 @@ $factory->define(App\Customer::class, function ($faker) {
         'cus_birthday_day' => $faker->dayOfMonth($max = 'now'),
         'cus_birthday_month' => $faker->month($max = 'now'),
         'cus_birthday_year' => $faker->year($max = 'now'),
+        'cus_tel' => $faker->phoneNumber,
         'cus_phone' => $faker->phoneNumber,
         'cus_email' => $faker->email,
         'cus_hno' => $faker->buildingNumber,

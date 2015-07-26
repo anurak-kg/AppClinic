@@ -53,7 +53,7 @@
             });
 
         $scope.customerSelect = function (customer) {
-            $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
+            $scope.customer.cus_name = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
@@ -227,7 +227,7 @@
         $scope.customerSelect = function (customer) {
             $scope.$apply(function () {
                 $scope.customer = customer;
-                $scope.customer.fullname = customer.cus_name + ' ' + customer.cus_lastname;
+                $scope.customer.cus_name = customer.cus_name;
             });
             $scope.getCourseData();
             console.log($scope.customer);

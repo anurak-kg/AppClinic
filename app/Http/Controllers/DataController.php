@@ -6,6 +6,7 @@ use App\Course;
 use App\Customer;
 use App\Http\Requests;
 use App\User;
+use yajra\Datatables\Datatables;
 
 class DataController extends Controller
 {
@@ -16,12 +17,18 @@ class DataController extends Controller
         $customer = Customer::
             where('cus_name', 'LIKE', $query)
             ->orWhere('cus_id', 'LIKE', $query)
-            ->orWhere('cus_lastname', 'LIKE', $query)
             ->orWhere('cus_phone', 'LIKE', $query)
             ->get();
         return response()->json($customer);
     }
+    public function getCustomerData(){
+        $customer = Customer::select(['cus_id','cus_name','cus_tel'])->get();
 
+        return Datatables::of($customer)
+            ->addColumn("รายละเอียด", "รายละเอียด",false)
+            ->make();
+
+    }
     public function getUserList()
     {
         $query = '%' . \Input::get('q') . '%';
