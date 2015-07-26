@@ -18,8 +18,6 @@
   border: 1px solid #cccccc;
   border-radius: 3px;
   background-color: #fff;
-  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-  -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
   transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 .checkbox label::after {
@@ -66,7 +64,6 @@
 .checkbox.checkbox-inline {
   margin-top: 0;
 }
-
 .checkbox-primary input[type="checkbox"]:checked + label::before,
 .checkbox-primary input[type="radio"]:checked + label::before {
   background-color: #337ab7;
@@ -76,7 +73,6 @@
 .checkbox-primary input[type="radio"]:checked + label::after {
   color: #fff;
 }
-
 .checkbox-danger input[type="checkbox"]:checked + label::before,
 .checkbox-danger input[type="radio"]:checked + label::before {
   background-color: #d9534f;
@@ -86,7 +82,6 @@
 .checkbox-danger input[type="radio"]:checked + label::after {
   color: #fff;
 }
-
 .checkbox-info input[type="checkbox"]:checked + label::before,
 .checkbox-info input[type="radio"]:checked + label::before {
   background-color: #5bc0de;
@@ -96,7 +91,6 @@
 .checkbox-info input[type="radio"]:checked + label::after {
   color: #fff;
 }
-
 .checkbox-warning input[type="checkbox"]:checked + label::before,
 .checkbox-warning input[type="radio"]:checked + label::before {
   background-color: #f0ad4e;
@@ -106,7 +100,6 @@
 .checkbox-warning input[type="radio"]:checked + label::after {
   color: #fff;
 }
-
 .checkbox-success input[type="checkbox"]:checked + label::before,
 .checkbox-success input[type="radio"]:checked + label::before {
   background-color: #5cb85c;
@@ -116,7 +109,6 @@
 .checkbox-success input[type="radio"]:checked + label::after {
   color: #fff;
 }
-
 .radio {
   padding-left: 20px;
 }
@@ -137,8 +129,6 @@
   border: 1px solid #cccccc;
   border-radius: 50%;
   background-color: #fff;
-  -webkit-transition: border 0.15s ease-in-out;
-  -o-transition: border 0.15s ease-in-out;
   transition: border 0.15s ease-in-out;
 }
 .radio label::after {
@@ -154,11 +144,8 @@
   background-color: #555555;
   -webkit-transform: scale(0, 0);
   -ms-transform: scale(0, 0);
-  -o-transform: scale(0, 0);
   transform: scale(0, 0);
-  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
-  -moz-transition: -moz-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
-  -o-transition: -o-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
   transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
 }
 .radio input[type="radio"] {
@@ -173,7 +160,6 @@
 .radio input[type="radio"]:checked + label::after {
   -webkit-transform: scale(1, 1);
   -ms-transform: scale(1, 1);
-  -o-transform: scale(1, 1);
   transform: scale(1, 1);
 }
 .radio input[type="radio"]:disabled + label {
@@ -185,7 +171,6 @@
 .radio.radio-inline {
   margin-top: 0;
 }
-
 .radio-primary input[type="radio"] + label::after {
   background-color: #337ab7;
 }
@@ -195,7 +180,6 @@
 .radio-primary input[type="radio"]:checked + label::after {
   background-color: #337ab7;
 }
-
 .radio-danger input[type="radio"] + label::after {
   background-color: #d9534f;
 }
@@ -205,7 +189,6 @@
 .radio-danger input[type="radio"]:checked + label::after {
   background-color: #d9534f;
 }
-
 .radio-info input[type="radio"] + label::after {
   background-color: #5bc0de;
 }
@@ -215,7 +198,6 @@
 .radio-info input[type="radio"]:checked + label::after {
   background-color: #5bc0de;
 }
-
 .radio-warning input[type="radio"] + label::after {
   background-color: #f0ad4e;
 }
@@ -225,7 +207,6 @@
 .radio-warning input[type="radio"]:checked + label::after {
   background-color: #f0ad4e;
 }
-
 .radio-success input[type="radio"] + label::after {
   background-color: #5cb85c;
 }
@@ -235,7 +216,6 @@
 .radio-success input[type="radio"]:checked + label::after {
   background-color: #5cb85c;
 }
-
 input[type="checkbox"].styled:checked + label:after,
 input[type="radio"].styled:checked + label:after {
   font-family: 'FontAwesome';
@@ -249,12 +229,12 @@ input[type="checkbox"] .styled:checked + label::after,
 input[type="radio"] .styled:checked + label::after {
   color: #fff;
 }
-
-
-.total-price{
+.total-price {
   font-weight: bolder;
   text-align: right;
 }
-.data-table-search-width{
+.data-table-search-width {
   width: 250px;
 }
+
+/*# sourceMappingURL=app.css.map */
