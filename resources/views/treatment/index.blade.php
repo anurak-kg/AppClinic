@@ -18,12 +18,12 @@
             @endif
 
             <div class="col-md-12">
-                <div class="panel panel-success ">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+                <div class="box box-success ">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div class="row">
                             <div class="col-md-5">
                                 <input class="form-control typeahead input-lg customer-input "
@@ -72,12 +72,12 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-info">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูล คอร์ส</h2>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">ข้อมูล คอร์ส</h2>
                     </div>
 
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div ng-repeat="order in course">
                             รหัสการซื้อ @{{order.quo_id}} ราคา @{{order.price}} ชำระแล้ว .... บาท สถาน ....
                             <table class="table table-bordered" ng-table="tableParams" ng-init="">
