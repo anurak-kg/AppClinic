@@ -7,6 +7,8 @@
 
 @extends('layout.master')
 @section('title','ข้อมูลลูกค้า')
+@section('headText','ข้อมูลลูกค้า')
+
 @section('content')
 
 
@@ -191,12 +193,11 @@
                                 </table>
                             @endforeach
                         </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
                 </div>
             </div>
         </div>
+
         <div class="col-md-12">
             <div class="box box-primary">
 
