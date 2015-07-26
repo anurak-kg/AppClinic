@@ -94,11 +94,11 @@
                     <tr>
                         <td>{{ $course->course_id }}</td>
                         <td>{{ $course->course_name }}</td>
-                        <td>1</td>
+                        <td></td>
                         <td></td>
                         <td><?php echo number_format($total = $course->course_price)?></td>
                         <td><?php echo number_format($dis= $bill->discount,2) ?> </td>
-                        <td><?php echo number_format($bill->price-$dis,2) ?></td>
+                        <td><?php echo number_format($sum= $total-$dis,2) ?></td>
                     </tr>
 
                         @endforeach
@@ -111,7 +111,7 @@
                         <td></td>
                         <td></td>
                     <th>ยอดเงินสุทธิ</th>
-                        <td><?php echo number_format($bill->price-$dis,2) ?></td>
+                        <td><?php echo number_format($sum,2) ?></td>
                     </tr>
                     </tfoot>
                 </table>
