@@ -309,7 +309,7 @@
                         templates: {
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบข้อมูลลูกค้า',
+                                'ไม่พบพนักงาน',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{id}} - @{{name}}</div>')
