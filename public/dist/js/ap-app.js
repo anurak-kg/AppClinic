@@ -41,7 +41,7 @@
         $http.get('/quotations/data_customer').
             success(function (data, status, headers, config) {
                 if (data.status == 'success') {
-                    $scope.customer.fullname = data.full_name;
+                    $scope.customer.fullname = data.cus_name;
                     $scope.customer.tel = data.tel;
                     $scope.customer.cus_id = data.cus_id;
                     $scope.boxSearch = true;
@@ -53,7 +53,7 @@
             });
 
         $scope.customerSelect = function (customer) {
-            $scope.customer.cus_name = customer.cus_name;
+            $scope.customer.fullname = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
@@ -231,6 +231,11 @@
             });
             $scope.getCourseData();
             console.log($scope.customer);
+        }
+        $scope.getYear = function(){
+            var d = new Date();
+            var n = d.getFullYear() + 543;
+            return n;
         }
         $scope.getCourseData = function () {
             $http.get('/treatment/course_data?id=' + $scope.customer.cus_id).

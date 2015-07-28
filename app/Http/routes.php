@@ -17,6 +17,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
+    Route::get('user/resetpassword','UserController@resetPass');
+    Route::post('user/resetpassword','UserController@postResetPassword');
 
     Route::post('user/adddoctor', 'UserController@adddoctor');
     Route::get('user/adddoctor', 'UserController@adddoctor');
@@ -100,14 +102,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('quotations/add', 'QuotationsController@add');
     Route::get('quotations/delete', 'QuotationsController@delete');
     Route::get('quotations/data', 'QuotationsController@getData');
-        //---customer script
-        Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
-        Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
-        Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
-        //---sale script
-        Route::get('quotations/data_sale', 'QuotationsController@getDataSale');
-        Route::get('quotations/set_sale', 'QuotationsController@setSale');
-        Route::get('quotations/remove_sale', 'QuotationsController@removeSale');
+    //---customer script
+    Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
+    Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
+    Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
+    //---sale script
+    Route::get('quotations/data_sale', 'QuotationsController@getDataSale');
+    Route::get('quotations/set_sale', 'QuotationsController@setSale');
+    Route::get('quotations/remove_sale', 'QuotationsController@removeSale');
     Route::get('quotations/save', 'QuotationsController@save');
 
     //Customer
@@ -118,9 +120,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('customer/edit', 'CustomerController@edit');
     Route::get('customer/edit', 'CustomerController@edit');
     Route::any('customer/edit', 'CustomerController@edit');
+    Route::post('customer/view', 'CustomerController@view');
+    Route::get('customer/view', 'CustomerController@view');
+    //Customer calender
     Route::post('customer/calendar', 'Customer_eventController@create');
     Route::get('customer/calendar', 'Customer_eventController@create');
-    //Customer calender
     Route::get('customer_calendar/fetch/', 'Customer_eventController@fetch');
     Route::get('customer_calendar/update/', 'Customer_eventController@update');
     Route::get('customer_calendar/delete/', 'Customer_eventController@delete');
@@ -172,10 +176,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/customer', 'DataController@getCustomerData');
 
     //Report
-    Route::get('report/doctor', 'ReportController@reportDoctorTest');
-    Route::get('report/sale', 'ReportController@reportSalesTest');
-    Route::get('report/coursemonth', 'ReportController@reportCourseMonthTest');
-    Route::get('report/coursehot', 'ReportController@reportCourseHotTest');
+    Route::any('report/doctor', 'ReportController@reportDoctorTest');
+    Route::any('report/sale', 'ReportController@reportSalesTest');
+    Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
+    Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
 
 
 });
@@ -189,6 +193,6 @@ Route::post('/auth',   'UserController@auth');
 Route::controller('admin','AdminController');
 Route::controller('user','UserController');
 Route::get('faker', function () {
- echo factory('App\Customer',50)->create();
+    echo factory('App\Customer',50)->create();
 
 });

@@ -18,12 +18,12 @@
             @endif
 
             <div class="col-md-12">
-                <div class="panel panel-success ">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+                <div class="box box-success ">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div class="row">
                             <div class="col-md-5">
                                 <input class="form-control typeahead input-lg customer-input "
@@ -39,28 +39,28 @@
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">ชื่อ - นามสกุล@{{tesf}}</label>
-                                <input class=" form-control" type="text" ng-model="customer.fullname">
+                                <input class=" form-control" type="text" ng-model="customer.cus_name">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">แพ้ยา</label>
-                                <input class=" form-control" type="text">
+                                <input class=" form-control" type="taginput" ng-model="customer.disease">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">โรคประจำตัว</label>
-                                <input class=" form-control" type="text">
+                                <input class=" form-control" type="taginput" ng-model="customer.allergic">
                             </span>
                             </div>
                             <div class="col-md-1">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">อายุ</label>
-                                <input class=" form-control" type="text">
+                                <input class=" form-control" type="text" value="@{{getYear() - customer.cus_birthday_year }}">
                             </span>
                             </div>
                         </div>
@@ -72,18 +72,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-info">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูล คอร์ส</h2>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">ข้อมูล คอร์ส</h2>
                     </div>
 
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div ng-repeat="order in course">
-                            รหัสการซื้อ @{{order.quo_id}} ราคา @{{order.price}} ชำระแล้ว .... บาท สถาน ....
+                            รหัสการซื้อ @{{order.quo_id}} / ราคา @{{order.price}} ชำระแล้ว .... บาท สถานะ ....
                             <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                 <tr data-ng-repeat=" item in order.course">
 
-                                    <td data-title="'#'">
+                                    <td data-title="'#'" align="middle">
                                         @{{$index+1 }}
                                     </td>
 
@@ -92,19 +92,19 @@
                                         - @{{item.course_detail}}
                                     </td>
 
-                                    <td data-title="'จำนวน'">
+                                    <td data-title="'จำนวน'" align="middle">
                                         @{{item.course_qty}}
                                     </td>
 
-                                    <td style="width: 45px" data-title="'รักษาแล้ว'">
+                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle">
                                         @{{item.pivot.qty}}
                                     </td>
 
                                     <td data-title="'สถานะ'">
-                                        <div ng-bind-html="getTreatStatus(item.pivot.treat_status)"></div>
+                                        <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
 
                                     </td>
-                                    <td data-title="'Action'">
+                                    <td data-title="'กระทำ'" align="middle">
                                         <a class="btn btn-success"
                                            ng-href="{{url('treatment/add')}}?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}"
                                            target="_blank">เข้ารับการรักษา</a>

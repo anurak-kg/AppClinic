@@ -5,27 +5,10 @@
 
     <div class="row">
 
-        <div class="col-md-4">
-            <div class="box box-solid box-default">
-                <div class="box-body">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <button class="btn btn-default pull-right" id="daterange-btn">
-                                <i class="fa fa-calendar"></i> &nbsp; เลือกเดือน &nbsp;
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-8">
-
+        <div class="col-md-12">
 
             <!-- BAR CHART -->
-            <div class="box box-solid box-default">
+            <div class="box box-default">
                 <div class="box-header with-border">
                     <h4 align="middle">ยอดขายแพทย์</h4>
 
@@ -34,8 +17,20 @@
                     </div>
                 </div>
                 <div class="box-body">
+
+                    {!! Form::open(array('url' => 'report/doctor', 'class' => 'form')) !!}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <label>กำหนดระยะเวลา</label><br>
+                            <input class="btn btn-default pull-right" id="daterange" name="doc" placeholder="เลือกระยะเวลา..">
+                            </input><br><br>
+                            <div align="left"> <input type="submit"  class="btn btn-block btn-primary" value="แสดง"></div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+
                     <div class="chart">
-                        <canvas id="barChart" height="700"></canvas>
+                        <canvas id="barChart" height="500"></canvas>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -46,24 +41,24 @@
         <!-- /.col (RIGHT) -->
     </div>
     </div> <!-- /.row -->
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
+    <script src="../../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
 
     <!-- daterange picker -->
-    <link href="/dist/js/daterangepicker.css" rel="stylesheet" type="text/css"/>
-
-    <!-- date-range-picker -->
-    <script src="/dist/js/moment.min.js" type="text/javascript"></script>
-    <script src="/dist/js/daterangepicker.js" type="text/javascript"></script>
+    <link href="../../plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
 
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
+
     <!-- page script -->
-    <script>
+    <script type="text/javascript">
         $(function () {
-
-            //Date range picker
-
-                    $('#daterange-btn').daterangepicker(
+                    var startDate;
+                    var endDate;
+                    //Date range as a button
+                    $('#daterange').daterangepicker(
                             {
                                 ranges: {
                                     'Today': [moment(), moment()],
@@ -77,7 +72,7 @@
                                 endDate: moment()
                             },
                             function (start, end) {
-                                $('#daterange-btn').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                                $('#daterange').html(start.format('YYYY MM DD') + ' - ' + end.format('YYYY MM DD'));
                                 startDate = start;
                                 endDate = end;
                             }
@@ -107,8 +102,8 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = areaChartData;
-            barChartData.datasets[0].fillColor = "#00a65a";
-            barChartData.datasets[0].strokeColor = "#00a65a";
+            barChartData.datasets[0].fillColor = "#c2ffd5";
+            barChartData.datasets[0].strokeColor = "#11ff5b";
             barChartData.datasets[0].pointColor = "#00a65a";
             var barChartOptions = {
                 //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value

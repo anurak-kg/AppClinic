@@ -1,7 +1,5 @@
 @extends('layout.master')
 @section('title','ตารางนัดคิวลูกค้า')
-
-
 @section('content')
 
     <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>
@@ -13,25 +11,25 @@
     <!-- Main content -->
     <div class="row">
         <div class="col-md-3">
-            <div class="panel panel-success">
+            <div class="box box-solid box-success">
 
-                <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                <div class="box-header with-border">
+                    <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
 
-                <div class="panel-body">
+                <div class="box-body">
                     {!! $form !!}
                     {!! Rapyd::scripts() !!}
                 </div>
 
             </div>
-            <div class="panel  panel-danger">
+            <div class="box box-solid box-danger">
 
-                <div class="panel-heading with-border">
-                    <h2 class="panel-title" align="middle">ลบข้อมูล</h2>
+                <div class="box-header with-border">
+                    <h2 class="box-title" align="middle">ลบข้อมูล</h2>
                 </div>
 
-                <div class="panel-body">
+                <div class="box-body">
                     <div id='external-events' align="middle">
                         <p>
                             <img src="/images/trashcan.png" id="trash" alt="">
