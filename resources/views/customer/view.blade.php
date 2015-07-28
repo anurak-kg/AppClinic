@@ -230,9 +230,33 @@
                                             <td>{{ $item->branch_id }}</td>
                                             <td>{{ $item->treat_id }}</td>
                                             <td>{{ $item->course_name }}</td>
-                                            <td>{{ $item->dr_id }}</td>
-                                            <td>{{ $item->bt_user_id1 }}</td>
-                                            <td>{{ $item->bt_user_id2 }}</td>
+                                            <td><?php
+                                                $dr=  \App\User::find($item->dr_id);
+                                                    if ($dr != null) {
+                                                        echo $dr->name;
+                                                    }
+                                               else {
+                                                       echo 'ไม่มีข้อมูล';
+                                               } ?>
+                                            </td>
+                                            <td><?php
+                                                $bt1=  \App\User::find($item->bt_user_id1);
+                                                if ($bt1 != null) {
+                                                    echo $bt1->name;
+                                                }
+                                                else {
+                                                    echo 'ไม่มีข้อมูล';
+                                                } ?>
+                                            </td>
+                                            <td><?php
+                                                $bt2 =  \App\User::find($item->bt_user_id2);
+                                                if ($bt2 != null) {
+                                                    echo $bt2->name;
+                                                }
+                                                else {
+                                                    echo 'ไม่มีข้อมูล';
+                                                } ?>
+                                            </td>
                                             <td >{{ $item->comment }}</td>
                                             <td >{{ $item->treat_date }}</td>
                                         </tr>
