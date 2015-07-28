@@ -53,7 +53,7 @@
             });
 
         $scope.customerSelect = function (customer) {
-            $scope.customer.cus_name = customer.cus_name;
+            $scope.customer.fullname = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
