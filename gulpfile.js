@@ -11,7 +11,7 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.less('app.less');
     mix.scripts(
         [
@@ -21,12 +21,15 @@ elixir(function(mix) {
             'jQuery-2.1.4.min.js',
             'bootstrap.min.js',
             'ui-bootstrap-custom-0.13.1.min.js',
-            'ui-bootstrap-custom-tpls-0.13.1.min.js'
+            'ui-bootstrap-custom-tpls-0.13.1.min.js',
+            'select2.min.js'
         ],
         'public/js/app.js'
     );
     mix.styles([
         'bootstrap.min.css',
-        'select2.css'
+        'font-awesome.min.css',
+        'select2.css',
+        'AdminLTE.min.css'
     ]);
 });
