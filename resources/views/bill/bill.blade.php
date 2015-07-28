@@ -99,9 +99,9 @@
                         <td></td>
                         <td><?php echo number_format($subtotal = $course->course_price)?></td>
                         <td><?php echo number_format($dis= $bill->discount,2) ?> </td>
-                        <td><?php echo number_format($sum = $subtotal-$dis,2) ?></td>
+                        <td><?php echo number_format($subtotal-$dis,2) ?></td>
                     </tr>
-                            <?php $total+=$sum ?>
+                            <?php $total+=($subtotal-$dis) ?>
                         @endforeach
                     </tbody>
                     <tfoot>
