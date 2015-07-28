@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Zofe\Rapyd\DataForm\DataForm;
 use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Requests;
@@ -37,8 +39,8 @@ class UserController extends Controller
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('{{ $position->position_name }}', 'ตำแหน่ง','position_id');
+        $grid->add('<a href="/user/resetpassword/?id={{ $id }}">Reset</a>','Reset Password');
         $grid->edit('/user/edit', 'กระทำ','show|modify');
-        $grid->orderBy('id','desc');
         $grid->paginate(10);
         return $grid;
     }
@@ -150,8 +152,22 @@ class UserController extends Controller
         return \Auth::user()->getRole();
     }
 
-
-
+    public function resetPass()
+    {
+        $user = User::find(Input::get('id'));
+        return view('user/resetpassword',['user' => $user]);
+    }
+    public function postResetPassword(){
+        $user = User::find(Input::get('id'));
+        $reset = \Input::get('pass');
+        //var_dump($reset);
+        $user->password = bcrypt(Input::get($reset));
+        $user->save();
+       // $user->message("success");
+        //return Redirect::to('user/manage')->with('message', 'Login Failed');
+        Session::flash('message', "ได้ทำการเปลี่ยนรหัสผ่านเรียบร้อย");
+        return Redirect::back();
+    }
 
     public function auth(Request $request)
     {

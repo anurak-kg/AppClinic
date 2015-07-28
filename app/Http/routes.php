@@ -17,6 +17,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
+    Route::get('user/resetpassword','UserController@resetPass');
+    Route::post('user/resetpassword','UserController@postResetPassword');
 
     Route::post('user/adddoctor', 'UserController@adddoctor');
     Route::get('user/adddoctor', 'UserController@adddoctor');
