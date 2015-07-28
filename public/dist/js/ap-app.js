@@ -41,7 +41,7 @@
         $http.get('/quotations/data_customer').
             success(function (data, status, headers, config) {
                 if (data.status == 'success') {
-                    $scope.customer.fullname = data.full_name;
+                    $scope.customer.fullname = data.cus_name;
                     $scope.customer.tel = data.tel;
                     $scope.customer.cus_id = data.cus_id;
                     $scope.boxSearch = true;
