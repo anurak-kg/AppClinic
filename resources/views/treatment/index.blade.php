@@ -39,21 +39,21 @@
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">ชื่อ - นามสกุล@{{tesf}}</label>
-                                <input class=" form-control" type="text" ng-model="customer.fullname">
+                                <input class=" form-control" type="text" ng-model="customer.cus_name">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">แพ้ยา</label>
-                                <input class=" form-control" type="text">
+                                <input class=" form-control" type="taginput" ng-model="customer.disease">
                             </span>
                             </div>
                             <div class="col-md-3">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">โรคประจำตัว</label>
-                                <input class=" form-control" type="text">
+                                <input class=" form-control" type="taginput" ng-model="customer.allergic">
                             </span>
                             </div>
                             <div class="col-md-1">
