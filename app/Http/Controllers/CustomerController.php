@@ -23,12 +23,21 @@ class CustomerController extends Controller
 
     public function view()
     {
-        $data = Customer::with('Quotations.course')->where('cus_id',\Input::get('cus_id'))->get()->first();
+        $customer = Customer::with('Quotations.course')->where('cus_id',\Input::get('cus_id'))->get()->first();
 
+        $data = \DB::table('treat_history')
+            ->select('treat_history.branch_id','treat_history.treat_id','course.course_name','users.name',
+                    'treat_history.dr_id', 'treat_history.bt_user_id2', 'treat_history.bt_user_id1', 'treat_history.comment',
+                    'treat_history.treat_date')
+            ->join('quotations','quotations.quo_id','=','treat_history.quo_id')
+            ->join('course','course.course_id','=','treat_history.course_id')
+            ->join('users','users.id','=','treat_history.emp_id')
+            ->where('quotations.cus_id','=',$customer->cus_id)
+            ->orderby('treat_id','desc')
+            ->get();
+        //  return response()->json($data);
 
-        // return response()->json($data);
-
-         return view('customer/view',['data'=>$data]);
+          return view('customer/view',['data'=>$customer,'treat'=>$data]);
     }
 
 

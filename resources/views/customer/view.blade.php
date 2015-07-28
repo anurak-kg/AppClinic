@@ -210,27 +210,36 @@
                 </div>
 
                 <div class="box-body">
-
-                    <div class="col-md-12">
-                        <br>
+                    <div class="row">
+                        <div class="col-xs-12 table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>สาขา</th>
+                                        <th>รหัสการรักษา</th>
+                                        <th>ชื่อคอร์ส</th>
+                                        <th>แพทย์</th>
+                                        <th>ผู้ช่วย1</th>
+                                        <th>ผู้ช่วย2</th>
+                                        <th>รายละเอียด</th>
+                                        <th>วันที่รักษา</th>
+                                    </tr>
+                                    </thead>
+                                    @foreach($treat as $item)
+                                        <tr>
+                                            <td>{{ $item->branch_id }}</td>
+                                            <td>{{ $item->treat_id }}</td>
+                                            <td>{{ $item->course_name }}</td>
+                                            <td>{{ $item->dr_id }}</td>
+                                            <td>{{ $item->bt_user_id1 }}</td>
+                                            <td>{{ $item->bt_user_id2 }}</td>
+                                            <td >{{ $item->comment }}</td>
+                                            <td >{{ $item->treat_date }}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                        </div>
                     </div>
-
-                    <div class="col-md-12">
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        <br>
-                    </div>
-
-                    <div class="col-md-12">
-                        <br>
-                    </div>
-
                 </div>
             </div>
         </div>
