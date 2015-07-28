@@ -25,4 +25,8 @@ elixir(function(mix) {
         ],
         'public/js/app.js'
     );
+    mix.styles([
+        'bootstrap.min.css',
+        'select2.css'
+    ]);
 });

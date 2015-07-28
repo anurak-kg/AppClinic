@@ -1,6 +1,13 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable','ui.bootstrap']);
+    var app = angular.module('application', ['ngTable','ui.bootstrap'])
+        .directive('onLastRepeat', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last) setTimeout(function(){
+                scope.$emit('onRepeatLast', element, attrs);
+            }, 1);
+        };
+    });
     app.controller('quotationsController', function ($scope, $http, ngTableParams,$modal) {
         $scope.product = [];
         $scope.customer = [];
@@ -265,9 +272,138 @@
             return $sce.trustAsHtml(text);
         }
     });
-})
+    app.controller('orderController', function ($scope, $http, ngTableParams,$modal) {
+        $scope.product = [];
+        $scope.customer = [];
+        $scope.quo_id = null;
+        $scope.dataLoading = false;
+        $scope.boxSearch = false;
+        $scope.SaleBoxSearch = false;
+        $scope.Vat = 7;
+        $scope.controller ='/order'
+        //$scope.modalInstance = null;
+        $scope.tableParams = new ngTableParams({}, {
+            data: $scope.product
+        })
+        $scope.init = function(vat,quo_id) {
+            $scope.quo_id = quo_id;
+            $scope.Vat= vat;
+        }
+        $scope.customerSelect = function (customer) {
+            $scope.customer.cus_name = customer.cus_name;
+            $scope.customer.tel = customer.cus_tel;
+            $scope.customer.cus_id = customer.cus_id;
+            $scope.dataLoading = true;
+            console.log(customer)
+            $http.get($scope.controller+'/set_vender?id=' + customer.cus_id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    console.log('error' + headers)
 
-();
+                });
+            $scope.$apply(function () {
+                $scope.boxSearch = true;
+            });
+        }
+        $scope.pushProduct = function (product) {
+            $scope.product.push(product);
+            $scope.product = $scope.pushDuplicateCheck();
+            $scope.getAddProduct(product.product_id);
+            $scope.tableParams.reload();
+            $scope.clearSearch();
+        }
+        $scope.clearSearch = function () {
+            $scope.courseSearchBox = ""
+        }
+
+        $scope.getAddProduct = function (id) {
+            $scope.dataLoading = true;
+            $http.get('/order/addproduct?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
+        }
+
+
+        $scope.deleteById = function (id) {
+            $scope.product = $scope.product
+                .filter(function (el) {
+                    return el.course_id !== id;
+                });
+            $scope.dataLoading = true;
+            $http.get('/quotations/delete?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status)
+                    $scope.dataLoading = false;
+                });
+            $scope.tableParams.reload();
+
+        }
+        $scope.open = function () {
+
+            $scope.modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'payment.html',
+                controller: 'quotationsController',
+                scope:$scope
+
+            });
+
+            $scope.modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+            });
+        };
+
+        $scope.cancel = function () {
+            $scope.modalInstance.dismiss();
+        };
+
+        $scope.payment = function(){
+            window.location.href = '/quotations/save';
+        }
+        $scope.paymentAndPrint = function(id){
+            window.open(
+                '/bill/bill?quo_id='+id,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+            window.location.href = '/quotations/save';
+        }
+        $scope.pushDuplicateCheck = function () {
+            var arr = $scope.product;
+            var results = [];
+            var idsSeen = {}, idSeenValue = {};
+            for (var i = 0, len = arr.length, id; i < len; ++i) {
+                id = arr[i].id;
+                if (idsSeen[id] !== idSeenValue) {
+                    results.push(arr[i]);
+                    idsSeen[id] = idSeenValue;
+                }
+            }
+            return results;
+        }
+    });
+    app.controller('courseController',function($scope,$http){
+
+        $http.get("/data/product").
+            success(function (data, status, headers, config) {
+                    $scope.product = data;
+               }).
+            error(function (data, status, headers, config) {
+                console.log('error' + headers)
+            });
+    });
+
+})();
 /**
  * Created by Anurak on 26/06/58.
  */
