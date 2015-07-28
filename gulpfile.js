@@ -22,7 +22,9 @@ elixir(function (mix) {
             'bootstrap.min.js',
             'ui-bootstrap-custom-0.13.1.min.js',
             'ui-bootstrap-custom-tpls-0.13.1.min.js',
-            'select2.min.js'
+            'select.min.js',
+            //'select2.min.js',
+            'angular-sanitize.min.js'
         ],
         'public/js/app.js'
     );
@@ -30,6 +32,9 @@ elixir(function (mix) {
         'bootstrap.min.css',
         'font-awesome.min.css',
         'select2.css',
+        'select2-bootstrap.css',
+        'select.min.css',
         'AdminLTE.min.css'
+
     ]);
 });
