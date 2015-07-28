@@ -232,6 +232,11 @@
             $scope.getCourseData();
             console.log($scope.customer);
         }
+        $scope.getYear = function(){
+            var d = new Date();
+            var n = d.getFullYear() + 543;
+            return n;
+        }
         $scope.getCourseData = function () {
             $http.get('/treatment/course_data?id=' + $scope.customer.cus_id).
                 success(function (data, status, headers, config) {
