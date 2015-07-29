@@ -185,6 +185,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/login',    'UserController@getLogin');
+Route::get('/login',    'UserController@getName');
 Route::get('user/logout',    'UserController@getLogout');
 
 

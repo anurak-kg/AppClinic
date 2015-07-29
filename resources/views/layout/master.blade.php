@@ -9,6 +9,8 @@
     <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
     <script src="/dist/js/typeahead.bundle.min.js"></script>
     <script src="/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/dist/js/select2.min.js"></script>
     <script src="/locales/bootstrap-datepicker.th.min.js"></script>
 
     <!-- ห้ามลบ -->

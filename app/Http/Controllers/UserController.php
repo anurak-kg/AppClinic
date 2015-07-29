@@ -8,6 +8,7 @@ use App\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
@@ -183,6 +184,15 @@ class UserController extends Controller
         }
         return back()->withErrors([Lang::get('user.loginFailed')])
             ->withInput($request->only('username', 'remember'));
+    }
+
+    public function getName() {
+
+        $data = DB::table('branch')
+            ->select('branch_name')
+            ->get();
+
+        return view('/login',['data'=> $data]);
     }
 
 
