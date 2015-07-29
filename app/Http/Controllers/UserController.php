@@ -115,6 +115,7 @@ class UserController extends Controller
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์');
         $form->text('email', 'Email')->rule('required|email|unique:users');
+        $form->add('position_id','','hidden')->insertValue(4);
         $form->text('license','เลขใบประกอบวิชาชีพ');
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
@@ -127,7 +128,7 @@ class UserController extends Controller
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
-            $user->position_id = Input::get('4');
+            $user->position_id = Input::get('position_id');
             $user->save();
             $form->message("ok record saved");
             $form->link("user/adddoctor", "back to the form");
