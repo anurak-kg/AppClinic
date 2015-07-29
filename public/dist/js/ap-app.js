@@ -272,7 +272,7 @@
             return $sce.trustAsHtml(text);
         }
     });
-    app.controller('orderController', function ($scope, $http, ngTableParams, $modal) {
+    app.controller('orderController', function ($scope, $http,ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
         $scope.quo_id = null;
@@ -281,7 +281,7 @@
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
         $scope.controller = '/order'
-        //$scope.modalInstance = null;
+
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
@@ -310,9 +310,9 @@
         }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
-            $scope.product = $scope.pushDuplicateCheck();
+           // $scope.product = $scope.pushDuplicateCheck();
             $scope.getAddProduct(product.product_id);
-            $scope.tableParams.reload();
+           // $scope.clearAndReload();
             $scope.clearSearch();
         }
         $scope.clearSearch = function () {
@@ -324,12 +324,19 @@
             $http.get('/order/addproduct?id=' + id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
                 }).
                 error(function (data, status, headers, config) {
                     $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
                 });
         }
 
+        $scope.clearAndReload =function(){
+            $scope.tableParams.reload()
+        }
 
         $scope.deleteById = function (id) {
             $scope.product = $scope.product

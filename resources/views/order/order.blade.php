@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table class="table table-bordered" ng-table="tableParams" ng-init="">
+                                    <table class="table table-bordered" ng-table="tableParams">
                                         <tr ng-repeat="item in product">
                                             <td style="width: 5px">
                                                 <button class="btn btn-box-tool" data-widget="remove"
@@ -118,6 +118,7 @@
                                         </tr>
 
                                     </table>
+                                    <button ng-click="tableParams.reload()" class="btn pull-right">Reload</button>
 
                                     <div class="col-md-10">
                                         <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
@@ -149,6 +150,7 @@
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     remote: {
                         url: '/order/productdata?q=%QUERY',
+                        //url: '/quotations/course_query?q=%QUERY',
                         wildcard: '%QUERY'
                     }
                 });
