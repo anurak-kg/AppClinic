@@ -17,6 +17,7 @@ class CreateTableVendor extends Migration
             $table->string('ven_name',30);
             $table->text('ven_address');
             $table->string('ven_sell_name',30);
+            $table->string('ven_code',13);
             $table->string('ven_sell_tel',10);
             $table->timestamps();
         });
