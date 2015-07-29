@@ -393,10 +393,29 @@
         }
     });
     app.controller('courseController', function ($scope, $http) {
-        $scope.course_medicine= {};
-        $scope.selected = 2;
+        $scope.course_medicine= [];
+        $scope.medicine= {};
+        $scope.qtyValue=0;
+        $scope.count = 0;
+        $scope.jsonData= undefined;
         $scope.addMedicine = function(id){
-            alert(id);
+            var course =
+            {
+                    id:             $scope.count,
+                    product_id:     $scope.medicine.selected.product_id,
+                    product_name:   $scope.medicine.selected.product_name,
+                    qty:            $scope.qtyValue
+            }
+            $scope.course_medicine.push(course);
+            $scope.count++;
+            $scope.jsonData = JSON.stringify($scope.course_medicine);
+            console.log( $scope.course_medicine);
+        }
+        $scope.form = {
+            course_name: ''
+        }
+        $scope.submit = function(){
+            alert($scope.form);
         }
         $scope.showText =function(text1,text2){
             return text1 + ' ' + text2;
@@ -404,11 +423,6 @@
         $scope.scopeMessage = "default text";
         var changeCount = 0;
 
-        $scope.onSelectChange = function()
-        {
-            changeCount++;
-            $scope.scopeMessage = "Change detected: " + changeCount;
-        };
         $http.get("/data/product").
             success(function (data, status, headers, config) {
                 $scope.product = data;

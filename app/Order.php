@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'order';
-    protected $primarykey = 'order_id';
+    protected $primaryKey = 'order_id';
 
     public function user()
     {
@@ -19,11 +19,11 @@ class Order extends Model
         return $this->belongsTo('\App\Vendor', 'ven_id');
     }
 
-    public function product()
-    {
-        return $this->hasMany('\App\Product');
-    }
+    public function product(){
 
+        return $this->belongsToMany('App\Product','order_detail','order_id','product_id')
+            ->withPivot('order_de_qty','order_de_price','order_de_discount','created_at');
+    }
     public function Receive()
     {
         return $this->hasMany('\App\Receive');

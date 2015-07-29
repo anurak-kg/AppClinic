@@ -25,20 +25,17 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::any('user/editdoc', 'UserController@editdoc');
     //Course
-    Route::post('course/index', 'CourseController@create');
-    Route::get('course/index', 'CourseController@create');
-    Route::post('course/create', 'CourseController@create');
+    Route::get('course/index', 'CourseController@grid');
     Route::get('course/create', 'CourseController@create');
     Route::any('course/edit', 'CourseController@edit');
-    //End Course
+    Route::post('course/create', 'CourseController@postCourse');
 
-    //Course
+    //Receive
     Route::post('receive/index', 'ReceiveController@grid');
     Route::get('receive/index', 'ReceiveController@grid');
     Route::post('receive/create', 'ReceiveController@create');
     Route::get('receive/create', 'ReceiveController@create');
     Route::any('receive/edit', 'ReceiveController@edit');
-    //End Course
 
     //Product Type
     Route::post('product_type/index', 'Product_typeController@grid');
@@ -141,10 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('product/edit', 'ProductController@edit');
 
     //Order
-    Route::get('order/index', 'OrderController@z');
-    Route::post('order/create', 'OrderController@create');
-    Route::get('order/create', 'OrderController@create');
-    Route::any('order/edit', 'OrderController@edit');
+    Route::controller('order','OrderController');
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
@@ -174,6 +168,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/customer_search', 'DataController@getCustomerList');
     Route::get('data/user_search', 'DataController@getUserList');
     Route::get('data/customer', 'DataController@getCustomerData');
+    Route::get('data/product', 'DataController@getProductList');
 
     //Report
     Route::any('report/doctor', 'ReportController@reportDoctorTest');
@@ -196,4 +191,7 @@ Route::controller('user','UserController');
 Route::get('faker', function () {
     echo factory('App\Customer',50)->create();
 
+});
+Route::get('test', function () {
+return view('template');
 });

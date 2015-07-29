@@ -2,98 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
+use App\Branch;
 use App\Order;
-use App\Quotations;
-use App\User;
-use ClassesWithParents\D;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Product;
+use Auth;
 
-use Zofe\Rapyd\Facades\DataForm;
-use Zofe\Rapyd\Facades\DataGrid;
-use Zofe\Rapyd\Facades\DataEdit;
-use Illuminate\Support\Facades\Input;
 class OrderController extends Controller
 {
-
-    public function index()
+    public function getIndex()
     {
-        $order = Order::orderBy('order_id')->with('branch','user','vendor','product')->get();
-
-     return response()->json($order);
-
-      // return view("order/index",['order' => $order]);
+        if (Order::where('order_status',"WAITING")->where('branch_id',Branch::getCurrentId())->count() == 0) {
+            $order = new Order();
+            $order->emp_id = Auth::user()->getAuthIdentifier();
+            $order->branch_id =  Branch::getCurrentId();
+            $order->order_status = "WAITING";
+            $order->save();
+            return $this->render();
+        } else {
+            return $this->render();
+        }
     }
-
-    public function getDataGrid(){
-        $grid = DataGrid::source(Order::with('user'));
-        $grid->attributes(array("class"=>"table table-hover"));
-        $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('order_id', 'เลขที่ใบสั่งซื้อ',true);
-
-        $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
-        $grid->add('created_at', 'วันที่สั่งซื้อ');
-        $grid->add('order_total', 'ราคารวม');
-
-
-        $grid->edit('/order/edit', 'กระทำ','modify|delete');
-        $grid->link('order/create',"เพิ่มข้อมูลใหม่", "TR");
-
-        $grid->paginate(10);
-        return $grid;
-    }
-
-
-    public function grid(){
-
-        $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('order_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
-
-        return view('order/index', compact('grid'));
-    }
-
-    public function create()
+    private function render()
     {
-
-        $form = DataEdit::source(new Order());
-        $form->add('id', 'ชื่อพนักงานสั่งซื้อ','select')->rule('required')->options(User::lists('name','id')->toArray());
-        $form->text('order_total', 'ราคารวม')->rule('required')->attributes(array('placeholder'=>'โปรดระบุราคารวม....'));
-
-        $form->attributes(array("class" => " "));
-
-
-        $form->saved(function () use ($form) {
-
-            $form->message("เพิ่มข้อมูลเรียบร้อย");
-            $form->link("order/index", "ย้อนกลับ");
-        });
-
-
-        return view('order/create', compact('form'));
+        return view('order.order', [
+            'data' => Order::findOrFail($this->getId())
+        ]);
     }
-
-
-    public function edit()
+    private function getId()
     {
-        if (Input::get('do_delete')==1) return  "not the first";
+        $quo = Order::where('order_status', "WAITING")
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
+            ->where('branch_id',Branch::getCurrentId())
+            ->firstOrFail();
+        return $quo->order_id;
+    }
+    public function getProductdata()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $product = Product::
+        where('product_id', 'LIKE', $query)
+            ->orWhere('product_name', 'LIKE', $query)
+            ->get();
+        return response()->json($product);
+    }
+    public function getAddproduct()
+    {
+        $id = \Input::get('id');
+        $rec = Order::find($this->getId());
+        $product = Product::find($id);
+        $rec->product()->attach($product, [
+            'order_de_qty' => 0,
+            'order_de_price'  =>$product->product_price,
+            'order_de_discount'=>0,
+            'order_de_disamount'=>0,
+            'order_de_total'=>$product->product_price,
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
-        $edit = DataEdit::source(new Order());
+        ]);
+        $status = "ok";
+        return response()->json([
+            'status' => $status,
+        ]);
 
-        $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
-        $edit->add('id', 'พนักงานสั่งซื้อ','select')->options(User::lists('name','id')->toArray());
-        $edit->text('order_total', 'ราคารวม');
+    }
+    public function getSet_vender()
+    {
+        $cus_id = \Input::get('id');
+        $quo = Order::findOrFail($this->getId());
+        $quo->ven_id = $cus_id;
+        $quo->save();
+        return response()->json(['status' => 'success']);
 
-        $edit->attributes(array("class" => " "));
-
-
-        return $edit->view('order/edit', compact('edit'));
     }
 
 

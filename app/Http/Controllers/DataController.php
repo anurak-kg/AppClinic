@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Customer;
 use App\Http\Requests;
+use App\Product;
 use App\User;
 use yajra\Datatables\Datatables;
 
@@ -40,6 +41,10 @@ class DataController extends Controller
             ->orWhere('name', 'LIKE', $query)
             ->get();
         return response()->json($customer);
+    }
+    public function getProductList(){
+        $product = Product::all();
+        return response()->json($product);
     }
     public function getCourseList()
     {
