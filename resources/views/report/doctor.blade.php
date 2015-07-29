@@ -30,7 +30,7 @@
                     {!! Form::close() !!}
 
                     <div class="chart">
-                        <canvas id="barChart" height="500"></canvas>
+                        <canvas id="barChart" height="300"></canvas>
                     </div>
                 </div>
                 <!-- /.box-body -->

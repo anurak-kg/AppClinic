@@ -23,6 +23,7 @@ class CourseController extends Controller
         $grid->add('course_id', 'รหัสคอร์ส',true);
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->edit('/course/edit', 'กระทำ','modify|delete');
+        $grid->link('course/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
         return $grid;
