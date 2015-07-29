@@ -28,12 +28,12 @@ class VendorController extends Controller
 
         $grid->add('ven_id', 'รหัสร้านค้า',true);
         $grid->add('ven_name', 'ชื่อร้านค้า');
+        $grid->add('ven_code', 'หมายเลขประจำตัวผู้เสียภาษี');
         $grid->add('ven_address', 'ที่อยู่ร้านค้า');
         $grid->add('ven_sell_name', 'ชื่อพนักงานขาย');
         $grid->add('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
 
         $grid->edit('/vendor/edit', 'กระทำ','modify|delete');
-        $grid->link('vendor/create',"เพิ่มข้อมูลใหม่", "TR");
         $grid->paginate(10);
         return $grid;
     }
@@ -57,6 +57,7 @@ class VendorController extends Controller
         $form = DataEdit::source(new Vendor());
         $form->text('ven_id', 'รหัสร้านค้า')->rule('required|unique:vendor,ven_id')->attributes(array('placeholder'=>'โปรดระบุรหัสร้านค้า....'));
         $form->text('ven_name', 'ชื่อร้านค้า')->rule('required|unique:vendor,ven_name')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
+        $form->text('ven_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required|unique:vendor,ven_code|numeric')->attributes(array('maxlength' => 13, 'minlength' => 13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
         $form->textarea('ven_address', 'ที่อยู่ร้านค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_name', 'ชื่อพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
         $form->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย')->rule('required')->attributes(array('placeholder'=>'โปรดระบุที่อยู่ร้านค้า....'));
@@ -77,6 +78,7 @@ class VendorController extends Controller
 
         $edit = DataEdit::source(new Vendor());
         $edit->text('ven_id', 'รหัสร้านค้า');
+        $edit->text('ven_name', 'ชื่อร้านค้า');
         $edit->text('ven_name', 'ชื่อร้านค้า');
         $edit->textarea('ven_address', 'ที่อยู่ร้านค้า')->attributes(array('rows'=>4));
         $edit->text('ven_sell_name', 'ชื่อพนักงานขาย');
