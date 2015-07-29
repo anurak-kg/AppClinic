@@ -38,7 +38,8 @@
         $(document).ready(function () {
             $('#customer').dataTable( {
                 processing: true,
-                serverSide: true,
+               // serverSide: true,
+                "searching": true,
                 "ajax": '{{url('data/customer')}}',
 
             } );
