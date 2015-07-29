@@ -28,7 +28,6 @@ class BranchController extends Controller
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
         $grid->edit('/branch/edit', 'กระทำ','modify|delete');
-        $grid->link('branch/create',"เพิ่มข้อมูลใหม่", "TR");
 
         $grid->paginate(10);
         return $grid;
