@@ -236,5 +236,9 @@ input[type="radio"] .styled:checked + label::after {
 .data-table-search-width {
   width: 250px;
 }
+.loading {
+  font-size: 45px;
+  color: #024665;
+}
 
 /*# sourceMappingURL=app.css.map */

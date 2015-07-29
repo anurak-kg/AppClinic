@@ -1,9 +1,20 @@
 @extends('layout.master')
 @section('title','การสั่งซื้อสินค้า')
+@section('headText','สั่งซื้อสินค้า')
+@section('headDes','ออกใบสั่งซื้อสินค้า')
+
 @section('content')
-    <div ng-controller="orderController" id="order" ng-init="init({{config('shop.vat')}},{{$data->order_id}})">
+    <div ng-controller="orderController" id="order">
 
         <div class="row">
+            @if( Session::get('message') != null )
+                <div class="col-md-12">
+                    <div class="callout callout-success">
+                        <h4>Success!</h4>
+                        <p>{{Session::get('message')}}.</p>
+                    </div>
+                </div>
+            @endif
             <div class="col-md-4">
                 <div class="panel  panel-success">
                     <div class="panel-heading with-border">
@@ -95,35 +106,57 @@
                                             <td data-title="'#'" style="width: 10px">
                                                 @{{$index+1}}
                                             </td>
-                                            <td data-title="'ราคา'">
-                                                @{{item.product_name }}
+                                            <td data-title="'สินค้า'">
+                                                @{{item.product.product_name }}
+                                            </td>
+                                            <td data-title="'จำนวน'" style="width: 80px">
+                                                <input type="number"
+                                                       ng-model="item.order_de_qty"
+                                                       ng-change="update('order_de_qty',item.product_id,item.order_de_qty)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'ราคาทุน'" style="width:180px">
+                                                <form class="form-inline">
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="exampleInputAmount"></label>
+                                                        <div class="input-group">
+                                                            <input type="text"
+                                                                   ng-model="item.order_de_price"
+                                                                   ng-change="update('order_de_price',item.product.product_id,item.order_de_price)"
+                                                                   ng-model-options="{debounce: 750}"
+                                                                   class="form-control"
+                                                                   id="exampleInputAmount" >
+                                                            <div class="input-group-addon">/ @{{ item.product.product_unit }}</div>
+                                                        </div>
+                                                    </div>
+                                                </form>                                            </td>
+
+                                            <td data-title="'ราคารวม'"  style="width:140px;text-align: center">
+                                                @{{ item.order_de_qty*item.order_de_price  | number}}
                                             </td>
 
 
-
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Subtotal:</td>
-                                            <td> บาท</td>
+                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td>@{{ getTotal() | number}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Tax(7%):</td>
-                                            <td>บาท
+                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td>0 บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Total:</td>
-                                            <td>             บาท
+                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td> @{{ getTotal() | number}} บาท
                                             </td>
                                         </tr>
 
                                     </table>
-                                    <button ng-click="tableParams.reload()" class="btn pull-right">Reload</button>
-
                                     <div class="col-md-10">
-                                        <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ยืนยัน
-                                                การชำระเงิน </i></a>
+                                        <a href="{{url('order/save')}}" class="btn btn-md btn-success pull-right"><i
+                                                    class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
                                     </div>
 
                                 </div>
@@ -212,7 +245,11 @@
                             }
                         })
                         .on('typeahead:selected', function ($e, datum) {
-                            product = datum;
+                            product = {
+                                id : datum.product_id,
+                                order_de_qty :1,
+                                product: datum }
+
                             console.log(product);
                             angular.element(document.getElementById('order')).scope().pushProduct(product);
 

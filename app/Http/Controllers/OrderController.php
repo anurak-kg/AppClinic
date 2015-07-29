@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use App\Branch;
 use App\Order;
 use App\Http\Requests;
+use App\Order_detail;
 use App\Product;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class OrderController extends Controller
 {
     public function getIndex()
     {
-        if (Order::where('order_status',"WAITING")->where('branch_id',Branch::getCurrentId())->count() == 0) {
+        if (Order::where('order_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
             $order = new Order();
             $order->emp_id = Auth::user()->getAuthIdentifier();
-            $order->branch_id =  Branch::getCurrentId();
+            $order->branch_id = Branch::getCurrentId();
             $order->order_status = "WAITING";
             $order->save();
             return $this->render();
@@ -23,29 +26,63 @@ class OrderController extends Controller
             return $this->render();
         }
     }
+
     private function render()
     {
         return view('order.order', [
             'data' => Order::findOrFail($this->getId())
         ]);
     }
+
     private function getId()
     {
         $quo = Order::where('order_status', "WAITING")
             ->where('emp_id', Auth::user()->getAuthIdentifier())
-            ->where('branch_id',Branch::getCurrentId())
+            ->where('branch_id', Branch::getCurrentId())
             ->firstOrFail();
         return $quo->order_id;
     }
+
+    public function getSave()
+    {
+        $order = Order::find($this->getId());
+        $order->order_total = $this->getTotal();
+        $order->order_status = "PENDING";
+        // $order->quo_date = null;
+        $order->save();
+        return redirect('order')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+    }
+
+    public function getTotal()
+    {
+        $sum = DB::table('order_detail')
+            ->select(DB::raw('SUM(order_de_qty*order_de_price) as total'))
+            ->where('order_id', $this->getId())
+            ->get();
+        return $sum[0]->total;
+    }
+
     public function getProductdata()
     {
         $query = '%' . \Input::get('q') . '%';
-        $product = Product::
-        where('product_id', 'LIKE', $query)
+        $product = Product::where('product_id', 'LIKE', $query)
             ->orWhere('product_name', 'LIKE', $query)
             ->get();
         return response()->json($product);
     }
+
+    public function getUpdate()
+    {
+        $type = Input::get('type');
+        $value = Input::get('value');
+        $id = Input::get('id');
+        $r = DB::table('order_detail')
+            ->where('order_id', "=", $this->getId())
+            ->where('product_id', "=", $id)
+            ->update([$type => $value]);
+        return response()->json(['status' => 'Success']);
+    }
+
     public function getAddproduct()
     {
         $id = \Input::get('id');
@@ -53,13 +90,12 @@ class OrderController extends Controller
         $product = Product::find($id);
         $rec->product()->attach($product, [
             'order_de_qty' => 0,
-            'order_de_price'  =>$product->product_price,
-            'order_de_discount'=>0,
-            'order_de_disamount'=>0,
-            'order_de_total'=>$product->product_price,
+            'order_de_price' => $product->product_price,
+            'order_de_discount' => 0,
+            'order_de_disamount' => 0,
+            'order_de_total' => $product->product_price,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-
         ]);
         $status = "ok";
         return response()->json([
@@ -67,6 +103,15 @@ class OrderController extends Controller
         ]);
 
     }
+
+    public function getData()
+    {
+        $data = Order_detail::with(['Product'])
+            ->where('order_id', "=", $this->getId())
+            ->get();
+        return response()->json($data);
+    }
+
     public function getSet_vender()
     {
         $cus_id = \Input::get('id');
@@ -74,7 +119,6 @@ class OrderController extends Controller
         $quo->ven_id = $cus_id;
         $quo->save();
         return response()->json(['status' => 'success']);
-
     }
 
 

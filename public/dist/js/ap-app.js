@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable', 'ui.bootstrap','ngSanitize', 'ui.select'])
+    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select'])
         .directive('onLastRepeat', function () {
             return function (scope, element, attrs) {
                 if (scope.$last) setTimeout(function () {
@@ -272,11 +272,11 @@
             return $sce.trustAsHtml(text);
         }
     });
-    app.controller('orderController', function ($scope, $http,ngTableParams) {
+    app.controller('orderController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
         $scope.quo_id = null;
-        $scope.dataLoading = false;
+        $scope.dataLoading = true;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
@@ -285,10 +285,18 @@
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
-        $scope.init = function (vat, quo_id) {
-            $scope.quo_id = quo_id;
-            $scope.Vat = vat;
-        }
+        $http.get($scope.controller + '/data').
+            success(function (data, status, headers, config) {
+                $scope.product = data;
+                console.log($scope.product);
+                $scope.dataLoading = false;
+
+                $scope.tableParams.reload();
+            }).error(function (data, status, headers, config) {
+                $scope.dataLoading = false;
+
+            });
+
         $scope.customerSelect = function (customer) {
             $scope.customer.cus_name = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
@@ -310,18 +318,31 @@
         }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
-           // $scope.product = $scope.pushDuplicateCheck();
-            $scope.getAddProduct(product.product_id);
-           // $scope.clearAndReload();
+            $scope.product = $scope.pushDuplicateCheck();
+            $scope.getAddProduct(product.product.product_id);
+            console.log($scope.product);
+            // $scope.clearAndReload();
             $scope.clearSearch();
         }
         $scope.clearSearch = function () {
-            $scope.courseSearchBox = ""
+            $scope.productSearchBox = ""
+        }
+        $scope.update = function (type, product_id, value) {
+            $scope.dataLoading = true;
+
+            var url = $scope.controller + '/update?id=' + product_id + '&type=' + type + '&value=' + value;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
         }
 
         $scope.getAddProduct = function (id) {
             $scope.dataLoading = true;
-            $http.get('/order/addproduct?id=' + id).
+            $http.get($scope.controller + '/addproduct?id=' + id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                     $scope.tableParams.reload();
@@ -333,11 +354,6 @@
 
                 });
         }
-
-        $scope.clearAndReload =function(){
-            $scope.tableParams.reload()
-        }
-
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
@@ -355,35 +371,15 @@
             $scope.tableParams.reload();
 
         }
-        $scope.open = function () {
+        $scope.getTotal = function () {
+            var total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                //console.log(product);
+                total += parseInt(product.order_de_price * product.order_de_qty );
+            }
 
-            $scope.modalInstance = $modal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'payment.html',
-                controller: 'quotationsController',
-                scope: $scope
-
-            });
-
-            $scope.modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-            });
-        };
-
-        $scope.cancel = function () {
-            $scope.modalInstance.dismiss();
-        };
-
-        $scope.payment = function () {
-            window.location.href = '/quotations/save';
-        }
-        $scope.paymentAndPrint = function (id) {
-            window.open(
-                '/bill/bill?quo_id=' + id,
-                '_blank' // <- This is what makes it open in a new window.
-            );
-            window.location.href = '/quotations/save';
+            return total;
         }
         $scope.pushDuplicateCheck = function () {
             var arr = $scope.product;
@@ -400,31 +396,31 @@
         }
     });
     app.controller('courseController', function ($scope, $http) {
-        $scope.course_medicine= [];
-        $scope.medicine= {};
-        $scope.qtyValue=0;
+        $scope.course_medicine = [];
+        $scope.medicine = {};
+        $scope.qtyValue = 0;
         $scope.count = 0;
-        $scope.jsonData= undefined;
-        $scope.addMedicine = function(id){
+        $scope.jsonData = undefined;
+        $scope.addMedicine = function (id) {
             var course =
             {
-                    id:             $scope.count,
-                    product_id:     $scope.medicine.selected.product_id,
-                    product_name:   $scope.medicine.selected.product_name,
-                    qty:            $scope.qtyValue
+                id: $scope.count,
+                product_id: $scope.medicine.selected.product_id,
+                product_name: $scope.medicine.selected.product_name,
+                qty: $scope.qtyValue
             }
             $scope.course_medicine.push(course);
             $scope.count++;
             $scope.jsonData = JSON.stringify($scope.course_medicine);
-            console.log( $scope.course_medicine);
+            console.log($scope.course_medicine);
         }
         $scope.form = {
             course_name: ''
         }
-        $scope.submit = function(){
+        $scope.submit = function () {
             alert($scope.form);
         }
-        $scope.showText =function(text1,text2){
+        $scope.showText = function (text1, text2) {
             return text1 + ' ' + text2;
         }
         $scope.scopeMessage = "default text";

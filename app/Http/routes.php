@@ -12,13 +12,12 @@
 */
 
 
-
 Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
-    Route::get('user/resetpassword','UserController@resetPass');
-    Route::post('user/resetpassword','UserController@postResetPassword');
+    Route::get('user/resetpassword', 'UserController@resetPass');
+    Route::post('user/resetpassword', 'UserController@postResetPassword');
 
     Route::post('user/adddoctor', 'UserController@adddoctor');
     Route::get('user/adddoctor', 'UserController@adddoctor');
@@ -80,19 +79,17 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', 'HomeController@dashboard');
-    Route::get('/dashboard', 'HomeController@dashboard');
-    Route::get('/', 'HomeController@dashboard');
 
     //Treatment
-    Route::get('treatment','TreatmentController@treatment');
-    Route::get('treatment/course_data','TreatmentController@getCourseData');
-    Route::get('treatment/add','TreatmentController@add');
-    Route::post('treatment/save','TreatmentController@save');
+    Route::get('treatment', 'TreatmentController@treatment');
+    Route::get('treatment/course_data', 'TreatmentController@getCourseData');
+    Route::get('treatment/add', 'TreatmentController@add');
+    Route::post('treatment/save', 'TreatmentController@save');
 
 
     //Quotations
-    Route::post('quotations','QuotationsController@index');
-    Route::get('quotations','QuotationsController@index');
+    Route::post('quotations', 'QuotationsController@index');
+    Route::get('quotations', 'QuotationsController@index');
     Route::get('quotations/query', 'QuotationsController@getCustomerList');
     Route::get('quotations/course_query', 'QuotationsController@getCourseList');
     Route::get('quotations/update', 'QuotationsController@update');
@@ -138,7 +135,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('product/edit', 'ProductController@edit');
 
     //Order
-    Route::controller('order','OrderController');
+    Route::controller('order', 'OrderController');
 
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
@@ -179,19 +176,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::get('/login',    'UserController@getLogin');
-Route::get('/login',    'UserController@getName');
-Route::get('user/logout',    'UserController@getLogout');
+Route::get('/login', 'UserController@getLogin');
+Route::get('/login', 'UserController@getName');
+Route::get('user/logout', 'UserController@getLogout');
 
 
-Route::post('/auth',   'UserController@auth');
+Route::post('/auth', 'UserController@auth');
 
-Route::controller('admin','AdminController');
-Route::controller('user','UserController');
+Route::controller('admin', 'AdminController');
+Route::controller('user', 'UserController');
 Route::get('faker', function () {
-    echo factory('App\Customer',50)->create();
+    echo factory('App\Customer', 50)->create();
 
 });
 Route::get('test', function () {
-return view('template');
+    return view('template');
 });
