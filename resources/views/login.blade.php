@@ -35,7 +35,6 @@
         <span id="reauth-email" class="reauth-email"></span>
 
 
-      <label class="required">เลือกสาขา</label>
       <select class="form-control n" id="names" >
           @foreach($data as $name)
          <option value="">เลือกสาขา...</option>
@@ -62,12 +61,7 @@
         <!-- /.col -->
 
         </form><!-- /form -->
-        <div class="form-group has-feedback">
-            <a href="#" class="forgot-password">
-
-                Forgot the password?
-            </a>
-        </div>
+       
     </div>
 
 </div>
