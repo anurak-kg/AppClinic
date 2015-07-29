@@ -35,10 +35,10 @@
         <span id="reauth-email" class="reauth-email"></span>
 
 
-      <select class="form-control n" id="names" >
+      <select class="form-control n" id="names" style="color:darkgrey;">
           @foreach($data as $name)
-         <option value="">เลือกสาขา...</option>
-         <option value="{{$name->branch_name}}">{{$name->branch_name}} </option>
+         <option default >เลือกสาขา...</option>
+         <option value="{{$name->branch_name}}" style="color:black;">{{$name->branch_name}} </option>
           @endforeach
        </select> <br>
 
@@ -61,7 +61,7 @@
         <!-- /.col -->
 
         </form><!-- /form -->
-       
+
     </div>
 
 </div>
