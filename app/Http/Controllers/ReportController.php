@@ -50,11 +50,12 @@ class ReportController extends Controller
         $sales
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
-          $date = $sales->get();
+        $data = $sales->get();
         //return response()->json($date);
         return view('report/sale', [
-            'name' => $this->arrayToChartData($date, 'name'),
-            'total' => $this->arrayToChartData($date, 'Total')
+            'data' => $data,
+            'name' => $this->arrayToChartData($data, 'name'),
+            'total' => $this->arrayToChartData($data, 'Total')
         ]);
 
     }
@@ -106,11 +107,12 @@ class ReportController extends Controller
         }
         $coursemonth
             ->groupBy('coursename')->orderBy('Total', 'desc');
-        $date = $coursemonth->get();
+        $data = $coursemonth->get();
 
         return view('report/coursemonth', [
-            'name' => $this->arrayToChartData($date, 'coursename'),
-            'total' => $this->arrayToChartData($date, 'Total')
+            'data' => $data,
+            'name' => $this->arrayToChartData($data, 'coursename'),
+            'total' => $this->arrayToChartData($data, 'Total')
         ]);
 
         //   return response()->json($coursemonth);
@@ -151,7 +153,10 @@ class ReportController extends Controller
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursehot->take(10)->get();
 
+       // return response()->json($data);
+
         return view('report/coursehot', [
+            'data' => $data,
             'name' => $this->arrayToChartData($data, 'coursename'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
@@ -195,10 +200,11 @@ class ReportController extends Controller
         $doctor->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
-        $date = $doctor->get();
+        $data = $doctor->get();
         return view('report/doctor', [
-            'name' => $this->arrayToChartData($date, 'name'),
-            'total' => $this->arrayToChartData($date, 'Total')
+            'data' => $data ,
+            'name' => $this->arrayToChartData($data, 'name'),
+            'total' => $this->arrayToChartData($data, 'Total')
         ]);
         // return response()->json($doctor);
 

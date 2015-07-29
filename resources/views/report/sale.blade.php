@@ -31,7 +31,7 @@
                     {!! Form::close() !!}
 
                     <div class="chart">
-                        <canvas id="barChart" height="500"></canvas>
+                        <canvas id="barChart" height="300"></canvas>
                     </div>
                 </div>
                 <!-- /.box-body -->
@@ -41,7 +41,38 @@
         </div>
         <!-- /.col (RIGHT) -->
     </div>
-    </div> <!-- /.row -->
+
+    <div class="box box-primary">
+
+        <div class="box-header with-border" align="middle">
+            <div class="box-tools pull-right">
+                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                            class="fa fa-minus"></i></button>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row">
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>พนักงาน</th>
+                            <th>ยอดขาย</th>
+                        </tr>
+                        </thead>
+                        @foreach($data as $test)
+                            <tr>
+                                <td> {{$test->name}}</td>
+                                <td><?php echo number_format( $test->Total) ,' บาท' ?></td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- date-range-picker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js" type="text/javascript"></script>
     <script src="../../plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
