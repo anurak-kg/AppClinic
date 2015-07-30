@@ -18,8 +18,11 @@ class CreateTreatHistory extends Migration
             $table->integer('quo_id');
             $table->integer('emp_id');
             $table->integer('dr_id');
+            $table->integer('dr_price');//ค่ามือแพทย์
             $table->integer('bt_user_id1');
+            $table->integer('bt1_price');//ค่ามือผู้ช่วย1
             $table->integer('bt_user_id2');
+            $table->integer('bt2_price');//ค่ามือผู้ช่วย2
             $table->text('comment');
             $table->date('treat_date');
             $table->integer('branch_id')->unsigned()->nullable();
