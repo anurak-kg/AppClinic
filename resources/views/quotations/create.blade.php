@@ -155,7 +155,7 @@
                                                placeholder="ระบุ ชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค้ด ">
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-app" href="{{url('product/update')}}">
+                                        <a class="btn btn-app" href="{{url('course/create')}}">
                                             <i class="fa fa-plus-circle"></i> จัดการคอร์ส
                                         </a>
                                     </div>
