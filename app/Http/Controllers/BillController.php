@@ -19,4 +19,13 @@ class BillController extends Controller
          return view("bill/bill",['bill' => $bill[0]]);
     }
 
+    public function product(){
+
+        $product = Sale::where('sales_id',\Input::get('sales_id'))
+            ->with('product','Customer','User','Branch')->get();
+
+        return response()->json($product);
+
+    }
+
 }
