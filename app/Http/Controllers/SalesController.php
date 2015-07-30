@@ -2,86 +2,118 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Branch;
+use App\Product;
+use App\Sales;
+use App\Sales_detail;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class SalesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
+    public function getIndex()
     {
-        //
+        if (Sales::where('sales_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
+            $sales = new Sales();
+            $sales->emp_id = Auth::user()->getAuthIdentifier();
+            $sales->branch_id = Branch::getCurrentId();
+            $sales->sales_status = "WAITING";
+            $sales->save();
+            return $this->render();
+        } else {
+            return $this->render();
+        }
+    }
+    private function render()
+    {
+        return view('sales.index', [
+            'data' => Sales::findOrFail($this->getId())
+        ]);
+    }
+    private function getId()
+    {
+        $quo = Sales::where('sales_status', "WAITING")
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
+            ->where('branch_id', Branch::getCurrentId())
+            ->firstOrFail();
+        return $quo->sales_id;
+    }
+    public function getSave()
+    {
+        $sales = Sales::find($this->getId());
+        $sales->sales_total = $this->getTotal();
+        $sales->sales_status = "CLOSE";
+        // $order->quo_date = null;
+        $sales->save();
+        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+    }
+    public function getTotal()
+    {
+        $sum = DB::table('sales_detail')
+            ->select(DB::raw('SUM(sales_de_qty*sales_de_price) as total'))
+            ->where('sales_id', $this->getId())
+            ->get();
+        return $sum[0]->total;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
+    public function getProductdata()
     {
-        //
+        $query = '%' . \Input::get('q') . '%';
+        $product = Product::where('product_id', 'LIKE', $query)
+            ->orWhere('product_name', 'LIKE', $query)
+            ->get();
+        return response()->json($product);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
+    public function getUpdate()
     {
-        //
+        $type = Input::get('type');
+        $value = Input::get('value');
+        $id = Input::get('id');
+        $r = DB::table('sales_detail')
+            ->where('sales_id', "=", $this->getId())
+            ->where('product_id', "=", $id)
+            ->update([$type => $value]);
+        return response()->json(['status' => 'Success']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
+    public function getAddproduct()
     {
-        //
+        $id = \Input::get('id');
+        $rec = Sales::find($this->getId());
+        $product = Product::find($id);
+        $rec->product()->attach($product, [
+            'sales_de_qty' => 0,
+            'sales_de_price' => $product->product_price,
+            'sales_de_discount' => 0, //ส่วนลดเปอร์เซ็น
+            'sales_de_disamount' => 0, //ส่วนลดจำนวนเงิน
+            'sales_de_total' => $product->product_price,
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+        ]);
+        $status = "ok";
+        return response()->json([
+            'status' => $status,
+        ]);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
+    public function getData()
     {
-        //
+        $data = sales_detail::with(['Product'])
+            ->where('sales_id', "=", $this->getId())
+            ->get();
+        return response()->json($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
+    public function getSet_customer()
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $cus_id = \Input::get('id');
+        $quo = Sales::findOrFail($this->getId());
+        $quo->cus_id = $cus_id;
+        $quo->save();
+        return response()->json(['status' => 'success']);
     }
 }

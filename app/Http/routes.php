@@ -173,6 +173,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
 
+    //sales ขายสินค้า pos
+    Route::controller('sales', 'SalesController');
 
 });
 

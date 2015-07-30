@@ -11,6 +11,12 @@ class Sales extends Model
     public function User(){
         return $this->belongsTo('\App\User','emp_id');
     }
+
+    public function product(){
+
+        return $this->belongsToMany('App\Product','sales_detail','sales_id','product_id')
+            ->withPivot('sales_de_qty','sales_de_price','sales_de_discount','created_at');
+    }
     public function Branch()
     {
         return $this->belongsTo('\App\Branch', 'branch_id');
