@@ -160,8 +160,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('bill/bill', 'BillController@index');
     Route::get('bill/bill', 'BillController@index');
-    Route::post('bill/billproduct', 'BillController@index');
-    Route::get('bill/billproduct', 'BillController@index');
+    Route::post('bill/billproduct', 'BillController@product');
+    Route::get('bill/billproduct', 'BillController@product');
 
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');

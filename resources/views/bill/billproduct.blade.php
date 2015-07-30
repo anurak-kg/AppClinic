@@ -32,28 +32,28 @@
             <div class="col-sm-4 invoice-col">
                 <address>
                     <br><br><br><br><br>
-                    <b> ชื่อลูกค้า {{ $bill->customer->cus_name }} {{ $bill->customer->cus_lastname }} </b> <br>
-                    {{ $bill->customer->cus_hno }}
-                    {{ $bill->customer->cus_moo }}
-                    {{ $bill->customer->cus_soi }}
-                    {{ $bill->customer->cus_road }}
-                    {{ $bill->customer->cus_subdis }}
-                    {{ $bill->customer->cus_district }}
-                    {{ $bill->customer->cus_province }}
-                    {{ $bill->customer->cus_postal }}
-                    {{ $bill->customer->cus_tel }}
-                    {{ $bill->customer->cus_phone }}
+                    <b> ชื่อลูกค้า {{ $sales->customer->cus_name }} </b> <br>
+                    {{ $sales->customer->cus_hno }}
+                    {{ $sales->customer->cus_moo }}
+                    {{ $sales->customer->cus_soi }}
+                    {{ $sales->customer->cus_road }}
+                    {{ $sales->customer->cus_subdis }}
+                    {{ $sales->customer->cus_district }}
+                    {{ $sales->customer->cus_province }}
+                    {{ $sales->customer->cus_postal }}
+                    {{ $sales->customer->cus_tel }}
+                    {{ $sales->customer->cus_phone }}
                 </address>
             </div><!-- /.col -->
 
             <div class="col-sm-4 invoice-col">
                 <address>
                     <br><br>
-                    <b> สาขา {{ $bill->branch->branch_name }}</b>
-                    {{ $bill->branch->branch_address }}<br>
-                    โทร : {{ $bill->branch->branch_tel }}
+                    <b> สาขา {{ $sales->branch->branch_name }}</b>
+                    {{ $sales->branch->branch_address }}<br>
+                    โทร : {{ $sales->branch->branch_tel }}
                     <br><br>
-                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }}
+                    <b>รหัสลูกค้า:</b> {{ $sales->customer->cus_id }}
 
                 </address>
             </div><!-- /.col -->
@@ -62,10 +62,10 @@
                     ใบเสร็จรับเงิน
                 </h3>
 
-                <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
+                <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $sales->sales_id }} <br>
                 <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
                 {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
-                <b>พนักงาน :</b> {{ $bill->user->name }} <br>
+                <b>พนักงาน :</b> {{ $sales->user->name }} <br>
 
             </div><!-- /.col -->
 
@@ -90,17 +90,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($bill->product as $product)
+                    <?php $total=0 ?>
+                    @foreach($sales->product as $sale)
                         <tr>
-                            <td>{{ $product->product_id }}</td>
-                            <td>{{ $product->product_name }}</td>
-                            <td>{{ $product->sales_de_qty }}</td>
-                            <td><?php echo number_format($product->sales_de_price)?></td>
-                            <td><?php echo number_format($product->sales_de_discount,2) ?> </td>
-                            <td><?php echo number_format($product->sales_de_disamount,2) ?> </td>
-                            <td><?php echo number_format($product->sales_de_total,2) ?></td>
+                            <td>{{ $sale->product_id }}</td>
+                            <td>{{ $sale->product_name }}</td>
+                            <td>{{$qty = $sale->pivot->sales_de_qty }}</td>
+                            <td><?php echo number_format($price = $sale->pivot->sales_de_price)?></td>
+                            <td><?php echo number_format($dis1 = $sale->pivot->sales_de_discount,2) ?> </td>
+                            <td><?php echo number_format($dis2 = $sale->pivot->sales_de_disamount,2) ?> </td>
+                            <td><?php echo number_format(($qty*$price)-$dis2,2) ?></td>
                         </tr>
-                        <?php  $product->sales_total ?>
+                        <?php $total+= ($qty*$price)-$dis2 ?>
                     @endforeach
                     </tbody>
                     <tfoot>
@@ -118,13 +119,7 @@
             </div><!-- /.col -->
         </div><!-- /.row -->
 
-        <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-xs-6">
 
-            </div><!-- /.col -->
-
-        </div><!-- /.row -->
 
 
 

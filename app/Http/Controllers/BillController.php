@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Quotations;
 
 use App\Http\Requests;
+use App\Sales;
 
 class BillController extends Controller
 {
@@ -21,10 +22,12 @@ class BillController extends Controller
 
     public function product(){
 
-        $product = Sale::where('sales_id',\Input::get('sales_id'))
-            ->with('product','Customer','User','Branch')->get();
+        $sales = Sales::where('sales_id',1)
+            ->with('product','Customer','User','Branch')->get()->first();
 
-        return response()->json($product);
+        // return response()->json($sales);
+
+      return view("bill/billproduct",['sales' => $sales]);
 
     }
 
