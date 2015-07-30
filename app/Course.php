@@ -16,5 +16,9 @@ class Course extends Model
         return $this->belongsToMany('App\Product','course_medicine','course_id','product_id')
             ->withPivot('qty','created_at','updated_at');
     }
+    public function course_medicine(){
+        return $this->hasMany('App\Medicine');
+    }
+
 
 }
