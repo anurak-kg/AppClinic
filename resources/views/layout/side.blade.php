@@ -15,7 +15,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
-            <li ><a href="{{url('dashboard')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
+            <li ><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
             <li ><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ซื้อคอร์ส</span></a></li>
             <li ><a href="{{url('treatment')}}"><i class='fa fa-heartbeat'></i> <span>การรักษา</span></a></li>
             <li class="treeview">

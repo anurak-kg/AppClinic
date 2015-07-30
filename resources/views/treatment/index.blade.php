@@ -102,12 +102,11 @@
 
                                     <td data-title="'สถานะ'">
                                         <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
-
                                     </td>
                                     <td data-title="'กระทำ'" align="middle">
-                                        <a class="btn btn-success"
-                                           ng-href="{{url('treatment/add')}}?course_id=@{{item.pivot.course_id}}&quo_id=@{{item.pivot.quo_id}}"
-                                           target="_blank">เข้ารับการรักษา</a>
+
+                                        <div ng-bind-html="getCheck(item.pivot.treat_status,order.quo_id,item.course_id)" align="middle"></div>
+
                                     </td>
                                 </tr>
 

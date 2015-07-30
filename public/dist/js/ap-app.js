@@ -271,6 +271,17 @@
             }
             return $sce.trustAsHtml(text);
         }
+        $scope.getCheck = function (status,quo_id,course_id) {
+            var text;
+            var url  ="/treatment/add?course_id="+course_id+"&quo_id="+quo_id
+            if (status == 5) {
+                text = "<span class=\"label label-success\">เสร็จแล้ว</span>";
+            }
+            else {
+                text = "<a class=\"btn btn-success\" href="+url+">เข้ารับการรักษา</a>";
+            }
+            return $sce.trustAsHtml(text);
+        }
     });
     app.controller('orderController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
