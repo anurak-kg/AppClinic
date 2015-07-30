@@ -35,10 +35,10 @@
         <span id="reauth-email" class="reauth-email"></span>
 
 
-      <select class="form-control n" id="names" style="color:darkgrey;">
+      <select class="form-control n" id="names" name="branch" style="color:darkgrey;">
           @foreach($data as $name)
          <option value="" disabled selected style='display:none;'>เลือกสาขา...</option>
-         <option value="{{$name->branch_name}}" style="color:black;">{{$name->branch_name}} </option>
+         <option value="{{$name->branch_id}}" style="color:black;">{{$name->branch_name}} </option>
           @endforeach
        </select> <br>
 
