@@ -22,10 +22,11 @@ class Branch extends Model
     }
 
     static  public  function  getCurrentId(){
-        return 1;
+        //dd(\Session::get('branch_id'));
+        return \Session::get('branch_id');
     }
     static public function getCurrentName(){
-       $branch = Branch::select('branch_name')->find(Branch::getCurrentId())->get()->first();
+       $branch = Branch::find(Branch::getCurrentId());
         return $branch->branch_name;
     }
 }

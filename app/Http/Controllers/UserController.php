@@ -180,6 +180,7 @@ class UserController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
+            Session::put('branch_id',Input::get('branch'));
             return redirect()->intended();
         }
         return back()->withErrors([Lang::get('user.loginFailed')])
