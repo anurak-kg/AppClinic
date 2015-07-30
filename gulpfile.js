@@ -22,8 +22,8 @@ elixir(function (mix) {
             'bootstrap.min.js',
             'ui-bootstrap-custom-0.13.1.min.js',
             'ui-bootstrap-custom-tpls-0.13.1.min.js',
+            'select2.min.js',
             'select.min.js',
-            //'select2.min.js',
             'angular-sanitize.min.js'
         ],
         'public/js/app.js'
