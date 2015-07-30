@@ -11,6 +11,7 @@ return array(
     'CreateCourseSystem' => $baseDir . '/database/migrations/2015_07_21_211007_create_Course_System.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateSales' => $baseDir . '/database/migrations/2015_07_26_155941_create_sales.php',
+    'CreateSessionTable' => $baseDir . '/database/migrations/2015_07_30_144531_create_session_table.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
     'CreateTableCustomer' => $baseDir . '/database/migrations/2015_06_29_154030_create_table_customer.php',
     'CreateTableCustomerEvent' => $baseDir . '/database/migrations/2015_07_25_233304_create_table_customer_event.php',
