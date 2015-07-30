@@ -5,18 +5,11 @@
     <meta charset="UTF-8">
     <title>@yield('title')</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <script src="/js/app.js"></script>
-    <script src="/dist/js/bootstrap-tagsinput.min.js"></script>
-    <script src="/dist/js/typeahead.bundle.min.js"></script>
-    <script src="/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="/dist/js/select2.min.js"></script>
-    <script src="/locales/bootstrap-datepicker.th.min.js"></script>
-
     <!-- ห้ามลบ -->
+    <script src="/js/app.js"></script>
+    <script src="/dist/js/ap-app.js"></script>
     <link href="/css/all.css" rel="stylesheet" type="text/css"/>
     <link href="/css/app.css" rel="stylesheet" type="text/css"/>
-    <script src="/dist/js/ap-app.js"></script>
     <!-- //ห้ามลบ -->
 
 
@@ -92,10 +85,6 @@
 
 
 <script src="/dist/js/app.js" type="text/javascript"></script>
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="http://datatables.yajrabox.com/js/handlebars.js"></script>
-<script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/jquery.browser.min.js"></script>
-<script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/redactor.min.js"></script>
 </body>
 </html>

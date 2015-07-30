@@ -24,7 +24,15 @@ elixir(function (mix) {
             'ui-bootstrap-custom-tpls-0.13.1.min.js',
             'select2.min.js',
             'select.min.js',
-            'angular-sanitize.min.js'
+            'angular-sanitize.min.js',
+            'bootstrap-datepicker.min.js',
+            'bootstrap-datepicker.th.min.js',
+            'typeahead.bundle.min.js',
+            'bootstrap-tagsinput.min.js',
+            'jquery.dataTables.min.js',
+            'redactor.min.js',
+            'handlebars-v3.0.3.js'
+
         ],
         'public/js/app.js'
     );
