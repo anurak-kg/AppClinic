@@ -99,7 +99,7 @@
                             <td><?php echo number_format($price = $sale->pivot->sales_de_price)?></td>
                             <td><?php echo number_format($dis1 = $sale->pivot->sales_de_discount,2) ?> </td>
                             <td><?php echo number_format($dis2 = $sale->pivot->sales_de_disamount,2) ?> </td>
-                            <td><?php echo number_format(($qty*$price)-$dis2,2) ?></td>
+                            <td><?php echo number_format(($qty*$price)-(($qty*$price)*$dis1/100)-$dis2,2) ?></td>
                         </tr>
                         <?php $total+= ($qty*$price)-$dis2 ?>
                     @endforeach
