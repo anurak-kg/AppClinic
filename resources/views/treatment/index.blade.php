@@ -102,7 +102,6 @@
 
                                     <td data-title="'สถานะ'">
                                         <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
-
                                     </td>
                                     <td data-title="'กระทำ'" align="middle">
 
