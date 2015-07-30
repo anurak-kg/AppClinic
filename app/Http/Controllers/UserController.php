@@ -174,7 +174,7 @@ class UserController extends Controller
     public function auth(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required', 'password' => 'required',
+            'username' => 'required', 'password' => 'required','branch' => 'required'
         ]);
 
         $credentials = $request->only('username', 'password');
@@ -189,7 +189,7 @@ class UserController extends Controller
     public function getName() {
 
         $data = DB::table('branch')
-            ->select('branch_name')
+            ->select('branch_name','branch_id')
             ->get();
 
         return view('/login',['data'=> $data]);
