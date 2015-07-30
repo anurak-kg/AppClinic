@@ -32,7 +32,6 @@ elixir(function (mix) {
             'jquery.dataTables.min.js',
             'redactor.min.js',
             'handlebars-v3.0.3.js'
-
         ],
         'public/js/app.js'
     );

@@ -24,45 +24,75 @@
                             <input class=" form-control" type="text"
                                    value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}}"
                                    disabled>
+                            <br>
                         </div>
                         <div class="col-md-12">
                             <span id="div_cus_name">
                                 <label class=" required">คอร์ส</label>
                                 <input class=" form-control" type="text" value="{{$quo->course->course_name}}" disabled>
                             </span>
+                            <br>
                         </div>
                         <div class="col-md-12">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">หมอ</label>
                                     <select class=" form-control dr" name="doctor">
                                         @foreach($doctor as $dr)
-                                            <option value=""></option>
                                             <option value="{{$dr->id}}">{{$dr->id}}
                                                 : {{$dr->name}}</option>
                                         @endforeach
                                     </select>
-                            </span>
+                            </span><br>
                         </div>
+
+                        <div class="col-md-12">
+                            <span id="div_cus_name">
+                                <label class=" required">ค่ามือ</label>
+                                <input class=" form-control" type="text" value="" >
+                            </span>
+                            <br>
+                        </div>
+
                         <div class="col-md-12">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">ผู้ช่วย 1</label>
                             <select class=" form-control dr" name="bt1">
                                 @foreach($users as $user)
-                                    <option value=""></option>
+                                    @if($user->name != $dr->name)
                                     <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
-                            </span>
+                            </span><br>
                         </div>
+
+                        <div class="col-md-12">
+                            <span id="div_cus_name">
+                                <label class=" required">ค่ามือ</label>
+                                <input class=" form-control" type="text" value="" >
+                            </span>
+                            <br>
+                        </div>
+
                         <div class="col-md-12">
                             <label for="cus_name" class=" required">ผู้ช่วย 2</label>
                             <select class=" form-control dr" name="bt2">
                                 @foreach($users as $user)
-                                    <option value=""></option>
+                                    @if($user->name != $dr->name)
                                     <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
+                                    @endif
                                 @endforeach
-                            </select>
+                            </select><br>
                         </div>
+
+                        <div class="col-md-12">
+                            <span id="div_cus_name">
+                                <label class=" required">ค่ามือ</label>
+                                <input class=" form-control" type="text" value="" >
+                            </span>
+                            <br>
+                        </div>
+
                         <div class="col-md-12">
                             <label class=" required">วันที่เข้ารับการรักษา</label>
 
@@ -71,7 +101,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input type="text" class="form-control" id="treat_date" name="treat_date" value="{{date("Y-m-d")}}">
-                            </div>
+                            </div><br>
                         </div>
                         <div class="col-md-12">
                             <label>ตัวยาที่ใช้</label>

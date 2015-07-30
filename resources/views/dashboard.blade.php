@@ -45,7 +45,7 @@
                             <div class="icon">
                                         <i class="fa fa-cart-plus"></i>
                              </div>
-                            <a href="{{url('product_detail/index')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="{{url('sales')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
 
