@@ -20,6 +20,9 @@ class CreateTableReceive extends Migration
             $table->date('receive_date');
             $table->decimal('receive_total',10,2);
             $table->enum('receive_status', array('WAITING','CLOSE'));
+            $table->text('receive_comment');
+            $table->integer('branch_id')->nullable();
+
             $table->timestamps();
         });
         Schema::create('receive_detail', function (Blueprint $table) {
