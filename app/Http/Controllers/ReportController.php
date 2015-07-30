@@ -118,23 +118,6 @@ class ReportController extends Controller
         //   return response()->json($coursemonth);
     }
 
-    //สรุปคอร์สที่ขายดีที่สุด
-    public function reportCourseHot()
-    {
-        $data = \DB::select((\DB::raw("
-                SELECT
-                course.course_id,
-                course.course_name as coursename,
-                SUM(quo_de_price) as Total
-                FROM
-                quotations_detail
-                INNER JOIN course ON course.course_id =quotations_detail.course_id
-                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015
-                GROUP BY
-                coursename
-                ORDER BY Total DESC
-                   ")));
-    }
 
 
     //สรุปคอร์สที่ขายดีที่สุด

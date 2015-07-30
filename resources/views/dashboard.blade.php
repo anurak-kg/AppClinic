@@ -481,34 +481,8 @@
                          // Get context with jQuery - using jQuery's .get() method.
                          var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
                          var pieChart = new Chart(pieChartCanvas);
-                         var PieData = [
-                           {
-                             value: 700,
-                             color: "#f56954",
-                             highlight: "#f56954",
-                             label: "Chrome"
-                           },
-                           {
-                             value: 500,
-                             color: "#00a65a",
-                             highlight: "#00a65a",
-                             label: "IE"
-                           },
-                           {
-                             value: 400,
-                             color: "#f39c12",
-                             highlight: "#f39c12",
-                             label: "FireFox"
-                           },
-                           {
-                             value: 600,
-                             color: "#00c0ef",
-                             highlight: "#00c0ef",
-                             label: "Safari"
-                           },
-
-                         ];
-                         var pieOptions = {
+                         var PieData = {!! $dataCourse !!};
+                        var pieOptions = {
                            //Boolean - Whether we should show a stroke on each segment
                            segmentShowStroke: true,
                            //String - The colour of each segment stroke
