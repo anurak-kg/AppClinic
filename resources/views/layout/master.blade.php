@@ -46,7 +46,7 @@
 
     <!-- Main Header -->
     <header class="main-header">
-        <a href="{{url('dashboard')}}" class="logo">
+        <a href="{{url('')}}" class="logo">
             <!-- Logo -->
 
             <span class="logo-mini"><b>C</b>D</span>
