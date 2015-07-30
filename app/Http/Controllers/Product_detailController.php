@@ -18,6 +18,7 @@ use Zofe\Rapyd\Facades\DataEdit;
 class Product_detailController extends Controller
 {
 
+    /*
     public function getDataGrid(){
         $grid = DataGrid::source('product_detail');
         $grid->attributes(array("class"=>"table table-hover"));
@@ -43,7 +44,7 @@ class Product_detailController extends Controller
         });
 
         return view('product_detail/index', compact('grid'));
-    }
+    }*/
 
 
    /* public function create()
