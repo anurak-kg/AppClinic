@@ -84,7 +84,7 @@
                                     <th style="width: 120px">จำนวนที่ใช้</th>
 
                                 </tr>
-                                @foreach($quo->course->medicine as $medicine)
+                                @foreach($quo->course->course_medicine as $medicine)
                                     <tr>
                                         <td>
                                             {{$medicine->product->product_id}}

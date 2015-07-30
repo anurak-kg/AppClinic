@@ -27,7 +27,7 @@
     <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/dist/js/ng-table.css">
     <link href="/dist/css/typeahead.css" rel="stylesheet" type="text/css"/>
-    <link href="https://almsaeedstudio.com/themes/AdminLTE/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -93,7 +93,7 @@
 
 <script src="/dist/js/app.js" type="text/javascript"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script src="https://almsaeedstudio.com/themes/AdminLTE/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="http://datatables.yajrabox.com/js/handlebars.js"></script>
 <script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/jquery.browser.min.js"></script>
 <script src="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/redactor.min.js"></script>
