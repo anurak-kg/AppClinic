@@ -28,6 +28,7 @@ class UserController extends Controller
     public function getLogout()
     {
         \Auth::logout();
+        Session::flush();
         return  redirect('');
     }
     public function getLogin()
