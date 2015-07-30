@@ -51,7 +51,7 @@
                                 </li>
                                 <li>ชื่อเบอร์โทร | <span
                                             class="customer"><strong>@{{ customer.tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('order/remove_customer')}}">
+                                    <span><strong><a href="{{url('sales/removecustomer')}}">
                                                 เปลียนลูกค้า</a></strong></span>
 
                                 </li>
@@ -248,6 +248,10 @@
                         .on('typeahead:selected', function ($e, datum) {
                             product = {
                                 id: datum.product_id,
+                                product_id: datum.product_id,
+                                sales_de_price:datum.product_price,
+                                sales_de_discount: 0,
+                                sales_de_disamount   :  0   ,
                                 sales_de_qty: 1,
                                 product: datum
                             }

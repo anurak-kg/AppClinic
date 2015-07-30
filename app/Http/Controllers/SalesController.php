@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Customer;
 use App\Product;
 use App\Sales;
 use App\Sales_detail;
@@ -85,7 +86,7 @@ class SalesController extends Controller
         $rec = Sales::find($this->getId());
         $product = Product::find($id);
         $rec->product()->attach($product, [
-            'sales_de_qty' => 0,
+            'sales_de_qty' => 1,
             'sales_de_price' => $product->product_price,
             'sales_de_discount' => 0, //ส่วนลดเปอร์เซ็น
             'sales_de_disamount' => 0, //ส่วนลดจำนวนเงิน
@@ -99,7 +100,31 @@ class SalesController extends Controller
         ]);
 
     }
+    public function getDatacustomer()
+    {
+        //echo $this->getQuoId();
+        $quo = Sales::find($this->getId());
+        // dd($quo);
+        $data = null;
+        if ($quo->cus_id == 0) {
+            $data['status'] = null;
+        } else {
+            $data['status'] = 'success';
+            $customer = Customer::find($quo->cus_id);
+            $data['cus_id'] = $customer->cus_id;
 
+            $data['cus_name'] = $customer->cus_name;
+            $data['tel'] = $customer->cus_tel;
+        }
+        return response()->json($data);
+    }
+    public function getRemovecustomer()
+    {
+        $quo = Sales::findOrFail($this->getId());
+        $quo->cus_id = 0;
+        $quo->save();
+        return redirect('sales');
+    }
     public function getData()
     {
         $data = sales_detail::with(['Product'])
@@ -108,12 +133,19 @@ class SalesController extends Controller
         return response()->json($data);
     }
 
-    public function getSet_customer()
+    public function getSetcustomer()
     {
         $cus_id = \Input::get('id');
         $quo = Sales::findOrFail($this->getId());
         $quo->cus_id = $cus_id;
         $quo->save();
         return response()->json(['status' => 'success']);
+    }
+    public function getDelete()
+    {
+        DB::table('sales_detail')
+            ->where('sales_id', "=", $this->getId())
+            ->where('product_id', "=", \Input::get('id'))
+            ->delete();
     }
 }

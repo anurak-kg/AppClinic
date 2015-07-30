@@ -449,7 +449,6 @@
     app.controller('SalesController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
-        $scope.quo_id = null;
         $scope.dataLoading = true;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
@@ -471,13 +470,27 @@
 
             });
 
+        $http.get($scope.controller + '/datacustomer').
+            success(function (data, status, headers, config) {
+                if (data.status == 'success') {
+                    $scope.customer.fullname = data.cus_name;
+                    $scope.customer.tel = data.tel;
+                    $scope.customer.cus_id = data.cus_id;
+                    $scope.boxSearch = true;
+                    console.log('update customer success');
+                }
+            }).
+            error(function (data, status, headers, config) {
+
+            });
+
         $scope.customerSelect = function (customer) {
-            $scope.customer.cus_name = customer.cus_name;
+            $scope.customer.fullname = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
             console.log(customer)
-            $http.get($scope.controller + '/set_customer?id=' + customer.cus_id).
+            $http.get($scope.controller + '/setcustomer?id=' + customer.cus_id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                 }).
@@ -531,9 +544,10 @@
                 });
         }
         $scope.deleteById = function (id) {
+            console.log($scope.product);
             $scope.product = $scope.product
                 .filter(function (el) {
-                    return el.course_id !== id;
+                    return el.product_id !== id;
                 });
             $scope.dataLoading = true;
             $http.get($scope.controller + '/delete?id=' + id).
