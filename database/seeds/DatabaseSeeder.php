@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call('BranchTableSeeder');
         $this->call('CustomerTableSeeder');
         $this->call('PositionTableSeeder');
+        $this->call('VendorTableSeeder');
         Model::reguard();
     }
 }
@@ -38,6 +39,21 @@ class CustomerTableSeeder extends Seeder
             'cus_name' => 'อนุรักษ์ กิ่งแก้ว',
             'cus_tel' => '0875430262',
             'cus_email' => 'imannn.99@gmail.com',
+        ]);
+    }
+}
+class VendorTableSeeder extends Seeder
+{
+    public function run(){
+        DB::table('vendor')->delete();
+
+        \App\Vendor::create([
+            'ven_id' => '123',
+            'ven_name' => 'Microsoft New York Metro District: Iselin, NJ',
+            'ven_address' => '101 Wood Avenue South, Suite 900 Metro Park 101 Iselin, NJ 08830 ',
+            'ven_sell_name'=>'',
+            'ven_sell_tel'=>'7324765600',
+            'ven_license'=>'2134545613212'
         ]);
     }
 }
