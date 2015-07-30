@@ -47,11 +47,11 @@
 
                     <div class="col-md-6">
                         <label for="course_name" class=" required">ราคา</label>
-                        <input class=" form-control" type="number" id="course_name" name="">
+                        <input class=" form-control" type="number" id="course_name" name="course_price">
                     </div>
                     <div class="col-md-6">
                         <label for="course_name" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_name" name="">
+                        <input class=" form-control" type="number" id="course_name" name="course_qty">
                     </div>
                     <div class="col-md-12"><br>
                         <div class="row">

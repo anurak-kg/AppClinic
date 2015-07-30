@@ -56,6 +56,9 @@ class CourseController extends Controller
         $course = new Course();
         $course->course_id = Input::get('course_id');
         $course->course_name = Input::get('course_name');
+        $course->course_detail = Input::get('comment');
+        $course->course_price = Input::get('course_price');
+        $course->course_qty = Input::get('course_qty');
         $course->save();
         $medicine = json_decode(Input::get('json'));
         //dd($medicine);
