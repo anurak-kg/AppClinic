@@ -43,12 +43,13 @@ class SalesController extends Controller
     }
     public function getSave()
     {
+        //echo $this->getId();
         $sales = Sales::find($this->getId());
         $sales->sales_total = $this->getTotal();
         $sales->sales_status = "CLOSE";
         // $order->quo_date = null;
         $sales->save();
-        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('sales/payment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว')->with('sales_id',$this->getId());
     }
     public function getTotal()
     {
@@ -147,5 +148,9 @@ class SalesController extends Controller
             ->where('sales_id', "=", $this->getId())
             ->where('product_id', "=", \Input::get('id'))
             ->delete();
+    }
+    public  function getPayment(){
+        $sale = Sales::find(Session::get('message'));
+        return view('sales.payment');
     }
 }

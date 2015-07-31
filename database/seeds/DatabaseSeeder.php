@@ -128,12 +128,9 @@ class ProductTableSeeder extends Seeder
 
     public function run()
     {
-        DB::table('product_type')->delete();
-
-        \App\Product_type::create(['pt_id' => '1001', 'pt_name' => 'Laser']);
 
         DB::table('product_group')->delete();
-        \App\Product_group::create(['pg_id' => '1001', 'pt_id' => '1001', 'pg_name' => 'Laser']);
+        \App\Product_group::create(['pg_id' => '1001','pg_name' => 'Laser']);
 
 
         DB::table('product')->delete();

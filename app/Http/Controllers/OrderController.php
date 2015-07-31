@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use App\Order;
+use App\User;
+
 use App\Http\Requests;
 use App\Order_detail;
 use App\Product;
+use App\Vendor;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -48,6 +51,7 @@ class OrderController extends Controller
         $order = Order::find($this->getId());
         $order->order_total = $this->getTotal();
         $order->order_status = "PENDING";
+        $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $order->save();
         return redirect('order')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
@@ -89,11 +93,10 @@ class OrderController extends Controller
         $rec = Order::find($this->getId());
         $product = Product::find($id);
         $rec->product()->attach($product, [
-            'order_de_qty' => 0,
+            'order_de_qty' => 1,
             'order_de_price' => $product->product_price,
             'order_de_discount' => 0,
             'order_de_disamount' => 0,
-            'order_de_total' => $product->product_price,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
         ]);
@@ -111,15 +114,43 @@ class OrderController extends Controller
             ->get();
         return response()->json($data);
     }
-
-    public function getSet_vender()
+    public function getDelete()
     {
-        $cus_id = \Input::get('id');
+        DB::table('order_detail')
+            ->where('order_id', "=", $this->getId())
+            ->where('product_id', "=", \Input::get('id'))
+            ->delete();
+    }
+
+    public function getDatavendor()
+    {
+        //echo $this->getQuoId();
+        $quo = Order::find($this->getId());
+        // dd($quo);
+        $data = null;
+        if ($quo->ven_id == 0) {
+            $data['status'] = -1;
+        } else {
+            $data = Vendor::find($quo->ven_id);
+
+        }
+        return response()->json($data);
+    }
+
+    public function getRemovevendor()
+    {
         $quo = Order::findOrFail($this->getId());
-        $quo->ven_id = $cus_id;
+        $quo->ven_id = 0;
+        $quo->save();
+        return redirect('order');
+    }
+
+    public function getSetvendor()
+    {
+        $ven_id = \Input::get('id');
+        $quo = Order::findOrFail($this->getId());
+        $quo->ven_id = $ven_id;
         $quo->save();
         return response()->json(['status' => 'success']);
     }
-
-
 }

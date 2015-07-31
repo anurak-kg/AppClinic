@@ -79,8 +79,8 @@ class ReceiveController extends Controller
         $type = Input::get('type');
         $value = Input::get('value');
         $id = Input::get('id');
-        $r = DB::table('sales_detail')
-            ->where('sales_id', "=", $this->getId())
+        $r = DB::table('receive_detail')
+            ->where('receive_id', "=", $this->getId())
             ->where('product_id', "=", $id)
             ->update([$type => $value]);
         return response()->json(['status' => 'Success']);
@@ -137,29 +137,32 @@ class ReceiveController extends Controller
 
     public function getOrderdata(){
         $id = Input::get('id');
-        $order = Order::find($id)
+        $order = Order::where('order_id',$id)
             ->with('product')
-            ->get()->first();
+        ->get()->first();
+
         DB::table('receive_detail')
             ->where('receive_id',$this->getId())
             ->delete();
         $receive = Receive::findOrFail($this->getId());
-
         $receive->ven_id = $order->ven_id;
         $receive->order_id = $order->order_id;
+        $receive->save();
 
         foreach($order->product as $item){
             //echo $item->pg_id;
             $product = Product::findOrFail($item->product_id);
             $receive->product()->attach($product, [
-                'receive_de_qty' => $item->pivot->order_de_qty, //ส่วนลดเปอร์เซ็น
-                'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
+                'receive_de_qty' => $item->pivot->order_de_qty,
+                'receive_de_qty_return' => 0,
                 'receive_de_text' => "",
+                'receive_de_disamount' => 0,
+                'receive_de_discount' => 0,
+                'receive_de_price' => $item->pivot->order_de_price,
                 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]);
         }
-        $receive->save();
 
 
 

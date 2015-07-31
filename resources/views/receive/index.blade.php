@@ -4,7 +4,8 @@
 @section('headDes','รับสินค้า')
 
 @section('content')
-    <div ng-controller="receiveController" id="order">
+
+    <div ng-controller="receiveController" id="order" ng-init="setVat({{config('shop.vat')}})">
 
         <div class="row">
             @if( Session::get('message') != null )
@@ -84,12 +85,11 @@
 
         </div>
         <div class="row">
+
             <div class="col-md-12">
-
                 <div class="panel panel-info">
-
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">สินค้า</h2>
+                        <h2 class="panel-title">รับสินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -113,6 +113,106 @@
 
                                     </div>
                                 </div>
+                                <div class="div row">
+                                    <div class="col-md-1">
+                                        <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <table class="table table-bordered" ng-table="tableParams">
+                                        <tr ng-repeat="item in product">
+                                            <td style="width: 5px">
+                                                <button class="btn btn-box-tool" data-widget="remove"
+                                                        ng-click="deleteById(item.product_id)"><i
+                                                            class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                            <td data-title="'#'" style="width: 10px">
+                                                @{{$index+1}}
+                                            </td>
+                                            <td data-title="'สินค้า'">
+                                                @{{item.product.product_name }}
+                                            </td>
+                                            <td data-title="'วันหมดอายุ'" style="width: 120px">
+                                                <input type="text"
+                                                       ng-model="item.product_exp"
+                                                       ng-change="update('product_exp',item.product_id,item.product_exp)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'จำนวนที่รับ'" style="width: 80px">
+                                                <input type="number"
+                                                       ng-model="item.receive_de_qty"
+                                                       ng-change="update('receive_de_qty',item.product_id,item.receive_de_qty)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'ราคาทุน'" style="width:170px;text-align: right">
+                                                <div class="input-group">
+                                                @{{item.receive_de_price }}
+                                                <div class="input-group-addon">
+                                                    / @{{ item.product.product_unit }}</div>
+                                                </div>
+                                            </td>
+                                            <td data-title="'ส่วนลดเปอร์เช็น'" style="width: 80px">
+                                                <input type="text"
+                                                       ng-model="item.receive_de_discount"
+                                                       ng-change="update('receive_de_discount',item.product_id,item.receive_de_discount)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'ส่วนลดจำนวนเงิน'" style="width: 100px">
+                                                <input type="text"
+                                                       ng-model="item.receive_de_disamount"
+                                                       ng-change="update('receive_de_disamount',item.product_id,item.receive_de_disamount)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'ราคารวม'" style="width:140px;text-align: center">
+                                                @{{ (item.receive_de_qty*item.receive_de_price)-((item.receive_de_qty*item.receive_de_price)*item.receive_de_discount/100)-item.receive_de_disamount| number}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td>@{{ getTotal() | number:2}} บาท</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td>@{{ getVat() | number:2}} บาท
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="col-md-10">
+                                        <a href="{{url('order/save')}}" class="btn btn-md btn-success pull-right"><i
+                                                    class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--<div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title">คืนสินค้า</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel-body">
+                                <div class="div row">
+                                    <div class="col-md-1">
+                                        <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
+
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <table class="table table-bordered" ng-table="tableParams">
                                         <tr ng-repeat="item in product">
@@ -129,75 +229,45 @@
                                             <td data-title="'สินค้า'">
                                                 @{{item.product.product_name }}
                                             </td>
-                                            <td data-title="'จำนวน'" style="width: 80px">
+                                            <td data-title="'จำนวนที่คืน'" style="width: 80px">
                                                 <input type="number"
-                                                       ng-model="item.order_de_qty"
-                                                       ng-change="update('order_de_qty',item.product_id,item.order_de_qty)"
+                                                       ng-model="item.receive_de_qty_return"
+                                                       ng-change="update('receive_de_qty_return',item.product_id,item.receive_de_qty_return)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
-                                            <td data-title="'ราคาทุน'" style="width:180px">
-                                                <form class="form-inline">
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="exampleInputAmount"></label>
-
-                                                        <div class="input-group">
-                                                            <input type="text"
-                                                                   ng-model="item.order_de_price"
-                                                                   ng-change="update('order_de_price',item.product.product_id,item.order_de_price)"
-                                                                   ng-model-options="{debounce: 750}"
-                                                                   class="form-control"
-                                                                   id="exampleInputAmount">
-
-                                                            <div class="input-group-addon">
-                                                                / @{{ item.product.product_unit }}</div>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                            <td data-title="'ราคาทุน'" style="width:180px;text-align: right">
+                                                <div class="input-group">
+                                                    @{{item.receive_de_price }}
+                                                    <div class="input-group-addon">
+                                                        / @{{ item.product.product_unit }}</div>
+                                                </div>
                                             </td>
 
                                             <td data-title="'ราคารวม'" style="width:140px;text-align: center">
-                                                @{{ item.order_de_qty*item.order_de_price  | number}}
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5" class="total-price">Subtotal:</td>
-                                            <td>@{{ getTotal() | number}} บาท</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5" class="total-price">Tax(7%):</td>
-                                            <td>0 บาท
+                                                @{{ item.receive_de_qty_return*item.receive_de_price  | number}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="5" class="total-price">Total:</td>
-                                            <td> @{{ getTotal() | number}} บาท
-                                            </td>
-                                        </tr>
-
                                     </table>
-                                    <div class="col-md-10">
-                                        <a href="{{url('order/save')}}" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
+                                    <div class="col-md-6">
+                                        </div>
+                                    <div class="col-md-6">
+                                    <td colspan="5" class="total-price">เหตุผลที่คืน</td>
+                                        <input type="text"
+                                               ng-model="item.receive_comment"
+                                               ng-change="update('receive_comment',item.receive_comment)"
+                                               ng-model-options="{debounce: 750}"
+                                               class="form-control">
+                                    </td>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
-
-
-                <!-- /.col -->
-
             </div>
-        </div>
+        </div>--}}
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -242,7 +312,7 @@
                             templates: {
                                 empty: [
                                     '<div class="empty-message">',
-                                    'ไม่พบข้อมูลลูกค้า',
+                                    'ไม่พบข้อมูล',
                                     '</div>'
                                 ].join('\n'),
                                 suggestion: Handlebars.compile('<div>@{{ven_id}} - @{{ven_name}}</div>')
@@ -267,7 +337,7 @@
                             templates: {
                                 empty: [
                                     '<div class="empty-message">',
-                                    'ไม่พบข้อมูลลูกค้า',
+                                    'ไม่พบข้อมูล',
                                     '</div>'
                                 ].join('\n'),
                                 suggestion: Handlebars.compile('<div>เลขที่การสั่งซื้อ @{{order_id}} - @{{order_date}}</div>')
