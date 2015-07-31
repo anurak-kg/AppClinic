@@ -4,7 +4,7 @@
         <!-- search form (Optional) -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="ค้นหา..."/>
+                <input type="text" name="q" class="form-control typeahead customer-input" placeholder="ค้นหา..."/>
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
@@ -76,6 +76,7 @@
                     <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลสาขา</a></li>
                     <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลร้านค้า</a></li>
                     <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลพนักงาน</a></li>
+                    <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>จัดการ การเงิน</a></li>
                 </ul>
             </li>
 
@@ -87,7 +88,7 @@
                     <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                     <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
                     <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a></li>
-                    <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a></li>
+                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a></li>
 
                 </ul>
             </li>
@@ -97,4 +98,5 @@
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
+
 </aside>
