@@ -2,15 +2,14 @@
 @section('title','การสั่งซื้อสินค้า')
 @section('headText','สั่งซื้อสินค้า')
 @section('headDes','ออกใบสั่งซื้อสินค้า')
-
 @section('content')
-    <div ng-controller="orderController" id="order">
-
+    <div ng-controller="orderController" id="order" ng-init="setVat({{config('shop.vat')}})">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>Success!</h4>
+
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
@@ -20,46 +19,40 @@
                     <div class="panel-heading with-border">
                         <h2 class="panel-title">รายละเอียด</h2>
                     </div>
-
                     <div class="panel-body">
                         เลขที่การสั่งซื้อ : <strong>{{$data->order_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
                     </div>
-
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+                        <h2 class="panel-title">Supplier</h2>
                     </div>
-
                     <div class="panel-body">
-                        <div class="customerSearchBox" ng-hide="boxSearch"
+                        <div class="vendorSearchBox" ng-hide="boxSearch"
                                 >
-                            <input class="form-control typeahead input-lg customer-input "
+                            <input class="form-control typeahead input-lg vendor-input "
                                    type="search"
-                                   placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า">
+                                   placeholder="ระบุ ชื่อร้าน หรือ รหัสร้าน">
                         </div>
-
-                        <div class="customer" ng-show="boxSearch">
+                        <div class="vendor" ng-show="boxSearch">
                             <ul>
-                                <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
-                                <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.fullname}}</strong></span>
+                                <li>รหัส | <span class="vendor"><strong>@{{vendor.ven_id}}</strong></span>.</li>
+                                <li>ชื่อร้าน | <span class="vendor"><strong>@{{vendor.ven_name}}</strong></span>
+                                <li>ชื่อ | <span class="vendor"><strong>@{{vendor.ven_sell_name}}</strong></span>
                                 </li>
-                                <li>ชื่อเบอร์โทร | <span
-                                            class="customer"><strong>@{{ customer.tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('order/remove_customer')}}">
-                                                เปลียนลูกค้า</a></strong></span>
-
+                                <li>เบอร์โทร | <span
+                                            class="vendor"><strong>@{{ vendor.ven_sell_tel }}</strong></span><br>
+                                    <span><strong><a href="{{url('order/removevendor')}}">
+                                                เปลี่ยน Supplier</a></strong></span>
                                 </li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -112,7 +105,7 @@
                                             <td data-title="'จำนวน'" style="width: 80px">
                                                 <input type="number"
                                                        ng-model="item.order_de_qty"
-                                                       ng-change="update('order_de_qty',item.product_id,item.order_de_qty)"
+                                                       ng-change="update('order_de_qty',item.product.product_id,item.order_de_qty)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
@@ -120,19 +113,23 @@
                                                 <form class="form-inline">
                                                     <div class="form-group">
                                                         <label class="sr-only" for="exampleInputAmount"></label>
+
                                                         <div class="input-group">
                                                             <input type="text"
                                                                    ng-model="item.order_de_price"
                                                                    ng-change="update('order_de_price',item.product.product_id,item.order_de_price)"
                                                                    ng-model-options="{debounce: 750}"
                                                                    class="form-control"
-                                                                   id="exampleInputAmount" >
-                                                            <div class="input-group-addon">/ @{{ item.product.product_unit }}</div>
+                                                                   id="exampleInputAmount">
+
+                                                            <div class="input-group-addon">
+                                                                / @{{ item.product.product_unit }}</div>
                                                         </div>
                                                     </div>
-                                                </form>                                            </td>
+                                                </form>
+                                            </td>
 
-                                            <td data-title="'ราคารวม'"  style="width:140px;text-align: center">
+                                            <td data-title="'ราคารวม'" style="width:140px;text-align: center">
                                                 @{{ item.order_de_qty*item.order_de_price  | number}}
                                             </td>
 
@@ -140,16 +137,16 @@
                                         </tr>
                                         <tr>
                                             <td colspan="5" class="total-price">Subtotal:</td>
-                                            <td>@{{ getTotal() | number}} บาท</td>
+                                            <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
                                             <td colspan="5" class="total-price">Tax(7%):</td>
-                                            <td>0 บาท
+                                            <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="5" class="total-price">Total:</td>
-                                            <td> @{{ getTotal() | number}} บาท
+                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
                                             </td>
                                         </tr>
 
@@ -187,43 +184,75 @@
                         wildcard: '%QUERY'
                     }
                 });
-                var customerDb = new Bloodhound({
+                var vendorDb = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
                     remote: {
-                        url: '/data/customer_search?q=%QUERY',
+                        url: '/data/vendor_search?q=%QUERY',
+                        wildcard: '%QUERY'
+                    }
+                });
+                var empDb = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/data/user_search?q=%QUERY',
                         wildcard: '%QUERY'
                     }
                 });
 
-                customerDb.initialize();
-                $('.customer-input').typeahead({
+                vendorDb.initialize();
+                $('.vendor-input').typeahead({
                             hint: true,
                             highlight: true,
                             minLength: 1
                         },
                         {
-                            displayKey: 'cus_name',
-                            source: customerDb.ttAdapter(),
+                            displayKey: 'ven_name',
+                            source: vendorDb.ttAdapter(),
+                            templates: {
+                                empty: [
+                                    '<div class="empty-message">',
+                                    'ไม่พบข้อมูล',
+                                    '</div>'
+                                ].join('\n'),
+                                suggestion: Handlebars.compile('<div>@{{ven_id}} - @{{ven_name}} - @{{ven_sell_name}} @{{ven_sell_tel}}</div>')
+                            }
+                        })
+                        .on('typeahead:selected', function ($e, datum) {
+                            //console.log(datum);
+                            vendor = datum;
+                            console.log(vendor);
+                            angular.element(document.getElementById('order')).scope().vendorSelect(vendor);
+
+                        })
+                empDb.initialize();
+                $('.emp-input').typeahead({
+                            hint: true,
+                            highlight: true,
+                            minLength: 1
+                        },
+                        {
+                            displayKey: 'name',
+                            source: empDb.ttAdapter(),
                             templates: {
                                 empty: [
                                     '<div class="empty-message">',
                                     'ไม่พบข้อมูลลูกค้า',
                                     '</div>'
                                 ].join('\n'),
-                                suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}}</div>')
+                                suggestion: Handlebars.compile('<div>@{{id}} - @{{name}}</div>')
                             }
                         })
                         .on('typeahead:selected', function ($e, datum) {
                             //console.log(datum);
-                            customer =
+                            emp =
                             {
-                                cus_id: datum.cus_id,
-                                cus_name: datum.cus_name,
-                                cus_tel: datum.cus_tel
+                                id: datum.id,
+                                name: datum.name,
                             }
-                            console.log(customer);
-                            angular.element(document.getElementById('order')).scope().customerSelect(customer);
+                            console.log(emp);
+                            angular.element(document.getElementById('order')).scope().empSelect(emp);
 
                         })
                 productDb.initialize();
@@ -246,9 +275,10 @@
                         })
                         .on('typeahead:selected', function ($e, datum) {
                             product = {
-                                id : datum.product_id,
-                                order_de_qty :1,
-                                product: datum }
+                                id: datum.product_id,
+                                order_de_qty: 1,
+                                product: datum
+                            }
 
                             console.log(product);
                             angular.element(document.getElementById('order')).scope().pushProduct(product);
@@ -257,5 +287,4 @@
 
             });
         </script>
-
 @stop
