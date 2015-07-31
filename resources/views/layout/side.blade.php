@@ -88,7 +88,7 @@
                     <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                     <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
                     <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a></li>
-                    <li><a href="{{url('')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a></li>
+                    <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a></li>
 
                 </ul>
             </li>

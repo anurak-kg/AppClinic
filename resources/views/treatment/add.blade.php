@@ -11,7 +11,7 @@
 
         </div>
         <div class="col-md-7">
-            <div class="box  box-warning">
+            <div class="box  box-info">
                 <div class="box-header with-border" align="center">
                     <h2 class="box-title">การรักษา</h2>
                 </div>
