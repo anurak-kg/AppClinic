@@ -79,31 +79,31 @@
 
                     <div class="box-body">
                         <div ng-repeat="order in course">
-                            รหัสการซื้อ @{{order.quo_id}} / ราคา @{{order.price}} ชำระแล้ว .... บาท สถานะ ....
+                            <b>รหัสการซื้อ @{{order.quo_id}} / ราคา @{{order.price}} ชำระแล้ว .... บาท สถานะ ....</b>
                             <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                 <tr data-ng-repeat=" item in order.course">
 
-                                    <td data-title="'#'" align="middle">
+                                    <td data-title="'#'" align="middle" style="width: 10px">
                                         @{{$index+1 }}
                                     </td>
 
-                                    <td data-title="'คอร์ส'">
-                                        <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
+                                    <td data-title="'คอร์ส'" style="width: 500px">
+                                       <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
                                         - @{{item.course_detail}}
                                     </td>
 
-                                    <td data-title="'จำนวน'" align="middle">
+                                    <td data-title="'จำนวน'" align="middle" style="width: 100px">
                                         @{{item.course_qty}}
                                     </td>
 
-                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle">
+                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle" style="width: 100px">
                                         @{{item.pivot.qty}}
                                     </td>
 
-                                    <td data-title="'สถานะ'">
+                                    <td data-title="'สถานะ'" style="width: 200px">
                                         <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
                                     </td>
-                                    <td data-title="'กระทำ'" align="middle">
+                                    <td data-title="" align="middle"  style="width: 200px">
 
                                         <div ng-bind-html="getCheck(item.pivot.treat_status,order.quo_id,item.course_id)" align="middle"></div>
 
