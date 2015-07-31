@@ -45,6 +45,10 @@ class TreatmentController extends Controller
         $treat->dr_id = $input['doctor'];
         $treat->bt_user_id1 = $input['bt1'];
         $treat->bt_user_id2 = $input['bt2'];
+        $treat->dr_price = $input['dr_price'];
+        $treat->bt1_price = $input['bt1_price'];
+        $treat->bt2_price = $input['bt2_price'];
+
         $treat->comment = $input['comment'];
         $treat->treat_date = $input['treat_date'];
         $treat->branch_id = Branch::getCurrentId();

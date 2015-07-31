@@ -10,6 +10,7 @@ return array(
     'CourseTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'CreateCourseSystem' => $baseDir . '/database/migrations/2015_07_21_211007_create_Course_System.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePaymentSystem' => $baseDir . '/database/migrations/2015_07_31_152308_create_Payment_System.php',
     'CreateSales' => $baseDir . '/database/migrations/2015_07_26_155941_create_sales.php',
     'CreateSessionTable' => $baseDir . '/database/migrations/2015_07_30_144531_create_session_table.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
@@ -534,4 +535,5 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'VendorTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
 );
