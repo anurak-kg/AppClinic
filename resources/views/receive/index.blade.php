@@ -95,6 +95,25 @@
                         <div class="col-md-12">
                             <div class="panel-body">
                                 <div class="div row">
+                                    <div class="col-md-5">
+                                        <input class="form-control typeahead input-lg productInput"
+                                               type="search"
+                                               id="product"
+                                               ng-model="productSearchBox"
+                                               placeholder="ระบุ ชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค้ด ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a class="btn btn-app" href="{{url('product')}}">
+                                            <i class="fa fa-plus-circle"></i> จัดการสินค้า
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
+
+                                    </div>
+                                </div>
+                                <div class="div row">
                                     <div class="col-md-1">
                                         <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
                                     </div>
