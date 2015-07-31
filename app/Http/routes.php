@@ -134,9 +134,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product/create', 'ProductController@create');
     Route::any('product/edit', 'ProductController@edit');
 
-    //Order
-    Route::controller('order', 'OrderController');
-
     //Product_detail
     Route::post('product_detail/index', 'Product_detailController@grid');
     Route::get('product_detail/index', 'Product_detailController@grid');
@@ -168,7 +165,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('data/user_search', 'DataController@getUserList');
     Route::get('data/customer', 'DataController@getCustomerData');
     Route::get('data/product', 'DataController@getProductList');
-
+    Route::get('data/vendor_search', 'DataController@vendorSearch');
     //Report
     Route::any('report/doctor', 'ReportController@reportDoctorTest');
     Route::any('report/sale', 'ReportController@reportSalesTest');
@@ -177,6 +174,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     //sales ขายสินค้า pos
     Route::controller('sales', 'SalesController');
+    //Order
+    Route::controller('order', 'OrderController');
+    //Received
+    Route::controller('receive', 'ReceiveController');
 
 });
 

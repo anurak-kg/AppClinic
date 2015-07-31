@@ -3,81 +3,194 @@
 namespace App\Http\Controllers;
 
 
+use App\Branch;
+use App\Order;
+use App\Product;
 use App\Receive;
-use App\User;
+use App\Receive_detail;
 use App\Vendor;
-use Illuminate\Http\Request;
-use Zofe\Rapyd\Facades\DataGrid;
-use Zofe\Rapyd\Facades\DataEdit;
+use Auth;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use DB;
 use Illuminate\Support\Facades\Input;
 
 class ReceiveController extends Controller
 {
-    public function getDataGrid(){
-        $grid = DataGrid::source(Receive::with('user','vendor','order'));
-        $grid->attributes(array("class"=>"table table-hover"));
-        $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('receive_id', 'เลขที่รับสินค้า',true);
-        $grid->add('{{ $order->order_id }}', 'เลขที่ใบสั่งซื้อ','order_id');
-        $grid->add('{{ $vendor->ven_name }}', 'ร้านค้า','ven_id');
-        $grid->add('{{ $user->name }}', 'ชื่อพนักงาน','id');
-        $grid->add('created_at', 'วันที่รับ');
-
-
-        $grid->edit('/receive/edit', 'กระทำ','modify|delete');
-        $grid->link('receive/create',"เพิ่มข้อมูลใหม่", "TR");
-
-        $grid->paginate(10);
-        return $grid;
-    }
-    public function grid(){
-
-        $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('receive_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
-
-        return view('receive/index', compact('grid'));
-    }
-    public function create()
+    public function getIndex()
     {
-        $form = DataEdit::source(new Receive());
-        $form->text('order_id', 'เลขที่ใบสั่งซื้อ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขใบสั่งซื้อสินค้า....'));
-        $form->text('receive_id', 'เลขที่รับสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเลขที่รับสินค้า....'));
-        $form->add('ven_id', 'ชื่อร้านค้า','select')->rule('required')->options(Vendor::lists('ven_name','ven_id')->toArray());
-        $form->add('id', 'ชื่อพนักงานที่รับ','select')->rule('required')->options(User::lists('name','id')->toArray());
-
-
-        $form->attributes(array("class" => " "));
-
-        $form->saved(function () use ($form) {
-
-            $form->message("เพิ่มข้อมูลเรียบร้อย");
-            $form->link("receive/index", "ย้อนกลับ");
-        });
-
-        return view('receive/create', compact('form'));
+        if (Receive::where('receive_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
+            $receive = new Receive();
+            $receive->emp_id = Auth::user()->getAuthIdentifier();
+            $receive->branch_id = Branch::getCurrentId();
+            $receive->receive_status = "WAITING";
+            $receive->save();
+            return $this->render();
+        } else {
+            return $this->render();
+        }
     }
 
-
-    public function edit()
+    private function render()
     {
-        if (Input::get('do_delete')==1) return  "not the first";
-
-        $edit = DataEdit::source(new Receive());
-        $edit->text('receive_id', 'เลขที่รับสินค้า');
-        $edit->text('order_id', 'เลขที่ใบสั่งซื้อ');
-        $edit->text('ven_id', 'รหัสร้านค้า')->options(Vendor::lists('ven_name','ven_id')->toArray());
-        $edit->add('id', 'ชื่อพนักงานที่รับ','select')->options(User::lists('name','id')->toArray());
-
-        $edit->attributes(array("class" => " "));
-        $edit->link("receive/index", "ย้อนกลับ");
-
-        return $edit->view('receive/edit', compact('edit'));
+        return view('receive.index', [
+            'data' => Receive::findOrFail($this->getId())
+        ]);
     }
 
+    private function getId()
+    {
+        $id = Receive::where('receive_status', "WAITING")
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
+            ->where('branch_id', Branch::getCurrentId())
+            ->firstOrFail();
+        return $id->receive_id;
+    }
+
+    public function getSave()
+    {
+        $sales = Sales::find($this->getId());
+        $sales->sales_total = $this->getTotal();
+        $sales->sales_status = "CLOSE";
+        // $order->quo_date = null;
+        $sales->save();
+        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+    }
+
+    public function getTotal()
+    {
+        $sum = DB::table('sales_detail')
+            ->select(DB::raw('SUM(sales_de_qty*sales_de_price) as total'))
+            ->where('sales_id', $this->getId())
+            ->get();
+        return $sum[0]->total;
+    }
+
+    public function getProductdata()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $product = Product::where('product_id', 'LIKE', $query)
+            ->orWhere('product_name', 'LIKE', $query)
+            ->get();
+        return response()->json($product);
+    }
+
+    public function getUpdate()
+    {
+        $type = Input::get('type');
+        $value = Input::get('value');
+        $id = Input::get('id');
+        $r = DB::table('sales_detail')
+            ->where('sales_id', "=", $this->getId())
+            ->where('product_id', "=", $id)
+            ->update([$type => $value]);
+        return response()->json(['status' => 'Success']);
+    }
+
+    public function getAddproduct()
+    {
+        $id = \Input::get('id');
+        $rec = Receive::find($this->getId());
+        $product = Product::find($id);
+        $rec->product()->attach($product, [
+            'receive_de_qty' => 1, //ส่วนลดเปอร์เซ็น
+            'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
+            'receive_de_text' => "",
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+        ]);
+        $status = "ok";
+        return response()->json([
+            'status' => $status,
+        ]);
+
+    }
+
+    public function getData()
+    {
+        $data = Receive_detail::with(['Product'])
+            ->where('receive_id', "=", $this->getId())
+            ->get();
+        return response()->json($data);
+    }
+
+    public function getDatacustomer()
+    {
+        //echo $this->getQuoId();
+        $quo = Receive::find($this->getId());
+        // dd($quo);
+        $data = null;
+        if ($quo->ven_id == 0) {
+            $data['status'] = -1;
+        } else {
+            $data = Vendor::find($quo->ven_id);
+        }
+        return response()->json($data);
+    }
+
+    public function getRemovecustomer()
+    {
+        $quo = Receive::findOrFail($this->getId());
+        $quo->ven_id = 0;
+        $quo->save();
+        return redirect('receive');
+    }
+
+    public function getOrderdata(){
+        $id = Input::get('id');
+        $order = Order::find($id)
+            ->with('product')
+            ->get()->first();
+        DB::table('receive_detail')
+            ->where('receive_id',$this->getId())
+            ->delete();
+        $receive = Receive::findOrFail($this->getId());
+
+        $receive->ven_id = $order->ven_id;
+        $receive->order_id = $order->order_id;
+
+        foreach($order->product as $item){
+            //echo $item->pg_id;
+            $product = Product::findOrFail($item->product_id);
+            $receive->product()->attach($product, [
+                'receive_de_qty' => $item->pivot->order_de_qty, //ส่วนลดเปอร์เซ็น
+                'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
+                'receive_de_text' => "",
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+        }
+        $receive->save();
+
+
+
+        return redirect('receive');
+
+    }
+    public function getOrdersearch(){
+        $query = '%' . \Input::get('q') . '%';
+        $order = Order::where('order_id', 'LIKE', $query)
+            ->get();
+        return response()->json($order);
+    }
+
+    public function getSetcustomer()
+    {
+        $ven_id = \Input::get('id');
+        $quo = Receive::findOrFail($this->getId());
+        $quo->ven_id = $ven_id;
+        $quo->save();
+        return response()->json(['status' => 'success']);
+    }
+
+    public function getDelete()
+    {
+        DB::table('receive_detail')
+            ->where('receive_id', "=", $this->getId())
+            ->where('product_id', "=", \Input::get('id'))
+            ->delete();
+
+        return response()->json([
+            'status' => "Success",
+        ]);
+    }
 }

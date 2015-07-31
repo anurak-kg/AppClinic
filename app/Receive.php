@@ -13,6 +13,11 @@ class Receive extends Model
     {
         return $this->belongsTo('App\User', 'emp_id');
     }
+    public function product(){
+
+        return $this->belongsToMany('App\Product','receive_detail','receive_id','product_id')
+            ->withPivot('receive_de_qty','receive_de_qty_return','receive_de_text','updated_at','created_at');
+    }
 
     public function Vendor()
     {
