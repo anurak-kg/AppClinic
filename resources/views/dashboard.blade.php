@@ -6,7 +6,7 @@
 
 
     <div class="row">
-
+        <section class="connectedSortable">
                <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
                            <div class="small-box bg-blue">
@@ -62,7 +62,7 @@
                             <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
-
+            </section>
      </div>
 
 
@@ -70,6 +70,7 @@
 
              <!-- Main content -->
                <div class="row">
+                   <section class="connectedSortable">
 
                  <div class="col-md-6">
                    <div class="box  box-success">
@@ -216,7 +217,11 @@
                        </div><!-- /.box-footer -->
                    </div><!-- /.box -->
                    </div>
+                   </section>
                </div><!-- /.row -->
+
+
+    <script src="/dist/js/jquery-ui.js"></script>
 
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
@@ -230,6 +235,16 @@
         {{--calendar doctor--}}
     <script type="text/javascript">
         $(function () {
+
+            $( ".connectedSortable" ).sortable({
+                cursor: "move",
+                forcePlaceholderSize: true,
+                helper: "clone",
+                opacity: 0.7,placeholder: "sortable-placeholder",
+                scrollSensitivity: 10,scrollSpeed: 40,tolerance: "pointer",
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+
             var currentMousePos = {
                 x: -1,
                 y: -1
