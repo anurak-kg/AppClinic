@@ -8,28 +8,27 @@
                 }, 1);
             };
         })
-    .directive("mydatepicker", function(){
-        return {
-            restrict: "E",
-            scope:{
-                ngModel: "=",
-                dateOptions: "=",
-                opened: "=",
-            },
-            link: function($scope, element, attrs) {
-                $scope.open = function(event){
-                    event.preventDefault();
-                    event.stopPropagation();
-                    $scope.opened = true;
-                };
-
-                $scope.clear = function () {
-                    $scope.ngModel = null;
-                };
-            },
-            templateUrl: 'datepicker.html'
-        }
-    })
+        .directive('datepicker', function () {
+            return {
+                restrict: 'A',
+                require: 'ngModel',
+                link: function (scope, element, attrs, ctrl) {
+                    $(element).datepicker({
+                        format: 'yyyy-mm-dd',
+                        language: 'th',
+                        startView: 2,
+                        todayBtn: "linked",
+                        autoclose: true,
+                        todayHighlight: true,
+                        onSelect: function (date) {
+                            ctrl.$setViewValue(date);
+                            ctrl.$render();
+                            scope.$apply();
+                        }
+                    });
+                }
+            };
+        });
     app.controller('quotationsController', function ($scope, $http, ngTableParams, $modal) {
         $scope.product = [];
         $scope.customer = [];
@@ -648,7 +647,7 @@
         })
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
-        $scope.open = function($event) {
+        $scope.open = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
@@ -760,7 +759,7 @@
                 var product = $scope.product[i];
                 var receive = $scope.receive[i];
                 //console.log(product);
-                $scope.total += parseInt((product.receive_de_qty * product.receive_de_price)-
+                $scope.total += parseInt((product.receive_de_qty * product.receive_de_price) -
                     ((product.receive_de_price * product.receive_de_qty) * product.receive_de_discount / 100)
                     - product.receive_de_disamount);
 

@@ -15,10 +15,11 @@ elixir(function (mix) {
     mix.less('app.less');
     mix.scripts(
         [
+            'jQuery-2.1.4.min.js',
+           // 'jquery-ui.min.js',
             'angular.min.js',
             'angular-route.min.js',
             'ng-table.js',
-            'jQuery-2.1.4.min.js',
             'bootstrap.min.js',
             'ui-bootstrap-custom-0.13.1.min.js',
             'ui-bootstrap-custom-tpls-0.13.1.min.js',
@@ -31,17 +32,21 @@ elixir(function (mix) {
             'bootstrap-tagsinput.min.js',
             'jquery.dataTables.min.js',
             'redactor.min.js',
-            'handlebars-v3.0.3.js'
+            'handlebars-v3.0.3.js',
+            'index.min.js'
         ],
         'public/js/app.js'
-    );
+    )
+    ;
     mix.styles([
         'bootstrap.min.css',
         'font-awesome.min.css',
         'select2.css',
         'select2-bootstrap.css',
         'select.min.css',
-        'AdminLTE.min.css'
+        'AdminLTE.min.css',
+        'index.min.css'
+        //'jquery-ui.min.css'
 
     ]);
 });

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/dist/js/ng-table.css">
     <link href="/dist/css/typeahead.css" rel="stylesheet" type="text/css"/>
     <link href="/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"/>
-
+    <script src="https://rawgithub.com/cletourneau/angular-bootstrap-datepicker/master/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
