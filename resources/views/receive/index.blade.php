@@ -43,6 +43,7 @@
                             <input class="form-control typeahead  order-input "
                                    type="search" value="{{$data->order_id}}"
                                    placeholder="รหัสการสั่งซื้อ">
+                            <br> <br>
                             <span class="warning">*ทำการกรอกเลขที่การสั่งซื้อ ข้อมูลสินค้าในตาราง จะถูกล้าง*</span>
                         </div>
                     </div>
