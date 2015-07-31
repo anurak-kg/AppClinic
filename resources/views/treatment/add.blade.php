@@ -37,7 +37,7 @@
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">หมอ</label>
                                     <select class=" form-control dr" name="doctor">
-                                        <option value=""> </option>
+                                        <option value="" style='display:none;'>เลือกหมอ...</option>
 
                                     @foreach($doctor as $dr)
                                             <option value="{{$dr->id}}">{{$dr->id}}
@@ -59,7 +59,8 @@
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">ผู้ช่วย 1</label>
                             <select class=" form-control dr" name="bt1">
-                                <option value=""> </option>
+                                <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
+                                <option value="" >ไม่มี</option>
 
                             @foreach($users as $user)
                                     @if($user->name != $dr->name)
@@ -81,7 +82,8 @@
                         <div class="col-md-6">
                             <label for="cus_name" class=" required">ผู้ช่วย 2</label>
                             <select class=" form-control dr" name="bt2">
-                                <option value=""> </option>
+                                <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
+                                <option value="" >ไม่มี</option>
 
                             @foreach($users as $user)
                                     @if($user->name != $dr->name)
@@ -145,7 +147,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>รายละเอียดเพิ่มเติม</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." name="comment"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..." name="comment"></textarea>
                                 <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
                                 <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
 
