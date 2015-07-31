@@ -34,9 +34,15 @@
 
         </div>
     </div>
+
+    <script type="text/javascript" src="jquery.dataTables.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#customer').dataTable( {
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
+                },
                 processing: true,
                // serverSide: true,
                 "searching": true,
