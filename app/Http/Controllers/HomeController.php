@@ -16,7 +16,7 @@ class HomeController extends Controller {
 		$data=[];
 		foreach($dataCourse as $item){
 
-			$array['value'] = 10;
+			$array['value'] =  (float)$item->Total;
 			$array['color'] =  '#' . strtoupper(dechex(rand(0,10000000)));
 			$array['highlight'] =  '#' . strtoupper(dechex(rand(0,10000000)));
 			$array['label'] = $item->coursename;
@@ -26,6 +26,7 @@ class HomeController extends Controller {
 		//return response()->json($data);
 
 		return view("dashboard",[
+			'data' => $data ,
 			'dataCourse' => json_encode($data)
 		]);
 	}

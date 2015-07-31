@@ -33,11 +33,13 @@
                             </span>
                             <br>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">หมอ</label>
                                     <select class=" form-control dr" name="doctor">
-                                        @foreach($doctor as $dr)
+                                        <option value=""> </option>
+
+                                    @foreach($doctor as $dr)
                                             <option value="{{$dr->id}}">{{$dr->id}}
                                                 : {{$dr->name}}</option>
                                         @endforeach
@@ -45,19 +47,21 @@
                             </span><br>
                         </div>
 
-                        <div class="col-md-12">
-                            <span id="div_cus_name">
-                                <label class=" required">ค่ามือ</label>
-                                <input class=" form-control" type="text" value="" >
+                        <div class="col-md-6">
+                            <span>
+                                <label class=" required" for="dr_price">ค่ามือหมอ</label>
+                                <input class=" form-control" type="number" value="0" name="dr_price" id="dr_price">
                             </span>
                             <br>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">ผู้ช่วย 1</label>
                             <select class=" form-control dr" name="bt1">
-                                @foreach($users as $user)
+                                <option value=""> </option>
+
+                            @foreach($users as $user)
                                     @if($user->name != $dr->name)
                                     <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
                                     @endif
@@ -66,18 +70,20 @@
                             </span><br>
                         </div>
 
-                        <div class="col-md-12">
-                            <span id="div_cus_name">
-                                <label class=" required">ค่ามือ</label>
-                                <input class=" form-control" type="text" value="" >
+                        <div class="col-md-6">
+                              <span>
+                                <label class=" required" for="bt1_price">ค่ามือผู้ช่วย 1</label>
+                                <input class=" form-control" type="number" value="0" name="bt1_price" id="bt1_price">
                             </span>
                             <br>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="cus_name" class=" required">ผู้ช่วย 2</label>
                             <select class=" form-control dr" name="bt2">
-                                @foreach($users as $user)
+                                <option value=""> </option>
+
+                            @foreach($users as $user)
                                     @if($user->name != $dr->name)
                                     <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
                                     @endif
@@ -85,10 +91,10 @@
                             </select><br>
                         </div>
 
-                        <div class="col-md-12">
-                            <span id="div_cus_name">
-                                <label class=" required">ค่ามือ</label>
-                                <input class=" form-control" type="text" value="" >
+                        <div class="col-md-6">
+                              <span>
+                                <label class=" required" for="bt2_price">ค่ามือผู้ช่วย 2</label>
+                                <input class=" form-control" type="number" value="0" name="bt2_price" id="bt2_price">
                             </span>
                             <br>
                         </div>

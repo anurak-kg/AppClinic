@@ -26,7 +26,7 @@ class CreateTableQuotations extends Migration
             // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ ,
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
             $table->decimal('payment',10,2);
-            $table->char('payment_type');
+            //$table->enum('payment_type', array('WAITING','PENDING', 'CLOSE','CANCEL'));
             $table->integer('branch_id')->nullable();
             $table->integer('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
