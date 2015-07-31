@@ -17,8 +17,8 @@ class HomeController extends Controller {
 		foreach($dataCourse as $item){
 
 			$array['value'] = 10;
-			$array['color'] = "#f39c12";
-			$array['highlight'] = "#f39c12";
+			$array['color'] =  '#' . strtoupper(dechex(rand(0,10000000)));
+			$array['highlight'] =  '#' . strtoupper(dechex(rand(0,10000000)));
 			$array['label'] = $item->coursename;
 			array_push($data,$array);
 		}
