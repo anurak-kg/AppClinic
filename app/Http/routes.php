@@ -174,6 +174,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/sale', 'ReportController@reportSalesTest');
     Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
+    Route::any('report/producthot', 'ReportController@reportProductHot');
 
     //sales ขายสินค้า pos
     Route::controller('sales', 'SalesController');

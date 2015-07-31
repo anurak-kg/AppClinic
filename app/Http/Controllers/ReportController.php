@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -10,27 +11,6 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
-
-    //ยอดขาย Sale
-    public function reportsales()
-    {
-        $data = \DB::select((\DB::raw("
-                SELECT
-                users.id,
-                users.name,
-                SUM(quo_de_price) as Total
-                FROM
-                quotations_detail
-                INNER JOIN course ON course.course_id = quotations_detail.course_id
-                INNER JOIN quotations ON quotations.quo_id = quotations_detail.quo_id
-                INNER JOIN users ON quotations.sale_id = users.id
-                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015 AND users.position_id = 1
-                GROUP BY
-                quotations.sale_id
-                ORDER BY Total DESC
-                   ")));
-
-    }
 
     //ยอดขาย Sale
     public function reportSalesTest()
@@ -44,8 +24,10 @@ class ReportController extends Controller
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
             ->join('users', 'quotations.sale_id', '=', 'users.id')
             ->where('users.position_id', '=', 1);
-        if($rang != null){
-            $sales->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+        if ($rang != null) {
+            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
+            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
+            $sales->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
         }
         $sales
             ->groupBy('quotations.sale_id')
@@ -77,23 +59,6 @@ class ReportController extends Controller
 
 
     //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
-    public function reportCourseMonth()
-    {
-        $data = \DB::select((\DB::raw("
-                SELECT
-                course.course_id,
-                course.course_name AS coursename,
-                SUM(quo_de_price) as Total
-                FROM
-                quotations_detail
-                INNER JOIN course ON course.course_id =quotations_detail.course_id
-                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015
-                GROUP BY
-                coursename
-                   ")));
-    }
-
-    //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
     public function reportCourseMonthTest()
     {
         $rang = \Input::get('rang');
@@ -103,7 +68,9 @@ class ReportController extends Controller
             ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
         if ($rang != null) {
-            $coursemonth->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
+            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
+            $coursemonth->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
         }
         $coursemonth
             ->groupBy('coursename')->orderBy('Total', 'desc');
@@ -131,7 +98,9 @@ class ReportController extends Controller
             ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
         if ($rang != null) {
-            $coursehot->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
+            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
+            $coursehot->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
         }
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursehot->take(10)->get();
@@ -145,25 +114,31 @@ class ReportController extends Controller
         ]);
     }
 
-    //ยอดขายแพทย์
-    public function reportDoctor()
-    {
-        $data = \DB::select((\DB::raw("
-                SELECT
-                users.id,
-                users.name,
-                SUM(quo_de_price) as Total
-                FROM
-                quotations_detail
+    //สินค้าที่ขายดีที่สุด
+    public function reportProductHot(){
 
-                INNER JOIN course ON course.course_id = quotations_detail.course_id
-                INNER JOIN quotations ON quotations.quo_id = quotations_detail.quo_id
-                INNER JOIN users ON quotations.sale_id = users.id
-                WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015 AND users.position_id = 4
-                GROUP BY
-                quotations.sale_id
-                ORDER BY Total DESC
-                   ")));
+        $rang = \Input::get('rang');
+        $date = explode('-',$rang);
+        //  var_dump([trim($date[0]),trim($date[1])]);
+        $producthot = DB::table('sales_detail')
+            ->select(DB::raw('product.product_name as productname'),DB::raw('SUM(sales_detail.sales_de_price) AS Total'))
+            ->join('product','product.product_id','=','sales_detail.product_id');
+             if ($rang != null) {
+                 $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
+                 $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
+                 $producthot->whereRaw("DATE(sales_detail.created_at) between ? and ?",[$start,$end]);
+             }
+        $producthot->groupBy('productname')->orderBy('Total','desc');
+         $data = $producthot->take(10)->get();
+
+       // return response()->json($data);
+
+        return view('report/producthot', [
+            'data' => $data,
+            'name' => $this->arrayToChartData($data, 'productname'),
+            'total' => $this->arrayToChartData($data, 'Total')
+        ]);
+
     }
 
     //ยอดขายแพทย์
@@ -172,13 +147,16 @@ class ReportController extends Controller
         $doc = \Input::get('doc');
         $date = explode('-', $doc);
         // var_dump($date);
+
         $doctor = DB::table('quotations_detail')
             ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
             ->join('users', 'quotations.sale_id', '=', 'users.id');
         if ($doc != null) {
-            $doctor->whereBetween('quotations_detail.created_at', [$date[0], $date[1]]);
+            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
+            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
+            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
         }
         $doctor->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')

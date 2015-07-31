@@ -44,7 +44,7 @@
 
     <div class="box box-primary">
 
-        <div class="box-header with-border" align="middle">
+        <div class="box-header" align="middle">
             <div class="box-tools pull-right">
                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
                             class="fa fa-minus"></i></button>
