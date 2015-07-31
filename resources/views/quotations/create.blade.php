@@ -60,7 +60,7 @@
                 </div>
             @endif
             <div class="col-md-4">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <h2 class="box-title">รายละเอียด</h2>
                     </div>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
@@ -138,7 +138,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="box box-info">
+                <div class="box box-primary">
 
                     <div class="box-header with-border">
                         <h2 class="box-title">คอร์ส</h2>

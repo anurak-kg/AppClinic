@@ -23,11 +23,29 @@ class HomeController extends Controller {
 			array_push($data,$array);
 		}
 
-		//return response()->json($data);
+		$producthot = DB::table('sales_detail')
+			->select(DB::raw('product.product_name as productname'),DB::raw('SUM(sales_detail.sales_de_price) AS Total'))
+			->join('product','product.product_id','=','sales_detail.product_id');
+		$producthot->groupBy('productname')->orderBy('Total','desc');
+		$dataProduct = $producthot->take(10)->get();
+		$array = [];
+		$datapro=[];
+		foreach($dataProduct as $item){
+
+			$array['value'] =  (float)$item->Total;
+			$array['color'] =  '#' . strtoupper(dechex(rand(0,10000000)));
+			$array['highlight'] =  '#' . strtoupper(dechex(rand(0,10000000)));
+			$array['label'] = $item->productname;
+			array_push($datapro,$array);
+		}
+
+		//return response()->json($dataProduct);
 
 		return view("dashboard",[
-			'data' => $data ,
-			'dataCourse' => json_encode($data)
+			'data' => $dataCourse ,
+			'datapro' => $dataProduct ,
+			'dataCourse' => json_encode($data),
+			'dataProduct' => json_encode($datapro)
 		]);
 	}
 
