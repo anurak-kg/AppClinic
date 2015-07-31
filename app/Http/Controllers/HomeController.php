@@ -26,6 +26,7 @@ class HomeController extends Controller {
 		//return response()->json($data);
 
 		return view("dashboard",[
+			'data' => $data ,
 			'dataCourse' => json_encode($data)
 		]);
 	}

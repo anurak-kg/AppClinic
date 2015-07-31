@@ -140,21 +140,110 @@
                                       </div><!-- /.box -->
                  </div>
                    <div class="col-md-6">
-                                              <div class="box  box-default">
-                                                                <div class="box-header with-border">
-                                                                  <h3 class="box-title">รายงานยอดขาย</h3>
-                                                                  <div class="box-tools pull-right">
-                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                       <div class="box  box-default">
+                           <div class="box-header with-border">
+                               <h3 class="box-title">สรุปคอร์สขายดี</h3>
+                               <div class="box-tools pull-right">
+                                   <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                               </div>
+                           </div><!-- /.box-header -->
+                           <div class="box-body">
+                               <div class="row">
+                                   <div class="col-md-8">
+                                       <div class="chart-responsive">
+                                           <canvas id="pieChart1" height="150"></canvas>
+                                       </div><!-- ./chart-responsive -->
+                                   </div><!-- /.col -->
+                                   <div class="col-md-4">
+                                       <ul class="chart-legend clearfix">
+                                           <hr>
+                                           <li><i class="fa fa-circle-o text-red"></i> MELASMA WHITENING</li>
+                                           <li><i class="fa fa-circle-o text-green"></i> ACNE</li>
+                                           <li><i class="fa fa-circle-o text-yellow"></i> AGE REVERSE</li>
+                                           <li><i class="fa fa-circle-o text-aqua"></i> VELA BODY</li>
+                                       </ul>
+                                   </div><!-- /.col -->
+                               </div><!-- /.row -->
+                           </div><!-- /.box-body -->
+                           <div class="box-footer no-padding">
+                               <ul class="nav nav-pills nav-stacked">
+                                   <li><a href="#">MELASMA WHITENING<span class="pull-right text-red"><i class="fa fa-angle-down"></i> 30%</span></a></li>
+                                   <li><a href="#">ACNE <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 20%</span></a></li>
+                                   <li><a href="#">AGE REVERSE <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 20%</span></a></li>
+                                   <li><a href="#">VELA BODY <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 30%</span></a></li>
+                               </ul>
+                           </div><!-- /.footer -->
+                       </div><!-- /.box -->
+                   </div>
 
-                                                                  </div>
-                                                                </div>
-                                                                <div class="box-body chart-responsive">
-                                                                  <div class="chart" id="bar-chart" style="height: 300px;"></div>
-                                                                </div><!-- /.box-body -->
-                                                              </div><!-- /.box -->
+                   <div class="col-md-6">
+                   <!-- PRODUCT LIST -->
+                   <div class="box box-primary">
+                       <div class="box-header with-border">
+                           <h3 class="box-title">Recently Added Products</h3>
+                           <div class="box-tools pull-right">
+                               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                               <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                           </div>
+                       </div><!-- /.box-header -->
+                       <div class="box-body">
+                           <ul class="products-list product-list-in-box">
+                               <li class="item">
+                                   <div class="product-img">
+                                       <img src="dist/img/default-50x50.gif" alt="Product Image" />
+                                   </div>
+                                   <div class="product-info">
+                                       <a href="javascript::;" class="product-title">Samsung TV <span class="label label-warning pull-right">$1800</span></a>
+                        <span class="product-description">
+                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+                        </span>
+                                   </div>
+                               </li><!-- /.item -->
+                               <li class="item">
+                                   <div class="product-img">
+                                       <img src="dist/img/default-50x50.gif" alt="Product Image" />
+                                   </div>
+                                   <div class="product-info">
+                                       <a href="javascript::;" class="product-title">Bicycle <span class="label label-info pull-right">$700</span></a>
+                        <span class="product-description">
+                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+                        </span>
+                                   </div>
+                               </li><!-- /.item -->
+                               <li class="item">
+                                   <div class="product-img">
+                                       <img src="dist/img/default-50x50.gif" alt="Product Image" />
+                                   </div>
+                                   <div class="product-info">
+                                       <a href="javascript::;" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
+                        <span class="product-description">
+                          Xbox One Console Bundle with Halo Master Chief Collection.
+                        </span>
+                                   </div>
+                               </li><!-- /.item -->
+                               <li class="item">
+                                   <div class="product-img">
+                                       <img src="dist/img/default-50x50.gif" alt="Product Image" />
+                                   </div>
+                                   <div class="product-info">
+                                       <a href="javascript::;" class="product-title">PlayStation 4 <span class="label label-success pull-right">$399</span></a>
+                        <span class="product-description">
+                          PlayStation 4 500GB Console (PS4)
+                        </span>
+                                   </div>
+                               </li><!-- /.item -->
+                           </ul>
+                       </div><!-- /.box-body -->
+                       <div class="box-footer text-center">
+                           <a href="javascript::;" class="uppercase">View All Products</a>
+                       </div><!-- /.box-footer -->
+                   </div><!-- /.box -->
                    </div>
 
                </div><!-- /.row -->
+
+
+
 
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
@@ -509,6 +598,39 @@
                          //Create pie or douhnut chart
                          // You can switch between pie and douhnut using the method below.
                          pieChart.Doughnut(PieData, pieOptions);
+
+
+
+               var pieChartCanvas = $("#pieChart1").get(0).getContext("2d");
+               var pieChart = new Chart(pieChartCanvas);
+               var PieData = {!! $dataCourse !!};
+               var pieOptions = {
+                   //Boolean - Whether we should show a stroke on each segment
+                   segmentShowStroke: true,
+                   //String - The colour of each segment stroke
+                   segmentStrokeColor: "#fff",
+                   //Number - The width of each segment stroke
+                   segmentStrokeWidth: 2,
+                   //Number - The percentage of the chart that we cut out of the middle
+                   percentageInnerCutout: 50, // This is 0 for Pie charts
+                   //Number - Amount of animation steps
+                   animationSteps: 100,
+                   //String - Animation easing effect
+                   animationEasing: "easeOutBounce",
+                   //Boolean - Whether we animate the rotation of the Doughnut
+                   animateRotate: true,
+                   //Boolean - Whether we animate scaling the Doughnut from the centre
+                   animateScale: false,
+                   //Boolean - whether to make the chart responsive to window resizing
+                   responsive: true,
+                   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                   maintainAspectRatio: false,
+                   //String - A legend template
+                   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+               };
+               //Create pie or douhnut chart
+               // You can switch between pie and douhnut using the method below.
+               pieChart.Doughnut(PieData, pieOptions);
 
                  //BAR CHART
                  var bar = new Morris.Bar({
