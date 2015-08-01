@@ -179,7 +179,7 @@
                                     <thead>
                                     <tr>
                                         <th>รหัสคอร์ส</th>
-                                        <th>คอร์ส</th>
+                                        <th style="width: 900px;">คอร์ส</th>
                                         <th>จำนวน</th>
                                     </tr>
                                     </thead>
@@ -187,7 +187,7 @@
                                         <tr>
                                             <td>{{ $course->course_id }}</td>
                                             <td>{{ $course->course_name }}</td>
-                                            <td >{{ $course->course_qty }}</td>
+                                            <td>{{ $course->course_qty }}</td>
                                         </tr>
                                     @endforeach
                                 </table>
@@ -227,8 +227,15 @@
                                     </thead>
                                     @foreach($treat as $item)
                                         <tr>
-                                            <td>{{ $item->branch_id }}</td>
-                                            <td>{{ $item->treat_id }}</td>
+                                            <td style="width: auto;"><?php
+                                                $branch =  \App\Branch::find($item->branch_id);
+                                                if ($branch != null) {
+                                                    echo $branch->branch_name;
+                                                }
+                                                else {
+                                                    echo 'ไม่มีข้อมูล';
+                                                } ?></td>
+                                            <td style="width: 180px;">{{ $item->treat_id }}</td>
                                             <td>{{ $item->course_name }}</td>
                                             <td><?php
                                                 $dr=  \App\User::find($item->dr_id);

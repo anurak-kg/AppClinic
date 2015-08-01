@@ -25,7 +25,7 @@
                 </div>
 
             </div>
-            <div class="box box-solid box-danger">
+            <div class="box box-solid box-danger" align="middle">
 
                 <div class="box-header with-border">
                     <h2 class="box-title" align="middle">ลบข้อมูล</h2>

@@ -43,6 +43,7 @@
                             <input class="form-control typeahead  order-input "
                                    type="search" value="{{$data->order_id}}"
                                    placeholder="รหัสการสั่งซื้อ">
+                            <br> <br>
                             <span class="warning">*ทำการกรอกเลขที่การสั่งซื้อ ข้อมูลสินค้าในตาราง จะถูกล้าง*</span>
                         </div>
                     </div>
@@ -156,7 +157,7 @@
                                                 </div>
                                             </td>
                                             <td data-title="'ส่วนลดเปอร์เช็น'" style="width: 80px">
-                                                <input type="text"
+                                                <input type="number"
                                                        ng-model="item.receive_de_discount"
                                                        ng-change="update('receive_de_discount',item.product_id,item.receive_de_discount)"
                                                        ng-model-options="{debounce: 750}"

@@ -30,28 +30,33 @@
                         <input class=" form-control"
                                type="text"
                                id="course_id"
-                               name="course_id" >
+                               name="course_id" placeholder="ระบุเลขที่คอร์ส ...">
+                        <br>
                     </div>
                     <div class="col-md-12">
                         <label for="course_name" class=" required">ชื่อคอร์ส</label>
-                        <input class=" form-control" type="text" id="course_name" name="course_name">
+                        <input class=" form-control" type="text" id="course_name" name="course_name" placeholder="ระบุชื่อคอร์ส ...">
+                        <br>
                     </div>
 
                     <div class="col-md-12">
 
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." name="comment"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..." name="comment"></textarea>
+                            <br>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="course_name" class=" required">ราคา</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_price">
+                        <input class=" form-control" type="number" id="course_name" name="course_price" placeholder="ระบุราคา ...">
+                        <br>
                     </div>
                     <div class="col-md-6">
                         <label for="course_name" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_qty">
+                        <input class=" form-control" type="number" id="course_name" name="course_qty" placeholder="ระบุจำนวนครั้ง ...">
+                        <br>
                     </div>
                     <div class="col-md-12"><br>
                         <div class="row">
@@ -104,7 +109,7 @@
                             <div class="col-md-1">
 
                                 <div class="form-group">
-                                    <label class=" required">.</label>
+                                    <label class=" required"> </label>
 
                                     <a class="btn btn-info" ng-click="addMedicine()">เพิ่มตัวยา</a>
                                 </div>
@@ -118,7 +123,7 @@
                 <div class="box-footer">
                     <div class="col-md-12">
                         <input ng-value="jsonData" type="hidden" name="json">
-                        <input  type="submit" class="btn btn-success btn-block" value="Save !!">
+                        <input  type="submit" class="btn btn-success btn-block" value="บันทึก">
                     </div>
                 </div>
 

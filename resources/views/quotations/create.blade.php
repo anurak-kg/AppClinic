@@ -60,7 +60,7 @@
                 </div>
             @endif
             <div class="col-md-4">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-info"></i>
 
@@ -78,7 +78,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
@@ -143,7 +143,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="box box-info">
+                <div class="box box-primary">
 
                     <div class="box-header with-border">
                         <i class="fa fa-cart-plus"></i>
