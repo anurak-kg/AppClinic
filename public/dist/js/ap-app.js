@@ -446,6 +446,16 @@
             }
             return results;
         }
+        $scope.save = function () {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่มีการเลือกสินค้า");
+            }
+            else {
+                window.location.href = $scope.controller+ '/save';
+
+            }
+        }
+
     });
     app.controller('courseController', function ($scope, $http) {
         $scope.course_medicine = [];
