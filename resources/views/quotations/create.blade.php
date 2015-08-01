@@ -14,13 +14,14 @@
                         <input name="total"
                                class=" form-control input-lg"
                                type="number" id="total"
-                                value="@{{getTotal() + getVat()}}"
+                               value="@{{getTotal() + getVat()}}"
                                disabled
                                 />
                     </div>
                     <div class="col-md-12">
                         <label for="cashInput">รับเงิน</label>
-                        <input name="cashInput" class=" form-control input-lg" ng-model="cashInput" type="number" id="cashInput"/>
+                        <input name="cashInput" class=" form-control input-lg" ng-model="cashInput" type="number"
+                               id="cashInput"/>
                         <button class="btn" ng-click="cashAdd(1000)">+1000</button>
                         <button class="btn" ng-click="cashAdd(500)">+500</button>
                         <button class="btn" ng-click="cashAdd(100)">+100</button>
@@ -46,7 +47,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" ng-click="payment()">ชำระเงิน</button>
-                <button class="btn btn-success" ng-click="paymentAndPrint({{$quo->quo_id}})">ชำระเงิน พร้อมปลิ้นบิล</button>
+                <button class="btn btn-success" ng-click="paymentAndPrint({{$quo->quo_id}})">ชำระเงิน พร้อมปลิ้นบิล
+                </button>
                 <button class="btn btn-danger" ng-click="cancel()">ยกเลิก</button>
             </div>
         </script>
@@ -55,6 +57,7 @@
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>Success!</h4>
+
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
@@ -81,6 +84,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
+
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
@@ -94,7 +98,7 @@
 
                         <div class="customer" ng-show="boxSearch">
                             <ul>
-                                <li>รหัสลูกค้า  | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
+                                <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
                                 <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.fullname}}</strong></span>
                                 </li>
                                 <li>ชื่อเบอร์โทร | <span
@@ -127,12 +131,17 @@
 
                         <div class="sale" ng-show="SaleBoxSearch">
                             <ul>
-                                <li>รหัสพนักงาน  | <span class="sale"><strong>@{{sale.id}}</strong></span>.</li>
+                                <li>รหัสพนักงาน | <span class="sale"><strong>@{{sale.id}}</strong></span>.</li>
                                 <li>ชื่อลูกค้า | <span class="sale"><strong>@{{sale.name}}</strong></span>.
-                                <span><br><strong><a href="{{url('quotations/remove_sale')}}">
-                                            เปลียนพนักงานขาย</a></strong></span>
                                 </li>
-                               </ul>
+                                <li>ยอดขายบิลนี้ | <span class="sale"><strong>@{{getTotal()}}</strong> บาท</span>.</li>
+                                <li>ค่าแนะนำ <?php echo getConfig('commission_rate');?>% | <span
+                                            class="sale"><strong>{{getTotal()*<?php echo getConfig('commission_rate');?>/100}}</strong> บาท</span>.
+                                </li>
+                                <li><strong><a href="{{url('quotations/remove_sale')}}">
+                                            เปลียนพนักงานขาย</a></strong></li>
+
+                            </ul>
                         </div>
                     </div>
 
@@ -221,16 +230,14 @@
                                     </table>
 
                                     <div class="col-md-10">
-                                    <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
-                                                class="fa fa-credit-card "> ยืนยัน
-                                            การชำระเงิน </i></a>
+                                        <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
+                                                    class="fa fa-credit-card "> ยืนยัน
+                                                การชำระเงิน </i></a>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-
-
 
 
                     </div>

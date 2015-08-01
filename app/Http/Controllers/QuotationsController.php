@@ -30,6 +30,7 @@ class QuotationsController extends Controller
             $quotation->emp_id = Auth::user()->getAuthIdentifier();
             $quotation->branch_id =  Branch::getCurrentId();
             $quotation->quo_status = -1;
+            $quotation->commission_rate = getConfig('commission_rate');
             // $quotation->branch_id = Branch::getId();
             $quotation->save();
             return $this->quoRender();
