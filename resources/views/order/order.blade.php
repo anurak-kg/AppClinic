@@ -275,7 +275,7 @@
                         })
                         .on('typeahead:selected', function ($e, datum) {
                             product = {
-                                id: datum.product_id,
+                                product_id: datum.product_id,
                                 order_de_qty: 1,
                                 product: datum
                             }
