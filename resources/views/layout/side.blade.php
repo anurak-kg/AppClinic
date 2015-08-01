@@ -2,11 +2,11 @@
     <section class="sidebar">
 
         <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
+        <form action="{{url('customer')}}" method="get" class="sidebar-form">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="ค้นหา..."/>
+                <input type="text" name="q" class="form-control typeahead customer-input" placeholder="ค้นหาลูกค้า..."/>
               <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+               <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
         </form>
@@ -76,6 +76,7 @@
                     <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลสาขา</a></li>
                     <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลร้านค้า</a></li>
                     <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>จัดการ ข้อมูลพนักงาน</a></li>
+                    <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>จัดการ การเงิน</a></li>
                 </ul>
             </li>
 
@@ -97,4 +98,5 @@
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
+
 </aside>

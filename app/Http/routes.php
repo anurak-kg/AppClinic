@@ -175,10 +175,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     //sales ขายสินค้า pos
     Route::controller('sales', 'SalesController');
+
     //Order
     Route::controller('order', 'OrderController');
+
     //Received
     Route::controller('receive', 'ReceiveController');
+
+    Route::get('money/manage', 'MoneyController@moneyDr');
 
 });
 

@@ -6,7 +6,7 @@
 
 
     <div class="row">
-
+        <section class="connectedSortable">
                <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
                            <div class="small-box bg-blue">
@@ -40,7 +40,7 @@
                            <div class="small-box bg-yellow">
                             <div class="inner">
                               <h4>ซื้อสินค้า</h4>
-                              <p>สำหรับลูกค้าทั่วไป</p>
+                              <p>สำหรับสมาชิกและลูกค้าทั่วไป</p>
                              </div>
                             <div class="icon">
                                         <i class="fa fa-cart-plus"></i>
@@ -62,7 +62,7 @@
                             <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
-
+            </section>
      </div>
 
 
@@ -70,7 +70,63 @@
 
              <!-- Main content -->
                <div class="row">
+                   <section class="connectedSortable">
+                       <div class="col-md-6">
+                           <div class="box  box-default">
+                               <div class="box-header with-border">
+                                   <h3 class="box-title">คอร์สขายดี</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                   </div>
+                               </div><!-- /.box-header -->
+                               <div class="box-body">
+                                   <div class="row">
+                                       <div class="col-md-5">
+                                           <div class="chart-responsive">
+                                               <canvas id="pieChart" height="150"></canvas>
+                                           </div><!-- ./chart-responsive -->
+                                       </div><!-- /.col -->
+                                       <div class="col-md-6">
+                                           <ul class="chart-legend clearfix">
+                                               @foreach($data as $item)
+                                                   <li>&nbsp;&nbsp;{{ $item->coursename }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
+                                                   <br>
+                                               @endforeach
+                                           </ul>
+                                       </div><!-- /.col -->
+                                   </div><!-- /.row -->
+                               </div><!-- /.box-body -->
 
+                           </div><!-- /.box -->
+                       </div>
+
+                       <div class="col-md-6">
+                           <div class="box  box-default">
+                               <div class="box-header with-border">
+                                   <h3 class="box-title">สินค้าขายดี</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                   </div>
+                               </div><!-- /.box-header -->
+                               <div class="box-body">
+                                   <div class="row">
+                                       <div class="col-md-6">
+                                           <div class="chart-responsive">
+                                               <canvas id="pieChart2" height="150"></canvas>
+                                           </div><!-- ./chart-responsive -->
+                                       </div><!-- /.col -->
+                                       <div class="col-md-5">
+                                           <ul class="chart-legend clearfix">
+                                               @foreach($datapro as $item)
+                                               <li>&nbsp;&nbsp;{{ $item->productname }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
+                                                   <br>
+                                               @endforeach
+                                           </ul>
+                                       </div><!-- /.col -->
+                                   </div><!-- /.row -->
+                               </div><!-- /.box-body -->
+                           </div><!-- /.box -->
+                       </div>
                  <div class="col-md-6">
                    <div class="box  box-success">
                    <div class="box-header with-border" align="middle">
@@ -88,7 +144,7 @@
                  </div><!-- /.col -->
 
                    <div class="col-md-6">
-                       <div class="box box-primary">
+                       <div class="box box-success">
                            <div class="box-header with-border" align="middle">
 
                                <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
@@ -103,56 +159,6 @@
                        </div><!-- /. box -->
                    </div><!-- /.col -->
 
-                 <div class="col-md-6">
-                                <div class="box  box-default">
-                                        <div class="box-header with-border">
-                                          <h3 class="box-title">สรุปคอร์สขายดี</h3>
-                                          <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                          </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body">
-                                          <div class="row">
-                                            <div class="col-md-8">
-                                              <div class="chart-responsive">
-                                                <canvas id="pieChart" height="100"></canvas>
-                                              </div><!-- ./chart-responsive -->
-                                            </div><!-- /.col -->
-                                            <div class="col-md-4">
-                                              <ul class="chart-legend clearfix">
-                                              <hr>
-                                                <li><i class="fa fa-circle-o text-red"></i> MELASMA WHITENING</li>
-                                                <li><i class="fa fa-circle-o text-green"></i> ACNE</li>
-                                                <li><i class="fa fa-circle-o text-yellow"></i> AGE REVERSE</li>
-                                                <li><i class="fa fa-circle-o text-aqua"></i> VELA BODY</li>
-                                              </ul>
-                                            </div><!-- /.col -->
-                                          </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                        <div class="box-footer no-padding">
-                                          <ul class="nav nav-pills nav-stacked">
-                                            <li><a href="#">MELASMA WHITENING<span class="pull-right text-red"><i class="fa fa-angle-down"></i> 30%</span></a></li>
-                                            <li><a href="#">ACNE <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 20%</span></a></li>
-                                            <li><a href="#">AGE REVERSE <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 20%</span></a></li>
-                                            <li><a href="#">VELA BODY <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 30%</span></a></li>
-                                          </ul>
-                                        </div><!-- /.footer -->
-                                      </div><!-- /.box -->
-                 </div>
-                   <div class="col-md-6">
-                                              <div class="box  box-default">
-                                                                <div class="box-header with-border">
-                                                                  <h3 class="box-title">รายงานยอดขาย</h3>
-                                                                  <div class="box-tools pull-right">
-                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-
-                                                                  </div>
-                                                                </div>
-                                                                <div class="box-body chart-responsive">
-                                                                  <div class="chart" id="bar-chart" style="height: 300px;"></div>
-                                                                </div><!-- /.box-body -->
-                                                              </div><!-- /.box -->
-                   </div>
                    <div class="col-md-6">
                    <!-- PRODUCT LIST -->
                    <div class="box box-primary">
@@ -216,7 +222,11 @@
                        </div><!-- /.box-footer -->
                    </div><!-- /.box -->
                    </div>
+                   </section>
                </div><!-- /.row -->
+
+
+    <script src="/dist/js/jquery-ui.js"></script>
 
     <!-- fullCalendar 2.2.5-->
     <link href="../plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
@@ -230,6 +240,16 @@
         {{--calendar doctor--}}
     <script type="text/javascript">
         $(function () {
+
+            $( ".connectedSortable" ).sortable({
+                cursor: "move",
+                forcePlaceholderSize: true,
+                helper: "clone",
+                opacity: 0.7,placeholder: "sortable-placeholder",
+                scrollSensitivity: 10,scrollSpeed: 40,tolerance: "pointer",
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+
             var currentMousePos = {
                 x: -1,
                 y: -1
@@ -572,25 +592,42 @@
                          // You can switch between pie and douhnut using the method below.
                          pieChart.Doughnut(PieData, pieOptions);
 
-                 //BAR CHART
-                 var bar = new Morris.Bar({
-                   element: 'bar-chart',
-                   resize: true,
-                   data: [
-                     {y: '2549', a: 100, b: 90},
-                     {y: '2550', a: 75, b: 65},
-                     {y: '2551', a: 50, b: 40},
-                     {y: '2552', a: 75, b: 65},
-                     {y: '2553', a: 50, b: 40},
-                     {y: '2554', a: 75, b: 65},
-                     {y: '2555', a: 100, b: 90}
-                   ],
-                   barColors: ['#00a65a', '#f56954'],
-                   xkey: 'y',
-                   ykeys: ['a', 'b'],
-                   labels: ['CPU', 'DISK'],
-                   hideHover: 'auto'
-                 });
+               //-------------
+               //- PIE CHART -
+               //-------------
+               // Get context with jQuery - using jQuery's .get() method.
+               var pieChartCanvas = $("#pieChart2").get(0).getContext("2d");
+               var pieChart = new Chart(pieChartCanvas);
+               var PieData = {!! $dataProduct !!};
+               var pieOptions = {
+                   //Boolean - Whether we should show a stroke on each segment
+                   segmentShowStroke: true,
+                   //String - The colour of each segment stroke
+                   segmentStrokeColor: "#fff",
+                   //Number - The width of each segment stroke
+                   segmentStrokeWidth: 2,
+                   //Number - The percentage of the chart that we cut out of the middle
+                   percentageInnerCutout: 50, // This is 0 for Pie charts
+                   //Number - Amount of animation steps
+                   animationSteps: 100,
+                   //String - Animation easing effect
+                   animationEasing: "easeOutBounce",
+                   //Boolean - Whether we animate the rotation of the Doughnut
+                   animateRotate: true,
+                   //Boolean - Whether we animate scaling the Doughnut from the centre
+                   animateScale: false,
+                   //Boolean - whether to make the chart responsive to window resizing
+                   responsive: true,
+                   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                   maintainAspectRatio: false,
+                   //String - A legend template
+                   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+               };
+               //Create pie or douhnut chart
+               // You can switch between pie and douhnut using the method below.
+               pieChart.Doughnut(PieData, pieOptions);
+
+
                });
              </script>
 

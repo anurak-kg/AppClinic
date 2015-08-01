@@ -69,9 +69,9 @@ class Doctor_eventController extends Controller
         /* dd(User::where('position_id','=',4)->lists('name','id')->toArray());*/
         $form = DataForm::create('doctor_event');
         $form->add('name', 'ชื่อแพทย์', 'select')->options(User::where('position_id', '=', 4)->lists('name', 'id')->toArray());
-        $form->text('event_name', 'รายละเอียด');
-        $form->add('event_start', 'วันที่เริ่ม', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
-        $form->add('event_end', 'วันที่สิ้นสุด', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required');
+        $form->text('event_name', 'รายละเอียด')->attributes(array('placeholder' => 'ระบุรายละเอียด ....'));
+        $form->add('event_start', 'วันที่เริ่ม', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required')->attributes(array('placeholder' => 'ระบุวันที่เริ่ม ....'));
+        $form->add('event_end', 'วันที่สิ้นสุด', 'datetime')->format('Y-m-d H:i:s', 'th')->rule('required')->attributes(array('placeholder' => 'ระบุวันที่สิ้นสุด ....'));
         // $form->text('event_status', 'สถานะ');
         //$form->add('color','Color','colorpicker');
 

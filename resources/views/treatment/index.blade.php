@@ -18,7 +18,7 @@
             @endif
 
             <div class="col-md-12">
-                <div class="box box-success ">
+                <div class="box box-default ">
                     <div class="box-header with-border">
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
@@ -72,38 +72,38 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-info">
+                <div class="box box-primary">
                     <div class="box-header with-border">
                         <h2 class="box-title">ข้อมูล คอร์ส</h2>
                     </div>
 
                     <div class="box-body">
                         <div ng-repeat="order in course">
-                            รหัสการซื้อ @{{order.quo_id}} / ราคา @{{order.price}} ชำระแล้ว .... บาท สถานะ ....
+                            <b>รหัสการซื้อ @{{order.quo_id}} / ราคา @{{order.price}} ชำระแล้ว .... บาท สถานะ ....</b>
                             <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                 <tr data-ng-repeat=" item in order.course">
 
-                                    <td data-title="'#'" align="middle">
+                                    <td data-title="'#'" align="middle" style="width: 10px">
                                         @{{$index+1 }}
                                     </td>
 
-                                    <td data-title="'คอร์ส'">
-                                        <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
+                                    <td data-title="'คอร์ส'" style="width: 500px">
+                                       <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
                                         - @{{item.course_detail}}
                                     </td>
 
-                                    <td data-title="'จำนวน'" align="middle">
+                                    <td data-title="'จำนวน'" align="middle" style="width: 100px">
                                         @{{item.course_qty}}
                                     </td>
 
-                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle">
+                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle" style="width: 100px">
                                         @{{item.pivot.qty}}
                                     </td>
 
-                                    <td data-title="'สถานะ'">
+                                    <td data-title="'สถานะ'" style="width: 200px">
                                         <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
                                     </td>
-                                    <td data-title="'กระทำ'" align="middle">
+                                    <td data-title="" align="middle"  style="width: 200px">
 
                                         <div ng-bind-html="getCheck(item.pivot.treat_status,order.quo_id,item.course_id)" align="middle"></div>
 
@@ -121,7 +121,16 @@
             </div>
         </div>
 
-
+        <div class="input-group">
+            <input type="text" class="form-control" datepicker-popup="@{{format}}"
+                   name="dt" ng-model="formData.dt" is-open="datepickers.dt"
+                   datepicker-options="dateOptions" ng-required="true"
+                   close-text="Close" />
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="open($event,'dt')">
+            <i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -162,4 +171,5 @@
                     })
         });
     </script>
+
 @stop
