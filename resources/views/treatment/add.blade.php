@@ -1,10 +1,13 @@
 @extends('layout.master')
 @section('title','การรักษา')
 @section('content')
+<script>
 
+
+</script>
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
-    <div class="row">
+    <div class="row" ng-controller="treatmentAddController">
 
 
         <div class="col-md-3">
@@ -15,7 +18,8 @@
                 <div class="box-header with-border" align="center">
                     <h2 class="box-title">การรักษา</h2>
                 </div>
-                {!! Form::open(array('url'=>'treatment/save')) !!}
+                <form class="form-horizontal" method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -36,7 +40,7 @@
                         <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">หมอ</label>
-                                    <select class=" form-control dr" name="doctor">
+                                    <select class=" form-control dr" name="doctor" ng-model="dr">
                                         <option value="" style='display:none;'>เลือกหมอ...</option>
 
                                     @foreach($doctor as $dr)
@@ -58,7 +62,7 @@
                         <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">ผู้ช่วย 1</label>
-                            <select class=" form-control dr" name="bt1">
+                            <select class=" form-control dr" name="bt1" ng-model="bt1">
                                 <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
                                 <option value="" >ไม่มี</option>
 
@@ -74,14 +78,14 @@
                         <div class="col-md-6">
                               <span>
                                 <label class=" required" for="bt1_price">ค่ามือผู้ช่วย 1</label>
-                                <input class=" form-control" type="number" value="0" name="bt1_price" id="bt1_price">
+                                <input class=" form-control" type="number" value="0" name="bt1_price" id="bt1_price" >
                             </span>
                             <br>
                         </div>
 
                         <div class="col-md-6">
                             <label for="cus_name" class=" required">ผู้ช่วย 2</label>
-                            <select class=" form-control dr" name="bt2">
+                            <select class=" form-control dr" name="bt2" ng-model="bt2">
                                 <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
                                 <option value="" >ไม่มี</option>
 

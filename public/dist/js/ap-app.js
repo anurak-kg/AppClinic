@@ -806,7 +806,20 @@
             return results;
         }
     });
+    app.controller('treatmentAddController', function ($scope) {
 
+        $scope.save = function (e) {
+            console.log(e );
+            console.log($scope.bt1 );
+
+            if (typeof $scope.dr === 'undefined' && typeof $scope.bt1 === 'undefined' && typeof $scope.bt2 === 'undefined') {
+                alert("ยังไม่มีการเลือกพนักงานที่เกี่ยวข้อง");
+                e.preventDefault();
+            }
+
+        }
+
+    });
 })();
 /**
  * Created by Anurak on 26/06/58.
