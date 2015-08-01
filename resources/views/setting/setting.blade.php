@@ -51,7 +51,7 @@
                                     <label for="inputEmail3" class="col-sm-3 control-label">ตัวย่อร้าน</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                        <input type="text" class="form-control" id="inputEdb:smail3" placeholder="">
                                     </div>
                                 </div>
 
