@@ -26,11 +26,11 @@ class ProductController extends Controller
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('product_id', 'รหัสสินค้า',true);
-        $grid->add('pg_id', 'รหัสกลุ่มสินค้า',true);
-        $grid->add('product_name', 'ชื่อสินค้า',true);
-        $grid->add('product_qty', 'จำนวนสินค้าที่มี');
-        $grid->add('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
-        $grid->add('product_date_start', 'วันที่ผลิต');
+        $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
+        $grid->add('product_name', 'ชื่อสินค้า');
+        $grid->add('product_qty', 'inventory');
+        $grid->add('product_qty_order', 'Order point');
+        //$grid->add('product_date_start', 'วันที่ผลิต');
         $grid->add('product_date_end', 'วันที่หมดอายุ');
         $grid->add('product_price', 'ราคา/หน่วย');
         $grid->add('product_unit', 'หน่วยนับ');
