@@ -31,7 +31,6 @@ class CreateTableQuotations extends Migration
             $table->integer('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
         });
-        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
         Schema::create('quotations_detail', function (Blueprint $table) {
             $table->integer('quo_id');
             $table->string('course_id');
@@ -45,6 +44,7 @@ class CreateTableQuotations extends Migration
             $table->primary(['quo_id','course_id']);
 
         });
+        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
 
 
 

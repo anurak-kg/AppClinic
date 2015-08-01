@@ -62,6 +62,8 @@
             <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
+                        <i class="fa fa-info"></i>
+
                         <h2 class="box-title">รายละเอียด</h2>
                     </div>
 
@@ -78,6 +80,7 @@
             <div class="col-md-4">
                 <div class="box box-success">
                     <div class="box-header with-border">
+                        <i class="fa fa-user"></i>
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
@@ -109,6 +112,8 @@
             <div class="col-md-4">
                 <div class="box box-warning">
                     <div class="box-header with-border">
+                        <i class="fa fa-money"></i>
+
                         <h2 class="box-title">พนักงานขาย</h2>
                     </div>
 
@@ -141,6 +146,8 @@
                 <div class="box box-info">
 
                     <div class="box-header with-border">
+                        <i class="fa fa-cart-plus"></i>
+
                         <h2 class="box-title">คอร์ส</h2>
                     </div>
                     <div class="row">
