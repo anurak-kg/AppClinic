@@ -147,7 +147,7 @@
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
             $scope.product = $scope.pushDuplicateCheck();
-            $scope.getAddProduct(product.id);
+            $scope.getAddProduct(product.course_id);
             $scope.tableParams.reload();
             $scope.clearSearch();
         }
@@ -240,7 +240,7 @@
             var results = [];
             var idsSeen = {}, idSeenValue = {};
             for (var i = 0, len = arr.length, id; i < len; ++i) {
-                id = arr[i].id;
+                id = arr[i].course_id;
                 if (idsSeen[id] !== idSeenValue) {
                     results.push(arr[i]);
                     idsSeen[id] = idSeenValue;

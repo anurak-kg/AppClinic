@@ -355,8 +355,9 @@
                     .on('typeahead:selected', function ($e, datum) {
                         course =
                         {
-                            id: datum.course_id,
+                            course_id: datum.course_id,
                             course: {
+                                course_id: datum.course_id,
 
                                 course_name: datum.course_name,
                                 course_price: datum.course_price,
