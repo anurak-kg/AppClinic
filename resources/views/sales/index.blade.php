@@ -120,7 +120,7 @@
                                                 @{{item.product.product_price }}
                                             </td>
                                             <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 100px">
-                                                <input type="text"
+                                                <input type="number"
                                                        ng-model="item.sales_de_discount"
                                                        ng-change="update('sales_de_discount',item.product_id,item.sales_de_discount)"
                                                        ng-model-options="{debounce: 750}"
@@ -150,14 +150,14 @@
                                         </tr>
                                         <tr>
                                             <td colspan="5" class="total-price">Total:</td>
-                                            <td> @{{ getTotal()-getVat() | number:2}} บาท
+                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
                                             </td>
                                         </tr>
 
                                     </table>
                                     <div class="col-md-10">
                                         <a href="{{url('sales/save')}}" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ออกใบขายสินค้า </i></a>
+                                                    class="fa fa-credit-card "> ชำระเงิน </i></a>
                                     </div>
 
                                 </div>
@@ -249,13 +249,12 @@
                             product = {
                                 id: datum.product_id,
                                 product_id: datum.product_id,
-                                sales_de_price:datum.product_price,
+                                sales_de_price: datum.product_price,
                                 sales_de_discount: 0,
-                                sales_de_disamount   :  0   ,
+                                sales_de_disamount: 0,
                                 sales_de_qty: 1,
                                 product: datum
                             }
-
                             console.log(product);
                             angular.element(document.getElementById('sales')).scope().pushProduct(product);
 
@@ -263,5 +262,4 @@
 
             });
         </script>
-
 @stop

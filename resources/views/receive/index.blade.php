@@ -155,7 +155,7 @@
                                                 </div>
                                             </td>
                                             <td data-title="'ส่วนลดเปอร์เช็น'" style="width: 80px">
-                                                <input type="text"
+                                                <input type="number"
                                                        ng-model="item.receive_de_discount"
                                                        ng-change="update('receive_de_discount',item.product_id,item.receive_de_discount)"
                                                        ng-model-options="{debounce: 750}"

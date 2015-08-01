@@ -27,7 +27,7 @@ class CreateSales extends Migration
             $table->string('product_id');
             $table->integer('sales_de_qty');
             $table->decimal('sales_de_price',10,2);
-            $table->decimal('sales_de_discount',10,2); //ส่วนลดเปอเซ็น
+            $table->integer('sales_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('sales_de_disamount',10,2); //ส่วนลดจำนวนเงิน
             $table->decimal('sales_de_total',10,2); //จำนวนเงินการสั่งซื้อหลังเพิ่มภาษี
             $table->timestamps();
