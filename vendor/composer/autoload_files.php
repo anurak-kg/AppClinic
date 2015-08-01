@@ -19,4 +19,5 @@ return array(
     $vendorDir . '/kris/laravel-form-builder/src/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
+    $baseDir . '/app/Http/helpers.php',
 );

@@ -120,17 +120,6 @@
 
             </div>
         </div>
-
-        <div class="input-group">
-            <input type="text" class="form-control" datepicker-popup="@{{format}}"
-                   name="dt" ng-model="formData.dt" is-open="datepickers.dt"
-                   datepicker-options="dateOptions" ng-required="true"
-                   close-text="Close" />
-      <span class="input-group-btn">
-        <button class="btn btn-default" ng-click="open($event,'dt')">
-            <i class="glyphicon glyphicon-calendar"></i></button>
-      </span>
-        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function () {

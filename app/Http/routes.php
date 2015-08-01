@@ -174,14 +174,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
 
-    //sales ขายสินค้า pos
-    Route::controller('sales', 'SalesController');
 
-    //Order
-    Route::controller('order', 'OrderController');
-
-    //Received
+    //Route By Controller
     Route::controller('receive', 'ReceiveController');
+    Route::controller('order', 'OrderController');
+    Route::controller('sales', 'SalesController');
+    Route::controller('setting', 'SettingController');
+
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 

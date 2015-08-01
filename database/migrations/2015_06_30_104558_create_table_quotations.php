@@ -25,13 +25,13 @@ class CreateTableQuotations extends Migration
             //สถานะ
             // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ ,
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
-            $table->decimal('payment',10,2);
-            //$table->enum('payment_type', array('WAITING','PENDING', 'CLOSE','CANCEL'));
+            $table->enum('payment_type', array('CASH','CREDIT'));
+            $table->integer('commission_rate');//% ค่าคอมมิชชั้น
+
             $table->integer('branch_id')->nullable();
             $table->integer('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
         });
-        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
         Schema::create('quotations_detail', function (Blueprint $table) {
             $table->integer('quo_id');
             $table->string('course_id');
@@ -45,6 +45,7 @@ class CreateTableQuotations extends Migration
             $table->primary(['quo_id','course_id']);
 
         });
+        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
 
 
 
