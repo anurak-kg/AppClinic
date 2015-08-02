@@ -22,7 +22,6 @@
                     <div class="panel-heading with-border">
                         <h2 class="panel-title">รายละเอียด</h2>
                     </div>
-
                     <div class="panel-body">
                         เลขที่การสั่งซื้อ : <strong>{{$data->receive_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
