@@ -95,7 +95,7 @@ class ReportController extends Controller
         // var_dump($date);
 
         $coursehot = DB::table('quotations_detail')
-            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
+            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
         if ($rang != null) {
             $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
@@ -121,7 +121,7 @@ class ReportController extends Controller
         $date = explode('-',$rang);
         //  var_dump([trim($date[0]),trim($date[1])]);
         $producthot = DB::table('sales_detail')
-            ->select(DB::raw('product.product_name as productname'),DB::raw('SUM(sales_detail.sales_de_price) AS Total'))
+            ->select(DB::raw('product.product_name as productname'),DB::raw('count(sales_detail.sales_de_price) AS Total'))
             ->join('product','product.product_id','=','sales_detail.product_id');
              if ($rang != null) {
                  $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');

@@ -159,6 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('bill/bill', 'BillController@index');
     Route::post('bill/billproduct', 'BillController@product');
     Route::get('bill/billproduct', 'BillController@product');
+    Route::get('bill/order', 'BillController@order');
 
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
@@ -173,6 +174,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
 
+    //order
+    Route::post('order/history', 'OrderController@history');
+    Route::get('order/history', 'OrderController@history');
+
 
     //Route By Controller
     Route::controller('receive', 'ReceiveController');
@@ -180,7 +185,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('sales', 'SalesController');
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
-
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 
