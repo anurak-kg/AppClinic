@@ -137,6 +137,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -150,6 +151,7 @@ return [
         'yajra\Datatables\DatatablesServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
         //'MaddHatter\LaravelFullcalendar\ServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider',
 
     ],
 
@@ -202,6 +204,7 @@ return [
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Datatables' => yajra\Datatables\Facades\Datatables::class,
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
+        'PDF' => 'Barryvdh\DomPDF\Facade',
 
     ],
 
