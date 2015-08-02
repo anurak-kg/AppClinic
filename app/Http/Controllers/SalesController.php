@@ -49,7 +49,7 @@ class SalesController extends Controller
         $sales->sales_status = "CLOSE";
         // $order->quo_date = null;
         $sales->save();
-        return redirect('sales/payment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว')->with('sales_id',$this->getId());
+        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว')->with('sales_id',$this->getId());
     }
     public function getTotal()
     {
