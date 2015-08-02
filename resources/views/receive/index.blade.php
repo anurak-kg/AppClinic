@@ -140,7 +140,6 @@
                                                        ng-model="item.product_exp"
                                                        ng-change="update('product_exp',item.product_id,item.product_exp)"
                                                        datepicker />
-
                                             </td>
                                             <td data-title="'จำนวนที่รับ'" style="width: 80px">
                                                 <input type="number"
@@ -151,7 +150,11 @@
                                             </td>
                                             <td data-title="'ราคาทุน'" style="width:170px;text-align: right">
                                                 <div class="input-group">
-                                                    @{{item.receive_de_price }}
+                                                    <input type="text"
+                                                           ng-model="item.receive_de_price"
+                                                           ng-change="update('receive_de_price',item.product_id,item.receive_de_price)"
+                                                           ng-model-options="{debounce: 750}"
+                                                           class="form-control">
                                                     <div class="input-group-addon">
                                                         / @{{ item.product.product_unit }}</div>
                                                 </div>
@@ -175,16 +178,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td colspan="7" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td colspan="7" class="total-price">Tax(7%):</td>
                                             <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td colspan="7" class="total-price">Total:</td>
                                             <td> @{{ getTotal()+getVat() | number:2}} บาท
                                             </td>
                                         </tr>
