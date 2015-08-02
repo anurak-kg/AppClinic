@@ -21,7 +21,7 @@ class CreatePaymentSystem extends Migration
             $table->timestamps();
         });
         Schema::create('payment_detail', function (Blueprint $table) {
-            $table->integer('payment_id');
+            $table->integer('payment_id')->unsigned();
             $table->integer('quo_de_id');
             $table->integer('bank_id');
             $table->integer('emp_id');
@@ -32,6 +32,10 @@ class CreatePaymentSystem extends Migration
             $table->decimal('amount',12,2); //จำนวนเงินที่จ่าย
             $table->timestamps();
             $table->primary(['payment_id','quo_de_id']);
+
+            $table->foreign('payment_id')
+                ->references('payment_id')->on('payment')
+                ->onDelete('cascade');
         });
         Schema::create('payment_bank', function (Blueprint $table) {
             $table->increments('bank_id');

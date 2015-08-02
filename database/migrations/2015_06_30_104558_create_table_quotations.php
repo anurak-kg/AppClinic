@@ -44,7 +44,6 @@ class CreateTableQuotations extends Migration
             $table->integer('qty');
             $table->decimal('quo_de_price',12,2);
             $table->timestamps();
-            $table->primary(['quo_id','course_id']);
 
         });
         DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
