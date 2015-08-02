@@ -8,7 +8,7 @@ class HomeController extends Controller {
 	public function dashboard(){
 
 		$coursehot = DB::table('quotations_detail')
-			->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
+			->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
 			->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
 		$coursehot->groupBy('coursename')->orderBy('Total', 'desc');
 		$dataCourse = $coursehot->take(10)->get();
@@ -24,7 +24,7 @@ class HomeController extends Controller {
 		}
 
 		$producthot = DB::table('sales_detail')
-			->select(DB::raw('product.product_name as productname'),DB::raw('SUM(sales_detail.sales_de_price) AS Total'))
+			->select(DB::raw('product.product_name as productname'),DB::raw('count(sales_detail.sales_de_price) AS Total'))
 			->join('product','product.product_id','=','sales_detail.product_id');
 		$producthot->groupBy('productname')->orderBy('Total','desc');
 		$dataProduct = $producthot->take(10)->get();
