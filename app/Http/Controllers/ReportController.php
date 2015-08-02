@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Jenssegers\Date\Date;
 
 class ReportController extends Controller
 {
@@ -16,8 +17,9 @@ class ReportController extends Controller
     public function reportSalesTest()
     {
         $rang = \Input::get('rang');
-        $date = explode('-', $rang);
+        $date = explode('to', $rang);
         //var_dump($date);
+        $dateTxt = [];
         $sales = DB::table('quotations_detail')
             ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
@@ -25,17 +27,19 @@ class ReportController extends Controller
             ->join('users', 'quotations.sale_id', '=', 'users.id')
             ->where('users.position_id', '=', 1);
         if ($rang != null) {
-            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
-            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
-            $sales->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
+            $sales->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
         }
         $sales
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
         $data = $sales->get();
-        //return response()->json($date);
+        //return response()->json($data);
+
         return view('report/sale', [
             'data' => $data,
+            'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'name'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
@@ -63,14 +67,15 @@ class ReportController extends Controller
     {
         $rang = \Input::get('rang');
         $date = explode('-', $rang);
+        $dateTxt = [];
         // var_dump($date);
         $coursemonth = DB::table('quotations_detail')
             ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
         if ($rang != null) {
-            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
-            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
-            $coursemonth->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
+            $coursemonth->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
         }
         $coursemonth
             ->groupBy('coursename')->orderBy('Total', 'desc');
@@ -78,6 +83,7 @@ class ReportController extends Controller
 
         return view('report/coursemonth', [
             'data' => $data,
+            'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'coursename'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
@@ -86,55 +92,59 @@ class ReportController extends Controller
     }
 
 
-
     //สรุปคอร์สที่ขายดีที่สุด
     public function reportCourseHotTest()
     {
         $rang = \Input::get('rang');
         $date = explode('-', $rang);
         // var_dump($date);
-
+        $dateTxt = [];
         $coursehot = DB::table('quotations_detail')
             ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
         if ($rang != null) {
-            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
-            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
-            $coursehot->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
+            $coursehot->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
         }
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursehot->take(10)->get();
 
-       // return response()->json($data);
+        // return response()->json($data);
 
         return view('report/coursehot', [
             'data' => $data,
+            'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'coursename'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
     }
 
     //สินค้าที่ขายดีที่สุด
-    public function reportProductHot(){
+    public function reportProductHot()
+    {
 
         $rang = \Input::get('rang');
-        $date = explode('-',$rang);
+        $date = explode('-', $rang);
+
+        $dateTxt = [];
         //  var_dump([trim($date[0]),trim($date[1])]);
         $producthot = DB::table('sales_detail')
-            ->select(DB::raw('product.product_name as productname'),DB::raw('count(sales_detail.sales_de_price) AS Total'))
-            ->join('product','product.product_id','=','sales_detail.product_id');
-             if ($rang != null) {
-                 $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
-                 $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
-                 $producthot->whereRaw("DATE(sales_detail.created_at) between ? and ?",[$start,$end]);
-             }
-        $producthot->groupBy('productname')->orderBy('Total','desc');
-         $data = $producthot->take(10)->get();
+            ->select(DB::raw('product.product_name as productname'), DB::raw('count(sales_detail.sales_de_price) AS Total'))
+            ->join('product', 'product.product_id', '=', 'sales_detail.product_id');
+        if ($rang != null) {
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+            $producthot->whereRaw("DATE(sales_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+        }
+        $producthot->groupBy('productname')->orderBy('Total', 'desc');
+        $data = $producthot->take(10)->get();
 
-       // return response()->json($data);
+        // return response()->json($data);
 
         return view('report/producthot', [
             'data' => $data,
+            'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'productname'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
@@ -147,23 +157,24 @@ class ReportController extends Controller
         $doc = \Input::get('doc');
         $date = explode('-', $doc);
         // var_dump($date);
-
+        $dateTxt = [];
         $doctor = DB::table('quotations_detail')
             ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
             ->join('users', 'quotations.sale_id', '=', 'users.id');
         if ($doc != null) {
-            $start = Carbon::createFromFormat("Y/m/d",trim($date[0]))->format('Y-m-d');
-            $end = Carbon::createFromFormat("Y/m/d",trim($date[1]))->format('Y-m-d');
-            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?",[$start,$end]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
         }
         $doctor->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
         $data = $doctor->get();
         return view('report/doctor', [
-            'data' => $data ,
+            'data' => $data,
+            'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'name'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);

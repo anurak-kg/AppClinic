@@ -27,6 +27,11 @@
                            <input type="submit"  class="btn btn-block btn-primary" value="แสดง">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <?php echo $date['start'] ;?> - <?php echo $date['end'] ;?>
+                        </div>
+                    </div>
                     {!! Form::close() !!}
 
                     <div class="chart">
