@@ -35,16 +35,21 @@ class ReportController extends Controller
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
         $data = $sales->get();
+        $data1 = $sales->take(4)->get();
         //return response()->json($data);
+
+
 
         return view('report/sale', [
             'data' => $data,
+            'data1' => $data1,
             'date' => $dateTxt,
             'name' => $this->arrayToChartData($data, 'name'),
             'total' => $this->arrayToChartData($data, 'Total')
         ]);
 
     }
+
 
 
     public function reportCourseProduct()
@@ -97,7 +102,7 @@ class ReportController extends Controller
     {
         $rang = \Input::get('rang');
         $date = explode('-', $rang);
-        // var_dump($date);
+        //var_dump($date);
         $dateTxt = [];
         $coursehot = DB::table('quotations_detail')
             ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
