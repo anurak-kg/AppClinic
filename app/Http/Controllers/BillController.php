@@ -33,9 +33,9 @@ class BillController extends Controller
     }
 
     public function order(){
-        $order = Order::where('order_id',\Input::get('order_id'))
-            ->with('product','vendor','branch')->get()->first();
-        //return response()->json($order);
+        $order = Order::where('order_id',1)
+            ->with('product','vendor','branch','user')->get()->first();
+       // return response()->json($order);
         return view("bill/order",['order' => $order]);
 
     }

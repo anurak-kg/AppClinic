@@ -171,7 +171,7 @@
                        <div class="box-body">
                            <ul class="products-list product-list-in-box">
                                <li class="item">
-                                  
+
                                        @foreach($exp as $item)
                                        <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
                         <span class="product-description">
