@@ -11,18 +11,13 @@ class Setting
     private $settingValue = [];
     private $rule = [];
 
-    public function __construct($list)
-    {
+    public function initSettingList($list){
         $this->rule = $list;
         foreach ($list as $key =>$rule) {
             $this->pushSettingList($key);
         }
         return $this;
     }
-
-    /**
-     * @param array $settingList
-     */
     public function pushSettingList($setting)
     {
         array_push($this->settingList, $setting);
@@ -48,9 +43,9 @@ class Setting
         return  $this->settingValue;
     }
 
-    private function getValue($setting_name)
+    public function getValue($setting_name)
     {
-        return $var =DB::table('setting')
+        return DB::table('setting')
             ->where('setting_name',$setting_name)->pluck('value');
     }
 

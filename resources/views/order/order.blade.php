@@ -152,7 +152,7 @@
 
                                     </table>
                                     <div class="col-md-10">
-                                        <a href="{{url('order/save')}}" class="btn btn-md btn-success pull-right"><i
+                                        <a ng-click="save()" class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
                                     </div>
 
@@ -275,7 +275,7 @@
                         })
                         .on('typeahead:selected', function ($e, datum) {
                             product = {
-                                id: datum.product_id,
+                                product_id: datum.product_id,
                                 order_de_qty: 1,
                                 product: datum
                             }

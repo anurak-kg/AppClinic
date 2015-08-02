@@ -29,6 +29,7 @@ class SettingController extends Controller
     public function getIndex()
     {
         $setting = new Setting($this->settingList);
+        $setting->initSettingList($this->settingList);
         $value = $setting->getSettingValue();
         //dd($value);
 
@@ -52,7 +53,7 @@ class SettingController extends Controller
                 ->withErrors($validator);
 
         } else {
-            $setting = new Setting( $this->settingList);
+            $setting = new Setting();
             $input = Input::except('_token');
             $setting->save($input);
             //dd($input);

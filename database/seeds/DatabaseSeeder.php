@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call('CustomerTableSeeder');
         $this->call('PositionTableSeeder');
         $this->call('VendorTableSeeder');
+        $this->call('SettingTableSeeder');
+
         Model::reguard();
     }
 }
@@ -54,6 +56,22 @@ class VendorTableSeeder extends Seeder
             'ven_sell_name'=>'',
             'ven_sell_tel'=>'7324765600',
             'ven_license'=>'2134545613212'
+        ]);
+    }
+}
+class SettingTableSeeder extends Seeder
+{
+    public function run(){
+        DB::table('setting')->delete();
+
+        DB::table('setting')->insert([
+            ['setting_name' => 'clinicName',        'value' => 'TheRock'],
+            ['setting_name' => 'commission_rate',   'value' => '10'],
+            ['setting_name' => 'vat_mode',          'value' => 'outVat'],
+            ['setting_name' => 'vat_rate',              'value' => '7'],
+            ['setting_name' => 'product_day_expire',    'value' => '30'],
+            ['setting_name' => 'order_sell',            'value' => 'FIFO'],
+
         ]);
     }
 }

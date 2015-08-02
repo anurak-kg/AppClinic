@@ -13,6 +13,7 @@ return array(
     'CreatePaymentSystem' => $baseDir . '/database/migrations/2015_07_31_152308_create_Payment_System.php',
     'CreateSales' => $baseDir . '/database/migrations/2015_07_26_155941_create_sales.php',
     'CreateSessionTable' => $baseDir . '/database/migrations/2015_07_30_144531_create_session_table.php',
+    'CreateSettingTable' => $baseDir . '/database/migrations/2015_08_02_022526_create_setting_table.php',
     'CreateTableBranch' => $baseDir . '/database/migrations/2015_06_29_152627_create_table_branch.php',
     'CreateTableCustomer' => $baseDir . '/database/migrations/2015_06_29_154030_create_table_customer.php',
     'CreateTableCustomerEvent' => $baseDir . '/database/migrations/2015_07_25_233304_create_table_customer_event.php',

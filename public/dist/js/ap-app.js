@@ -147,7 +147,7 @@
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
             $scope.product = $scope.pushDuplicateCheck();
-            $scope.getAddProduct(product.id);
+            $scope.getAddProduct(product.course_id);
             $scope.tableParams.reload();
             $scope.clearSearch();
         }
@@ -240,7 +240,7 @@
             var results = [];
             var idsSeen = {}, idSeenValue = {};
             for (var i = 0, len = arr.length, id; i < len; ++i) {
-                id = arr[i].id;
+                id = arr[i].course_id;
                 if (idsSeen[id] !== idSeenValue) {
                     results.push(arr[i]);
                     idsSeen[id] = idSeenValue;
@@ -438,7 +438,7 @@
             var results = [];
             var idsSeen = {}, idSeenValue = {};
             for (var i = 0, len = arr.length, id; i < len; ++i) {
-                id = arr[i].id;
+                id = arr[i].product_id;
                 if (idsSeen[id] !== idSeenValue) {
                     results.push(arr[i]);
                     idsSeen[id] = idSeenValue;
@@ -446,6 +446,16 @@
             }
             return results;
         }
+        $scope.save = function () {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่มีการเลือกสินค้า");
+            }
+            else {
+                window.location.href = $scope.controller+ '/save';
+
+            }
+        }
+
     });
     app.controller('courseController', function ($scope, $http) {
         $scope.course_medicine = [];
@@ -796,7 +806,20 @@
             return results;
         }
     });
+    app.controller('treatmentAddController', function ($scope) {
 
+        $scope.save = function (e) {
+            console.log(e );
+            console.log($scope.bt1 );
+
+            if (typeof $scope.dr === 'undefined' && typeof $scope.bt1 === 'undefined' && typeof $scope.bt2 === 'undefined') {
+                alert("ยังไม่มีการเลือกพนักงานที่เกี่ยวข้อง");
+                e.preventDefault();
+            }
+
+        }
+
+    });
 })();
 /**
  * Created by Anurak on 26/06/58.
