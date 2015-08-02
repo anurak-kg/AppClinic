@@ -28,7 +28,6 @@
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-3">
