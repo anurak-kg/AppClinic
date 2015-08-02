@@ -173,13 +173,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
 
+    //order
+    Route::post('order/history', 'OrderController@history');
+    Route::get('order/history', 'OrderController@history');
+
 
     //Route By Controller
     Route::controller('receive', 'ReceiveController');
     Route::controller('order', 'OrderController');
     Route::controller('sales', 'SalesController');
     Route::controller('setting', 'SettingController');
-
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 

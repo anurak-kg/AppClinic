@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Branch;
 use App\Order;
 use App\User;
-
 use App\Http\Requests;
 use App\Order_detail;
 use App\Product;
@@ -13,9 +12,25 @@ use App\Vendor;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Zofe\Rapyd\Facades\DataGrid;
 
 class OrderController extends Controller
 {
+    public function history(){
+        $order = DB::table('order')
+            ->select('order.order_id', 'vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
+            ->join('users', 'order.emp_id', '=', 'users.id')
+            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
+            ->where('order.order_id', '=', 1);
+        $data = $order->get();
+
+       // return response()->json($data);
+
+        return view('order/history', [
+            'data' => $data,
+        ]);
+    }
+
     public function getIndex()
     {
         if (Order::where('order_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
@@ -152,5 +167,15 @@ class OrderController extends Controller
         $quo->ven_id = $ven_id;
         $quo->save();
         return response()->json(['status' => 'success']);
+    }
+
+    private function arrayToChartData($data, $string)
+    {
+        $text = "[";
+        foreach ($data as $row) {
+            $text .= "'" . $row->$string . "'" . ',';
+        }
+        $text .= ']';
+        return $text;
     }
 }
