@@ -140,16 +140,16 @@
 
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td colspan="7" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td colspan="7" class="total-price">Tax(7%):</td>
                                             <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td colspan="7" class="total-price">Total:</td>
                                             <td> @{{ getTotal()+getVat() | number:2}} บาท
                                             </td>
                                         </tr>

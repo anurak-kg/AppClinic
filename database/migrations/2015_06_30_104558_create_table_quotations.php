@@ -27,15 +27,17 @@ class CreateTableQuotations extends Migration
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
             $table->enum('payment_type', array('CASH','CREDIT'));
             $table->integer('commission_rate');//% ค่าคอมมิชชั้น
-
             $table->integer('branch_id')->nullable();
             $table->integer('bill_number');//เลขที่ใบเสร้จ
             $table->timestamps();
         });
         Schema::create('quotations_detail', function (Blueprint $table) {
+            $table->increments('quo_de_id');
             $table->integer('quo_id');
             $table->string('course_id');
             $table->integer('treat_status');
+            $table->enum('payment_status', array('REMAIN','FULLY_PAID'));//REMAIN ค้างจ่าย fully Paid จ่ายครบ
+            $table->decimal('payment_remain',14,2);
             //สถานะ
             // 0 = ไม่เริ่ม,
             // 1 = อยุ่ในระหว่างการรักษา ,5 = เรียบร้อยแล้ว -99 = ยกเลิก
