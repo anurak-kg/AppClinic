@@ -66,7 +66,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="panel-body">
+                            <div class="box-body">
                                 <div class="div row">
                                     <div class="col-md-5">
                                         <input class="form-control typeahead input-lg productInput"
@@ -157,6 +157,9 @@
                                     </div>
 
                                 </div>
+                            </div>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-success pull-right">บันทึก</button>
                             </div>
                         </div>
 
