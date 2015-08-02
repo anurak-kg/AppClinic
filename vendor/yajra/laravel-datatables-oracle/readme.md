@@ -28,6 +28,7 @@ This package is created to handle [server-side](https://www.datatables.net/manua
 - Decorate your data output using [`league\fractal`](https://github.com/thephpleague/fractal) Transformer.
 - Works with Laravel Dependency Injection and IoC Container.
 - Provides a [DataTable Html Builder](http://datatables.yajrabox.com/html) to help you use the package with less code.
+- Provides XSS filtering function to optionally escape all or specified column values using `escapeColumns('*'\['column'])` method.
 
 ## Buy me a beer
 <a href='https://pledgie.com/campaigns/29515'><img alt='Click here to lend your support to: Laravel Datatables and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/29515.png?skin_name=chrome' border='0' ></a>
@@ -66,3 +67,8 @@ And that's it! Start building out some awesome DataTables!
 ## License
 
 Licensed under the [MIT License](https://github.com/yajra/laravel-datatables/blob/master/LICENSE).
+
+## Credits
+
+- This project is used to be a fork from [bllim/laravel4-datatables-package](https://github.com/bllim/laravel4-datatables-package).
+- Credits to all the contributors of this package
