@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
@@ -17,9 +18,20 @@ use Zofe\Rapyd\Facades\DataEdit;
 
 class ProductController extends Controller
 {
-    public function product(){
-        return view("product/index");
+    public function expday(){
+
+        $exp = DB::table('inventory_transaction')
+            ->select('inventory_transaction.product_id','product.product_name','inventory_transaction.expiry_date',
+                DB::raw('DATEDIFF(inventory_transaction.expiry_date,NOW()) as day'))
+            ->join('product','product.product_id','=','inventory_transaction.product_id')
+            ->orderBy('inventory_transaction.expiry_date','desc')
+            ->get();
+        //return response()->json($exp);
+
+        return view("product/expday",['exp'=>$exp]);
     }
+
+
 
     public function getDataGrid(){
         $grid = DataGrid::source(new Product());
@@ -48,6 +60,9 @@ class ProductController extends Controller
                 $row->style("background-color:#EEEEEE");
             }
         });
+
+
+
 
         return view('product/index', compact('grid'));
     }
