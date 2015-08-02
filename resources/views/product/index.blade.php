@@ -16,12 +16,9 @@
                 <div class="panel-body ">
                     {!! $grid !!}
                 </div>
-
             </div>
-
-
-
         </div>
+
     </div>
 
 @stop

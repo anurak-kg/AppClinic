@@ -20,6 +20,7 @@ class CreateTableInventory extends Migration
             $table->integer('received_id')->unsigned()->nullable();//สินค้าที่ได้รับมาจากร้านยา
             $table->integer('branch_id')->unsigned()->nullable();
             $table->integer('qty');//จำนวนยาที่ใช้
+            $table->date('expiry_date');//วันหมดอายุ
             $table->timestamps();
 
         });

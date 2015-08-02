@@ -41,13 +41,25 @@ class HomeController extends Controller {
 
 		//return response()->json($dataProduct);
 
+		$exp = DB::table('inventory_transaction')
+			->select('inventory_transaction.product_id','product.product_name','inventory_transaction.expiry_date',
+				DB::raw('DATEDIFF(inventory_transaction.expiry_date,NOW()) as day'))
+			->join('product','product.product_id','=','inventory_transaction.product_id')
+			->having('day','<',30)
+			->orderBy('inventory_transaction.expiry_date','desc')
+			->get();
+		//return response()->json($exp);
+
 		return view("dashboard",[
 			'data' => $dataCourse ,
 			'datapro' => $dataProduct ,
+			'exp'=>$exp,
 			'dataCourse' => json_encode($data),
 			'dataProduct' => json_encode($datapro)
 		]);
 	}
+
+
 
 
 }
