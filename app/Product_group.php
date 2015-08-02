@@ -17,5 +17,4 @@ class Product_group extends Model
     {
         return $this->belongsTo('\App\Product_type', 'pt_id');
     }
-
 }
