@@ -3338,58 +3338,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "sebastian/environment",
-        "version": "1.3.1",
-        "version_normalized": "1.3.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sebastianbergmann/environment.git",
-            "reference": "3e39374f4c9ec3757839e2952e7a68ac28941760"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/3e39374f4c9ec3757839e2952e7a68ac28941760",
-            "reference": "3e39374f4c9ec3757839e2952e7a68ac28941760",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.4"
-        },
-        "time": "2015-08-02 04:41:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "src/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Sebastian Bergmann",
-                "email": "sebastian@phpunit.de"
-            }
-        ],
-        "description": "Provides functionality to handle HHVM/PHP environments",
-        "homepage": "http://www.github.com/sebastianbergmann/environment",
-        "keywords": [
-            "Xdebug",
-            "environment",
-            "hhvm"
-        ]
-    },
-    {
         "name": "phpunit/php-file-iterator",
         "version": "1.4.1",
         "version_normalized": "1.4.1.0",
@@ -3922,42 +3870,146 @@
         ]
     },
     {
-        "name": "maddhatter/laravel-fullcalendar",
+        "name": "sebastian/environment",
+        "version": "1.3.2",
+        "version_normalized": "1.3.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sebastianbergmann/environment.git",
+            "reference": "6324c907ce7a52478eeeaede764f48733ef5ae44"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6324c907ce7a52478eeeaede764f48733ef5ae44",
+            "reference": "6324c907ce7a52478eeeaede764f48733ef5ae44",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.4"
+        },
+        "time": "2015-08-03 06:14:51",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Sebastian Bergmann",
+                "email": "sebastian@phpunit.de"
+            }
+        ],
+        "description": "Provides functionality to handle HHVM/PHP environments",
+        "homepage": "http://www.github.com/sebastianbergmann/environment",
+        "keywords": [
+            "Xdebug",
+            "environment",
+            "hhvm"
+        ]
+    },
+    {
+        "name": "mpdf/mpdf",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/maddhatter/laravel-fullcalendar.git",
-            "reference": "dd3c982e9690265c653990a8b72c45420446e6b9"
+            "url": "https://github.com/mpdf/mpdf.git",
+            "reference": "9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/maddhatter/laravel-fullcalendar/zipball/dd3c982e9690265c653990a8b72c45420446e6b9",
-            "reference": "dd3c982e9690265c653990a8b72c45420446e6b9",
+            "url": "https://api.github.com/repos/mpdf/mpdf/zipball/9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7",
+            "reference": "9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7",
             "shasum": ""
         },
         "require": {
-            "illuminate/support": "~5.0",
+            "ext-mbstring": "*",
+            "php": ">=4.3.10"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.7.*"
+        },
+        "time": "2015-06-17 07:26:51",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "mpdf.php",
+                "classes"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Ian Back",
+                "role": "Developer"
+            }
+        ],
+        "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+        "homepage": "http://www.mpdf1.com/mpdf/index.php",
+        "keywords": [
+            "pdf",
+            "php",
+            "utf-8"
+        ]
+    },
+    {
+        "name": "servit/l5mpdf",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/limweb/L5MPDF.git",
+            "reference": "4594c65f29061e5c1d5ed08d5acf2eb25fcc0e1d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/limweb/L5MPDF/zipball/4594c65f29061e5c1d5ed08d5acf2eb25fcc0e1d",
+            "reference": "4594c65f29061e5c1d5ed08d5acf2eb25fcc0e1d",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.x",
+            "mpdf/mpdf": "dev-master",
             "php": ">=5.4.0"
         },
-        "time": "2015-07-24 12:22:43",
+        "time": "2015-05-25 08:47:27",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-0": {
-                "MaddHatter\\LaravelFullcalendar": "src/"
+                "Servit\\Mpdf": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
         "authors": [
             {
-                "name": "Shawn Tunney",
-                "email": "shawn.tunney@gmail.com"
+                "name": "thongchai",
+                "email": "limweb@hotmail.com"
             }
         ],
-        "description": "Laravel helper for FullCalendar.io"
+        "description": "mPDF wrapper for Laravel 5",
+        "keywords": [
+            "laravel",
+            "mpdf",
+            "pdf"
+        ]
     }
 ]
