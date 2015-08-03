@@ -65,7 +65,7 @@
 
      </div>
 
-
+    <span class="pull-right"></span>
 
 
              <!-- Main content -->
@@ -81,22 +81,37 @@
                                </div><!-- /.box-header -->
                                <div class="box-body">
                                    <div class="row">
-                                       <div class="col-md-5">
+                                       <div class="col-md-8">
                                            <div class="chart-responsive">
                                                <canvas id="pieChart" height="150"></canvas>
                                            </div><!-- ./chart-responsive -->
                                        </div><!-- /.col -->
-                                       <div class="col-md-6">
+                                       <div class="col-md-4">
                                            <ul class="chart-legend clearfix">
                                                @foreach($data as $item)
-                                                   <li>&nbsp;&nbsp;{{ $item->coursename }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
+                                                   <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->coursename }}</li>
                                                    <br>
+                                                   {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-red"></i> Safari</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-gray"></i> Navigator</li>--}}
+
                                                @endforeach
                                            </ul>
                                        </div><!-- /.col -->
                                    </div><!-- /.row -->
                                </div><!-- /.box-body -->
+                               <div class="box-footer no-padding">
+                                   <ul class="nav nav-pills nav-stacked">
+                                       @foreach($data as $item)
+                                       <li><a href="#">{{ $item->coursename }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' คอร์ส' ?></span></a></li>
+                                       {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
+                                       {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
+                                       @endforeach
 
+                                   </ul>
+                               </div><!-- /.footer -->
                            </div><!-- /.box -->
                        </div>
 
@@ -112,21 +127,38 @@
                                </div><!-- /.box-header -->
                                <div class="box-body">
                                    <div class="row">
-                                       <div class="col-md-6">
+                                       <div class="col-md-8">
                                            <div class="chart-responsive">
                                                <canvas id="pieChart2" height="150"></canvas>
                                            </div><!-- ./chart-responsive -->
                                        </div><!-- /.col -->
-                                       <div class="col-md-5">
+                                       <div class="col-md-4">
                                            <ul class="chart-legend clearfix">
                                                @foreach($datapro as $item)
-                                               <li>&nbsp;&nbsp;{{ $item->productname }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
+                                               <li><i class="fa fa-circle-o text-red"></i>{{ $item->productname }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
                                                    <br>
+
+                                                   {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-aqua"></i> Safari</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>--}}
+                                                   {{--<li><i class="fa fa-circle-o text-gray"></i> Navigator</li>--}}
+
                                                @endforeach
                                            </ul>
                                        </div><!-- /.col -->
                                    </div><!-- /.row -->
                                </div><!-- /.box-body -->
+                               <div class="box-footer no-padding">
+                                   <ul class="nav nav-pills nav-stacked">
+                                       @foreach($datapro as $item)
+                                           <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' ' ?></span></a></li>
+                                           {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
+                                           {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
+                                       @endforeach
+
+                                   </ul>
+                               </div><!-- /.footer -->
                            </div><!-- /.box -->
                        </div>
 
