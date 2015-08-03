@@ -50,10 +50,20 @@ class HomeController extends Controller {
 			->get();
 		//return response()->json($exp);
 
+		$order = DB::table('order')
+			->select('order.order_id', 'vendor.ven_name','users.name','order.order_date','order.order_status')
+			->join('users', 'order.emp_id', '=', 'users.id')
+			->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
+			->where('order.order_id', '=', 1);
+		$dataorder = $order->take(5)->get();
+
+		// return response()->json($dataorder);
+
 		return view("dashboard",[
 			'data' => $dataCourse ,
 			'datapro' => $dataProduct ,
 			'exp'=>$exp,
+			'dataorder'=>$dataorder,
 			'dataCourse' => json_encode($data),
 			'dataProduct' => json_encode($datapro)
 		]);

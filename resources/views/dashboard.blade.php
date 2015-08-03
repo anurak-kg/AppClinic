@@ -6,7 +6,7 @@
 
 
     <div class="row">
-        <section class="connectedSortable">
+
                <div class="col-lg-3 col-xs-6">
                             <!-- small box -->
                            <div class="small-box bg-blue">
@@ -62,7 +62,7 @@
                             <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                           </div><!-- ./col -->
-            </section>
+
      </div>
 
 
@@ -100,6 +100,8 @@
                            </div><!-- /.box -->
                        </div>
 
+
+
                        <div class="col-md-6">
                            <div class="box  box-default">
                                <div class="box-header with-border">
@@ -127,67 +129,126 @@
                                </div><!-- /.box-body -->
                            </div><!-- /.box -->
                        </div>
-                 <div class="col-md-6">
-                   <div class="box  box-success">
-                   <div class="box-header with-border" align="middle">
 
-                                       <h3 class="box-title">ตารางการทำงานหมอ</h3>
-                                       <div class="box-tools pull-right">
-                                             <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                                           </div><!-- /.box-tools -->
+                       <div class="col-md-6">
+                           <!-- PRODUCT LIST -->
+                           <div class="box box-primary">
+                               <div class="box-header with-border">
+                                   <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                    </div>
-                     <div class="box-body no-padding">
-                       <!-- THE CALENDAR -->
-                       <div id="calendar" height="150"></div>
-                     </div><!-- /.box-body -->
-                   </div><!-- /. box -->
-                 </div><!-- /.col -->
+                               </div><!-- /.box-header -->
+                               <div class="box-body">
+                                   <ul class="products-list product-list-in-box">
+                                       <li class="item">
 
-                   <div class="col-md-6">
-                       <div class="box box-success">
-                           <div class="box-header with-border" align="middle">
-
-                               <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
-                               <div class="box-tools pull-right">
-                                   <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                               </div><!-- /.box-tools -->
-                           </div>
-                           <div class="box-body no-padding">
-                               <!-- THE CALENDAR -->
-                               <div id="calendar_customer"></div>
-                           </div><!-- /.box-body -->
-                       </div><!-- /. box -->
-                   </div><!-- /.col -->
-
-                   <div class="col-md-6">
-                   <!-- PRODUCT LIST -->
-                   <div class="box box-primary">
-                       <div class="box-header with-border">
-                           <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
-                           <div class="box-tools pull-right">
-                               <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                           </div>
-                       </div><!-- /.box-header -->
-                       <div class="box-body">
-                           <ul class="products-list product-list-in-box">
-                               <li class="item">
-
-                                       @foreach($exp as $item)
-                                       <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
-                        <span class="product-description">
+                                           @foreach($exp as $item)
+                                               <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
+                                               <span class="product-description">
                           รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->expiry_date  }}
                         </span>
                                            @endforeach
 
-                               </li><!-- /.item -->
+                                       </li><!-- /.item -->
 
-                           </ul>
-                       </div><!-- /.box-body -->
-                       <div class="box-footer text-center">
-                           <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
-                       </div><!-- /.box-footer -->
-                   </div><!-- /.box -->
-                   </div>
+                                   </ul>
+                               </div><!-- /.box-body -->
+                               <div class="box-footer text-center">
+                                   <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                               </div><!-- /.box-footer -->
+                           </div><!-- /.box -->
+                       </div>
+
+                       <div class="col-md-6">
+                           <!-- TABLE: LATEST ORDERS -->
+                           <div class="box box-info">
+                               <div class="box-header with-border">
+                                   <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                   </div>
+                               </div><!-- /.box-header -->
+                               <div class="box-body">
+                                   <div class="table-responsive">
+                                       <table class="table no-margin">
+                                           <thead>
+                                           <tr>
+                                               <th>รหัสใบสั่งซื้อ</th>
+                                               <th>Supplier</th>
+                                               <th>พนักงาน</th>
+                                               <th>วันที่สั่งซื้อ</th>
+                                               <th>สถานะ</th>
+                                           </tr>
+                                           </thead>
+                                           <tbody>
+                                           <tr>
+                                                @foreach( $dataorder as $item)
+                                               <td>{{ $item->order_id }}</td>
+                                               <td>{{ $item->ven_name  }}</td>
+                                               <td>{{ $item->name }}</td>
+                                               <td>{{ $item->order_date }}</td>
+                                               <td>
+                                                   @if($item->order_status = 'PENDING')
+                                                   <span class="label label-warning">{{ $item->order_status  }}</span>
+                                                    @else
+                                                       <span class="label label-danger">{{ $item->order_status  }}</span>
+                                                    @endif
+                                               </td>
+                                               @endforeach
+                                           </tr>
+                                           </tbody>
+                                       </table>
+                                   </div><!-- /.table-responsive -->
+                               </div><!-- /.box-body -->
+                               <div class="box-footer clearfix">
+                                   <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
+                                   <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
+                               </div><!-- /.box-footer -->
+                           </div><!-- /.box -->
+                       </div>
+
+
+
+
+                       <div class="col-md-6 col-sm-8 col-xs-12">
+                           <div class="box  box-warning">
+                               <div class="box-header with-border" align="middle">
+
+                                   <h3 class="box-title">ตารางการทำงานหมอ</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                                   </div><!-- /.box-tools -->
+                               </div>
+                               <div class="box-body no-padding">
+                                   <!-- THE CALENDAR -->
+                                   <div id="calendar" height="150"></div>
+                               </div><!-- /.box-body -->
+                           </div><!-- /. box -->
+                       </div><!-- /.col -->
+
+
+
+
+                       <div class="col-md-6 col-sm-8 col-xs-12">
+                           <div class="box box-danger">
+                               <div class="box-header with-border" align="middle">
+
+                                   <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                                   <div class="box-tools pull-right">
+                                       <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                                   </div><!-- /.box-tools -->
+                               </div>
+                               <div class="box-body no-padding">
+                                   <!-- THE CALENDAR -->
+                                   <div id="calendar_customer" ></div>
+                               </div><!-- /.box-body -->
+                           </div><!-- /. box -->
+                       </div><!-- /.col -->
+
+
+
+
                    </section>
                </div><!-- /.row -->
 
