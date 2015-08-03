@@ -32,17 +32,16 @@
                                 <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
                                        placeholder="เลือกระยะเวลา..">
                                 </input> <br> <br>
-                                <input type="submit" class="btn btn-block btn-success" value="แสดง">
+                                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
                                 <br>
                                 {!! Form::close() !!}
                             </p>
                             <div class="progress-group">
                                 <p class="text-center"><b>พนักงานยอดขายสูงสุด</b></p>
                                 @foreach($data1 as $test)
-                                <span class="progress-text">{{$test->name}}</span>
+                                <span class="progress-text"><i class="fa fa-circle-o text-aqua"></i> {{$test->name}}</span>
                                 <span class="progress-number"><?php echo number_format($test->Total), ' บาท' ?></span>
                                 <div class="progress sm">
-                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
                                 </div>
                                 @endforeach
                             </div><!-- /.progress-group -->
@@ -69,6 +68,7 @@
                             </thead>
                             @foreach($data as $test)
                                 <tr>
+
                                     <td align="middle">{{$test->name}}</td>
                                     <td align="middle" style="width: 850px;"><?php echo number_format($test->Total), ' บาท' ?></td>
                                 </tr>

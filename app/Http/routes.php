@@ -86,7 +86,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('treatment/add', 'TreatmentController@add');
     Route::post('treatment/save', 'TreatmentController@save');
 
-
     //Quotations
     Route::post('quotations', 'QuotationsController@index');
     Route::get('quotations', 'QuotationsController@index');
