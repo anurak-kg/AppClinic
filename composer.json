@@ -15,8 +15,9 @@
     "barryvdh/laravel-ide-helper": "^2.0@dev",
     "yajra/laravel-datatables-oracle": "~5.0",
     "jenssegers/date": "^3.0@dev",
-    "maddhatter/laravel-fullcalendar": "dev-master",
-    "barryvdh/laravel-dompdf": "0.6.*"
+    "barryvdh/laravel-dompdf": "0.6.*",
+    "servit/l5mpdf": "dev-master"
+
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

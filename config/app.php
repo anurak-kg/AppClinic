@@ -152,6 +152,7 @@ return [
         'Jenssegers\Date\DateServiceProvider',
         //'MaddHatter\LaravelFullcalendar\ServiceProvider',
         'Barryvdh\DomPDF\ServiceProvider',
+        'Servit\Mpdf\ServiceProvider',
 
     ],
 
@@ -204,7 +205,7 @@ return [
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Datatables' => yajra\Datatables\Facades\Datatables::class,
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
-        'PDF' => 'Barryvdh\DomPDF\Facade',
+        'PDF'     => 'Servit\Mpdf\Facades\Pdf',
 
     ],
 
