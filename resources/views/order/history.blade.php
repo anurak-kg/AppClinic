@@ -4,16 +4,13 @@
 
 @section('content')
 
-    <div class="box box-primary">
+    <div class="panel panel-primary">
 
-        <div class="box-header" align="middle">
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
-                            class="fa fa-minus"></i></button>
-            </div>
+        <div class="panel-heading" align="middle">
+                <h2 class="panel-title">ประวัติการสั่งซื้อสินค้า</h2>
         </div>
 
-        <div class="box-body">
+        <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 table-responsive">
                     <table class="table table-bordered">
@@ -34,7 +31,13 @@
                                 <td> {{$test->name}}</td>
                                 <td> {{$test->order_date}}</td>
                                 <td><?php echo number_format( $test->order_total) ,' บาท' ?></td>
-                                <td> {{$test->order_status}}</td>
+                                <td>
+                                    @if($test->order_status = 'PENDING')
+                                        <span class="label label-warning">{{ $test->order_status  }}</span>
+                                    @else
+                                        <span class="label label-danger">{{ $test->order_status  }}</span>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </table>
