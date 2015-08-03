@@ -55,6 +55,7 @@
                                         <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i class="fa fa-angle-left pull-right"></i></a>
                                         <ul class="treeview-menu">
                                             <li><a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อ สินค้า</a></li>
+                                            <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a></li>
                                             <li><a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
 
                                         </ul>
