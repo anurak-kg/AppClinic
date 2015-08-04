@@ -4,6 +4,17 @@
 
     <div class="row">
         <div class="col-md-12">
+
+            <p class="text-center">
+                {!! Form::open(array('url' => 'report/sale', 'class' => 'form')) !!}
+                <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
+                       placeholder="เลือกระยะเวลา..">
+                </input> <br> <br>
+                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+                <br>
+                {!! Form::close() !!}
+            </p>
+
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">ยอดขายพนักงาน</h3>
@@ -13,7 +24,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <p class="text-center">
                                 <strong> @if( isset( $date['start']))
                                         <?php echo $date['start'];?> - <?php echo $date['end'];?>
@@ -23,30 +34,10 @@
                             </p>
                             <div class="chart">
                                 <!-- Sales Chart Canvas -->
-                                <canvas id="areaChart" height="90"></canvas>
+                                <canvas id="areaChart" height="50"></canvas>
                             </div><!-- /.chart-responsive -->
                         </div><!-- /.col -->
-                        <div class="col-md-4">
-                            <p class="text-center">
-                                {!! Form::open(array('url' => 'report/sale', 'class' => 'form')) !!}
-                                <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-                                       placeholder="เลือกระยะเวลา..">
-                                </input> <br> <br>
-                                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
-                                <br>
-                                {!! Form::close() !!}
-                            </p>
-                            <div class="progress-group">
-                                <p class="text-center"><b>พนักงานยอดขายสูงสุด</b></p>
-                                @foreach($data1 as $test)
-                                <span class="progress-text"><i class="fa fa-circle-o text-aqua"></i> {{$test->name}}</span>
-                                <span class="progress-number"><?php echo number_format($test->Total), ' บาท' ?></span>
-                                <div class="progress sm">
-                                </div>
-                                @endforeach
-                            </div><!-- /.progress-group -->
 
-                        </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- ./box-body -->
             </div><!-- /.box -->
@@ -136,6 +127,7 @@
                 };
 
         var areaChartOptions = {
+            scaleBeginAtZero: true,
             //Boolean - If we should show the scale at all
             showScale: true,
             //Boolean - Whether grid lines are shown across the chart
