@@ -94,13 +94,13 @@ class QuotationsController extends Controller
 
     }
 
-    public function getSave()
+    public function anySave()
     {
 
         $quo = Quotations::find($this->getQuoId());
         $quo->price = $this->getCurrentSum();
         $quo->quo_status = 1;
-        $quo->quo_date = null;
+        $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
         return redirect('quotations')->with('message','ลงบันทึกเรียบร้อยแล้ว');
 

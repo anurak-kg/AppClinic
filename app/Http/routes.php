@@ -86,17 +86,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('treatment/add', 'TreatmentController@add');
     Route::post('treatment/save', 'TreatmentController@save');
 
-
-    //---customer script
-    Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
-    Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
-    Route::get('quotations/remove_customer', 'QuotationsController@removeCustomer');
-    //---sale script
-    Route::get('quotations/data_sale', 'QuotationsController@getDataSale');
-    Route::get('quotations/set_sale', 'QuotationsController@setSale');
-    Route::get('quotations/remove_sale', 'QuotationsController@removeSale');
-    Route::get('quotations/save', 'QuotationsController@save');
-
     //Customer
     Route::post('customer', 'CustomerController@grid');
     Route::get('customer', 'CustomerController@grid');
@@ -195,7 +184,7 @@ Route::controller('admin', 'AdminController');
 Route::controller('user', 'UserController');
 Route::get('faker', function () {
     echo factory('App\Customer', 50)->create();
-
+    echo factory('App\User', 20)->create();
 });
 Route::get('test', function () {
     return view('template');
