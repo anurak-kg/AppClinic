@@ -223,7 +223,7 @@
                                                <td>
                                                    @if($item->order_status = 'PENDING')
                                                    <span class="label label-warning">{{ $item->order_status  }}</span>
-                                                    @else
+                                                    @elseif($item->order_status != 'PENDING')
                                                        <span class="label label-danger">{{ $item->order_status  }}</span>
                                                     @endif
                                                </td>
