@@ -53,8 +53,8 @@ class HomeController extends Controller {
 		$order = DB::table('order')
 			->select('order.order_id', 'vendor.ven_name','users.name','order.order_date','order.order_status')
 			->join('users', 'order.emp_id', '=', 'users.id')
-			->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
-			->where('order.order_id', '=', 1);
+			->join('vendor', 'order.ven_id', '=', 'vendor.ven_id');
+
 		$dataorder = $order->take(5)->get();
 
 		// return response()->json($dataorder);

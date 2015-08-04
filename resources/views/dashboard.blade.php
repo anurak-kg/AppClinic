@@ -214,21 +214,21 @@
                                            </tr>
                                            </thead>
                                            <tbody>
+                                           @foreach( $dataorder as $item)
                                            <tr>
-                                                @foreach( $dataorder as $item)
                                                <td>{{ $item->order_id }}</td>
                                                <td>{{ $item->ven_name  }}</td>
                                                <td>{{ $item->name }}</td>
                                                <td>{{ $item->order_date }}</td>
                                                <td>
-                                                   @if($item->order_status = 'PENDING')
+                                                   @if($item->order_status == 'PENDING')
                                                    <span class="label label-warning">{{ $item->order_status  }}</span>
-                                                    @elseif($item->order_status != 'PENDING')
+                                                    @else
                                                        <span class="label label-danger">{{ $item->order_status  }}</span>
                                                     @endif
                                                </td>
-                                               @endforeach
                                            </tr>
+                                           @endforeach
                                            </tbody>
                                        </table>
                                    </div><!-- /.table-responsive -->
