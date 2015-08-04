@@ -36,7 +36,7 @@
         $scope.quo_id = null;
         $scope.cashInput = 0;
         $scope.CashTotal = 0;
-        $scope.dataLoading = false;
+        $scope.dataLoading = true;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
@@ -54,6 +54,8 @@
             success(function (data, status, headers, config) {
                 $scope.product = data;
                 console.log(data)
+                $scope.dataLoading = false;
+
             }).
             error(function (data, status, headers, config) {
 
@@ -821,7 +823,53 @@
         }
 
     });
-    app.controller('paymentController', function ($scope) {
+    app.controller('paymentController', function ($scope,$http) {
+        $scope.payment = [];
+        $scope.vat = 7;
+        $scope.quo_id = null;
+
+        $scope.paymentMethod = function (index) {
+            $scope.payment[index].buttonPay = true;
+            console.log($scope.payment[index].boxMethod);
+            if ($scope.payment[index].boxMethod == "PAID_IN_FULL") {
+                $scope.payment[index].boxPaidFull = true;
+                $scope.payment[index].received_amount = 0;
+
+                $scope.payment[index].buttonPay = false;
+            }
+            if ($scope.payment[index].boxMethod == "PAYABLE") {
+                $scope.payment[index].boxPaidFull = false;
+
+            }
+
+        }
+        $scope.init = function(index,value,vat,quo_id,courseId) {
+            $scope.payment[index] = [];
+            $scope.quo_id = quo_id;
+            console.log(index);
+            console.log(value);
+            $scope.vat = vat;
+            $scope.payment[index].paymentTotal = (value * (100 + $scope.vat))/100;
+            $scope.payment[index].course_id = courseId;
+
+        }
+        $scope.receiveChange = function(index){
+            if($scope.payment[index].receivedAmount >= 0){
+                $scope.payment[index].withdawn = $scope.payment[index].paymentTotal - $scope.payment[index].receivedAmount
+            }
+        }
+
+        $scope.savePayment =function(index) {
+            var url = '/payment/quosave?quo_id=' + $scope.quo_id + '&receivedAmount=' + $scope.payment[index].receivedAmount  +
+                '&course_id=' + $scope.payment[index].course_id;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
+        };
 
         $scope.save = function (e) {
             console.log(e);
