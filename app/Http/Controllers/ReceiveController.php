@@ -48,19 +48,20 @@ class ReceiveController extends Controller
 
     public function getSave()
     {
-        $sales = Sales::find($this->getId());
-        $sales->sales_total = $this->getTotal();
-        $sales->sales_status = "CLOSE";
+        $sales = Receive::find($this->getId());
+        $sales->receive_total = $this->getTotal();
+        $sales->receive_status = "CLOSE";
+        $sales->receive_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $sales->save();
-        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('receive')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()
     {
-        $sum = DB::table('sales_detail')
-            ->select(DB::raw('SUM(sales_de_qty*sales_de_price) as total'))
-            ->where('sales_id', $this->getId())
+        $sum = DB::table('receive_detail')
+            ->select(DB::raw('SUM(receive_de_qty * receive_de_price) as total'))
+            ->where('receive_id', $this->getId())
             ->get();
         return $sum[0]->total;
     }

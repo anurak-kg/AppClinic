@@ -45,7 +45,6 @@
                                       <ul class="treeview-menu">
                                         <li><a href="{{url('product/index')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้า</a></li>
                                         <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>กลุ่มสินค้า</a></li>
-                                        <li><a href="{{url('product_type/index')}}"><i class='fa fa-angle-double-right'></i>ประเภทสินค้า</a></li>
                                         <li><a href="{{url('product/expday')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้าหมดอายุ</a></li>
 
                                       </ul>
