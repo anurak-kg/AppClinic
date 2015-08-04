@@ -20,8 +20,8 @@ class OrderController extends Controller
         $order = DB::table('order')
             ->select('order.order_id', 'vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
             ->join('users', 'order.emp_id', '=', 'users.id')
-            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
-            ->where('order.order_id', '=', 1);
+            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id');
+
         $data = $order->get();
 
        // return response()->json($data);
