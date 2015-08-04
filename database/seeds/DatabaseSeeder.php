@@ -41,6 +41,7 @@ class CustomerTableSeeder extends Seeder
             'cus_name' => 'อนุรักษ์ กิ่งแก้ว',
             'cus_tel' => '0875430262',
             'cus_email' => 'imannn.99@gmail.com',
+            'cus_birthday_year' => '2548',
         ]);
     }
 }

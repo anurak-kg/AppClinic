@@ -39,4 +39,16 @@ $factory->define(App\Customer::class, function ($faker) {
         'branch_id' => '1'
     ];
 });
+$factory->define(App\User::class, function ($faker) {
+    return [
+        'username' => $faker->userName,
+        'name' => $faker->name($gender = null | 'male' | 'female'),
+        'tel' => $faker->phoneNumber,
+        'email' => $faker->email,
+        'password' => $faker->password,
+        'position_id' => $faker->randomElement($array = array ('1','4')),
+        'branch_id' => '1'
+    ];
+});
+
 
