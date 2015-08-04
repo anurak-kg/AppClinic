@@ -36,7 +36,7 @@
         $scope.quo_id = null;
         $scope.cashInput = 0;
         $scope.CashTotal = 0;
-        $scope.dataLoading = true;
+        $scope.dataLoading = false;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
