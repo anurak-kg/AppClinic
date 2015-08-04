@@ -1,6 +1,6 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar" >
     <section class="sidebar">
-
+        <div class="sidebar" id="side">
         <!-- search form (Optional) -->
         <form action="{{url('customer')}}" method="get" class="sidebar-form">
             <div class="input-group">
@@ -98,7 +98,21 @@
             <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
 
         </ul><!-- /.sidebar-menu -->
+        </div>
     </section>
+
     <!-- /.sidebar -->
 
+    <script type="text/javascript" src="/dist/js/jquery.slimscroll.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#side').slimScroll({
+                position: 'right',
+                height: '150px',
+                railVisible: true,
+                alwaysVisible: true
+            });
+        });
+    </script>
 </aside>
