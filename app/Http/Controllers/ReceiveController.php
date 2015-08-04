@@ -66,9 +66,7 @@ class ReceiveController extends Controller
     public function getTotal()
     {
         $sum = DB::table('receive_detail')
-            ->select(DB::raw('SUM(receive_de_qty * receive_de_price) -
-                    ((receive_de_price * receive_de_qty) * receive_de_discount / 100)
-                    - receive_de_disamount) as total'))
+            ->select(DB::raw('SUM(receive_de_qty * receive_de_price) as total'))
             ->where('receive_id', $this->getId())
             ->get();
         return $sum[0]->total;
