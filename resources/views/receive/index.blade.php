@@ -191,8 +191,8 @@
                                         </tr>
                                     </table>
                                     <div class="col-md-10">
-                                        <a href="{{url('order/save')}}" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
+                                        <a href="{{url('receive/save')}}" class="btn btn-md btn-success pull-right"><i
+                                                    class="fa fa-credit-card "> รับสินค้า </i></a>
                                     </div>
                                 </div>
                             </div>
