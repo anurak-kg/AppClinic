@@ -38,8 +38,6 @@ class ReportController extends Controller
         $data1 = $sales->take(4)->get();
         //return response()->json($data);
 
-
-
         return view('report/sale', [
             'data' => $data,
             'data1' => $data1,
@@ -71,7 +69,7 @@ class ReportController extends Controller
     public function reportCourseMonthTest()
     {
         $rang = \Input::get('rang');
-        $date = explode('-', $rang);
+        $date = explode('to', $rang);
         $dateTxt = [];
         // var_dump($date);
         $coursemonth = DB::table('quotations_detail')
@@ -101,7 +99,7 @@ class ReportController extends Controller
     public function reportCourseHotTest()
     {
         $rang = \Input::get('rang');
-        $date = explode('-', $rang);
+        $date = explode('to', $rang);
         //var_dump($date);
         $dateTxt = [];
         $coursehot = DB::table('quotations_detail')
@@ -111,6 +109,7 @@ class ReportController extends Controller
             $coursehot->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
             $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
             $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
         }
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursehot->take(10)->get();
@@ -130,7 +129,7 @@ class ReportController extends Controller
     {
 
         $rang = \Input::get('rang');
-        $date = explode('-', $rang);
+        $date = explode('to', $rang);
 
         $dateTxt = [];
         //  var_dump([trim($date[0]),trim($date[1])]);
@@ -159,8 +158,8 @@ class ReportController extends Controller
     //ยอดขายแพทย์
     public function reportDoctorTest()
     {
-        $doc = \Input::get('doc');
-        $date = explode('-', $doc);
+        $doc = \Input::get('rang');
+        $date = explode('to', $doc);
         // var_dump($date);
         $dateTxt = [];
         $doctor = DB::table('quotations_detail')
@@ -169,9 +168,10 @@ class ReportController extends Controller
             ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
             ->join('users', 'quotations.sale_id', '=', 'users.id');
         if ($doc != null) {
+            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
             $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
             $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
-            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+
         }
         $doctor->where('users.position_id', '=', 4)
             ->groupBy('quotations.sale_id')
