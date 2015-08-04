@@ -29,18 +29,12 @@ class BranchController extends Controller
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
         $grid->edit('/branch/edit', 'กระทำ','modify|delete');
 
-        $grid->paginate(10);
         return $grid;
     }
 
     public function grid(){
 
         $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('branch_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
 
         return view('branch/index', compact('grid'));
     }

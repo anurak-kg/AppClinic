@@ -31,18 +31,13 @@ class Product_typeController extends Controller
         $grid->add('pt_name', 'ชื่อประเภทสินค้า',true);
         $grid->edit('/product_type/edit', 'กระทำ','modify|delete');
 
-        $grid->paginate(10);
         return $grid;
     }
     public function grid(){
 
         $grid = $this->getDataGrid();
         $form = $this->create();
-        $grid->row(function ($row) {
-            if ($row->cell('product_type_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
+
 
         return view('product_type/index', compact('form','grid'));
     }

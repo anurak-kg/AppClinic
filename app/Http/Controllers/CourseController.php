@@ -28,7 +28,7 @@ class CourseController extends Controller
         $grid->edit('/course/edit', 'กระทำ', 'modify|delete');
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
 
-        $grid->paginate(10);
+
         return $grid;
     }
 
@@ -36,11 +36,6 @@ class CourseController extends Controller
     {
 
         $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('course_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
 
         return view('course/index', compact('grid'));
     }

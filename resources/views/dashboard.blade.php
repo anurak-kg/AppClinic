@@ -40,7 +40,7 @@
                            <div class="small-box bg-yellow">
                             <div class="inner">
                               <h4>ซื้อสินค้า</h4>
-                              <p>สำหรับสมาชิกและลูกค้าทั่วไป</p>
+                              <p>สำหรับสมาชิก/ลูกค้าทั่วไป</p>
                              </div>
                             <div class="icon">
                                         <i class="fa fa-cart-plus"></i>
@@ -71,6 +71,7 @@
              <!-- Main content -->
                <div class="row">
                    <section class="connectedSortable">
+
                        <div class="col-md-6">
                            <div class="box  box-default">
                                <div class="box-header with-border">
@@ -81,12 +82,12 @@
                                </div><!-- /.box-header -->
                                <div class="box-body">
                                    <div class="row">
-                                       <div class="col-md-8">
+                                       <div class="col-md-6">
                                            <div class="chart-responsive">
                                                <canvas id="pieChart" height="150"></canvas>
                                            </div><!-- ./chart-responsive -->
                                        </div><!-- /.col -->
-                                       <div class="col-md-4">
+                                       <div class="col-md-6">
                                            <ul class="chart-legend clearfix">
                                                @foreach($data as $item)
                                                    <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->coursename }}</li>
@@ -127,15 +128,15 @@
                                </div><!-- /.box-header -->
                                <div class="box-body">
                                    <div class="row">
-                                       <div class="col-md-8">
+                                       <div class="col-md-6">
                                            <div class="chart-responsive">
                                                <canvas id="pieChart2" height="150"></canvas>
                                            </div><!-- ./chart-responsive -->
                                        </div><!-- /.col -->
-                                       <div class="col-md-4">
+                                       <div class="col-md-6">
                                            <ul class="chart-legend clearfix">
                                                @foreach($datapro as $item)
-                                               <li><i class="fa fa-circle-o text-red"></i>{{ $item->productname }} <span class="pull-right"><?php echo number_format($item->Total) ?></span></li>
+                                               <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->productname }}</li>
                                                    <br>
 
                                                    {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
@@ -162,7 +163,7 @@
                            </div><!-- /.box -->
                        </div>
 
-                       <div class="col-md-6">
+                       <div class="col-md-4">
                            <!-- PRODUCT LIST -->
                            <div class="box box-primary">
                                <div class="box-header with-border">
@@ -192,7 +193,7 @@
                            </div><!-- /.box -->
                        </div>
 
-                       <div class="col-md-6">
+                       <div class="col-md-8">
                            <!-- TABLE: LATEST ORDERS -->
                            <div class="box box-info">
                                <div class="box-header with-border">
@@ -206,10 +207,10 @@
                                        <table class="table no-margin">
                                            <thead>
                                            <tr>
-                                               <th>รหัสใบสั่งซื้อ</th>
+                                               <th>เลขทีใบสั่งซื้อ</th>
                                                <th>Supplier</th>
                                                <th>พนักงาน</th>
-                                               <th>วันที่สั่งซื้อ</th>
+                                               <th>วันที่</th>
                                                <th>สถานะ</th>
                                            </tr>
                                            </thead>

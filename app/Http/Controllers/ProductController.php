@@ -48,21 +48,13 @@ class ProductController extends Controller
         $grid->add('product_unit', 'หน่วยนับ');
         $grid->edit('/product/edit', 'กระทำ','modify|delete');
         $grid->link('product/create',"เพิ่มข้อมูลใหม่", "TR");
-        $grid->paginate(10);
+
         return $grid;
     }
 
     public function grid(){
 
         $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('product_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
-
-
-
 
         return view('product/index', compact('grid'));
     }
