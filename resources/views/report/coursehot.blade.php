@@ -7,10 +7,12 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">สรุปคอร์สขายดี</h3>
+
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
-                </div><!-- /.box-header -->
+                </div>
+                <!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-8">
@@ -21,11 +23,14 @@
                                         <?php 'ว่าง' ?>
                                     @endif</strong>
                             </p>
+
                             <div class="chart">
                                 <!-- Sales Chart Canvas -->
                                 <canvas id="areaChart" height="90"></canvas>
-                            </div><!-- /.chart-responsive -->
-                        </div><!-- /.col -->
+                            </div>
+                            <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
                         <div class="col-md-4">
                             <p class="text-center">
                                 {!! Form::open(array('url' => 'report/coursehot', 'class' => 'form')) !!}
@@ -36,21 +41,29 @@
                                 <br>
                                 {!! Form::close() !!}
                             </p>
+
                             <div class="progress-group">
                                 <p class="text-center"><b>คอร์สที่ขายดีที่สุด</b></p>
                                 @foreach($data as $test)
-                                    <span class="progress-text"><i class="fa fa-circle-o text-aqua"></i> {{$test->coursename}}</span>
+                                    <span class="progress-text"><i
+                                                class="fa fa-circle-o text-aqua"></i> {{$test->coursename}}</span>
                                     <span class="progress-number"><?php echo number_format($test->Total), ' บาท' ?></span>
                                     <div class="progress sm">
                                     </div>
                                 @endforeach
-                            </div><!-- /.progress-group -->
+                            </div>
+                            <!-- /.progress-group -->
 
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- ./box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- ./box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
 
         <div class="col-md-12">
             <div class="box">
@@ -70,7 +83,8 @@
                                 <tr>
 
                                     <td align="middle">{{$test->coursename}}</td>
-                                    <td align="middle" style="width: 850px;"><?php echo number_format($test->Total), ' บาท' ?></td>
+                                    <td align="middle"
+                                        style="width: 850px;"><?php echo number_format($test->Total), ' บาท' ?></td>
                                 </tr>
                             @endforeach
                         </table>
@@ -107,27 +121,27 @@
                     );
 
                     //--------------
-        //- AREA CHART -
-        //--------------
+                    //- AREA CHART -
+                    //--------------
 
-        // Get context with jQuery - using jQuery's .get() method.
-        var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
-        // This will get the first returned node in the jQuery collection.
-        var areaChart = new Chart(areaChartCanvas);
+                    // Get context with jQuery - using jQuery's .get() method.
+                    var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+                    // This will get the first returned node in the jQuery collection.
+                    var areaChart = new Chart(areaChartCanvas);
 
-        var areaChartData = {
-            labels: {!! $name !!},
-        datasets :
-                [
-                    {
-                        label: "Electronics",
-                        fillColor: "#3b8bba",
-                        strokeColor: "rgba(210, 214, 222, 1)",
-                        pointColor: "#3b8bba",
-                        pointStrokeColor: "#3b8bba",
-                        pointHighlightFill: "#3b8bba",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: {!! $total !!}
+                    var areaChartData = {
+                        labels: {!!$name!!},
+                        datasets :
+        [
+            {
+                label: "Electronics",
+                fillColor: "#3b8bba",
+                strokeColor: "rgba(210, 214, 222, 1)",
+                pointColor: "#3b8bba",
+                pointStrokeColor: "#3b8bba",
+                pointHighlightFill: "#3b8bba",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: {!!$total !!}
         },
         ]
         };
@@ -170,10 +184,10 @@
             //Boolean - whether to make the chart responsive to window resizing
             responsive: true
         };
-
         //Create the line chart
         areaChart.Line(areaChartData, areaChartOptions);
-        });
+        })
+        ;
     </script>
     </body>
 
