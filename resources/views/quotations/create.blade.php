@@ -2,7 +2,7 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}})">
+    <div ng-controller="quotationsController" id="course"  ng-init="setVat({{config('shop.vat')}})">
         <script type="text/ng-template" id="payment.html">
             <div class="modal-header">
                 <h3 class="modal-title">ชำระเงิน</h3>
@@ -99,7 +99,7 @@
                         <div class="customer" ng-show="boxSearch">
                             <ul>
                                 <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
-                                <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.fullname}}</strong></span>
+                                <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.cus_name}}</strong></span>
                                 </li>
                                 <li>ชื่อเบอร์โทร | <span
                                             class="customer"><strong>@{{ customer.tel }}</strong></span><br>
@@ -205,34 +205,50 @@
                                                     </li>
                                                 </ul>
                                             </td>
-                                            <td data-title="'ราคา'">
-                                                @{{item.course.course_price | number }}
+                                            <td data-title="'ราคา'" style="width:170px;text-align: right">
+                                                @{{item.course.course_price | number:2 }}
+                                            </td>
+                                            <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 80px">
+                                                <input type="number"
+                                                       ng-model="item.quo_de_discount"
+                                                       ng-change="update('quo_de_discount',item.course_id,item.quo_de_discount)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+                                            <td data-title="'ส่วนลดจำนวนเงิน'" style="width: 80px">
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                           ng-model="item.quo_de_disamount"
+                                                           ng-change="update('quo_de_disamount',item.course_id,item.quo_de_disamount)"
+                                                           ng-model-options="{debounce: 750}"
+                                                           class="form-control">
+                                                </div>
+                                            </td>
+                                            <td data-title="'จำนวนเงินที่ต้องชำระ'" style="width:170px;text-align: right">
+                                                @{{ (item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
+                                                -item.quo_de_disamount| number:2}}
                                             </td>
 
 
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Subtotal:</td>
-                                            <td>@{{ getTotal() | number }} บาท</td>
+                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Tax(7%):</td>
-                                            <td><?php echo "{{ getVat(" . config('shop.vat') . ") | number }} ";?>บาท
-                                            </td>
+                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td>@{{ getVat() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" class="total-price">Total:</td>
-                                            <td><?php echo "{{ getTotal() + getVat(" . config('shop.vat') . ") | number }} ";?>
-                                                บาท
-                                            </td>
+                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td> @{{ getTotal()+getVat() | number:2}} บาท</td>
                                         </tr>
 
                                     </table>
 
                                     <div class="col-md-10">
                                         <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ยืนยัน
-                                                การชำระเงิน </i></a>
+                                                    class="fa fa-credit-card "> ยืนยันการชำระเงิน </i></a>
                                     </div>
 
                                 </div>
@@ -258,7 +274,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/quotations/course_query?q=%QUERY',
+                    url: '/quotations/course-list?q=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
@@ -276,7 +292,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/quotations/query?q=%QUERY',
+                    url: '/quotations/customer-list?q=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
@@ -360,17 +376,13 @@
                         }
                     })
                     .on('typeahead:selected', function ($e, datum) {
-                        course =
-                        {
+                        course = {
                             course_id: datum.course_id,
-                            course: {
-                                course_id: datum.course_id,
-
-                                course_name: datum.course_name,
-                                course_price: datum.course_price,
-                                detail: datum.detail
-                            }
-                        }
+                            quo_de_discount: 0,
+                            quo_de_disamount: 0,
+                            quo_de_price:datum.course_price,
+                            course : datum
+                        };
                         console.log(course);
                         angular.element(document.getElementById('course')).scope().pushProduct(course);
 

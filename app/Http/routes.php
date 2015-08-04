@@ -86,15 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('treatment/add', 'TreatmentController@add');
     Route::post('treatment/save', 'TreatmentController@save');
 
-    //Quotations
-    Route::post('quotations', 'QuotationsController@index');
-    Route::get('quotations', 'QuotationsController@index');
-    Route::get('quotations/query', 'QuotationsController@getCustomerList');
-    Route::get('quotations/course_query', 'QuotationsController@getCourseList');
-    Route::get('quotations/update', 'QuotationsController@update');
-    Route::get('quotations/add', 'QuotationsController@add');
-    Route::get('quotations/delete', 'QuotationsController@delete');
-    Route::get('quotations/data', 'QuotationsController@getData');
+
     //---customer script
     Route::get('quotations/data_customer', 'QuotationsController@getDataCustomer');
     Route::get('quotations/set_customer', 'QuotationsController@setCustomer');
@@ -180,8 +172,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('order/history', 'OrderController@history');
     Route::get('order/history', 'OrderController@history');
 
-
     //Route By Controller
+    Route::controller('quotations', 'QuotationsController');
     Route::controller('receive', 'ReceiveController');
     Route::controller('order', 'OrderController');
     Route::controller('sales', 'SalesController');

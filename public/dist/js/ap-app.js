@@ -40,6 +40,7 @@
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
+        $scope.controller = '/quotations'
         //$scope.modalInstance = null;
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
@@ -48,45 +49,38 @@
             $scope.quo_id = quo_id;
             $scope.Vat = vat;
         }
-        $scope.getTotal = function () {
-            var total = 0;
-            for (var i = 0; i < $scope.product.length; i++) {
-                var product = $scope.product[i];
-                total += parseInt(product.course.course_price);
-            }
-
-            return total;
-        }
 
         $http.get('/quotations/data').
             success(function (data, status, headers, config) {
                 $scope.product = data;
+                console.log(data)
             }).
             error(function (data, status, headers, config) {
 
             });
-
-        $http.get('/quotations/data_customer').
+        $http.get($scope.controller + '/data-customer').
             success(function (data, status, headers, config) {
-                if (data.status == 'success') {
-                    $scope.customer.fullname = data.cus_name;
-                    $scope.customer.tel = data.tel;
-                    $scope.customer.cus_id = data.cus_id;
+                console.log(typeof (data.status));
+                if (data.status === null) {
+                    console.log('Receive Customer null');
+                    $scope.boxSearch = false;
+
+                }
+                else {
+                    $scope.customer = data;
                     $scope.boxSearch = true;
-                    console.log('update customer success');
                 }
             }).
             error(function (data, status, headers, config) {
 
             });
-
         $scope.customerSelect = function (customer) {
             $scope.customer.fullname = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
             console.log(customer)
-            $http.get('/quotations/set_customer?id=' + customer.cus_id).
+            $http.get('/quotations/set-customer?id=' + customer.cus_id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                 }).
@@ -100,7 +94,7 @@
             });
         }
 
-        $http.get('/quotations/data_sale').
+        $http.get('/quotations/data-sale').
             success(function (data, status, headers, config) {
                 if (data.status == 'success') {
                     $scope.sale.id = data.id;
@@ -157,35 +151,49 @@
 
         $scope.getAddProduct = function (id) {
             $scope.dataLoading = true;
-            $http.get('/quotations/add?id=' + id).
+            var url = $scope.controller + '/add?id=' + id;
+            console.log(url);
+            $http.get(url).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
+                    $scope.tableParams.reload();
                 }).
                 error(function (data, status, headers, config) {
                     $scope.dataLoading = false;
+                    $scope.tableParams.reload();
                 });
         }
         $scope.cashAdd = function (cash) {
             $scope.cashInput += cash;
         }
-        $scope.update = function (item) {
-            $scope.dataLoading = true;
-            console.log(item);
+        $scope.getTotal = function () {
+            $scope.total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                $scope.total += parseInt(product.quo_de_price) - (product.quo_de_price * product.quo_de_discount / 100)
+                    - product.quo_de_disamount;
 
-            $http.get('/quotations/update?id=' + item.id + '&qty=' + item.qty + "&discount_price=" + item.discount_price).
-                success(function (data, status, headers, config) {
-                    //console.log(data)
-                    $scope.dataLoading = false;
-                }).
-                error(function (data, status, headers, config) {
-                    console.log(status)
-                    $scope.dataLoading = false;
-                });
+            }
+            return $scope.total;
+        }
+
+        $scope.setVat = function (vat) {
+            $scope.vat = vat;
         }
         $scope.getVat = function () {
-            //console.log($scope.Vat );
-            return $scope.getTotal() * $scope.Vat / 100;
+            return $scope.getTotal() * $scope.vat / 100;
+        }
+        $scope.update = function (type, course_id, value) {
+            $scope.dataLoading = true;
 
+            var url = $scope.controller + '/update?id=' + course_id + '&type=' + type + '&value=' + value;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
         }
 
         $scope.deleteById = function (id) {
@@ -451,7 +459,7 @@
                 alert("ยังไม่มีการเลือกสินค้า");
             }
             else {
-                window.location.href = $scope.controller+ '/save';
+                window.location.href = $scope.controller + '/save';
 
             }
         }
@@ -772,13 +780,6 @@
                 $scope.total += parseInt((product.receive_de_qty * product.receive_de_price) -
                     ((product.receive_de_price * product.receive_de_qty) * product.receive_de_discount / 100)
                     - product.receive_de_disamount);
-
-            }
-            $scope.setVat = function (vat) {
-                $scope.vat = vat;
-            }
-            $scope.getVat = function () {
-                return $scope.getTotal() * $scope.vat / 100;
             }
             return $scope.total;
         }
@@ -809,8 +810,8 @@
     app.controller('treatmentAddController', function ($scope) {
 
         $scope.save = function (e) {
-            console.log(e );
-            console.log($scope.bt1 );
+            console.log(e);
+            console.log($scope.bt1);
 
             if (typeof $scope.dr === 'undefined' && typeof $scope.bt1 === 'undefined' && typeof $scope.bt2 === 'undefined') {
                 alert("ยังไม่มีการเลือกพนักงานที่เกี่ยวข้อง");
@@ -823,8 +824,8 @@
     app.controller('paymentController', function ($scope) {
 
         $scope.save = function (e) {
-            console.log(e );
-            console.log($scope.bt1 );
+            console.log(e);
+            console.log($scope.bt1);
 
             if (typeof $scope.dr === 'undefined' && typeof $scope.bt1 === 'undefined' && typeof $scope.bt2 === 'undefined') {
                 alert("ยังไม่มีการเลือกพนักงานที่เกี่ยวข้อง");
@@ -833,7 +834,8 @@
         }
 
     });
-})();
+})
+();
 /**
  * Created by Anurak on 26/06/58.
  */
