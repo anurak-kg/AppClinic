@@ -48,19 +48,27 @@ class ReceiveController extends Controller
 
     public function getSave()
     {
-        $sales = Receive::find($this->getId());
-        $sales->receive_total = $this->getTotal();
-        $sales->receive_status = "CLOSE";
-        $sales->receive_date = \Carbon\Carbon::now()->toDateTimeString();
+        $receive = Receive::find($this->getId());
+        $receive->receive_total = $this->getTotal();
+        $receive->receive_status = "CLOSE";
+        $receive->receive_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
-        $sales->save();
+        if ( $receive->order_id != 0){
+            $order = Order::find( $receive->order_id);
+            $order->order_status = 'CLOSE';
+            $order->save();
+        }
+
+        $receive->save();
         return redirect('receive')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()
     {
         $sum = DB::table('receive_detail')
-            ->select(DB::raw('SUM(receive_de_qty * receive_de_price) as total'))
+            ->select(DB::raw('SUM(receive_de_qty * receive_de_price) -
+                    ((receive_de_price * receive_de_qty) * receive_de_discount / 100)
+                    - receive_de_disamount) as total'))
             ->where('receive_id', $this->getId())
             ->get();
         return $sum[0]->total;
@@ -136,21 +144,22 @@ class ReceiveController extends Controller
         return redirect('receive');
     }
 
-    public function getOrderdata(){
+    public function getOrderdata()
+    {
         $id = Input::get('id');
-        $order = Order::where('order_id',$id)
+        $order = Order::where('order_id', $id)
             ->with('product')
-        ->get()->first();
+            ->get()->first();
 
         DB::table('receive_detail')
-            ->where('receive_id',$this->getId())
+            ->where('receive_id', $this->getId())
             ->delete();
         $receive = Receive::findOrFail($this->getId());
         $receive->ven_id = $order->ven_id;
         $receive->order_id = $order->order_id;
         $receive->save();
 
-        foreach($order->product as $item){
+        foreach ($order->product as $item) {
             //echo $item->pg_id;
             $product = Product::findOrFail($item->product_id);
             $receive->product()->attach($product, [
@@ -166,11 +175,12 @@ class ReceiveController extends Controller
         }
 
 
-
         return redirect('receive');
 
     }
-    public function getOrdersearch(){
+
+    public function getOrdersearch()
+    {
         $query = '%' . \Input::get('q') . '%';
         $order = Order::where('order_id', 'LIKE', $query)
             ->get();

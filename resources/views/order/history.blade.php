@@ -32,11 +32,7 @@
                                 <td> {{$test->order_date}}</td>
                                 <td><?php echo number_format( $test->order_total) ,' บาท' ?></td>
                                 <td>
-                                    @if($test->order_status = 'PENDING')
                                         <span class="label label-warning">{{ $test->order_status  }}</span>
-                                    @else
-                                        <span class="label label-danger">{{ $test->order_status  }}</span>
-                                    @endif
                                 </td>
                             </tr>
                         @endforeach
