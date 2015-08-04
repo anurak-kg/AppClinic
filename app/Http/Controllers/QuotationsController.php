@@ -22,7 +22,7 @@ use App\Http\Requests;
 
 class QuotationsController extends Controller
 {
-    public function index()
+    public function getIndex()
     {
         if (Quotations::where('quo_status', -1)->where('branch_id',Branch::getCurrentId())->count() == 0) {
             $quotation = new Quotations();
@@ -70,7 +70,7 @@ class QuotationsController extends Controller
         return response()->json($course);
     }
 
-    public function add()
+    public function getAdd()
     {
         $id = \Input::get('id');
          $rec = Quotations::find($this->getQuoId());
@@ -78,6 +78,9 @@ class QuotationsController extends Controller
         $rec->course()->attach($product, [
             'qty' => 0,
             'quo_de_price'  =>$product->course_price,
+            'quo_de_discount' =>0,
+            'quo_de_disamount'=>0,
+            'payment_remain'=>$product->course_price,
             'treat_status'=>0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -91,7 +94,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function save()
+    public function getSave()
     {
 
         $quo = Quotations::find($this->getQuoId());
@@ -111,7 +114,7 @@ class QuotationsController extends Controller
                         WHERE quo_id = ".$this->getQuoId()."")   );
         return $sum[0]->Total;
     }
-    public function delete()
+    public function getDelete()
     {
         DB::table('quotations_detail')
             ->where('quo_id', "=", $this->getQuoId())
@@ -131,7 +134,17 @@ class QuotationsController extends Controller
         // dd($receivedItem);
         return response()->json($receivedItem);
     }
-
+    public function getUpdate()
+    {
+        $type = Input::get('type');
+         $value = Input::get('value');
+        $id = Input::get('id');
+        $r = DB::table('quotations_detail')
+            ->where('quo_id', "=", $this->getQuoId())
+            ->where('course_id', "=", $id)
+            ->update([$type => $value]);
+        return response()->json(['status' => 'Success']);
+    }
     public function getDataCustomer()
     {
         //echo $this->getQuoId();
@@ -151,7 +164,7 @@ class QuotationsController extends Controller
         return response()->json($data);
     }
 
-    public function setCustomer()
+    public function getSetCustomer()
     {
         $cus_id = \Input::get('id');
         $quo = Quotations::findOrFail($this->getQuoId());

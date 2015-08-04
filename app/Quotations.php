@@ -31,7 +31,6 @@ class Quotations extends Model
         return $this->belongsToMany('App\Course','quotations_detail','quo_id','course_id')
             ->withPivot('qty','treat_status','created_at','updated_at');
     }
-
     public function Quotations_detail()
     {
         return $this->hasmany('\App\Quotations_detail');

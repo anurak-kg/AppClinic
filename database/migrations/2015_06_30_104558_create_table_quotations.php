@@ -36,6 +36,8 @@ class CreateTableQuotations extends Migration
             $table->integer('quo_id');
             $table->string('course_id');
             $table->integer('treat_status');
+            $table->integer('quo_de_discount'); //ส่วนลดเปอเซ็น
+            $table->decimal('quo_de_disamount',10,2); //ส่วนลดจำนวนเงิน
             $table->enum('payment_status', array('REMAIN','FULLY_PAID'));//REMAIN ค้างจ่าย fully Paid จ่ายครบ
             $table->decimal('payment_remain',14,2);
             //สถานะ
@@ -44,7 +46,7 @@ class CreateTableQuotations extends Migration
             $table->integer('qty');
             $table->decimal('quo_de_price',12,2);
             $table->timestamps();
-
+            $table->unique(array('quo_id', 'course_id'));
         });
         DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
 
