@@ -49,19 +49,62 @@ class ReportController extends Controller
     }
 
 
-
-    public function reportCourseProduct()
+    //ยอดขายรายวัน
+    public function reportsalesperday()
     {
-        /*  $data = \DB::select((\DB::raw("
-                      SELECT
-                      DAY(quotations_detail.created_at),
-                      SUM(course_price) as Total
-                      FROM
-                      quotations_detail
-                      INNER JOIN course ON course.course_id =quotations_detail.course_id
-                      WHERE MONTH(quotations_detail.created_at) = 7 AND YEAR(quotations_detail.created_at) = 2015
-                      GROUP BY
-                      DAY(quotations_detail.created_at) ")));*/
+        $rang = \Input::get('rang');
+        $date = explode('to', $rang);
+       //var_dump($date);
+        $dateTxt = [];
+        $salesdaycourse = DB::select(DB::raw(
+            "
+                SELECT
+                (calendar.datefield) AS DATE,
+                IFNULL(SUM(quotations.price),0) AS total_sales
+                FROM
+                quotations
+                RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
+
+                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('".$rang."-30'))) FROM quotations))
+
+                GROUP BY DATE
+
+                ORDER BY DATE ASC
+            "
+            ,[$rang,$rang]));
+
+        $salesdaypro = DB::select(DB::raw(
+            "
+            SELECT
+            calendar.datefield AS DATE,
+            IFNULL(SUM(sales.sales_total),0) AS total_sales
+
+            FROM
+            sales
+            RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
+            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM sales) AND (SELECT MAX(DATE(DATE('".$rang."-30'))) FROM sales))
+            GROUP BY DATE
+
+            ORDER BY DATE ASC
+            "
+        ,[$rang,$rang]));
+
+
+
+       //return response()->json($salesdaypro);
+
+        return view('report/salesperday', [
+            'datapro' => $salesdaypro,
+            'datapro1' => $salesdaypro,
+
+            'total1' => $this->arrayToChartData($salesdaypro, 'total_sales'),
+
+            'data' => $salesdaycourse,
+            'data1' => $salesdaycourse,
+
+            'name' => $this->arrayToChartData($salesdaycourse, 'DATE'),
+            'total' => $this->arrayToChartData($salesdaycourse, 'total_sales')
+        ]);
     }
 
 

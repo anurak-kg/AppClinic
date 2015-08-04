@@ -11,7 +11,7 @@ class HomeController extends Controller {
 			->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
 			->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
 		$coursehot->groupBy('coursename')->orderBy('Total', 'desc');
-		$dataCourse = $coursehot->take(5)->get();
+		$dataCourse = $coursehot->take(3)->get();
 		$array = [];
 		$data=[];
 		foreach($dataCourse as $item){
@@ -27,7 +27,7 @@ class HomeController extends Controller {
 			->select(DB::raw('product.product_name as productname'),DB::raw('count(sales_detail.sales_de_price) AS Total'))
 			->join('product','product.product_id','=','sales_detail.product_id');
 		$producthot->groupBy('productname')->orderBy('Total','desc');
-		$dataProduct = $producthot->take(5)->get();
+		$dataProduct = $producthot->take(3)->get();
 		$array = [];
 		$datapro=[];
 		foreach($dataProduct as $item){

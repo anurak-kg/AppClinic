@@ -166,6 +166,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
+    Route::any('report/salesperday', 'ReportController@reportsalesperday');
 
     //order
     Route::post('order/history', 'OrderController@history');

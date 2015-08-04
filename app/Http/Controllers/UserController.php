@@ -43,7 +43,7 @@ class UserController extends Controller
         $grid->add('{{ $position->position_name }}', 'ตำแหน่ง','position_id');
         $grid->add('<a href="/user/resetpassword/?id={{ $id }}">Reset</a>','Reset Password');
         $grid->edit('/user/edit', 'กระทำ','show|modify');
-        $grid->paginate(10);
+
         return $grid;
     }
 
@@ -101,7 +101,7 @@ class UserController extends Controller
         $grid->add('license','เลขใบประกอบวิชาชีพ');
         $grid->edit('/user/editdoc', 'กระทำ','show|modify');
         $grid->orderBy('id','desc');
-        $grid->paginate(10);
+
         return $grid;
     }
     public function adddoctor (){

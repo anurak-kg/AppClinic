@@ -38,18 +38,13 @@ class Product_groupController extends Controller
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
 
-        $grid->paginate(10);
+
         return $grid;
     }
     public function grid(){
 
         $grid = $this->getDataGrid();
         $form = $this->create();
-        $grid->row(function ($row) {
-            if ($row->cell('product_group_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
 
         return view('product_group/index', compact('form','grid'));
     }

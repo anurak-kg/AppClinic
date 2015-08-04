@@ -133,6 +133,7 @@
         };
 
         var areaChartOptions = {
+            scaleBeginAtZero: true,
             //Boolean - If we should show the scale at all
             showScale: true,
             //Boolean - Whether grid lines are shown across the chart

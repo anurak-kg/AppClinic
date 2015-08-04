@@ -34,18 +34,13 @@ class VendorController extends Controller
         $grid->add('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
 
         $grid->edit('/vendor/edit', 'กระทำ','modify|delete');
-        $grid->paginate(10);
+
         return $grid;
     }
 
     public function grid(){
 
         $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('ven_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
 
         return view('vendor/index', compact('grid'));
     }
