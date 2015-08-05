@@ -10,8 +10,8 @@
                 </div>
 
                 <div class="pull-left info">
-                    <p>สาขา</p>
-                    <a href="#"> {{\App\Branch::getCurrentName()}} </a>
+                    <br>
+                    <p>สาขา : {{\App\Branch::getCurrentName()}}</p>
                 </div>
             </div>
 
