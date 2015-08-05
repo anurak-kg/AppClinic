@@ -87,7 +87,7 @@
 
                                         <ul class="chart-legend clearfix">
                                             @foreach($data as $item)
-                                                <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->coursename }}</li>
+                                                <li><i class="fa fa-circle-o" style="color:{{$item['color']}}"></i> {{ $item['label'] }}</li>
                                                 <br>
                                             @endforeach
                                         </ul>
@@ -97,9 +97,8 @@
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($data as $item)
-                                        <li><a href="#">{{ $item->coursename }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' คอร์ส' ?></span></a></li>
-                                        {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
-                                        {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
+                                        <li><a href="#" >{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' คอร์ส' ?></span></a></li>
+
                                     @endforeach
 
                                 </ul>
@@ -192,15 +191,8 @@
                                     <div class="col-md-6">
                                         <ul class="chart-legend clearfix">
                                             @foreach($datapro as $item)
-                                                <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->productname }}</li>
+                                                <li><i class="fa fa-circle-o"  style="color:{{$item['color']}}"></i> {{ $item['label'] }}</li>
                                                 <br>
-
-                                                {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
-                                                {{--<li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>--}}
-                                                {{--<li><i class="fa fa-circle-o text-aqua"></i> Safari</li>--}}
-                                                {{--<li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>--}}
-                                                {{--<li><i class="fa fa-circle-o text-gray"></i> Navigator</li>--}}
-
                                             @endforeach
                                         </ul>
                                     </div><!-- /.col -->
@@ -209,7 +201,7 @@
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($datapro as $item)
-                                        <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' ' ?></span></a></li>
+                                        <li><a href="#">{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' ' ?></span></a></li>
                                         {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
                                         {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
                                     @endforeach
