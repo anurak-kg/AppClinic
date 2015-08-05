@@ -11,7 +11,7 @@
 
                 <div class="pull-left info">
                     <p>สาขา</p>
-                    <a href="#"> FIIN Tech</a>
+                    <a href="#"> {{\App\Branch::getCurrentName()}} </a>
                 </div>
             </div>
 
