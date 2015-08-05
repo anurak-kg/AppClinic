@@ -17,8 +17,9 @@ class CreatePaymentSystem extends Migration
             $table->integer('quo_de_id');
             $table->integer('sales_id');
             $table->integer('cus_id');
-            $table->enum('payment_type', array('PAID_IN_FULL','PAYABLE'));//PAID_IN_FULL เต็มจำนวน PAYABLE ผ่านจ่าย
-            $table->enum('payment_status', array('REMAIN','FULLY_PAID'));//REMAIN ค้างจ่าย fully Paid จ่ายครบ
+            $table->enum('payment_type', array('PAID_IN_FULL', 'PAYABLE','PAY_BY_COURSE'));
+            //PAID_IN_FULL เต็มจำนวน  //  PAYABLE ผ่านจ่าย // PAY_BY_COURSE  แบ่งจ่ายตามจำนวนครั้ง
+            $table->enum('payment_status', array('REMAIN', 'FULLY_PAID'));//REMAIN ค้างจ่าย fully Paid จ่ายครบ
             $table->timestamps();
         });
         Schema::create('payment_detail', function (Blueprint $table) {
@@ -26,10 +27,10 @@ class CreatePaymentSystem extends Migration
             $table->integer('bank_id');
             $table->integer('emp_id');
             $table->integer('branch_id');
-            $table->enum('payment_type', array('CASH','DEBIT','CREDIT'));
+            $table->enum('payment_type', array('CASH', 'DEBIT', 'CREDIT'));
             $table->string('card_id');//เลขที่บัตรเครดิต
             $table->string('edc_id');//เลขที่ edc
-            $table->decimal('amount',12,2); //จำนวนเงินที่จ่าย
+            $table->decimal('amount', 12, 2); //จำนวนเงินที่จ่าย
             $table->timestamps();
 
             $table->foreign('payment_id')
@@ -48,5 +49,6 @@ class CreatePaymentSystem extends Migration
         Schema::drop('payment_detail');
         Schema::drop('payment');
         Schema::drop('payment_bank');
+
     }
 }
