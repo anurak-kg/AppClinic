@@ -148,7 +148,7 @@
                                <div class="box-footer no-padding">
                                    <ul class="nav nav-pills nav-stacked">
                                        @foreach($datapro as $item)
-                                           <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total),' ' ?></span></a></li>
+                                           <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' ' ?></span></a></li>
                                            {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
                                            {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
                                        @endforeach
@@ -174,8 +174,8 @@
                                            @foreach($exp as $item)
                                                <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
                                                <span class="product-description">
-                          รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->expiry_date  }}
-                        </span>
+                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->expiry_date  }}
+                                                </span>
                                            @endforeach
 
                                        </li><!-- /.item -->

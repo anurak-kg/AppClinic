@@ -49,12 +49,11 @@ class HomeController extends Controller {
 
 			//return response()->json($data);
 
-			$exp = DB::table('inventory_transaction')
-				->select('inventory_transaction.product_id', 'product.product_name', 'inventory_transaction.expiry_date',
-					DB::raw('DATEDIFF(inventory_transaction.expiry_date,NOW()) as day'))
-				->join('product', 'product.product_id', '=', 'inventory_transaction.product_id')
+			$exp = DB::table('product')
+				->select('product.product_id', 'product.product_name', 'product.product_date_end',
+					DB::raw('DATEDIFF(product.product_date_end,NOW()) as day'))
 				->having('day', '<', 30)
-				->orderBy('inventory_transaction.expiry_date', 'desc')
+				->orderBy('product.product_date_end', 'desc')
 				->get();
 			//return response()->json($exp);
 
