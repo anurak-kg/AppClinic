@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $table = 'payment';
-    protected $primary_key = 'payment_id';
+    protected $primaryKey = 'payment_id';
 
     public function payment_detail()
     {
@@ -28,7 +28,7 @@ class Payment extends Model
     public function quotations_detail()
     {
 
-        return $this->belongsToMany('App\Quotations_detail','payment_detail','payment_id','quo_de_tail')
-            ->withPivot('quo_de_price');
+        return $this->belongsToMany('App\Quotations_detail','payment_detail','payment_id','quo_de_id')
+            ->withPivot('emp_id','branch_id','payment_type','amount','edc_id','card_id','created_at');
     }
 }

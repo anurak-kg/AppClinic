@@ -102,7 +102,8 @@ class QuotationsController extends Controller
         $quo->quo_status = 1;
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
-        return redirect('quotations')->with('message','ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('payment')
+            ->with('quo_id',$quo->quo_id);
 
     }
     public function getCurrentSum()
@@ -175,7 +176,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function getRemovecustomer()
+    public function removeCustomer()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->cus_id = 0;
@@ -183,7 +184,7 @@ class QuotationsController extends Controller
         return redirect('quotations');
     }
 
-    public function getDatasale()
+    public function getDataSale()
     {
         //echo $this->getQuoId();
         $quo = Quotations::find($this->getQuoId());
@@ -200,7 +201,7 @@ class QuotationsController extends Controller
         return response()->json($data);
     }
 
-    public function getSetsale()
+    public function setSale()
     {
         $sale_id = \Input::get('id');
         $quo = Quotations::findOrFail($this->getQuoId());
@@ -211,7 +212,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function getRemovesale()
+    public function removeSale()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->sale_id = 0;
