@@ -38,7 +38,6 @@ class CreateTableQuotations extends Migration
             $table->integer('treat_status');
             $table->integer('quo_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('quo_de_disamount',10,2); //ส่วนลดจำนวนเงิน
-            $table->enum('payment_status', array('REMAIN','FULLY_PAID'));//REMAIN ค้างจ่าย fully Paid จ่ายครบ
             $table->decimal('payment_remain',14,2);
             //สถานะ
             // 0 = ไม่เริ่ม,
