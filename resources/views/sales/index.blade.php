@@ -1,7 +1,6 @@
 @extends('layout.master')
 @section('title','ขายสินค้า')
 @section('headText','ขายสินค้า')
-@section('headDes','ออกใบขายสินค้า')
 @section('content')
     <div ng-controller="SalesController" id="sales" ng-init="setVat({{config('shop.vat')}})">
         <div class="row">
@@ -17,7 +16,7 @@
             <div class="col-md-4">
                 <div class="panel  panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">รายละเอียด</h2>
+                        <h2 class="panel-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
 
                     <div class="panel-body">
@@ -33,7 +32,7 @@
             <div class="col-md-4">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+                        <h2 class="panel-title"><i class="fa fa-users"></i> ข้อมูลลูกค้า</h2>
                     </div>
 
                     <div class="panel-body">
@@ -68,7 +67,7 @@
                 <div class="panel panel-info">
 
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">สินค้า</h2>
+                        <h2 class="panel-title"><i class="fa fa-medkit"></i> สินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -139,6 +138,7 @@
 
 
                                         </tr>
+                                        <span class="pull-right">
                                         <tr>
                                             <td colspan="7" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
@@ -153,12 +153,14 @@
                                             <td> @{{ getTotal()+getVat() | number:2}} บาท
                                             </td>
                                         </tr>
-
+                                      </span>
                                     </table>
-                                    <div class="col-md-10">
+
+                                        <span class="pull-right col-lg-1">
                                         <a href="{{url('sales/save')}}" class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-credit-card "> ชำระเงิน </i></a>
-                                    </div>
+                                            </span>
+
 
                                 </div>
                             </div>
