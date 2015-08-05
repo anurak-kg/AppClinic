@@ -149,20 +149,19 @@
                             </table>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group">
+
                                 <label>รายละเอียดเพิ่มเติม</label>
                                 <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..." name="comment"></textarea>
                                 <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
                                 <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
 
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-success" style="width: 100%">บันทึก</button>
                 </div>
-                {!! Form::close() !!}
+               </form>
             </div>
 
         </div>
@@ -170,11 +169,7 @@
     <script>
         $(document).ready(function () {
             $(".dr").select2();
-            $('#treat_date').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose:true,
-                language: 'th'
-            });
+            $('#treat_date').attr('readonly', 'readonly');;
         });
 
     </script>
