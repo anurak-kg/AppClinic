@@ -51,7 +51,7 @@
         </div>
 
         <div class="col-xs-">
-            <button class="btn  btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            <button class="btn  btn-primary btn-block btn-signin" type="submit">เข้าสู่ระบบ</button>
         </div>
         <!-- /.col -->
 

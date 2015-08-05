@@ -20,17 +20,17 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                        <h2 class="box-title"> <i class="fa fa-search"></i> ข้อมูลลูกค้า</h2>
                     </div>
 
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-5">
+
                                 <input class="form-control typeahead input-lg customer-input "
                                        type="search"
                                        placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า"
                                         >
-
                             </div>
 
                         </div>

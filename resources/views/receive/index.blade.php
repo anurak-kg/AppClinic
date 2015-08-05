@@ -1,7 +1,6 @@
 @extends('layout.master')
-@section('title','Receive : รับสินค้า')
-@section('headText','Receive')
-@section('headDes','รับสินค้า')
+@section('title','รับสินค้า')
+@section('headText','รับสินค้า')
 
 @section('content')
 
@@ -20,7 +19,8 @@
             <div class="col-md-5">
                 <div class="panel  panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">รายละเอียด</h2>
+
+                        <h2 class="panel-title"><i class="fa fa-info-circle"></i> รายละเอียด</h2>
                     </div>
                     <div class="panel-body">
                         เลขที่การสั่งซื้อ : <strong>{{$data->receive_id}}</strong> <br>
@@ -33,7 +33,7 @@
             <div class="col-md-3">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">อ้างอิง</h2>
+                        <h2 class="panel-title"><i class="fa fa-level-up"></i> อ้างอิง เลขที่ใบสั่งซื้อสินค้า</h2>
                     </div>
 
                     <div class="panel-body">
@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">Supplier</h2>
+                        <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
                     </div>
 
                     <div class="panel-body">
@@ -88,7 +88,7 @@
             <div class="col-md-12">
                 <div class="panel panel-info">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">รับสินค้า</h2>
+                        <h2 class="panel-title"><i class="fa fa-mail-reply"></i> รับสินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">

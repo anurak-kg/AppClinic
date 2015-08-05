@@ -11,13 +11,13 @@
     <!-- Main content -->
     <div class="row">
         <div class="col-md-3">
-            <div class="box box-solid box-success">
+            <div class="panel panel-primary">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
                 </div>
 
-                <div class="box-body">
+                <div class="panel-body">
                     {!! $form !!}
                     {!! Rapyd::scripts() !!}
                 </div>

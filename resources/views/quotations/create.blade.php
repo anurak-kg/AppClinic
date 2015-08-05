@@ -83,7 +83,7 @@
             <div class="col-md-4">
                 <div class="box box-default">
                     <div class="box-header with-border">
-                        <i class="fa fa-user"></i>
+                        <i class="fa fa-users"></i>
 
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
@@ -114,9 +114,9 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box box-warning">
+                <div class="box box-success">
                     <div class="box-header with-border">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-user"></i>
 
                         <h2 class="box-title">พนักงานขาย</h2>
                     </div>
@@ -231,6 +231,7 @@
 
 
                                         </tr>
+
                                         <tr>
                                             <td colspan="5" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
@@ -246,10 +247,10 @@
 
                                     </table>
 
-                                    <div class="col-md-10">
+                                    <span class="pull-right col-lg-1">
                                         <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-credit-card "> ยืนยันการชำระเงิน </i></a>
-                                    </div>
+                                    </span>
 
                                 </div>
                             </div>

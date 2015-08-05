@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title','การสั่งซื้อสินค้า')
 @section('headText','สั่งซื้อสินค้า')
-@section('headDes','ออกใบสั่งซื้อสินค้า')
+
 @section('content')
     <div ng-controller="orderController" id="order" ng-init="setVat({{config('shop.vat')}})">
         <div class="row">
@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <div class="panel  panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">รายละเอียด</h2>
+                        <h2 class="panel-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
                     <div class="panel-body">
                         เลขที่การสั่งซื้อ : <strong>{{$data->order_id}}</strong> <br>
@@ -30,7 +30,7 @@
             <div class="col-md-4">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">Supplier</h2>
+                        <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
                     </div>
                     <div class="panel-body">
                         <div class="vendorSearchBox" ng-hide="boxSearch"
@@ -62,7 +62,7 @@
                 <div class="panel panel-info">
 
                     <div class="panel-heading with-border">
-                        <h2 class="panel-title">สินค้า</h2>
+                        <h2 class="panel-title"><i class="fa fa-medkit"></i> สินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -135,6 +135,7 @@
 
 
                                         </tr>
+
                                         <tr>
                                             <td colspan="5" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
@@ -151,10 +152,10 @@
                                         </tr>
 
                                     </table>
-                                    <div class="col-md-10">
+                                    <span class="pull-right col-lg-1">
                                         <a ng-click="save()" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ออกใบสั่งสินค้า </i></a>
-                                    </div>
+                                                    class="fa fa-mail-forward "> ออกใบสั่งสินค้า </i></a>
+                                    </span>
 
                                 </div>
                             </div>

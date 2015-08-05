@@ -34,7 +34,7 @@
 
 </head>
 
-<body class="skin-blue fixed sidebar-mini">
+<body class="skin-blue fixed sidebar-collapse sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->

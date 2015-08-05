@@ -32,7 +32,7 @@
                                     <tr>
                                         <td>{{ $item->product_id }}</td>
                                         <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->expiry_date }}</td>
+                                        <td>{{ $item->product_date_end }}</td>
                                         <td>{{ $item->day }} วัน</td>
                                     </tr>
                                 @endforeach

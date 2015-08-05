@@ -20,11 +20,10 @@ class ProductController extends Controller
 {
     public function expday(){
 
-        $exp = DB::table('inventory_transaction')
-            ->select('inventory_transaction.product_id','product.product_name','inventory_transaction.expiry_date',
-                DB::raw('DATEDIFF(inventory_transaction.expiry_date,NOW()) as day'))
-            ->join('product','product.product_id','=','inventory_transaction.product_id')
-            ->orderBy('inventory_transaction.expiry_date','desc')
+        $exp = DB::table('product')
+            ->select('product.product_id','product.product_name','product.product_date_end',
+                DB::raw('DATEDIFF(product.product_date_end,NOW()) as day'))
+            ->orderBy('product.product_date_end','desc')
             ->get();
         //return response()->json($exp);
 
@@ -68,7 +67,7 @@ class ProductController extends Controller
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
         $form->text('product_qty', 'จำนวนสินค้าที่มี')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุจำนวนสินค้าที่มี....'));
         $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
-        $form->date('product_date_start', 'วันที่ผลิต')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบวันที่ผลิต....'));
+        //$form->date('product_date_start', 'วันที่ผลิต')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบวันที่ผลิต....'));
         $form->date('product_date_end', 'วันที่หมดอายุ')->format('d/m/Y','th')->rule('required')->attributes(array('placeholder'=>'โปรดระบุวันที่หมดอายุ....'));
         $form->text('product_price', 'ราคา/หน่วย')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุราคา/หน่วย....'));
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุหน่วยนับ....'));

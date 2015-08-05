@@ -4,16 +4,25 @@
 
     <div class="row">
         <div class="col-md-12">
+            <p class="text-center">
+                {!! Form::open(array('url' => 'report/salesperday', 'class' => 'form')) !!}
+                <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
+                       placeholder="เลือกระยะเวลา..">
+                </input> <br> <br>
+                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+                <br>
+                {!! Form::close() !!}
+            </p>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">ยอดขายรายวัน</h3>
+                    <h3 class="box-title">สรุปยอดขายรายวัน</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <p class="text-center">
                                 <strong> @if( isset( $date['start']))
                                         <?php echo $date['start'];?> - <?php echo $date['end'];?>
@@ -23,19 +32,11 @@
                             </p>
                             <div class="chart">
                                 <!-- Sales Chart Canvas -->
-                                <canvas id="areaChart" height="90"></canvas>
+                                <canvas id="areaChart" height="50"></canvas>
                             </div><!-- /.chart-responsive -->
                         </div><!-- /.col -->
                         <div class="col-md-4">
-                            <p class="text-center">
-                                {!! Form::open(array('url' => 'report/salesperday', 'class' => 'form')) !!}
-                                <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-                                       placeholder="เลือกระยะเวลา..">
-                                </input> <br> <br>
-                                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
-                                <br>
-                                {!! Form::close() !!}
-                            </p>
+
                             <div class="progress-group">
 
                              <span class="progress-text">คอร์ส</span>
