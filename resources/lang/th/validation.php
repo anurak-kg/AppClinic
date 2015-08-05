@@ -39,7 +39,7 @@ return [
     'exists'               => 'The selected :attribute is invalid.',
     'image'                => 'The :attribute must be an image.',
     'in'                   => 'The selected :attribute is invalid.',
-    'integer'              => 'The :attribute must be an integer.',
+    'integer'              => ':attribute เป็นตัวเลขเท่านั้น.',
     'ip'                   => 'The :attribute must be a valid IP address.',
     'max'                  => [
         'numeric' => 'The :attribute may not be greater than :max.',
