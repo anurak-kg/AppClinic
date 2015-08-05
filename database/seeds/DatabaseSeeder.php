@@ -159,7 +159,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '200',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2012-02-03',
+            'product_date_end' => '2018-02-03',
             'product_price' => '200',
             'product_unit' => 'CC']);
         \App\Product::create(['product_id' => 'b012',
@@ -195,7 +195,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '200',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2025-02-03',
+            'product_date_end' => '2018-02-03',
             'product_price' => '2400',
             'product_unit' => 'กล่อง']);
         \App\Product::create(['product_id' => 'b016',
@@ -204,7 +204,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '200',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2025-02-03',
+            'product_date_end' => '2020-02-03',
             'product_price' => '595',
             'product_unit' => 'กล่อง']);
         \App\Product::create(['product_id' => 'b017',
@@ -213,7 +213,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '200',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2025-02-03',
+            'product_date_end' => '2020-02-03',
             'product_price' => '895',
             'product_unit' => 'หลอด']);
         \App\Product::create(['product_id' => 'b021',
@@ -222,7 +222,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '80',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2012-02-03',
+            'product_date_end' => '2017-02-03',
             'product_price' => '7000',
             'product_unit' => 'ขวด']);
 
@@ -232,7 +232,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '99',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2012-02-03',
+            'product_date_end' => '2017-02-03',
             'product_price' => '7000',
             'product_unit' => 'เข็ม']);
         \App\Product::create(['product_id' => 'ad03',
@@ -241,7 +241,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '99',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2012-02-03',
+            'product_date_end' => '2017-02-03',
             'product_price' => '590',
             'product_unit' => 'ขวด']);
         \App\Product::create(['product_id' => 'ad04',
@@ -250,7 +250,7 @@ class ProductTableSeeder extends Seeder
             'product_qty' => '99',
             'product_qty_order' => '50',
             'product_date_start' => '2002-02-03',
-            'product_date_end' => '2012-02-03',
+            'product_date_end' => '2017-02-03',
             'product_price' => '897',
             'product_unit' => 'ขวด']);
     }
