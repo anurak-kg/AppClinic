@@ -1,6 +1,21 @@
+
+
 <aside class="main-sidebar" >
     <section class="sidebar">
-        <div class="sidebar" id="side">
+
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="dist/img/11797990_951960494863627_1141623071_n.jpg" class="img-circle" alt="User Image" />
+                </div>
+
+                <div class="pull-left info">
+                    <br>
+                    <p>สาขา : {{\App\Branch::getCurrentName()}}</p>
+                </div>
+            </div>
+
+
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
@@ -87,7 +102,7 @@
             <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
 
         </ul><!-- /.sidebar-menu -->
-        </div>
+
     </section>
 
     <!-- /.sidebar -->

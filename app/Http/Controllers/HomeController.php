@@ -17,7 +17,6 @@ class HomeController extends Controller {
 		$dataCourse = $coursehot->take(3)->get();
 		$array = [];
 		$data = [];
-		$colorfix =['#f56954','#00a65a','#00c0ef'];
 		foreach ($dataCourse as $item) {
 
 				$array['value'] = (float)$item->Total;
@@ -67,8 +66,8 @@ class HomeController extends Controller {
 			// return response()->json($dataorder);
 
 			return view("dashboard", [
-				'data' => $dataCourse,
-				'datapro' => $dataProduct,
+				'data' => $data,
+				'datapro' => $datapro,
 				'exp' => $exp,
 				'dataorder' => $dataorder,
 				'dataCourse' => json_encode($data),
