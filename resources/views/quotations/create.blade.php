@@ -103,7 +103,7 @@
                                 </li>
                                 <li>ชื่อเบอร์โทร | <span
                                             class="customer"><strong>@{{ customer.tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('quotations/remove_customer')}}">
+                                    <span><strong><a href="{{url('quotations/removecustomer')}}">
                                                 เปลียนลูกค้า</a></strong></span>
 
                                 </li>
@@ -138,7 +138,7 @@
                                 <li>ค่าแนะนำ <?php echo getConfig('commission_rate');?>% | <span
                                             class="sale"><strong>{{getTotal()*<?php echo getConfig('commission_rate');?>/100}}</strong> บาท</span>.
                                 </li>
-                                <li><strong><a href="{{url('quotations/remove_sale')}}">
+                                <li><strong><a href="{{url('quotations/removesale')}}">
                                             เปลียนพนักงานขาย</a></strong></li>
 
                             </ul>

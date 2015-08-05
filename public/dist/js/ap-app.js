@@ -77,7 +77,7 @@
 
             });
         $scope.customerSelect = function (customer) {
-            $scope.customer.fullname = customer.cus_name;
+            $scope.customer.cus_name = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
             $scope.dataLoading = true;
@@ -96,7 +96,7 @@
             });
         }
 
-        $http.get('/quotations/data-sale').
+        $http.get('/quotations/datasale').
             success(function (data, status, headers, config) {
                 if (data.status == 'success') {
                     $scope.sale.id = data.id;
@@ -113,7 +113,7 @@
             $scope.sale.id = sale.id;
             $scope.sale.name = sale.name;
             $scope.dataLoading = true;
-            $http.get('/quotations/set_sale?id=' + sale.id).
+            $http.get('/quotations/setsale?id=' + sale.id).
                 success(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                 }).
