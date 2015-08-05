@@ -167,19 +167,7 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
 
-                    <div class="box box-danger">
-                        <div class="box-header with-border" align="middle">
 
-                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                            </div><!-- /.box-tools -->
-                        </div>
-                        <div class="box-body no-padding">
-                            <!-- THE CALENDAR -->
-                            <div id="calendar_customer" ></div>
-                        </div><!-- /.box-body -->
-                    </div><!-- /. box -->
 
                 </section><!-- /.Left col -->
 
@@ -281,9 +269,21 @@
                         </div><!-- /.box -->
                     </div>
 
+                    <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border" align="middle">
 
-
-
+                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div>
+                        <div class="box-body no-padding">
+                            <!-- THE CALENDAR -->
+                            <div id="calendar_customer" ></div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /. box -->
+                    </div>
 
                 </section><!-- right col -->
             </div><!-- /.row (main row) -->

@@ -52,7 +52,7 @@ class ProductController extends Controller
         $grid = DataGrid::source(new Product());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('product_id', 'รหัสสินค้า',true);
+        $grid->add('product_id', 'รหัสสินค้า');
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('product_name', 'ชื่อสินค้า');
         $grid->add('product_qty_order', 'Order point');
