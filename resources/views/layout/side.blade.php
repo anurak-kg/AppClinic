@@ -1,7 +1,13 @@
 <aside class="main-sidebar" >
     <section class="sidebar">
         <div class="sidebar" id="side">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="text-center image">
+                    <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image" />
+                </div>
 
+            </div>
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
