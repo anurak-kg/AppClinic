@@ -14,7 +14,6 @@ class CreatePaymentSystem extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->increments('payment_id');
-            $table->integer('quo_id');
             $table->integer('quo_de_id');
             $table->integer('sales_id');
             $table->integer('cus_id');
