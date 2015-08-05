@@ -14,8 +14,7 @@
                     <p>Tokyo</p>
                 </div>
             </div>
-
-
+        
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
