@@ -3,282 +3,272 @@
 
 @section('content')
 
+        
+
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <!-- small box -->
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h4>สมัครสมาชิก</h4>
+                            <p>สำหรับลูกค้าใหม่</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{{url('customer/create')}}" class="small-box-footer">สมัครสมาชิก   <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h4>ซื้อคอร์ส</h4>
+                            <p>สำหรับสมาชิก</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios-cart"></i>
+                        </div>
+                        <a href="{{url('quotations')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h4>ซื้อสินค้า</h4>
+                            <p>สำหรับสมาชิก/ลูกค้าทั่วไป</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-cart-plus"></i>
+                        </div>
+                        <a href="{{url('sales')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h4>รักษา</h4>
+                            <p>สำหรับสมาชิก</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-heart"></i>
+                        </div>
+                        <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+            </div><!-- /.row -->
+
+            <!-- Main row -->
+            <div class="row">
+                <!-- Left col -->
+                <section class="col-lg-6 connectedSortable">
+
+                        <div class="box  box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">คอร์สขายดี</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="chart-responsive">
+                                            <canvas id="pieChart" height="150"></canvas>
+                                        </div><!-- ./chart-responsive -->
+                                    </div><!-- /.col -->
+                                    <div class="col-md-6">
+
+                                        <ul class="chart-legend clearfix">
+                                            @foreach($data as $item)
+                                                <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->coursename }}</li>
+                                                <br>
+                                            @endforeach
+                                        </ul>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                            </div><!-- /.box-body -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-pills nav-stacked">
+                                    @foreach($data as $item)
+                                        <li><a href="#">{{ $item->coursename }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' คอร์ส' ?></span></a></li>
+                                        {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
+                                        {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
+                                    @endforeach
+
+                                </ul>
+                            </div><!-- /.footer -->
+                        </div><!-- /.box -->
 
 
-    <div class="row">
 
-               <div class="col-lg-3 col-xs-6">
-                            <!-- small box -->
-                           <div class="small-box bg-blue">
-                              <div class="inner">
-                                <h4>สมัครสมาชิก</h4>
-                                 <p>สำหรับลูกค้าใหม่</p>
-                              </div>
-                              <div class="icon">
-                                <i class="ion ion-person-add"></i>
-                              </div>
-                              <a href="{{url('customer/create')}}" class="small-box-footer">สมัครสมาชิก   <i class="fa fa-arrow-circle-right"></i></a>
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>
-                          </div><!-- ./col -->
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>เลขทีใบสั่งซื้อ</th>
+                                        <th>Supplier</th>
+                                        <th>พนักงาน</th>
+                                        <th>วันที่</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach( $dataorder as $item)
+                                        <tr>
+                                            <td>{{ $item->order_id }}</td>
+                                            <td>{{ $item->ven_name  }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->order_date }}</td>
+                                            <td>
+                                                @if($item->order_status == 'PENDING')
+                                                    <span class="label label-warning">{{ $item->order_status  }}</span>
+                                                @else
+                                                    <span class="label label-danger">{{ $item->order_status  }}</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div><!-- /.table-responsive -->
+                        </div><!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
+                            <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
+                        </div><!-- /.box-footer -->
+                    </div><!-- /.box -->
 
-                              <div class="col-lg-3 col-xs-6">
-                                                      <!-- small box -->
-                                 <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h4>ซื้อคอร์ส</h4>
-                                        <p>สำหรับสมาชิก</p>
-                                    </div>
-                                 <div class="icon">
-                                   <i class="ion ion-ios-cart"></i>
-                                 </div>
-                              <a href="{{url('quotations')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
-                              </div>
-                          </div><!-- ./col -->
 
-                          <div class="col-lg-3 col-xs-6">
-                              <!-- small box -->
-                           <div class="small-box bg-yellow">
-                            <div class="inner">
-                              <h4>ซื้อสินค้า</h4>
-                              <p>สำหรับสมาชิก/ลูกค้าทั่วไป</p>
-                             </div>
-                            <div class="icon">
-                                        <i class="fa fa-cart-plus"></i>
-                             </div>
-                            <a href="{{url('sales')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
+                        <div class="box  box-warning">
+                            <div class="box-header with-border" align="middle">
+
+                                <h3 class="box-title">ตารางการทำงานหมอ</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                                </div><!-- /.box-tools -->
                             </div>
-                          </div><!-- ./col -->
+                            <div class="box-body no-padding">
+                                <!-- THE CALENDAR -->
+                                <div id="calendar" height="150"></div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /. box -->
 
-                          <div class="col-lg-3 col-xs-6">
-                              <!-- small box -->
-                           <div class="small-box bg-red">
-                            <div class="inner">
-                              <h4>รักษา</h4>
-                              <p>สำหรับสมาชิก</p>
-                             </div>
-                            <div class="icon">
-                                <i class="ion ion-heart"></i>
-                             </div>
-                            <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                </section><!-- /.Left col -->
+
+
+                <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-6 connectedSortable">
+
+
+                        <div class="box  box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">สินค้าขายดี</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="chart-responsive">
+                                            <canvas id="pieChart2" height="150"></canvas>
+                                        </div><!-- ./chart-responsive -->
+                                    </div><!-- /.col -->
+                                    <div class="col-md-6">
+                                        <ul class="chart-legend clearfix">
+                                            @foreach($datapro as $item)
+                                                <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->productname }}</li>
+                                                <br>
+
+                                                {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
+                                                {{--<li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>--}}
+                                                {{--<li><i class="fa fa-circle-o text-aqua"></i> Safari</li>--}}
+                                                {{--<li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>--}}
+                                                {{--<li><i class="fa fa-circle-o text-gray"></i> Navigator</li>--}}
+
+                                            @endforeach
+                                        </ul>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                            </div><!-- /.box-body -->
+                            <div class="box-footer no-padding">
+                                <ul class="nav nav-pills nav-stacked">
+                                    @foreach($datapro as $item)
+                                        <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' ' ?></span></a></li>
+                                        {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
+                                        {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
+                                    @endforeach
+
+                                </ul>
+                            </div><!-- /.footer -->
+                        </div><!-- /.box -->
+
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>
-                          </div><!-- ./col -->
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <ul class="products-list product-list-in-box">
+                                <li class="item">
 
-     </div>
-
-    <span class="pull-right"></span>
-
-
-             <!-- Main content -->
-               <div class="row">
-                   <section class="connectedSortable">
-
-                       <div class="col-md-6">
-                           <div class="box  box-default">
-                               <div class="box-header with-border">
-                                   <h3 class="box-title">คอร์สขายดี</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                   </div>
-                               </div><!-- /.box-header -->
-                               <div class="box-body">
-                                   <div class="row">
-                                       <div class="col-md-6">
-                                           <div class="chart-responsive">
-                                               <canvas id="pieChart" height="150"></canvas>
-                                           </div><!-- ./chart-responsive -->
-                                       </div><!-- /.col -->
-                                       <div class="col-md-6">
-
-                                           <ul class="chart-legend clearfix">
-                                               @foreach($data as $item)
-                                                   <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->coursename }}</li>
-                                                   <br>
-                                               @endforeach
-                                           </ul>
-                                       </div><!-- /.col -->
-                                   </div><!-- /.row -->
-                               </div><!-- /.box-body -->
-                               <div class="box-footer no-padding">
-                                   <ul class="nav nav-pills nav-stacked">
-                                       @foreach($data as $item)
-                                       <li><a href="#">{{ $item->coursename }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' คอร์ส' ?></span></a></li>
-                                       {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
-                                       {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
-                                       @endforeach
-
-                                   </ul>
-                               </div><!-- /.footer -->
-                           </div><!-- /.box -->
-                       </div>
-
-
-
-                       <div class="col-md-6">
-                           <div class="box  box-default">
-                               <div class="box-header with-border">
-                                   <h3 class="box-title">สินค้าขายดี</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                   </div>
-                               </div><!-- /.box-header -->
-                               <div class="box-body">
-                                   <div class="row">
-                                       <div class="col-md-6">
-                                           <div class="chart-responsive">
-                                               <canvas id="pieChart2" height="150"></canvas>
-                                           </div><!-- ./chart-responsive -->
-                                       </div><!-- /.col -->
-                                       <div class="col-md-6">
-                                           <ul class="chart-legend clearfix">
-                                               @foreach($datapro as $item)
-                                               <li><i class="fa fa-circle-o text-aqua"></i> {{ $item->productname }}</li>
-                                                   <br>
-
-                                                   {{--<li><i class="fa fa-circle-o text-green"></i> IE</li>--}}
-                                                   {{--<li><i class="fa fa-circle-o text-yellow"></i> FireFox</li>--}}
-                                                   {{--<li><i class="fa fa-circle-o text-aqua"></i> Safari</li>--}}
-                                                   {{--<li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>--}}
-                                                   {{--<li><i class="fa fa-circle-o text-gray"></i> Navigator</li>--}}
-
-                                               @endforeach
-                                           </ul>
-                                       </div><!-- /.col -->
-                                   </div><!-- /.row -->
-                               </div><!-- /.box-body -->
-                               <div class="box-footer no-padding">
-                                   <ul class="nav nav-pills nav-stacked">
-                                       @foreach($datapro as $item)
-                                           <li><a href="#">{{ $item->productname }}<span class="pull-right text-green"><?php echo 'จำนวน ', number_format( $item->Total  ),' ' ?></span></a></li>
-                                           {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
-                                           {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
-                                       @endforeach
-
-                                   </ul>
-                               </div><!-- /.footer -->
-                           </div><!-- /.box -->
-                       </div>
-
-                       <div class="col-md-4">
-                           <!-- PRODUCT LIST -->
-                           <div class="box box-primary">
-                               <div class="box-header with-border">
-                                   <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                   </div>
-                               </div><!-- /.box-header -->
-                               <div class="box-body">
-                                   <ul class="products-list product-list-in-box">
-                                       <li class="item">
-
-                                           @foreach($exp as $item)
-                                               <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
-                                               <span class="product-description">
-                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->expiry_date  }}
+                                    @foreach($exp as $item)
+                                        <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
+                                        <span class="product-description">
+                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->product_date_end  }}
                                                 </span>
-                                           @endforeach
+                                    @endforeach
 
-                                       </li><!-- /.item -->
+                                </li><!-- /.item -->
 
-                                   </ul>
-                               </div><!-- /.box-body -->
-                               <div class="box-footer text-center">
-                                   <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
-                               </div><!-- /.box-footer -->
-                           </div><!-- /.box -->
-                       </div>
-
-                       <div class="col-md-8">
-                           <!-- TABLE: LATEST ORDERS -->
-                           <div class="box box-info">
-                               <div class="box-header with-border">
-                                   <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                   </div>
-                               </div><!-- /.box-header -->
-                               <div class="box-body">
-                                   <div class="table-responsive">
-                                       <table class="table no-margin">
-                                           <thead>
-                                           <tr>
-                                               <th>เลขทีใบสั่งซื้อ</th>
-                                               <th>Supplier</th>
-                                               <th>พนักงาน</th>
-                                               <th>วันที่</th>
-                                               <th>สถานะ</th>
-                                           </tr>
-                                           </thead>
-                                           <tbody>
-                                           @foreach( $dataorder as $item)
-                                           <tr>
-                                               <td>{{ $item->order_id }}</td>
-                                               <td>{{ $item->ven_name  }}</td>
-                                               <td>{{ $item->name }}</td>
-                                               <td>{{ $item->order_date }}</td>
-                                               <td>
-                                                   @if($item->order_status == 'PENDING')
-                                                   <span class="label label-warning">{{ $item->order_status  }}</span>
-                                                    @else
-                                                       <span class="label label-danger">{{ $item->order_status  }}</span>
-                                                    @endif
-                                               </td>
-                                           </tr>
-                                           @endforeach
-                                           </tbody>
-                                       </table>
-                                   </div><!-- /.table-responsive -->
-                               </div><!-- /.box-body -->
-                               <div class="box-footer clearfix">
-                                   <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
-                                   <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
-                               </div><!-- /.box-footer -->
-                           </div><!-- /.box -->
-                       </div>
+                            </ul>
+                        </div><!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                        </div><!-- /.box-footer -->
+                    </div><!-- /.box -->
 
 
 
+                        <div class="box box-danger">
+                            <div class="box-header with-border" align="middle">
 
-                       <div class="col-md-6 col-sm-8 col-xs-12">
-                           <div class="box  box-warning">
-                               <div class="box-header with-border" align="middle">
-
-                                   <h3 class="box-title">ตารางการทำงานหมอ</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                                   </div><!-- /.box-tools -->
-                               </div>
-                               <div class="box-body no-padding">
-                                   <!-- THE CALENDAR -->
-                                   <div id="calendar" height="150"></div>
-                               </div><!-- /.box-body -->
-                           </div><!-- /. box -->
-                       </div><!-- /.col -->
+                                <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                                </div><!-- /.box-tools -->
+                            </div>
+                            <div class="box-body no-padding">
+                                <!-- THE CALENDAR -->
+                                <div id="calendar_customer" ></div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /. box -->
 
 
-
-
-                       <div class="col-md-6 col-sm-8 col-xs-12">
-                           <div class="box box-danger">
-                               <div class="box-header with-border" align="middle">
-
-                                   <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
-                                   <div class="box-tools pull-right">
-                                       <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                                   </div><!-- /.box-tools -->
-                               </div>
-                               <div class="box-body no-padding">
-                                   <!-- THE CALENDAR -->
-                                   <div id="calendar_customer" ></div>
-                               </div><!-- /.box-body -->
-                           </div><!-- /. box -->
-                       </div><!-- /.col -->
+                </section><!-- right col -->
+            </div><!-- /.row (main row) -->
 
 
 
-
-                   </section>
-               </div><!-- /.row -->
 
 
     <script src="/dist/js/jquery-ui.js"></script>
