@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Product_group;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
@@ -74,8 +75,8 @@ class ProductController extends Controller
     public function create()
     {
         $form = DataEdit::create(new Product());
-        $form->text('product_id', 'รหัสสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสสินค้า....'));
-        $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->attributes(array('placeholder'=>'โปรดระบุรหัสกลุ่มสินค้า....'));
+        $form->text('product_id', 'รหัสสินค้า')->rule('required|unique:product,product_id')->attributes(array('placeholder'=>'โปรดระบุรหัสสินค้า....'));
+        $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->options(Product_group::lists('pg_name','pg_id'));
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
         $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
         $form->text('product_price', 'ราคาขาย')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุราคา/หน่วย....'));
@@ -99,13 +100,8 @@ class ProductController extends Controller
         $edit = DataEdit::source(new Product());
         $edit->link("branch/index","บันทึก", "TR")->back();
 
-        $edit->text('product_id', 'รหัสสินค้า');
-        $edit->text('pg_id', 'รหัสกลุ่มสินค้า');
         $edit->text('product_name', 'ชื่อสินค้า');
-        $edit->text('product_qty', 'จำนวนสินค้าที่มี');
         $edit->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
-        $edit->date('product_date_start', 'วันที่ผลิต');
-        $edit->date('product_date_end', 'วันที่หมดอายุ');
         $edit->text('product_price', 'ราคา/หน่วย');
         $edit->text('product_unit', 'หน่วยนับ');
         $edit->attributes(array("class" => " "));
