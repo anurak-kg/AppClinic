@@ -6,12 +6,12 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="dist/img/11824180_951942541532089_327784635_n.jpg" class="img-circle" alt="User Image" />
+                    <img src="dist/img/11830756_951961524863524_1108073568_n.jpg" class="img-circle" alt="User Image" />
                 </div>
 
                 <div class="pull-left info">
                     <p>สาขา</p>
-                    <p>{{ $data->branch_name }}</p>
+                    <p>Tokyo</p>
                 </div>
             </div>
 
