@@ -1,19 +1,17 @@
 @extends('layout.master')
 @section('title','ข้อมูลสมาชิก')
-@section('headText','Customer')
-@section('headDes','ลูกค้า')
+@section('headText','ข้อมูลสมาชิก')
+
 
 @section('content')
     <div>
         <div class="row">
             <div class="col-md-12">
-                <div class="box  box-info">
-                    <div class="box-header with-border">
-                        <i class="fa fa-users"></i>
-
-                        <h2 class="box-title"> รายการข้อมูลลูกค้า </h2>
+                <div class="panel panel-primary">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title"><i class="fa fa-users"></i> รายการข้อมูลลูกค้า </h2>
                     </div>
-                    <div class="box-body">
+                    <div class="panel-body">
                         <table id="customer" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>

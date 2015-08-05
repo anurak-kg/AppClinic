@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title','สินค้า')
-
+@section('headText','จัดการสินค้า')
 
 @section('content')
 
