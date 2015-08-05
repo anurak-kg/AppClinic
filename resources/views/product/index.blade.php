@@ -28,6 +28,6 @@
                 },
             });
         });
-        </script>
+    </script>
 
 @stop
