@@ -125,7 +125,7 @@ class CustomerController extends Controller
     {
 
         $form = DataEdit::source(new Customer());
-        $form->text('cus_name', 'ชื่อ-นามสกุล')->rule('required|unique:customer,cus_name')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
+        $form->text('cus_name', 'ชื่อ-นามสกุล')->rule('required')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
         $form->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'))->rule('required');
         $form->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'))->rule('required');
         $form->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'))->rule('required');
