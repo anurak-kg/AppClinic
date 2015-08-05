@@ -12,4 +12,5 @@ class TreatHistory extends Model
     public function product(){
         return $this->belongsToMany('App\Product','treat_has_medicine','treat_id','product_id');
     }
+
 }

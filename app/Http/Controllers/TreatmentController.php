@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use App\Doctor;
+use App\InventoryTransaction;
 use App\Product;
 use App\Quotations_detail;
 use App\TreatHistory;
@@ -56,7 +57,16 @@ class TreatmentController extends Controller
         $treat->save();
         $array = $input['qty'];
         foreach ($array as $qty) {
+
             $treat->product()->attach(Product::find(key($array)), ['qty' => $qty]);
+            $inv = new InventoryTransaction();
+            $inv->product_id =  key($array);
+            $inv->treatment_id =  $treat->treat_id;
+            $inv->qty =  -abs($qty);
+            $inv->branch_id =  Branch::getCurrentId();
+            $inv->type = "Treatment" ;
+
+            $inv->save();
             next($array);
         }
         // dd(\Input::all());

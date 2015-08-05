@@ -16,11 +16,12 @@ class CreateTableInventory extends Migration
             $table->increments('inv_id');
             $table->string('product_id');//รหัสสินค้า
             $table->integer('treatment_id')->unsigned()->nullable();//รหัสการรักษา
-            $table->integer('order_id')->unsigned()->nullable();//รหัสใบสั่งซื้อสินค้าจากร้านขายยา
+            $table->integer('sales_id')->unsigned()->nullable();//รหัสที่ขาย
             $table->integer('received_id')->unsigned()->nullable();//สินค้าที่ได้รับมาจากร้านยา
             $table->integer('branch_id')->unsigned()->nullable();
             $table->integer('qty');//จำนวนยาที่ใช้
             $table->date('expiry_date');//วันหมดอายุ
+            $table->string('type');//รายละเอียด
             $table->timestamps();
 
         });

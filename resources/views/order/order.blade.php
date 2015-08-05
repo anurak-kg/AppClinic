@@ -159,9 +159,6 @@
 
                                 </div>
                             </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-success pull-right">บันทึก</button>
-                            </div>
                         </div>
 
 

@@ -6,7 +6,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="dist/img/11797990_951960494863627_1141623071_n.jpg" class="img-circle" alt="User Image" />
+                    <img src="/dist/img/11797990_951960494863627_1141623071_n.jpg" class="img-circle" alt="User Image" />
                 </div>
 
                 <div class="pull-left info">
@@ -51,6 +51,7 @@
                                         <li><a href="{{url('product/index')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้า</a></li>
                                         <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>กลุ่มสินค้า</a></li>
                                         <li><a href="{{url('product/expday')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้าหมดอายุ</a></li>
+                                        <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>สต๊อกสินค้า</a></li>
 
                                       </ul>
                                     </li>

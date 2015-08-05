@@ -47,14 +47,22 @@ class HomeController extends Controller {
 			}
 
 			//return response()->json($data);
-
-			$exp = DB::table('product')
-				->select('product.product_id', 'product.product_name', 'product.product_date_end',
-					DB::raw('DATEDIFF(product.product_date_end,NOW()) as day'))
-				->having('day', '<', 30)
-				->orderBy('product.product_date_end', 'desc')
-				->get();
+		$exp = DB::table('receive_detail')
+			->select('receive_detail.product_id','product.product_name','receive_detail.product_exp',
+				DB::raw('DATEDIFF(receive_detail.product_exp,NOW()) as day'))
+			->join('product','product.product_id','=','receive_detail.product_id')
+			->having('day','<',30)
+			->orderBy('receive_detail.product_exp','asc')
+			->get();
 			//return response()->json($exp);
+
+		$stock = DB::table('inventory_transaction')
+			->select('branch.branch_name','inventory_transaction.product_id','product.product_name',
+				DB::raw('Sum(inventory_transaction.qty) as total'))
+			->join('product','product.product_id','=','inventory_transaction.product_id')
+			->join('branch','branch.branch_id','=','inventory_transaction.branch_id')
+			->groupBy('inventory_transaction.product_id')
+			->get();
 
 			$order = DB::table('order')
 				->select('order.order_id', 'vendor.ven_name', 'users.name', 'order.order_date', 'order.order_status')
@@ -69,6 +77,7 @@ class HomeController extends Controller {
 				'data' => $data,
 				'datapro' => $datapro,
 				'exp' => $exp,
+				'stock' => $stock,
 				'dataorder' => $dataorder,
 				'dataCourse' => json_encode($data),
 				'dataProduct' => json_encode($datapro)

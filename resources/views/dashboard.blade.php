@@ -167,6 +167,20 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
 
+                    <div class="box box-danger">
+                        <div class="box-header with-border" align="middle">
+
+                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div>
+                        <div class="box-body no-padding">
+                            <!-- THE CALENDAR -->
+                            <div id="calendar_customer" ></div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /. box -->
+
                 </section><!-- /.Left col -->
 
 
@@ -210,8 +224,7 @@
                             </div><!-- /.footer -->
                         </div><!-- /.box -->
 
-
-
+                    <div class="col-md-12">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
@@ -226,8 +239,8 @@
                                     @foreach($exp as $item)
                                         <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
                                         <span class="product-description">
-                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->product_date_end  }}
-                                                </span>
+                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->product_exp  }}
+                                                </span> <br>
                                     @endforeach
 
                                 </li><!-- /.item -->
@@ -238,22 +251,38 @@
                             <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
                         </div><!-- /.box-footer -->
                     </div><!-- /.box -->
+                    </div>
 
-
-
-                        <div class="box box-danger">
-                            <div class="box-header with-border" align="middle">
-
-                                <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">สินค้าที่ถึงจำนวนต้องสั่งซื้อ</h3>
                                 <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                                </div><!-- /.box-tools -->
-                            </div>
-                            <div class="box-body no-padding">
-                                <!-- THE CALENDAR -->
-                                <div id="calendar_customer" ></div>
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="products-list product-list-in-box">
+                                    <li class="item">
+
+                                        @foreach($stock as $item)
+                                            <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
+                                            <span class="product-description">
+                                              รหัสสินค้า {{ $item->product_id }} / สาขา {{ $item->branch_name  }}
+                                                </span> <br>
+                                        @endforeach
+
+                                    </li><!-- /.item -->
+                                </ul>
                             </div><!-- /.box-body -->
-                        </div><!-- /. box -->
+                            <div class="box-footer text-center">
+                                <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                            </div><!-- /.box-footer -->
+                        </div><!-- /.box -->
+                    </div>
+
+
+
 
 
                 </section><!-- right col -->

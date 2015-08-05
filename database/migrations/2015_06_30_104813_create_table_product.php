@@ -16,10 +16,7 @@ class CreateTableProduct extends Migration
             $table->string('product_id');
             $table->integer('pg_id');
             $table->string('product_name',30);
-            $table->integer('product_qty');
             $table->integer('product_qty_order');
-            $table->date('product_date_start');
-            $table->date('product_date_end');
             $table->integer('product_price');
             $table->string('product_unit',10);
             $table->timestamps();

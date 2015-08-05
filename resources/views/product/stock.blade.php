@@ -22,18 +22,18 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
+                                    <th>สาขา</th>
                                     <th>รหัสสินค้า</th>
                                     <th>สินค้า</th>
-                                    <th>วันที่หมดอายุ</th>
-                                    <th>เหลืออีก</th>
+                                    <th>จำนวน</th>
                                 </tr>
                                 </thead>
-                                @foreach($exp as $item)
+                                @foreach($stock as $item)
                                     <tr>
+                                        <td>{{ $item->branch_name }}</td>
                                         <td>{{ $item->product_id }}</td>
                                         <td>{{ $item->product_name }}</td>
-                                        <td>{{ $item->product_exp }}</td>
-                                        <td>{{ $item->day }} วัน</td>
+                                        <td>{{ $item->total }}</td>
                                     </tr>
                                 @endforeach
                             </table>

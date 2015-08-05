@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Branch;
+use App\InventoryTransaction;
 use App\Order;
 use App\Product;
 use App\Receive;
 use App\Receive_detail;
+use App\TreatHistory;
 use App\Vendor;
 use Auth;
 use App\Http\Requests;
@@ -50,7 +52,6 @@ class ReceiveController extends Controller
     {
         $receive = Receive::find($this->getId());
         $receive->receive_total = $this->getTotal();
-        $receive->receive_status = "CLOSE";
         $receive->receive_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         if ( $receive->order_id != 0){
@@ -58,7 +59,19 @@ class ReceiveController extends Controller
             $order->order_status = 'CLOSE';
             $order->save();
         }
+        $receive_detail = Receive_detail::where('receive_id',$this->getId())->get();
+        foreach($receive_detail as $item) {
+            $inv = new InventoryTransaction();
+            $inv->product_id =  $item->product_id;
 
+            $inv->received_id =  $item->receive_id;
+            $inv->qty =  $item->receive_de_qty;
+            $inv->branch_id =  Branch::getCurrentId();
+            $inv->expiry_date =  $item->product_exp;
+            $inv->save();
+        }
+
+        $receive->receive_status = "CLOSE";
         $receive->save();
         return redirect('receive')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }

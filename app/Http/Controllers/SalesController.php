@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use App\Customer;
+use App\InventoryTransaction;
 use App\Product;
 use App\Sales;
 use App\Sales_detail;
@@ -46,9 +47,22 @@ class SalesController extends Controller
         //echo $this->getId();
         $sales = Sales::find($this->getId());
         $sales->sales_total = $this->getTotal();
+
+        $sale = Sales_detail::where('sales_id',$this->getId())->get();
+        foreach ($sale as $item) {
+
+            $inv = new InventoryTransaction();
+            $inv->product_id = $item->product_id;
+            $inv->sales_id =  $item->sales_id;
+            $inv->qty =  -abs($item->sales_de_qty);
+            $inv->type = "SALE" ;
+            $inv->branch_id =  Branch::getCurrentId();
+            $inv->save();
+        }
         $sales->sales_status = "CLOSE";
         // $order->quo_date = null;
         $sales->save();
+
         return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว')->with('sales_id',$this->getId());
     }
     public function getTotal()

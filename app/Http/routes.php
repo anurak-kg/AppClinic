@@ -114,6 +114,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product/create', 'ProductController@create');
     Route::post('product/expday', 'ProductController@expday');
     Route::get('product/expday', 'ProductController@expday');
+    Route::post('product/stock', 'ProductController@stock');
+    Route::get('product/stock', 'ProductController@stock');
     Route::any('product/edit', 'ProductController@edit');
 
     //Product_detail
