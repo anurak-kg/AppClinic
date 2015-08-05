@@ -175,7 +175,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeCustomer()
+    public function getRemovecustomer()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->cus_id = 0;
@@ -183,7 +183,7 @@ class QuotationsController extends Controller
         return redirect('quotations');
     }
 
-    public function getDataSale()
+    public function getDatasale()
     {
         //echo $this->getQuoId();
         $quo = Quotations::find($this->getQuoId());
@@ -200,7 +200,7 @@ class QuotationsController extends Controller
         return response()->json($data);
     }
 
-    public function setSale()
+    public function getSetsale()
     {
         $sale_id = \Input::get('id');
         $quo = Quotations::findOrFail($this->getQuoId());
@@ -211,7 +211,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeSale()
+    public function getRemovesale()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->sale_id = 0;
