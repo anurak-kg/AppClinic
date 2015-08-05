@@ -25,10 +25,10 @@ class CourseController extends Controller
         $grid->attributes(array("class" => "table table-bordered"));
         $grid->add('course_id', 'รหัสคอร์ส', true);
         $grid->add('course_name', 'ชื่อคอร์ส');
-        $grid->edit('/course/edit', 'กระทำ', 'modify|delete');
+        $grid->add('course_qty', 'จำนวน');
+        $grid->add('course_price', 'ราคา');
+        $grid->edit('/course/edit', 'กระทำ', 'modify');
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
-
-
         return $grid;
     }
 
@@ -49,11 +49,11 @@ class CourseController extends Controller
     {
 
         $course = new Course();
-        $course->course_id = Input::get('course_id');
+        $course->course_id = Input::get('course_id')->rule('unique:course,course_id');
         $course->course_name = Input::get('course_name');
         $course->course_detail = Input::get('comment');
-        $course->course_price = Input::get('course_price');
-        $course->course_qty = Input::get('course_qty');
+        $course->course_price = Input::get('course_price')->rule('required|numeric');
+        $course->course_qty = Input::get('course_qty')->rule('required|numeric');
         $course->save();
         $medicine = json_decode(Input::get('json'));
         //dd($medicine);
@@ -81,15 +81,20 @@ class CourseController extends Controller
         if (Input::get('do_delete') == 1) return "not the first";
 
         $edit = DataEdit::source(new Course());
-
-        $edit->text('course_id', 'รหัส');
         $edit->text('course_name', 'ชื่อคอร์ส');
+        $edit->text('comment','รายละเอียดเพิ่มเติม');
+        $edit->text('course_price','ราคา');
+        $edit->text('course_qty','จำนวน');
         $edit->attributes(array("class" => " "));
-
         $edit->link("course/index", "ย้อนกลับ");
 
         return $edit->view('course/edit', compact('edit'));
     }
-
+    public function removemedicine()
+    {
+        $quo = Course::findOrFail('course_id');
+        $quo->product_id = 0;
+        $quo->save();
+    }
 
 }

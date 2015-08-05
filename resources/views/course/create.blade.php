@@ -65,6 +65,7 @@
                                     <td style="width: 80px">รหัสยา</td>
                                     <td>ตัวยา</td>
                                     <td style="width: 90px" >จำนวนที่ใช้</td>
+                                    <td style="width: 20px"> </td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -73,6 +74,8 @@
                                     <td>@{{ item.product_id }}</td>
                                     <td>@{{ item.product_name }}</td>
                                     <td>@{{ item.qty }}</td>
+                                    <td><a href="{{url('course/removemedicine')}}">
+                                            ลบยา</a></td>
                                 </tr>
                                 </tbody>
 
