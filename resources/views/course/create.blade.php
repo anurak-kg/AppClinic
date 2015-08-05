@@ -1,7 +1,5 @@
 @extends('layout.master')
 @section('title','ข้อมูลคอร์ส')
-@section('headText','Course Management')
-@section('headDes','เพิ่มคอร์ส')
 
 @section('content')
 
@@ -16,14 +14,14 @@
         @endif
         <div class="col-md-10 col-md-offset-1">
             {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
-            <div class="box  box-success">
+            <div class="panel  panel-primary">
 
-                <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                <div class="panel-heading with-border">
+                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
 
                 </div>
 
-                <div class="box-body">
+                <div class="panel-body">
 
                     <div class="col-md-12">
                         <label for="course_id" class=" required">เลขที่คอร์ส</label>
@@ -109,7 +107,7 @@
                             <div class="col-md-1">
 
                                 <div class="form-group">
-                                    <label class=" required"> </label>
+                                    <label class=" required">   </label>
 
                                     <a class="btn btn-info" ng-click="addMedicine()">เพิ่มตัวยา</a>
                                 </div>
@@ -120,11 +118,11 @@
                     </div>
 
                 </div>
-                <div class="box-footer">
-                    <div class="col-md-12">
+                <div class="panel-footer">
+
                         <input ng-value="jsonData" type="hidden" name="json">
-                        <input  type="submit" class="btn btn-success btn-block" value="บันทึก">
-                    </div>
+                        <input  type="submit" class="btn btn-primary btn-block" value="บันทึก">
+
                 </div>
 
             </div>

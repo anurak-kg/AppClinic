@@ -3,7 +3,7 @@
 
 @section('content')
 
-        
+
 
             <!-- Small boxes (Stat box) -->
             <div class="row">
