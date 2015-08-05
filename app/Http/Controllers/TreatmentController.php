@@ -69,6 +69,7 @@ class TreatmentController extends Controller
             $inv->save();
             next($array);
         }
+
         // dd(\Input::all());
         return redirect('treatment')->with('message','ลงบันทึกเรียบร้อยแล้ว');    }
 
