@@ -18,6 +18,7 @@
                         <tr>
                             <th>รหัสใบสั่งซื้อ</th>
                             <th>Supplier</th>
+                            <th>สินค้า</th>
                             <th>พนักงาน</th>
                             <th>วันที่สั่งซื้อ</th>
                             <th>จำนวนเงิน</th>
@@ -28,6 +29,7 @@
                             <tr>
                                 <td> {{$test->order_id}}</td>
                                 <td> {{$test->ven_name}}</td>
+                                <td> {{$test->product_name}}</td>
                                 <td> {{$test->name}}</td>
                                 <td> {{$test->order_date}}</td>
                                 <td><?php echo number_format( $test->order_total) ,' บาท' ?></td>
