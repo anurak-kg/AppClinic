@@ -96,14 +96,14 @@ class ProductController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Product());
-        $edit->link("branch/index","บันทึก", "TR")->back();
+
 
         $edit->text('product_name', 'ชื่อสินค้า');
         $edit->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
         $edit->text('product_price', 'ราคา/หน่วย');
         $edit->text('product_unit', 'หน่วยนับ');
         $edit->attributes(array("class" => " "));
-
+        $edit->link("product/index", "ย้อนกลับ");
 
         return $edit->view('product/edit', compact('edit'));
     }
