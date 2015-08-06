@@ -209,7 +209,7 @@ class QuotationsController extends Controller
         return response()->json($data);
     }
 
-    public function setSale()
+    public function getSetsale()
     {
         $sale_id = \Input::get('id');
         $quo = Quotations::findOrFail($this->getQuoId());
@@ -220,7 +220,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeSale()
+    public function getRemovesale()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->sale_id = 0;

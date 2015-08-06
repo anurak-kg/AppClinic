@@ -106,7 +106,7 @@
             });
         }
 
-        $http.get('/quotations/datasale').
+        $http.get('/quotations/data-sale').
             success(function (data, status, headers, config) {
                 if (data.status == 'success') {
                     $scope.sale.id = data.id;
