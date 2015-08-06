@@ -13,7 +13,7 @@ use Zofe\Rapyd\Facades\DataEdit;
 use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
-
+use yajra\Datatables\Datatables;
 
 class CustomerController extends Controller
 {
@@ -98,30 +98,30 @@ class CustomerController extends Controller
         return redirect('customer');
     }
 
+
+
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Customer());
         $grid->attributes(array("class" => "table table-hover"));
         $grid->attributes(array("class" => "table table-bordered"));
-        $grid->add('cus_id', 'รหัสสมาชิก', true);
+        $grid->add('cus_id', 'รหัสสมาชิก');
         $grid->add('cus_name', 'ชื่อ');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์');
-        $grid->add('created_at', 'วันที่ลงทะเบียน');
+        $grid->add('{{$cus_id}}','รายละเอียด')->cell(function ($cus_id) {
+            return '<a href="' . url('customer/view') . '?cus_id=' . $cus_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
+        });
         $grid->edit('/customer/edit', 'กระทำ', 'modify|delete');
 
-        $grid->paginate(10);
         return $grid;
     }
 
     public function grid()
     {
         $grid = $this->getDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('cus_id')) {
-                $row->style("background-color:#EEEEEE");
-            }
-        });
+
         return view('customer/index', compact('grid'));
+
     }
 
     public function create()
@@ -204,7 +204,7 @@ class CustomerController extends Controller
 
         $edit->attributes(array("class" => " "));
 
-        $edit->link("customer/index", "ย้อนกลับ");
+        $edit->link("customer", "ย้อนกลับ");
 
         return $edit->view('customer/edit', compact('edit'));
     }
