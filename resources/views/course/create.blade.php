@@ -8,6 +8,7 @@
             <div class="col-md-12">
                 <div class="callout callout-success">
                     <h4>Success!</h4>
+
                     <p>{{Session::get('message')}}.</p>
                 </div>
             </div>
@@ -25,7 +26,7 @@
 
                     <div class="col-md-12">
                         <label for="course_id" class=" required">เลขที่คอร์ส</label>
-                        <input class=" form-control"
+                        <input class=" form-control" required
                                type="text"
                                id="course_id"
                                name="course_id" placeholder="ระบุเลขที่คอร์ส ...">
@@ -33,7 +34,8 @@
                     </div>
                     <div class="col-md-12">
                         <label for="course_name" class=" required">ชื่อคอร์ส</label>
-                        <input class=" form-control" type="text" id="course_name" name="course_name" placeholder="ระบุชื่อคอร์ส ...">
+                        <input class=" form-control" type="text" id="course_name" name="course_name"
+                               placeholder="ระบุชื่อคอร์ส ..." required>
                         <br>
                     </div>
 
@@ -41,22 +43,26 @@
 
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
-                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..." name="comment"></textarea>
+                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
+                                      name="comment"></textarea>
                             <br>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label for="course_name" class=" required">ราคา</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_price" placeholder="ระบุราคา ...">
+                        <input class=" form-control" type="number" id="course_name" name="course_price"
+                               placeholder="ระบุราคา ..." required>
                         <br>
                     </div>
                     <div class="col-md-6">
                         <label for="course_name" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_qty" placeholder="ระบุจำนวนครั้ง ...">
+                        <input class=" form-control" type="number" id="course_name" name="course_qty"
+                               placeholder="ระบุจำนวนครั้ง ..." required>
                         <br>
                     </div>
                     <div class="col-md-12"><br>
+
                         <div class="row">
                             <table class="table table-bordered">
                                 <thead>
@@ -64,8 +70,8 @@
                                     <td style="width: 10px">#</td>
                                     <td style="width: 80px">รหัสยา</td>
                                     <td>ตัวยา</td>
-                                    <td style="width: 90px" >จำนวนที่ใช้</td>
-                                    <td style="width: 20px"> </td>
+                                    <td style="width: 90px">จำนวนที่ใช้</td>
+                                    <td style="width: 20px"></td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -74,8 +80,7 @@
                                     <td>@{{ item.product_id }}</td>
                                     <td>@{{ item.product_name }}</td>
                                     <td>@{{ item.qty }}</td>
-                                    <td><a href="{{url('course/removemedicine')}}">
-                                            ลบยา</a></td>
+                                    <td><a ng-click="deleteById(item.product_id)"> ลบยา</a></td>
                                 </tr>
                                 </tbody>
 
@@ -103,8 +108,8 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="course_name" class=" required">จำนวน</label>
-                                    <input class=" form-control" ng-model="qtyValue" type="text" id="">
+                                    <label for="course_name" class="">จำนวน</label>
+                                    <input class=" form-control" ng-model="qtyValue" type="text" id="" required>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -123,8 +128,8 @@
                 </div>
                 <div class="panel-footer">
 
-                        <input ng-value="jsonData" type="hidden" name="json">
-                        <input  type="submit" class="btn btn-primary btn-block" value="บันทึก">
+                    <input ng-value="jsonData" type="hidden" name="json">
+                    <input type="submit" class="btn btn-primary btn-block" value="บันทึก">
 
                 </div>
 

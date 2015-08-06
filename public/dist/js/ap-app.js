@@ -519,22 +519,14 @@
             error(function (data, status, headers, config) {
                 console.log('error' + headers)
             });
+
+
         $scope.deleteById = function (id) {
-            console.log($scope.product);
-            $scope.product = $scope.product
+            console.log($scope.course_medicine);
+            $scope.course_medicine = $scope.course_medicine
                 .filter(function (el) {
                     return el.product_id !== id;
                 });
-            $scope.dataLoading = true;
-            $http.get($scope.controller + '/delete?id=' + id).
-                success(function (data, status, headers, config) {
-                    $scope.dataLoading = false;
-                }).
-                error(function (data, status, headers, config) {
-                    console.log(status)
-                    $scope.dataLoading = false;
-                });
-            $scope.tableParams.reload();
 
         }
     });
