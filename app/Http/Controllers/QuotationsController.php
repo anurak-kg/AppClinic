@@ -184,7 +184,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeCustomer()
+    public function getRemovecustomer()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->cus_id = 0;
