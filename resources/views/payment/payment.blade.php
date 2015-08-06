@@ -42,7 +42,7 @@
                             @foreach($quo->course as $course)
                                 <tr>
                                     <td>{{$index+1}}</td>
-                                    <td>{{$course->course_name}}</td>
+                                    <td>{{$course->course_name}}  จำนวน {{$course->course_qty}}  ครั้ง</td>
                                     <td>{{$course->course_price}}</td>
 
 
@@ -84,7 +84,9 @@
                 </div>
 
                 <div class="box-footer">
-
+                    <a class="btn btn-warning pull-right"
+                       href="{{url('bill/bill')}}?quo_id={{$quo->quo_id}}">
+                        ปลิ้นบิล </a>
                 </div>
             </div>
 

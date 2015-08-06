@@ -47,29 +47,31 @@ class CourseController extends Controller
 
     public function postCourse()
     {
+        $medicine = json_decode(Input::get('json'));
 
         $course = new Course();
-        $course->course_id = Input::get('course_id')->rule('unique:course,course_id');
+        $course->course_id = Input::get('course_id');
         $course->course_name = Input::get('course_name');
         $course->course_detail = Input::get('comment');
-        $course->course_price = Input::get('course_price')->rule('required|numeric');
-        $course->course_qty = Input::get('course_qty')->rule('required|numeric');
+        $course->course_price = Input::get('course_price');
+        $course->course_qty = Input::get('course_qty');
         $course->save();
-        $medicine = json_decode(Input::get('json'));
-        //dd($medicine);
-        echo $course->course_id;
-        foreach ($medicine as $item) {
+        if (count($medicine) != 0) {
+            foreach ($medicine as $item) {
 
-            $product = Product::find($item->product_id);
-            $course->medicine()->attach($product, [
-                'qty' => $item->qty,
-                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                $product = Product::find($item->product_id);
+                $course->medicine()->attach($product, [
+                    'qty' => $item->qty,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
-            ]);
+                ]);
 
-            echo $item->product_id;
+                echo $item->product_id;
+            }
         }
+        //dd($medicine);
+
         //dd(Input::all());
         return redirect('course/create')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
 
@@ -82,19 +84,14 @@ class CourseController extends Controller
 
         $edit = DataEdit::source(new Course());
         $edit->text('course_name', 'ชื่อคอร์ส');
-        $edit->text('comment','รายละเอียดเพิ่มเติม');
-        $edit->text('course_price','ราคา');
-        $edit->text('course_qty','จำนวน');
+        $edit->text('comment', 'รายละเอียดเพิ่มเติม');
+        $edit->text('course_price', 'ราคา');
+        $edit->text('course_qty', 'จำนวน');
         $edit->attributes(array("class" => " "));
         $edit->link("course/index", "ย้อนกลับ");
 
         return $edit->view('course/edit', compact('edit'));
     }
-    public function removemedicine()
-    {
-        $quo = Course::findOrFail('course_id');
-        $quo->product_id = 0;
-        $quo->save();
-    }
+
 
 }

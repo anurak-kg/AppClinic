@@ -519,22 +519,14 @@
             error(function (data, status, headers, config) {
                 console.log('error' + headers)
             });
+
+
         $scope.deleteById = function (id) {
-            console.log($scope.product);
-            $scope.product = $scope.product
+            console.log($scope.course_medicine);
+            $scope.course_medicine = $scope.course_medicine
                 .filter(function (el) {
                     return el.product_id !== id;
                 });
-            $scope.dataLoading = true;
-            $http.get($scope.controller + '/delete?id=' + id).
-                success(function (data, status, headers, config) {
-                    $scope.dataLoading = false;
-                }).
-                error(function (data, status, headers, config) {
-                    console.log(status)
-                    $scope.dataLoading = false;
-                });
-            $scope.tableParams.reload();
 
         }
     });
@@ -885,7 +877,7 @@
             }
 
         }
-        $scope.init = function (value, vat, quo_id, courseId, qty) {
+        $scope.init = function (value, vat, quo_id, courseId, qty,pay_by_course) {
             $scope.payment = [];
             $scope.box = [];
             $scope.course = [];
@@ -902,6 +894,11 @@
             //Vat ใน
             $scope.payment.paymentTotal = value;
             $scope.payment.course_id = courseId;
+            if(pay_by_course == 1){
+                $scope.payment.boxPaidFull = true;
+                $scope.payment.minPrice = $scope.course.price / $scope.course.qty;
+
+            }
 
         }
         $scope.changeType = function () {
@@ -914,11 +911,14 @@
         }
         $scope.receiveChange = function () {
             if ($scope.payment.receivedAmount >= 0) {
-                $scope.payment.withdawn = $scope.payment.paymentTotal - $scope.payment.receivedA
-                if ($scope.payment.receivedAmount >= $scope.payment.paymentTotal) {
+                $scope.payment.withdawn = $scope.payment.minPrice - $scope.payment.receivedAmount ;
+                if ($scope.payment.receivedAmount >= $scope.payment.minPrice) {
                     $scope.payment.buttonPay = false;
+                }else
+                {
+                    $scope.payment.buttonPay = true;
+
                 }
-                $scope.payment.buttonPay = false;
             }
         };
 
