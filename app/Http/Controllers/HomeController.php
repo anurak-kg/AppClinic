@@ -62,6 +62,7 @@ class HomeController extends Controller {
 			->join('product','product.product_id','=','inventory_transaction.product_id')
 			->join('branch','branch.branch_id','=','inventory_transaction.branch_id')
 			->groupBy('inventory_transaction.product_id')
+			->orderBy('Total','asc')
 			->get();
 
 			$order = DB::table('order')
