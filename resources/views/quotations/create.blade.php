@@ -77,7 +77,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
 
-                        <h2 class="box-title">พนักงานขาย</h2>
+                        <h2 class="box-title">พนักงานขาย / แพทย์</h2>
                     </div>
 
                     <div class="box-body">
@@ -98,7 +98,7 @@
                                             class="sale"><strong>{{getTotal()*<?php echo getConfig('commission_rate');?>/100}}</strong> บาท</span>.
                                 </li>
                                 <li><strong><a href="{{url('quotations/removesale')}}">
-                                            เปลียนพนักงานขาย</a></strong></li>
+                                            เปลียนพนักงาน</a></strong></li>
 
                             </ul>
                         </div>
@@ -196,7 +196,10 @@
                                             <td colspan="6" class="total-price">Subtotal:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
-
+                                        <tr>
+                                            <td colspan="6" class="total-price">Tax(7%):</td>
+                                            <td>@{{ getVat() | number:2}} บาท</td>
+                                        </tr>
                                         <tr>
                                             <td colspan="6" class="total-price">Total:</td>
                                             <td> @{{ getTotal()+getVat() | number:2}} บาท</td>
