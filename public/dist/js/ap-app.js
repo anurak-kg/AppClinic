@@ -80,6 +80,15 @@
             $scope.customer.cus_name = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
             $scope.customer.cus_id = customer.cus_id;
+            $scope.customer.phone = customer.cus_phone;
+            $scope.customer.day = customer.cus_birthday_day;
+            $scope.customer.month = customer.cus_birthday_month;
+            $scope.customer.year = customer.cus_birthday_year;
+            $scope.customer.height = customer.cus_height;
+            $scope.customer.weight = customer.cus_weight;
+            $scope.customer.email = customer.cus_email;
+            $scope.customer.allergic = customer.allergic;
+            $scope.customer.disease = customer.disease;
             $scope.dataLoading = true;
             console.log(customer)
             $http.get('/quotations/set-customer?id=' + customer.cus_id).
@@ -317,6 +326,7 @@
     app.controller('orderController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.vendor = [];
+        $scope.order_detail = [];
         $scope.quo_id = null;
         $scope.dataLoading = true;
         $scope.boxSearch = false;
@@ -505,7 +515,24 @@
             error(function (data, status, headers, config) {
                 console.log('error' + headers)
             });
+        $scope.deleteById = function (id) {
+            console.log($scope.product);
+            $scope.product = $scope.product
+                .filter(function (el) {
+                    return el.product_id !== id;
+                });
+            $scope.dataLoading = true;
+            $http.get($scope.controller + '/delete?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status)
+                    $scope.dataLoading = false;
+                });
+            $scope.tableParams.reload();
 
+        }
     });
     app.controller('SalesController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
@@ -604,6 +631,14 @@
                     $scope.tableParams.reload();
 
                 });
+        }
+        $scope.save = function () {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่มีการเพิ่มคอร์ส");
+            }
+            else {
+                $scope.open();
+            }
         }
         $scope.deleteById = function (id) {
             console.log($scope.product);

@@ -2,7 +2,7 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course"  ng-init="setVat({{config('shop.vat')}})">
+    <div ng-controller="quotationsController" id="course" ng-init="setVat({{config('shop.vat')}})">
         <script type="text/ng-template" id="payment.html">
             <div class="modal-header">
                 <h3 class="modal-title">ชำระเงิน</h3>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             @endif
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-info"></i>
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-users"></i>
@@ -98,12 +98,21 @@
 
                         <div class="customer" ng-show="boxSearch">
                             <ul>
-                                <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
-                                <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.cus_name}}</strong></span>
+                                <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span><br>
                                 </li>
-                                <li>ชื่อเบอร์โทร | <span
-                                            class="customer"><strong>@{{ customer.tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('quotations/removecustomer')}}">
+                                <li>ชื่อลูกค้า | <span class="customer"><strong>@{{customer.cus_name}}</strong></span>
+                                    วันเดือนปีเกิด | <span class="customer"><strong>@{{customer.day}}
+                                            /@{{customer.month}}/@{{customer.year}} </strong></span>
+                                </li>
+                                <li>ส่วนสูง | <span class="sale"><strong>@{{customer.height}}</strong></span>
+                                    น้ำหนัก | <span class="sale"><strong>@{{customer.weight}}</strong></span>
+                                    โรคประจำตัว | <span class="sale"><strong>@{{customer.allergic}}</strong></span>
+                                    แพ้ยา | <span class="sale"><strong>@{{customer.disease}}</strong></span></li>
+                                <li>มือถือ | <span class="customer"><strong>@{{ customer.tel }}</strong></span>
+                                    เบอร์โทร | <span class="customer"><strong>@{{ customer.phone }}</strong></span>
+                                    E-mail | <span class="customer"><strong>@{{ customer.email }}</strong></span>
+                                    <br></li>
+                                <li><span><strong><a href="{{url('quotations/removecustomer')}}">
                                                 เปลียนลูกค้า</a></strong></span>
 
                                 </li>
@@ -195,7 +204,7 @@
                                                 @{{$index+1}}
                                             </td>
 
-                                            <td data-title="'คอร์ส'">
+                                            <td data-title="'คอร์ส'" style="width:380px">
                                                 @{{item.course.course_name}}<br>
                                                 <strong>รายละเอียดคอร์ส</strong>
                                                 <ul>
@@ -224,7 +233,8 @@
                                                            class="form-control">
                                                 </div>
                                             </td>
-                                            <td data-title="'จำนวนเงินที่ต้องชำระ'" style="width:170px;text-align: right">
+                                            <td data-title="'จำนวนเงินที่ต้องชำระ'"
+                                                style="width:170px;text-align: right">
                                                 @{{ (item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
                                                 -item.quo_de_disamount| number:2}}
                                             </td>
@@ -381,8 +391,8 @@
                             course_id: datum.course_id,
                             quo_de_discount: 0,
                             quo_de_disamount: 0,
-                            quo_de_price:datum.course_price,
-                            course : datum
+                            quo_de_price: datum.course_price,
+                            course: datum
                         };
                         console.log(course);
                         angular.element(document.getElementById('course')).scope().pushProduct(course);

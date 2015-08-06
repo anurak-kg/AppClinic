@@ -157,9 +157,18 @@ class QuotationsController extends Controller
             $data['status'] = 'success';
             $customer = Customer::find($quo->cus_id);
             $data['cus_id'] = $customer->cus_id;
-
             $data['cus_name'] = $customer->cus_name;
+            $data['day'] = $customer->cus_birthday_day;
+            $data['month'] = $customer->cus_birthday_month;
+            $data['year'] = $customer->cus_birthday_year;
+            $data['height'] = $customer->cus_height;
+            $data['weight'] = $customer->cus_weight;
+            $data['phone'] = $customer->cus_phone;
             $data['tel'] = $customer->cus_tel;
+            $data['email'] = $customer->cus_email;
+            $data['allergic'] = $customer->allergic;
+            $data['disease'] = $customer->disease;
+            //$data[''] = $customer->;
         }
         return response()->json($data);
     }
