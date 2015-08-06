@@ -102,7 +102,7 @@ class QuotationsController extends Controller
         $quo->quo_status = 1;
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
-        return redirect('payment')
+        return redirect("payment" . "?quo_id=" . $quo->quo_id)
             ->with('quo_id',$quo->quo_id);
 
     }

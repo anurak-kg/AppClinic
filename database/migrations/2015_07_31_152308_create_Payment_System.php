@@ -23,6 +23,7 @@ class CreatePaymentSystem extends Migration
             $table->timestamps();
         });
         Schema::create('payment_detail', function (Blueprint $table) {
+            $table->increments('payment_de_id');
             $table->integer('payment_id')->unsigned();
             $table->integer('bank_id');
             $table->integer('emp_id');
