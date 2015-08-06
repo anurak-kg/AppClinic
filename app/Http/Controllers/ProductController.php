@@ -37,11 +37,12 @@ class ProductController extends Controller
     public function stock(){
 
         $stock = DB::table('inventory_transaction')
-            ->select('branch.branch_name','inventory_transaction.product_id','product.product_name',
+            ->select('branch.branch_name','product.product_id','product.product_name',
                DB::raw('Sum(inventory_transaction.qty) as total'))
             ->join('product','product.product_id','=','inventory_transaction.product_id')
             ->join('branch','branch.branch_id','=','inventory_transaction.branch_id')
-            ->groupBy('inventory_transaction.product_id')
+            ->groupBy('product.product_id','branch.branch_name')
+            ->orderBy('branch.branch_name','asc')
             ->get();
 
         return view('product/stock',['stock'=>$stock]);
