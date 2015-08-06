@@ -6,7 +6,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/dist/img/11824131_491826700981233_314405556_n.jpg" class="img-circle" alt="User Image" />
+                    <img src="/dist/img/11797990_951960494863627_1141623071_n.jpg" class="img-circle" alt="User Image" />
                 </div>
 
                 <div class="pull-left info">
