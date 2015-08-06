@@ -115,7 +115,6 @@
                 }
             }).
             error(function (data, status, headers, config) {
-
             });
 
         $scope.saleSelect = function (sale) {
@@ -129,7 +128,6 @@
                 error(function (data, status, headers, config) {
                     $scope.dataLoading = false;
                     console.log('error' + headers)
-
                 });
             $scope.$apply(function () {
                 $scope.SaleBoxSearch = true;
@@ -146,7 +144,7 @@
                 alert("ยังไม่เลือกพนักงานขาย");
             }
             else {
-                $scope.open();
+                $scope.payment();
             }
         }
         $scope.pushProduct = function (product) {
@@ -260,6 +258,7 @@
             var idsSeen = {}, idSeenValue = {};
             for (var i = 0, len = arr.length, id; i < len; ++i) {
                 id = arr[i].course_id;
+                // console.log("id ="+ id +"len="+len);
                 if (idsSeen[id] !== idSeenValue) {
                     results.push(arr[i]);
                     idsSeen[id] = idSeenValue;
@@ -267,6 +266,7 @@
             }
             return results;
         }
+
     });
     app.controller('treatController', function ($scope, $http, ngTableParams, $sce) {
         $scope.customer = [];
@@ -858,63 +858,78 @@
         }
 
     });
-    app.controller('paymentController', function ($scope,$http) {
+    app.controller('paymentController', function ($scope, $http) {
         $scope.payment = [];
+        $scope.box = [];
         $scope.vat = 7;
         $scope.quo_id = null;
 
-        $scope.paymentMethod = function (index) {
-            $scope.payment[index].buttonPay = true;
-            console.log($scope.payment[index].boxMethod);
-            if ($scope.payment[index].boxMethod == "PAID_IN_FULL") {
-                $scope.payment[index].boxPaidFull = true;
-                $scope.payment[index].received_amount = 0;
-
-                $scope.payment[index].buttonPay = false;
+        $scope.paymentMethod = function () {
+            $scope.payment.buttonPay = true;
+            console.log($scope.payment.boxMethod);
+            if ($scope.payment.boxMethod == "PAID_IN_FULL") {
+                $scope.payment.boxPaidFull = true;
+                $scope.payment.received_amount = 0;
+                $scope.payment.minPrice = $scope.course.price;
             }
-            if ($scope.payment[index].boxMethod == "PAYABLE") {
-                $scope.payment[index].boxPaidFull = false;
+            if ($scope.payment.boxMethod == "PAYABLE") {
+            }
+            if ($scope.payment.boxMethod == "PAY_BY_COURSE") {
+                $scope.payment.boxPaidFull = true;
+                $scope.payment.minPrice = $scope.course.price / $scope.course.qty;
 
             }
 
         }
-        $scope.init = function(index,value,vat,quo_id,courseId) {
-            $scope.payment[index] = [];
+        $scope.init = function (value, vat, quo_id, courseId, qty) {
+            $scope.payment = [];
+            $scope.box = [];
+            $scope.course = [];
+            $scope.course.qty = qty;
+            $scope.course.price = value;
+            $scope.box.Show = false;
+            $scope.payment.boxPaidMethod = true;
             $scope.quo_id = quo_id;
-            console.log(index);
+            $scope.payment.creditCardBox = false;
             console.log(value);
             $scope.vat = vat;
-            $scope.payment[index].paymentTotal = (value * (100 + $scope.vat))/100;
-            $scope.payment[index].course_id = courseId;
+            // Vat นอก
+            // $scope.payment[index].paymentTotal = (value * (100 + $scope.vat))/100;
+            //Vat ใน
+            $scope.payment.paymentTotal = value;
+            $scope.payment.course_id = courseId;
 
         }
-        $scope.receiveChange = function(index){
-            if($scope.payment[index].receivedAmount >= 0){
-                $scope.payment[index].withdawn = $scope.payment[index].paymentTotal - $scope.payment[index].receivedAmount
+        $scope.changeType = function () {
+            console.log($scope.payment.type);
+            if ($scope.payment.type == "credit_card") {
+                $scope.payment.creditCardBox = true;
+            } else {
+                $scope.payment.creditCardBox = false;
             }
         }
-
-        $scope.savePayment =function(index) {
-            var url = '/payment/quosave?quo_id=' + $scope.quo_id + '&receivedAmount=' + $scope.payment[index].receivedAmount  +
-                '&course_id=' + $scope.payment[index].course_id;
-            console.log(url);
-            $http.get(url).
-                success(function (data, status, headers, config) {
-                    $scope.dataLoading = false;
-                }).error(function (data, status, headers, config) {
-                    $scope.dataLoading = false;
-                });
+        $scope.receiveChange = function () {
+            if ($scope.payment.receivedAmount >= 0) {
+                $scope.payment.withdawn = $scope.payment.paymentTotal - $scope.payment.receivedA
+                if ($scope.payment.receivedAmount >= $scope.payment.paymentTotal) {
+                    $scope.payment.buttonPay = false;
+                }
+                $scope.payment.buttonPay = false;
+            }
         };
 
-        $scope.save = function (e) {
-            console.log(e);
-            console.log($scope.bt1);
+        /*$scope.savePayment = function (index) {
+         var url = '/payment/quosave?quo_id=' + $scope.quo_id + '&receivedAmount=' + $scope.payment[index].receivedAmount +
+         '&course_id=' + $scope.payment[index].course_id;
+         console.log(url);
+         $http.get(url).
+         success(function (data, status, headers, config) {
+         $scope.dataLoading = false;
+         }).error(function (data, status, headers, config) {
+         $scope.dataLoading = false;
+         });
+         };*/
 
-            if (typeof $scope.dr === 'undefined' && typeof $scope.bt1 === 'undefined' && typeof $scope.bt2 === 'undefined') {
-                alert("ยังไม่มีการเลือกพนักงานที่เกี่ยวข้อง");
-                e.preventDefault();
-            }
-        }
 
     });
 })

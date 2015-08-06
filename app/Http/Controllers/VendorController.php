@@ -26,7 +26,7 @@ class VendorController extends Controller
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
 
-        $grid->add('ven_id', 'รหัสร้านค้า',true);
+        $grid->add('ven_id', 'รหัสร้านค้า')->style("width:100px");
         $grid->add('ven_name', 'ชื่อร้านค้า');
         $grid->add('ven_code', 'หมายเลขประจำตัวผู้เสียภาษี');
         $grid->add('ven_address', 'ที่อยู่ร้านค้า');

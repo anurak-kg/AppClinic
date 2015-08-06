@@ -2,57 +2,8 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course" ng-init="setVat({{config('shop.vat')}})">
-        <script type="text/ng-template" id="payment.html">
-            <div class="modal-header">
-                <h3 class="modal-title">ชำระเงิน</h3>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="total">ยอดทั้งสิ้น</label>
-                        <input name="total"
-                               class=" form-control input-lg"
-                               type="number" id="total"
-                               value="@{{getTotal() + getVat()}}"
-                               disabled
-                                />
-                    </div>
-                    <div class="col-md-12">
-                        <label for="cashInput">รับเงิน</label>
-                        <input name="cashInput" class=" form-control input-lg" ng-model="cashInput" type="number"
-                               id="cashInput"/>
-                        <button class="btn" ng-click="cashAdd(1000)">+1000</button>
-                        <button class="btn" ng-click="cashAdd(500)">+500</button>
-                        <button class="btn" ng-click="cashAdd(100)">+100</button>
-                        <button class="btn" ng-click="cashAdd(20)">+20</button>
-                        <button class="btn" ng-click="cashAdd(10)">+10</button>
-                        <button class="btn" ng-click="cashAdd(5)">+5</button>
-                        <button class="btn" ng-click="cashAdd(1)">+5</button>
-
-                    </div>
-
-                    <div class="col-md-12">
-                        <label for="withdrawn">เงินทอน</label>
-                        <input name="withdrawn"
-                               class=" form-control input-lg"
-                               type="number" id="withdrawn"
-                               value="@{{getTotal() + getVat() - cashInput}}"
-                               disabled
-                                />
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success" ng-click="payment()">ชำระเงิน</button>
-                <button class="btn btn-success" ng-click="paymentAndPrint({{$quo->quo_id}})">ชำระเงิน พร้อมปลิ้นบิล
-                </button>
-                <button class="btn btn-danger" ng-click="cancel()">ยกเลิก</button>
-            </div>
-        </script>
-        <div class="row">
+    <div ng-controller="quotationsController" id="course"  ng-init="setVat({{config('shop.vat')}})">
+            <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">

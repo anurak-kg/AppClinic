@@ -189,5 +189,11 @@ Route::get('faker', function () {
     echo factory('App\User', 20)->create();
 });
 Route::get('test', function () {
-    return view('template');
+
+    $mpdf=new mPDF('th');
+    $mpdf->ignore_invalid_utf8 = true;
+
+    $mpdf->WriteHTML(view('template'));
+    $mpdf->Output();
+
 });
