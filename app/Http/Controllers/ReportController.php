@@ -177,7 +177,7 @@ class ReportController extends Controller
         $dateTxt = [];
         //  var_dump([trim($date[0]),trim($date[1])]);
         $producthot = DB::table('sales_detail')
-            ->select(DB::raw('product.product_name as productname'), DB::raw('count(sales_detail.sales_de_price) AS Total'))
+            ->select(DB::raw('product.product_name as productname'), DB::raw('Sum(sales_detail.sales_de_qty) AS Total'))
             ->join('product', 'product.product_id', '=', 'sales_detail.product_id');
         if ($rang != null) {
             $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');

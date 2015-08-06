@@ -70,7 +70,7 @@
 
                                     <td align="middle">{{$test->coursename}}</td>
                                     <td align="middle"
-                                        style="width: 850px;"><?php echo number_format($test->Total), ' บาท' ?></td>
+                                        style="width: 850px;"><?php echo number_format($test->Total)?></td>
                                 </tr>
                             @endforeach
                         </table>

@@ -254,7 +254,7 @@
                                     <li class="item">
 
                                         @foreach($stock as $item)
-                                            <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
+                                            <a href="{{url('product/stock')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
                                             <span class="product-description">
                                               รหัสสินค้า {{ $item->product_id }} / สาขา {{ $item->branch_name  }}
                                                 </span> <br>
@@ -264,7 +264,7 @@
                                 </ul>
                             </div><!-- /.box-body -->
                             <div class="box-footer text-center">
-                                <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                                <a href="{{url('product/stock')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
                     </div>

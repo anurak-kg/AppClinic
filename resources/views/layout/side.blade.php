@@ -6,7 +6,7 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="/dist/img/11797990_951960494863627_1141623071_n.jpg" class="img-circle" alt="User Image" />
+                    <img src="/dist/img/11824131_491826700981233_314405556_n.jpg" class="img-circle" alt="User Image" />
                 </div>
 
                 <div class="pull-left info">
@@ -26,7 +26,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="{{url('customer')}}"><i class='fa fa-minus'></i>ข้อมูลสมาชิก</a></li>
+                  <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>ข้อมูลสมาชิก</a></li>
                   <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
                   <li><a href="{{url('customer/calendar')}}"><i class='fa fa-minus'></i>ตารางนัด</a></li>
 
