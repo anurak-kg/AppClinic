@@ -471,6 +471,9 @@
             if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเลือกสินค้า");
             }
+            else if ($scope.VendorBoxSearch == false) {
+                alert("ยังไม่เลือกร้านค้า");
+            }
             else {
                 window.location.href = $scope.controller + '/save';
 
