@@ -4,9 +4,6 @@
 
 @section('content')
 
-    <script src="/packages/zofe/rapyd/assets/datepicker/bootstrap-datepicker.js"></script>
-
-    <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
 
     <div class="row">
 
@@ -19,7 +16,6 @@
 
                 <div class="panel-body">
                     {!! $form !!}
-                    {!! Rapyd::scripts() !!}
                 </div>
 
             </div>

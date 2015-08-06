@@ -53,7 +53,7 @@ class ProductController extends Controller
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
         $grid->add('product_id', 'รหัสสินค้า');
-        $grid->add('{{ $product_group->pg_name }}', 'กลุ่มสินค้า');
+        $grid->add('{{ $product_group->pg_name }}','กลุ่มสินค้า');
         $grid->add('product_name', 'ชื่อสินค้า');
         $grid->add('product_qty_order', 'Order point');
         $grid->add('product_price', 'ราคา/หน่วย');
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = DataEdit::create(new Product());
+        $form = DataEdit::source(new Product());
         $form->text('product_id', 'รหัสสินค้า')->rule('required|unique:product,product_id')->attributes(array('placeholder'=>'โปรดระบุรหัสสินค้า....'));
         $form->add('pg_id', 'กลุ่มสินค้า','select')->options(Product_group::lists('pg_name','pg_id')->toarray())->rule('required');
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
@@ -82,9 +82,6 @@ class ProductController extends Controller
         $form->text('product_price', 'ราคาขาย')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุราคา/หน่วย....'));
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุหน่วยนับ....'));
         $form->attributes(array("class" => " "));
-
-
-
 
         $form->saved(function () use ($form) {
             $form->message("เพิ่มข้อมูลเรียบร้อย");
