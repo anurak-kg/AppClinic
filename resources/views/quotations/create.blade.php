@@ -46,7 +46,6 @@
                                    type="search"
                                    placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า">
                         </div>
-
                         <div class="customer" ng-show="boxSearch">
                             <ul>
                                 <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span><br>

@@ -122,7 +122,6 @@ class QuotationsController extends Controller
             ->where('course_id', "=", \Input::get('id'))
             ->delete();
     }
-
     public function getData()
     {
         /*$receivedItem = DB::table('quotations_detail')

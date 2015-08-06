@@ -90,6 +90,7 @@
             $scope.customer.allergic = customer.allergic;
             $scope.customer.disease = customer.disease;
             $scope.dataLoading = true;
+
             console.log(customer)
             $http.get('/quotations/set-customer?id=' + customer.cus_id).
                 success(function (data, status, headers, config) {
