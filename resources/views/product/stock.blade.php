@@ -11,7 +11,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">สินค้าหมดอายุ</h2>
+                    <h2 class="panel-title">สต๊อกสินค้า</h2>
 
                 </div>
 

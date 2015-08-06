@@ -37,11 +37,12 @@ class ProductController extends Controller
     public function stock(){
 
         $stock = DB::table('inventory_transaction')
-            ->select('branch.branch_name','inventory_transaction.product_id','product.product_name',
+            ->select('branch.branch_name','product.product_id','product.product_name',
                DB::raw('Sum(inventory_transaction.qty) as total'))
             ->join('product','product.product_id','=','inventory_transaction.product_id')
             ->join('branch','branch.branch_id','=','inventory_transaction.branch_id')
-            ->groupBy('inventory_transaction.product_id')
+            ->groupBy('product.product_id','branch.branch_name')
+            ->orderBy('branch.branch_name','asc')
             ->get();
 
         return view('product/stock',['stock'=>$stock]);
@@ -49,11 +50,11 @@ class ProductController extends Controller
 
 
     public function getDataGrid(){
-        $grid = DataGrid::source(new Product());
+        $grid = DataGrid::source(Product::with('product_group'));
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('product_id', 'รหัสสินค้า',true);
-        $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
+        $grid->add('product_id', 'รหัสสินค้า');
+        $grid->add('{{ $product_group->pg_name }}','กลุ่มสินค้า');
         $grid->add('product_name', 'ชื่อสินค้า');
         $grid->add('product_qty_order', 'Order point');
         $grid->add('product_price', 'ราคา/หน่วย');
@@ -74,17 +75,14 @@ class ProductController extends Controller
 
     public function create()
     {
-        $form = DataEdit::create(new Product());
+        $form = DataEdit::source(new Product());
         $form->text('product_id', 'รหัสสินค้า')->rule('required|unique:product,product_id')->attributes(array('placeholder'=>'โปรดระบุรหัสสินค้า....'));
-        $form->text('pg_id', 'รหัสกลุ่มสินค้า')->rule('required')->options(Product_group::lists('pg_name','pg_id'));
+        $form->add('pg_id', 'กลุ่มสินค้า','select')->options(Product_group::lists('pg_name','pg_id')->toarray())->rule('required');
         $form->text('product_name', 'ชื่อสินค้า')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุชื่อสินค้า....'));
         $form->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุจำนวนสินค้าที่ถึงจุดสั่งซื้อ....'));
         $form->text('product_price', 'ราคาขาย')->rule('required|integer')->attributes(array('placeholder'=>'โปรดระบุราคา/หน่วย....'));
         $form->text('product_unit', 'หน่วยนับ')->rule('required')->attributes(array('placeholder'=>'โปรดระบุหน่วยนับ....'));
         $form->attributes(array("class" => " "));
-
-
-
 
         $form->saved(function () use ($form) {
             $form->message("เพิ่มข้อมูลเรียบร้อย");
@@ -98,14 +96,14 @@ class ProductController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Product());
-        $edit->link("branch/index","บันทึก", "TR")->back();
+
 
         $edit->text('product_name', 'ชื่อสินค้า');
         $edit->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');
         $edit->text('product_price', 'ราคา/หน่วย');
         $edit->text('product_unit', 'หน่วยนับ');
         $edit->attributes(array("class" => " "));
-
+        $edit->link("product/index", "ย้อนกลับ");
 
         return $edit->view('product/edit', compact('edit'));
     }

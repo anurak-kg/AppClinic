@@ -37,10 +37,10 @@ class UserController extends Controller
     }
     public function getUserDataGrid(){
         $grid = DataGrid::source(User::with('branch','position'));
-        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา','branch_id');
+        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
         $grid->add('name','Name');
         $grid->add('email','Email');
-        $grid->add('{{ $position->position_name }}', 'ตำแหน่ง','position_id');
+        $grid->add('{{ $position->position_name }}', 'ตำแหน่ง');
         $grid->add('<a href="/user/resetpassword/?id={{ $id }}">Reset</a>','Reset Password');
         $grid->edit('/user/edit', 'กระทำ','show|modify');
 
@@ -95,7 +95,7 @@ class UserController extends Controller
     }
     public function getUserDataGridDoctor(){
         $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
-        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา','branch_id');
+        $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('license','เลขใบประกอบวิชาชีพ');

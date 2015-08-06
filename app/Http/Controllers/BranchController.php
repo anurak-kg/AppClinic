@@ -22,8 +22,8 @@ class BranchController extends Controller
         $grid = DataGrid::source(new Branch());
         $grid->attributes(array("class"=>"table table-hover"));
         $grid->attributes(array("class"=>"table table-bordered"));
-        $grid->add('branch_id', 'รหัสสาขา',true);
-        $grid->add('branch_name', 'ชื่อสาขา',true);
+        $grid->add('branch_id', 'รหัสสาขา');
+        $grid->add('branch_name', 'ชื่อสาขา');
         $grid->add('branch_address', 'ที่อยู่สาขา');
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');

@@ -122,7 +122,6 @@ class QuotationsController extends Controller
             ->where('course_id', "=", \Input::get('id'))
             ->delete();
     }
-
     public function getData()
     {
         /*$receivedItem = DB::table('quotations_detail')
@@ -158,9 +157,18 @@ class QuotationsController extends Controller
             $data['status'] = 'success';
             $customer = Customer::find($quo->cus_id);
             $data['cus_id'] = $customer->cus_id;
-
             $data['cus_name'] = $customer->cus_name;
+            $data['day'] = $customer->cus_birthday_day;
+            $data['month'] = $customer->cus_birthday_month;
+            $data['year'] = $customer->cus_birthday_year;
+            $data['height'] = $customer->cus_height;
+            $data['weight'] = $customer->cus_weight;
+            $data['phone'] = $customer->cus_phone;
             $data['tel'] = $customer->cus_tel;
+            $data['email'] = $customer->cus_email;
+            $data['allergic'] = $customer->allergic;
+            $data['disease'] = $customer->disease;
+            //$data[''] = $customer->;
         }
         return response()->json($data);
     }
@@ -176,7 +184,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeCustomer()
+    public function getRemovecustomer()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->cus_id = 0;
@@ -201,7 +209,7 @@ class QuotationsController extends Controller
         return response()->json($data);
     }
 
-    public function setSale()
+    public function getSetsale()
     {
         $sale_id = \Input::get('id');
         $quo = Quotations::findOrFail($this->getQuoId());
@@ -212,7 +220,7 @@ class QuotationsController extends Controller
 
     }
 
-    public function removeSale()
+    public function getRemovesale()
     {
         $quo = Quotations::findOrFail($this->getQuoId());
         $quo->sale_id = 0;

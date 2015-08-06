@@ -215,18 +215,22 @@
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>สาขา</th>
                                         <th>รหัสการรักษา</th>
+                                        <th>สาขา</th>
                                         <th>ชื่อคอร์ส</th>
                                         <th>แพทย์</th>
                                         <th>ผู้ช่วย1</th>
                                         <th>ผู้ช่วย2</th>
+                                        <th>ตัวยาที่ใช้</th>
                                         <th>รายละเอียด</th>
                                         <th>วันที่รักษา</th>
                                     </tr>
                                     </thead>
                                     @foreach($treat as $item)
                                         <tr>
+
+                                            <td style="width: 180px;">{{ $item->treat_id }}</td>
+
                                             <td style="width: auto;"><?php
                                                 $branch =  \App\Branch::find($item->branch_id);
                                                 if ($branch != null) {
@@ -235,7 +239,7 @@
                                                 else {
                                                     echo 'ไม่มีข้อมูล';
                                                 } ?></td>
-                                            <td style="width: 180px;">{{ $item->treat_id }}</td>
+
                                             <td>{{ $item->course_name }}</td>
                                             <td><?php
                                                 $dr=  \App\User::find($item->dr_id);
@@ -264,7 +268,17 @@
                                                     echo 'ไม่มีข้อมูล';
                                                 } ?>
                                             </td>
-                                            <td >{{ $item->comment }}</td>
+                                            <td style="width: 300px">{{ $item->product_name }}</td>
+
+                                            <td style="width: 300px">
+                                                <?php
+                                                if ($item->comment != null) {
+                                                   echo  $item->comment ;
+                                                }
+                                                else {
+                                                    echo 'ไม่มีข้อมูล';
+                                                } ?>
+                                            </td>
                                             <td >{{ $item->treat_date }}</td>
                                         </tr>
                                     @endforeach

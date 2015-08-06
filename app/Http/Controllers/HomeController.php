@@ -57,12 +57,16 @@ class HomeController extends Controller {
 			//return response()->json($exp);
 
 		$stock = DB::table('inventory_transaction')
-			->select('branch.branch_name','inventory_transaction.product_id','product.product_name',
+			->select('branch.branch_name','product.product_id','product.product_name','product.product_qty_order',
 				DB::raw('Sum(inventory_transaction.qty) as total'))
 			->join('product','product.product_id','=','inventory_transaction.product_id')
 			->join('branch','branch.branch_id','=','inventory_transaction.branch_id')
-			->groupBy('inventory_transaction.product_id')
+			->groupBy('product.product_id','branch.branch_name')
+			->havingRaw('total < product.product_qty_order')
+			->orderBy('total','asc')
 			->get();
+
+
 
 			$order = DB::table('order')
 				->select('order.order_id', 'vendor.ven_name', 'users.name', 'order.order_date', 'order.order_status')
@@ -71,7 +75,7 @@ class HomeController extends Controller {
 
 			$dataorder = $order->take(5)->get();
 
-			// return response()->json($dataorder);
+			 //return response()->json($stock);
 
 			return view("dashboard", [
 				'data' => $data,

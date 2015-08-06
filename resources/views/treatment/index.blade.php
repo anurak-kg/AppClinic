@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title"> <i class="fa fa-search"></i> ข้อมูลลูกค้า</h2>
+                        <h2 class="box-title"><i class="fa fa-search"></i> ข้อมูลลูกค้า</h2>
                     </div>
 
                     <div class="box-body">
@@ -35,32 +35,47 @@
 
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                             <span id="div_cus_name">
-                                 <br>
-                                <label for="cus_name" class=" required">ชื่อ - นามสกุล@{{tesf}}</label>
-                                <input class=" form-control" type="text" ng-model="customer.cus_name">
+                                <br>
+                                <label for="cus_id" class=" required">รหัสสมาชิก</label>
+                                <input class=" form-control" type="text" ng-model="customer.cus_id" disabled>
+                                 <label for="cus_name" class=" required">Email</label>
+                                <input class=" form-control" type="taginput" ng-model="customer.cus_email" disabled>
+
                             </span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                             <span id="div_cus_name">
                                  <br>
-                                <label for="cus_name" class=" required">แพ้ยา</label>
-                                <input class=" form-control" type="taginput" ng-model="customer.disease">
+                                 <label for="cus_name" class=" required">ชื่อ - นามสกุล</label>
+                                <input class=" form-control" type="text" ng-model="customer.cus_name" disabled>
+                                   <label for="cus_name" class=" required">แพ้ยา</label>
+                                <input class=" form-control" type="taginput" ng-model="customer.disease" disabled>
                             </span>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                             <span id="div_cus_name">
                                  <br>
+                                <label for="cus_name" class=" required">เบอร์โทรศัพท์</label>
+                                <input class=" form-control" type="text" value="@{{ customer.cus_phone }}" disabled>
                                 <label for="cus_name" class=" required">โรคประจำตัว</label>
-                                <input class=" form-control" type="taginput" ng-model="customer.allergic">
+                                <input class=" form-control" type="taginput" ng-model="customer.allergic" disabled>
                             </span>
                             </div>
                             <div class="col-md-1">
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">อายุ</label>
-                                <input class=" form-control" type="text" value="@{{getYear() - customer.cus_birthday_year }}">
+                                <input class=" form-control" type="text"
+                                       value="@{{getYear() - customer.cus_birthday_year }}" disabled>
+                            </span>
+                            </div>
+                            <div class="col-md-2">
+                            <span id="div_cus_name">
+                                 <br>
+                                <label for="cus_name" class=" required">เบอร์โทรศัพทมือถือ</label>
+                                <input class=" form-control" type="text" value="@{{ customer.cus_tel }}" disabled>
                             </span>
                             </div>
                         </div>
@@ -88,7 +103,7 @@
                                     </td>
 
                                     <td data-title="'คอร์ส'" style="width: 500px">
-                                       <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
+                                        <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
                                         - @{{item.course_detail}}
                                     </td>
 
@@ -96,16 +111,19 @@
                                         @{{item.course_qty}}
                                     </td>
 
-                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle" style="width: 100px">
+                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle"
+                                        style="width: 100px">
                                         @{{item.pivot.qty}}
                                     </td>
 
                                     <td data-title="'สถานะ'" style="width: 200px">
-                                        <div ng-bind-html="getTreatStatus(item.pivot.treat_status)" align="middle"></div>
+                                        <div ng-bind-html="getTreatStatus(item.pivot.treat_status)"
+                                             align="middle"></div>
                                     </td>
-                                    <td data-title="" align="middle"  style="width: 200px">
+                                    <td data-title="" align="middle" style="width: 200px">
 
-                                        <div ng-bind-html="getCheck(item.pivot.treat_status,order.quo_id,item.course_id)" align="middle"></div>
+                                        <div ng-bind-html="getCheck(item.pivot.treat_status,order.quo_id,item.course_id)"
+                                             align="middle"></div>
 
                                     </td>
                                 </tr>

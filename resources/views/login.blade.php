@@ -16,7 +16,8 @@
 <div class="login-box">
 
     <div class="login-logo">
-        <a><b>Clinic</b> Demo</a>
+        <h2><b>Clinic </b>Demo  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</h2>
+        <h6> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; By SMART SOLUTION AND SERVICE</h6>
     </div>
     <!-- /.login-logo -->
 

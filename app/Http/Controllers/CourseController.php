@@ -23,7 +23,7 @@ class CourseController extends Controller
         $grid = DataGrid::source(new Course());
         $grid->attributes(array("class" => "table table-hover"));
         $grid->attributes(array("class" => "table table-bordered"));
-        $grid->add('course_id', 'รหัสคอร์ส', true);
+        $grid->add('course_id', 'รหัสคอร์ส');
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_qty', 'จำนวน');
         $grid->add('course_price', 'ราคา');

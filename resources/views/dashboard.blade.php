@@ -97,7 +97,7 @@
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($data as $item)
-                                        <li><a href="#" >{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' คอร์ส' ?></span></a></li>
+                                        <li><a href="#" >{{ $item['label'] }}<span class="pull-right" ><?php echo 'จำนวน ', number_format( $item['value']  ),' คอร์ส' ?></span></a></li>
 
                                     @endforeach
 
@@ -167,19 +167,7 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
 
-                    <div class="box box-danger">
-                        <div class="box-header with-border" align="middle">
 
-                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
-                            </div><!-- /.box-tools -->
-                        </div>
-                        <div class="box-body no-padding">
-                            <!-- THE CALENDAR -->
-                            <div id="calendar_customer" ></div>
-                        </div><!-- /.box-body -->
-                    </div><!-- /. box -->
 
                 </section><!-- /.Left col -->
 
@@ -215,7 +203,7 @@
                             <div class="box-footer no-padding">
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach($datapro as $item)
-                                        <li><a href="#">{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' ' ?></span></a></li>
+                                        <li><a href="#">{{ $item['label'] }}<span class="pull-right"><?php echo 'จำนวน ', number_format( $item['value']  ),' ' ?></span></a></li>
                                         {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
                                         {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
                                     @endforeach
@@ -266,7 +254,7 @@
                                     <li class="item">
 
                                         @foreach($stock as $item)
-                                            <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
+                                            <a href="{{url('product/stock')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
                                             <span class="product-description">
                                               รหัสสินค้า {{ $item->product_id }} / สาขา {{ $item->branch_name  }}
                                                 </span> <br>
@@ -276,14 +264,26 @@
                                 </ul>
                             </div><!-- /.box-body -->
                             <div class="box-footer text-center">
-                                <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                                <a href="{{url('product/stock')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
                     </div>
 
+                    <div class="col-md-12">
+                    <div class="box box-danger">
+                        <div class="box-header with-border" align="middle">
 
-
-
+                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
+                            </div><!-- /.box-tools -->
+                        </div>
+                        <div class="box-body no-padding">
+                            <!-- THE CALENDAR -->
+                            <div id="calendar_customer" ></div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /. box -->
+                    </div>
 
                 </section><!-- right col -->
             </div><!-- /.row (main row) -->

@@ -26,17 +26,20 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('Quotations.course')->where('cus_id',\Input::get('cus_id'))->get()->first();
 
-        $data = \DB::table('treat_history')
-            ->select('treat_history.branch_id','treat_history.treat_id','course.course_name','users.name',
-                    'treat_history.dr_id', 'treat_history.bt_user_id1', 'treat_history.bt_user_id2', 'treat_history.comment',
-                    'treat_history.treat_date','users.name')
-            ->join('quotations','quotations.quo_id','=','treat_history.quo_id')
+        $data = \DB::table('treat_has_medicine')
+            ->select('treat_history.treat_id','treat_history.branch_id','course.course_name','users.name',
+                    'treat_history.dr_id', 'treat_history.bt_user_id1', 'treat_history.bt_user_id2','product.product_name','treat_history.comment',
+                    'treat_history.treat_date')
+            ->join('treat_history','treat_history.treat_id','=','treat_has_medicine.treat_id')
+            ->join('product','product.product_id','=','treat_has_medicine.product_id')
             ->join('course','course.course_id','=','treat_history.course_id')
+            ->join('quotations','quotations.quo_id','=','treat_history.quo_id')
             ->join('users','users.id','=','treat_history.emp_id')
             ->where('quotations.cus_id','=',$customer->cus_id)
             ->orderby('treat_id','desc')
             ->get();
-        //  return response()->json($data);
+
+         // return response()->json($data);
 
           return view('customer/view',['data'=>$customer,'treat'=>$data]);
     }

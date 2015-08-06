@@ -26,7 +26,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i class="fa fa-angle-left pull-right"></i></a>
                  <ul class="treeview-menu">
-                  <li><a href="{{url('customer')}}"><i class='fa fa-minus'></i>ข้อมูลสมาชิก</a></li>
+                  <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>ข้อมูลสมาชิก</a></li>
                   <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
                   <li><a href="{{url('customer/calendar')}}"><i class='fa fa-minus'></i>ตารางนัด</a></li>
 

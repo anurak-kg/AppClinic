@@ -43,7 +43,7 @@
             <!-- Logo -->
 
             <span class="logo-mini"><b>C</b>D</span>
-            <span class="logo-lg"><b>Clinic</b> Demo</span>
+            <span class="logo-lg"><b>Clinic </b>Demo </span>
         </a>
 
         <!-- Header Navbar -->
@@ -73,10 +73,10 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Contact : 087-5430262
+
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">FIIN Tech</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015 <a href="#">SMART SOLUTION AND SERVICE</a>.</strong> All rights reserved.
     </footer>
 
 
