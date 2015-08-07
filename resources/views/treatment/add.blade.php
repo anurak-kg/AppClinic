@@ -139,6 +139,8 @@
                                         </td>
                                         <td>
                                             <div class="col-md-12">
+
+
                                                 <input class="form-control" type="number" name="qty[{{$medicine->product->product_id}}]"
                                                        value="{{$medicine->qty}}"> {{$medicine->product->product_unit}}
 

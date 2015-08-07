@@ -107,6 +107,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('course_detail/index', 'Course_detailController@grid');
     Route::get('course_detail/index', 'Course_detailController@grid');
 
+    Route::post('course/view', 'CourseController@view');
+    Route::get('course/view', 'CourseController@view');
+
     //Product
     Route::post('product/index', 'ProductController@grid');
     Route::get('product/index', 'ProductController@grid');

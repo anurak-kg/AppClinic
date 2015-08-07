@@ -15,14 +15,26 @@ class HomeController extends Controller {
 			->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
 		$coursehot->groupBy('coursename')->orderBy('Total', 'desc');
 		$dataCourse = $coursehot->take(3)->get();
-		$array = [];
+		$array = [] ;
 		$data = [];
+		$col = $colortest = ['#f56954','#00a65a','#f39c12'];
 		foreach ($dataCourse as $item) {
 
 				$array['value'] = (float)$item->Total;
 
-				$array['color'] = '#' . strtoupper(dechex(rand(0, 10000000)));
+			for ( $i = 1; $i < 3 ; $i++ )
+			{
+				if( empty($colortest))
+						$colortest  =  $col ;
 
+				array_rand($colortest);
+
+				$selected = array_pop($colortest);
+
+				$array['color'] = $selected;
+
+				echo $array['color'].PHP_EOL;
+			}
 				$array['highlight'] = $array['color'];
 
 				$array['label'] = $item->coursename;
@@ -37,10 +49,23 @@ class HomeController extends Controller {
 			$dataProduct = $producthot->take(3)->get();
 			$array = [];
 			$datapro = [];
+		$col = $colortest = ['#00c0ef','#3c8dbc','#d2d6de'];
 			foreach ($dataProduct as $item) {
 
 				$array['value'] = (float)$item->Total;
-				$array['color'] = '#' . strtoupper(dechex(rand(0, 10000000)));
+				for ( $i = 1; $i < 3 ; $i++ )
+				{
+					if( empty($colortest))
+						$colortest  =  $col ;
+
+					array_rand($colortest);
+
+					$selected = array_pop($colortest);
+
+					$array['color'] = $selected;
+
+					echo $array['color'].PHP_EOL;
+				}
 				$array['highlight'] = $array['color'];
 				$array['label'] = $item->productname;
 				array_push($datapro, $array);

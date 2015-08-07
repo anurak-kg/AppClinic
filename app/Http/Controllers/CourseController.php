@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataForm;
@@ -18,6 +19,24 @@ class CourseController extends Controller
         return view("course/index");
     }
 
+    public function view(){
+
+        $course = Course::where('course_id',\Input::get('course_id'))->get()->first();
+
+        $data = DB::table('course')
+            ->select('course.course_id','course.course_name','course.course_detail','course.course_price','course.course_qty','course_medicine.product_id'
+            ,'product.product_name','course_medicine.qty')
+            ->join('course_medicine','course_medicine.course_id','=','course.course_id')
+            ->join('product','product.product_id','=','course_medicine.product_id')
+            ->where('course.course_id','=',$course->course_id)
+
+            ->get();
+
+       //return response()->json($data);
+
+        return view("course/view",['data'=>$data]);
+    }
+
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Course());
@@ -27,14 +46,16 @@ class CourseController extends Controller
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_qty', 'จำนวน');
         $grid->add('course_price', 'ราคา');
-        $grid->edit('/course/edit', 'กระทำ', 'modify');
+        $grid->add('{{$course_id}}','รายละเอียด')->cell(function ($course_id) {
+            return '<a href="' . url('/course/view') . '?course_id=' . $course_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลคอร์ส</a>';
+        });
+        $grid->edit('/course/edit', 'กระทำ', 'modify|delete');
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
         return $grid;
     }
 
     public function grid()
     {
-
         $grid = $this->getDataGrid();
 
         return view('course/index', compact('grid'));

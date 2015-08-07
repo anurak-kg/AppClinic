@@ -40,6 +40,7 @@
                                 <br>
                                 <label for="cus_id" class=" required">รหัสสมาชิก</label>
                                 <input class=" form-control" type="text" ng-model="customer.cus_id" disabled>
+                                <br>
                                  <label for="cus_name" class=" required">Email</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.cus_email" disabled>
 
@@ -50,6 +51,7 @@
                                  <br>
                                  <label for="cus_name" class=" required">ชื่อ - นามสกุล</label>
                                 <input class=" form-control" type="text" ng-model="customer.cus_name" disabled>
+                                <br>
                                    <label for="cus_name" class=" required">แพ้ยา</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.disease" disabled>
                             </span>
@@ -59,6 +61,7 @@
                                  <br>
                                 <label for="cus_name" class=" required">เบอร์โทรศัพท์</label>
                                 <input class=" form-control" type="text" value="@{{ customer.cus_phone }}" disabled>
+                                <br>
                                 <label for="cus_name" class=" required">โรคประจำตัว</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.allergic" disabled>
                             </span>
@@ -67,8 +70,10 @@
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">อายุ</label>
+
+
                                 <input class=" form-control" type="text"
-                                       value="@{{getYear() - customer.cus_birthday_year }}" disabled>
+                                       value="@{{getYear() - customer.cus_birthday_year}}" disabled>
                             </span>
                             </div>
                             <div class="col-md-2">
