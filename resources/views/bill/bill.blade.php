@@ -9,42 +9,40 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <!-- Main content -->
-    <section class="invoice">
-        <!-- title row -->
-        <h3 align="right">
-            ใบเสร็จรับเงิน
-        </h3>
 
-        <hr>
         <div align="right">
-
-            <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
             <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
+        </div>
+
+        <h3 align="left">
+            ใบเสร็จรับเงิน
+
+        </h3>
+        <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
+        <hr>
+
+
+        <address>
+            <b> สาขา {{ $bill->branch->branch_name }}</b>
+            {{ $bill->branch->branch_address }}
+            &nbsp;  เบอร์โทร : {{ $bill->branch->branch_tel }}
+        </address>
+
+
             {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
-            <b>พนักงาน :</b> {{ $bill->user->name }} <br>
+            <b>พนักงาน :</b> {{ $bill->user->name }}
+         <br><br>
 
-        </div><!-- /.col -->
-        <!-- info row -->
-        <div class="row invoice-info">
+        </div>
 
-            <div class="col-sm-4 invoice-col">
+
+
+        <div id="section">
                 <address>
-                    <br><br>
-                    <b> สาขา {{ $bill->branch->branch_name }}</b><br>
-                    {{ $bill->branch->branch_address }}
-                    โทร : {{ $bill->branch->branch_tel }}
-                </address>
-            </div><!-- /.col -->
+                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }}  <br><br>
 
-            <div class="col-sm-4 invoice-col">
-                <address>
-
-                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }} <br>
-
-                    <b> ชื่อลูกค้า {{ $bill->customer->cus_name }} {{ $bill->customer->cus_lastname }} </b> <br>
-                      {{ $bill->customer->cus_hno }}
+                    <b> ชื่อลูกค้า {{ $bill->customer->cus_name }} </b><br><br>
+                       ที่อยู่ : {{ $bill->customer->cus_hno }}
                       {{ $bill->customer->cus_moo }}
                       {{ $bill->customer->cus_soi }}
                       {{ $bill->customer->cus_road }}
@@ -55,9 +53,9 @@
                       {{ $bill->customer->cus_tel }}
                       {{ $bill->customer->cus_phone }}
                 </address>
-            </div><!-- /.col -->
 
-        </div><!-- /.row -->
+        </div>
+
 
 
         <!-- Table row -->
@@ -105,20 +103,8 @@
                     </tfoot>
                 </table>
             </div><!-- /.col -->
-        </div><!-- /.row -->
-
-        <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-xs-6">
-
-            </div><!-- /.col -->
-
-        </div><!-- /.row -->
 
 
-
-    </section><!-- /.content -->
-</div><!-- ./wrapper -->
 
 </body>
 </html>

@@ -13,54 +13,53 @@
     <!-- Main content -->
     <section class="invoice">
 
-        <h3 align="right">
-            ใบเสร็จรับเงิน
-        </h3>
-
-
-        <hr>
         <div align="right">
-
-            <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $sales->sales_id }} <br>
             <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
-            {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
-            <b>พนักงาน :</b> {{ $sales->user->name }} <br>
+        </div>
 
-        </div><!-- /.col -->
+        <h3 align="left">
+            ใบเสร็จรับเงิน
 
-        <!-- info row -->
-        <div class="row invoice-info">
+        </h3>
+        <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $sales->sales_id }} <br>
+        <hr>
 
-            <div class="col-sm-4 invoice-col">
-                <address>
-                    <br><br>
-                    <b> สาขา {{ $sales->branch->branch_name }}</b>
-                    {{ $sales->branch->branch_address }}<br>
-                    โทร : {{ $sales->branch->branch_tel }}
-                    <br><br>
-                </address>
-            </div><!-- /.col -->
 
-            <div class="col-sm-4 invoice-col">
-                <address>
+        <address>
+            <b> สาขา {{ $sales->branch->branch_name }}</b>
+            {{ $sales->branch->branch_address }}<br>
+            โทร : {{ $sales->branch->branch_tel }}
+        </address>
 
-                    <b>รหัสลูกค้า:</b> {{ $sales->customer->cus_id }}
 
-                    <b> ชื่อลูกค้า {{ $sales->customer->cus_name }} </b> <br>
-                    {{ $sales->customer->cus_hno }}
-                    {{ $sales->customer->cus_moo }}
-                    {{ $sales->customer->cus_soi }}
-                    {{ $sales->customer->cus_road }}
-                    {{ $sales->customer->cus_subdis }}
-                    {{ $sales->customer->cus_district }}
-                    {{ $sales->customer->cus_province }}
-                    {{ $sales->customer->cus_postal }}
-                    {{ $sales->customer->cus_tel }}
-                    {{ $sales->customer->cus_phone }}
-                </address>
-            </div><!-- /.col -->
+        {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
+        <b>พนักงาน :</b> {{ $sales->user->name }} <br>
+        <br><br>
 
-        </div><!-- /.row -->
+</div>
+
+
+
+<div id="section">
+    <address>
+        <b>รหัสลูกค้า:</b> {{ $sales->customer->cus_id }} <br><br>
+
+        <b> ชื่อลูกค้า {{ $sales->customer->cus_name }} </b> <br><br>
+        ที่อยู่ :  {{ $sales->customer->cus_hno }}
+        {{ $sales->customer->cus_moo }}
+        {{ $sales->customer->cus_soi }}
+        {{ $sales->customer->cus_road }}
+        {{ $sales->customer->cus_subdis }}
+        {{ $sales->customer->cus_district }}
+        {{ $sales->customer->cus_province }}
+        {{ $sales->customer->cus_postal }}
+        {{ $sales->customer->cus_tel }}
+        {{ $sales->customer->cus_phone }}
+    </address>
+
+</div>
+
+
 
 
         <!-- Table row -->
