@@ -33,7 +33,7 @@ class HomeController extends Controller {
 
 				$array['color'] = $selected;
 
-				echo $array['color'].PHP_EOL;
+				 $array['color'].PHP_EOL;
 			}
 				$array['highlight'] = $array['color'];
 
@@ -64,7 +64,7 @@ class HomeController extends Controller {
 
 					$array['color'] = $selected;
 
-					echo $array['color'].PHP_EOL;
+					 $array['color'].PHP_EOL;
 				}
 				$array['highlight'] = $array['color'];
 				$array['label'] = $item->productname;
