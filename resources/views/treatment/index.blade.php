@@ -73,7 +73,7 @@
 
 
                                 <input class=" form-control" type="text"
-                                       value="@{{getYear() - customer.cus_birthday_year}}" disabled>
+                                       value="@{{getAge(customer.cus_birthday_year)}}" disabled>
                             </span>
                             </div>
                             <div class="col-md-2">

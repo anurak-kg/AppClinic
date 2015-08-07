@@ -285,12 +285,21 @@
             var n = d.getFullYear() + 543;
             return n;
         }
+        $scope.getAge =function(year){
+            var age = null;
+            if(typeof year === "undefined"){
+                age = ""
+            }
+            else{
+                 age = $scope.getYear() - year;
+            }
+            return age;
+        }
         $scope.getCourseData = function () {
             $http.get('/treatment/course_data?id=' + $scope.customer.cus_id).
                 success(function (data, status, headers, config) {
                     $scope.course = data;
                     console.log($scope.course);
-
                     $scope.dataLoading = false;
                 }).
                 error(function (data, status, headers, config) {
@@ -631,7 +640,6 @@
 
         }
     });
-
     app.controller('SalesController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];
