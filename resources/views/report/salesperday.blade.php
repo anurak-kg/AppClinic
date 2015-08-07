@@ -35,13 +35,13 @@
                                 <canvas id="areaChart" height="50"></canvas>
                             </div><!-- /.chart-responsive -->
                         </div><!-- /.col -->
-                        <div class="col-md-4">
+                        <div class="col-md-12">
 
                             <div class="progress-group">
 
                              <span class="progress-text">คอร์ส</span>
                                 <div class="progress sm">
-                                    <div class="progress-bar progress-bar-blue" style="width: 100%"></div>
+                                    <div class="progress-bar progress-bar-aqua" style="width: 100%"></div>
                                 </div> <br>
                              <span class="progress-text"> สินค้า</span>
                                 <div class="progress sm">
@@ -152,20 +152,20 @@
         [
             {
                 label: "Electronics",
-                fillColor: "rgba(151,187,205,0.2)",
+                fillColor: "#98F5FF",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
+                pointHighlightFill: "rgba(151,187,205,1)",
                 data: {!! $total !!}
             },
             {
                 label: "Electronics",
-                        fillColor: "#00CD66",
+                        fillColor: "#98FB98",
+                    strokeColor: "rgba(151,187,205,1)",
                     pointColor: "#00CD66",
-                    pointStrokeColor: "#00CD66",
+                    pointStrokeColor: "#fff",
                     pointHighlightFill: "#00CD66",
-                    pointHighlightStroke: "#00CD66",
                     data: {!! $total1 !!}
             },
 

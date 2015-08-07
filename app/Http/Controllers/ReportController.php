@@ -65,7 +65,7 @@ class ReportController extends Controller
                 quotations
                 RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
 
-                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('".$rang."-30'))) FROM quotations))
+                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('".$rang."-31'))) FROM quotations))
 
                 GROUP BY DATE
 
@@ -82,7 +82,7 @@ class ReportController extends Controller
             FROM
             sales
             RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
-            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM sales) AND (SELECT MAX(DATE(DATE('".$rang."-30'))) FROM sales))
+            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM sales) AND (SELECT MAX(DATE(DATE('".$rang."-31'))) FROM sales))
             GROUP BY DATE
 
             ORDER BY DATE ASC
