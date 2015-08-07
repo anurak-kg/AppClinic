@@ -26,7 +26,6 @@ class CreateTreatHistory extends Migration
             $table->text('comment');
             $table->date('treat_date');
             $table->integer('branch_id')->unsigned()->nullable();
-            $table->unique(array('course_id', 'quo_id'));
             $table->timestamps();
         });
         Schema::create('treat_has_medicine', function (Blueprint $table) {

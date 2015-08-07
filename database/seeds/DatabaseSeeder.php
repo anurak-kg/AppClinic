@@ -246,7 +246,7 @@ class CourseTableSeeder extends Seeder
 
         Course::create(
             ['course_id' => 'A002',
-                'course_name' => 'นวดและนาบ',
+                'course_name' => 'นวดอโลมา',
                 'course_detail' => 'เป็นการนวดที่ผสมการนาบที่ลงตัวลึกสุดใจ',
                 'course_price' => '2400',
                 'course_qty'=>'1']);
