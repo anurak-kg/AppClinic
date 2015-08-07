@@ -7,6 +7,7 @@ use App\Quotations;
 
 use App\Http\Requests;
 use App\Sales;
+use mPDF;
 
 class BillController extends Controller
 {
@@ -18,7 +19,13 @@ class BillController extends Controller
 
      //return response()->json($bill);
 
-         return view("bill/bill",['bill' => $bill[0]]);
+
+        $mpdf=new mPDF('th','A4-L');
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view("bill/bill",['bill' => $bill[0]]));
+        $mpdf->Output('Bill.pdf','I');
+
     }
 
     public function product(){
@@ -26,17 +33,26 @@ class BillController extends Controller
         $sales = Sales::where('sales_id',\Input::get('sales_id'))
             ->with('product','Customer','User','Branch')->get()->first();
 
-        // return response()->json($sales);
+        $mpdf=new mPDF('th','A4-L');
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view("bill/billproduct",['sales' => $sales]));
+        $mpdf->Output('Billproduct.pdf','I');
 
-      return view("bill/billproduct",['sales' => $sales]);
 
     }
 
     public function order(){
         $order = Order::where('order_id',1)
             ->with('product','vendor','branch','user')->get()->first();
-       // return response()->json($order);
-        return view("bill/order",['order' => $order]);
+
+        $mpdf=new mPDF('th','A4-L');
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view("bill/order",['order' => $order]));
+        $mpdf->Output('Order.pdf','I');
+
+
 
     }
 

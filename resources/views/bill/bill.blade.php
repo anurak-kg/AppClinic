@@ -13,12 +13,36 @@
     <!-- Main content -->
     <section class="invoice">
         <!-- title row -->
+        <h3 align="right">
+            ใบเสร็จรับเงิน
+        </h3>
 
+        <hr>
+        <div align="right">
+
+            <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
+            <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
+            {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
+            <b>พนักงาน :</b> {{ $bill->user->name }} <br>
+
+        </div><!-- /.col -->
         <!-- info row -->
         <div class="row invoice-info">
+
             <div class="col-sm-4 invoice-col">
                 <address>
-                    <br><br><br><br><br>
+                    <br><br>
+                    <b> สาขา {{ $bill->branch->branch_name }}</b><br>
+                    {{ $bill->branch->branch_address }}
+                    โทร : {{ $bill->branch->branch_tel }}
+                </address>
+            </div><!-- /.col -->
+
+            <div class="col-sm-4 invoice-col">
+                <address>
+
+                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }} <br>
+
                     <b> ชื่อลูกค้า {{ $bill->customer->cus_name }} {{ $bill->customer->cus_lastname }} </b> <br>
                       {{ $bill->customer->cus_hno }}
                       {{ $bill->customer->cus_moo }}
@@ -31,29 +55,6 @@
                       {{ $bill->customer->cus_tel }}
                       {{ $bill->customer->cus_phone }}
                 </address>
-            </div><!-- /.col -->
-
-            <div class="col-sm-4 invoice-col">
-                <address>
-                    <br><br>
-                    <b> สาขา {{ $bill->branch->branch_name }}</b>
-                    {{ $bill->branch->branch_address }}<br>
-                    โทร : {{ $bill->branch->branch_tel }}
-                    <br><br>
-                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }}
-
-                </address>
-            </div><!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                <h3 align="right">
-                    ใบเสร็จรับเงิน
-                </h3>
-
-                <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
-                <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
-               {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
-                <b>พนักงาน :</b> {{ $bill->user->name }} <br>
-
             </div><!-- /.col -->
 
         </div><!-- /.row -->
