@@ -20,7 +20,7 @@ class CourseController extends Controller
         return view("course/index");
     }
 
-    public function view()
+    public function getView()
     {
 
         $course = Course::where('course_id', \Input::get('course_id'))->get()->first();
