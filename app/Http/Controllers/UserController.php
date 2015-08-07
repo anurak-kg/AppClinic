@@ -47,11 +47,23 @@ class UserController extends Controller
         return $grid;
     }
 
+
     public function manage (){
 
         //User Table
         $grid = $this->getUserDataGrid();
-        //User Create
+        $grid->row(function ($row) {
+            if ($row->cell('{{ $position->position_name }}') == 'admin') {
+                $row->cell('{{ $position->position_name }}')->style("display:none");
+                $row->style("display:none");
+            }
+            if ($row->cell('{{ $position->position_name }}') == 'IT') {
+                $row->cell('{{ $position->position_name }}')->style("display:none");
+                $row->style("display:none");
+            }
+        });
+
+            //User Create
         $form = DataForm::create('user');
         $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
         $form->text('username', 'Username')->rule('required|unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
@@ -60,7 +72,7 @@ class UserController extends Controller
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
         $form->text('email', 'Email')->rule('required|email|unique:users')->attributes(array('placeholder' => 'ระบุ E-mail ....'));
-        $form->add('position_id', 'ตำแหน่ง','select')->options(Position::lists('position_name','position_id')->toArray());
+        $form->add('position_id', 'ตำแหน่ง','select')->options(Position::lists('position_name')->toarray());
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
