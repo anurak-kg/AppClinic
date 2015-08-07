@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
                             <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
-                                      name="comment"></textarea>
+                                      name="course_detail"></textarea>
                             <br>
                         </div>
                     </div>

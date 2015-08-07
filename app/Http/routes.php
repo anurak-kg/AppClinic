@@ -24,10 +24,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
 
     Route::any('user/editdoc', 'UserController@editdoc');
     //Course
-    Route::get('course/index', 'CourseController@grid');
-    Route::get('course/create', 'CourseController@create');
-    Route::any('course/edit', 'CourseController@edit');
-    Route::post('course/create', 'CourseController@postCourse');
+    Route::controller('course', 'CourseController');
+
 
     //Receive
     Route::post('receive/index', 'ReceiveController@grid');

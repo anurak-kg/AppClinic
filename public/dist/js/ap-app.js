@@ -530,6 +530,108 @@
 
         }
     });
+    app.controller('courseEditController', function ($scope, $http) {
+        $scope.course_medicine = [];
+        $scope.medicine = {};
+        $scope.qtyValue = 0;
+        $scope.count = 0;
+        $scope.jsonData = undefined;
+        $scope.init= function(course_id){
+            $scope.course_id = course_id;
+            var url = "/course/medicine-data?course_id="+$scope.course_id;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.course_medicine = data;
+                    console.log($scope.course_medicine);
+
+                }).
+                error(function (data, status, headers, config) {
+                    console.log('error' + headers)
+                });
+        }
+        $scope.addMedicine = function (id) {
+            if($scope.qtyValue == 0 ){
+                alert("กรุณาใส่จำนวนยาก่อนค่ะ")
+            }else {
+                var course =
+                {
+                    id: $scope.count,
+                    product_id: $scope.medicine.selected.product_id,
+                    product_name: $scope.medicine.selected.product_name,
+                    qty: $scope.qtyValue
+                }
+                $scope.course_medicine.push(course);
+                $scope.course_medicine = $scope.pushDuplicateCheck();
+                $scope.count++;
+
+                var url = "/course/medicine-add?course_id=" + $scope.course_id +
+                    "&product_id=" + $scope.medicine.selected.product_id + "&qty=" + $scope.qtyValue;
+                console.log(url);
+                $http.get(url).
+                    success(function (data, status, headers, config) {
+                    }).
+                    error(function (data, status, headers, config) {
+                        console.log('error' + headers)
+                    });
+            }
+        }
+        $scope.form = {
+            course_name: ''
+        }
+        $scope.submit = function () {
+            alert($scope.form);
+        }
+        $scope.showText = function (text1, text2) {
+            return text1 + ' ' + text2;
+        }
+        $scope.scopeMessage = "default text";
+        var changeCount = 0;
+
+
+
+        $http.get("/data/product").
+            success(function (data, status, headers, config) {
+                $scope.product = data;
+            }).
+            error(function (data, status, headers, config) {
+                console.log('error' + headers)
+            });
+
+        $scope.pushDuplicateCheck = function () {
+            var arr = $scope.course_medicine;
+            var results = [];
+            var idsSeen = {}, idSeenValue = {};
+            for (var i = 0, len = arr.length, id; i < len; ++i) {
+                id = arr[i].product_id;
+                console.log(idsSeen[id]);
+                if (idsSeen[id] !== idSeenValue) {
+                    results.push(arr[i]);
+                    idsSeen[id] = idSeenValue;
+                }
+            }
+            return results;
+        }
+        $scope.deleteById = function (id) {
+            $scope.course_medicine = $scope.course_medicine
+                .filter(function (el) {
+                    return el.product_id !== id;
+                });
+            console.log(id);
+            var url = "/course/medicine-remove?course_id="+$scope.course_id+"&product_id="+id;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    console.log($scope.course_medicine);
+                }).
+                error(function (data, status, headers, config) {
+                    console.log('error' + headers)
+                });
+
+
+        }
+    });
+
     app.controller('SalesController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.customer = [];

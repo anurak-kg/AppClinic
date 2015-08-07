@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Medicine;
 use App\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -19,22 +20,22 @@ class CourseController extends Controller
         return view("course/index");
     }
 
-    public function view(){
+    public function view()
+    {
 
-        $course = Course::where('course_id',\Input::get('course_id'))->get()->first();
+        $course = Course::where('course_id', \Input::get('course_id'))->get()->first();
 
         $data = DB::table('course')
-            ->select('course.course_id','course.course_name','course.course_detail','course.course_price','course.course_qty','course_medicine.product_id'
-            ,'product.product_name','course_medicine.qty')
-            ->join('course_medicine','course_medicine.course_id','=','course.course_id')
-            ->join('product','product.product_id','=','course_medicine.product_id')
-            ->where('course.course_id','=',$course->course_id)
-
+            ->select('course.course_id', 'course.course_name', 'course.course_detail', 'course.course_price', 'course.course_qty', 'course_medicine.product_id'
+                , 'product.product_name', 'course_medicine.qty')
+            ->join('course_medicine', 'course_medicine.course_id', '=', 'course.course_id')
+            ->join('product', 'product.product_id', '=', 'course_medicine.product_id')
+            ->where('course.course_id', '=', $course->course_id)
             ->get();
 
-       //return response()->json($data);
+        //return response()->json($data);
 
-        return view("course/view",['data'=>$data]);
+        return view("course/view", ['data' => $data]);
     }
 
     public function getDataGrid()
@@ -46,22 +47,22 @@ class CourseController extends Controller
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_qty', 'จำนวน');
         $grid->add('course_price', 'ราคา');
-        $grid->add('{{$course_id}}','รายละเอียด')->cell(function ($course_id) {
+        $grid->add('{{$course_id}}', 'รายละเอียด')->cell(function ($course_id) {
             return '<a href="' . url('/course/view') . '?course_id=' . $course_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลคอร์ส</a>';
         });
-        $grid->edit('/course/edit', 'กระทำ', 'modify|delete');
+        $grid->edit('/course/edit', 'กระทำ', 'modify');
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
         return $grid;
     }
 
-    public function grid()
+    public function getIndex()
     {
         $grid = $this->getDataGrid();
 
         return view('course/index', compact('grid'));
     }
 
-    public function create()
+    public function getCreate()
     {
         return view('course/create');
     }
@@ -73,7 +74,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->course_id = Input::get('course_id');
         $course->course_name = Input::get('course_name');
-        $course->course_detail = Input::get('comment');
+        $course->course_detail = Input::get('course_detail');
         $course->course_price = Input::get('course_price');
         $course->course_qty = Input::get('course_qty');
         $course->save();
@@ -98,20 +99,56 @@ class CourseController extends Controller
 
     }
 
+    public function postUpdate(){
+        $course = Course::findOrFail(Input::get('course_id'));
+        $course->course_name = Input::get('course_name');
+        $course->course_detail = Input::get('course_detail');
+        $course->course_price = Input::get('course_price');
+        $course->course_qty = Input::get('course_qty');
+        $course->save();
+        return redirect('course/index')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
 
-    public function edit()
+
+    }
+    public function getEdit()
     {
-        if (Input::get('do_delete') == 1) return "not the first";
+        $course = Course::findOrFail(Input::get('modify'));
+        return view('course/edit', compact('course'));
+    }
 
-        $edit = DataEdit::source(new Course());
-        $edit->text('course_name', 'ชื่อคอร์ส');
-        $edit->text('comment', 'รายละเอียดเพิ่มเติม');
-        $edit->text('course_price', 'ราคา');
-        $edit->text('course_qty', 'จำนวน');
-        $edit->attributes(array("class" => " "));
-        $edit->link("course/index", "ย้อนกลับ");
+    public function getMedicineData()
+    {
+        $medicine = Medicine::where('course_id', Input::get('course_id'))
+            ->with('product')->get();
+        $data = [];
+        $index = 0;
+        foreach ($medicine as $item) {
+            $array['id'] = $index;
+            $array['product_id'] = $item->product->product_id;
+            $array['qty'] = $item->qty;
+            $array['product_name'] = $item->product->product_name;
+            array_push($data, $array);
 
-        return $edit->view('course/edit', compact('edit'));
+            $index++;
+        }
+        return response()->json($data);
+
+    }
+
+    public function getMedicineAdd()
+    {
+        $medicine = new Medicine();
+        $medicine->course_id = Input::get('course_id');
+        $medicine->product_id = Input::get('product_id');
+        $medicine->qty= Input::get('qty');
+        $medicine->save();
+    }
+    public function getMedicineRemove()
+    {
+        $medicine = Medicine::where('course_id', Input::get('course_id'))
+                ->where('product_id', Input::get('product_id'));
+        $medicine->delete();
+
     }
 
 

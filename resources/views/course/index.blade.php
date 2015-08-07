@@ -5,7 +5,15 @@
 @section('content')
 
     <div class="row">
+        @if( Session::get('message') != null )
+            <div class="col-md-12">
+                <div class="callout callout-success">
+                    <h4>Success!</h4>
 
+                    <p>{{Session::get('message')}}.</p>
+                </div>
+            </div>
+        @endif
 
         <div class="col-md-12">
             <div class="panel panel-primary table-responsive no-padding">
