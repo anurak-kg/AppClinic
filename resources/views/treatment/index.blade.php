@@ -70,8 +70,10 @@
                             <span id="div_cus_name">
                                  <br>
                                 <label for="cus_name" class=" required">อายุ</label>
+
+
                                 <input class=" form-control" type="text"
-                                       value="@{{getYear() - customer.cus_birthday_year }}" disabled>
+                                       value="@{{getYear() - customer.cus_birthday_year}}" disabled>
                             </span>
                             </div>
                             <div class="col-md-2">

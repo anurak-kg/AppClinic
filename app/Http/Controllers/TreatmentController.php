@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Branch;
 use App\Doctor;
 use App\InventoryTransaction;
@@ -13,7 +11,6 @@ use App\Quotations;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
 class TreatmentController extends Controller
 {
     /**
@@ -25,7 +22,6 @@ class TreatmentController extends Controller
     {
         return view("treatment/index");
     }
-
     public function getCourseData()
     {
         $customerId = \Input::get('id');
@@ -35,7 +31,6 @@ class TreatmentController extends Controller
             ->get();
         return response()->json($course);
     }
-
     public function save()
     {
         $input = \Input::all();
@@ -49,7 +44,6 @@ class TreatmentController extends Controller
         $treat->dr_price = $input['dr_price'];
         $treat->bt1_price = $input['bt1_price'];
         $treat->bt2_price = $input['bt2_price'];
-
         $treat->comment = $input['comment'];
         $treat->treat_date = $input['treat_date'];
         $treat->branch_id = Branch::getCurrentId();
@@ -57,7 +51,6 @@ class TreatmentController extends Controller
         $treat->save();
         $array = $input['qty'];
         foreach ($array as $qty) {
-
             $treat->product()->attach(Product::find(key($array)), ['qty' => $qty]);
             $inv = new InventoryTransaction();
             $inv->product_id =  key($array);
@@ -65,18 +58,14 @@ class TreatmentController extends Controller
             $inv->qty =  -abs($qty);
             $inv->branch_id =  Branch::getCurrentId();
             $inv->type = "Treatment" ;
-
             $inv->save();
             next($array);
         }
-
         // dd(\Input::all());
         return redirect('treatment')->with('message','ลงบันทึกเรียบร้อยแล้ว');    }
-
     public function updateCourseQty($quo_id, $course_id)
     {
         $treat_status = 1;
-
         $quo = Quotations_detail::with(['Course'])
             ->where('quo_id', '=', $quo_id)
             ->where('course_id', '=', $course_id)
@@ -84,7 +73,6 @@ class TreatmentController extends Controller
             ->first();
         $course_qty = $quo->course->course_qty;
         $qty = $quo->qty + 1;
-
         if ($course_qty == $qty) {
             $treat_status = 5;
         }
@@ -93,7 +81,6 @@ class TreatmentController extends Controller
             ->where('course_id', '=', $course_id)
             ->update(['treat_status' => $treat_status,'qty' => $qty]);
     }
-
     public function add()
     {
         $course_id = \Input::get('course_id');
@@ -112,6 +99,4 @@ class TreatmentController extends Controller
                 'users' => $user
             ]);
     }
-
-
 }

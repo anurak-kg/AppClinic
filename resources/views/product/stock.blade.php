@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','สินค้าหมดอายุ')
+@section('title','สต๊อกสินค้า')
 
 
 @section('content')
