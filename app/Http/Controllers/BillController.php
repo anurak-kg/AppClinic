@@ -19,7 +19,6 @@ class BillController extends Controller
 
      //return response()->json($bill);
 
-
         $mpdf=new mPDF('th','A4-L');
         $mpdf->ignore_invalid_utf8 = true;
         $mpdf->SetHTMLHeader();
