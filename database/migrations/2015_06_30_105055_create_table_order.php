@@ -30,7 +30,7 @@ class CreateTableOrder extends Migration
             $table->string('product_id');
             $table->integer('order_de_qty');
             $table->decimal('order_de_price',10,2);
-            $table->decimal('order_de_discount',10,2); //ส่วนลดเปอเซ็น
+            $table->integer('order_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('order_de_disamount',10,2); //ส่วนลดจำนวนเงิน
             $table->decimal('order_de_total',10,2); //จำนวนเงินการสั่งซื้อหลังเพิ่มภาษี
             $table->timestamps();
