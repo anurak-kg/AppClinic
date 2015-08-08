@@ -1,7 +1,6 @@
 @extends('layout.master')
 @section('title','คอร์ส')
 @section('headText','Course Management')
-
 @section('content')
 
     <div class="row">
