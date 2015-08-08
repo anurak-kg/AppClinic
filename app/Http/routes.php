@@ -170,6 +170,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
     Route::controller('permission', 'RoleController');
+    Route::controller('course_type', 'Course_typeController');
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 
