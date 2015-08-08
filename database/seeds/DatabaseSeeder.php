@@ -88,13 +88,13 @@ class UserTableSeeder extends Seeder
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
-        User::create(['username' => 'sale',
-            'branch_id'=>'1','position_id'=>1,
+        User::create(['username' => 'reception',
+            'branch_id'=>'1','position_id'=>6,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'sale@fiin.in.th',
             'password' => bcrypt('1234')]);
-        User::create(['username' => 'doctor',
-            'branch_id'=>'1','position_id'=>4,
+        User::create(['username' => 'manager',
+            'branch_id'=>'1','position_id'=>5,
             'name' => 'นายชูวิทย์ กมลวิศิษฎ์',
             'email' => 'doctor@fiin.in.th',
             'password' => bcrypt('1234')]);
@@ -198,17 +198,23 @@ class ProductTableSeeder extends Seeder
     }
 
 }
-
 class CourseTableSeeder extends Seeder
 {
 
     public function run()
     {
         DB::table('course')->delete();
+        DB::table('course_type')->delete();
         DB::table('course_medicine')->delete();
-
+        \App\Course_type::create(
+            ['name' => 'Laser']
+        );
+        \App\Course_type::create(
+            ['name' => 'Treatment']
+        );
         Course::create(
             ['course_id' => 'A001',
+                'ct_id' => '1',
                 'course_name' => 'Advence Growth Factors รายครั้ง',
                 'course_detail'=>'บริการหน้าขาว ใส ไร้สิว',
                 'course_price' => '10000.00',
@@ -221,6 +227,7 @@ class CourseTableSeeder extends Seeder
 
         Course::create(
             ['course_id' => 'A002',
+                'ct_id' => '2',
                 'course_name' => 'นวดอโลมา',
                 'course_detail' => 'เป็นการนวดที่ผสมการนาบที่ลงตัวลึกสุดใจ',
                 'course_price' => '2400',
@@ -233,6 +240,7 @@ class CourseTableSeeder extends Seeder
 
         Course::create(
             ['course_id' => 'A003',
+                'ct_id' => '2',
                 'course_name' => 'Fake body',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '70000',
@@ -245,6 +253,7 @@ class CourseTableSeeder extends Seeder
             ]);
         Course::create(
             ['course_id' => 'A004',
+                'ct_id' => '1',
                 'course_name' => 'body scrap',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '12000',
@@ -261,6 +270,7 @@ class CourseTableSeeder extends Seeder
             ]);
         Course::create(
             ['course_id' => 'A005',
+                'ct_id' => '1',
                 'course_name' => 'face scrap',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '12000',
@@ -312,7 +322,7 @@ class RolePermissionTableSeeder extends Seeder
             ['id' => '13', 'name' => 'receive.return', 'display_name' => 'คืนสินค้า'],
             ['id' => '14', 'name' => 'treatment', 'display_name' => 'รักษา'],
             ['id' => '15', 'name' => 'sales', 'display_name' => 'POS'],
+            ['id' => '16', 'name' => 'report', 'display_name' => 'รายงาน'],
         ]);
-
     }
 }
