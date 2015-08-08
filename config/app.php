@@ -147,12 +147,14 @@ return [
         App\Providers\RouteServiceProvider::class,
         'Illuminate\Html\HtmlServiceProvider',
         'Zofe\Rapyd\RapydServiceProvider',
+        'Zizaco\Entrust\EntrustServiceProvider',
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         'yajra\Datatables\DatatablesServiceProvider',
         'Jenssegers\Date\DateServiceProvider',
         //'MaddHatter\LaravelFullcalendar\ServiceProvider',
         'Barryvdh\DomPDF\ServiceProvider',
         'Servit\Mpdf\ServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
 
     ],
 
@@ -201,11 +203,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Entrust' => 'Zizaco\Entrust\EntrustFacade',
         'Form' => 'Illuminate\Html\FormFacade',
         'HTML' => 'Illuminate\Html\HtmlFacade',
         'Datatables' => yajra\Datatables\Facades\Datatables::class,
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
         'PDF'     => 'Servit\Mpdf\Facades\Pdf',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
     ],
 

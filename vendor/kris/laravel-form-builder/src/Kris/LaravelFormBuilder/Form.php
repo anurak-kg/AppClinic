@@ -1,5 +1,8 @@
 <?php namespace Kris\LaravelFormBuilder;
 
+use Illuminate\Contracts\Validation\Factory as ValidatorFactory;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\Fields\FormField;
 
 class Form
@@ -59,6 +62,21 @@ class Form
      * @var FormBuilder
      */
     protected $formBuilder;
+
+    /**
+     * @var ValidatorFactory
+     */
+    protected $validatorFactory;
+
+    /**
+     * @var Validator
+     */
+    protected $validator = null;
+
+    /**
+     * @var Request
+     */
+    protected $request;
 
     /**
      * List of fields to not render
@@ -592,6 +610,8 @@ class Form
     /**
      * Add any aditional data that field needs (ex. array of choices)
      *
+     * @deprecated deprecated since 1.6.20 - use 3rd param on create, or 2nd on plain method to pass data
+     * will be switched to protected in 1.7
      * @param string $name
      * @param mixed $data
      */
@@ -619,6 +639,8 @@ class Form
     /**
      * Add multiple peices of data at once
      *
+     * @deprecated deprecated since 1.6.12 - use 3rd param on create, or 2nd on plain method to pass data
+     * will be switched to protected in 1.7
      * @param $data
      * @return $this
      **/
@@ -638,7 +660,20 @@ class Form
      */
     public function getRequest()
     {
-        return $this->formHelper->getRequest();
+        return $this->request ?: $this->formHelper->getRequest();
+    }
+
+    /**
+     * Set request on form
+     *
+     * @param Request $request
+     * @return $this
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+
+        return $this;
     }
 
     /**
@@ -658,13 +693,24 @@ class Form
         $this->setupNamedModel();
 
         return $this->formHelper->getView()
-            ->make($this->formHelper->getConfig('form'))
+            ->make($this->getTemplate())
             ->with(compact('showStart', 'showFields', 'showEnd'))
             ->with('formOptions', $formOptions)
             ->with('fields', $fields)
             ->with('model', $this->getModel())
             ->with('exclude', $this->exclude)
+            ->with('form', $this)
             ->render();
+    }
+
+    /**
+     * Get template from options if provided, otherwise fallback to config
+     *
+     * @return mixed
+     */
+    protected function getTemplate()
+    {
+        return $this->getFormOption('template', $this->formHelper->getConfig('form'));
     }
 
     /**
@@ -803,6 +849,17 @@ class Form
     }
 
     /**
+     * @param ValidatorFactory $validator
+     * @return $this
+     */
+    public function setValidator(ValidatorFactory $validator)
+    {
+        $this->validatorFactory = $validator;
+
+        return $this;
+    }
+
+    /**
      * Exclude some fields from rendering
      *
      * @return $this
@@ -848,5 +905,69 @@ class Form
         foreach ($this->fields as $field) {
             $field->enable();
         }
+    }
+
+    /**
+     * Validate the form
+     *
+     * @param array $validationRules
+     * @param array $messages
+     * @return Validator
+     */
+    public function validate($validationRules = [], $messages = [])
+    {
+        $fieldRules = $this->formHelper->mergeFieldsRules($this->fields);
+        $rules = array_merge($fieldRules['rules'], $validationRules);
+
+        $this->validator = $this->validatorFactory->make($this->getRequest()->all(), $rules, $messages);
+        $this->validator->setAttributeNames($fieldRules['attributes']);
+
+        return $this->validator;
+    }
+
+    /**
+     * Get validatdion rules for the form
+     *
+     * @param array $overrideRules
+     * @return array
+     */
+    public function getRules($overrideRules = [])
+    {
+        $fieldRules = $this->formHelper->mergeFieldsRules($this->fields);
+
+        return array_merge($fieldRules['rules'], $overrideRules);
+    }
+
+    /**
+     * Check if the form is valid
+     *
+     * @return bool
+     */
+    public function isValid()
+    {
+        if (!$this->validator) {
+            $this->validate();
+        }
+
+        return !$this->validator->fails();
+    }
+
+    /**
+     * Get validation errors
+     *
+     * @return array
+     */
+    public function getErrors()
+    {
+        if (!$this->validator || !$this->validator instanceof Validator) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Form %s was not validated. To validate it, call "isValid" method before retrieving the errors',
+                    get_class($this)
+                )
+            );
+        }
+
+        return $this->validator->getMessageBag()->getMessages();
     }
 }

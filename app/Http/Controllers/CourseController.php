@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Course;
 use App\Medicine;
 use App\Product;
@@ -12,19 +10,15 @@ use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
 use Zofe\Rapyd\Facades\DataEdit;
 use App\Http\Controllers\Controller;
-
 class CourseController extends Controller
 {
     public function course()
     {
         return view("course/index");
     }
-
     public function getView()
     {
-
         $course = Course::where('course_id', \Input::get('course_id'))->get()->first();
-
         $data = DB::table('course')
             ->select('course.course_id', 'course.course_name', 'course.course_detail', 'course.course_price', 'course.course_qty', 'course_medicine.product_id'
                 , 'product.product_name', 'course_medicine.qty')
@@ -32,12 +26,9 @@ class CourseController extends Controller
             ->join('product', 'product.product_id', '=', 'course_medicine.product_id')
             ->where('course.course_id', '=', $course->course_id)
             ->get();
-
         //return response()->json($data);
-
         return view("course/view", ['data' => $data]);
     }
-
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Course());
@@ -54,23 +45,18 @@ class CourseController extends Controller
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
         return $grid;
     }
-
     public function getIndex()
     {
         $grid = $this->getDataGrid();
-
         return view('course/index', compact('grid'));
     }
-
     public function getCreate()
     {
         return view('course/create');
     }
-
     public function postCourse()
     {
         $medicine = json_decode(Input::get('json'));
-
         $course = new Course();
         $course->course_id = Input::get('course_id');
         $course->course_name = Input::get('course_name');
@@ -80,25 +66,19 @@ class CourseController extends Controller
         $course->save();
         if (count($medicine) != 0) {
             foreach ($medicine as $item) {
-
                 $product = Product::find($item->product_id);
                 $course->medicine()->attach($product, [
                     'qty' => $item->qty,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-
                 ]);
-
                 echo $item->product_id;
             }
         }
         //dd($medicine);
-
         //dd(Input::all());
         return redirect('course/create')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
-
     }
-
     public function postUpdate(){
         $course = Course::findOrFail(Input::get('course_id'));
         $course->course_name = Input::get('course_name');
@@ -107,15 +87,12 @@ class CourseController extends Controller
         $course->course_qty = Input::get('course_qty');
         $course->save();
         return redirect('course/index')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
-
-
     }
     public function getEdit()
     {
         $course = Course::findOrFail(Input::get('modify'));
         return view('course/edit', compact('course'));
     }
-
     public function getMedicineData()
     {
         $medicine = Medicine::where('course_id', Input::get('course_id'))
@@ -128,13 +105,10 @@ class CourseController extends Controller
             $array['qty'] = $item->qty;
             $array['product_name'] = $item->product->product_name;
             array_push($data, $array);
-
             $index++;
         }
         return response()->json($data);
-
     }
-
     public function getMedicineAdd()
     {
         $medicine = new Medicine();
@@ -146,10 +120,7 @@ class CourseController extends Controller
     public function getMedicineRemove()
     {
         $medicine = Medicine::where('course_id', Input::get('course_id'))
-                ->where('product_id', Input::get('product_id'));
+            ->where('product_id', Input::get('product_id'));
         $medicine->delete();
-
     }
-
-
 }

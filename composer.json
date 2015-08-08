@@ -12,11 +12,14 @@
     "laravel/framework": "5.1.*",
     "kris/laravel-form-builder": "1.6.*",
     "zofe/rapyd": "2.0.*",
+    "zizaco/entrust": "dev-laravel-5",
     "barryvdh/laravel-ide-helper": "^2.0@dev",
     "yajra/laravel-datatables-oracle": "~5.0",
     "jenssegers/date": "^3.0@dev",
     "barryvdh/laravel-dompdf": "0.6.*",
-    "servit/l5mpdf": "dev-master"
+    "servit/l5mpdf": "dev-master",
+    "maatwebsite/excel": "~2.0.0"
+
 
   },
   "require-dev": {

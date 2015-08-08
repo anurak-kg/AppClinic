@@ -39,7 +39,7 @@ abstract class ParentType extends FormField
      *
      * @return ChildFormType
      */
-    protected function setValue($val)
+    public function setValue($val)
     {
         parent::setValue($val);
         $this->createChildren();
@@ -140,5 +140,13 @@ abstract class ParentType extends FormField
         foreach ($this->children as $field) {
             $field->enable();
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getValidationRules()
+    {
+        return $this->formHelper->mergeFieldsRules($this->children);
     }
 }
