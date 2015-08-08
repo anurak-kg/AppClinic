@@ -19,5 +19,6 @@ return array(
     $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
     $vendorDir . '/kris/laravel-form-builder/src/helpers.php',
+    $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     $baseDir . '/app/Http/helpers.php',
 );

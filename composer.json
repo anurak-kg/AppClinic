@@ -18,7 +18,8 @@
     "jenssegers/date": "^3.0@dev",
     "barryvdh/laravel-dompdf": "0.6.*",
     "servit/l5mpdf": "dev-master",
-    "maatwebsite/excel": "~2.0.0"
+    "maatwebsite/excel": "~2.0.0",
+    "barryvdh/laravel-debugbar": "^2.0@dev"
 
 
   },
