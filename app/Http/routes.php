@@ -23,14 +23,6 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::get('user/adddoctor', 'UserController@adddoctor');
 
     Route::any('user/editdoc', 'UserController@editdoc');
-    //Course
-    Route::get('course/index', 'CourseController@grid');
-    Route::get('course/create', 'CourseController@create');
-    Route::get('course/create', 'CourseController@removemedicine');
-    Route::any('course/edit', 'CourseController@edit');
-    Route::post('course/create', 'CourseController@postCourse');
-
-
     //Receive
     Route::post('receive/index', 'ReceiveController@grid');
     Route::get('receive/index', 'ReceiveController@grid');
@@ -175,6 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
     Route::controller('permission', 'RoleController');
+    Route::controller('course', 'CourseController');
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 
