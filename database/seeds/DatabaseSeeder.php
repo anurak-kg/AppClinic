@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call('PositionTableSeeder');
         $this->call('VendorTableSeeder');
         $this->call('SettingTableSeeder');
+        $this->call('RolePermissionTableSeeder');
 
         Model::reguard();
     }
@@ -302,4 +303,30 @@ class CourseTableSeeder extends Seeder
             ]);
     }
 
+}
+class RolePermissionTableSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('roles')->delete();
+
+        \App\Models\Role::create(['id' => '', 'name' => '', 'display_name' => '']);
+
+        DB::table('permissions')->delete();
+        DB::table('permissions')->insert([
+            ['id' => '1', 'name' => 'customer.read', 'display_name' => 'ดูข้อมูลลูกค้า'],
+            ['id' => '2', 'name' => 'customer.create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
+            ['id' => '3', 'name' => 'customer.delete', 'display_name' => 'ลบลูกค้า'],
+            ['id' => '4', 'name' => 'order.order', 'display_name' => 'สั่งสิ้นค้า'],
+            ['id' => '5', 'name' => 'order.delete', 'display_name' => 'ลบการสั่งซื้อ'],
+            ['id' => '6', 'name' => 'emp.create', 'display_name' => 'เพิ่มพนักงาน'],
+            ['id' => '7', 'name' => 'emp.read', 'display_name' => 'ดูข้อมูลพนนักงาน'],
+            ['id' => '8', 'name' => 'emp.delete', 'display_name' => 'ลบพนักงาน'],
+            ['id' => '9', 'name' => 'course.create', 'display_name' => 'เพิ่มคอร์ส'],
+            ['id' => '10', 'name' => 'course.read', 'display_name' => 'ดูข้อมูลคอร์ส'],
+            ['id' => '11', 'name' => 'course.delete', 'display_name' => 'ลบคอร์ส'],
+
+        ]);
+
+    }
 }
