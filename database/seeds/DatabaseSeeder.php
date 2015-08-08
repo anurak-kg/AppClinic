@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call('CourseTableSeeder');
         $this->call('BranchTableSeeder');
         $this->call('CustomerTableSeeder');
-        $this->call('PositionTableSeeder');
         $this->call('VendorTableSeeder');
         $this->call('SettingTableSeeder');
         $this->call('RolePermissionTableSeeder');
@@ -75,31 +74,6 @@ class SettingTableSeeder extends Seeder
             ['setting_name' => 'order_sell',            'value' => 'FIFO'],
 
         ]);
-    }
-}
-class PositionTableSeeder extends Seeder{
-    public function run(){
-        DB::table('position')->delete();
-        \App\Position::create(['position_id'=>1,'position_name'=>'General',
-            'role'=>10]);
-        \App\Position::create(['position_id'=>2,'position_name'=>'IT',
-            'role'=>80]);
-        \App\Position::create(['position_id'=>3,'position_name'=>'Manager',
-            'role'=>60]);
-        \App\Position::create(['position_id'=>4,'position_name'=>'Doctor',
-            'role'=>40]);
-        \App\Position::create(['position_id'=>5,'position_name'=>'Human resources officer',
-            'role'=>50]);
-        \App\Position::create(['position_id'=>6,'position_name'=>'Sale',
-            'role'=>1]);
-        \App\Position::create(['position_id'=>99,'position_name'=>'admin',
-            'role'=>99]);
-        \App\Position::create(['position_name'=>'Reception',
-            'role'=>1]);
-        \App\Position::create(['position_name'=>'Marketing',
-            'role'=>5]);
-        \App\Position::create(['position_name'=>'Stock',
-            'role'=>6]);
     }
 }
 class UserTableSeeder extends Seeder
@@ -310,7 +284,16 @@ class RolePermissionTableSeeder extends Seeder
     {
         DB::table('roles')->delete();
 
-        \App\Models\Role::create(['id' => '', 'name' => '', 'display_name' => '']);
+        \App\Models\Role::create(['id' => '1', 'name' => 'Sale', 'display_name' => 'พนักงานขาย']);
+        \App\Models\Role::create(['id' => '2', 'name' => 'PO', 'display_name' => 'พนักงานสั่งซื้อสินค้า']);
+        \App\Models\Role::create(['id' => '3', 'name' => 'Stock', 'display_name' => 'พนักงานจัดการสินค้า']);
+        \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
+        \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
+        \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
+        \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
+        \App\Models\Role::create(['id' => '90', 'name' => 'admin', 'display_name' => 'พนักงานไอที']);
+        \App\Models\Role::create(['id' => '95', 'name' => 'super_admin', 'display_name' => 'super_admin']);
+        \App\Models\Role::create(['id' => '99', 'name' => 'owner', 'display_name' => 'owner']);
 
         DB::table('permissions')->delete();
         DB::table('permissions')->insert([
@@ -325,7 +308,10 @@ class RolePermissionTableSeeder extends Seeder
             ['id' => '9', 'name' => 'course.create', 'display_name' => 'เพิ่มคอร์ส'],
             ['id' => '10', 'name' => 'course.read', 'display_name' => 'ดูข้อมูลคอร์ส'],
             ['id' => '11', 'name' => 'course.delete', 'display_name' => 'ลบคอร์ส'],
-
+            ['id' => '12', 'name' => 'receive.index', 'display_name' => 'รับสินค้า'],
+            ['id' => '13', 'name' => 'receive.return', 'display_name' => 'คืนสินค้า'],
+            ['id' => '14', 'name' => 'treatment', 'display_name' => 'รักษา'],
+            ['id' => '15', 'name' => 'sales', 'display_name' => 'POS'],
         ]);
 
     }
