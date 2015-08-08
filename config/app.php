@@ -155,6 +155,9 @@ return [
         'Barryvdh\DomPDF\ServiceProvider',
         'Servit\Mpdf\ServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+
 
     ],
 
@@ -210,6 +213,7 @@ return [
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
         'PDF'     => 'Servit\Mpdf\Facades\Pdf',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

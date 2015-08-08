@@ -1,10 +1,3 @@
-{{--
-- คอร์สที่ซื้อ
-- รักษา
-- สินค้าที่ซื้อ
-- ประวัติ
---}}
-
 @extends('layout.master')
 @section('title','ข้อมูลลูกค้า')
 @section('headText','ข้อมูลลูกค้า')
@@ -12,7 +5,41 @@
 @section('content')
 
 
+
+
     <div class="row">
+
+        <div class="col-md-12">
+        <div class="box box-soild box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title" align="middle">Before</h2>
+
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                class="fa fa-minus"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                Test
+            </div>
+        </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="box box-soild box-default">
+                <div class="box-header with-border">
+                    <h2 class="box-title" align="middle">After</h2>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    Test
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-6">
             <div class="box box-soild box-default">

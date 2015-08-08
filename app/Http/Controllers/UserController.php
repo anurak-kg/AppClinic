@@ -73,8 +73,7 @@ class UserController extends Controller
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
         $form->text('email', 'Email')->rule('required|email|unique:users')->attributes(array('placeholder' => 'ระบุ E-mail ....'));
-        $form->add('position_id', 'ตำแหน่ง','select')->options(Position::lists('position_name','position_id')->toArray());
-        $form->add('role', 'สิทธิการใช้งาน','select')->options(Role::lists('display_name','id')->toArray());
+        $form->add('role', 'ตำแหน่ง','select')->options(Role::lists('display_name','id')->toArray());
 
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
@@ -87,14 +86,9 @@ class UserController extends Controller
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
-            $user->position_id = Input::get('position_id');
+            $user->position_id = Input::get('role');
             $user->save();
-            // Input::get('role');
-            if(Input::get('role') != null)
-            {
-                echo "Sasdasd";
-                $user->roles()->sync([Input::get('role')]);
-            }
+            $user->roles()->sync([Input::get('role')]);
             $form->message("ok record saved");
             $form->link("user/manage", "back to the form");
         });

@@ -102,6 +102,11 @@
                             <br>
                         </div>
 
+                    <div class="col-md-12">
+                        {!! $form->render('cus_reference') !!}
+                        <br>
+                    </div>
+
                 </div>
 
             </div>

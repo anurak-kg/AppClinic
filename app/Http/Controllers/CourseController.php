@@ -3,18 +3,19 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Medicine;
 use App\Product;
+use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests;
-use Zofe\Rapyd\Facades\DataForm;
 use Zofe\Rapyd\Facades\DataGrid;
-use Zofe\Rapyd\Facades\DataEdit;
-use App\Http\Controllers\Controller;
+
 class CourseController extends Controller
 {
-    public function course()
+    public function getIndex()
     {
-        return view("course/index");
+        $course = Course::all();
+
+        return view("course/index",compact('course'));
     }
     public function getView()
     {
@@ -45,14 +46,16 @@ class CourseController extends Controller
         $grid->link('course/create', "เพิ่มข้อมูลใหม่", "TR");
         return $grid;
     }
-    public function getIndex()
-    {
-        $grid = $this->getDataGrid();
-        return view('course/index', compact('grid'));
-    }
+
     public function getCreate()
     {
         return view('course/create');
+    }
+    public function getDelete(){
+        $course = Course::findOrFail(Input::get('course_id'));
+        $course->delete();
+        return redirect('course/index')->with('message', 'ลบคอร์สเรียบร้อยแล้ว');
+
     }
     public function postCourse()
     {
