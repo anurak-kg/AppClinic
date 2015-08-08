@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Zofe\\Rapyd\\' => array($vendorDir . '/zofe/rapyd/src'),
     'Zofe\\Burp\\' => array($vendorDir . '/zofe/burp/src'),
+    'Zizaco\\Entrust\\' => array($vendorDir . '/zizaco/entrust/src/Entrust'),
     'XdgBaseDir\\' => array($vendorDir . '/dnoegel/php-xdg-base-dir/src'),
     'TijsVerkoyen\\CssToInlineStyles\\' => array($vendorDir . '/tijsverkoyen/css-to-inline-styles/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),

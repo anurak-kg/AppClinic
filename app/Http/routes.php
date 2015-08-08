@@ -172,6 +172,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('sales', 'SalesController');
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
+    Route::controller('permission', 'RoleController');
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 
