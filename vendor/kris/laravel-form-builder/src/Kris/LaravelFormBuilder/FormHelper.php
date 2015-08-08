@@ -4,6 +4,7 @@ use Illuminate\Contracts\View\Factory as View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\Fields\FormField;
 
 class FormHelper
 {
@@ -239,6 +240,28 @@ class FormHelper
             return null;
         }
 
-        return ucwords(str_replace('_', ' ', $name));
+        return ucfirst(str_replace('_', ' ', $name));
+    }
+
+    /**
+     * @param FormField[] $fields
+     * @return array
+     */
+    public function mergeFieldsRules($fields)
+    {
+        $rules = [];
+        $attributes = [];
+
+        foreach ($fields as $field) {
+            if ($fieldRules = $field->getValidationRules()) {
+                $rules = array_merge($rules, $fieldRules['rules']);
+                $attributes = array_merge($attributes, $fieldRules['attributes']);
+            }
+        }
+
+        return [
+            'rules' => $rules,
+            'attributes' => $attributes
+        ];
     }
 }

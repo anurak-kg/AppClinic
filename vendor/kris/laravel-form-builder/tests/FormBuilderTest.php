@@ -11,10 +11,6 @@ namespace {
         /** @test */
         public function it_creates_plain_form_and_sets_options_on_it()
         {
-            $this->container->shouldReceive('make')
-                ->with('Kris\LaravelFormBuilder\Form')
-                ->andReturn($this->plainForm);
-
             $options = [
                 'method' => 'PUT',
                 'url' => '/some/url/1',
@@ -38,19 +34,13 @@ namespace {
                 'data' => ['dummy_choices' => [1 => 'choice_1', 2 => 'choice_2']]
             ];
 
-            $customForm = new CustomDummyForm();
+            $customForm = $this->formBuilder->create('CustomDummyForm', $options);
 
-            $this->container->shouldReceive('make')
-                    ->with('CustomDummyForm')
-                    ->andReturn($customForm);
-
-            $customFormInstance = $this->formBuilder->create('CustomDummyForm', $options);
-
-            $this->assertEquals('POST', $customFormInstance->getMethod());
-            $this->assertEquals($this->request, $customFormInstance->getRequest());
-            $this->assertEquals('/posts', $customFormInstance->getUrl());
-            $this->assertEquals([1 => 'choice_1', 2 => 'choice_2'], $customFormInstance->getData('dummy_choices'));
-            $this->assertInstanceOf('Kris\\LaravelFormBuilder\\Form', $customFormInstance);
+            $this->assertEquals('POST', $customForm->getMethod());
+            $this->assertEquals($this->request, $customForm->getRequest());
+            $this->assertEquals('/posts', $customForm->getUrl());
+            $this->assertEquals([1 => 'choice_1', 2 => 'choice_2'], $customForm->getData('dummy_choices'));
+            $this->assertInstanceOf('Kris\\LaravelFormBuilder\\Form', $customForm);
             $this->assertArrayHasKey('title', $customForm->getFields());
             $this->assertArrayHasKey('body', $customForm->getFields());
         }
@@ -91,7 +81,7 @@ namespace {
         /** @test */
         public function it_can_set_form_helper_once_and_call_build_form()
         {
-            $form = $this->setupForm(new CustomDummyForm());
+            $form = $this->formBuilder->create('CustomDummyForm');
 
             $this->assertEquals($this->formHelper, $form->getFormHelper());
             $this->assertEquals($this->formBuilder, $form->getFormBuilder());
@@ -106,11 +96,7 @@ namespace {
             $config = $this->config;
             $config['default_namespace'] = 'LaravelFormBuilderTest\Forms';
             $formHelper = new FormHelper($this->view, $this->request, $config);
-            $formBuilder = new FormBuilder($this->container, $formHelper);
-
-            $this->container->shouldReceive('make')
-                ->with('LaravelFormBuilderTest\Forms\NamespacedDummyForm')
-                ->andReturn($form);
+            $formBuilder = new FormBuilder($this->app, $formHelper);
 
             $formBuilder->create('NamespacedDummyForm');
         }
