@@ -16,8 +16,8 @@ return array(
     $vendorDir . '/zofe/burp/src/helpers.php',
     $vendorDir . '/psy/psysh/src/Psy/functions.php',
     $vendorDir . '/danielstjules/stringy/src/Create.php',
-    $vendorDir . '/kris/laravel-form-builder/src/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
+    $vendorDir . '/kris/laravel-form-builder/src/helpers.php',
     $baseDir . '/app/Http/helpers.php',
 );
