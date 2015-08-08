@@ -15,13 +15,30 @@
                 </div>
 
                 <div class="panel-body ">
-                    {!! $grid !!}
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>รหัสลูกค้า</td>
+                            <td>ชื่อ</td>
+                            <td>เบอร์โทร</td>
+                            <td>รายละเอียด</td>
+                            <td>จัดการรูปภาพ</td>
+                        </tr>
+                        @foreach($customers as $customer)
+                            <tr>
+                            <td>{{$customer->cus_id}}</td>
+                            <td>{{$customer->cus_name}}</td>
+                            <td>{{$customer->cus_tel}}</td>
+                            <td><a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-primary"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a> </td>
+                            <td><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}" class="btn btn-primary"><i class="fa fa-upload"></i> อัพโหลดรูป</a> </td>
+                            <td><a href="{{url('customer/edit')}}?cus_id={{$customer->cus_id}}" class="btn btn-success "> แก้ไข</a> </td>
+                            <td></td>
+
+                        </tr>
+                            @endforeach
+                    </table>
                 </div>
 
             </div>
-
-
-
         </div>
     </div>
     <script type="text/javascript">

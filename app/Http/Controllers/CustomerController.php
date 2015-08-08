@@ -7,6 +7,8 @@ use App\Course;
 use App\User;
 use App\Customer;
 use App\Disease_detail;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Zofe\Rapyd\Facades\DataEdit;
@@ -19,7 +21,8 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return view('customer/index');
+        $customers = Customer::all();
+        return view('customer/index',compact('customers'));
     }
 
     public function view()
@@ -43,7 +46,34 @@ class CustomerController extends Controller
 
           return view('customer/view',['data'=>$customer,'treat'=>$data]);
     }
+    public function upload(){
+        return view('customer.upload');
+    }
+    public function uploadFiles() {
 
+        $input = Input::all();
+
+        $rules = array(
+            'file' => 'image|max:3000',
+        );
+
+        $validation = Validator::make($input, $rules);
+
+        if ($validation->fails()) {
+            return Response::make($validation->errors->first(), 400);
+        }
+
+        $destinationPath = 'uploads'; // upload path
+        $extension = Input::file('file')->getClientOriginalExtension(); // getting file extension
+        $fileName = rand(11111, 99999) . '.' . $extension; // renameing image
+        $upload_success = Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
+
+        if ($upload_success) {
+            return Response::json('success', 200);
+        } else {
+            return Response::json('error', 400);
+        }
+    }
 
 
     public function getDataCustomer()
@@ -111,7 +141,12 @@ class CustomerController extends Controller
         $grid->add('{{$cus_id}}','รายละเอียด')->cell(function ($cus_id) {
             return '<a href="' . url('customer/view') . '?cus_id=' . $cus_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
         });
+        $grid->add('cus_id','รายละเอียด')->cell(function ($cus_id) {
+            return '<a href="' . url('customer/upload') . '?cus_id=' . $cus_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
+        });
+
         $grid->edit('/customer/edit', 'กระทำ', 'modify|delete');
+
 
         return $grid;
     }
@@ -145,6 +180,7 @@ class CustomerController extends Controller
 
         $form->text('allergic', 'โรคประจำตัว')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
         $form->text('disease', 'แพ้ยา')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
+        $form->add('cus_reference', 'แหล่งที่มา','select')->attributes(array('placeholder' => 'โปรดระบุ แหล่งที่มา....'));
 
         $form->text('cus_hno', 'บ้านเลขที่')->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo', 'หมู่')->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));

@@ -37,7 +37,9 @@ class CreateTableCustomer extends Migration
             $table->string('cus_district',30);
             $table->string('cus_province',30);
             $table->string('cus_postal',10);
+            $table->enum('cus_reference',array('Web Site','Booth','Offline'));
             $table->integer('branch_id')->nullable();
+            $table->integer('pic_id')->nullable();
 
             $table->timestamps();
         });
