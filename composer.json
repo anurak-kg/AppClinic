@@ -17,7 +17,8 @@
     "yajra/laravel-datatables-oracle": "~5.0",
     "jenssegers/date": "^3.0@dev",
     "barryvdh/laravel-dompdf": "0.6.*",
-    "servit/l5mpdf": "dev-master"
+    "servit/l5mpdf": "dev-master",
+    "maatwebsite/excel": "~2.0.0"
 
 
   },

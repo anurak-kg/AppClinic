@@ -154,6 +154,7 @@ return [
         //'MaddHatter\LaravelFullcalendar\ServiceProvider',
         'Barryvdh\DomPDF\ServiceProvider',
         'Servit\Mpdf\ServiceProvider',
+        'Maatwebsite\Excel\ExcelServiceProvider',
 
     ],
 
@@ -208,6 +209,7 @@ return [
         'Datatables' => yajra\Datatables\Facades\Datatables::class,
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
         'PDF'     => 'Servit\Mpdf\Facades\Pdf',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
     ],
 

@@ -1,8 +1,9 @@
-@extends('layout.master')
-@section('title','การสั่งซื้อสินค้า')
-@section('content')
+<html>
+<head>
 
+</head>
 
+<body>
     <section class="invoice">
         <div class="row">
         <div align="middle">
@@ -98,6 +99,5 @@
         <!-- /.row -->
 
     </section>
-
-
-@stop
+</body>
+</html>

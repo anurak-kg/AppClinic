@@ -278,6 +278,7 @@
                             product = {
                                 product_id: datum.product_id,
                                 order_de_qty: 1,
+                                order_de_price: 0,
                                 product: datum
                             }
 
