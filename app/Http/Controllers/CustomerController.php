@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Allergic_detail;
 use App\Course;
-use App\User;
 use App\Customer;
 use App\Disease_detail;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
+use Response;
+use Validator;
 use Zofe\Rapyd\Facades\DataEdit;
-use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
-use yajra\Datatables\Datatables;
 
 class CustomerController extends Controller
 {

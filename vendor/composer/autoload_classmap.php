@@ -41,6 +41,7 @@ return array(
     'CreateTableInstallment' => $baseDir . '/database/migrations/2015_07_21_061618_create_table_installment.php',
     'CreateTableInventory' => $baseDir . '/database/migrations/2015_07_21_062204_create_table_inventory.php',
     'CreateTableOrder' => $baseDir . '/database/migrations/2015_06_30_105055_create_table_order.php',
+    'CreateTablePicture' => $baseDir . '/database/migrations/2015_08_08_085027_create_table_picture.php',
     'CreateTableProduce' => $baseDir . '/database/migrations/2015_08_07_162252_create_table_produce.php',
     'CreateTableProduct' => $baseDir . '/database/migrations/2015_06_30_104813_create_table_product.php',
     'CreateTableProductDetail' => $baseDir . '/database/migrations/2015_06_30_171054_create_table_product_detail.php',
