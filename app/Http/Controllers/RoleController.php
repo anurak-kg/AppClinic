@@ -29,8 +29,6 @@ class RoleController extends Controller
 
         $roles = Role::all();
 
-        dump($input);
-
         foreach($roles as $role)
         {
 
@@ -39,6 +37,6 @@ class RoleController extends Controller
 
         }
 
-        //return redirect('/permission');
+        return redirect('/permission');
     }
 }
