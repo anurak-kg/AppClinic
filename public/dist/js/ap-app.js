@@ -219,6 +219,18 @@
                     $scope.dataLoading = false;
                 });
         }
+        $scope.updatesale = function (type, quo_id, value) {
+            $scope.dataLoading = true;
+
+            var url = $scope.controller + '/updatesale?id=' + quo_id + '&type=' + type + '&value=' + value;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
+        }
 
         $scope.deleteById = function (id) {
             $scope.product = $scope.product

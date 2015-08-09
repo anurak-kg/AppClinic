@@ -2,8 +2,8 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course"  ng-init="setVat({{config('shop.vat')}})">
-            <div class="row">
+    <div ng-controller="quotationsController" id="course" ng-init="setVat({{config('shop.vat')}})">
+        <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">
@@ -94,8 +94,15 @@
                                 <li>ชื่อลูกค้า | <span class="sale"><strong>@{{sale.name}}</strong></span>.
                                 </li>
                                 <li>ยอดขายบิลนี้ | <span class="sale"><strong>@{{getTotal()}}</strong> บาท</span>.</li>
-                                <li>ค่าแนะนำ <?php echo getConfig('commission_rate');?>% | <span
-                                            class="sale"><strong>{{getTotal()*<?php echo getConfig('commission_rate');?>/100}}</strong> บาท</span>.
+                                <li>ค่าแนะนำจำนวนเงิน | <input type="text"
+                                                               ng-model="item.sale_price"
+                                                               ng-change="updatesale('sale_price',item.quo_id,item.sale_price)"
+                                            >
+                                </li>
+                                <li>ค่าแนะนำเปอร์เซ็น | <input type="number"
+                                                               ng-model="item.sale_price1"
+                                                               ng-change="updatesale('sale_price1',item.quo_id,item.sale_price1)"
+                                            >
                                 </li>
                                 <li><strong><a href="{{url('quotations/removesale')}}">
                                             เปลียนพนักงาน</a></strong></li>

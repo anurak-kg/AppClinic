@@ -145,6 +145,16 @@ class QuotationsController extends Controller
             ->update([$type => $value]);
         return response()->json(['status' => 'Success']);
     }
+    public function getUpdatesale()
+    {
+        $type = Input::get('type');
+        $value = Input::get('value');
+        $id = Input::get('id');
+        $r = DB::table('quotations')
+            ->where('quo_id', "=", $this->getQuoId())
+            ->update([$type => $value]);
+        return response()->json(['status' => 'Success']);
+    }
     public function getDataCustomer()
     {
         //echo $this->getQuoId();
