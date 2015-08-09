@@ -230,6 +230,28 @@ class ReportController extends Controller
 
     }
 
+    public function reportCustomerref(){
+        $ref = DB::table('customer')
+            ->select(DB::raw('customer.cus_reference as name'),DB::raw('(SELECT Count(customer.cus_reference) FROM customer WHERE customer.cus_reference = "Web Site" AND customer.cus_reference = name  ) as web')
+            ,DB::raw('(SELECT Count(customer.cus_reference) FROM customer WHERE customer.cus_reference = "Booth" AND customer.cus_reference = name ) as booth')
+            ,DB::raw('(SELECT Count(customer.cus_reference) FROM customer WHERE customer.cus_reference = "Offline" AND customer.cus_reference = name ) as offline '))
+           ->groupBy('name')
+            ->get();
+
+
+
+        return view('report/customer_ref', [
+            'ref' => $ref,
+
+            'name' => $this->arrayToChartData($ref, 'name'),
+            'web' => $this->arrayToChartData($ref, 'web'),
+            'booth' => $this->arrayToChartData($ref, 'booth'),
+            'offline' => $this->arrayToChartData($ref, 'offline'),
+
+
+        ]);
+    }
+
     public function arrayToChartData($db, $name)
     {
         $text = "[";

@@ -16,6 +16,7 @@
 
                 <div class="panel-body ">
                     <table class="table table-bordered">
+                        <thead>
                         <tr>
                             <td>รหัสลูกค้า</td>
                             <td>ชื่อ</td>
@@ -23,6 +24,8 @@
                             <td>รายละเอียด</td>
                             <td>จัดการรูปภาพ</td>
                         </tr>
+                        </thead>
+                        <tbody>
                         @foreach($customers as $customer)
                             <tr>
                             <td>{{$customer->cus_id}}</td>
@@ -35,23 +38,25 @@
 
                         </tr>
                             @endforeach
+                        </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('table').DataTable({
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
-                },
-               // "ajax": '{{url('data/customer')}}',
 
-            });
+    {{--<script type="text/javascript">--}}
+        {{--$(document).ready(function () {--}}
+            {{--$('table').DataTable({--}}
+                {{--"language": {--}}
+                    {{--"url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"--}}
+                {{--},--}}
+               {{--// "ajax": '{{url('data/customer')}}',--}}
+
+            {{--});--}}
 
 
-        });
-    </script>
+        {{--});--}}
+    {{--</script>--}}
+
 @stop

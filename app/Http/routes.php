@@ -88,8 +88,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('treatment/save', 'TreatmentController@save');
 
     //Customer
-    Route::post('customer', 'CustomerController@grid');
-    Route::get('customer', 'CustomerController@grid');
+    Route::post('customer', 'CustomerController@index');
+    Route::get('customer', 'CustomerController@index');
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
     Route::post('customer/edit', 'CustomerController@edit');
@@ -159,6 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/salesperday', 'ReportController@reportsalesperday');
+    Route::any('report/customer_ref', 'ReportController@reportCustomerref');
 
 
     Route::any('course_type', 'Course_typeController@grid');
