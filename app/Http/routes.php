@@ -51,6 +51,8 @@ Route::group(['middleware' => 'permission:ADMIN'], function () {
     Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
 
+
+
     //Dr
     Route::post('dr/index', 'DoctorController@grid');
     Route::get('dr/index', 'DoctorController@grid');
@@ -158,6 +160,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/salesperday', 'ReportController@reportsalesperday');
 
+
+    Route::any('course_type', 'Course_typeController@grid');
+    Route::any('course_type/edit', 'Course_typeController@edit');
+
+
     //order
     Route::post('order/history', 'OrderController@history');
     Route::get('order/history', 'OrderController@history');
@@ -170,7 +177,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
     Route::controller('permission', 'RoleController');
-    Route::controller('course_type', 'Course_typeController');
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 

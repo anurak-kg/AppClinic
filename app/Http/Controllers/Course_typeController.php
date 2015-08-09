@@ -2,86 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Course_type;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Zofe\Rapyd\Facades\DataGrid;
+use Zofe\Rapyd\Facades\DataEdit;
 
 class Course_typeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
-        //
+        return view("course_type");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    public function getDataGrid()
+    {
+        $grid = DataGrid::source(new Course_type());
+        $grid->attributes(array("class"=>"table table-hover"));
+        $grid->attributes(array("class"=>"table table-bordered"));
+        $grid->add('ct_id', 'รหัสประเภทคอร์ส');
+        $grid->add('name', 'ชื่อประเภทคอร์ส');
+        $grid->edit('/course_type/edit', 'กระทำ','modify|delete');
+
+
+        return $grid;
+    }
+    public function grid(){
+
+        $grid = $this->getDataGrid();
+        $form = $this->create();
+
+        return view('course_type/course_type', compact('form','grid'));
+    }
     public function create()
     {
-        //
+        $grid = $this->getDataGrid();
+        $form = DataEdit::source(new Course_type());
+        $form->text('name', 'ชื่อประเภทคอร์ส')->rule('required|unique:course_type,ct_id')->attributes(array('placeholder'=>'....'));
+        $form->attributes(array("class" => " "));
+        $form->saved(function () use ($form) {
+
+            $form->message("เสร็จสิ้น");
+            $form->link("course_type", "กลับ");
+        });
+        return view('course_type/course_type', compact('form','grid'));
+    }
+    public function edit()
+    {
+        if (Input::get('do_delete')==1) return  "not the first";
+
+        $edit = DataEdit::source(new Course_type());
+        $edit->text('name', 'ชื่อประเภทคอร์ส');
+        $edit->attributes(array("class" => " "));
+        $edit->link("course_type", "กลับ");
+
+        return $edit->view('course_type/edit', compact('edit'));
+
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
