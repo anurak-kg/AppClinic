@@ -23,6 +23,7 @@
                             <th>วันที่สั่งซื้อ</th>
                             <th>จำนวนเงิน</th>
                             <th>สถานะ</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         @foreach($data as $test)
@@ -38,6 +39,12 @@
                                         <span class="label label-warning">{{ $test->order_status  }}</span>
                                     @else
                                         <span class="label label-danger">{{ $test->order_status  }}</span>
+                                    @endif
+                                </td>
+                                <td>@if($test->order_status == 'PENDING')
+                                    <a href="{{url('order/cancelorder')}}?order_id={{$test->order_id}}" class="btn btn-primary"> ยกเลิกการสั่งซื้อ</a>
+                                    @else
+                                    <a href="{{url('order/cancelorder')}}?order_id={{$test->order_id}}" class="btn btn-primary" disabled>ยกเลิกการสั่งซื้อ</a>
                                     @endif
                                 </td>
                             </tr>
