@@ -6,7 +6,6 @@
 
     <div class="row">
 
-
         <div class="col-md-12">
             <div class="panel panel-primary table-responsive no-padding">
 
@@ -15,6 +14,7 @@
                 </div>
 
                 <div class="panel-body ">
+                    <div class="col-xs-12 table-responsive">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -40,23 +40,20 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{--<script type="text/javascript">--}}
-        {{--$(document).ready(function () {--}}
-            {{--$('table').DataTable({--}}
-                {{--"language": {--}}
-                    {{--"url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"--}}
-                {{--},--}}
-               {{--// "ajax": '{{url('data/customer')}}',--}}
-
-            {{--});--}}
-
-
-        {{--});--}}
-    {{--</script>--}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
+                },
+            });
+        });
+    </script>
 
 @stop
