@@ -35,7 +35,7 @@
                                     <td width="150"><strong>{{ $permission->display_name }}</strong><br>{{ $permission->name }}</td>
                                     @foreach ($roles as $role)
                                         <td width="150" class="text-center">
-                                            @if ($permission->hasRole($role->name) && $role->name == 'owner')
+                                            @if ($permission->hasRole($role->name) && $role->name == 'root')
                                                 <input type="checkbox" checked="checked" name="roles[{{ $role->id}}][permissions][]" value="{{ $permission->id }}" disabled="disabled">
                                                 <input type="hidden" name="roles[{{ $role->id}}][permissions][]" value="{{ $permission->id }}">
                                             @elseif($permission->hasRole($role->name))
