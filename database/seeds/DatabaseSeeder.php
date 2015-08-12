@@ -358,7 +358,7 @@ class RolePermissionTableSeeder extends Seeder
         $recp->perms()->sync([1,2,3,4,6,12,13,16,22]);
 
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
-        $it = \App\Models\Role::create(['id' => '90', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
+        $it = \App\Models\Role::create(['id' => '11', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
         $it->perms()->sync([]);
 
         $super = \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);

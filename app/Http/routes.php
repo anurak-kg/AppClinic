@@ -34,7 +34,6 @@ Route::group(['middleware' => 'permission:emp'], function () {
     Route::any('user/resetpassword','UserController@resetPass');
     Route::any('user/editdoc','UserController@editdoc');
     Route::any('user/manage', 'UserController@manage');
-    Route::any('user/manage','UserController@manage');
     Route::any('user/adddoctor','UserController@adddoctor');
 });
 
@@ -149,10 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::get('/login', 'UserController@getLogin');
-Route::get('/login', 'UserController@getName');
 Route::get('user/logout', 'UserController@getLogout');
-
-
 Route::post('/auth', 'UserController@auth');
 
 Route::controller('admin', 'AdminController');
