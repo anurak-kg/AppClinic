@@ -28,46 +28,48 @@
 
 
                 <div class="panel-body ">
-                    <table class="table table-bordered" id="course_table">
-                        <thead>
+                    <div class="col-xs-12 table-responsive">
+                        <table class="table table-bordered" id="course_table">
+                            <thead>
 
-                        <tr>
-                            <td style="width: 45px">รหัสคอร์ส</td>
-                            <td>ชื่อคอร์ส</td>
-                            <td style="width: 100px">จำนวนครั้ง</td>
-                            <td style="width: 120px">ราคา</td>
-                            <td style="width: 120px">รายละเอียด</td>
-
-                            <td style="width: 120px">Action</td>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        @foreach($course as $item)
                             <tr>
-                                <td>{{$item->course_id}}</td>
-                                <td>
-                                    <strong>{{$item->course_name}}</strong>
-                                    <br>{{$item->course_detail}}
-                                </td>
-                                <td>{{$item->course_qty}}</td>
-                                <td>{{$item->course_price}}</td>
-                                <td>
-                                    <a href="{{url('course/view')}}?course_id={{$item->course_id}}"
-                                       class="btn btn-default ">รายละเอียดคอร์ส</a>
-                                </td>
-                                <td>
-                                    <a href="{{url('course/edit')}}?modify={{$item->course_id}}"
-                                       class="btn btn-success">แก้ไข</a>
-                                    <a href="{{url('course/delete')}}?course_id={{$item->course_id}}"
-                                       class="btn btn-danger"
-                                       onclick="return confirm('แน่ใจว่าจะลบ การกระทำนี้ไม่สารถกู้คืนได้ ?');">ลบ</a>
+                                <td style="width: 45px">รหัสคอร์ส</td>
+                                <td>ชื่อคอร์ส</td>
+                                <td style="width: 100px">จำนวนครั้ง</td>
+                                <td style="width: 120px">ราคา</td>
+                                <td style="width: 120px">รายละเอียด</td>
 
-                                </td>
+                                <td style="width: 120px">Action</td>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+                            @foreach($course as $item)
+                                <tr>
+                                    <td>{{$item->course_id}}</td>
+                                    <td>
+                                        <strong>{{$item->course_name}}</strong>
+                                        <br>{{$item->course_detail}}
+                                    </td>
+                                    <td>{{$item->course_qty}}</td>
+                                    <td>{{$item->course_price}}</td>
+                                    <td>
+                                        <a href="{{url('course/view')}}?course_id={{$item->course_id}}"
+                                           class="btn btn-default ">รายละเอียดคอร์ส</a>
+                                    </td>
+                                    <td>
+                                        <a href="{{url('course/edit')}}?modify={{$item->course_id}}"
+                                           class="btn btn-success">แก้ไข</a>
+                                        <a href="{{url('course/delete')}}?course_id={{$item->course_id}}"
+                                           class="btn btn-danger"
+                                           onclick="return confirm('แน่ใจว่าจะลบ การกระทำนี้ไม่สารถกู้คืนได้ ?');">ลบ</a>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
             </div>

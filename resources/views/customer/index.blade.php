@@ -37,7 +37,8 @@
                                     ข้อมูลลูกค้า</a>
                             </td>
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
-                                   class="btn btn-primary"><i class="fa fa-upload"></i> อัพโหลดรูป</a></td>
+                                                  class="btn btn-primary"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
