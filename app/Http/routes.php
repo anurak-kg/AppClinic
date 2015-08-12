@@ -53,7 +53,7 @@ Route::group(['middleware' => 'permission:receive-index'], function () {
 
 //Course
 Route::group(['middleware' => 'permission:course'], function () {
-    Route::controller('course/index', 'CourseController');
+    Route::controller('course', 'CourseController');
 });
 Route::group(['middleware' => 'permission:course-read'], function () {
     Route::any('course/index', 'CourseController@getIndex');
