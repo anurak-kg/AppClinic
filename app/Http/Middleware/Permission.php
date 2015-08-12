@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
+
 use App\Http\Controllers\Auth;
+use Barryvdh\Debugbar\Middleware\Debugbar;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -14,7 +16,7 @@ class Permission
         $this->auth = $auth;
     }
 
-    public function handle($request, Closure $next,$level)
+    public function handle($request, Closure $next, $permission)
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
@@ -24,13 +26,11 @@ class Permission
             }
         }
         $user = $this->auth->user();
-        if($user->getRole() < $this->getLevel($level)  ){
-            return response('Unauthorized.', 401);
+
+        if (!$user->can($permission)) {
+            return response("<strong>Unauthorized. </strong><br>-- ไม่มีสิทธิเข้าใช้งาน  โปรติดต่อ Admin.", 401);
         }
         return $next($request);
     }
 
-    private function getLevel($level){
-        return config('shop.roleCon.'.$level);
-    }
 }

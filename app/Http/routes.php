@@ -1,18 +1,19 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+Route::group(['middleware' => 'permission:quo'], function () {
+    Route::controller('quotations', 'QuotationsController');
+});
+
+Route::controller('course', 'CourseController');
+
+//Treatment
+Route::get('treatment',['uses'  => 'TreatmentController@treatment','middleware' => 'permission:gfhg']);
+Route::get('treatment/course_data', 'TreatmentController@getCourseData');
+Route::get('treatment/add', 'TreatmentController@add');
+Route::post('treatment/save', 'TreatmentController@save');
 
 
-Route::group(['middleware' => 'permission:ADMIN'], function () {
+Route::group(['middleware' => 'permission:ADMIN-ds'], function () {
     Route::post('user/manage', 'UserController@manage');
     Route::get('user/manage', 'UserController@manage');
     Route::any('user/edit', 'UserController@edit');
@@ -74,11 +75,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', 'HomeController@dashboard');
 
-    //Treatment
-    Route::get('treatment', 'TreatmentController@treatment');
-    Route::get('treatment/course_data', 'TreatmentController@getCourseData');
-    Route::get('treatment/add', 'TreatmentController@add');
-    Route::post('treatment/save', 'TreatmentController@save');
 
     //Customer
     Route::get('customer', 'CustomerController@index');
@@ -160,7 +156,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('order/history', 'OrderController@history');
 
     //Route By Controller
-    Route::controller('quotations', 'QuotationsController');
     Route::controller('receive', 'ReceiveController');
     Route::controller('order', 'OrderController');
     Route::controller('sales', 'SalesController');
@@ -172,6 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('money/manage', 'MoneyController@moneyDr');
 
 });
+
 
 Route::get('/login', 'UserController@getLogin');
 Route::get('/login', 'UserController@getName');
@@ -185,13 +181,4 @@ Route::controller('user', 'UserController');
 Route::get('faker', function () {
     echo factory('App\Customer', 50)->create();
     echo factory('App\User', 20)->create();
-});
-Route::get('test', function () {
-
-    $mpdf=new mPDF('th');
-    $mpdf->ignore_invalid_utf8 = true;
-
-    $mpdf->WriteHTML(view('template'));
-    $mpdf->Output();
-
 });

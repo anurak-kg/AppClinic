@@ -1,7 +1,6 @@
 <?php
 
 use App\Course;
-use App\Course_detail;
 use App\Medicine;
 use App\Unit;
 use App\User;
@@ -19,7 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('UserTableSeeder');
         $this->call('ProductTableSeeder');
         $this->call('CourseTableSeeder');
         $this->call('BranchTableSeeder');
@@ -27,6 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call('VendorTableSeeder');
         $this->call('SettingTableSeeder');
         $this->call('RolePermissionTableSeeder');
+        $this->call('UserTableSeeder');
+
 
         Model::reguard();
     }
@@ -83,11 +83,13 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        User::create(['username' => 'admin',
+        $root = User::create(['username' => 'admin',
             'branch_id'=>'1','position_id'=>99,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
+        $root->roles()->sync([99]);
+
         User::create(['username' => 'sale',
             'branch_id'=>'1','position_id'=>1,
             'name' => 'นางยิงลักษณ์ ชินวัต',
@@ -282,6 +284,25 @@ class RolePermissionTableSeeder extends Seeder
 {
     public function run()
     {
+
+        DB::table('permissions')->delete();
+        DB::table('permissions')->insert([
+            ['id' => '1', 'name' => 'customer-read', 'display_name' => 'ดูข้อมูลลูกค้า'],
+            ['id' => '2', 'name' => 'customer-create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
+            ['id' => '3', 'name' => 'customer-delete', 'display_name' => 'ลบลูกค้า'],
+            ['id' => '4', 'name' => 'order-order', 'display_name' => 'สั่งสิ้นค้า'],
+            ['id' => '5', 'name' => 'quo', 'display_name' => 'ขายคอร์ส'],
+            ['id' => '6', 'name' => 'emp-create', 'display_name' => 'เพิ่มพนักงาน'],
+            ['id' => '7', 'name' => 'emp-read', 'display_name' => 'ดูข้อมูลพนนักงาน'],
+            ['id' => '8', 'name' => 'emp-delete', 'display_name' => 'ลบพนักงาน'],
+            ['id' => '9', 'name' => 'course-create', 'display_name' => 'เพิ่มคอร์ส'],
+            ['id' => '10', 'name' => 'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
+            ['id' => '11', 'name' => 'course-delete', 'display_name' => 'ลบคอร์ส'],
+            ['id' => '12', 'name' => 'receive-index', 'display_name' => 'รับสินค้า'],
+            ['id' => '13', 'name' => 'receive-return', 'display_name' => 'คืนสินค้า'],
+            ['id' => '14', 'name' => 'treatment', 'display_name' => 'รักษา'],
+            ['id' => '15', 'name' => 'sales', 'display_name' => 'POS'],
+        ]);
         DB::table('roles')->delete();
 
         \App\Models\Role::create(['id' => '1', 'name' => 'Sale', 'display_name' => 'พนักงานขาย']);
@@ -291,28 +312,13 @@ class RolePermissionTableSeeder extends Seeder
         \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
         \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
-        \App\Models\Role::create(['id' => '90', 'name' => 'admin', 'display_name' => 'พนักงานไอที']);
-        \App\Models\Role::create(['id' => '95', 'name' => 'super_admin', 'display_name' => 'super_admin']);
-        \App\Models\Role::create(['id' => '99', 'name' => 'owner', 'display_name' => 'owner']);
+        \App\Models\Role::create(['id' => '90', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
+        \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
+        $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
+        $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
 
-        DB::table('permissions')->delete();
-        DB::table('permissions')->insert([
-            ['id' => '1', 'name' => 'customer.read', 'display_name' => 'ดูข้อมูลลูกค้า'],
-            ['id' => '2', 'name' => 'customer.create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
-            ['id' => '3', 'name' => 'customer.delete', 'display_name' => 'ลบลูกค้า'],
-            ['id' => '4', 'name' => 'order.order', 'display_name' => 'สั่งสิ้นค้า'],
-            ['id' => '5', 'name' => 'order.delete', 'display_name' => 'ลบการสั่งซื้อ'],
-            ['id' => '6', 'name' => 'emp.create', 'display_name' => 'เพิ่มพนักงาน'],
-            ['id' => '7', 'name' => 'emp.read', 'display_name' => 'ดูข้อมูลพนนักงาน'],
-            ['id' => '8', 'name' => 'emp.delete', 'display_name' => 'ลบพนักงาน'],
-            ['id' => '9', 'name' => 'course.create', 'display_name' => 'เพิ่มคอร์ส'],
-            ['id' => '10', 'name' => 'course.read', 'display_name' => 'ดูข้อมูลคอร์ส'],
-            ['id' => '11', 'name' => 'course.delete', 'display_name' => 'ลบคอร์ส'],
-            ['id' => '12', 'name' => 'receive.index', 'display_name' => 'รับสินค้า'],
-            ['id' => '13', 'name' => 'receive.return', 'display_name' => 'คืนสินค้า'],
-            ['id' => '14', 'name' => 'treatment', 'display_name' => 'รักษา'],
-            ['id' => '15', 'name' => 'sales', 'display_name' => 'POS'],
-        ]);
+
+
 
     }
 }
