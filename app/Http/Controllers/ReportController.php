@@ -129,8 +129,7 @@ class ReportController extends Controller
             ORDER BY DATE ASC
             "
             , [$rang, $rang]));
-
-
+        
         //return response()->json($salesdaypro);
         $data = $salesdaycourse;
         if ($type == "excel") {
