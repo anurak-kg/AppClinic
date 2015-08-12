@@ -9,14 +9,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Jenssegers\Date\Date;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
+
+    public $data1 = null;
+
+    public function getDatSale()
+    {
+
+    }
 
     //ยอดขาย Sale
     public function reportSalesTest()
     {
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
         //var_dump($date);
         $dateTxt = [];
@@ -36,15 +45,46 @@ class ReportController extends Controller
             ->orderBy('Total', 'desc');
         $data = $sales->get();
         $data1 = $sales->take(4)->get();
+        //dd($data);
         //return response()->json($data);
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
 
-        return view('report/sale', [
-            'data' => $data,
-            'data1' => $data1,
-            'date' => $dateTxt,
-            'name' => $this->arrayToChartData($data, 'name'),
-            'total' => $this->arrayToChartData($data, 'Total')
-        ]);
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsale',['data'=>$data]);
+                });
+
+            })->export('xls');
+        } else {
+            return view('report/sale', [
+                'data' => $data,
+                'data1' => $data1,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
 
     }
 
@@ -53,8 +93,9 @@ class ReportController extends Controller
     public function reportsalesperday()
     {
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
-       //var_dump($date);
+        //var_dump($date);
         $dateTxt = [];
         $salesdaycourse = DB::select(DB::raw(
             "
@@ -65,13 +106,13 @@ class ReportController extends Controller
                 quotations
                 RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
 
-                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('".$rang."-31'))) FROM quotations))
+                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
 
                 GROUP BY DATE
 
                 ORDER BY DATE ASC
             "
-            ,[$rang,$rang]));
+            , [$rang, $rang]));
 
         $salesdaypro = DB::select(DB::raw(
             "
@@ -82,29 +123,72 @@ class ReportController extends Controller
             FROM
             sales
             RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
-            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang."-01')) FROM sales) AND (SELECT MAX(DATE(DATE('".$rang."-31'))) FROM sales))
+            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM sales) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM sales))
             GROUP BY DATE
 
             ORDER BY DATE ASC
             "
-        ,[$rang,$rang]));
+            , [$rang, $rang]));
+
+        //return response()->json($salesdaypro);
+        $data = $salesdaycourse;
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsaleperday',['data'=>$data]);
+                });
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
 
 
 
-       //return response()->json($salesdaypro);
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsaleperday',['data'=>$data]);
+                });
 
-        return view('report/salesperday', [
-            'datapro' => $salesdaypro,
-            'datapro1' => $salesdaypro,
+            })->export('xls');
+        } else {
+            return view('report/salesperday', [
+                'datapro' => $salesdaypro,
+                'datapro1' => $salesdaypro,
 
-            'total1' => $this->arrayToChartData($salesdaypro, 'total_sales'),
+                'total1' => $this->arrayToChartData($salesdaypro, 'total_sales'),
 
-            'data' => $salesdaycourse,
-            'data1' => $salesdaycourse,
+                'data' => $salesdaycourse,
+                'data1' => $salesdaycourse,
 
-            'name' => $this->arrayToChartData($salesdaycourse, 'DATE'),
-            'total' => $this->arrayToChartData($salesdaycourse, 'total_sales')
-        ]);
+                'name' => $this->arrayToChartData($salesdaycourse, 'DATE'),
+                'total' => $this->arrayToChartData($salesdaycourse, 'total_sales')
+            ]);
+        }
+
     }
 
 
@@ -112,6 +196,7 @@ class ReportController extends Controller
     public function reportCourseMonthTest()
     {
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
         $dateTxt = [];
         // var_dump($date);
@@ -127,12 +212,44 @@ class ReportController extends Controller
             ->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursemonth->get();
 
-        return view('report/coursemonth', [
-            'data' => $data,
-            'date' => $dateTxt,
-            'name' => $this->arrayToChartData($data, 'coursename'),
-            'total' => $this->arrayToChartData($data, 'Total')
-        ]);
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcoursemonth',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/coursemonth', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'coursename'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
 
         //   return response()->json($coursemonth);
     }
@@ -142,6 +259,7 @@ class ReportController extends Controller
     public function reportCourseHotTest()
     {
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
         //var_dump($date);
         $dateTxt = [];
@@ -159,12 +277,43 @@ class ReportController extends Controller
 
         // return response()->json($data);
 
-        return view('report/coursehot', [
-            'data' => $data,
-            'date' => $dateTxt,
-            'name' => $this->arrayToChartData($data, 'coursename'),
-            'total' => $this->arrayToChartData($data, 'Total')
-        ]);
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcoursehot',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/coursehot', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'coursename'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
     }
 
     //สินค้าที่ขายดีที่สุด
@@ -172,6 +321,7 @@ class ReportController extends Controller
     {
 
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
 
         $dateTxt = [];
@@ -187,14 +337,44 @@ class ReportController extends Controller
         $producthot->groupBy('productname')->orderBy('Total', 'desc');
         $data = $producthot->take(10)->get();
 
-        // return response()->json($data);
 
-        return view('report/producthot', [
-            'data' => $data,
-            'date' => $dateTxt,
-            'name' => $this->arrayToChartData($data, 'productname'),
-            'total' => $this->arrayToChartData($data, 'Total')
-        ]);
+        // return response()->json($data);
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelproducthot',['data'=>$data]);
+                });
+
+            })->export('xls');
+        } else {
+            return view('report/producthot', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'productname'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
 
     }
 
@@ -202,6 +382,7 @@ class ReportController extends Controller
     public function reportDoctorTest()
     {
         $doc = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $doc);
         // var_dump($date);
         $dateTxt = [];
@@ -220,13 +401,46 @@ class ReportController extends Controller
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
         $data = $doctor->get();
-        return view('report/doctor', [
-            'data' => $data,
-            'date' => $dateTxt,
-            'name' => $this->arrayToChartData($data, 'name'),
-            'total' => $this->arrayToChartData($data, 'Total')
-        ]);
+
         // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.exceldoctor',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/doctor', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
 
     }
 

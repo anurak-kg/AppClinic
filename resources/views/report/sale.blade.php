@@ -19,7 +19,11 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">ยอดขายพนักงาน</h3>
 
-                    <span class="pull-right"><input type="submit" class="btn btn-block btn-success" value="Export" ></span>
+                    <span class="pull-right">
+                    {!! Form::open(array('url' => 'report/sale?type=excel', 'class' => 'form')) !!}
+                        <input type="submit" class="btn btn-block btn-success" value="Export" >
+                        {!! Form::close() !!}
+                    </span>
 
                 </div><!-- /.box-header -->
                 <div class="box-body">
