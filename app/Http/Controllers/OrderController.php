@@ -161,7 +161,13 @@ class OrderController extends Controller
         $quo->save();
         return redirect('order');
     }
-
+    public function getCancelorder()
+    {
+        $quo = Order::findOrFail(Input::get('order_id'));
+        $quo->order_status = "CANCEL";
+        $quo->save();
+        return redirect('order/history')->with('message', 'ยกเลิกใบเสร็จเรียบร้อย');
+    }
     public function getSetvendor()
     {
         $ven_id = \Input::get('id');

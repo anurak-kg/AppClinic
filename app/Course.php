@@ -19,6 +19,9 @@ class Course extends Model
     public function course_medicine(){
         return $this->hasMany('App\Medicine');
     }
+    public function course_type(){
+        return $this->belongsTo('App\Course_type','ct_id');
+    }
 
 
 }

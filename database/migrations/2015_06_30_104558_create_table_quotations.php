@@ -17,7 +17,8 @@ class CreateTableQuotations extends Migration
             $table->integer('cus_id');
             $table->integer('emp_id');
             $table->integer('sale_id');
-            $table->integer('sale_price');//ค่าแนะนำคอร์ส
+            $table->integer('sale_price');//ค่าแนะนำคอร์สจำนวนเงิน
+            $table->integer('sale_price1');//ค่าแนะนำคอร์สเปอร์เซ็น
             $table->date('quo_date');
             $table->integer('quo_status');
             $table->decimal('price',14,2);

@@ -18,9 +18,9 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">ยอดขายพนักงาน</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
+
+                    <span class="pull-right"><input type="submit" class="btn btn-block btn-success" value="Export" ></span>
+
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div class="row">

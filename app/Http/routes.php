@@ -24,6 +24,11 @@ Route::group(['middleware' => 'permission:ADMIN-ds'], function () {
     Route::get('user/adddoctor', 'UserController@adddoctor');
 
     Route::any('user/editdoc', 'UserController@editdoc');
+    //Course
+    Route::controller('course', 'CourseController');
+
+
+
     //Receive
     Route::post('receive/index', 'ReceiveController@grid');
     Route::get('receive/index', 'ReceiveController@grid');
@@ -46,6 +51,8 @@ Route::group(['middleware' => 'permission:ADMIN-ds'], function () {
     Route::get('product_group/create', 'Product_groupController@create');
     Route::any('product_group/edit', 'Product_groupController@edit');
     //End Product group
+
+
 
     //Dr
     Route::post('dr/index', 'DoctorController@grid');
@@ -77,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //Customer
+    Route::post('customer', 'CustomerController@index');
     Route::get('customer', 'CustomerController@index');
     Route::post('customer/create', 'CustomerController@create');
     Route::get('customer/create', 'CustomerController@create');
@@ -85,9 +93,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('customer/edit', 'CustomerController@edit');
     Route::post('customer/view', 'CustomerController@view');
     Route::get('customer/view', 'CustomerController@view');
-    Route::post('customer/upload', 'CustomerController@uploadFiles');
-    Route::get('customer/upload', 'CustomerController@upload');
-
     //Customer calender
     Route::post('customer/calendar', 'Customer_eventController@create');
     Route::get('customer/calendar', 'Customer_eventController@create');
@@ -150,6 +155,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/salesperday', 'ReportController@reportsalesperday');
+    Route::any('report/customer_ref', 'ReportController@reportCustomerref');
+
+
+    Route::any('course_type', 'Course_typeController@grid');
+    Route::any('course_type/edit', 'Course_typeController@edit');
+
 
     //order
     Route::post('order/history', 'OrderController@history');
@@ -162,7 +173,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller('setting', 'SettingController');
     Route::controller('payment', 'PaymentController');
     Route::controller('permission', 'RoleController');
-    Route::controller('course', 'CourseController');
 
     Route::get('money/manage', 'MoneyController@moneyDr');
 

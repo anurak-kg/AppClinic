@@ -90,6 +90,7 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
+                    {{--<li><a href="{{url('report/customer_ref')}}"><i class='fa fa-minus'></i>แหล่งที่มาของสมาชิก </a></li>--}}
                     <li><a href="{{url('report/sale')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
                     <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
                     <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
