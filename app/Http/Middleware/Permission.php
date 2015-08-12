@@ -28,7 +28,8 @@ class Permission
         $user = $this->auth->user();
 
         if (!$user->can($permission)) {
-            return response("<strong>Unauthorized. </strong><br>-- ไม่มีสิทธิเข้าใช้งาน  โปรติดต่อ Admin.", 401);
+            abort('403');
+            //return response("<strong>Unauthorized. </strong><br>- - ไม่มีสิทธิเข้าใช้งาน  โปรติดต่อ Admin.", 403);
         }
         return $next($request);
     }
