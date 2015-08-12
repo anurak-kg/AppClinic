@@ -79,7 +79,6 @@ class UserController extends Controller
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
         $form->text('email', 'Email')->rule('required|email|unique:users')->attributes(array('placeholder' => 'ระบุ E-mail ....'));
         $form->add('role', 'ตำแหน่ง','select')->options(Role::where('id','<','90')->lists('display_name','id')->toArray());
-
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
