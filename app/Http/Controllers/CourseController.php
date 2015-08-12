@@ -6,7 +6,7 @@ use App\Product;
 use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use Zofe\Rapyd\Facades\DataGrid;
 
 class CourseController extends Controller
@@ -55,10 +55,18 @@ class CourseController extends Controller
         $course = Course::findOrFail(Input::get('course_id'));
         $course->delete();
         return redirect('course/index')->with('message', 'ลบคอร์สเรียบร้อยแล้ว');
-
     }
-    public function postCourse()
+    public function postCreate(Request $request)
     {
+        $this->validate($request, [
+            'course_id' => 'required|unique:course,course_id',
+            'course_name' => 'required',
+            'course_detail' => 'required',
+            'course_price' => 'required|numeric',
+            'course_qty' => 'required|numeric',
+
+        ]);
+
         $medicine = json_decode(Input::get('json'));
         $course = new Course();
         $course->course_id = Input::get('course_id');
