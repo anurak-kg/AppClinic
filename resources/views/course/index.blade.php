@@ -28,7 +28,7 @@
 
 
                 <div class="panel-body ">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="course_table">
                         <thead>
 
                         <tr>
@@ -77,10 +77,9 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            console.log('foor');
-            $('table').DataTable({
+            $('#course_table').DataTable({
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
+                    "url": "/Thai.json"
                 },
             });
         });

@@ -31,11 +31,12 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('table').DataTable({
+            $('#data-table').DataTable({
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
+                    "url": "/Thai.json"
                 },
             });
         });
     </script>
+
 @stop
