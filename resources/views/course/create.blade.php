@@ -15,26 +15,35 @@
         @endif
         <div class="col-md-10 col-md-offset-1">
             {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
-            <div class="panel  panel-primary">
+            <div class="box  box-primary">
 
                 <div class="panel-heading with-border">
                     <h2 class="panel-title">เพิ่มข้อมูล</h2>
 
                 </div>
 
-                <div class="panel-body">
-
+                <div class="box-body">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="col-md-12">
                         <label for="course_id" class=" required">เลขที่คอร์ส</label>
                         <input class=" form-control" required
-                               type="text"
+                               type="text" value="{{Input::old('course_id')}}"
                                id="course_id"
                                name="course_id" placeholder="ระบุเลขที่คอร์ส ...">
                         <br>
                     </div>
                     <div class="col-md-12">
                         <label for="course_name" class=" required">ชื่อคอร์ส</label>
-                        <input class=" form-control" type="text" id="course_name" name="course_name"
+                        <input class=" form-control" type="text" value="{{Input::old('course_name')}}"
+                               id="course_name" name="course_name"
                                placeholder="ระบุชื่อคอร์ส ..." required>
                         <br>
                     </div>
@@ -43,7 +52,7 @@
 
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
-                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
+                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ... " value="{{Input::old('course_detail')}}"
                                       name="course_detail"></textarea>
                             <br>
                         </div>
@@ -51,13 +60,13 @@
 
                     <div class="col-md-6">
                         <label for="course_name" class=" required">ราคา</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_price"
+                        <input class=" form-control" type="number" id="course_name" value="{{Input::old('course_price')}}" name="course_price"
                                placeholder="ระบุราคา ..." required>
                         <br>
                     </div>
                     <div class="col-md-6">
                         <label for="course_name" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_qty"
+                        <input class=" form-control" type="number" id="course_name" name="course_qty" value="{{Input::old('course_qty')}}"
                                placeholder="ระบุจำนวนครั้ง ..." required>
                         <br>
                     </div>

@@ -17,13 +17,7 @@ class Doctor_eventController extends Controller
 
     public function index()
     {
-
-        //return view("dr/calender");
-        $event = Doctor_event::find(1)->with('doctor_event', 'doctor')->get();
-
-        //return response()->json($event);
-
-        return view("dr/calender", ['doctor_event' => $event[0]]);
+        return view("dr/calender");
     }
 
     public function fetch()
