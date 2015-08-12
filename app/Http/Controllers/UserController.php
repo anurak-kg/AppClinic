@@ -34,7 +34,11 @@ class UserController extends Controller
     }
     public function getLogin()
     {
-        return view('login');
+        $data = DB::table('branch')
+            ->select('branch_name','branch_id')
+            ->get();
+        
+        return view('login',['data'=>$data]);
     }
     public function getUserDataGrid(){
         $grid = DataGrid::source(User::with('branch','position')
@@ -209,14 +213,6 @@ class UserController extends Controller
             ->withInput($request->only('username', 'remember'));
     }
 
-    public function getName() {
-
-        $data = DB::table('branch')
-            ->select('branch_name','branch_id')
-            ->get();
-
-        return view('/login',['data'=> $data]);
-    }
 
 
 
