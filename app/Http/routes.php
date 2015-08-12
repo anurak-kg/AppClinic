@@ -2,153 +2,123 @@
 
 Route::group(['middleware' => 'permission:quo'], function () {
     Route::controller('quotations', 'QuotationsController');
+    Route::any('bill/bill', 'BillController@index');
 });
-
-Route::controller('course', 'CourseController');
 
 //Treatment
-Route::get('treatment',['uses'  => 'TreatmentController@treatment','middleware' => 'permission:gfhg']);
-Route::get('treatment/course_data', 'TreatmentController@getCourseData');
-Route::get('treatment/add', 'TreatmentController@add');
-Route::post('treatment/save', 'TreatmentController@save');
-
-
-Route::group(['middleware' => 'permission:ADMIN-ds'], function () {
-    Route::post('user/manage', 'UserController@manage');
-    Route::get('user/manage', 'UserController@manage');
-    Route::any('user/edit', 'UserController@edit');
-    Route::get('user/resetpassword', 'UserController@resetPass');
-    Route::post('user/resetpassword', 'UserController@postResetPassword');
-
-    Route::post('user/adddoctor', 'UserController@adddoctor');
-    Route::get('user/adddoctor', 'UserController@adddoctor');
-
-    Route::any('user/editdoc', 'UserController@editdoc');
-    //Course
-    Route::controller('course', 'CourseController');
-
-
-
-    //Receive
-    Route::post('receive/index', 'ReceiveController@grid');
-    Route::get('receive/index', 'ReceiveController@grid');
-    Route::post('receive/create', 'ReceiveController@create');
-    Route::get('receive/create', 'ReceiveController@create');
-    Route::any('receive/edit', 'ReceiveController@edit');
-
-    //Product Type
-    Route::post('product_type/index', 'Product_typeController@grid');
-    Route::get('product_type/index', 'Product_typeController@grid');
-
-    Route::post('product_type/create', 'Product_typeController@create');
-    Route::get('product_type/create', 'Product_typeController@create');
-    Route::any('product_type/edit', 'Product_typeController@edit');
-
-    //Product group
-    Route::post('product_group/index', 'Product_groupController@grid');
-    Route::get('product_group/index', 'Product_groupController@grid');
-    Route::post('product_group/create', 'Product_groupController@create');
-    Route::get('product_group/create', 'Product_groupController@create');
-    Route::any('product_group/edit', 'Product_groupController@edit');
-    //End Product group
-
-
-
-    //Dr
-    Route::post('dr/index', 'DoctorController@grid');
-    Route::get('dr/index', 'DoctorController@grid');
-    Route::post('dr/create', 'DoctorController@create');
-    Route::get('dr/create', 'DoctorController@create');
-    Route::any('dr/edit', 'DoctorController@edit');
-    Route::post('dr/calender', 'Doctor_eventController@create');
-    Route::get('dr/calender', 'Doctor_eventController@create');
-    //Doctor calender
-    Route::get('doctor_calender/fetch/', 'Doctor_eventController@fetch');
-    Route::get('doctor_calender/update/', 'Doctor_eventController@update');
-    Route::get('doctor_calender/delete/', 'Doctor_eventController@delete');
-
-    //Employee
-    Route::post('employee/index', 'EmployeeController@grid');
-    Route::get('employee/index', 'EmployeeController@grid');
-
-    Route::post('employee/create', 'EmployeeController@create');
-    Route::get('employee/create', 'EmployeeController@create');
-
-    Route::any('employee/edit', 'EmployeeController@edit');
-    //End Employee
-
+Route::group(['middleware' => 'permission:treatment'], function () {
+    Route::get('treatment', 'TreatmentController@treatment');
+    Route::get('treatment/course_data', 'TreatmentController@getCourseData');
+    Route::get('treatment/add', 'TreatmentController@add');
+    Route::post('treatment/save', 'TreatmentController@save');
 });
-Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', 'HomeController@dashboard');
-
-
-    //Customer
-    Route::post('customer', 'CustomerController@index');
-    Route::get('customer', 'CustomerController@index');
-    Route::post('customer/create', 'CustomerController@create');
-    Route::get('customer/create', 'CustomerController@create');
-    Route::post('customer/edit', 'CustomerController@edit');
-    Route::get('customer/edit', 'CustomerController@edit');
-    Route::any('customer/edit', 'CustomerController@edit');
-    Route::post('customer/view', 'CustomerController@view');
-    Route::get('customer/view', 'CustomerController@view');
-    //Customer calender
-    Route::post('customer/calendar', 'Customer_eventController@create');
-    Route::get('customer/calendar', 'Customer_eventController@create');
-    Route::get('customer_calendar/fetch/', 'Customer_eventController@fetch');
-    Route::get('customer_calendar/update/', 'Customer_eventController@update');
-    Route::get('customer_calendar/delete/', 'Customer_eventController@delete');
-
-    //Course_detail
-    Route::post('course_detail/index', 'Course_detailController@grid');
-    Route::get('course_detail/index', 'Course_detailController@grid');
-
-    //Product
-    Route::post('product/index', 'ProductController@grid');
-    Route::get('product/index', 'ProductController@grid');
-    Route::post('product/create', 'ProductController@create');
-    Route::get('product/create', 'ProductController@create');
-    Route::post('product/expday', 'ProductController@expday');
-    Route::get('product/expday', 'ProductController@expday');
-    Route::post('product/stock', 'ProductController@stock');
-    Route::get('product/stock', 'ProductController@stock');
-    Route::any('product/edit', 'ProductController@edit');
-
-    //Product_detail
-    Route::post('product_detail/index', 'Product_detailController@grid');
-    Route::get('product_detail/index', 'Product_detailController@grid');
-
-
-    //Branch
-    Route::post('branch/index', 'BranchController@create');
-    Route::get('branch/index', 'BranchController@create');
-    Route::post('branch/create', 'BranchController@create');
-    Route::get('branch/create', 'BranchController@create');
-    Route::any('branch/edit', 'BranchController@edit');
-
-
-    //Vendor
-    Route::post('vendor/index', 'VendorController@create');
-    Route::get('vendor/index', 'VendorController@create');
-    Route::post('vendor/create', 'VendorController@create');
-    Route::get('vendor/create', 'VendorController@create');
-    Route::any('vendor/edit', 'VendorController@edit');
-
-
-    Route::post('bill/bill', 'BillController@index');
-    Route::get('bill/bill', 'BillController@index');
-    Route::post('bill/billproduct', 'BillController@product');
-    Route::get('bill/billproduct', 'BillController@product');
-    Route::get('bill/order', 'BillController@order');
-
+//Customer
+Route::group(['middleware' => 'permission:customer-read'], function () {
+    Route::any('customer','CustomerController@index');
+    Route::any('customer/view','CustomerController@view');
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
     Route::get('data/user_search', 'DataController@getUserList');
     Route::get('data/customer', 'DataController@getCustomerData');
     Route::get('data/product', 'DataController@getProductList');
     Route::get('data/vendor_search', 'DataController@vendorSearch');
-    //Report
+});
+Route::any('customer/create', ['uses' => 'CustomerController@create', 'middleware' => 'permission:customer-create']);
+Route::any('customer/edit', ['uses' => 'CustomerController@edit', 'middleware' => 'permission:customer-edit']);
+Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
+
+//Employee
+Route::group(['middleware' => 'permission:emp-edit'], function () {
+    Route::any('user/edit', ['uses' => 'UserController@edit', 'middleware' => 'permission:emp-edit']);
+    Route::any('user/resetpassword', ['uses' => 'UserController@resetPass', 'middleware' => 'permission:emp-edit']);
+    Route::any('user/editdoc', ['uses' => 'UserController@editdoc', 'middleware' => 'permission:emp-edit']);
+});
+Route::group(['middleware' => 'permission:emp-create'], function () {
+    Route::any('user/manage', ['uses' => 'UserController@manage', 'middleware' => 'permission:emp-create']);
+    Route::any('user/adddoctor', ['uses' => 'UserController@adddoctor', 'middleware' => 'permission:emp-create']);
+});
+Route::any('user/manage', ['uses' => 'UserController@manage', 'middleware' => 'permission:emp-read']);
+
+//order
+Route::group(['middleware' => 'permission:order-order'], function () {
+    Route::any('order/history', 'OrderController@history');
+    Route::controller('order', 'OrderController');
+    Route::any('bill/order', 'BillController@order');
+});
+
+//Receive
+Route::group(['middleware' => 'permission:receive-index'], function () {
+    Route::controller('receive', 'ReceiveController');
+});
+
+//Course
+Route::group(['middleware' => 'permission:course'], function () {
+    Route::controller('course/index', 'CourseController');
+});
+Route::group(['middleware' => 'permission:course-read'], function () {
+    Route::any('course/index', 'CourseController@getIndex');
+    Route::any('course/view', 'CourseController@getView');
+});
+
+//Product group
+Route::group(['middleware' => 'permission:product-group'], function () {
+    Route::any('product_group/index', 'Product_groupController@grid');
+    Route::any('product_group/create', 'Product_groupController@create');
+    Route::any('product_group/edit', 'Product_groupController@edit');
+});
+
+//Course type
+Route::group(['middleware' => 'permission:course-type'], function () {
+    Route::any('course_type', 'Course_typeController@grid');
+    Route::any('course_type/edit', 'Course_typeController@edit');
+});
+
+//Dr
+Route::group(['middleware' => 'permission:dr-working'], function () {
+    Route::any('dr/calender','Doctor_eventController@create');
+    //Doctor calender
+    Route::get('doctor_calender/fetch/', 'Doctor_eventController@fetch');
+    Route::get('doctor_calender/update/', 'Doctor_eventController@update');
+    Route::get('doctor_calender/delete/', 'Doctor_eventController@delete');
+});
+
+//ตารางนัด
+Route::group(['middleware' => 'permission:dr-working'], function () {
+    Route::any('customer/calendar','Customer_eventController@create');
+    //Customer calender
+    Route::get('customer_calendar/fetch/', 'Customer_eventController@fetch');
+    Route::get('customer_calendar/update/', 'Customer_eventController@update');
+    Route::get('customer_calendar/delete/', 'Customer_eventController@delete');
+
+});
+
+//Product
+Route::group(['middleware' => 'permission:product'], function () {
+    Route::any('product/index', 'ProductController@grid');
+    Route::any('product/create', 'ProductController@create');
+    Route::any('product/expday', 'ProductController@expday');
+    Route::any('product/stock', 'ProductController@stock');
+    Route::any('product/edit', 'ProductController@edit');
+});
+Route::any('product/index', ['uses' =>  'ProductController@grid', 'middleware' => 'permission:product-read']);
+
+//Branch
+Route::group(['middleware' => 'permission:branch'], function () {
+    Route::any('branch/index', 'BranchController@create');
+    Route::any('branch/create', 'BranchController@create');
+    Route::any('branch/edit', 'BranchController@edit');
+});
+
+//Vendor
+Route::group(['middleware' => 'permission:vendor'], function () {
+    Route::any('vendor/index', 'VendorController@create');
+    Route::any('vendor/create', 'VendorController@create');
+    Route::any('vendor/edit', 'VendorController@edit');
+});
+
+//Report
+Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/doctor', 'ReportController@reportDoctorTest');
     Route::any('report/sale', 'ReportController@reportSalesTest');
     Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
@@ -156,25 +126,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/salesperday', 'ReportController@reportsalesperday');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
+    Route::any('money/manage', 'MoneyController@moneyDr');
+});
 
-
-    Route::any('course_type', 'Course_typeController@grid');
-    Route::any('course_type/edit', 'Course_typeController@edit');
-
-
-    //order
-    Route::post('order/history', 'OrderController@history');
-    Route::get('order/history', 'OrderController@history');
-
-    //Route By Controller
-    Route::controller('receive', 'ReceiveController');
-    Route::controller('order', 'OrderController');
+Route::group(['middleware' => 'permission:sales'], function () {
     Route::controller('sales', 'SalesController');
-    Route::controller('setting', 'SettingController');
+    Route::any('bill/billproduct', 'BillController@product');
+});
+Route::group(['middleware' => 'permission:payment'], function () {
     Route::controller('payment', 'PaymentController');
+});
+Route::group(['middleware' => 'permission:setting'], function () {
+    Route::controller('setting', 'SettingController');
+});
+Route::group(['middleware' => 'permission:permission'], function () {
     Route::controller('permission', 'RoleController');
+});
 
-    Route::get('money/manage', 'MoneyController@moneyDr');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', 'HomeController@dashboard');
 
 });
 
