@@ -316,42 +316,50 @@ class RolePermissionTableSeeder extends Seeder
             ['id' => '4',  'name' =>  'customer-edit', 'display_name' => 'แก้ไขข้อมูลลูกค้า'],
             ['id' => '5',  'name' =>  'order-order', 'display_name' => 'สั่งสิ้นค้า'],
             ['id' => '6',  'name' =>  'quo', 'display_name' => 'ขายคอร์ส'],
-            ['id' => '7',  'name' =>  'emp-create', 'display_name' => 'เพิ่มพนักงาน'],
-            ['id' => '8',  'name' =>  'emp-read', 'display_name' => 'ดูข้อมูลพนนักงาน'],
-            ['id' => '9',  'name' =>  'emp-delete', 'display_name' => 'ลบพนักงาน'],
-            ['id' => '10', 'name' =>  'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
-            ['id' => '11', 'name' =>  'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
-            ['id' => '12', 'name' =>  'product-group', 'display_name' => 'เพิ่ม ลบ และแก้ไขกลุ่มสินค้า'],
-            ['id' => '13', 'name' =>  'receive-return', 'display_name' => 'รับสินค้าและคืนสินค้า'],
-            ['id' => '14', 'name' =>  'treatment', 'display_name' => 'รักษา'],
-            ['id' => '15', 'name' =>  'sales', 'display_name' => 'POS'],
-            ['id' => '16', 'name' =>  'report', 'display_name' => 'รายงาน'],
-            ['id' => '17', 'name' =>  'dr-working', 'display_name' => 'ตารางการทำงานหมอ'],
-            ['id' => '18', 'name' =>  'appointment', 'display_name' => 'ตารางนัดลูกค้า'],
-            ['id' => '19', 'name' =>  'product', 'display_name' => 'เพิ่ม แก้ไข และลบสินค้า'],
-            ['id' => '20', 'name' =>  'product-read', 'display_name' => 'ดูข้อมูลสินค้า'],
-            ['id' => '21', 'name' =>  'branch', 'display_name' => 'การจัดการสาขา'],
-            ['id' => '22', 'name' =>  'vendor', 'display_name' => 'การจัดการ suppiler'],
-            ['id' => '23', 'name' =>  'course-type', 'display_name' => 'เพิ่ม ลบ และแก้ไขประเภทคอร์ส'],
-            ['id' => '24', 'name' =>  'payment', 'display_name' => 'ชำระเงิน'],
-            ['id' => '25', 'name' =>  'setting', 'display_name' => 'ตั้งค่า'],
-            ['id' => '26', 'name' =>  'permission', 'display_name' => 'กำหนดสิทธิ'],
+            ['id' => '7',  'name' =>  'emp', 'display_name' => 'การจัดการพนักงาน'],
+            ['id' => '8',  'name' =>  'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
+            ['id' => '9',  'name' =>  'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
+            ['id' => '10', 'name' =>  'product-group', 'display_name' => 'เพิ่ม ลบ และแก้ไขกลุ่มสินค้า'],
+            ['id' => '11', 'name' =>  'receive-return', 'display_name' => 'รับสินค้าและคืนสินค้า'],
+            ['id' => '12', 'name' =>  'treatment', 'display_name' => 'รักษา'],
+            ['id' => '13', 'name' =>  'sales', 'display_name' => 'POS'],
+            ['id' => '14', 'name' =>  'report', 'display_name' => 'รายงาน'],
+            ['id' => '15', 'name' =>  'dr-working', 'display_name' => 'ตารางการทำงานหมอ'],
+            ['id' => '16', 'name' =>  'appointment', 'display_name' => 'ตารางนัดลูกค้า'],
+            ['id' => '17', 'name' =>  'product', 'display_name' => 'เพิ่ม แก้ไข และลบสินค้า'],
+            ['id' => '18', 'name' =>  'product-read', 'display_name' => 'ดูข้อมูลสินค้า'],
+            ['id' => '19', 'name' =>  'branch', 'display_name' => 'การจัดการสาขา'],
+            ['id' => '20', 'name' =>  'vendor', 'display_name' => 'การจัดการ suppiler'],
+            ['id' => '21', 'name' =>  'course-type', 'display_name' => 'เพิ่ม ลบ และแก้ไขประเภทคอร์ส'],
+            ['id' => '22', 'name' =>  'payment', 'display_name' => 'ชำระเงิน'],
+            ['id' => '23', 'name' =>  'setting', 'display_name' => 'ตั้งค่า'],
+            ['id' => '24', 'name' =>  'permission', 'display_name' => 'กำหนดสิทธิ'],
+
 
         ]);
         DB::table('roles')->delete();
 
-        \App\Models\Role::create(['id' => '1', 'name' => 'Sale', 'display_name' => 'พนักงานขาย']);
-        \App\Models\Role::create(['id' => '2', 'name' => 'PO', 'display_name' => 'พนักงานสั่งซื้อสินค้า']);
-        \App\Models\Role::create(['id' => '3', 'name' => 'Stock', 'display_name' => 'พนักงานจัดการสินค้า']);
-        \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
-        \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
-        \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
+        $sale = \App\Models\Role::create(['id' => '1', 'name' => 'Sale', 'display_name' => 'พนักงานขาย']);
+        $po = \App\Models\Role::create(['id' => '2', 'name' => 'PO', 'display_name' => 'พนักงานสั่งซื้อสินค้า']);
+        $stock = \App\Models\Role::create(['id' => '3', 'name' => 'Stock', 'display_name' => 'พนักงานจัดการสินค้า']);
+        $doctor = \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
+        $manager = \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
+        $recp = \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
-        \App\Models\Role::create(['id' => '90', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
-        \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
+        $it = \App\Models\Role::create(['id' => '90', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
+        $super = \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
         $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
-        $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]);
-        
+        $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
+        $sale->perms()->sync([]);
+        $po->perms()->sync([5,11]);
+        $stock->perms()->sync([10,17,18]);
+        $doctor->perms()->sync([]);
+        $manager->perms()->sync([14]);
+        $recp->perms()->sync([1,2,3,4,6,12,13,16,22]);
+        $it->perms()->sync([]);
+        $super->perms()->sync([]);
+
+
 
     }
 }

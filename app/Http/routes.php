@@ -29,16 +29,15 @@ Route::any('customer/edit', ['uses' => 'CustomerController@edit', 'middleware' =
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
 
 //Employee
-Route::group(['middleware' => 'permission:emp-edit'], function () {
-    Route::any('user/edit', ['uses' => 'UserController@edit', 'middleware' => 'permission:emp-edit']);
-    Route::any('user/resetpassword', ['uses' => 'UserController@resetPass', 'middleware' => 'permission:emp-edit']);
-    Route::any('user/editdoc', ['uses' => 'UserController@editdoc', 'middleware' => 'permission:emp-edit']);
+Route::group(['middleware' => 'permission:emp'], function () {
+    Route::any('user/edit','UserController@edit');
+    Route::any('user/resetpassword','UserController@resetPass');
+    Route::any('user/editdoc','UserController@editdoc');
+    Route::any('user/manage', 'UserController@manage');
+    Route::any('user/manage','UserController@manage');
+    Route::any('user/adddoctor','UserController@adddoctor');
 });
-Route::group(['middleware' => 'permission:emp-create'], function () {
-    Route::any('user/manage', ['uses' => 'UserController@manage', 'middleware' => 'permission:emp-create']);
-    Route::any('user/adddoctor', ['uses' => 'UserController@adddoctor', 'middleware' => 'permission:emp-create']);
-});
-Route::any('user/manage', ['uses' => 'UserController@manage', 'middleware' => 'permission:emp-read']);
+
 
 //order
 Route::group(['middleware' => 'permission:order-order'], function () {
