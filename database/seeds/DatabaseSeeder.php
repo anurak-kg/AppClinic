@@ -340,24 +340,32 @@ class RolePermissionTableSeeder extends Seeder
         DB::table('roles')->delete();
 
         $sale = \App\Models\Role::create(['id' => '1', 'name' => 'Sale', 'display_name' => 'พนักงานขาย']);
+        $sale->perms()->sync([]);
+
         $po = \App\Models\Role::create(['id' => '2', 'name' => 'PO', 'display_name' => 'พนักงานสั่งซื้อสินค้า']);
+        $po->perms()->sync([5,11]);
+
         $stock = \App\Models\Role::create(['id' => '3', 'name' => 'Stock', 'display_name' => 'พนักงานจัดการสินค้า']);
+        $stock->perms()->sync([10,17,18]);
+
         $doctor = \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
+        $doctor->perms()->sync([]);
+
         $manager = \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
+        $manager->perms()->sync([14]);
+
         $recp = \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
+        $recp->perms()->sync([1,2,3,4,6,12,13,16,22]);
+
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
         $it = \App\Models\Role::create(['id' => '90', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
+        $it->perms()->sync([]);
+
         $super = \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
+        $super->perms()->sync([]);
+
         $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
         $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
-        $sale->perms()->sync([]);
-        $po->perms()->sync([5,11]);
-        $stock->perms()->sync([10,17,18]);
-        $doctor->perms()->sync([]);
-        $manager->perms()->sync([14]);
-        $recp->perms()->sync([1,2,3,4,6,12,13,16,22]);
-        $it->perms()->sync([]);
-        $super->perms()->sync([]);
 
 
 
