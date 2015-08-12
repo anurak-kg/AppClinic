@@ -37,7 +37,10 @@ class UserController extends Controller
         return view('login');
     }
     public function getUserDataGrid(){
-        $grid = DataGrid::source(User::with('branch','position'));
+        $grid = DataGrid::source(User::with('branch','position')
+            ->where('position_id','!=',95)
+            ->where('position_id','!=',99));
+
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
 
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');

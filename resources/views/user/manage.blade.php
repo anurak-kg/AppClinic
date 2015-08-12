@@ -1,15 +1,19 @@
 @extends('layout.master')
 @section('title','ข้อมูลพนักงาน')
+@section('headText','Employee')
+@section('headDes','จัดการพนักงาน')
 @section('content')
 
 <div class="row">
     <div class="col-md-4">
         <!-- general form elements -->
-        <div class="panel panel-primary">
-            <div class="panel-heading with-border">
-                <h3 class="panel-title">เพิ่มข้อมูล</h3>
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <i class="fa fa-user"></i>
+
+                <h2 class="box-title">เพิ่มพนักงาน</h2>
             </div>
-            <div class="panel-body">
+            <div class="box-body">
                 {!! $form !!}
             </div>
 
@@ -18,9 +22,11 @@
 
     </div>
     <div class="col-md-8">
-        <div class="panel panel-primary">
-            <div class="panel-heading with-border">
-                <h3 class="panel-title">ข้อมูลพนักงาน</h3>
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <i class="fa fa-user"></i>
+
+                <h2 class="box-title">พนักงานขาย / แพทย์</h2>
             </div>
 
             <div class="panel-body">
@@ -37,7 +43,7 @@
         $('#data-table').DataTable({
             "language": {
                 "url": "/Thai.json"
-            },
+            }
         });
     });
 </script>
