@@ -145,9 +145,7 @@ Route::group(['middleware' => 'permission:permission'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/', 'HomeController@dashboard');
-
 });
 
 

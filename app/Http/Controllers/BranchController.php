@@ -20,8 +20,8 @@ class BranchController extends Controller
 
     public function getDataGrid(){
         $grid = DataGrid::source(new Branch());
-        $grid->attributes(array("class"=>"table table-hover"));
-        $grid->attributes(array("class"=>"table table-bordered"));
+        $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
+
         $grid->add('branch_id', 'รหัสสาขา');
         $grid->add('branch_name', 'ชื่อสาขา');
         $grid->add('branch_address', 'ที่อยู่สาขา');

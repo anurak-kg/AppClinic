@@ -38,6 +38,8 @@ class UserController extends Controller
     }
     public function getUserDataGrid(){
         $grid = DataGrid::source(User::with('branch','position'));
+        $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
+
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
         $grid->add('name','Name');
         $grid->add('email','Email');
@@ -110,6 +112,8 @@ class UserController extends Controller
     }
     public function getUserDataGridDoctor(){
         $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
+        $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
+
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
         $grid->add('name','Name');
         $grid->add('email','Email');

@@ -32,8 +32,8 @@ class Product_groupController extends Controller
     public function getDataGrid()
     {
         $grid = DataGrid::source(Product_group::with('product_type'));
-        $grid->attributes(array("class"=>"table table-hover"));
-        $grid->attributes(array("class"=>"table table-bordered"));
+        $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
+
         $grid->add('pg_id', 'รหัสกลุ่มสินค้า');
         $grid->add('pg_name', 'ชื่อกลุ่มสินค้า');
         $grid->edit('/product_group/edit', 'กระทำ','modify|delete');
@@ -44,6 +44,7 @@ class Product_groupController extends Controller
     public function grid(){
 
         $grid = $this->getDataGrid();
+
         $form = $this->create();
 
         return view('product_group/index', compact('form','grid'));
