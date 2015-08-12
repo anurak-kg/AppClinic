@@ -37,7 +37,7 @@ class UserController extends Controller
         $data = DB::table('branch')
             ->select('branch_name','branch_id')
             ->get();
-        
+
         return view('login',['data'=>$data]);
     }
     public function getUserDataGrid(){

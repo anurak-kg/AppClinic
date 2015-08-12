@@ -13,7 +13,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="history_table">
                         <thead>
                         <tr>
                             <th>รหัสใบสั่งซื้อ</th>
@@ -57,9 +57,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('table').DataTable({
+            $('#history_table').DataTable({
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.7/i18n/Thai.json"
+                    "url": "/Thai.json"
                 },
             });
         });

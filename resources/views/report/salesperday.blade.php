@@ -16,11 +16,9 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">สรุปยอดขายรายวัน</h3>
-                    <span class="pull-right">
-                         {!! Form::open(array('url' => 'report/salesperday?type=excel', 'class' => 'form')) !!}
-                        <input type="submit" class="btn btn-block btn-success" value="Export" >
-                        {!! Form::close() !!}
-                    </span>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
 
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -63,6 +61,11 @@
             <div class="box">
                 <div class="box-header with-border" align="middle">
                     <h2 class="box-title">ตารางสรุปยอดขายคอร์ส</h2>
+                     <span class="pull-right">
+                         {!! Form::open(array('url' => 'report/salesperday?type=excel', 'class' => 'form')) !!}
+                              <input type="submit" class="btn btn-block btn-success" value="Export" >
+                              {!! Form::close() !!}
+                    </span>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
@@ -91,6 +94,11 @@
             <div class="box">
                 <div class="box-header with-border" align="middle">
                     <h2 class="box-title">ตารางสรุปยอดขายสินค้า</h2>
+                    <span class="pull-right">
+                         {!! Form::open(array('url' => 'report/salesperday?type=excel', 'class' => 'form')) !!}
+                        <input type="submit" class="btn btn-block btn-success" value="Export" >
+                        {!! Form::close() !!}
+                    </span>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
