@@ -134,9 +134,10 @@
                         <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
                         <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                         <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
-                        <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
-                        </li>
+                        <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a></li>
                         <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
+                        <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
+                        <li><a href="{{url('report/customer_payment')}}"><i class='fa fa-minus'></i>รายได้ทั้งหมด</a>
                         </li>
                     </ul>
                 </li>

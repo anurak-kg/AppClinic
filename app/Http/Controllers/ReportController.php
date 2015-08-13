@@ -16,10 +16,7 @@ class ReportController extends Controller
 
     public $data1 = null;
 
-    public function getDatSale()
-    {
 
-    }
 
     //ยอดขาย Sale
     public function reportSalesTest()
@@ -44,7 +41,6 @@ class ReportController extends Controller
             ->groupBy('quotations.sale_id')
             ->orderBy('Total', 'desc');
         $data = $sales->get();
-        $data1 = $sales->take(4)->get();
         //dd($data);
         //return response()->json($data);
         if ($type == "excel") {
@@ -78,7 +74,6 @@ class ReportController extends Controller
         } else {
             return view('report/sale', [
                 'data' => $data,
-                'data1' => $data1,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
                 'total' => $this->arrayToChartData($data, 'Total')
@@ -273,7 +268,7 @@ class ReportController extends Controller
 
         }
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
-        $data = $coursehot->take(10)->get();
+        $data = $coursehot->get();
 
         // return response()->json($data);
 
@@ -335,7 +330,7 @@ class ReportController extends Controller
             $producthot->whereRaw("DATE(sales_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
         }
         $producthot->groupBy('productname')->orderBy('Total', 'desc');
-        $data = $producthot->take(10)->get();
+        $data = $producthot->get();
 
 
         // return response()->json($data);
@@ -465,6 +460,132 @@ class ReportController extends Controller
 //
 //        ]);
 //    }
+
+        //รายจ่าย suplier
+    public function reportsuplier()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $suplier = DB::table('vendor')
+            ->select('vendor.ven_name as name',DB::raw('SUM(order_detail.order_de_price+order_detail.order_de_price*7/100) as total'))
+            ->join('order_detail', 'order_detail.order_id', '=', 'order_detail.order_id')
+            ->join('order', 'order.order_id', '=', 'order.order_id');
+        if ($rang != null) {
+            $suplier->whereRaw("DATE(order.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $suplier->groupBy('ven_name')->orderBy('total', 'desc');
+
+        $data = $suplier->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsuplier',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/suplier', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
+
+    //รายได้ทั้งหมดจากลูกค้า แบ่งเป็น ประเภทการชำระเงิน
+    public function reportCustomer_payment()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $pay = DB::table('payment_detail')
+            ->select('payment_detail.payment_type as name',DB::raw('Sum(payment_detail.amount+payment_detail.amount*7/100) AS Total'));
+        if ($rang != null) {
+            $pay->whereRaw("DATE(payment_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $pay->groupBy('name')->orderBy('Total', 'desc');
+
+        $data = $pay->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('Filename', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcustomer_payment',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/customer_payment', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'Total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
 
     public function arrayToChartData($db, $name)
     {
