@@ -24,7 +24,11 @@ class QuotationsController extends Controller
 {
     public function getIndex()
     {
-        if (Quotations::where('quo_status', -1)->where('branch_id',Branch::getCurrentId())->count() == 0) {
+        $quoCount = Quotations::where('quo_status', -1)
+            ->where('branch_id',Branch::getCurrentId())
+            ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->count();
+        if ($quoCount == 0) {
             $quotation = new Quotations();
             //$quotation->cus_id = null;
             $quotation->emp_id = Auth::user()->getAuthIdentifier();
@@ -61,7 +65,7 @@ class QuotationsController extends Controller
     {
         $query = '%' . \Input::get('q') . '%';
         $course = Course::
-                where('course_name', 'LIKE', $query)
+        where('course_name', 'LIKE', $query)
             ->orWhere('course_id', 'LIKE', $query)
             ->get();
 
@@ -73,7 +77,7 @@ class QuotationsController extends Controller
     public function getAdd()
     {
         $id = \Input::get('id');
-         $rec = Quotations::find($this->getQuoId());
+        $rec = Quotations::find($this->getQuoId());
         $product = Course::find($id);
         $rec->course()->attach($product, [
             'qty' => 0,
@@ -137,7 +141,7 @@ class QuotationsController extends Controller
     public function getUpdate()
     {
         $type = Input::get('type');
-         $value = Input::get('value');
+        $value = Input::get('value');
         $id = Input::get('id');
         $r = DB::table('quotations_detail')
             ->where('quo_id', "=", $this->getQuoId())
@@ -159,7 +163,7 @@ class QuotationsController extends Controller
     {
         //echo $this->getQuoId();
         $quo = Quotations::find($this->getQuoId());
-       // dd($quo);
+        // dd($quo);
         $data = null;
         if ($quo->cus_id == 0) {
             $data['status'] = null;
