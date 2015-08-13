@@ -24,8 +24,15 @@ Route::group(['middleware' => 'permission:customer-read'], function () {
     Route::get('data/product', 'DataController@getProductList');
     Route::get('data/vendor_search', 'DataController@vendorSearch');
 });
+Route::group(['middleware' => 'permission:customer-edit'], function () {
+    Route::any('customer/edit','CustomerController@edit');
+    Route::get('customer/upload','CustomerController@upload');
+    Route::get('customer/photo-data','CustomerController@getJsonPhotoList');
+    Route::post('customer/upload','CustomerController@uploadFiles');
+    Route::post('customer/photo-delete','CustomerController@getDeletePhotoById');
+
+});
 Route::any('customer/create', ['uses' => 'CustomerController@create', 'middleware' => 'permission:customer-create']);
-Route::any('customer/edit', ['uses' => 'CustomerController@edit', 'middleware' => 'permission:customer-edit']);
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
 
 //Employee

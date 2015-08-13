@@ -72,6 +72,7 @@ class SettingTableSeeder extends Seeder
             ['setting_name' => 'vat_rate',              'value' => '7'],
             ['setting_name' => 'product_day_expire',    'value' => '30'],
             ['setting_name' => 'order_sell',            'value' => 'FIFO'],
+            ['setting_name' => 'customer_photo_limit',            'value' => '5'],
 
         ]);
     }

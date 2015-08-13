@@ -12,11 +12,13 @@ class CreateTablePicture extends Migration
      */
     public function up()
     {
-        Schema::create('picture', function (Blueprint $table) {
-            $table->increments('pic_id');
+        Schema::create('customer_photo', function (Blueprint $table) {
+            $table->increments('photo_id');
+            $table->integer('branch_id');
+            $table->integer('emp_id');
             $table->integer('cus_id');
-            $table->enum('pic_type', array('Before','After'));
-            $table->string('pic_name');
+            $table->enum('photo_type', array('Before','After'));
+            $table->string('photo_file_name');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateTablePicture extends Migration
      */
     public function down()
     {
-        Schema::drop('picture');
+        Schema::drop('customer_photo');
     }
 }

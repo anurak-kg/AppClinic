@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Allergic_detail;
+use App\Branch;
 use App\Course;
 use App\Customer;
+use App\CustomerPhoto;
 use App\Disease_detail;
+use Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Response;
@@ -19,57 +22,94 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('customer/index',compact('customers'));
+        return view('customer/index', compact('customers'));
     }
 
     public function view()
     {
-        $customer = Customer::with('Quotations.course')->where('cus_id',\Input::get('cus_id'))->get()->first();
+        $customer = Customer::with('Quotations.course')->where('cus_id', \Input::get('cus_id'))->get()->first();
 
         $data = \DB::table('treat_has_medicine')
-            ->select('treat_history.treat_id','treat_history.branch_id','course.course_name','users.name',
-                    'treat_history.dr_id', 'treat_history.bt_user_id1', 'treat_history.bt_user_id2','product.product_name','treat_history.comment',
-                    'treat_history.treat_date')
-            ->join('treat_history','treat_history.treat_id','=','treat_has_medicine.treat_id')
-            ->join('product','product.product_id','=','treat_has_medicine.product_id')
-            ->join('course','course.course_id','=','treat_history.course_id')
-            ->join('quotations','quotations.quo_id','=','treat_history.quo_id')
-            ->join('users','users.id','=','treat_history.emp_id')
-            ->where('quotations.cus_id','=',$customer->cus_id)
-            ->orderby('treat_id','desc')
+            ->select('treat_history.treat_id', 'treat_history.branch_id', 'course.course_name', 'users.name',
+                'treat_history.dr_id', 'treat_history.bt_user_id1', 'treat_history.bt_user_id2', 'product.product_name', 'treat_history.comment',
+                'treat_history.treat_date')
+            ->join('treat_history', 'treat_history.treat_id', '=', 'treat_has_medicine.treat_id')
+            ->join('product', 'product.product_id', '=', 'treat_has_medicine.product_id')
+            ->join('course', 'course.course_id', '=', 'treat_history.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'treat_history.quo_id')
+            ->join('users', 'users.id', '=', 'treat_history.emp_id')
+            ->where('quotations.cus_id', '=', $customer->cus_id)
+            ->orderby('treat_id', 'desc')
             ->get();
 
-         // return response()->json($data);
+        // return response()->json($data);
 
-          return view('customer/view',['data'=>$customer,'treat'=>$data]);
+        return view('customer/view', ['data' => $customer, 'treat' => $data]);
     }
-    public function upload(){
-        return view('customer.upload');
+
+    public function upload()
+    {
+        $customer = Customer::findOrFail(Input::get('cus_id'));
+        return view('customer.upload', compact('customer'));
     }
-    public function uploadFiles() {
+
+    public function uploadFiles()
+    {
 
         $input = Input::all();
 
         $rules = array(
-            'file' => 'image|max:3000',
+           // 'file' => 'image',
+            'customer_id' => 'required',
+            'type' => 'required',
+
         );
 
         $validation = Validator::make($input, $rules);
-
+        //dd($input);
         if ($validation->fails()) {
             return Response::make($validation->errors->first(), 400);
         }
-
-        $destinationPath = 'uploads'; // upload path
-        $extension = Input::file('file')->getClientOriginalExtension(); // getting file extension
-        $fileName = rand(11111, 99999) . '.' . $extension; // renameing image
-        $upload_success = Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
+        $cus_id = Input::get('customer_id');
+        $type = Input::get('type');
+        $destinationPath = 'uploads/customer'; // upload path
+        $upload_success = null;
+        foreach($input['file'] as $file ){
+            $extension = $file->getClientOriginalExtension(); // getting file extension
+            $fileName = $cus_id .'-'.$type.'-'.rand(111111, 991999) . '.' . $extension; // renameing image
+            $upload_success = $file->move($destinationPath, $fileName); // uploading file to given path
+            $customerPhoto = new CustomerPhoto();
+            $customerPhoto->emp_id = Auth::user()->getAuthIdentifier();
+            $customerPhoto->branch_id =  Branch::getCurrentId();
+            $customerPhoto->cus_id =  $cus_id;
+            $customerPhoto->photo_type = $type;
+            $customerPhoto->photo_file_name = $fileName;
+            $customerPhoto->save();
+        }
 
         if ($upload_success) {
             return Response::json('success', 200);
         } else {
             return Response::json('error', 400);
         }
+    }
+    public function getJsonPhotoList(){
+        $customerPhoto = CustomerPhoto::where('cus_id',Input::get('cus_id'))->where('photo_type',Input::get('type'))->get();
+        $data = [];
+        foreach($customerPhoto as $photo){
+            array_push($data,[
+                'name'=> $photo->photo_file_name,
+                'size'=>1024
+            ]);
+        }
+        return response()->json($data);
+    }
+    public function getDeletePhotoById(){
+        $filename=Input::get('filename');
+        $customer_photo = CustomerPhoto::where('photo_file_name',$filename)->first();
+        $customer_photo->delete();
+        \File::delete(public_path().'/uploads/customer/'.$filename);
+        return Response::json('success', 200);
     }
 
 
@@ -126,7 +166,6 @@ class CustomerController extends Controller
     }
 
 
-
     public function getDataGrid()
     {
         $grid = DataGrid::source(new Customer());
@@ -135,10 +174,10 @@ class CustomerController extends Controller
         $grid->add('cus_id', 'รหัสสมาชิก');
         $grid->add('cus_name', 'ชื่อ');
         $grid->add('cus_tel', 'เบอร์โทรศัพท์');
-        $grid->add('{{$cus_id}}','รายละเอียด')->cell(function ($cus_id) {
+        $grid->add('{{$cus_id}}', 'รายละเอียด')->cell(function ($cus_id) {
             return '<a href="' . url('customer/view') . '?cus_id=' . $cus_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
         });
-        $grid->add('cus_id','รายละเอียด')->cell(function ($cus_id) {
+        $grid->add('cus_id', 'รายละเอียด')->cell(function ($cus_id) {
             return '<a href="' . url('customer/upload') . '?cus_id=' . $cus_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลลูกค้า</a>';
         });
 
@@ -224,7 +263,7 @@ class CustomerController extends Controller
 
         $edit->add('allergic', 'โรคประจำตัว', 'text')->attributes(array('data-role' => "tagsinput"));
         $edit->add('disease', 'แพ้ยา', 'text')->attributes(array('data-role' => "tagsinput"));
-        $edit->add('cus_reference', 'แหล่งที่มา','select')->options(['Web Site'=>'Web Site','Booth'=>'Booth','Offline'=>'Offline']);
+        $edit->add('cus_reference', 'แหล่งที่มา', 'select')->options(['Web Site' => 'Web Site', 'Booth' => 'Booth', 'Offline' => 'Offline']);
 
         $edit->text('cus_hno', 'บ้านเลขที่');
         $edit->text('cus_moo', 'หมู่');

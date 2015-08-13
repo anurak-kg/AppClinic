@@ -1,81 +1,131 @@
 @extends('layout.master')
-@section('title','ข้อมูลคอร์ส')
-
+@section('title','จัดการรูปถ่าย')
+@section('headDes',$customer->cus_name)
+@section('headText','Customer Photo')
 @section('content')
-
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>jQuery File Upload Example</title>
-</head>
-<body>
-
-<script src="/dist/js/dropzone.js"></script>
-
-<link href="/dist/js/dropzone.css" rel="stylesheet" type="text/css"/>
-
-
-<div class="container">
-
-
+    <script src="/dist/js/dropzone.js"></script>
+    <link href="/dist/js/dropzone.css" rel="stylesheet" type="text/css"/>
 
     <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-heading with-border">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h2 class="box-title">จัดการรูปถ่าย :: {{$customer->cus_id}} - {{$customer->cus_name}}</h2>
 
+                <div class="box-tools pull-right">
+                    <a href="" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
+                </div>
             </div>
-            <div class="panel-body">
-                <div class="dropzone" id="dropzoneFileUpload"></div>
+            <div class="box-body">
 
-                <button id="clear-dropzone">Clear Dropzone</button>
+                    <p><strong>ขั้นตอนการอัพโหลดรูป. </strong> คุณสามารถลากรูปภาพของลูกค้าจาก Folder ในคอมพิวเตอร์ เข้ามาในกล่องสีแดงด้านล่าง
+                        หรือ คลิกที่กล่องเพื่อเลือกไฟล์ โดยสามารถคลิกลาก หรือ กด ctrl เพื่อเลือกภาพพร้อมกันหลายภาพ</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h2 class="box-title">Before : ก่อน</h2>
+                            </div>
+                            <div class="box-body">
+                                <div class="dropzone" id="beforeZone"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h2 class="box-title">After : หลัง</h2>
+                            </div>
+                            <div class="box-body">
+                                <div class="dropzone" id="afterZone"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
     </div>
 
 
-</div>
 
+    <script type="text/javascript">
+        var baseUrl = "{{ url('customer/upload') }}";
+        var jsonBeforeDataUrl = "{{ url('customer/photo-data') }}?cus_id={{ $customer->cus_id }}&type=before";
+        var jsonAfterDataUrl = "{{ url('customer/photo-data') }}?cus_id={{ $customer->cus_id }}&type=after";
+        var deleteUrl = "{{ url('customer/photo-delete') }}";
+        console.log(jsonBeforeDataUrl);
+        console.log(jsonAfterDataUrl);
 
-<script type="text/javascript">
-    var baseUrl = "{{ url('customer/upload') }}";
-    var token = "{{ Session::getToken() }}";
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("div#dropzoneFileUpload", {
-        url: baseUrl,
-        params: {
-            _token: token
-        }
-    });
-    Dropzone.options.myAwesomeDropzone = {
-        paramName: "file", // The name that will be used to transfer the file
-        maxFilesize: 2, // MB
-        addRemoveLinks: true,
-        maxFiles: 5,
-        accept: function(file, done) {
+        Dropzone.autoDiscover = false;
 
-        },
-        init: function() {
-            this.on("sending", function(file) {
-                alert('Sending the file' +  file.name)
-            });
+        var myDropzoneBefore = new Dropzone("div#beforeZone", {
+            url: baseUrl,
+            acceptedFiles:'image/*',
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            dictRemoveFile: "ลบรูป",
+            maxFilesize: 4,//MB
+            dictRemoveFileConfirmation: 'แน่ใจว่าต้องการลบรูป ?',
+            dictDefaultMessage: "คลิก หรือลากไฟล์มาไว้ในช่องสีเหลี่ยมเพื่ออัพโหลดภาพ",
+            maxFiles: {{getConfig('customer_photo_limit')}},
+            params: {
+                customer_id: {{ $customer->cus_id }},
+                type: 'before'
+            },
+            init: function () {
+                thisDropzone = this;
+                $.getJSON(jsonBeforeDataUrl, function (data) {
+                    $.each(data, function (index, val) {
+                        var mockFile = {name: val.name, size: val.size};
+                        myDropzoneBefore.emit("addedfile", mockFile);
+                        myDropzoneBefore.emit("thumbnail", mockFile, "/uploads/customer/" + val.name);
+                        myDropzoneBefore.emit("complete", mockFile);
+                    });
+                });
+            }
+        }).on("removedfile", function (file) {
+                    $.ajax({
+                        url: deleteUrl,
+                        type: "POST",
+                        data: {'filename': file.name}
+                    });
+                });
 
-            // Using a closure.
-            var _this = this;
+        var myDropzoneAfter = new Dropzone("div#afterZone", {
+            url: baseUrl,
+            acceptedFiles:'image/*',
+            uploadMultiple: true,
+            addRemoveLinks: true,
+            dictRemoveFile: "ลบรูป",
+            maxFilesize: 4,//MB
+            dictRemoveFileConfirmation: 'แน่ใจว่าต้องการลบรูป ?',
+            dictDefaultMessage: "คลิก หรือลากไฟล์มาไว้ในช่องสีเหลี่ยมเพื่ออัพโหลดภาพ",
+            maxFiles: {{getConfig('customer_photo_limit')}},
+            params: {
+                customer_id: {{ $customer->cus_id }},
+                type: 'after'
+            },
+            init: function () {
+                $.getJSON(jsonAfterDataUrl, function (data) {
+                    $.each(data, function (index, val) {
+                        var mockFile = {name: val.name, size: val.size};
+                        myDropzoneAfter.emit("addedfile", mockFile);
+                        myDropzoneAfter.emit("thumbnail", mockFile, "/uploads/customer/" + val.name);
+                        myDropzoneAfter.emit("complete", mockFile);
+                    });
+                });
+            }
+        }).on("removedfile", function (file) {
+                    $.ajax({
+                        url: deleteUrl,
+                        type: "POST",
+                        data: {'filename': file.name}
+                    });
+                });
 
-            // Setup the observer for the button.
-            document.querySelector("button#clear-dropzone").addEventObserver("click", function() {
-                // Using "_this" here, because "this" doesn't point to the dropzone anymore
-                _this.removeAllFiles();
-                // If you want to cancel uploads as well, you
-                // could also call _this.removeAllFiles(true);
-            });
-        }
-    };
-
-</script>
-
-</body>
-</html>
-
-    @stop
+    </script>
+@stop
