@@ -124,6 +124,8 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/salesperday', 'ReportController@reportsalesperday');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
+    Route::any('report/suplier', 'ReportController@reportsuplier');
+    Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
     Route::any('money/manage', 'MoneyController@moneyDr');
 });
 
