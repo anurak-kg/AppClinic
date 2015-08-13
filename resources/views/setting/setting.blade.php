@@ -114,6 +114,21 @@
                             </fieldset>
                         </div>
 
+                            <div class="col-md-6">
+                                <fieldset>
+                                    <legend>ลูกค้า</legend>
+                                    <div class="form-group">
+                                        <label for="customer_photo_limit" class="col-sm-4 control-label">จำนวนรูปภาพที่สำมารถเก็บได้</label>
+
+                                        <div class="col-sm-8">
+                                            <input type="number" class="form-control" id="customer_photo_limit" name="customer_photo_limit" placeholder="..." value="{{$value['customer_photo_limit']}}">
+                                            @if ($errors->has('customer_photo_limit')) <p class="help-block">{{ $errors->first('customer_photo_limit') }}</p> @endif
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+
                     </div>
                     <!-- /.box-body -->
 

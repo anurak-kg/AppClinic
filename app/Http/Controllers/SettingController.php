@@ -23,7 +23,9 @@ class SettingController extends Controller
         'vat_mode'          => 'required',
         'vat_rate'          => 'required',
         'product_day_expire' => 'required',
-        'order_sell'        => 'required'
+        'order_sell'        => 'required',
+        'customer_photo_limit'        => 'required',
+
     ];
 
     public function getIndex()
