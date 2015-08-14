@@ -252,6 +252,12 @@ class CustomerController extends Controller
 
         return view('customer/create', compact('form'));
     }
+    public function delete(){
+        $customer = Customer::findOrFail(Input::get('cus_id'));
+        $customer->delete();
+        return redirect('customer')->with('message', 'ลบข้อมูลลูกค้าเรียบร้อยแล้ว');
+
+    }
 
     public function edit()
     {
