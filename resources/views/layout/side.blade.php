@@ -19,12 +19,15 @@
         <ul class="sidebar-menu">
 
             <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
+
             @if(Auth::user()->can('quo'))
                 <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ซื้อคอร์ส</span></a></li>
             @endif
+
             @if(Auth::user()->can('treatment'))
                 <li><a href="{{url('treatment')}}"><i class='fa fa-heartbeat'></i> <span>การรักษา</span></a></li>
             @endif
+
             <li class="treeview">
                 <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
@@ -72,18 +75,22 @@
                         </ul>
                     </li>
                     @if(Auth::user()->can('order-order') || (Auth::user()->can('receive-return')))
-                    <li>
-                        <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i
-                                    class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                                <li><a href="{{url('order')}}"><i
-                                                class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a></li>
-                                <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
-                                </li>
-                                <li><a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a>
-                                </li>
-                        </ul>
-                    </li>
+                        <li>
+                            <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i
+                                        class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                @if(Auth::user()->can('order-order'))
+                                    <li><a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
+                                    </li>
+                                    <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
+                                    </li>
+                                @endif
+                                @if(Auth::user()->can('receive-return'))
+                                    <li><a href="{{url('receive')}}"><i
+                                                    class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
+                                @endif
+                            </ul>
+                        </li>
                     @endif
                 </ul>
             </li>
@@ -97,7 +104,7 @@
                     </ul>
                 </li>
             @endif
-            @if(Auth::user()->can('report'))
+            @if(Auth::user()->can('branch') || Auth::user()->can('vendor') || Auth::user()->can('emp') || Auth::user()->can('permission'))
                 <li class="treeview">
                     <a href="#"><i class='fa fa-gears'></i> <span>การจัดการ</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
@@ -132,12 +139,14 @@
                         <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
                         <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                         <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
-                        <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a></li>
+                        <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
+                        </li>
                         <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
                         <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
                         <li><a href="{{url('report/customer_payment')}}"><i class='fa fa-minus'></i>รายได้ทั้งหมด</a>
                         <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
-                        <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission Credit</a>
+                        <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
+                                Credit</a>
                         </li>
                     </ul>
                 </li>
