@@ -214,11 +214,25 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <td>สถานะการชำระเงิน</td>
-                                        <td></td>
+                                        <td>
+                                            @if($quo->payment == null)
+                                                <span>ไม่พบข้อมูลการชำระเงิน</span>
+                                            @elseif($quo->payment->payment_status=='FULLY_PAID')
+                                                <span class="label label-success">จ่ายเงินครบแล้ว</span>
+                                            @else
+                                                <span class="label label-warning">ค้างจ่าย</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>ประเภทการชำระ</td>
-                                        <td></td>
+                                        <td>
+                                            @if($quo->payment->payment_status=='REMAIN')
+                                                <span>ผ่อนจ่าย</span>
+                                            @elseif($quo->payment->payment_status=='FULLY_PAID')
+                                                <span>จ่ายเต็มจำนวน</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>ยอดค้างชำระ</td>
@@ -228,7 +242,15 @@
 
                             </div>
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-success" style="width: 100%">บันทึก</button>
+                                @if(getConfig('product_out_stock_can_treat') == 'false' && $outOfStock )
+                                    <button type="submit" class="btn btn-danger" style="width: 100%" disabled>ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้</button>
+                                @elseif($quo->payment_remain > 0)
+                                    <button type="submit" class="btn btn-success" style="width: 100%" >บันทึกและเข้าสู่การชำระเงิน</button>
+                                @elseif($quo->payment_remain == 0)
+                                    <button type="submit" class="btn btn-success" style="width: 100%" >บันทึก</button>
+
+                                @endif
+
                             </div>
                         </div>
 

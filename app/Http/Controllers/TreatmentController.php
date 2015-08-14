@@ -91,7 +91,7 @@ class TreatmentController extends Controller
     {
         $course_id = \Input::get('course_id');
         $quo_id = \Input::get('quo_id');
-        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer'])
+        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer','payment'])
             ->where('quo_id', '=', $quo_id)
             ->where('course_id', '=', $course_id)
             ->get()
