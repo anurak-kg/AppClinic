@@ -71,22 +71,20 @@
                             @endif
                         </ul>
                     </li>
+                    @if(Auth::user()->can('order-order') || (Auth::user()->can('receive-return')))
                     <li>
                         <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i
                                     class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            @if(Auth::user()->can('order-order'))
                                 <li><a href="{{url('order')}}"><i
                                                 class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a></li>
                                 <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
                                 </li>
-                            @endif
-                            @if(Auth::user()->can('receive-return'))
                                 <li><a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a>
                                 </li>
-                            @endif
                         </ul>
                     </li>
+                    @endif
                 </ul>
             </li>
             @if(Auth::user()->can('emp'))
@@ -118,7 +116,7 @@
                             <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>จัดการการเงิน</a></li>
                         @endif
                         @if(Auth::user()->can('permission'))
-                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธิ</a></li>
+                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
                         @endif
                     </ul>
                 </li>

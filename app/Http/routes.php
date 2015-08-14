@@ -100,7 +100,6 @@ Route::group(['middleware' => 'permission:dr-working'], function () {
 
 //Product
 Route::group(['middleware' => 'permission:product'], function () {
-    Route::any('product/index', 'ProductController@grid');
     Route::any('product/create', 'ProductController@create');
     Route::any('product/expday', 'ProductController@expday');
     Route::any('product/stock', 'ProductController@stock');
