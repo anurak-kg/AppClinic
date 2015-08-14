@@ -20,7 +20,11 @@ class ReceiveController extends Controller
 {
     public function getIndex()
     {
-        if (Receive::where('receive_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
+        $receiveCount = Receive::where('receive_status', "WAITING")
+                    ->where('emp_id',Auth::user()->getAuthIdentifier())
+                    ->where('branch_id', Branch::getCurrentId())
+                        ->count();
+        if ($receiveCount == 0) {
             $receive = new Receive();
             $receive->emp_id = Auth::user()->getAuthIdentifier();
             $receive->branch_id = Branch::getCurrentId();
