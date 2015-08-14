@@ -199,6 +199,7 @@
                                           name="comment"></textarea>
                                     <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
                                     <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
+                                    <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
 
                                 </div>
                             </div>
@@ -245,7 +246,9 @@
                                 @if(getConfig('product_out_stock_can_treat') == 'false' && $outOfStock )
                                     <button type="submit" class="btn btn-danger" style="width: 100%" disabled>ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้</button>
                                 @elseif($quo->payment_remain > 0)
+                                    <input type="hidden" name="payment" value="true">
                                     <button type="submit" class="btn btn-success" style="width: 100%" >บันทึกและเข้าสู่การชำระเงิน</button>
+
                                 @elseif($quo->payment_remain == 0)
                                     <button type="submit" class="btn btn-success" style="width: 100%" >บันทึก</button>
 

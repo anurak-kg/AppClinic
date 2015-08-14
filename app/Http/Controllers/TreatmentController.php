@@ -64,6 +64,9 @@ class TreatmentController extends Controller
             $inv->save();
             next($array);
         }
+        if($input['payment'] == 'true'){
+            return redirect('payment/pay?quo_de_id='. $input['quo_de_id']);
+        }
         // dd(\Input::all());
         return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
