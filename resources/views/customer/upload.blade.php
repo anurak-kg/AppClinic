@@ -6,13 +6,15 @@
     <script src="/dist/js/dropzone.js"></script>
     <link href="/dist/js/dropzone.css" rel="stylesheet" type="text/css"/>
 
-    <div class="col-md-12">
+
         <div class="box box-success">
             <div class="box-header with-border">
                 <h2 class="box-title">จัดการรูปถ่าย :: {{$customer->cus_id}} - {{$customer->cus_name}}</h2>
 
                 <div class="box-tools pull-right">
-                    <a href="" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
+                    <a href="{{url('/customer/view?cus_id='.$customer->cus_id.'')}}" class="btn btn-info">ดูข้อมูลลูกค้า</a>
+
+                    <a href="{{url('/customer')}}" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
                 </div>
             </div>
             <div class="box-body">
@@ -48,7 +50,6 @@
             </div>
 
         </div>
-    </div>
 
 
 

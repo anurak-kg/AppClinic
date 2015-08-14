@@ -18,9 +18,15 @@
                     <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
                                 class="fa fa-minus"></i></button>
                 </div>
+
+                <div class="box-tools pull-right">
+                    <a href="{{url('/customer')}}" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
+                </div>
             </div>
             <div class="box-body">
-                Test
+                @foreach($dataphotoBefore as $item)
+                <img src="{{ asset('/uploads/customer/'.$item->photo_file_name.'') }}" class="img-thumbnail" width="304" height="236" />
+                @endforeach
             </div>
         </div>
         </div>
@@ -36,7 +42,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    Test
+                    @foreach($dataphotoAfter as $item)
+                        <img src="{{ asset('/uploads/customer/'.$item->photo_file_name.'') }}" class="img-thumbnail" width="304" height="236" />
+                    @endforeach
                 </div>
             </div>
         </div>

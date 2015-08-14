@@ -37,12 +37,12 @@
                             <td>{{$customer->cus_name}}</td>
                             <td>{{$customer->cus_tel}}</td>
                             <td align="middle">
-                                <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-primary">
-                                    <i class="glyphicon glyphicon-edit"></i>
+                                <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-info">
+                                    <i class="fa fa-book"></i>
                                     ข้อมูลลูกค้า</a>
                             </td>
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
-                                                  class="btn btn-primary"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
+                                                  class="btn btn-warning"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
                             </td>
                         </tr>
                     @endforeach

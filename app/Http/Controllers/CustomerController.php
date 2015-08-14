@@ -25,6 +25,7 @@ class CustomerController extends Controller
         return view('customer/index', compact('customers'));
     }
 
+
     public function view()
     {
         $customer = Customer::with('Quotations.course')->where('cus_id', \Input::get('cus_id'))->get()->first();
@@ -42,9 +43,21 @@ class CustomerController extends Controller
             ->orderby('treat_id', 'desc')
             ->get();
 
-        // return response()->json($data);
+        $dataphotoBefore = \DB::table('customer_photo')
+            ->select('customer_photo.photo_file_name')
+            ->where('customer_photo.cus_id', '=', $customer->cus_id)
+            ->whereRaw('customer_photo.photo_type = "Before"')
+            ->get();
 
-        return view('customer/view', ['data' => $customer, 'treat' => $data]);
+        $dataphotoAfter = \DB::table('customer_photo')
+            ->select('customer_photo.photo_file_name')
+            ->where('customer_photo.cus_id', '=', $customer->cus_id)
+            ->whereRaw('customer_photo.photo_type = "After"')
+            ->get();
+
+      // return response()->json($dataphotoBefore);
+
+        return view('customer/view', ['data' => $customer, 'treat' => $data,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
     }
 
     public function upload()
