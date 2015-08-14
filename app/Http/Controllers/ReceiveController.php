@@ -66,8 +66,6 @@ class ReceiveController extends Controller
 
             $inv->received_id =  $item->receive_id;
             $inv->qty =  $item->receive_de_qty;
-            $inv->return =  $item->receive_de_qty_return;
-            $inv->text =  $item->receive_de_text;
             $inv->branch_id =  Branch::getCurrentId();
             $inv->expiry_date =  $item->product_exp;
             $inv->save();
