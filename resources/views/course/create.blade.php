@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title','ข้อมูลคอร์ส')
-
+@section('headText','Course Management')
+@section('headDes','เพิ่มข้อมูลคอร์ส')
 @section('content')
 
     <div class="row" ng-controller="courseController">
@@ -13,9 +14,9 @@
                 </div>
             </div>
         @endif
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
-            <div class="box  box-primary">
+            <div class="box  box-default">
 
                 <div class="panel-heading with-border">
                     <h2 class="panel-title">เพิ่มข้อมูล</h2>
@@ -53,7 +54,7 @@
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
                             <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ... " value="{{Input::old('course_detail')}}"
-                                      name="course_detail"></textarea>
+                                      name="course_detail">{{Input::old('course_detail')}}</textarea>
                             <br>
                         </div>
                     </div>
@@ -65,8 +66,8 @@
                         <br>
                     </div>
                     <div class="col-md-6">
-                        <label for="course_name" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_name" name="course_qty" value="{{Input::old('course_qty')}}"
+                        <label for="course_qty" class=" required">จำนวนครั้ง</label>
+                        <input class=" form-control" type="number" id="course_qty" name="course_qty" value="{{Input::old('course_qty')}}"
                                placeholder="ระบุจำนวนครั้ง ..." required>
                         <br>
                     </div>

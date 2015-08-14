@@ -63,7 +63,7 @@ class CourseController extends Controller
             'course_name' => 'required',
             'course_detail' => 'required',
             'course_price' => 'required|numeric',
-            'course_qty' => 'required|numeric',
+            'course_qty' => 'required|numeric|min:1',
 
         ]);
 
