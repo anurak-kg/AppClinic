@@ -138,6 +138,8 @@
                         <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
                         <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
                         <li><a href="{{url('report/customer_payment')}}"><i class='fa fa-minus'></i>รายได้ทั้งหมด</a>
+                        <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
+                        <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission Credit</a>
                         </li>
                     </ul>
                 </li>
