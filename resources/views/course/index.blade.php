@@ -21,13 +21,13 @@
                     <h2 class="box-title">จัดการคอร์ส</h2>
 
                     <div class="box-tools pull-right">
-                        <a href="{{url('course/create')}}?modify={{$item->course_id}}"
-                           class="btn btn-success">เพิ่มคอร์สใหม่</a>
+                        <a href="{{url('course/create')}}"
+                           class="btn btn-default">เพิ่มคอร์สใหม่</a>
                     </div>
                 </div>
 
 
-                <div class="panel-body ">
+                <div class="box-body ">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-bordered" id="course_table">
                             <thead>

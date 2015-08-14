@@ -1,17 +1,22 @@
 @extends('layout.master')
 @section('title','ข้อมูลลูกค้า')
-
+@section('headText','Customers')
+@section('headDes','จัดการข้อมูลลูกค้า')
 
 @section('content')
 
 
-    <div class="panel panel-primary">
+    <div class="box box-danger">
 
-        <div class="panel-heading">
-            <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+        <div class="box-header with-border">
+            <h2 class="box-title">ข้อมูลลูกค้า</h2>
+            <div class="box-tools pull-right">
+                <a href="{{url('customer/create')}}"
+                   class="btn btn-danger">เพิ่มข้อมูลลูกค้า</a>
+            </div>
         </div>
 
-        <div class="panel-body ">
+        <div class="box-body ">
 
             <div class="col-xs-12 table-responsive">
                 <table class="table table-bordered" id="customer_table">

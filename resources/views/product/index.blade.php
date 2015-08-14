@@ -1,19 +1,23 @@
 @extends('layout.master')
 @section('title','สินค้า')
-@section('headText','จัดการสินค้า')
-
+@section('headText','Product')
+@section('headDes','จัดการยาและสินค้า')
 @section('content')
 
     <div class="row">
 
         <div class="col-md-12">
-            <div class="panel panel-primary table-responsive no-padding">
+            <div class="box box-success table-responsive no-padding">
 
-                <div class="panel-heading with-border">
-                    <h2 class="panel-title">ข้อมูลสินค้า</h2>
+                <div class="box-header with-border">
+                    <h2 class="box-title">ข้อมูลสินค้า</h2>
+                    <div class="box-tools pull-right">
+                        <a href="{{url('product/create')}}"
+                           class="btn btn-success">เพิ่มข้อมูลใหม่</a>
+                    </div>
                 </div>
 
-                <div class="panel-body ">
+                <div class="box-body " style="    margin-top: -32px;">
                     {!! $grid !!}
                 </div>
             </div>

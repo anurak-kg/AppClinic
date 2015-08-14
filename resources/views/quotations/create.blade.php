@@ -8,7 +8,6 @@
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>Success!</h4>
-
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
@@ -17,10 +16,8 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-info"></i>
-
                         <h2 class="box-title">รายละเอียด</h2>
                     </div>
-
                     <div class="box-body">
                         เลขที่การสั่งซื้อ : <strong>{{$quo->quo_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
@@ -35,7 +32,6 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-users"></i>
-
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
@@ -73,7 +69,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
 
