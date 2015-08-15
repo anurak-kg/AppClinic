@@ -27,5 +27,7 @@ class Receive extends Model
     {
         return $this->belongsTo('\App\Order', 'order_id');
     }
-
+    public function Re_turn() {
+        return $this->hasmany('\App\Return');
+    }
 }
