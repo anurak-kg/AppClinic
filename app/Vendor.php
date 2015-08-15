@@ -21,4 +21,7 @@ class Vendor extends Model
     public function Receive() {
         return $this->hasmany('\App\Receive');
     }
+    public function Re_turn() {
+        return $this->hasmany('\App\Return');
+    }
 }
