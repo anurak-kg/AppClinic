@@ -35,7 +35,12 @@ class OrderController extends Controller
 
     public function getIndex()
     {
-        if (Order::where('order_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
+        $orderCount = Order::where('order_status', "WAITING")
+            ->where('branch_id', Branch::getCurrentId())
+            ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->count();
+
+        if ($orderCount == 0) {
             $order = new Order();
             $order->emp_id = Auth::user()->getAuthIdentifier();
             $order->branch_id = Branch::getCurrentId();
@@ -177,13 +182,4 @@ class OrderController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    private function arrayToChartData($data, $string)
-    {
-        $text = "[";
-        foreach ($data as $row) {
-            $text .= "'" . $row->$string . "'" . ',';
-        }
-        $text .= ']';
-        return $text;
-    }
 }
