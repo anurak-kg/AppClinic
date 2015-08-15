@@ -55,6 +55,7 @@ Route::group(['middleware' => 'permission:order-order'], function () {
 //Receive
 Route::group(['middleware' => 'permission:receive-return'], function () {
     Route::controller('receive', 'ReceiveController');
+    Route::controller('return', 'ReturnController');
 });
 
 //Course
