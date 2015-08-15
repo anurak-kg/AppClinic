@@ -50,12 +50,12 @@
                             <td>{{(date('Y')+543) - $customer->cus_birthday_year }} ปี</td>
 
                             <td align="middle">
-                                <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-info">
+                                <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
                                     <i class="fa fa-book"></i>
                                     ข้อมูลลูกค้า</a>
                             </td>
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
-                                                  class="btn btn-warning"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
+                                                  class="btn btn-default"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
                             </td>
                             <td>
                                 <a href="{{url('customer/edit')}}?modify={{$customer->cus_id}}"
