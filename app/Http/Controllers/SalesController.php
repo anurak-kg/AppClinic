@@ -17,7 +17,11 @@ class SalesController extends Controller
 {
     public function getIndex()
     {
-        if (Sales::where('sales_status', "WAITING")->where('branch_id', Branch::getCurrentId())->count() == 0) {
+        $saleCount = Sales::where('sales_status', "WAITING")
+            ->where('branch_id', Branch::getCurrentId())
+            ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->count();
+        if ($saleCount == 0) {
             $sales = new Sales();
             $sales->emp_id = Auth::user()->getAuthIdentifier();
             $sales->branch_id = Branch::getCurrentId();
