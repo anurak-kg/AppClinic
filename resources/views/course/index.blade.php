@@ -33,7 +33,7 @@
                             <thead>
 
                             <tr>
-                                <td style="width: 45px">รหัสคอร์ส</td>
+                                <td style="width: 90px">รหัสคอร์ส</td>
                                 <td>ชื่อคอร์ส</td>
                                 <td style="width: 100px">จำนวนครั้ง</td>
                                 <td style="width: 120px">ราคา</td>
