@@ -9,98 +9,59 @@
 </head>
 
 <body>
-
         <div align="right">
-            <b>วันที่ออกใบเสร็จ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br>
+            #{{ $bill->quo_id }} <br>
+            {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br><br>
         </div>
 
-        <h3 align="left">
-            ใบเสร็จรับเงิน
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->customer->cus_name }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $bill->customer->cus_id }} <br><br>
 
-        </h3>
-        <b> เลขที่ใบเสร็จรับเงิน</b>  #{{ $bill->quo_id }} <br>
-        <hr>
-
-
-        <address>
-            <b> สาขา {{ $bill->branch->branch_name }}</b>
-            {{ $bill->branch->branch_address }}
-            &nbsp;  เบอร์โทร : {{ $bill->branch->branch_tel }}
-        </address>
-
-
-            {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
-            <b>พนักงาน :</b> {{ $bill->user->name }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->customer->cus_hno }}
+        {{ $bill->customer->cus_moo }}
+        {{ $bill->customer->cus_soi }}
+        {{ $bill->customer->cus_road }}
+        {{ $bill->customer->cus_subdis }}
+        {{ $bill->customer->cus_district }}
+        {{ $bill->customer->cus_province }}
+        {{ $bill->customer->cus_postal }}
+        {{ $bill->customer->cus_tel }}
+        {{ $bill->customer->cus_phone }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $bill->user->name }}
          <br><br>
 
-        </div>
 
+        <br><br>
 
-
-        <div id="section">
-                <address>
-                    <b>รหัสลูกค้า:</b> {{ $bill->customer->cus_id }}  <br><br>
-
-                    <b> ชื่อลูกค้า {{ $bill->customer->cus_name }} </b><br><br>
-                       ที่อยู่ : {{ $bill->customer->cus_hno }}
-                      {{ $bill->customer->cus_moo }}
-                      {{ $bill->customer->cus_soi }}
-                      {{ $bill->customer->cus_road }}
-                      {{ $bill->customer->cus_subdis }}
-                      {{ $bill->customer->cus_district }}
-                      {{ $bill->customer->cus_province }}
-                      {{ $bill->customer->cus_postal }}
-                      {{ $bill->customer->cus_tel }}
-                      {{ $bill->customer->cus_phone }}
-                </address>
-
-        </div>
-
-
-
-        <!-- Table row -->
-        <div class="row">
             <div class="col-xs-12 table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>รหัสคอร์ส</th>
-                        <th>คอร์ส</th>
-                        <th>จำนวน</th>
-                        <th>หน่วยนับ</th>
-                        <th>หน่วยละ</th>
-                        <th>ส่วนลด</th>
-                        <th>จำนวนเงิน</th>
+                <table class="table ">
 
-
-                    </tr>
-                    </thead>
                     <tbody>
                     <?php $total=0 ?>
+                    <?php $index=0 ?>
                     @foreach($bill->course as $course)
                     <tr>
+                        <td><?php echo $index+=1?> &nbsp; &nbsp;</td>
                         <td>{{ $course->course_id }}</td>
-                        <td>{{ $course->course_name }}</td>
-                        <td></td>
-                        <td></td>
-                        <td><?php echo number_format($subtotal = $course->course_price)?></td>
-                        <td><?php echo number_format($dis= $bill->discount,2) ?> </td>
-                        <td><?php echo number_format($subtotal-$dis,2) ?></td>
+                        <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ $course->course_name }}</td>
+                        <td>1</td>
+                        <td>&nbsp; <?php echo number_format($subtotal = $course->course_price)?></td>
+                        <td> <?php echo number_format($dis= $bill->discount,2) ?> </td>
+                        <?php echo number_format($subtotal-$dis,2) ?>
+                        <td>&nbsp; &nbsp;&nbsp;&nbsp;<?php echo number_format($total+=($subtotal-$dis)) ?></td>
                     </tr>
-                            <?php $total+=($subtotal-$dis) ?>
+
                         @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    <th>ยอดเงินสุทธิ</th>
-                        <td><?php echo number_format($total,2) ?></td>
-                    </tr>
-                    </tfoot>
+
                 </table>
             </div><!-- /.col -->
 
