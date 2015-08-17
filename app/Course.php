@@ -11,17 +11,21 @@ class Course extends Model
     public $incrementing = false;
 
 
-    public function medicine(){
+    public function product(){
 
         return $this->belongsToMany('App\Product','course_medicine','course_id','product_id')
             ->withPivot('qty','created_at','updated_at');
     }
+
     public function course_medicine(){
-        return $this->hasMany('App\Medicine');
+        return $this->hasMany('App\Medicine','course_id');
     }
+
     public function course_type(){
         return $this->belongsTo('App\Course_type','ct_id');
     }
+
+
 
 
 }

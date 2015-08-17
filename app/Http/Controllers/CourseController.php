@@ -19,16 +19,10 @@ class CourseController extends Controller
     }
     public function getView()
     {
-        $course = Course::where('course_id', \Input::get('course_id'))->get()->first();
-        $data = DB::table('course')
-            ->select('course.course_id', 'course.course_name', 'course.course_detail', 'course.course_price', 'course.course_qty', 'course_medicine.product_id'
-                , 'product.product_name', 'course_medicine.qty')
-            ->join('course_medicine', 'course_medicine.course_id', '=', 'course.course_id')
-            ->join('product', 'product.product_id', '=', 'course_medicine.product_id')
-            ->where('course.course_id', '=', $course->course_id)
-            ->get();
-        //return response()->json($data);
-        return view("course/view", ['data' => $data]);
+        $course = Course::where('course_id', \Input::get('course_id'))->with('product')->get();
+
+        //return response()->json($course);
+        return view("course/view", ['course' => $course[0]]);
     }
     public function getDataGrid()
     {
