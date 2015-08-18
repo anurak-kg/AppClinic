@@ -42,7 +42,7 @@
                     });
                 }
             };
-        }])
+        }]);
     app.controller('quotationsController', function ($scope, $http, ngTableParams, $modal) {
         $scope.product = [];
         $scope.customer = [];
@@ -668,15 +668,17 @@
 
         }
     });
-    app.controller('SalesController', function ($scope, $http, ngTableParams) {
+    app.controller('salesController', function ($scope, $http, ngTableParams,$modal) {
         $scope.product = [];
         $scope.customer = [];
         $scope.dataLoading = true;
         $scope.boxSearch = false;
+        $scope.cashInput = 0;
+        $scope.CashTotal = 0;
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
         $scope.controller = '/sales'
-
+        $scope.paymentType = "cash"
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
@@ -749,7 +751,6 @@
                     $scope.dataLoading = false;
                 });
         }
-
         $scope.getAddProduct = function (id) {
             $scope.dataLoading = true;
             var url = $scope.controller + '/addproduct?id=' + id;
@@ -820,6 +821,40 @@
                 }
             }
             return results;
+        }
+        $scope.cashAdd = function (cash) {
+            $scope.cashInput += cash;
+        }
+        $scope.open = function (size) {
+
+            $scope.modalInstance = $modal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: 'payment.html',
+                controller: 'salesController',
+                size: size,
+                scope: $scope
+
+            });
+
+            $scope.modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+            });
+        };
+
+        $scope.cancel = function () {
+            $scope.modalInstance.dismiss();
+        };
+
+        $scope.payment = function () {
+            window.location.href = '/quotations/save';
+        }
+        $scope.paymentAndPrint = function (id) {
+            window.open(
+                '/bill/billproduct?sales_id=' + id,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+            window.location.href = 'payment/sale-pay?sale_id='+id+'&type='+$scope.paymentType;
         }
     });
     app.controller('receiveController', function ($scope, $http, ngTableParams) {
@@ -1229,6 +1264,7 @@
 
 
     });
+
 })
 
 ();

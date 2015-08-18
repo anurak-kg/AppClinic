@@ -7,7 +7,9 @@ use App\Payment_detail;
 use App\Quotations;
 use App\Http\Requests;
 use App\Quotations_detail;
+use App\Sales;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Payment;
 use Illuminate\Support\Facades\Log;
@@ -35,13 +37,31 @@ class PaymentController extends Controller
         // return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
-
+    public function getSalePay(){
+        $sale = Sales::findOrFail(Input::get('sale_id'));
+        $saleController = new SalesController();
+        $saleId = $saleController->getId();
+        $type = Input::get('type');
+        $this->payment = new Payment();
+        $this->payment->sales_id = $saleId;
+        $this->payment->cus_id = $sale->cus_id;
+        $total = DB::table('sales_detail')->where('sales_id',$saleId)->sum('sales_de_total') ;
+        //$totalVat = $total * getConfig('vat_rate') /100;
+        //$totalWithVat = $total + $totalVat;
+        if($type=='cash'){
+            $this->payment->payment_status ="FULLY_PAID";
+            $this->payment->payment_type ='PAID_IN_FULL';
+            $this->payment->save();
+            $this->amount = $total;
+            $this->saveCash();
+            return redirect('sales/save');
+        }
+    }
     public function getPay()
     {
         $quo = Quotations_detail::where('quo_de_id', Input::get('quo_de_id'))->with('Course', 'payment')->get()->first();
         //return response()->json($quo);
         return view('payment.pay', compact('quo'));
-
     }
 
     public function postPay()

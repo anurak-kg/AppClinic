@@ -38,7 +38,7 @@ class SalesController extends Controller
             'data' => Sales::findOrFail($this->getId())
         ]);
     }
-    private function getId()
+    public function getId()
     {
         $quo = Sales::where('sales_status', "WAITING")
             ->where('emp_id', Auth::user()->getAuthIdentifier())
@@ -48,13 +48,10 @@ class SalesController extends Controller
     }
     public function getSave()
     {
-        //echo $this->getId();
         $sales = Sales::find($this->getId());
         $sales->sales_total = $this->getTotal();
-
         $sale = Sales_detail::where('sales_id',$this->getId())->get();
         foreach ($sale as $item) {
-
             $inv = new InventoryTransaction();
             $inv->product_id = $item->product_id;
             $inv->sales_id =  $item->sales_id;
@@ -67,7 +64,7 @@ class SalesController extends Controller
         // $order->quo_date = null;
         $sales->save();
 
-        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว')->with('sales_id',$this->getId());
+        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
     public function getTotal()
     {
