@@ -19,7 +19,7 @@ class CreateReturn extends Migration
             $table->integer('emp_id');
             $table->integer('order_id');
             $table->date('return_date');
-            $table->enum('return_status', array('RECEIVE','RETURN'));
+            $table->enum('return_status',  array('WAITING','CLOSE'));
             $table->decimal('return_total',10,2);
             $table->text('return_comment');
             $table->integer('branch_id')->nullable();
