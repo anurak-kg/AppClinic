@@ -116,9 +116,11 @@ class ReceiveController extends Controller
         $rec = Receive::find($this->getId());
         $product = Product::find($id);
         $rec->product()->attach($product, [
-            'receive_de_qty' => 1, //ส่วนลดเปอร์เซ็น
+            'receive_de_qty' => 1,
             'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
             'receive_de_text' => "",
+            'receive_de_text' => "",
+            'product_exp' => \Carbon\Carbon::now()->toDateString(),
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
         ]);

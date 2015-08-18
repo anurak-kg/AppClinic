@@ -205,6 +205,19 @@
         </div>
 
         <script type="text/javascript">
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd
+            }
+            if(mm<10){
+                mm='0'+mm
+            }
+            var today = dd+'/'+mm+'/'+yyyy;
+
             $(document).ready(function () {
 
                 var productDb = new Bloodhound({
@@ -301,9 +314,14 @@
                             }
                         })
                         .on('typeahead:selected', function ($e, datum) {
+
                             product = {
-                                id: datum.product_id,
-                                order_de_qty: 1,
+                                product_id: datum.product_id,
+                                receive_de_discount: 0,
+                                receive_de_disamount: 0,
+                                receive_de_qty: 1,
+                                receive_de_price: 0,
+                                product_exp: today,
                                 product: datum
                             }
 

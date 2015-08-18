@@ -90,7 +90,7 @@ Route::group(['middleware' => 'permission:dr-working'], function () {
 });
 
 //ตารางนัด
-Route::group(['middleware' => 'permission:dr-working'], function () {
+Route::group(['middleware' => 'permission:appointment'], function () {
     Route::any('customer/calendar','Customer_eventController@create');
     //Customer calender
     Route::get('customer_calendar/fetch/', 'Customer_eventController@fetch');
