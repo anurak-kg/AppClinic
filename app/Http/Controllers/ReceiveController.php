@@ -67,11 +67,11 @@ class ReceiveController extends Controller
         foreach($receive_detail as $item) {
             $inv = new InventoryTransaction();
             $inv->product_id =  $item->product_id;
-
             $inv->received_id =  $item->receive_id;
             $inv->qty =  $item->receive_de_qty;
             $inv->branch_id =  Branch::getCurrentId();
             $inv->expiry_date =  $item->product_exp;
+            $inv->type = "Receive";
             $inv->save();
         }
 
@@ -116,9 +116,10 @@ class ReceiveController extends Controller
         $rec = Receive::find($this->getId());
         $product = Product::find($id);
         $rec->product()->attach($product, [
-            'receive_de_qty' => 1, //ส่วนลดเปอร์เซ็น
+            'receive_de_qty' => 1,
             'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
             'receive_de_text' => "",
+            'product_exp' => \Carbon\Carbon::now()->toDateString(),
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
         ]);
@@ -184,6 +185,7 @@ class ReceiveController extends Controller
                 'receive_de_disamount' => 0,
                 'receive_de_discount' => 0,
                 'receive_de_price' => $item->pivot->order_de_price,
+                'product_exp' => $item->pivot->created_at,
                 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]);

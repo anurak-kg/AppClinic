@@ -116,7 +116,7 @@ class OrderController extends Controller
         $product = Product::find($id);
         $rec->product()->attach($product, [
             'order_de_qty' => 1,
-            'order_de_price' => $product->product_price,
+            'order_de_price' => 0,
             'order_de_discount' => 0,
             'order_de_disamount' => 0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
