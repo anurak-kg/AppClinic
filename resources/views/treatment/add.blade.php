@@ -132,6 +132,9 @@
                         <div class="box  box-default">
                             <div class="box-header with-border" align="center">
                                 <h2 class="box-title">รายละเอียดการใช้ยา</h2>
+                                <div class="box-tools pull-right">
+                                    <a href="{{url('/treatment')}}" class="btn btn-info">กลับไปที่ข้อมูลการรักษา</a>
+                                </div>
                             </div>
                             <div class="box-body">
                                 <div class="col-md-12">

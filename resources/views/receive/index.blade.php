@@ -217,7 +217,6 @@
                 mm='0'+mm
             }
             var today = dd+'/'+mm+'/'+yyyy;
-
             $(document).ready(function () {
 
                 var productDb = new Bloodhound({

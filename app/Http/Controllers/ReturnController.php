@@ -60,11 +60,7 @@ class ReturnController extends Controller
         $return->return_total = $this->getTotal();
         $return->return_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
-        if ( $return->receive_id != 0){
-            $receive = Receive::find( $return->receive_id);
-            $receive->receive_status = 'RETURN';
-            $receive->save();
-        }
+
         $return_detail = Return_detail::where('return_id',$this->getId())->get();
         foreach($return_detail as $item) {
             $inv = new InventoryTransaction();
@@ -72,6 +68,7 @@ class ReturnController extends Controller
             $inv->return_id =  $item->return_id;
             $inv->qty =  -abs($item->return_de_qty);
             $inv->branch_id =  Branch::getCurrentId();
+            $inv->type = "Return";
             $inv->save();
         }
 
