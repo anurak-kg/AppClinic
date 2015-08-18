@@ -86,8 +86,8 @@
                                     </li>
                                 @endif
                                 @if(Auth::user()->can('receive-return'))
-                                    <li><a href="{{url('receive')}}"><i
-                                                    class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
+                                    <li><a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
+                                    <li><a href="{{url('return')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a></li>
                                 @endif
                             </ul>
                         </li>
