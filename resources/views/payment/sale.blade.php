@@ -1,0 +1,154 @@
+@extends('layout.master')
+@section('title','สินค้า')
+
+
+@section('content')
+    <div ng-controller="salePaymentController" id="treat">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="box box-default">
+
+                    <div class="box-header with-border">
+                    </div>
+
+                    <div class="box-body">
+                        <div class="col-md-12">
+                            <fieldset>
+                                <form class="form-horizontal" method="POST" action="{{url('payment/pay')}}">
+                                    <input name="quo_de_id" value="{{$quo->quo_de_id}}" type="hidden">
+                                    <input name="course_id" value="{{$quo->course_id}}" type="hidden">
+
+                                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
+                                    <legend>การชำระเงิน</legend>
+
+                                    <div class="form-group col-md-12"
+                                         ng-show="payment.boxPaidMethod">
+                                        <select class="form-control input-lg" name="method"
+                                                ng-model="payment.boxMethod" ng-change="paymentMethod()">
+                                            <?php $pay_by_course = null;?>
+
+                                            @if($quo->payment == null)
+                                                <?php $pay_by_course = 0;?>
+
+                                                <option ng-selected="true">> การชำระเงิน <</option>
+                                                <option value="PAID_IN_FULL"> ชำระเต็มจำนวน</option>
+                                                <option value="PAY_BY_COURSE"> แบ่งจ่ายตามจำนวนครั้งที่เข้ารักษา
+                                                </option>
+                                                <option value="PAYABLE" disabled> ผ่อนจ่าย</option>
+                                            @else
+                                                <option value="PAY_BY_COURSE" ng-selected="true">
+                                                    แบ่งจ่ายตามจำนวนครั้งที่เข้ารักษา
+                                                </option>
+                                                <?php $pay_by_course = 1;?>
+
+                                            @endif
+                                        </select>
+                                    </div>
+
+                                    <div ng-show="payment.boxPaidFull"
+                                         ng-init="init({{ (int)$quo->quo_de_price }},{{getConfig('vat_rate')}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
+                                        <div class="col-md-12">
+                                            <div class="form-group col-md-12">
+                                                <label>ประเภทการชำระ</label>
+                                                <select class="form-control" ng-change="changeType()"
+                                                        ng-model="payment.type" name="type">
+                                                    <option ng-selected="true"
+                                                            value="cash">เงินสด
+                                                    </option>
+                                                    <option value="credit_card">บัตรเครดิต</option>
+                                                </select>
+
+                                            </div>
+                                            <table class="table table-bordered form-group  col-md-12"
+                                                   style="text-align: right">
+                                                <tr>
+                                                    <td>เวลา</td>
+                                                    <td>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">ราคาคอร์ส
+                                                        ทั้งหมด {{$quo->course->course_qty}} ครั้ง
+                                                    </td>
+                                                    <td style="width: 189px;text-align: right">{{ number_format($quo->quo_de_price,0) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ยอดค้างชำระ</td>
+                                                    <td style="font-weight: bolder;color: #FF0009;font-size: 16px;">{{ number_format($quo->payment_remain,0)}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>จำนวนเงินที่ต้องชำระครั้งนี้</td>
+                                                    <td style="font-size: 24px;font-weight: bolder">@{{payment.minPrice | number}}</td>
+                                                </tr>
+                                                <tr ng-show="payment.creditCardBox">
+                                                    <td>ธนาคาร</td>
+                                                    <td>
+                                                        <select class="form-control" ng-model="payment.bank_id"
+                                                                name="bank_id">
+                                                            <option value="1">กรุงศรี</option>
+                                                            <option value="2">Aeon</option>
+                                                            <option value="3">option 3</option>
+
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr ng-show="payment.creditCardBox">
+                                                    <td>รหัสบัตรเครดิต</td>
+                                                    <td>
+                                                        <input type="text" class="form-control" name="card_id"
+                                                               id="received_amount"
+                                                               ng-model="payment.card_id"
+                                                               placeholder="เลขที่บัตรเครดดิต">
+                                                    </td>
+                                                </tr>
+                                                <tr ng-show="payment.creditCardBox">
+                                                    <td>รหัส EDC</td>
+                                                    <td>
+                                                        <input type="text" class="form-control"
+                                                               id="received_amount" name="edc"
+                                                               ng-model="payment.edc"
+                                                               placeholder="EDC ID">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>รับเงิน</td>
+                                                    <td>
+                                                        <input type="number" class="form-control  total-price input-lg"
+                                                               id="received_amount" name="receivedAmount" required
+                                                               ng-change="receiveChange()"
+                                                               ng-model="payment.receivedAmount"
+                                                               placeholder="เงินที่รับ">
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>เงินทอน</td>
+                                                    <td>@{{payment.withdawn | number}}</td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="col-md-12">
+                                                <a class="btn btn-danger pull-left"
+                                                   href="{{url('payment')}}?quo_id={{$quo->quo_id}}">
+                                                    กลับหน้าชำระเงิน </a>
+                                                <button class="btn btn-success pull-right"
+                                                        ng-disabled="payment.buttonPay"
+                                                        ng-click="saveFullPaidPayment()">ชำระเงิน
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+@stop

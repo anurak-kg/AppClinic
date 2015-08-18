@@ -15,7 +15,6 @@
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link href="/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
     <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/dist/js/ng-table.css">
@@ -73,7 +72,7 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-
+            <b>Version</b> 1.0 (10000)
         </div>
         <!-- Default to the left -->
         <strong>Copyright &copy; 2015 <a href="http://www.smartss9168.com">SMART SOLUTION AND SERVICE</a>.</strong> All rights reserved.
