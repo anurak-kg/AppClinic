@@ -44,7 +44,7 @@ class ReportController extends Controller
         //dd($data);
         //return response()->json($data);
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('ยอดขายพนักงาน', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -127,8 +127,11 @@ class ReportController extends Controller
 
         //return response()->json($salesdaypro);
         $data = $salesdaycourse;
+        $data1 = $salesdaypro;
+
+
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('ยอดขายคอร์สรายวัน', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -142,7 +145,6 @@ class ReportController extends Controller
 
                 $excel->sheet('Sheetname', function ($sheet) use ($data) {
 
-                    //dd($data);
 
                     $sheet->setStyle(array(
                         'font' => array(
@@ -151,21 +153,7 @@ class ReportController extends Controller
                             'bold'      =>  false
                         )
                     ));
-                    $sheet->loadView('report.excelsaleperday',['data'=>$data]);
-                });
-
-                $excel->sheet('Sheetname', function ($sheet) use ($data) {
-
-
-
-                    $sheet->setStyle(array(
-                        'font' => array(
-                            'name'      =>  'Angsana new',
-                            'size'      =>  18,
-                            'bold'      =>  false
-                        )
-                    ));
-                    $sheet->loadView('report.excelsaleperday',['data'=>$data]);
+                    $sheet->loadView('report.excelsaleperdaycourse',['data'=>$data]);
                 });
 
             })->export('xls');
@@ -208,7 +196,7 @@ class ReportController extends Controller
         $data = $coursemonth->get();
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('ยอดขายคอร์ส', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -273,7 +261,7 @@ class ReportController extends Controller
         // return response()->json($data);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุปคอร์สที่ขายดีที่สุด', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -335,7 +323,7 @@ class ReportController extends Controller
 
         // return response()->json($data);
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุปสินค้าที่ขายดีที่สุด', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -400,7 +388,7 @@ class ReportController extends Controller
         // return response()->json($doctor);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('ยอดขายแพทย์', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -486,7 +474,7 @@ class ReportController extends Controller
         // return response()->json($doctor);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุปรายจ่าย Suplier', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -548,7 +536,7 @@ class ReportController extends Controller
         // return response()->json($doctor);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุปรายได้ทั้งหมดจากลูกค้า', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -613,7 +601,7 @@ class ReportController extends Controller
         // return response()->json($doctor);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุป Commission เงินสด', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');
@@ -678,7 +666,7 @@ class ReportController extends Controller
         // return response()->json($doctor);
 
         if ($type == "excel") {
-            Excel::create('Filename', function ($excel) use ($data) {
+            Excel::create('สรุป Commission Credit', function ($excel) use ($data) {
 
                 // Set the title
                 $excel->setTitle('Our new awesome title');

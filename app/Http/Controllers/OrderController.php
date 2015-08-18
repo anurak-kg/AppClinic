@@ -71,7 +71,7 @@ class OrderController extends Controller
         $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $order->save();
-        return redirect('order')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('bill/order'."?order_id=". $order->order_id)->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()

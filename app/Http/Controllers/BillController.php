@@ -42,10 +42,10 @@ class BillController extends Controller
     }
 
     public function order(){
-        $order = Order::where('order_id',1)
+        $order = Order::where('order_id',\Input::get('order_id'))
             ->with('product','vendor','branch','user')->get()->first();
 
-        $mpdf=new mPDF('th','A4-L');
+        $mpdf=new mPDF('th','A4');
         $mpdf->ignore_invalid_utf8 = true;
         $mpdf->SetHTMLHeader();
         $mpdf->WriteHTML(view("bill/order",['order' => $order]));
