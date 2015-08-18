@@ -15,7 +15,6 @@
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
     <link href="/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
     <link href="/dist/js/bootstrap-tagsinput.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="/dist/js/ng-table.css">

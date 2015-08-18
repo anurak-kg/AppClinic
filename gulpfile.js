@@ -45,7 +45,8 @@ elixir(function (mix) {
         'select2-bootstrap.css',
         'select.min.css',
         'AdminLTE.min.css',
-        'index.min.css'
+        'index.min.css',
+        'ionicons.min.css'
         //'jquery-ui.min.css'
 
     ]);
