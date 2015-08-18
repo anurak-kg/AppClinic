@@ -1,42 +1,42 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select'])
-        .directive('onLastRepeat', function () {
-            return function (scope, element, attrs) {
-                if (scope.$last) setTimeout(function () {
-                    scope.$emit('onRepeatLast', element, attrs);
-                }, 1);
-            };
-        })
-        .directive('datepicker', function () {
-            return {
-                restrict: 'A',
-                require: 'ngModel',
-                link: function (scope, element, attrs, ctrl) {
-                    $(element).datepicker({
-                        format: 'yyyy-mm-dd',
-                        language: 'th',
-                        startView: 2,
-                        todayBtn: "linked",
-                        autoclose: true,
-                        todayHighlight: true,
-                        onSelect: function (date) {
-                            ctrl.$setViewValue(date);
-                            ctrl.$render();
-                            scope.$apply();
-                        }
-                    });
-                }
-            };
-        });
+    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select']);
+    app.directive('onLastRepeat', function () {
+        return function (scope, element, attrs) {
+            if (scope.$last) setTimeout(function () {
+                scope.$emit('onRepeatLast', element, attrs);
+            }, 1);
+        };
+    })
+    app.directive('datepicker', function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
+                $(element).datepicker({
+                    format: 'yyyy-mm-dd',
+                    language: 'th',
+                    startView: 2,
+                    todayBtn: "linked",
+                    autoclose: true,
+                    todayHighlight: true,
+                    onSelect: function (date) {
+                        ctrl.$setViewValue(date);
+                        ctrl.$render();
+                        scope.$apply();
+                    }
+                });
+            }
+        };
+    });
     app.directive('ngConfirmClick', [
-        function(){
+        function () {
             return {
                 link: function (scope, element, attr) {
                     var msg = attr.ngConfirmClick || "Are you sure?";
                     var clickAction = attr.confirmedClick;
-                    element.bind('click',function (event) {
-                        if ( window.confirm(msg) ) {
+                    element.bind('click', function (event) {
+                        if (window.confirm(msg)) {
                             scope.$eval(clickAction)
                         }
                     });
@@ -311,13 +311,13 @@
             var n = d.getFullYear() + 543;
             return n;
         }
-        $scope.getAge =function(year){
+        $scope.getAge = function (year) {
             var age = null;
-            if(typeof year === "undefined"){
+            if (typeof year === "undefined") {
                 age = ""
             }
-            else{
-                 age = $scope.getYear() - year;
+            else {
+                age = $scope.getYear() - year;
             }
             return age;
         }
@@ -415,6 +415,9 @@
             $scope.$apply(function () {
                 $scope.VendorBoxSearch = true;
             });
+        }
+        $scope.setTax = function(){
+
         }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
@@ -571,9 +574,9 @@
         $scope.qtyValue = 0;
         $scope.count = 0;
         $scope.jsonData = undefined;
-        $scope.init= function(course_id){
+        $scope.init = function (course_id) {
             $scope.course_id = course_id;
-            var url = "/course/medicine-data?course_id="+$scope.course_id;
+            var url = "/course/medicine-data?course_id=" + $scope.course_id;
             console.log(url);
             $http.get(url).
                 success(function (data, status, headers, config) {
@@ -586,9 +589,9 @@
                 });
         }
         $scope.addMedicine = function (id) {
-            if($scope.qtyValue == 0 ){
+            if ($scope.qtyValue == 0) {
                 alert("กรุณาใส่จำนวนยาก่อนค่ะ")
-            }else {
+            } else {
                 var course =
                 {
                     id: $scope.count,
@@ -624,7 +627,6 @@
         var changeCount = 0;
 
 
-
         $http.get("/data/product").
             success(function (data, status, headers, config) {
                 $scope.product = data;
@@ -653,7 +655,7 @@
                     return el.product_id !== id;
                 });
             console.log(id);
-            var url = "/course/medicine-remove?course_id="+$scope.course_id+"&product_id="+id;
+            var url = "/course/medicine-remove?course_id=" + $scope.course_id + "&product_id=" + id;
             console.log(url);
             $http.get(url).
                 success(function (data, status, headers, config) {
@@ -1146,7 +1148,7 @@
         }
 
     });
-    app.controller('paymentController', function ($scope, $http) {
+    app.controller('paymentController', function ($scope) {
         $scope.payment = [];
         $scope.box = [];
         $scope.vat = 7;
@@ -1169,7 +1171,7 @@
             }
 
         }
-        $scope.init = function (value, vat, quo_id, courseId, qty,pay_by_course) {
+        $scope.init = function (value, vat, quo_id, courseId, qty, pay_by_course) {
             $scope.payment = [];
             $scope.box = [];
             $scope.course = [];
@@ -1186,7 +1188,7 @@
             //Vat ใน
             $scope.payment.paymentTotal = value;
             $scope.payment.course_id = courseId;
-            if(pay_by_course == 1){
+            if (pay_by_course == 1) {
                 $scope.payment.boxPaidFull = true;
                 $scope.payment.minPrice = $scope.course.price / $scope.course.qty;
 
@@ -1203,11 +1205,10 @@
         }
         $scope.receiveChange = function () {
             if ($scope.payment.receivedAmount >= 0) {
-                $scope.payment.withdawn = $scope.payment.minPrice - $scope.payment.receivedAmount ;
+                $scope.payment.withdawn = $scope.payment.minPrice - $scope.payment.receivedAmount;
                 if ($scope.payment.receivedAmount >= $scope.payment.minPrice) {
                     $scope.payment.buttonPay = false;
-                }else
-                {
+                } else {
                     $scope.payment.buttonPay = true;
 
                 }
