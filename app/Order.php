@@ -33,4 +33,7 @@ class Order extends Model
     {
         return $this->belongsTo('\App\Branch', 'branch_id');
     }
+    public function Re_turn() {
+        return $this->hasmany('\App\Return');
+    }
 }
