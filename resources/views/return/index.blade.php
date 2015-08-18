@@ -23,7 +23,7 @@
                         <h2 class="panel-title"><i class="fa fa-info-circle"></i> รายละเอียด</h2>
                     </div>
                     <div class="panel-body">
-                        เลขที่การสั่งซื้อ : <strong>{{$data->return_id}}</strong> <br>
+                        เลขที่การคืนสินค้า : <strong>{{$data->return_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>

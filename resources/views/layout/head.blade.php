@@ -11,7 +11,7 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                    <span class="hidden-xs">{{Auth::user()->name}} ({{Auth::user()->getRoleName()}})</span>
+                    <span class="hidden-xs">{{Auth::user()->name}} ({{Auth::user()->roles[0]->display_name}})</span>
 
                 </a>
 

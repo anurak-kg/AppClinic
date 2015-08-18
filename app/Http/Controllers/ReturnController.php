@@ -70,7 +70,7 @@ class ReturnController extends Controller
             $inv = new InventoryTransaction();
             $inv->product_id =  $item->product_id;
             $inv->return_id =  $item->return_id;
-            $inv->qty =  $item->return_de_qty;
+            $inv->qty =  -abs($item->return_de_qty);
             $inv->branch_id =  Branch::getCurrentId();
             $inv->save();
         }
