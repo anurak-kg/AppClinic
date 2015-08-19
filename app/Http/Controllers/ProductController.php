@@ -59,7 +59,7 @@ class ProductController extends Controller
 
         $grid->add('product_price', 'ราคา/หน่วย');
         $grid->add('product_unit', 'หน่วยนับ');
-        $grid->edit('/product/edit', 'กระทำ','modify|delete');
+
 
         return $grid;
     }
