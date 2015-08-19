@@ -170,7 +170,7 @@
                                 'ไม่พบข้อมูลลูกค้า',
                                 '</div>'
                             ].join('\n'),
-                            suggestion: Handlebars.compile('<div>@{{cus_name}}</div>')
+                            suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}}</div>')
                         }
                     })
                     .on('typeahead:selected', function ($e, datum) {

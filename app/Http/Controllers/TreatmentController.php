@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TreatmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function treatment()
     {
         return view("treatment/index");
