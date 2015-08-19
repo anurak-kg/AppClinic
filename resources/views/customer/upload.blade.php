@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                         <div class="box box-danger">
                             <div class="box-header with-border">
-                                <h2 class="box-title">Before : ก่อน</h2>
+                                <h2 class="box-title">Before : ก่อน [ สูงสุด 5 รูปภาพ ]</h2>
                             </div>
                             <div class="box-body">
                                 <div class="dropzone" id="beforeZone"></div>
@@ -37,7 +37,7 @@
                     <div class="col-md-6">
                         <div class="box box-danger">
                             <div class="box-header with-border">
-                                <h2 class="box-title">After : หลัง</h2>
+                                <h2 class="box-title">After : หลัง  [ สูงสุด 5 รูปภาพ ]</h2>
                             </div>
                             <div class="box-body">
                                 <div class="dropzone" id="afterZone"></div>

@@ -84,9 +84,9 @@
                 </div>
 
                 <div class="box-footer">
-                    <a class="btn btn-warning pull-right"
+                    <a class="btn btn-default pull-right"
                        href="{{url('bill/bill')}}?quo_id={{$quo->quo_id}}">
-                        ปลิ้นบิล </a>
+                        <i class="fa fa-print"></i> ปริ้นใบเสร็จ </a>
                 </div>
             </div>
 

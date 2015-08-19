@@ -95,7 +95,7 @@
                 <div class="box-header with-border" align="middle">
                     <h2 class="box-title">ตารางสรุปยอดขายสินค้า</h2>
                     <span class="pull-right">
-                         {!! Form::open(array('url' => 'report/salesperday?type=excel', 'class' => 'form')) !!}
+                         {!! Form::open(array('url' => 'report/salesperday?type=excel1', 'class' => 'form')) !!}
                         <input type="submit" class="btn btn-block btn-success" value="Export" >
                         {!! Form::close() !!}
                     </span>

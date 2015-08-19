@@ -92,6 +92,10 @@ class ReportController extends Controller
         $date = explode('to', $rang);
         //var_dump($date);
         $dateTxt = [];
+        if($rang == null){
+           $rang = date('Y/m');
+        }
+
         $salesdaycourse = DB::select(DB::raw(
             "
                 SELECT
@@ -101,7 +105,7 @@ class ReportController extends Controller
                 quotations
                 RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
 
-                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
+                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang ."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
 
                 GROUP BY DATE
 
@@ -126,9 +130,12 @@ class ReportController extends Controller
             , [$rang, $rang]));
 
         //return response()->json($salesdaypro);
-        $data = $salesdaycourse;
-        $data1 = $salesdaypro;
 
+        $data = $salesdaycourse;
+
+        $datapro = $salesdaypro;
+
+        //dd($data);
 
         if ($type == "excel") {
             Excel::create('ยอดขายคอร์สรายวัน', function ($excel) use ($data) {
@@ -145,7 +152,6 @@ class ReportController extends Controller
 
                 $excel->sheet('Sheetname', function ($sheet) use ($data) {
 
-
                     $sheet->setStyle(array(
                         'font' => array(
                             'name'      =>  'Angsana new',
@@ -157,7 +163,34 @@ class ReportController extends Controller
                 });
 
             })->export('xls');
-        } else {
+        } elseif ($type == "excel1") {
+        Excel::create('ยอดขายสินค้ารายวัน', function ($excel) use ($datapro) {
+
+            // Set the title
+            $excel->setTitle('Our new awesome title');
+
+            // Chain the settersp
+            $excel->setCreator('Maatwebsite')
+                ->setCompany('Maatwebsite');
+
+            // Call them separately
+            $excel->setDescription('A demonstration to change the file properties');
+
+            $excel->sheet('Sheetname', function ($sheet) use ($datapro) {
+
+
+                $sheet->setStyle(array(
+                    'font' => array(
+                        'name'      =>  'Angsana new',
+                        'size'      =>  18,
+                        'bold'      =>  false
+                    )
+                ));
+                $sheet->loadView('report.excelsaleperdayproduct',['datapro'=>$datapro]);
+            });
+
+        })->export('xls');
+    }else {
             return view('report/salesperday', [
                 'datapro' => $salesdaypro,
                 'datapro1' => $salesdaypro,
@@ -171,6 +204,9 @@ class ReportController extends Controller
                 'total' => $this->arrayToChartData($salesdaycourse, 'total_sales')
             ]);
         }
+
+
+
 
     }
 

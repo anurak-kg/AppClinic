@@ -205,7 +205,7 @@
 
                     <div class="box  box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">คอร์สขายดี</h3>
+                            <h3 class="box-title">3 อันดับ คอร์สขายดี <i class="fa fa-star"></i></h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>
@@ -242,7 +242,7 @@
 
                     <div class="box  box-default">
                         <div class="box-header with-border">
-                            <h3 class="box-title">สินค้าขายดี</h3>
+                            <h3 class="box-title">3 อันดับ สินค้าขายดี <i class="fa fa-star"></i></h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>

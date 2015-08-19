@@ -22,11 +22,10 @@
 - ปลิ้นบิล
 - export report to excel
 - กำหนดสิทธิ์ user [ ตั้งค่าการมองเห็นเมนู ]
-
-
-###Function เรียงตามความสำคัญ
 - ชำระเงิน
 - คืนสินค้า
+
+###Function เรียงตามความสำคัญ
 - เมนูตั้งค่า
 - Refactor code
 - minify Code
@@ -35,5 +34,7 @@
 ###Freature
 + เช็ค PK ก่อนจะ Submit
     - Course
+
+
 
 

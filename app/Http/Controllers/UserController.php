@@ -134,10 +134,9 @@ class UserController extends Controller
         //User Table
         $grid = $this->getUserDataGridDoctor();
         //User Create
-        $form = DataForm::create('user');
+        $form = DataForm::create('users');
         $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
         $form->text('username', 'Username')->rule('required|unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
-        $form->text('password', 'Password', 'password')->rule('required')->attributes(array('placeholder' => 'ระบุ Password ....'));
         $form->text('name', 'ชื่อ-สกุล')->rule('required')->attributes(array('placeholder' => 'ระบุ ชื่อ-สกุล ....'));
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
@@ -173,7 +172,7 @@ class UserController extends Controller
         $edit->text('email', 'Email');
         $edit->text('license','เลขใบประกอบวิชาชีพ');
         $edit->attributes(array("class" => " "));
-        $edit->link("user/manage", "ย้อนกลับ");
+        $edit->link("user/adddoctor", "ย้อนกลับ");
         return $edit->view('user/edit', compact('edit'));
     }
     public function test(){

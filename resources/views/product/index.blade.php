@@ -7,7 +7,7 @@
     <div class="row">
 
         <div class="col-md-12">
-            <div class="box box-success table-responsive no-padding">
+            <div class="box box-success ">
 
                 <div class="box-header with-border">
                     <h2 class="box-title">ข้อมูลสินค้า</h2>
