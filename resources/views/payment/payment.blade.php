@@ -9,6 +9,7 @@
             <div class="box box-default ">
                 <div class="box-header with-border">
                     <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo->quo_id}}</h2>
+
                     <div class="box-tools pull-right">
                         <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
                     </div>
@@ -42,7 +43,7 @@
                             @foreach($quo->course as $course)
                                 <tr>
                                     <td>{{$index+1}}</td>
-                                    <td>{{$course->course_name}}  จำนวน {{$course->course_qty}}  ครั้ง</td>
+                                    <td>{{$course->course_name}} จำนวน {{$course->course_qty}} ครั้ง</td>
                                     <td>{{$course->course_price}}</td>
 
 
@@ -54,8 +55,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{$quo->quotations_detail[$index]->payment_remain}}
-
+                                        @if($quo->vat_type == 'none' || $quo->vat_type == 'in_vat' )
+                                            {{$quo->quotations_detail[$index]->payment_remain}}
+                                        @else
+                                            {{$quo->quotations_detail[$index]->payment_remain + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
+                                        @endif
                                     </td>
                                     <td>
                                         @if($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')

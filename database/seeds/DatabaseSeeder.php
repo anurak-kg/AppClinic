@@ -68,7 +68,7 @@ class SettingTableSeeder extends Seeder
         DB::table('setting')->insert([
             ['setting_name' => 'clinicName',        'value' => 'TheRock'],
             ['setting_name' => 'commission_rate',   'value' => '10'],
-            ['setting_name' => 'vat_mode',          'value' => 'outVat'],
+            ['setting_name' => 'vat_mode',          'value' => 'in_vat'],
             ['setting_name' => 'vat_rate',              'value' => '7'],
             ['setting_name' => 'product_day_expire',    'value' => '30'],
             ['setting_name' => 'order_sell',            'value' => 'FIFO'],

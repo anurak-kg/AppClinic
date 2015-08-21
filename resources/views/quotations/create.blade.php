@@ -2,7 +2,7 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course" ng-init="setVat({{config('shop.vat')}})">
+    <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat_type}}')">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
@@ -186,7 +186,7 @@
                                                            class="form-control">
                                                 </div>
                                             </td>
-                                            <td data-title="'จำนวนเงินที่ต้องชำระ'"
+                                            <td data-title="'ราคารวม'"
                                                 style="width:170px;text-align: right">
                                                 @{{ (item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
                                                 -item.quo_de_disamount| number:2}}
@@ -196,8 +196,22 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="6" class="total-price">Total:</td>
+                                            <td colspan="6" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="total-price">ส่วนลด:</td>
+                                            <td>@{{ getDiscount() | number:2}} บาท</td>
+                                        </tr>
+                                        @if($quo->vat_type != 'none')
+                                        <tr>
+                                            <td colspan="6" class="total-price">ภาษี {{getConfig('vat_rate')}}% :</td>
+                                            <td>@{{ getVat() | number:2}} บาท</td>
+                                        </tr>
+                                        @endif
+                                        <tr>
+                                            <td colspan="6" class="total-price">ยอดสุทธิ:</td>
+                                            <td><strong>@{{ getFinalTotal() | number:2}}</strong> บาท</td>
                                         </tr>
 
                                     </table>

@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div ng-show="payment.boxPaidFull"
-                                         ng-init="init({{ (int)$quo->quo_de_price }},{{getConfig('vat_rate')}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
+                                         ng-init="init({{ (int)$totalPrice}},{{getConfig('vat_rate')}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
                                         <div class="col-md-12">
                                             <div class="form-group col-md-12">
                                                 <label>ประเภทการชำระ</label>
@@ -76,6 +76,7 @@
                                                     <td>ยอดค้างชำระ</td>
                                                     <td style="font-weight: bolder;color: #FF0009;font-size: 16px;">{{ number_format($quo->payment_remain,0)}}</td>
                                                 </tr>
+
                                                 <tr>
                                                     <td>จำนวนเงินที่ต้องชำระครั้งนี้</td>
                                                     <td style="font-size: 24px;font-weight: bolder">@{{payment.minPrice | number}}</td>

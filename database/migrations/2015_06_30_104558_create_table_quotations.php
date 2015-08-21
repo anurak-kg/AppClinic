@@ -21,12 +21,13 @@ class CreateTableQuotations extends Migration
             $table->integer('sale_price1');//ค่าแนะนำคอร์สเปอร์เซ็น
             $table->date('quo_date');
             $table->integer('quo_status');
-            $table->decimal('price',14,2);
-            $table->decimal('discount',14,2);
             //สถานะ
             // -1 = อยุ่ในหน้าจอการซื้อ, 1 = ซื้อสำเร็จ ,
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
-            $table->enum('payment_type', array('CASH','CREDIT'));
+            //VAT
+            $table->decimal('total_net_price',14,2);
+            $table->enum('vat_type', array('none','in_vat','out_vat'));
+            $table->integer('vat_rate');//
             $table->integer('commission_rate');//% ค่าคอมมิชชั้น
             $table->integer('branch_id')->nullable();
             $table->integer('bill_number');//เลขที่ใบเสร้จ
@@ -37,14 +38,15 @@ class CreateTableQuotations extends Migration
             $table->integer('quo_id');
             $table->string('course_id');
             $table->integer('treat_status');
+            $table->decimal('quo_de_price',12,2);
             $table->integer('quo_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('quo_de_disamount',10,2); //ส่วนลดจำนวนเงิน
+            $table->decimal('net_price',14,2);
             $table->decimal('payment_remain',14,2);
             //สถานะ
             // 0 = ไม่เริ่ม,
             // 1 = อยุ่ในระหว่างการรักษา ,5 = เรียบร้อยแล้ว -99 = ยกเลิก
             $table->integer('qty');
-            $table->decimal('quo_de_price',12,2);
             $table->timestamps();
             $table->unique(array('quo_id', 'course_id'));
         });

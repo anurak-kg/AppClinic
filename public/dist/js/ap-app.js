@@ -53,15 +53,17 @@
         $scope.dataLoading = true;
         $scope.boxSearch = false;
         $scope.SaleBoxSearch = false;
-        $scope.Vat = 7;
+        $scope.vat = 7;
+        $scope.vatType = null;
         $scope.controller = '/quotations'
         //$scope.modalInstance = null;
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
-        $scope.init = function (vat, quo_id) {
+        $scope.init = function (vat, quo_id,vatType) {
             $scope.quo_id = quo_id;
-            $scope.Vat = vat;
+            $scope.vat = vat;
+            $scope.vatType = vatType;
         }
 
         $http.get('/quotations/data').
@@ -90,6 +92,7 @@
             error(function (data, status, headers, config) {
 
             });
+
         $scope.customerSelect = function (customer) {
             $scope.customer.cus_name = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
@@ -190,22 +193,37 @@
         $scope.cashAdd = function (cash) {
             $scope.cashInput += cash;
         }
+        $scope.getDiscount = function () {
+            $scope.discout = 0.0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                $scope.discout += parseInt((product.quo_de_price * product.quo_de_discount / 100)) + parseInt(product.quo_de_disamount);
+            }
+            return $scope.discout;
+        }
         $scope.getTotal = function () {
             $scope.total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                $scope.total += parseInt(product.quo_de_price) - (product.quo_de_price * product.quo_de_discount / 100)
-                    - product.quo_de_disamount;
+                $scope.total += parseInt(product.quo_de_price)
 
             }
             return $scope.total;
         }
+        $scope.getFinalTotal = function () {
+            if($scope.vatType == 'in_vat' || $scope.vatType == 'none'){
+                return $scope.getTotal()-$scope.getDiscount();
+            }else if($scope.vatType == 'out_vat'){
+                return ($scope.getTotal()-$scope.getDiscount()) + $scope.getVat();
 
+            }
+
+        }
         $scope.setVat = function (vat) {
             $scope.vat = vat;
         }
         $scope.getVat = function () {
-            return $scope.getTotal() * $scope.vat / 100;
+            return ($scope.getTotal()-$scope.getDiscount()) * $scope.vat / 100;
         }
         $scope.update = function (type, course_id, value) {
             $scope.dataLoading = true;
@@ -865,6 +883,7 @@
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
         $scope.controller = '/receive'
+        $scope.vat_mode = vat_mode;
 
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
@@ -993,7 +1012,8 @@
             window.location.href = '/receive/orderdata?id=' + id;
 
         }
-        $scope.setVat = function (vat) {
+        $scope.init = function (vat_mode,vat) {
+            $scope.vat_mode = vat_mode;
             $scope.vat = vat;
         }
         $scope.getVat = function () {

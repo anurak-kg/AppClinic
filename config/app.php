@@ -113,6 +113,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -141,6 +142,7 @@ return [
         /*
          * Application Service Providers...
          */
+
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -206,6 +208,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
         'Entrust' => 'Zizaco\Entrust\EntrustFacade',
         'Form' => 'Illuminate\Html\FormFacade',
         'HTML' => 'Illuminate\Html\HtmlFacade',
@@ -213,7 +216,6 @@ return [
         //'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
         'PDF'     => 'Servit\Mpdf\Facades\Pdf',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

@@ -19,6 +19,13 @@ class CreateSales extends Migration
             $table->date('sales_date');//วันที่ซื้อสินค้า
             $table->enum('sales_status', array('WAITING','CLOSE'));
             $table->decimal('sales_total',10,2);
+
+            //VAT
+            $table->decimal('net_price',14,2);
+            $table->enum('vat_type', array('none','in_vat','out_vat'));
+            $table->integer('vat_rate');//
+
+
             $table->integer('branch_id')->nullable();
             $table->timestamps();
         });

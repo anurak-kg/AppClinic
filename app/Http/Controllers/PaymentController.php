@@ -12,20 +12,25 @@ use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Payment;
-use Illuminate\Support\Facades\Log;
 use Session;
 
 class PaymentController extends Controller
 {
-    private $input = null;
-    private $amount = null;
-    private $quo_id = null;
-    private $payment = null;
-    private $quo_detail = null;
-    private $minAmountPay = null;
+    private $input;
+    private $amount;
+
+    private $quo_id;
+    private $payment;
+    private $quo_detail;
+    private $minAmountPay;
+    private $quo;
+    private $quoDetail;
+    private $totalPrice;
+    private $vat = 0;
 
     public function getIndex()
     {
+
         $id = null;
         if (Session::get('quo_id') != null) {
             $id = Session::get('quo_id');
@@ -37,7 +42,9 @@ class PaymentController extends Controller
         // return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
-    public function getSalePay(){
+
+    public function getSalePay()
+    {
         $sale = Sales::findOrFail(Input::get('sale_id'));
         $saleController = new SalesController();
         $saleId = $saleController->getId();
@@ -45,23 +52,31 @@ class PaymentController extends Controller
         $this->payment = new Payment();
         $this->payment->sales_id = $saleId;
         $this->payment->cus_id = $sale->cus_id;
-        $total = DB::table('sales_detail')->where('sales_id',$saleId)->sum('sales_de_total') ;
+        $total = DB::table('sales_detail')->where('sales_id', $saleId)->sum('sales_de_total');
         //$totalVat = $total * getConfig('vat_rate') /100;
         //$totalWithVat = $total + $totalVat;
-        if($type=='cash'){
-            $this->payment->payment_status ="FULLY_PAID";
-            $this->payment->payment_type ='PAID_IN_FULL';
+        if ($type == 'cash') {
+            $this->payment->payment_status = "FULLY_PAID";
+            $this->payment->payment_type = 'PAID_IN_FULL';
             $this->payment->save();
             $this->amount = $total;
             $this->saveCash();
             return redirect('sales/save');
         }
     }
+
     public function getPay()
     {
-        $quo = Quotations_detail::where('quo_de_id', Input::get('quo_de_id'))->with('Course', 'payment')->get()->first();
+        $this->quo_detail = Quotations_detail::where('quo_de_id',Input::get('quo_de_id'))
+            ->with('Course', 'Quotations')
+            ->get()->first();
+        $this->input['method'] = 'PAID_IN_FULL';
+        $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
+        $this->quo_id = $this->quo_detail->quo_id;
+        $this->vatCalculate();
+        $totalPrice = $this->totalPrice;
         //return response()->json($quo);
-        return view('payment.pay', compact('quo'));
+        return view('payment.pay', ['quo'=>$this->quo_detail,'totalPrice'=>$totalPrice]);
     }
 
     public function postPay()
@@ -72,6 +87,10 @@ class PaymentController extends Controller
         } elseif ($this->input['method'] == 'PAY_BY_COURSE') {
             $this->savePayPerCourse();
         }
+        //var_dump($this->quo);
+       // dump($this->totalPrice);
+       // dd($this->input['method']);
+
         return redirect("payment" . "?quo_id=" . $this->quo_id)
             ->with(['headTxt' => 'เรียบร้อยแล้ว',
                     'message' => 'ลงบันทึกการชำระเงินเรียบร้อยแล้ว',
@@ -81,27 +100,50 @@ class PaymentController extends Controller
 
     }
 
+    private function vatCalculate()
+    {
+        if ($this->input['method'] == 'PAID_IN_FULL') {
+            if ($this->quo->vat_type == 'none' || $this->quo->vat_type == 'in_vat') {
+                $this->totalPrice = (float)$this->quo_detail->payment_remain;
+            } elseif ($this->quo->vat_type == 'out_vat') {
+                $this->setVat(($this->quo_detail->payment_remain * $this->quo->vat_rate / 100));
+                $this->totalPrice = (float)$this->quo_detail->payment_remain + $this->getVat();
+            }
+        } elseif ($this->input['method'] == 'PAY_BY_COURSE') {
+            if ($this->quo->vat_type == 'none' || $this->quo->vat_type == 'in_vat') {
+                $this->totalPrice = (float)$this->quo_detail->net_price / $this->quo_detail->Course->course_qty;
+            } elseif ($this->quo->vat_type == 'out_vat') {
+                $this->setVat(($this->quo_detail->net_price/$this->quo_detail->Course->course_qty) * $this->quo->vat_rate / 100);
+                $this->totalPrice = (float)($this->quo_detail->net_price / $this->quo_detail->Course->course_qty)+$this->getVat();
+            }
+        }
+
+    }
+
     private function savePaidInFull()
     {
         $count = Payment::where('quo_de_id', $this->input['quo_de_id'])->count();
         if ($count == 0) {
-            $quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
+            $this->quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
                 ->where('course_id', $this->input['course_id'])->get()->first();
 
-            $quo = Quotations::find($quo_detail->quo_id);
-            $this->quo_id = $quo_detail->quo_id;
-            if ($quo_detail->payment_remain > $this->input['receivedAmount']) {
+            $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
+            $this->quo_id = $this->quo_detail->quo_id;
+            $this->vatCalculate();
+
+            /* ยังไม่ถูกต้อง
+             * if ($this->quo_detail->payment_remain > $this->input['receivedAmount']) {
                 abort(403, '400001 : ข้อมูลเงินสดไม่ถูกต้อง.');
-            }
-            if ($this->input['receivedAmount'] >= $quo_detail->payment_remain) {
-                $this->amount = $quo_detail->payment_remain;
+            }*/
+            if ($this->input['receivedAmount'] >= $this->totalPrice) {
+                $this->amount = $this->totalPrice;
             } else {
-                abort(403, '400002 : ข้อมูลเงินสดไม่ถูกต้อง.');
+                abort(405, '0x400002 : จำนวนเงินไม่พอ.');
             }
 
             $this->payment = new Payment();
             $this->payment->quo_de_id = $this->input['quo_de_id'];
-            $this->payment->cus_id = $quo->cus_id;
+            $this->payment->cus_id = $this->quo->cus_id;
             $this->payment->payment_type = "PAID_IN_FULL";
             $this->payment->save();
             if ($this->input['type'] == "cash") {
@@ -113,9 +155,8 @@ class PaymentController extends Controller
             $this->updateQuoPaymentStatus();
             $this->payment->save();
 
-
         } else {
-            abort(403, '400003 : ข้อมูลเงินสดไม่ถูกต้อง.');
+            abort(405, '0x400003 : พบข้อผิดพลาดทางการเงิน.');
         }
     }
 
@@ -123,26 +164,25 @@ class PaymentController extends Controller
     {
         $count = Payment::where('quo_de_id', $this->input['quo_de_id'])->count();
 
-        $quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
-            ->with('Course')
+        $this->quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
+            ->with('Course', 'Quotations')
             ->where('course_id', $this->input['course_id'])->get()->first();
-        $this->quo_id = $quo_detail->quo_id;
+        $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
+        $this->quo_id = $this->quo_detail->quo_id;
+        $this->vatCalculate();
 
-        $this->minAmountPay = ((int)$quo_detail->quo_de_price) / $quo_detail->Course->course_qty;
-        if ($this->input['receivedAmount'] >= $this->minAmountPay) {
-            $this->amount = $this->minAmountPay;
+        if ($this->input['receivedAmount'] >= $this->totalPrice) {
+            $this->amount = $this->totalPrice;
         } else {
-            abort(403, '400002 : ข้อมูลเงินสดไม่ถูกต้อง.');
+            abort(405, '0x400004 : จำนวนเงินไม่พอ');
         }
 
         if ($count == 0) {
-
             // dd($quo_detail);
-            $quo = Quotations::find($quo_detail->quo_id);
-            $this->quo_id = $quo_detail->quo_id;
+            $this->quo_id = $this->quo_detail->quo_id;
             $this->payment = new Payment();
             $this->payment->quo_de_id = $this->input['quo_de_id'];
-            $this->payment->cus_id = $quo->cus_id;
+            $this->payment->cus_id = $this->quo->cus_id;
             $this->payment->payment_type = "PAY_BY_COURSE";
             $this->payment->save();
         } else {
@@ -159,13 +199,15 @@ class PaymentController extends Controller
         $this->payment->save();
 
     }
-    private function saveCash(){
+
+    private function saveCash()
+    {
         $paymentDetail = new Payment_detail();
         $paymentDetail->payment_type = 'CASH';
         $paymentDetail->payment_id = $this->payment->payment_id;
         $paymentDetail->branch_id = Branch::getCurrentId();
         $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
-        $paymentDetail->amount = $this->amount;
+        $paymentDetail->amount = $this->getAmountWithOutVat();
         $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
         $paymentDetail->save();
@@ -178,7 +220,7 @@ class PaymentController extends Controller
         $paymentDetail->payment_type = 'CREDIT';
         $paymentDetail->branch_id = Branch::getCurrentId();
         $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
-        $paymentDetail->amount = $this->amount;
+        $paymentDetail->amount = $this->getAmountWithOutVat();
         $paymentDetail->bank_id = $this->input['bank_id'];
         $paymentDetail->card_id = $this->input['card_id'];
         $paymentDetail->edc_id = $this->input['edc'];
@@ -190,7 +232,7 @@ class PaymentController extends Controller
     private function updateQuoPaymentStatus()
     {
         $quo_detail = Quotations_detail::find($this->input['quo_de_id']);
-        $quo_detail->payment_remain = $quo_detail->payment_remain - $this->amount;
+        $quo_detail->payment_remain = $quo_detail->payment_remain - $this->getAmountWithOutVat();
         if ($quo_detail->payment_remain <= 0) {
             $quo_detail->payment_remain = 0;
             $this->payment->payment_status = 'FULLY_PAID';
@@ -201,6 +243,30 @@ class PaymentController extends Controller
         $quo_detail->save();
 
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVat()
+    {
+        return $this->vat;
+    }
+
+    /**
+     * @param mixed $vat
+     */
+    public function setVat($vat)
+    {
+        $this->vat = $vat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAmountWithOutVat()
+    {
+        return $this->amount - $this->getVat();
     }
 
 
