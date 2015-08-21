@@ -65,7 +65,7 @@
                                     <label for="vat_mode" class="col-sm-3 control-label">ประเภทภาษี</label>
 
                                     <div class="col-sm-9">
-                                       {!! Form::select('vat_mode', array('none' => 'ไม่มี', 'outvat' => 'Vat นอก'), $value['vat_mode'],array('class' => 'form-control')) !!}
+                                       {!! Form::select('vat_mode', array('none' => 'ไม่มี Vat', 'out_vat' => 'Vat นอก(Out Vat)','in_vat' => 'Vat ใน (In Vat)'), $value['vat_mode'],array('class' => 'form-control')) !!}
                                     </div>
                                 </div>
 
