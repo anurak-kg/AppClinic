@@ -19,11 +19,6 @@ class BillController extends Controller
 
      //return response()->json($bill);
 
-        $mpdf=new mPDF('th',array(280,140));
-        $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view("bill/bill",['bill' => $bill[0]]));
-        $mpdf->Output('Bill.pdf','I');
 
     }
 
@@ -32,11 +27,6 @@ class BillController extends Controller
         $sales = Sales::where('sales_id',\Input::get('sales_id'))
             ->with('product','Customer','User','Branch')->get()->first();
 
-        $mpdf=new mPDF('th',array(280,140));
-        $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view("bill/billproduct",['sales' => $sales]));
-        $mpdf->Output('Billproduct.pdf','I');
 
 
     }

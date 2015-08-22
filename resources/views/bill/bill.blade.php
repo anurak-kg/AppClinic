@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body onload="window.print();">
         <div align="right">
             #{{ $bill->quo_id }} <br>
             {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br><br>
