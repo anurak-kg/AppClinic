@@ -25,6 +25,7 @@ class SettingController extends Controller
         'product_day_expire' => 'required',
         'order_sell'        => 'required',
         'customer_photo_limit'        => 'required',
+        'product_out_stock_can_treat' => 'required',
 
     ];
 
