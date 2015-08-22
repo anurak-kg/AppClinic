@@ -211,11 +211,10 @@
             return $scope.total;
         }
         $scope.getFinalTotal = function () {
-            if($scope.vatType == 'in_vat' || $scope.vatType == 'none'){
+            if($scope.vatType == 'false'){
                 return $scope.getTotal()-$scope.getDiscount();
-            }else if($scope.vatType == 'out_vat'){
+            }else if($scope.vatType == 'true'){
                 return ($scope.getTotal()-$scope.getDiscount()) + $scope.getVat();
-
             }
 
         }

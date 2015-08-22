@@ -2,7 +2,7 @@
 @section('title','ซื้อคอร์ส')
 @section('headText','ซื้อคอร์ส')
 @section('content')
-    <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat_type}}')">
+    <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat}}')">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
@@ -203,7 +203,7 @@
                                             <td colspan="6" class="total-price">ส่วนลด:</td>
                                             <td>@{{ getDiscount() | number:2}} บาท</td>
                                         </tr>
-                                        @if($quo->vat_type != 'none')
+                                        @if($quo->vat == 'true')
                                         <tr>
                                             <td colspan="6" class="total-price">ภาษี {{getConfig('vat_rate')}}% :</td>
                                             <td>@{{ getVat() | number:2}} บาท</td>

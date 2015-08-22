@@ -25,16 +25,16 @@ class QuotationsController extends Controller
     public function getIndex()
     {
         $quoCount = Quotations::where('quo_status', -1)
-            ->where('branch_id',Branch::getCurrentId())
-            ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->where('branch_id', Branch::getCurrentId())
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
             ->count();
         if ($quoCount == 0) {
             $quotation = new Quotations();
             //$quotation->cus_id = null;
             $quotation->emp_id = Auth::user()->getAuthIdentifier();
-            $quotation->branch_id =  Branch::getCurrentId();
+            $quotation->branch_id = Branch::getCurrentId();
             $quotation->quo_status = -1;
-            $quotation->vat_type = getConfig('vat_mode');
+            $quotation->vat = getConfig('vat_mode');
             $quotation->vat_rate = getConfig('vat_rate');
             $quotation->commission_rate = getConfig('commission_rate');
             // $quotation->branch_id = Branch::getId();
@@ -83,12 +83,12 @@ class QuotationsController extends Controller
         $product = Course::find($id);
         $rec->course()->attach($product, [
             'qty' => 0,
-            'quo_de_price'  =>$product->course_price,
-            'net_price' =>$product->course_price,
-            'quo_de_discount' =>0,
-            'quo_de_disamount'=>0,
-            'payment_remain'=>$product->course_price,
-            'treat_status'=>0,
+            'quo_de_price' => $product->course_price,
+            'net_price' =>  $product->course_price,
+            'quo_de_discount' => 0,
+            'quo_de_disamount' => 0,
+            'payment_remain' =>  $product->course_price,
+            'treat_status' => 0,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
@@ -110,18 +110,20 @@ class QuotationsController extends Controller
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
-            ->with('quo_id',$quo->quo_id);
+            ->with('quo_id', $quo->quo_id);
 
     }
+
     public function getCurrentSum()
     {
         $sum = DB::select(
             DB::raw("SELECT quotations_detail.quo_id, SUM(net_price) as Total
                      FROM quotations_detail
                      INNER JOIN course ON quotations_detail.course_id = course.course_id
-                     WHERE quo_id = ".$this->getQuoId()."")   );
+                     WHERE quo_id = " . $this->getQuoId() . ""));
         return $sum[0]->Total;
     }
+
     public function getDelete()
     {
         DB::table('quotations_detail')
@@ -129,6 +131,7 @@ class QuotationsController extends Controller
             ->where('course_id', "=", \Input::get('id'))
             ->delete();
     }
+
     public function getData()
     {
         /*$receivedItem = DB::table('quotations_detail')
@@ -141,6 +144,7 @@ class QuotationsController extends Controller
         // dd($receivedItem);
         return response()->json($receivedItem);
     }
+
     public function getUpdate()
     {
         $type = Input::get('type');
@@ -151,13 +155,16 @@ class QuotationsController extends Controller
             ->get()
             ->first();
         $quo_detail->$type = $value;
-        if($type == 'quo_de_discount'  || $type == 'quo_de_disamount'  ){
-            $quo_detail->net_price = $quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount /100) - $quo_detail->quo_de_disamount;
+        if ($type == 'quo_de_discount' || $type == 'quo_de_disamount') {
+            $course_price = $quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount / 100) - $quo_detail->quo_de_disamount;
+            $quo_detail->net_price=$course_price;
+            $quo_detail->payment_remain=$course_price;
         }
         $quo_detail->save();
 
         return response()->json(['status' => 'Success']);
     }
+
     public function getUpdatesale()
     {
         $type = Input::get('type');
@@ -168,6 +175,7 @@ class QuotationsController extends Controller
             ->update([$type => $value]);
         return response()->json(['status' => 'Success']);
     }
+
     public function getDataCustomer()
     {
         //echo $this->getQuoId();
@@ -250,11 +258,12 @@ class QuotationsController extends Controller
         $quo->save();
         return redirect('quotations');
     }
+
     private function getQuoId()
     {
         $quo = \App\Quotations::where('quo_status', -1)
             ->where('emp_id', Auth::user()->getAuthIdentifier())
-            ->where('branch_id',Branch::getCurrentId())
+            ->where('branch_id', Branch::getCurrentId())
             ->firstOrFail();
         return $quo->quo_id;
     }
