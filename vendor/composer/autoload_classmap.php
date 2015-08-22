@@ -50,6 +50,7 @@ return array(
     'CreateTableProductType' => $baseDir . '/database/migrations/2015_06_29_155848_create_table_product_type.php',
     'CreateTableQuotations' => $baseDir . '/database/migrations/2015_06_30_104558_create_table_quotations.php',
     'CreateTableReceive' => $baseDir . '/database/migrations/2015_07_21_090738_create_table_receive.php',
+    'CreateTableSystemLogs' => $baseDir . '/database/migrations/2015_08_22_200902_create_table_system_logs.php',
     'CreateTableVendor' => $baseDir . '/database/migrations/2015_06_29_155559_create_table_vendor.php',
     'CreateTreatHistory' => $baseDir . '/database/migrations/2015_07_23_135417_create_treat_history.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

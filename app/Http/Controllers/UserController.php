@@ -206,6 +206,11 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
             Session::put('branch_id',Input::get('branch'));
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=>'Auth',
+                'description'=>'พนักงาน Username :'.$request->input('username') . ' ได้เช้าสู่ระบบ'
+            ]);
             return redirect()->intended();
         }
         return back()->withErrors([Lang::get('user.loginFailed')])
