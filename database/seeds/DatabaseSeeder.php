@@ -54,9 +54,9 @@ class VendorTableSeeder extends Seeder
             'ven_id' => '123',
             'ven_name' => 'Microsoft New York Metro District: Iselin, NJ',
             'ven_address' => '101 Wood Avenue South, Suite 900 Metro Park 101 Iselin, NJ 08830 ',
-            'ven_sell_name'=>'',
-            'ven_sell_tel'=>'7324765600',
-            'ven_license'=>'2134545613212'
+            'ven_sell_name' => '',
+            'ven_sell_tel' => '7324765600',
+            'ven_license' => '2134545613212'
         ]);
     }
 }
@@ -78,6 +78,7 @@ class SettingTableSeeder extends Seeder
         ]);
     }
 }
+
 class UserTableSeeder extends Seeder
 {
 
@@ -86,54 +87,67 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $root = User::create(['username' => 'admin',
-            'branch_id'=>'1','position_id'=>99,
+            'branch_id' => '1', 'position_id' => 99,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
         $root->roles()->sync([99]);
 
         $recp = User::create(['username' => 'reception',
-            'branch_id'=>'1','position_id'=>6,
+            'branch_id' => '1', 'position_id' => 6,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'reception@fiin.in.th',
             'password' => bcrypt('1234')]);
         $recp->roles()->sync([6]);
-
         $manager = User::create(['username' => 'manager',
-            'branch_id'=>'1','position_id'=>5,
+            'branch_id' => '1', 'position_id' => 5,
             'name' => 'นายชูวิทย์ กมลวิศิษฎ์',
             'email' => 'manager@fiin.in.th',
             'password' => bcrypt('1234')]);
         $manager->roles()->sync([5]);
         $sale = User::create(['username' => 'sale',
-            'branch_id'=>'1','position_id'=>1,
+            'branch_id' => '1', 'position_id' => 1,
             'name' => 'sale',
             'email' => 'sale@fiin.in.th']);
         $sale->roles()->sync([1]);
         $doctor = User::create(['username' => 'doctor',
-            'branch_id'=>'1','position_id'=>4,
+            'branch_id' => '1', 'position_id' => 4,
             'name' => 'doctor',
             'email' => 'doctor@fiin.in.th']);
         $doctor->roles()->sync([4]);
+        $it = User::create(['username' => 'it',
+            'branch_id' => '1','position_id' => 11,
+            'name' => 'IT',
+            'email' => 'IT@fiin.in.th',
+            'password' => bcrypt('1234')]);
+        $it->roles()->sync([11]);
+        $super = User::create(['username' => 'superadmin',
+            'branch_id' => '1','position_id' => 95,
+            'name' => 'superadmin',
+            'email' => 'superadmin@fiin.in.th',
+            'password' => bcrypt('1234')]);
+        $super->roles()->sync([95]);
     }
 
 }
+
 class BranchTableSeeder extends Seeder
 {
 
     public function run()
     {
-          DB::table('branch')->delete();
+        DB::table('branch')->delete();
         \App\Branch::create([
-            'branch_id'=>'1',
-            'branch_name'=>'Tokyo',
-            'branch_address'=>'150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
-            'branch_tel'=>'ไม่ระบุ',
-            'branch_email'=>'AV-JP@jp.com',
-            'branch_code'=>'4257893625145']);
+            'branch_id' => '1',
+            'branch_name' => 'Tokyo',
+            'branch_address' => '150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
+            'branch_tel' => 'ไม่ระบุ',
+            'branch_email' => 'AV-JP@jp.com',
+            'branch_code' => '4257893625145']);
     }
 
 }
+
 class ProductTableSeeder extends Seeder
 {
 
@@ -141,7 +155,7 @@ class ProductTableSeeder extends Seeder
     {
 
         DB::table('product_group')->delete();
-        \App\Product_group::create(['pg_id' => '1001','pg_name' => 'Laser']);
+        \App\Product_group::create(['pg_id' => '1001', 'pg_name' => 'Laser']);
 
 
         DB::table('product')->delete();
@@ -215,6 +229,7 @@ class ProductTableSeeder extends Seeder
     }
 
 }
+
 class CourseTableSeeder extends Seeder
 {
 
@@ -305,6 +320,7 @@ class CourseTableSeeder extends Seeder
     }
 
 }
+
 class RolePermissionTableSeeder extends Seeder
 {
     public function run()
@@ -312,30 +328,30 @@ class RolePermissionTableSeeder extends Seeder
 
         DB::table('permissions')->delete();
         DB::table('permissions')->insert([
-            ['id' => '1',  'name' =>  'customer-read', 'display_name' => 'ดูข้อมูลลูกค้า'],
-            ['id' => '2',  'name' =>  'customer-create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
-            ['id' => '3',  'name' =>  'customer-delete', 'display_name' => 'ลบลูกค้า'],
-            ['id' => '4',  'name' =>  'customer-edit', 'display_name' => 'แก้ไขข้อมูลลูกค้า'],
-            ['id' => '5',  'name' =>  'order-order', 'display_name' => 'สั่งสิ้นค้า'],
-            ['id' => '6',  'name' =>  'quo', 'display_name' => 'ขายคอร์ส'],
-            ['id' => '7',  'name' =>  'emp', 'display_name' => 'การจัดการพนักงาน'],
-            ['id' => '8',  'name' =>  'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
-            ['id' => '9',  'name' =>  'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
-            ['id' => '10', 'name' =>  'product-group', 'display_name' => 'เพิ่ม ลบ และแก้ไขกลุ่มสินค้า'],
-            ['id' => '11', 'name' =>  'receive-return', 'display_name' => 'รับสินค้าและคืนสินค้า'],
-            ['id' => '12', 'name' =>  'treatment', 'display_name' => 'รักษา'],
-            ['id' => '13', 'name' =>  'sales', 'display_name' => 'POS'],
-            ['id' => '14', 'name' =>  'report', 'display_name' => 'รายงาน'],
-            ['id' => '15', 'name' =>  'dr-working', 'display_name' => 'ตารางการทำงานหมอ'],
-            ['id' => '16', 'name' =>  'appointment', 'display_name' => 'ตารางนัดลูกค้า'],
-            ['id' => '17', 'name' =>  'product', 'display_name' => 'เพิ่ม แก้ไข และลบสินค้า'],
-            ['id' => '18', 'name' =>  'product-read', 'display_name' => 'ดูข้อมูลสินค้า'],
-            ['id' => '19', 'name' =>  'branch', 'display_name' => 'การจัดการสาขา'],
-            ['id' => '20', 'name' =>  'vendor', 'display_name' => 'การจัดการ suppiler'],
-            ['id' => '21', 'name' =>  'course-type', 'display_name' => 'เพิ่ม ลบ และแก้ไขประเภทคอร์ส'],
-            ['id' => '22', 'name' =>  'payment', 'display_name' => 'ชำระเงิน'],
-            ['id' => '23', 'name' =>  'setting', 'display_name' => 'ตั้งค่า'],
-            ['id' => '24', 'name' =>  'permission', 'display_name' => 'กำหนดสิทธิ'],
+            ['id' => '1', 'name' => 'customer-read', 'display_name' => 'ดูข้อมูลลูกค้า'],
+            ['id' => '2', 'name' => 'customer-create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
+            ['id' => '3', 'name' => 'customer-delete', 'display_name' => 'ลบลูกค้า'],
+            ['id' => '4', 'name' => 'customer-edit', 'display_name' => 'แก้ไขข้อมูลลูกค้า'],
+            ['id' => '5', 'name' => 'order-order', 'display_name' => 'สั่งสิ้นค้า'],
+            ['id' => '6', 'name' => 'quo', 'display_name' => 'ขายคอร์ส'],
+            ['id' => '7', 'name' => 'emp', 'display_name' => 'การจัดการพนักงาน'],
+            ['id' => '8', 'name' => 'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
+            ['id' => '9', 'name' => 'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
+            ['id' => '10', 'name' => 'product-group', 'display_name' => 'เพิ่ม ลบ และแก้ไขกลุ่มสินค้า'],
+            ['id' => '11', 'name' => 'receive-return', 'display_name' => 'รับสินค้าและคืนสินค้า'],
+            ['id' => '12', 'name' => 'treatment', 'display_name' => 'รักษา'],
+            ['id' => '13', 'name' => 'sales', 'display_name' => 'POS'],
+            ['id' => '14', 'name' => 'report', 'display_name' => 'รายงาน'],
+            ['id' => '15', 'name' => 'dr-working', 'display_name' => 'ตารางการทำงานหมอ'],
+            ['id' => '16', 'name' => 'appointment', 'display_name' => 'ตารางนัดลูกค้า'],
+            ['id' => '17', 'name' => 'product', 'display_name' => 'เพิ่ม แก้ไข และลบสินค้า'],
+            ['id' => '18', 'name' => 'product-read', 'display_name' => 'ดูข้อมูลสินค้า'],
+            ['id' => '19', 'name' => 'branch', 'display_name' => 'การจัดการสาขา'],
+            ['id' => '20', 'name' => 'vendor', 'display_name' => 'การจัดการ suppiler'],
+            ['id' => '21', 'name' => 'course-type', 'display_name' => 'เพิ่ม ลบ และแก้ไขประเภทคอร์ส'],
+            ['id' => '22', 'name' => 'payment', 'display_name' => 'ชำระเงิน'],
+            ['id' => '23', 'name' => 'setting', 'display_name' => 'ตั้งค่า'],
+            ['id' => '24', 'name' => 'permission', 'display_name' => 'กำหนดสิทธิ'],
 
 
         ]);

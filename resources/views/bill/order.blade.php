@@ -3,7 +3,7 @@
 
 </head>
 
-<body>
+<body onload="window.print();">
     <section class="invoice">
         <div class="row">
         <div align="middle">
