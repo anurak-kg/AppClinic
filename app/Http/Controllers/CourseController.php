@@ -72,7 +72,7 @@ class CourseController extends Controller
         if (count($medicine) != 0) {
             foreach ($medicine as $item) {
                 $product = Product::find($item->product_id);
-                $course->medicine()->attach($product, [
+                $course->product()->attach($product, [
                     'qty' => $item->qty,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
