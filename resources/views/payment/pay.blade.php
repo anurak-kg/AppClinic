@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div ng-show="payment.boxPaidFull"
-                                         ng-init="init({{ (int)$totalPrice}},{{getConfig('vat_rate')}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
+                                         ng-init="init({{ (int)$totalPrice}},'{{$quo->Quotations->vat}}',{{$quo->Quotations->vat_rate}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
                                         <div class="col-md-12">
                                             <div class="form-group col-md-12">
                                                 <label>ประเภทการชำระ</label>
@@ -70,13 +70,20 @@
                                                     <td style="text-align: right">ราคาคอร์ส
                                                         ทั้งหมด {{$quo->course->course_qty}} ครั้ง
                                                     </td>
-                                                    <td style="width: 189px;text-align: right">{{ number_format($quo->quo_de_price,0) }}</td>
+                                                    <td style="width: 189px;text-align: right">{{ number_format($quo->net_price,0) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>ยอดค้างชำระ</td>
                                                     <td style="font-weight: bolder;color: #FF0009;font-size: 16px;">{{ number_format($quo->payment_remain,0)}}</td>
                                                 </tr>
-
+                                                @if($quo->Quotations->vat == 'true')
+                                                    <tr>
+                                                        <td>ภาษีที่ต้องชำระครั้งนี้</td>
+                                                        <td style="font-weight: bolder;font-size: 16px;">
+                                                            @{{ vat_amount | number}}
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                                 <tr>
                                                     <td>จำนวนเงินที่ต้องชำระครั้งนี้</td>
                                                     <td style="font-size: 24px;font-weight: bolder">@{{payment.minPrice | number}}</td>

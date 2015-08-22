@@ -1205,27 +1205,34 @@
     app.controller('paymentController', function ($scope) {
         $scope.payment = [];
         $scope.box = [];
+        $scope.vat_rate = null;
         $scope.vat = 7;
         $scope.quo_id = null;
-
+        $scope.vat_amount = 0;
         $scope.paymentMethod = function () {
             $scope.payment.buttonPay = true;
-            console.log($scope.payment.boxMethod);
+                 console.log($scope.payment.boxMethod);
             if ($scope.payment.boxMethod == "PAID_IN_FULL") {
                 $scope.payment.boxPaidFull = true;
                 $scope.payment.received_amount = 0;
-                $scope.payment.minPrice = $scope.course.price;
+                if($scope.vat == 'true') {
+                    $scope.vat_amount = $scope.course.price * $scope.vat_rate / 100;
+                }
+                $scope.payment.minPrice = $scope.course.price + $scope.vat_amount ;
+
             }
             if ($scope.payment.boxMethod == "PAYABLE") {
             }
             if ($scope.payment.boxMethod == "PAY_BY_COURSE") {
                 $scope.payment.boxPaidFull = true;
-                $scope.payment.minPrice = $scope.course.price / $scope.course.qty;
-
+                if($scope.vat == 'true'){
+                    $scope.vat_amount = ($scope.course.price / $scope.course.qty) * $scope.vat_rate /100
+                }
+                $scope.payment.minPrice = ($scope.course.price / $scope.course.qty ) + $scope.vat_amount ;
             }
 
         }
-        $scope.init = function (value, vat, quo_id, courseId, qty, pay_by_course) {
+        $scope.init = function (value, vat,vat_rate, quo_id, courseId, qty, pay_by_course) {
             $scope.payment = [];
             $scope.box = [];
             $scope.course = [];
@@ -1237,16 +1244,15 @@
             $scope.payment.creditCardBox = false;
             console.log(value);
             $scope.vat = vat;
+            $scope.vat_rate = vat_rate;
+            $scope.pay_by_course = pay_by_course;
             // Vat นอก
             // $scope.payment[index].paymentTotal = (value * (100 + $scope.vat))/100;
             //Vat ใน
             $scope.payment.paymentTotal = value;
             $scope.payment.course_id = courseId;
-            if (pay_by_course == 1) {
-                $scope.payment.boxPaidFull = true;
-                $scope.payment.minPrice = $scope.course.price / $scope.course.qty;
 
-            }
+
 
         }
         $scope.changeType = function () {
