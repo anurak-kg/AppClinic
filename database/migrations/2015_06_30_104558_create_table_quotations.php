@@ -26,7 +26,7 @@ class CreateTableQuotations extends Migration
             // 2 = อยุ่ในระหว่างการรักษา ,3 = เรียบร้อยแล้ว
             //VAT
             $table->decimal('total_net_price',14,2);
-            $table->enum('vat_type', array('none','in_vat','out_vat'));
+            $table->boolean('vat');
             $table->integer('vat_rate');//
             $table->integer('commission_rate');//% ค่าคอมมิชชั้น
             $table->integer('branch_id')->nullable();
