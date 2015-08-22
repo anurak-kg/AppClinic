@@ -32,6 +32,8 @@ class CreatePaymentSystem extends Migration
             $table->string('card_id');//เลขที่บัตรเครดิต
             $table->string('edc_id');//เลขที่ edc
             $table->decimal('amount', 12, 2); //จำนวนเงินที่จ่าย
+            $table->decimal('vat_amount', 12, 2); //ภาษีที่จ่าย
+
             $table->timestamps();
 
             $table->foreign('payment_id')
