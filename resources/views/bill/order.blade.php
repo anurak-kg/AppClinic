@@ -76,7 +76,7 @@
                                 <td style="width: 240px">{{$item->product_name}}</td>
                                 <td  align="center" style="width: 70px">{{$qty = $item->pivot->order_de_qty}}</td>
                                 <td  align="center" style="width: 70px">{{$item->product_unit}}</td>
-                                <td align="center" style="width: 70px">{{number_format($price = $item->product_price)}}</td>
+                                <td align="center" style="width: 70px">{{number_format($price = $item->order_de_price)}}</td>
                                 <td align="center" style="width: 90px" >{{number_format($sumtotal = $price*$qty)}}</td>
 
                             </tr>

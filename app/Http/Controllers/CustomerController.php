@@ -45,15 +45,11 @@ class CustomerController extends Controller
             ->get();
 
         $datapayment = DB::table('payment_detail')
-            ->select('payment.payment_id', 'payment_detail.payment_type','payment_bank.bank_id',
-                'payment_detail.amount','payment.created_at','branch.branch_id','payment_detail.card_id',
-                'payment_detail.edc_id')
-            ->join('payment', 'payment.payment_id', '=', 'payment_detail.payment_id')
-            ->join('payment_bank', 'payment_bank.bank_id', '=', 'payment_bank.bank_id')
-            ->join('branch', 'branch.branch_id', '=', 'payment_detail.branch_id')
-            ->join('quotations', 'quotations.quo_id', '=', 'payment.quo_de_id')
-            ->join('users', 'users.id', '=', 'payment_detail.emp_id')
-            ->where('quotations.cus_id', '=', $customer->cus_id)
+            ->select('payment_detail.branch_id', 'payment_detail.bank_id','payment_detail.payment_id',
+                'payment_detail.payment_type','payment_detail.amount','payment_detail.card_id','payment_detail.edc_id',
+                DB::raw('date(payment_detail.created_at) as date'))
+            ->join('payment','payment.payment_id','=','payment_detail.payment_id')
+            ->where('payment.cus_id', '=', $customer->cus_id)
             ->orderby('payment_id', 'desc')
             ->get();
 
@@ -69,7 +65,8 @@ class CustomerController extends Controller
             ->whereRaw('customer_photo.photo_type = "After"')
             ->get();
 
-      // return response()->json($dataphotoBefore);
+
+      //return response()->json($datapayment);
 
         return view('customer/view', ['data' => $customer, 'treat' => $data,'payment' => $datapayment,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
     }
