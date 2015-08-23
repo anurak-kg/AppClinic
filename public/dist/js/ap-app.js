@@ -216,7 +216,6 @@
             }else if($scope.vatType == 'true'){
                 return ($scope.getTotal()-$scope.getDiscount()) + $scope.getVat();
             }
-
         }
         $scope.setVat = function (vat) {
             $scope.vat = vat;
@@ -693,8 +692,8 @@
         $scope.cashInput = 0;
         $scope.CashTotal = 0;
         $scope.SaleBoxSearch = false;
-        $scope.Vat = 7;
-        $scope.controller = '/sales'
+        $scope.vat = 7;
+        $scope.vatType = null;        $scope.controller = '/sales'
         $scope.paymentType = "cash"
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
@@ -724,7 +723,11 @@
             error(function (data, status, headers, config) {
 
             });
+        $scope.init = function(vat_type,vat){
+            $scope.vatType = vat_type;
+            $scope.setVat(vat);
 
+        }
         $scope.customerSelect = function (customer) {
             $scope.customer.fullname = customer.cus_name;
             $scope.customer.tel = customer.cus_tel;
@@ -815,16 +818,33 @@
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
                 //console.log(product);
-                $scope.total += parseInt((product.sales_de_price * product.sales_de_qty) - ((product.sales_de_price * product.sales_de_qty) * product.sales_de_discount / 100) - product.sales_de_disamount);
+                $scope.total += parseInt(product.sales_de_price * product.sales_de_qty);
             }
 
             return $scope.total;
+        }
+        $scope.getDiscount = function () {
+            $scope.discout = 0.0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                $scope.discout += ((product.sales_de_price * product.sales_de_discount / 100) + parseInt(product.sales_de_disamount))*product.sales_de_qty;
+            }
+            return $scope.discout;
+        }
+        $scope.getFinalPrice = function () {
+            if($scope.vatType == 'false'){
+                $scope.finalPrice = $scope.getTotal()-$scope.getDiscount();
+            }else if($scope.vatType == 'true'){
+                $scope.finalPrice = ($scope.getTotal() - $scope.getDiscount()) + $scope.getVat();
+            }
+            console.log($scope.finalPrice);
+            return $scope.finalPrice;
         }
         $scope.setVat = function (vat) {
             $scope.vat = vat;
         }
         $scope.getVat = function () {
-            return $scope.getTotal() * $scope.vat / 100;
+            return ($scope.getTotal()-$scope.getDiscount()) * $scope.vat / 100;
         }
         $scope.pushDuplicateCheck = function () {
             var arr = $scope.product;

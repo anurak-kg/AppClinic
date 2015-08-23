@@ -2,7 +2,7 @@
 @section('title','ขายสินค้า')
 @section('headText','ขายสินค้า')
 @section('content')
-    <div ng-controller="salesController" id="sales" ng-init="setVat({{getConfig('vat_rate')}})">
+    <div ng-controller="salesController" id="sales" ng-init="init('{{$data->vat}}',{{$data->vat_rate}})">
         <script type="text/ng-template" id="payment.html">
                 <div class="modal-header">
                     <h3 class="modal-title">ชำระเงิน</h3>
@@ -21,10 +21,10 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="total">ยอดที่ต้องชำระ</label>
-                                <input name="total"
-                                       class=" form-control input-lg"
+                                <input name="total" ng-model="finalPrice"
+                                       class="form-control input-lg"
                                        type="number" id="total"
-                                       value="@{{getTotal() + getVat()}}"
+                                       value="@{{ getFinalPrice() }}"
                                        disabled/>
 
                             </div>
@@ -48,7 +48,7 @@
                                 <input name="withdrawn"
                                        class=" form-control input-lg"
                                        type="number" id="withdrawn"
-                                       value="@{{getTotal() + getVat() - cashInput}}"
+                                       value="@{{getFinalPrice() - cashInput}}"
                                        disabled
                                         /></div>
                         </div>
@@ -56,7 +56,9 @@
                 </div>
                 <div class="modal-footer">
                     {{-- <button class="btn btn-success" ng-click="payment()">ชำระเงิน</button>--}}
-                    <button class="btn btn-success" ng-click="paymentAndPrint({{$data->sales_id}})">ชำระเงิน
+                    <button class="btn btn-success"
+                            ng-disabled="cashInput<finalPrice"
+                            ng-click="paymentAndPrint({{$data->sales_id}})" >ชำระเงิน
                         พร้อมปลิ้นบิล
                     </button>
                     <button class="btn btn-danger" ng-click="cancel()">ยกเลิก</button>
@@ -197,22 +199,24 @@
 
 
                                         </tr>
-                                        <span class="pull-right">
                                         <tr>
-                                            <td colspan="7" class="total-price">Subtotal:</td>
+                                            <td colspan="7" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" class="total-price">Tax(7%):</td>
+                                            <td colspan="7" class="total-price">ส่วนลด:</td>
+                                            <td>@{{ getDiscount() | number:2}} บาท</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="7" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
                                             <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" class="total-price">Total:</td>
-                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
-                                            </td>
+                                            <td colspan="7" class="total-price">ยอดสุทธิ:</td>
+                                            <td> @{{ getFinalPrice() | number:2}} บาท                                            </td>
                                         </tr>
-                                      </span>
                                     </table>
 
                                         <span class="pull-right col-lg-1">
