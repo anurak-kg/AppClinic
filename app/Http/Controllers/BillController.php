@@ -6,6 +6,7 @@ use App\Order;
 use App\Quotations;
 
 use App\Http\Requests;
+use App\Quotations_detail;
 use App\Sales;
 use mPDF;
 
