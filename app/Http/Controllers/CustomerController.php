@@ -236,8 +236,8 @@ class CustomerController extends Controller
         $form->text('cus_road', 'ถนน')->attributes(array('placeholder' => 'โปรดระบุ ถนน....'));
         $form->text('cus_subdis', 'ตำบล/แขวง')->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
         $form->text('cus_district', 'อำเภอ/เขต')->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
-        $form->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'))->rule('required');
-        $form->text('cus_postal', 'รหัสไปรษณีย์')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'))->rule('required');
+        $form->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'));
+        $form->text('cus_postal', 'รหัสไปรษณีย์')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
 
         $form->attributes(array("class" => " "));
 
