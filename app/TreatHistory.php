@@ -10,7 +10,9 @@ class TreatHistory extends Model
     protected $primaryKey = 'treat_id';
 
     public function product(){
-        return $this->belongsToMany('App\Product','treat_has_medicine','treat_id','product_id');
+        return $this->belongsToMany('App\Product','treat_has_medicine','treat_id','product_id')
+            ->withPivot('qty','created_at','updated_at');
+
     }
 
 }

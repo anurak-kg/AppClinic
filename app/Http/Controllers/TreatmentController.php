@@ -49,17 +49,18 @@ class TreatmentController extends Controller
         $this->updateCourseQty($input['quo_id'], $input['course_id']);
         $treat->save();
         $array = $input['qty'];
+       // dump($array);
+
         if (count($array) >= 1){
-        foreach ($array as $qty) {
-            $treat->product()->attach(Product::find(key($array)), ['qty' => $qty]);
+        foreach ($array as $product_id => $qty) {
+            $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
             $inv = new InventoryTransaction();
-            $inv->product_id = key($array);
+            $inv->product_id = $product_id;
             $inv->treatment_id = $treat->treat_id;
             $inv->qty = -abs($qty);
             $inv->branch_id = Branch::getCurrentId();
             $inv->type = "Treatment";
             $inv->save();
-            next($array);
         }
     }
 

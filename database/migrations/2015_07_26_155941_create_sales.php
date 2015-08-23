@@ -43,6 +43,7 @@ class CreateSales extends Migration
                 ->references('sales_id')->on('sales')
                 ->onDelete('cascade');
         });
+        DB::unprepared("ALTER TABLE sales AUTO_INCREMENT = 1000000;");
     }
 
     /**
