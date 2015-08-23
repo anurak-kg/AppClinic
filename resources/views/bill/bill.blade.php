@@ -14,23 +14,29 @@
             {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br><br>
         </div>
 
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->customer->cus_name }}
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->quotations->customer->cus_name }}
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $bill->customer->cus_id }} <br><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $bill->quotations->customer->cus_id }} <br><br>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->customer->cus_hno }}
-        {{ $bill->customer->cus_moo }}
-        {{ $bill->customer->cus_soi }}
-        {{ $bill->customer->cus_road }}
-        {{ $bill->customer->cus_subdis }}
-        {{ $bill->customer->cus_district }}
-        {{ $bill->customer->cus_province }}
-        {{ $bill->customer->cus_postal }}
-        {{ $bill->customer->cus_tel }}
-        {{ $bill->customer->cus_phone }}
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->quotations->customer->cus_hno }}
+        {{ $bill->quotations->customer->cus_moo }}
+        {{ $bill->quotations->customer->cus_soi }}
+        {{ $bill->quotations->customer->cus_road }}
+        {{ $bill->quotations->customer->cus_subdis }}
+        {{ $bill->quotations->customer->cus_district }}
+        {{ $bill->quotations->customer->cus_province }}
+        {{ $bill->quotations->customer->cus_postal }}
+        {{ $bill->quotations->customer->cus_tel }}
+        {{ $bill->quotations->customer->cus_phone }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{ $bill->quotations->user->id }}
 
          <br><br>
 
@@ -42,20 +48,22 @@
 
                     <tbody>
                     <?php $total=0 ?>
-                    <?php $index=1000000 ?>
-                    @foreach($bill->course as $course)
+                    <?php $index=0 ?>
+
                     <tr>
                         <td><?php echo $index+=1?> &nbsp; &nbsp;</td>
-                        <td>{{ $course->course_id }}</td>
-                        <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ $course->course_name }}</td>
+                        <td>{{$bill->course->course_id }}</td>
+                        <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{ $bill->course->course_name }}</td>
                         <td>1</td>
-                        <td>&nbsp; <?php echo number_format($subtotal = $course->course_price)?></td>
-                        <td> <?php echo number_format($dis= $bill->discount,2) ?> </td>
-                        <?php echo number_format($subtotal-$dis,2) ?>
-                        <td>&nbsp; &nbsp;&nbsp;&nbsp;<?php echo number_format($total+=($subtotal-$dis)) ?></td>
+                        <td>&nbsp; <?php echo number_format($subtotal = $bill->course->course_price)?></td>
+                        <?php  number_format($dis1 = $bill->quo_de_discount,2) ?>
+                        <?php  number_format($dis2 = $bill->quo_de_disamount,2) ?>
+                        <td>  <?php echo number_format($distotal = (($subtotal*$dis1/100)+$dis2)) ?> </td>
+                        <?php echo number_format($subtotal-$distotal,2) ?>
+                        <td>&nbsp; &nbsp;&nbsp;&nbsp;<?php echo number_format($total+=($subtotal-$distotal)) ?></td>
                     </tr>
 
-                        @endforeach
+
                     </tbody>
 
                 </table>
