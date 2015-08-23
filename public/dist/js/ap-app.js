@@ -1300,7 +1300,7 @@
             }
 
         }
-        $scope.init = function (value, vat,vat_rate, quo_id, courseId, qty, pay_by_course) {
+        $scope.init = function (value, vat,vat_rate, quo_id, courseId, qty, pay_by_course,quo_de_id) {
             $scope.payment = [];
             $scope.box = [];
             $scope.course = [];
@@ -1312,6 +1312,7 @@
             $scope.payment.creditCardBox = false;
             console.log(value);
             $scope.vat = vat;
+            $scope.quo_de_id = quo_de_id;
             $scope.vat_rate = vat_rate;
             $scope.pay_by_course = pay_by_course;
             // Vat นอก
@@ -1342,6 +1343,12 @@
                 }
             }
         };
+        $scope.saveFullPaidPayment = function() {
+            window.open(
+                '/bill/bill?quo_de_id=' + $scope.quo_de_id,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+        }
 
         /*$scope.savePayment = function (index) {
          var url = '/payment/quosave?quo_id=' + $scope.quo_id + '&receivedAmount=' + $scope.payment[index].receivedAmount +

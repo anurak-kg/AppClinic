@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div ng-show="payment.boxPaidFull"
-                                         ng-init="init({{ (int)$totalPrice}},'{{$quo->Quotations->vat}}',{{$quo->Quotations->vat_rate}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}})">
+                                         ng-init="init({{ (int)$totalPrice}},'{{$quo->Quotations->vat}}',{{$quo->Quotations->vat_rate}},{{$quo->quo_id}},'{{ $quo->course_id }}',{{$quo->course->course_qty}},{{$pay_by_course}},{{$quo->quo_de_id}})">
                                         <div class="col-md-12">
                                             <div class="form-group col-md-12">
                                                 <label>ประเภทการชำระ</label>
@@ -91,11 +91,10 @@
                                                 <tr ng-show="payment.creditCardBox">
                                                     <td>ธนาคาร</td>
                                                     <td>
-                                                        <select class="form-control" ng-model="payment.bank_id"
-                                                                name="bank_id">
-                                                            <option value="1">กรุงศรี</option>
-                                                            <option value="2">Aeon</option>
-                                                            <option value="3">option 3</option>
+                                                        <select class="form-control" ng-model="payment.bank_id" name="bank_id">
+                                                            @foreach($bank as $item)
+                                                                <option value="{{$item->bank_id}}">{{$item->bank_name}}</option>
+                                                            @endforeach
 
                                                         </select>
                                                     </td>

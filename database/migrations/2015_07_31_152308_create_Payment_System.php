@@ -42,7 +42,7 @@ class CreatePaymentSystem extends Migration
         });
         Schema::create('payment_bank', function (Blueprint $table) {
             $table->increments('bank_id');
-            $table->integer('bank_name');
+            $table->string('bank_name',255);
             $table->timestamps();
         });
     }

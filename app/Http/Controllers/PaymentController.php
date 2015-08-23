@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Payment_bank;
 use App\Payment_detail;
 use App\Quotations;
 use App\Http\Requests;
@@ -77,8 +78,12 @@ class PaymentController extends Controller
         $this->quo_id = $this->quo_detail->quo_id;
         $this->vatCalculate();
         $totalPrice = $this->quo_detail->net_price;
+        $bank = Payment_bank::all();
         //return response()->json($quo);
-        return view('payment.pay', ['quo' => $this->quo_detail, 'totalPrice' => $totalPrice]);
+        return view('payment.pay', [
+            'quo' => $this->quo_detail,
+            'totalPrice' => $totalPrice,
+            'bank' =>$bank]);
     }
 
     public function postPay()
