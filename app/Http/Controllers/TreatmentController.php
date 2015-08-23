@@ -102,7 +102,7 @@ class TreatmentController extends Controller
         // dd($this->getMedicineRemain($quo->course_id));
         $medicines = $this->getMedicineRemain($quo->course_id);
         $doctor = User::where('position_id', '=', 4)->get();
-        $users = User::all();
+        $users = User::where('position_id', '=', 8)->get();
         //return response()->json($quo);
         return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines'));
     }
