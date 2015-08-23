@@ -33,7 +33,6 @@ class CreateTableReceive extends Migration
             $table->integer('receive_id')->unsigned();
             $table->string('product_id');
             $table->integer('receive_de_qty');//รับสินค้า
-            $table->integer('receive_de_qty_return');//คืนสินค้า
             $table->integer('receive_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('receive_de_disamount',10,2); //ส่วนลดจำนวนเงิน
             $table->decimal('receive_de_price',10,2);

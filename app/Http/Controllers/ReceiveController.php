@@ -179,8 +179,6 @@ class ReceiveController extends Controller
             $product = Product::findOrFail($item->product_id);
             $receive->product()->attach($product, [
                 'receive_de_qty' => $item->pivot->order_de_qty,
-                'receive_de_qty_return' => 0,
-                'receive_de_text' => "",
                 'receive_de_disamount' => 0,
                 'receive_de_discount' => 0,
                 'receive_de_price' => $item->pivot->order_de_price,

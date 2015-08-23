@@ -937,7 +937,6 @@
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
         $scope.controller = '/receive'
-        $scope.vat_mode = vat_mode;
 
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
