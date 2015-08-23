@@ -383,7 +383,8 @@
         $scope.dataLoading = true;
         $scope.boxSearch = false;
         $scope.VendorBoxSearch = false;
-        $scope.Vat = 7;
+        $scope.vat = null;
+        $scope.vat_rate = 7;
         $scope.controller = '/order'
 
         $scope.tableParams = new ngTableParams({}, {
@@ -413,6 +414,28 @@
             }).
             error(function (data, status, headers, config) {
             });
+        $scope.init = function(vat,vat_rate,order_id){
+            $scope.vat = vat;
+            $scope.vat_rate = vat_rate;
+            $scope.order_id = order_id;
+            if($scope.vat  =='true'){
+                $scope.vat_enable = true;
+            }else{
+                $scope.vat_enable = false;
+
+            }
+        }
+        $scope.vatChange = function(){
+            $scope.dataLoading = true;
+            //alert($scope.vat_enable);
+            $http.get($scope.controller + '/vat-change?vat='+$scope.vat_enable).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+
+                });
+        }
 
         $scope.vendorSelect = function (vendor) {
             $scope.vendor = vendor;
@@ -492,22 +515,27 @@
             $scope.tableParams.reload();
 
         }
-        $scope.setVat = function (vat) {
-            $scope.vat = vat;
-        }
-        $scope.getVat = function () {
-            return $scope.getTotal() * $scope.vat / 100;
-        }
         $scope.getTotal = function () {
-            var total = 0;
+            $scope.total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                //console.log(product);
-                total += parseInt(product.order_de_price * product.order_de_qty);
-            }
+                $scope.total += parseInt(product.order_de_price * product.order_de_qty)
 
-            return total;
+            }
+            return $scope.total;
         }
+        $scope.getFinalTotal = function () {
+            if($scope.vat_enable == false){
+                return $scope.getTotal();
+            }else if($scope.vat_enable == true){
+                return ($scope.getTotal() + $scope.getVat());
+            }
+        }
+
+        $scope.getVat = function () {
+            return $scope.getTotal() * $scope.vat_rate / 100;
+        }
+
         $scope.pushDuplicateCheck = function () {
             var arr = $scope.product;
             var results = [];
@@ -521,7 +549,8 @@
             }
             return results;
         }
-        $scope.save = function () {
+
+        $scope.save = function (id) {
             if ($scope.product.length == 0) {
                 alert("ยังไม่มีการเลือกสินค้า");
             }
@@ -529,8 +558,11 @@
                 alert("ยังไม่เลือกร้านค้า");
             }
             else {
-                window.location.href = $scope.controller + '/save';
-
+                window.open(
+                    '/bill/order?order_id=' + id,
+                    '_blank' // <- This is what makes it open in a new window.
+                );
+                window.location.href = '/order/save';
             }
         }
 

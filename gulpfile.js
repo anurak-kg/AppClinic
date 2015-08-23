@@ -33,7 +33,8 @@ elixir(function (mix) {
             'jquery.dataTables.min.js',
             'redactor.min.js',
             'handlebars-v3.0.3.js',
-            'index.min.js'
+            'index.min.js',
+            'bootstrap-toggle.min.js'
         ],
         'public/js/app.js'
     )
@@ -46,7 +47,8 @@ elixir(function (mix) {
         'select.min.css',
         'AdminLTE.min.css',
         'index.min.css',
-        'ionicons.min.css'
+        'ionicons.min.css',
+        'bootstrap-toggle.min.css'
         //'jquery-ui.min.css'
 
     ]);

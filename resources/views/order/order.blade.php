@@ -1,9 +1,9 @@
 @extends('layout.master')
-@section('title','การสั่งซื้อสินค้า')
-@section('headText','สั่งซื้อสินค้า')
+@section('title','การซื้อสินค้า')
+@section('headText','สั่งสินค้า')
 
 @section('content')
-    <div ng-controller="orderController" id="order" ng-init="setVat({{config('shop.vat')}})">
+    <div ng-controller="orderController" id="order" ng-init="init('{{$data->vat}}',{{$data->vat_rate}},{{$data->order_id}})">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
@@ -24,6 +24,10 @@
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
+                        ภาษี: <input type="checkbox"
+                                     ng-model="vat_enable"
+                                     ng-change="vatChange()">
+
                     </div>
                 </div>
             </div>
@@ -137,23 +141,27 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5" class="total-price">Subtotal:</td>
+                                            <td colspan="5" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Tax(7%):</td>
+                                            <td colspan="5" class="total-price">ส่วนลด:</td>
+                                            <td>0 บาท</td>
+                                        </tr>
+                                        <tr ng-show="vat_enable">
+                                            <td colspan="5" class="total-price">ภาษี ( {{$data->vat_rate}}%):</td>
                                             <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="5" class="total-price">Total:</td>
-                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
+                                            <td colspan="5" class="total-price">ยอดสุทธิ:</td>
+                                            <td> @{{ getFinalTotal() | number:2}} บาท
                                             </td>
                                         </tr>
 
                                     </table>
                                     <span class="pull-right col-lg-1">
-                                        <a ng-click="save()" class="btn btn-md btn-success pull-right"><i
+                                        <a ng-click="save({{$data->order_id}})" class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-mail-forward "> ออกใบสั่งสินค้า </i></a>
                                     </span>
 
