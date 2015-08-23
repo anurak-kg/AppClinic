@@ -50,7 +50,6 @@ Route::group(['middleware' => 'permission:order-order'], function () {
     Route::any('order/history', 'OrderController@history');
     Route::controller('order', 'OrderController');
     Route::any('bill/order', 'BillController@order');
-
 });
 
 //Receive
