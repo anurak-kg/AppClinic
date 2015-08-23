@@ -224,8 +224,8 @@ class CustomerController extends Controller
         $form->text('cus_phone', 'เบอร์โทรศัพท์บ้าน')->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
         $form->text('cus_email', 'E-mail')->rule('required|email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
 
-        $form->text('cus_height', 'ส่วนสูง')->rule('required|numeric')->attributes(array('placeholder' => 'โปรดระบุ ส่วนสูง....'));
-        $form->text('cus_weight', 'น้ำหนัก')->rule('required|numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
+        $form->text('cus_height', 'ส่วนสูง')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ ส่วนสูง....'));
+        $form->text('cus_weight', 'น้ำหนัก')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
 
         $form->text('allergic', 'โรคประจำตัว')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
         $form->text('disease', 'แพ้ยา')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
@@ -237,7 +237,7 @@ class CustomerController extends Controller
         $form->text('cus_subdis', 'ตำบล/แขวง')->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
         $form->text('cus_district', 'อำเภอ/เขต')->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
         $form->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'))->rule('required');
-        $form->text('cus_postal', 'รหัสไปรษณีย์')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'))->rule('required');
+        $form->text('cus_postal', 'รหัสไปรษณีย์')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'))->rule('required');
 
         $form->attributes(array("class" => " "));
 
