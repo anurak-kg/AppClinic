@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call('SettingTableSeeder');
         $this->call('RolePermissionTableSeeder');
         $this->call('UserTableSeeder');
+        $this->call('BankTableSeeder');
 
         Model::reguard();
     }
@@ -78,7 +79,6 @@ class SettingTableSeeder extends Seeder
         ]);
     }
 }
-
 class UserTableSeeder extends Seeder
 {
 
@@ -130,7 +130,6 @@ class UserTableSeeder extends Seeder
     }
 
 }
-
 class BranchTableSeeder extends Seeder
 {
 
@@ -147,7 +146,6 @@ class BranchTableSeeder extends Seeder
     }
 
 }
-
 class ProductTableSeeder extends Seeder
 {
 
@@ -229,7 +227,6 @@ class ProductTableSeeder extends Seeder
     }
 
 }
-
 class CourseTableSeeder extends Seeder
 {
 
@@ -320,7 +317,6 @@ class CourseTableSeeder extends Seeder
     }
 
 }
-
 class RolePermissionTableSeeder extends Seeder
 {
     public function run()
@@ -387,5 +383,23 @@ class RolePermissionTableSeeder extends Seeder
 
 
 
+    }
+}
+class BankTableSeeder extends Seeder{
+    public  function run(){
+        DB::table('payment_bank')->delete();
+
+        \App\Payment_bank::create(['bank_name' => 'ธนาคาร ซิตี้']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารกรุงไทย']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารกรุงศรีอยุธยา']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารไทยพาณิชย์']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารกรุงเทพ']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารยูโอบี']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารกสิกรไทย']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารซีไอเอ็มบีไทย']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารทหารไทย']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารธนชาต']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารแลนด์ แอนด์ เฮาส์']);
+        \App\Payment_bank::create(['bank_name' => 'ธนาคารออมสิน']);
     }
 }
