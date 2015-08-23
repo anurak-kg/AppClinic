@@ -18,6 +18,11 @@ class CreateTableOrder extends Migration
             $table->integer('emp_id');
             $table->date('order_date');
             $table->integer('order_total');
+
+            //VAT
+            $table->enum('vat', array('true','false'));
+            $table->integer('vat_rate');//
+
             //WAITING เลือกสินค้า PENDING กำลังจัดซื้อ CLOSE การจัดซื้อเสร้จสิ้น CANCEL ยกเลิกการสั่งซื้อ
             $table->enum('order_status', array('WAITING','PENDING', 'CLOSE','CANCEL'));
             $table->integer('branch_id')->nullable();
@@ -32,7 +37,7 @@ class CreateTableOrder extends Migration
             $table->decimal('order_de_price',10,2);
             $table->integer('order_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('order_de_disamount',10,2); //ส่วนลดจำนวนเงิน
-            $table->decimal('order_de_total',10,2); //จำนวนเงินการสั่งซื้อหลังเพิ่มภาษี
+            $table->decimal('order_de_total',10,2); //จำนวนเงิน ไม่รวม Vat !
             $table->timestamps();
             $table->primary(['order_id','product_id']);
 

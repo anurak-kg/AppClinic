@@ -45,11 +45,18 @@ class OrderController extends Controller
             $order->emp_id = Auth::user()->getAuthIdentifier();
             $order->branch_id = Branch::getCurrentId();
             $order->order_status = "WAITING";
+            $order->vat = "false";
+            $order->vat_rate = getConfig('vat_rate');
             $order->save();
             return $this->render();
         } else {
             return $this->render();
         }
+    }
+    public function getVatChange(){
+        $order = Order::findOrFail($this->getId());
+        $order->vat = Input::get('vat');
+        $order->save();
     }
 
     private function render()
@@ -76,7 +83,7 @@ class OrderController extends Controller
         $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $order->save();
-        return redirect('bill/order'."?order_id=". $order->order_id)->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('order')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()
