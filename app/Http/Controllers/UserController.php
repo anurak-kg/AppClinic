@@ -208,7 +208,7 @@ class UserController extends Controller
             systemLogs([
                 'logs_type' => 'info' ,
                 'logs_where'=>'Auth',
-                'description'=>'พนักงาน Username :'.$request->input('username') . ' ได้เช้าสู่ระบบ'
+                'description'=>'พนักงาน Username :'.$request->input('username') . ' ได้เข้าสู่ระบบ'
             ]);
             return redirect()->intended();
         }
