@@ -50,7 +50,7 @@ class CreateTableQuotations extends Migration
             $table->timestamps();
             $table->unique(array('quo_id', 'course_id'));
         });
-        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 580000;");
+        DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 1000000;");
 
 
 
