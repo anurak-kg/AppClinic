@@ -843,6 +843,9 @@
         $scope.setVat = function (vat) {
             $scope.vat = vat;
         }
+        $scope.stringToInt =function(string){
+            return parseInt(string)
+        }
         $scope.getVat = function () {
             return ($scope.getTotal()-$scope.getDiscount()) * $scope.vat / 100;
         }
