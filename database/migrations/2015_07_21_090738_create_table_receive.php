@@ -18,10 +18,13 @@ class CreateTableReceive extends Migration
             $table->integer('emp_id');
             $table->integer('order_id');
             $table->date('receive_date');
-            $table->enum('receive_type', array('RECEIVE','RETURN'));
             $table->decimal('receive_total',10,2);
             $table->enum('receive_status', array('WAITING','CLOSE'));
             $table->text('receive_comment');
+            //VAT
+            $table->enum('vat', array('true','false'));
+            $table->integer('vat_rate');//
+
             $table->integer('branch_id')->nullable();
 
             $table->timestamps();
@@ -31,7 +34,6 @@ class CreateTableReceive extends Migration
             $table->string('product_id');
             $table->integer('receive_de_qty');//รับสินค้า
             $table->integer('receive_de_qty_return');//คืนสินค้า
-            $table->string('receive_de_text');//เหตุผลที่คืน
             $table->integer('receive_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('receive_de_disamount',10,2); //ส่วนลดจำนวนเงิน
             $table->decimal('receive_de_price',10,2);
