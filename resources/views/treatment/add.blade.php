@@ -184,7 +184,7 @@
 
 
                                                         <input class="form-control" type="number"
-                                                               name="qty[{{$medicine->product->product_id}}]"
+                                                               name="qty[{{$medicine->p_id}}]"
                                                                value="{{$medicine->qty}}"> {{$medicine->product->product_unit}}
 
                                                     </div>
