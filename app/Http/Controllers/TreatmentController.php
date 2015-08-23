@@ -49,6 +49,7 @@ class TreatmentController extends Controller
         $this->updateCourseQty($input['quo_id'], $input['course_id']);
         $treat->save();
         $array = $input['qty'];
+        if (count($array) >= 1){
         foreach ($array as $qty) {
             $treat->product()->attach(Product::find(key($array)), ['qty' => $qty]);
             $inv = new InventoryTransaction();
@@ -60,8 +61,10 @@ class TreatmentController extends Controller
             $inv->save();
             next($array);
         }
-        if($input['payment'] == 'true'){
-            return redirect('payment/pay?quo_de_id='. $input['quo_de_id']);
+    }
+
+        if ($input['payment'] == 'true') {
+            return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
         }
         // dd(\Input::all());
         return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
@@ -90,7 +93,7 @@ class TreatmentController extends Controller
     {
         $course_id = \Input::get('course_id');
         $quo_id = \Input::get('quo_id');
-        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer','payment'])
+        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer', 'payment'])
             ->where('quo_id', '=', $quo_id)
             ->where('course_id', '=', $course_id)
             ->get()
