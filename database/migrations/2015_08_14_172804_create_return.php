@@ -55,7 +55,10 @@ class CreateReturn extends Migration
      */
     public function down()
     {
-        Schema::drop('return_detail');
-        Schema::drop('return');
+       // DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+       Schema::drop('return_detail');
+       Schema::drop('return');
+       // DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }
