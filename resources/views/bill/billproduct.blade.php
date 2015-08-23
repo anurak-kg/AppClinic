@@ -42,7 +42,7 @@
 
         <tbody>
         <?php $total=0 ?>
-        <?php $index=0 ?>
+        <?php $index=1000000 ?>
         <?php $distotal =0 ?>
         @foreach($sales->product as $sale)
             <tr>
