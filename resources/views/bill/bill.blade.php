@@ -42,7 +42,7 @@
 
                     <tbody>
                     <?php $total=0 ?>
-                    <?php $index=0 ?>
+                    <?php $index=1000000 ?>
                     @foreach($bill->course as $course)
                     <tr>
                         <td><?php echo $index+=1?> &nbsp; &nbsp;</td>
