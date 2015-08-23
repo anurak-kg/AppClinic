@@ -140,7 +140,7 @@ Route::group(['middleware' => 'permission:report'], function () {
 
 Route::group(['middleware' => 'permission:sales'], function () {
     Route::controller('sales', 'SalesController');
-    Route::any('bill/billproduct', 'BillController@product');
+    Route::any('bill/billproduct', 'BillController@printBillSaleToHtml');
 });
 Route::group(['middleware' => 'permission:payment'], function () {
     Route::controller('payment', 'PaymentController');
