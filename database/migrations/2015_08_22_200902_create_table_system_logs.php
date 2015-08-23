@@ -33,7 +33,7 @@ class CreateTableSystemLogs extends Migration
      */
     public function down()
     {
-        Schema::drop('return');
+        Schema::drop('system_logs');
 
     }
 }
