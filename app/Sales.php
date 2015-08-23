@@ -15,7 +15,7 @@ class Sales extends Model
     public function product(){
 
         return $this->belongsToMany('App\Product','sales_detail','sales_id','product_id')
-            ->withPivot('sales_de_qty','sales_de_price','sales_de_discount','sales_de_disamount','created_at');
+            ->withPivot('sales_de_qty','sales_de_price','sales_de_discount','sales_de_disamount','created_at','sales_de_net_price');
     }
     public function Branch()
     {

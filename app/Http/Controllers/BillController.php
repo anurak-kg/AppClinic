@@ -6,7 +6,6 @@ use App\Order;
 use App\Quotations;
 
 use App\Http\Requests;
-use App\Quotations_detail;
 use App\Sales;
 use mPDF;
 
@@ -15,45 +14,42 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations_detail::where('quo_de_id',\Input::get('quo_de_id'))
-            ->with('course','Quotations.Customer','Quotations.User','Quotations.Branch')->get()->first();
+        $bill = Quotations::where('quo_id', \Input::get('quo_id'))
+            ->with('course', 'Customer', 'User', 'Branch')->get();
 
-     //return response()->json($bill);
+        //return response()->json($bill);
 
-//        $mpdf=new mPDF('th','A4');
-//        $mpdf->ignore_invalid_utf8 = true;
-//        $mpdf->SetHTMLHeader();
-//        $mpdf->WriteHTML(view("bill/bill",['bill' => $bill[0]]));
-//        $mpdf->Output('Order.pdf','I');
 
-            return view("bill/bill",['bill' => $bill]);
     }
 
-    public function product(){
+    public function product()
+    {
 
-        $sales = Sales::where('sales_id',\Input::get('sales_id'))
-            ->with('product','Customer','User','Branch')->get()->first();
+        $sales = Sales::where('sales_id', \Input::get('sales_id'))
+            ->with('product', 'Customer', 'User', 'Branch')->get()->first();
 
-//        $mpdf=new mPDF('th','A4');
-//        $mpdf->ignore_invalid_utf8 = true;
-//        $mpdf->SetHTMLHeader();
-//        $mpdf->WriteHTML(view("bill/billproduct",['sales' => $sales[0]]));
-//        $mpdf->Output('Order.pdf','I');
 
-        return view("bill/billproduct",['sales' => $sales]);
     }
 
-    public function order(){
-        $order = Order::where('order_id',\Input::get('order_id'))
-            ->with('product','vendor','branch','user')->get()->first();
-        return response()->json($order);
-//        $mpdf=new mPDF('th','A4');
-//        $mpdf->ignore_invalid_utf8 = true;
-//        $mpdf->SetHTMLHeader();
-//        $mpdf->WriteHTML();
-//        $mpdf->Output('Order.pdf','I');
+    public function printBillSaleToHtml()
+    {
+        $sales = Sales::where('sales_id', \Input::get('sales_id'))
+            ->with('product', 'Customer', 'User', 'Branch')->get()->first();
+       // return response()->json($sales);
+        return view('bill.billproduct',compact('sales'));
+    }
 
-        return view("bill/order",['order' => $order]);
+    public function order()
+    {
+        $order = Order::where('order_id', \Input::get('order_id'))
+            ->with('product', 'vendor', 'branch', 'user')->get()->first();
+
+        $mpdf = new mPDF('th', 'A4');
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view("bill/order", ['order' => $order]));
+        $mpdf->Output('Order.pdf', 'I');
+
 
     }
 
