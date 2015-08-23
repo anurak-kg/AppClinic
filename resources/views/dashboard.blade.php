@@ -31,7 +31,7 @@
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
                         </div>
-                        <a href="{{url('quotations')}}" class="small-box-footer">ซื้อคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
@@ -45,7 +45,7 @@
                         <div class="icon">
                             <i class="fa fa-cart-plus"></i>
                         </div>
-                        <a href="{{url('sales')}}" class="small-box-footer">ซื้อสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('sales')}}" class="small-box-footer">ขายสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
