@@ -9,6 +9,7 @@ use App\Customer;
 use App\CustomerPhoto;
 use App\Disease_detail;
 use Auth;
+use DB;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Response;
@@ -43,6 +44,19 @@ class CustomerController extends Controller
             ->orderby('treat_id', 'desc')
             ->get();
 
+        $datapayment = DB::table('payment_detail')
+            ->select('payment.payment_id', 'payment_detail.payment_type','payment_bank.bank_id',
+                'payment_detail.amount','payment.created_at','branch.branch_id','payment_detail.card_id',
+                'payment_detail.edc_id')
+            ->join('payment', 'payment.payment_id', '=', 'payment_detail.payment_id')
+            ->join('payment_bank', 'payment_bank.bank_id', '=', 'payment_bank.bank_id')
+            ->join('branch', 'branch.branch_id', '=', 'payment_detail.branch_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'payment.quo_de_id')
+            ->join('users', 'users.id', '=', 'payment_detail.emp_id')
+            ->where('quotations.cus_id', '=', $customer->cus_id)
+            ->orderby('payment_id', 'desc')
+            ->get();
+
         $dataphotoBefore = \DB::table('customer_photo')
             ->select('customer_photo.photo_file_name')
             ->where('customer_photo.cus_id', '=', $customer->cus_id)
@@ -57,7 +71,7 @@ class CustomerController extends Controller
 
       // return response()->json($dataphotoBefore);
 
-        return view('customer/view', ['data' => $customer, 'treat' => $data,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
+        return view('customer/view', ['data' => $customer, 'treat' => $data,'payment' => $datapayment,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
     }
 
     public function upload()
