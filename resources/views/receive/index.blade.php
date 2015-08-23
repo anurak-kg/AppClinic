@@ -178,17 +178,17 @@
 
 
                                         <tr>
-                                            <td colspan="8" class="total-price">Subtotal:</td>
+                                            <td colspan="8" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="8" class="total-price">Tax(7%):</td>
-                                            <td>@{{ getVat() | number:2}} บาท
+                                            <td colspan="8" class="total-price">ส่วนลด:</td>
+                                            <td>@{{ getDiscount() | number:2}} บาท
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="8" class="total-price">Total:</td>
-                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
+                                            <td colspan="8" class="total-price">ยอดสุทธิ:</td>
+                                            <td> @{{ getFinalTotal() | number:2}} บาท
                                             </td>
                                         </tr>
                                     </table>

@@ -1049,18 +1049,32 @@
             $scope.tableParams.reload();
 
         }
+        $scope.getDiscount = function () {
+            $scope.discout = 0.0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                $scope.discout += parseInt((product.receive_de_price *  product.receive_de_discount  / 100)) + parseInt(product.receive_de_disamount);
+            }
+            return $scope.discout;
+        }
         $scope.getTotal = function () {
             $scope.total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                var receive = $scope.receive[i];
-                //console.log(product);
-                $scope.total += parseInt((product.receive_de_qty * product.receive_de_price) -
-                    ((product.receive_de_price * product.receive_de_qty) * product.receive_de_discount / 100)
-                    - product.receive_de_disamount);
+                $scope.total += parseInt(product.receive_de_price)
             }
             return $scope.total;
         }
+        $scope.getFinalTotal = function () {
+            /*if($scope.vatType == 'false'){
+                return $scope.getTotal()-$scope.getDiscount();
+            }else if($scope.vatType == 'true'){
+                return ($scope.getTotal()-$scope.getDiscount()) + $scope.getVat();
+            }*/
+            return $scope.getTotal()-$scope.getDiscount();
+
+        }
+
         $scope.getOrderData = function (id) {
             window.location.href = '/receive/orderdata?id=' + id;
 
