@@ -25,7 +25,7 @@
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h4>ซื้อคอร์ส</h4>
+                            <h4>ขายคอร์ส</h4>
                             <p>สำหรับสมาชิก</p>
                         </div>
                         <div class="icon">
@@ -39,7 +39,7 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h4>ซื้อสินค้า</h4>
+                            <h4>ขายสินค้า</h4>
                             <p>สำหรับสมาชิก/ลูกค้าทั่วไป</p>
                         </div>
                         <div class="icon">
