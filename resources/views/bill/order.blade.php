@@ -69,7 +69,7 @@
                     <?php $total=0 ?>
                     <?php $index=0 ?>
                         @foreach($order->product as $item)
-                            <tr style="height: 1000px">
+                            <tr style="height: 100px">
 
                                 <td style="width: 20px"><?php echo $index=+1 ?></td>
                                 <td style="width: 90px">{{$item->product_id}}</td>

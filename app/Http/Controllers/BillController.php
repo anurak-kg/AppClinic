@@ -14,12 +14,12 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations::where('quo_id', \Input::get('quo_id'))
-            ->with('course', 'Customer', 'User', 'Branch')->get();
+        $bill = Quotations_detail::where('quo_de_id',\Input::get('quo_de_id'))
+            ->with('course','Quotations.Customer','Quotations.User','Quotations.Branch')->get()->first();
 
         //return response()->json($bill);
 
-
+        return view("bill/bill", ['bill' => $bill]);
     }
 
     public function product()
@@ -44,13 +44,13 @@ class BillController extends Controller
         $order = Order::where('order_id', \Input::get('order_id'))
             ->with('product', 'vendor', 'branch', 'user')->get()->first();
 
-        $mpdf = new mPDF('th', 'A4');
-        $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view("bill/order", ['order' => $order]));
-        $mpdf->Output('Order.pdf', 'I');
+//        $mpdf = new mPDF('th', 'A4');
+//        $mpdf->ignore_invalid_utf8 = true;
+//        $mpdf->SetHTMLHeader();
+//        $mpdf->WriteHTML(view("bill/order", ['order' => $order]));
+//        $mpdf->Output('Order.pdf', 'I');
 
-
+        return view("bill/order", ['order' => $order]);
     }
 
 }

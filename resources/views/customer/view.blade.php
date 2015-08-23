@@ -272,6 +272,69 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="box box-primary">
+
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title">ประวัติการจ่ายเงิน</h2>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
+                                    class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-12 table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ประเภท</th>
+                                    <th>ธนาคาร</th>
+                                    <th>จำนวนเงิน</th>
+                                    <th>วันที่จ่าย</th>
+                                    <th>สาขา</th>
+                                    <th>เลขที่บัตรเครดิต</th>
+                                    <th>เลขที่เครื่อง EDC</th>
+                                </tr>
+                                </thead>
+                                @foreach($payment as $item)
+                                    <tr>
+
+                                        <td style="width: 180px;">{{ $item->payment_id }}</td>
+
+                                        <td style="width: 180px;">{{ $item->payment_type }}</td>
+
+                                        <td><?php
+                                            $dr = \App\Payment_bank::find($item->bank_id);
+                                            if ($dr != null) {
+                                                echo $dr->bank_name;
+                                            } else {
+                                                echo 'ไม่มีข้อมูล';
+                                            } ?>
+                                        </td>
+                                        <td style="width: 180px;">{{ $item->amount }}</td>
+                                        <td style="width: 180px;">{{ $item->created_at }}</td>
+                                        <td><?php
+                                            $bt2 = \App\Branch::find($item->branch_id);
+                                            if ($bt2 != null) {
+                                                echo $bt2->branch_name;
+                                            } else {
+                                                echo 'ไม่มีข้อมูล';
+                                            } ?>
+                                        </td>
+                                        <td style="width: 300px">{{ $item->card_id }}</td>
+                                        <td style="width: 300px">{{ $item->edc_id }}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     </div>
