@@ -19,25 +19,29 @@ class SalesController extends Controller
     {
         $saleCount = Sales::where('sales_status', "WAITING")
             ->where('branch_id', Branch::getCurrentId())
-            ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
             ->count();
         if ($saleCount == 0) {
             $sales = new Sales();
             $sales->emp_id = Auth::user()->getAuthIdentifier();
             $sales->branch_id = Branch::getCurrentId();
             $sales->sales_status = "WAITING";
+            $sales->vat = getConfig('vat_mode');
+            $sales->vat_rate = getConfig('vat_rate');
             $sales->save();
             return $this->render();
         } else {
             return $this->render();
         }
     }
+
     private function render()
     {
         return view('sales.index', [
             'data' => Sales::findOrFail($this->getId())
         ]);
     }
+
     public function getId()
     {
         $quo = Sales::where('sales_status', "WAITING")
@@ -46,18 +50,19 @@ class SalesController extends Controller
             ->firstOrFail();
         return $quo->sales_id;
     }
+
     public function getSave()
     {
         $sales = Sales::find($this->getId());
         $sales->sales_total = $this->getTotal();
-        $sale = Sales_detail::where('sales_id',$this->getId())->get();
+        $sale = Sales_detail::where('sales_id', $this->getId())->get();
         foreach ($sale as $item) {
             $inv = new InventoryTransaction();
             $inv->product_id = $item->product_id;
-            $inv->sales_id =  $item->sales_id;
-            $inv->qty =  -abs($item->sales_de_qty);
-            $inv->type = "SALE" ;
-            $inv->branch_id =  Branch::getCurrentId();
+            $inv->sales_id = $item->sales_id;
+            $inv->qty = -abs($item->sales_de_qty);
+            $inv->type = "SALE";
+            $inv->branch_id = Branch::getCurrentId();
             $inv->save();
         }
         $sales->sales_status = "CLOSE";
@@ -66,10 +71,11 @@ class SalesController extends Controller
 
         return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
+
     public function getTotal()
     {
         $sum = DB::table('sales_detail')
-            ->select(DB::raw('SUM(sales_de_qty*sales_de_price) as total'))
+            ->select(DB::raw('SUM(sales_de_qty*sales_de_net_price) as total'))
             ->where('sales_id', $this->getId())
             ->get();
         return $sum[0]->total;
@@ -93,6 +99,20 @@ class SalesController extends Controller
             ->where('sales_id', "=", $this->getId())
             ->where('product_id', "=", $id)
             ->update([$type => $value]);
+
+        $r = DB::table('sales_detail')
+            ->where('sales_id', "=", $this->getId())
+            ->where('product_id', "=", $id)
+            ->first();
+        $discount = ($r->sales_de_price * $r->sales_de_discount /100 ) + $r->sales_de_disamount;
+
+        $totalPrice =  ($r->sales_de_price - $discount) * $r->sales_de_qty;
+        //dd([$r->sales_de_price,$discount,$r->sales_de_qty,$totalPrice]);
+        DB::table('sales_detail')
+            ->where('sales_id', "=", $this->getId())
+            ->where('product_id', "=", $id)
+            ->update(['sales_de_net_price' => $totalPrice]);
+
         return response()->json(['status' => 'Success']);
     }
 
@@ -106,7 +126,7 @@ class SalesController extends Controller
             'sales_de_price' => $product->product_price,
             'sales_de_discount' => 0, //ส่วนลดเปอร์เซ็น
             'sales_de_disamount' => 0, //ส่วนลดจำนวนเงิน
-            'sales_de_total' => $product->product_price,
+            'sales_de_net_price' => $product->product_price,
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
         ]);
@@ -116,6 +136,7 @@ class SalesController extends Controller
         ]);
 
     }
+
     public function getDatacustomer()
     {
         //echo $this->getQuoId();
@@ -134,6 +155,7 @@ class SalesController extends Controller
         }
         return response()->json($data);
     }
+
     public function getRemovecustomer()
     {
         $quo = Sales::findOrFail($this->getId());
@@ -141,6 +163,7 @@ class SalesController extends Controller
         $quo->save();
         return redirect('sales');
     }
+
     public function getData()
     {
         $data = sales_detail::with(['Product'])
@@ -157,6 +180,7 @@ class SalesController extends Controller
         $quo->save();
         return response()->json(['status' => 'success']);
     }
+
     public function getDelete()
     {
         DB::table('sales_detail')
@@ -164,7 +188,9 @@ class SalesController extends Controller
             ->where('product_id', "=", \Input::get('id'))
             ->delete();
     }
-    public  function getPayment(){
+
+    public function getPayment()
+    {
         $sale = Sales::find(Session::get('message'));
         return view('sales.payment');
     }

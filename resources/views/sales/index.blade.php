@@ -46,7 +46,7 @@
                             <div class="col-md-12">
                                 <label for="withdrawn">เงินทอน</label>
                                 <input name="withdrawn"
-                                       class=" form-control input-lg"
+                                       class="form-control input-lg"
                                        type="number" id="withdrawn"
                                        value="@{{getFinalPrice() - cashInput}}"
                                        disabled
@@ -194,7 +194,7 @@
                                                        class="form-control">
                                             </td>
                                             <td data-title="'ราคารวม'" style="width:140px;text-align: center">
-                                                @{{ (item.sales_de_qty*item.sales_de_price)-((item.sales_de_qty*item.sales_de_price)*item.sales_de_discount/100)-item.sales_de_disamount  | number:2}}
+                                                @{{(item.sales_de_price -((item.sales_de_price*item.sales_de_discount/100 )+stringToInt(item.sales_de_disamount))) * item.sales_de_qty | number:2}}
                                             </td>
 
 
@@ -207,12 +207,14 @@
                                             <td colspan="7" class="total-price">ส่วนลด:</td>
                                             <td>@{{ getDiscount() | number:2}} บาท</td>
                                         </tr>
+                                        @if($data->vat== "true")
 
                                         <tr>
                                             <td colspan="7" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
                                             <td>@{{ getVat() | number:2}} บาท
                                             </td>
                                         </tr>
+                                        @endif
                                         <tr>
                                             <td colspan="7" class="total-price">ยอดสุทธิ:</td>
                                             <td> @{{ getFinalPrice() | number:2}} บาท                                            </td>
@@ -312,7 +314,6 @@
                         })
                         .on('typeahead:selected', function ($e, datum) {
                             product = {
-                                id: datum.product_id,
                                 product_id: datum.product_id,
                                 sales_de_price: datum.product_price,
                                 sales_de_discount: 0,

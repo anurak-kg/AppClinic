@@ -21,8 +21,7 @@ class CreateSales extends Migration
             $table->decimal('sales_total',10,2);
 
             //VAT
-            $table->decimal('net_price',14,2);
-            $table->enum('vat_type', array('none','in_vat','out_vat'));
+            $table->enum('vat', array('true','false'));
             $table->integer('vat_rate');//
 
 
@@ -36,7 +35,7 @@ class CreateSales extends Migration
             $table->decimal('sales_de_price',10,2);
             $table->integer('sales_de_discount'); //ส่วนลดเปอเซ็น
             $table->decimal('sales_de_disamount',10,2); //ส่วนลดจำนวนเงิน
-            $table->decimal('sales_de_total',10,2); //จำนวนเงินการสั่งซื้อหลังเพิ่มภาษี
+            $table->decimal('sales_de_net_price',10,2); //จำนวนเงินการสั่งซื้อหลังเพิ่มภาษี
             $table->timestamps();
             $table->primary(['sales_id','product_id']);
 

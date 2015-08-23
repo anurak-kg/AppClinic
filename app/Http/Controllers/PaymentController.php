@@ -27,6 +27,7 @@ class PaymentController extends Controller
     private $quoDetail;
     private $totalPrice;
     private $vat = 0;
+    private $sale;
 
     public function getIndex()
     {
@@ -45,21 +46,22 @@ class PaymentController extends Controller
 
     public function getSalePay()
     {
-        $sale = Sales::findOrFail(Input::get('sale_id'));
+        $this->sale = Sales::findOrFail(Input::get('sale_id'));
         $saleController = new SalesController();
         $saleId = $saleController->getId();
         $type = Input::get('type');
         $this->payment = new Payment();
         $this->payment->sales_id = $saleId;
-        $this->payment->cus_id = $sale->cus_id;
-        $total = DB::table('sales_detail')->where('sales_id', $saleId)->sum('sales_de_total');
+        $this->payment->cus_id = $this->sale->cus_id;
+        $total = DB::table('sales_detail')->where('sales_id', $saleId)->sum('sales_de_net_price');
         //$totalVat = $total * getConfig('vat_rate') /100;
         //$totalWithVat = $total + $totalVat;
         if ($type == 'cash') {
             $this->payment->payment_status = "FULLY_PAID";
             $this->payment->payment_type = 'PAID_IN_FULL';
             $this->payment->save();
-            $this->amount = $total;
+            $this->totalPrice = $total;
+            $this->saleVatCalculate();
             $this->saveCash();
             return redirect('sales/save');
         }
@@ -257,6 +259,15 @@ class PaymentController extends Controller
     public function setVat($vat)
     {
         $this->vat = $vat;
+    }
+
+    private function saleVatCalculate()
+    {
+
+        if($this->sale->vat == 'true'){
+            $vat = $this->totalPrice * $this->sale->vat_rate /100;
+            $this->setVat($vat);
+        }
     }
 
 
