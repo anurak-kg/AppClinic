@@ -31,10 +31,8 @@
 
 
       <select class="form-control " id="names" name="branch" style="color:darkgrey;">
-          <option value="" style='display:none;'>เลือกสาขา...</option>
-
           @foreach($data as $name)
-         <option value="{{ $name->branch_id }}" style="color:black;">{{$name->branch_name}} </option>
+         <option value="{{ $name->branch_id }}" style="color:black;">สาขา {{$name->branch_name}} </option>
           @endforeach
        </select> <br>
 
