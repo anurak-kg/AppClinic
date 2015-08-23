@@ -52,7 +52,7 @@ class UserController extends Controller
         $grid->add('email','Email');
         $grid->add('{{ $position->position_name }}', 'ตำแหน่ง');
         $grid->add('<a href="/user/resetpassword/?id={{ $id }}">Reset</a>','Reset Password');
-        $grid->edit('/user/edit', 'กระทำ','show|modify');
+        $grid->edit('/user/edit', 'กระทำ','show|modify|delete');
 
         return $grid;
     }
@@ -76,8 +76,8 @@ class UserController extends Controller
             //User Create
         $form = DataForm::create('user');
         $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $form->text('username', 'Username')->rule('required|unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
-        $form->text('password', 'Password', 'password')->rule('required')->attributes(array('placeholder' => 'ระบุ Password ....'));
+        $form->text('username', 'Username')->rule('unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
+        $form->text('password', 'Password', 'password')->attributes(array('placeholder' => 'ระบุ Password ....'));
         $form->text('name', 'ชื่อ-สกุล')->rule('required')->attributes(array('placeholder' => 'ระบุ ชื่อ-สกุล ....'));
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
@@ -124,7 +124,7 @@ class UserController extends Controller
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('license','เลขใบประกอบวิชาชีพ');
-        $grid->edit('/user/editdoc', 'กระทำ','show|modify');
+        $grid->edit('/user/editdoc', 'กระทำ','show|modify|delete');
         $grid->orderBy('id','desc');
 
         return $grid;
@@ -136,13 +136,12 @@ class UserController extends Controller
         //User Create
         $form = DataForm::create('users');
         $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
-        $form->text('username', 'Username')->rule('required|unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
         $form->text('name', 'ชื่อ-สกุล')->rule('required')->attributes(array('placeholder' => 'ระบุ ชื่อ-สกุล ....'));
         $form->add('sex','เพศ','select')->options(Config::get('sex.sex'))->rule('required');
         $form->text('tel','เบอร์โทรศัพท์')->attributes(array('placeholder' => 'ระบุ เบอร์โทร ....'));
         $form->text('email', 'Email')->rule('required|email|unique:users')->attributes(array('placeholder' => 'ระบุ E-mail ....'));
         $form->add('position_id','','hidden')->insertValue(4);
-        $form->text('license','เลขใบประกอบวิชาชีพ')->attributes(array('placeholder' => 'ระบุ เลขใบประกอบวิชาชีพ ....'));
+        $form->text('license','เลขใบประกอบวิชาชีพ')->rule('required')->attributes(array('placeholder' => 'ระบุ เลขใบประกอบวิชาชีพ ....'));
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
