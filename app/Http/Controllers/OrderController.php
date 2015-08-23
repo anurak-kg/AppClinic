@@ -94,7 +94,6 @@ class OrderController extends Controller
             ->get();
         return $sum[0]->total;
     }
-
     public function getProductdata()
     {
         $query = '%' . \Input::get('q') . '%';
