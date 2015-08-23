@@ -68,7 +68,7 @@ class SettingTableSeeder extends Seeder
         DB::table('setting')->insert([
             ['setting_name' => 'clinicName',        'value' => 'TheRock'],
             ['setting_name' => 'commission_rate',   'value' => '10'],
-            ['setting_name' => 'vat_mode',          'value' => 'true'],
+            ['setting_name' => 'vat_mode',          'value' => 'false'], // เปิดใช้ Vat  : true มี vat  false:ไม่มี Vat
             ['setting_name' => 'vat_rate',              'value' => '7'],
             ['setting_name' => 'product_day_expire',    'value' => '30'],
             ['setting_name' => 'order_sell',            'value' => 'FIFO'],
