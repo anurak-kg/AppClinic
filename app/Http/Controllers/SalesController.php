@@ -59,6 +59,7 @@ class SalesController extends Controller
         $sale = Sales_detail::where('sales_id', $this->getId())->get();
         foreach ($sale as $item) {
             $inv = new InventoryTransaction();
+            $inv->inv_id = getNewInvTranPK();
             $inv->product_id = $item->product_id;
             $inv->sales_id = $item->sales_id;
             $inv->qty = -abs($item->sales_de_qty);

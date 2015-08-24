@@ -67,6 +67,7 @@ class ReceiveController extends Controller
         $receive_detail = Receive_detail::where('receive_id', $this->getId())->get();
         foreach ($receive_detail as $item) {
             $inv = new InventoryTransaction();
+            $inv->inv_id = getNewInvTranPK();
             $inv->product_id = $item->product_id;
             $inv->received_id = $item->receive_id;
             $inv->qty = $item->receive_de_qty;

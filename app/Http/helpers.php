@@ -81,7 +81,10 @@ function getNewReturnPK()
 {
     return createPkFrom('App\Re_turn', 'return_id', 5, '5000000', '9999999');
 }
-
+function getNewInvTranPK()
+{
+    return createPkFrom('App\InventoryTransaction', 'inv_id', 6, '0000000', '9999999');
+}
 function getNewPaymentPK()
 {
     return createPkFrom('App\Payment', 'payment_id', 7, '0000000', '4999999');
