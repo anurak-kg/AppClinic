@@ -78,7 +78,7 @@ function getNewReceivePK()
 
 function getNewReturnPK()
 {
-    return createPkFrom('App\Return', 'return_id', 5, '5000000', '9999999');
+    return createPkFrom('App\Re_turn', 'return_id', 5, '5000000', '9999999');
 }
 
 function getNewCustomerPK()

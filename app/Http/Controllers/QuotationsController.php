@@ -30,6 +30,7 @@ class QuotationsController extends Controller
             ->count();
         if ($quoCount == 0) {
             $quotation = new Quotations();
+            $quotation->quo_id = getNewQuoPK();
             //$quotation->cus_id = null;
             $quotation->emp_id = Auth::user()->getAuthIdentifier();
             $quotation->branch_id = Branch::getCurrentId();
@@ -82,6 +83,7 @@ class QuotationsController extends Controller
         $rec = Quotations::find($this->getQuoId());
         $product = Course::find($id);
         $rec->course()->attach($product, [
+            'quo_de_id' => getNewQuoDetailPK(),
             'qty' => 0,
             'quo_de_price' => $product->course_price,
             'net_price' =>  $product->course_price,
