@@ -63,6 +63,10 @@ function getNewSalePK()
 {
     return createPkFrom('App\Sales','sales_id',3);
 }
+function getNewOrderPK()
+{
+    return createPkFrom('App\Order','order_id',4);
+}
 function getNewCustomerPK()
 {
     return createPkFrom('App\Customer','cus_id',9);
