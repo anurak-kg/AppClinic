@@ -8,6 +8,7 @@ class Payment extends Model
 {
     protected $table = 'payment';
     protected $primaryKey = 'payment_id';
+    public $incrementing = false;
 
     public function payment_detail()
     {

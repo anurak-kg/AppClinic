@@ -164,7 +164,10 @@ Route::post('/auth', 'UserController@auth');
 
 Route::controller('admin', 'AdminController');
 Route::controller('user', 'UserController');
-Route::get('faker', function () {
-    echo factory('App\Customer', 50)->create();
-    echo factory('App\User', 20)->create();
+Route::get('test', function () {
+    /*echo factory('App\Customer', 50)->create();
+    echo factory('App\User', 20)->create();*/
+   $ph = getNewCustomerPK();
+    $count = strlen((string)$ph);
+    dump([getNewPaymentPK(),getNewPaymentDetailPK()]);
 });
