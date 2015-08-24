@@ -100,7 +100,7 @@ class ReportController extends Controller
             "
                 SELECT
                 (calendar.datefield) AS DATE,
-                IFNULL(SUM(quotations.price),0) AS total_sales
+                IFNULL(SUM(total_net_price),0) AS total_sales
                 FROM
                 quotations
                 RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
@@ -494,7 +494,7 @@ class ReportController extends Controller
         // var_dump($date);
         $dateTxt = [];
         $suplier = DB::table('vendor')
-            ->select('vendor.ven_name as name',DB::raw('SUM(order_detail.order_de_price+order_detail.order_de_price*7/100) as total'))
+            ->select('vendor.ven_name as name',DB::raw('SUM(order_total) as total'))
             ->join('order_detail', 'order_detail.order_id', '=', 'order_detail.order_id')
             ->join('order', 'order.order_id', '=', 'order.order_id');
         if ($rang != null) {

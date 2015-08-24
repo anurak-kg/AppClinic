@@ -48,7 +48,7 @@
             <div class="box box-primary">
 
                 <div class="box-header" align="middle">
-                    <h2 class="box-title">ข้อมูลการเงินผู้ช่วย 1</h2>
+                    <h2 class="box-title">ข้อมูลการเงินผู้ช่วย</h2>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
                                     class="fa fa-minus"></i></button>

@@ -110,6 +110,11 @@ class UserTableSeeder extends Seeder
             'name' => 'sale',
             'email' => 'sale@fiin.in.th']);
         $sale->roles()->sync([1]);
+        $bt = User::create(['username' => 'bt',
+            'branch_id' => '101', 'position_id' => 8,
+            'name' => 'bt',
+            'email' => 'bt@fiin.in.th']);
+        $bt->roles()->sync([8]);
         $doctor = User::create(['username' => 'doctor',
             'branch_id' => '10', 'position_id' => 4,
             'name' => 'doctor',
@@ -364,6 +369,9 @@ class RolePermissionTableSeeder extends Seeder
 
         $doctor = \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
         $doctor->perms()->sync([]);
+
+        $bt = \App\Models\Role::create(['id' => '8', 'name' => 'BT', 'display_name' => 'ผู้ช่วย']);
+        $bt->perms()->sync([]);
 
         $manager = \App\Models\Role::create(['id' => '5', 'name' => 'Manager', 'display_name' => 'ผู้บริหาร']);
         $manager->perms()->sync([14]);

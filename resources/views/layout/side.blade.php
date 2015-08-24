@@ -125,6 +125,9 @@
                         @if(Auth::user()->can('permission'))
                             <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
                         @endif
+                        @if(Auth::user()->can('setting'))
+                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i>  ตั้งค่า</a></li>
+                        @endif
                     </ul>
                 </li>
             @endif

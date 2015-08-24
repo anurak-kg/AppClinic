@@ -17,7 +17,7 @@
 
             </li>
             <li>
-                <a href="{{url('setting')}}"><i class="fa fa-gears"></i>  ตั้งค่า</a>
+
             </li>
           
         </ul>
