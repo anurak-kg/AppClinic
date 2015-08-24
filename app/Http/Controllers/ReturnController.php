@@ -28,6 +28,7 @@ class ReturnController extends Controller
             ->count();
         if ($returnCount == 0) {
             $return = new Re_turn();
+            $return->return_id = getNewReturnPK();
             $return->emp_id = Auth::user()->getAuthIdentifier();
             $return->branch_id = Branch::getCurrentId();
             $return->return_status = "WAITING";
