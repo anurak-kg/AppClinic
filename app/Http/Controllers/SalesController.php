@@ -23,6 +23,7 @@ class SalesController extends Controller
             ->count();
         if ($saleCount == 0) {
             $sales = new Sales();
+            $sales->sales_id = getNewSalePK();
             $sales->emp_id = Auth::user()->getAuthIdentifier();
             $sales->branch_id = Branch::getCurrentId();
             $sales->sales_status = "WAITING";
