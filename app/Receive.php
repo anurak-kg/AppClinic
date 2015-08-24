@@ -8,6 +8,7 @@ class Receive extends Model
 {
     protected $table = 'receive';
     protected $primaryKey = 'receive_id';
+    public $incrementing = false;
 
     public function User()
     {
