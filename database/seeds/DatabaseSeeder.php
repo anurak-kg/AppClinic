@@ -87,42 +87,42 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $root = User::create(['username' => 'admin',
-            'branch_id' => '101', 'position_id' => 99,
+            'branch_id' => '10', 'position_id' => 99,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
         $root->roles()->sync([99]);
 
         $recp = User::create(['username' => 'reception',
-            'branch_id' => '101', 'position_id' => 6,
+            'branch_id' => '10', 'position_id' => 6,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'reception@fiin.in.th',
             'password' => bcrypt('1234')]);
         $recp->roles()->sync([6]);
         $manager = User::create(['username' => 'manager',
-            'branch_id' => '101', 'position_id' => 5,
+            'branch_id' => '10', 'position_id' => 5,
             'name' => 'นายชูวิทย์ กมลวิศิษฎ์',
             'email' => 'manager@fiin.in.th',
             'password' => bcrypt('1234')]);
         $manager->roles()->sync([5]);
         $sale = User::create(['username' => 'sale',
-            'branch_id' => '101', 'position_id' => 1,
+            'branch_id' => '10', 'position_id' => 1,
             'name' => 'sale',
             'email' => 'sale@fiin.in.th']);
         $sale->roles()->sync([1]);
         $doctor = User::create(['username' => 'doctor',
-            'branch_id' => '101', 'position_id' => 4,
+            'branch_id' => '10', 'position_id' => 4,
             'name' => 'doctor',
             'email' => 'doctor@fiin.in.th']);
         $doctor->roles()->sync([4]);
         $it = User::create(['username' => 'it',
-            'branch_id' => '101','position_id' => 11,
+            'branch_id' => '10','position_id' => 11,
             'name' => 'IT',
             'email' => 'IT@fiin.in.th',
             'password' => bcrypt('1234')]);
         $it->roles()->sync([11]);
         $super = User::create(['username' => 'superadmin',
-            'branch_id' => '101','position_id' => 95,
+            'branch_id' => '10','position_id' => 95,
             'name' => 'superadmin',
             'email' => 'superadmin@fiin.in.th',
             'password' => bcrypt('1234')]);
@@ -137,7 +137,7 @@ class BranchTableSeeder extends Seeder
     {
         DB::table('branch')->delete();
         \App\Branch::create([
-            'branch_id' => '101',
+            'branch_id' => '10',
             'branch_name' => 'Tokyo',
             'branch_address' => '150-0042 โตเกียว, Shibuya-ku, Udagawa-cho 3-1, ญี่ปุ่น',
             'branch_tel' => 'ไม่ระบุ',
