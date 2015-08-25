@@ -96,6 +96,8 @@ class ProductController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Product());
+        $edit->text('product_id', 'รหัสสินค้า');
+
         $edit->text('product_name', 'ชื่อสินค้า');
         $edit->add('pg_id', 'กลุ่มสินค้า','select')->options(Product_group::lists('pg_name','pg_id')->toarray())->rule('required');
         $edit->text('product_qty_order', 'จำนวนสินค้าที่ถึงจุดสั่งซื้อ');

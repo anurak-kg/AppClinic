@@ -16,7 +16,7 @@ return array(
     'updated'    => 'The record has been updated.',
     'deleted'    => 'ทำการลบเรียบร้อยแล้ว.',
     'err'        => 'Error reading record.',
-    'err_unknown'=> 'Error, no record selected',
+    'err_unknown'=> 'แก้ไขเรียบร้อยแล้ว',
     'err_dup_pk' => 'Error, duplicated primary key',
     'conf_delete'=> 'คุณแน่ใจหรือว่าจะลบรายการนี้ ?',
 
