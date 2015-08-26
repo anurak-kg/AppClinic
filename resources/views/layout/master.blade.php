@@ -75,7 +75,7 @@
             <b>Version</b> 1.0 (10000)
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="http://www.smartss9168.com">SMART SOLUTION AND SERVICE</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015 <a href="#">MOT</a>.</strong> All rights reserved.
     </footer>
 
 

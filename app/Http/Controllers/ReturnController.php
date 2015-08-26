@@ -28,6 +28,7 @@ class ReturnController extends Controller
             ->count();
         if ($returnCount == 0) {
             $return = new Re_turn();
+            $return->return_id = getNewReturnPK();
             $return->emp_id = Auth::user()->getAuthIdentifier();
             $return->branch_id = Branch::getCurrentId();
             $return->return_status = "WAITING";
@@ -64,6 +65,7 @@ class ReturnController extends Controller
         $return_detail = Return_detail::where('return_id',$this->getId())->get();
         foreach($return_detail as $item) {
             $inv = new InventoryTransaction();
+            $inv->inv_id = getNewInvTranPK();
             $inv->product_id =  $item->product_id;
             $inv->return_id =  $item->return_id;
             $inv->qty =  -abs($item->return_de_qty);

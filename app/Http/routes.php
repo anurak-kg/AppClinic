@@ -33,6 +33,9 @@ Route::group(['middleware' => 'permission:customer-edit'], function () {
 
 });
 Route::any('customer/create', ['uses' => 'CustomerController@create', 'middleware' => 'permission:customer-create']);
+Route::any('report/customer_payment', ['uses' => 'ReportController@reportCustomer_payment', 'middleware' => 'permission:customer-create']);
+Route::any('report/commissionCash', ['uses' => 'ReportController@reportCommissionCash', 'middleware' => 'permission:customer-create']);
+Route::any('report/commissionCredit', ['uses' => 'ReportController@reportCommissionCredit', 'middleware' => 'permission:customer-create']);
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
 
 //Employee
@@ -129,9 +132,9 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
     Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
     Route::any('report/producthot', 'ReportController@reportProductHot');
-    Route::any('report/salesperday', 'ReportController@reportsalesperday');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
     Route::any('report/suplier', 'ReportController@reportsuplier');
+    Route::any('report/salesperday', 'ReportController@reportsalesperday');
     Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
     Route::any('report/commissionCash', 'ReportController@reportCommissionCash');
     Route::any('report/commissionCredit', 'ReportController@reportCommissionCredit');
@@ -164,7 +167,10 @@ Route::post('/auth', 'UserController@auth');
 
 Route::controller('admin', 'AdminController');
 Route::controller('user', 'UserController');
-Route::get('faker', function () {
-    echo factory('App\Customer', 50)->create();
-    echo factory('App\User', 20)->create();
+Route::get('test', function () {
+    /*echo factory('App\Customer', 50)->create();
+    echo factory('App\User', 20)->create();*/
+   $ph = getNewCustomerPK();
+    $count = strlen((string)$ph);
+    dump([getNewPaymentPK(),getNewPaymentDetailPK()]);
 });

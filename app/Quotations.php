@@ -29,7 +29,7 @@ class Quotations extends Model
     public function course(){
 
         return $this->belongsToMany('App\Course','quotations_detail','quo_id','course_id')
-            ->withPivot('qty','treat_status','created_at','updated_at');
+            ->withPivot('qty','quo_de_id','treat_status','created_at','updated_at');
     }
     public function Quotations_detail()
     {

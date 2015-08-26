@@ -21,11 +21,12 @@ class ReceiveController extends Controller
     public function getIndex()
     {
         $receiveCount = Receive::where('receive_status', "WAITING")
-                    ->where('emp_id',Auth::user()->getAuthIdentifier())
-                    ->where('branch_id', Branch::getCurrentId())
-                        ->count();
+            ->where('emp_id', Auth::user()->getAuthIdentifier())
+            ->where('branch_id', Branch::getCurrentId())
+            ->count();
         if ($receiveCount == 0) {
             $receive = new Receive();
+            $receive->receive_id = getNewReceivePK();
             $receive->emp_id = Auth::user()->getAuthIdentifier();
             $receive->branch_id = Branch::getCurrentId();
             $receive->receive_status = "WAITING";
@@ -58,19 +59,20 @@ class ReceiveController extends Controller
         $receive->receive_total = $this->getTotal();
         $receive->receive_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
-        if ( $receive->order_id != 0){
-            $order = Order::find( $receive->order_id);
+        if ($receive->order_id != 0) {
+            $order = Order::find($receive->order_id);
             $order->order_status = 'CLOSE';
             $order->save();
         }
-        $receive_detail = Receive_detail::where('receive_id',$this->getId())->get();
-        foreach($receive_detail as $item) {
+        $receive_detail = Receive_detail::where('receive_id', $this->getId())->get();
+        foreach ($receive_detail as $item) {
             $inv = new InventoryTransaction();
-            $inv->product_id =  $item->product_id;
-            $inv->received_id =  $item->receive_id;
-            $inv->qty =  $item->receive_de_qty;
-            $inv->branch_id =  Branch::getCurrentId();
-            $inv->expiry_date =  $item->product_exp;
+            $inv->inv_id = getNewInvTranPK();
+            $inv->product_id = $item->product_id;
+            $inv->received_id = $item->receive_id;
+            $inv->qty = $item->receive_de_qty;
+            $inv->branch_id = Branch::getCurrentId();
+            $inv->expiry_date = $item->product_exp;
             $inv->type = "Receive";
             $inv->save();
         }

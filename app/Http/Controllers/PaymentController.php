@@ -52,6 +52,7 @@ class PaymentController extends Controller
         $saleId = $saleController->getId();
         $type = Input::get('type');
         $this->payment = new Payment();
+        $this->payment->payment_id = getNewPaymentPK();
         $this->payment->sales_id = $saleId;
         $this->payment->cus_id = $this->sale->cus_id;
         $total = DB::table('sales_detail')->where('sales_id', $saleId)->sum('sales_de_net_price');
@@ -83,7 +84,7 @@ class PaymentController extends Controller
         return view('payment.pay', [
             'quo' => $this->quo_detail,
             'totalPrice' => $totalPrice,
-            'bank' =>$bank]);
+            'bank' => $bank]);
     }
 
     public function postPay()
@@ -145,6 +146,7 @@ class PaymentController extends Controller
             }
 
             $this->payment = new Payment();
+            $this->payment_id = getNewPaymentPK();
             $this->payment->quo_de_id = $this->input['quo_de_id'];
             $this->payment->cus_id = $this->quo->cus_id;
             $this->payment->payment_type = "PAID_IN_FULL";
@@ -184,6 +186,7 @@ class PaymentController extends Controller
             // dd($quo_detail);
             $this->quo_id = $this->quo_detail->quo_id;
             $this->payment = new Payment();
+            $this->payment->payment_id = getNewPaymentPK();
             $this->payment->quo_de_id = $this->input['quo_de_id'];
             $this->payment->cus_id = $this->quo->cus_id;
             $this->payment->payment_type = "PAY_BY_COURSE";
@@ -206,6 +209,7 @@ class PaymentController extends Controller
     private function saveCash()
     {
         $paymentDetail = new Payment_detail();
+        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
         $paymentDetail->payment_type = 'CASH';
         $paymentDetail->payment_id = $this->payment->payment_id;
         $paymentDetail->branch_id = Branch::getCurrentId();
@@ -220,6 +224,8 @@ class PaymentController extends Controller
     private function saveCredit()
     {
         $paymentDetail = new Payment_detail();
+        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
+
         $paymentDetail->payment_id = $this->payment->payment_id;
         $paymentDetail->payment_type = 'CREDIT';
         $paymentDetail->branch_id = Branch::getCurrentId();
@@ -269,8 +275,8 @@ class PaymentController extends Controller
     private function saleVatCalculate()
     {
 
-        if($this->sale->vat == 'true'){
-            $vat = $this->totalPrice * $this->sale->vat_rate /100;
+        if ($this->sale->vat == 'true') {
+            $vat = $this->totalPrice * $this->sale->vat_rate / 100;
             $this->setVat($vat);
         }
     }

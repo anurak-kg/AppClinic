@@ -42,6 +42,7 @@ class OrderController extends Controller
 
         if ($orderCount == 0) {
             $order = new Order();
+            $order->order_id = getNewOrderPK();
             $order->emp_id = Auth::user()->getAuthIdentifier();
             $order->branch_id = Branch::getCurrentId();
             $order->order_status = "WAITING";

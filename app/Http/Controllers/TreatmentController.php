@@ -55,6 +55,7 @@ class TreatmentController extends Controller
         foreach ($array as $product_id => $qty) {
             $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
             $inv = new InventoryTransaction();
+            $inv->inv_id = getNewInvTranPK();
             $inv->product_id = $product_id;
             $inv->treatment_id = $treat->treat_id;
             $inv->qty = -abs($qty);

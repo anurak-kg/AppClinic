@@ -8,6 +8,7 @@ class Sales extends Model
 {
     protected $table = 'sales';
     protected $primaryKey = 'sales_id';
+    public $incrementing = false;
     public function User(){
         return $this->belongsTo('\App\User','emp_id');
     }

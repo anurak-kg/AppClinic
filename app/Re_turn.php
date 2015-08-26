@@ -8,6 +8,7 @@ class Re_turn extends Model
 {
     protected $table = 'return';
     protected $primaryKey = 'return_id';
+    public $incrementing = false;
 
     public function User()
     {
