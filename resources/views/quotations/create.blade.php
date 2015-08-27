@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title','ซื้อคอร์ส')
-@section('headText','ซื้อคอร์ส')
+@section('title','ขายคอร์ส')
+@section('headText','ขายคอร์ส')
 @section('content')
     <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat}}')">
         <div class="row">
@@ -159,7 +159,7 @@
 
                                             <td data-title="'คอร์ส'" style="width:380px">
                                                 @{{item.course.course_name}}<br>
-                                                <strong>รายละเอียดคอร์ส</strong>
+                                                @{{item.course.course_detail}}
                                                 <ul>
                                                     <li ng-repeat="c in item.course.detail">
                                                         @{{c.course_detail_name}}
