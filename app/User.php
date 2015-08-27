@@ -58,8 +58,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function Branch(){
         return $this->belongsTo('\App\Branch', 'branch_id');
     }
-    public function Position(){
-        return $this->belongsTo('\App\Position', 'position_id');
+    public function Role(){
+        return $this->belongsTo('\App\Models\Role', 'position_id');
     }
     public function Doctor_event(){
         return $this->hasMany('\App\Doctor_event');
