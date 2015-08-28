@@ -576,6 +576,205 @@
         }
 
     });
+    app.controller('requestController', function ($scope, $http, ngTableParams) {
+        $scope.product = [];
+        $scope.vendor = [];
+        $scope.order_detail = [];
+        $scope.quo_id = null;
+        $scope.dataLoading = true;
+        $scope.boxSearch = false;
+        $scope.VendorBoxSearch = false;
+        $scope.vat = null;
+        $scope.vat_rate = 7;
+        $scope.controller = '/request'
+        $scope.warehouse = [];
+        $scope.warehouse.id = 0;
+        $scope.tableParams = new ngTableParams({}, {
+            data: $scope.product
+        })
+        $http.get($scope.controller + '/data').
+            success(function (data, status, headers, config) {
+                $scope.product = data;
+                console.log($scope.product);
+                $scope.dataLoading = false;
+
+                $scope.tableParams.reload();
+            }).error(function (data, status, headers, config) {
+                $scope.dataLoading = false;
+
+            });
+        $http.get($scope.controller + '/datavendor').
+            success(function (data, status, headers, config) {
+                if (data.status == -1) {
+                    console.log('Receive vendor null');
+                    $scope.boxSearch = false;
+                }
+                else {
+                    $scope.vendor = data;
+                    $scope.boxSearch = true;
+                }
+            }).
+            error(function (data, status, headers, config) {
+            });
+        $scope.init = function(vat,vat_rate,order_id){
+            $scope.vat = vat;
+            $scope.vat_rate = vat_rate;
+            $scope.order_id = order_id;
+            if($scope.vat  =='true'){
+                $scope.vat_enable = true;
+            }else{
+                $scope.vat_enable = false;
+
+            }
+        }
+        $scope.vatChange = function(){
+            $scope.dataLoading = true;
+            //alert($scope.vat_enable);
+            $http.get($scope.controller + '/vat-change?vat='+$scope.vat_enable).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+
+                });
+        }
+        $scope.warehouseChange = function(){
+            $http.get($scope.controller + '/warehouse?id=' + $scope.warehouse.id ).
+                success(function (data, status, headers, config) {
+                    console.log('Warehouse Changed');
+                }).
+                error(function (data, status, headers, config) {
+                });
+        }
+
+        $scope.vendorSelect = function (vendor) {
+            $scope.vendor = vendor;
+            $scope.dataLoading = true;
+            console.log(vendor)
+            $http.get($scope.controller + '/setvendor?id=' + vendor.ven_id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    $scope.boxSearch = true;
+
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    console.log('error' + headers)
+                });
+            $scope.$apply(function () {
+                $scope.VendorBoxSearch = true;
+            });
+        }
+        $scope.setTax = function(){
+
+        }
+        $scope.pushProduct = function (product) {
+            $scope.product.push(product);
+            $scope.product = $scope.pushDuplicateCheck();
+            $scope.getAddProduct(product.product.product_id);
+            console.log($scope.product);
+            // $scope.clearAndReload();
+            $scope.clearSearch();
+        }
+        $scope.clearSearch = function () {
+            $scope.productSearchBox = ""
+            $scope.vendorSearchBox = ""
+            $scope.empSearchBox = ""
+        }
+        $scope.update = function (type, product_id, value) {
+            $scope.dataLoading = true;
+
+            var url = $scope.controller + '/update?id=' + product_id + '&type=' + type + '&value=' + value;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
+        }
+
+        $scope.getAddProduct = function (id) {
+            $scope.dataLoading = true;
+            $http.get($scope.controller + '/addproduct?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
+                });
+        }
+        $scope.deleteById = function (id) {
+            $scope.product = $scope.product
+                .filter(function (el) {
+                    return el.product_id !== id;
+                });
+            $scope.dataLoading = true;
+            $http.get('/order/delete?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status)
+                    $scope.dataLoading = false;
+                });
+            $scope.tableParams.reload();
+
+        }
+        $scope.getTotal = function () {
+            $scope.total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                $scope.total += parseInt(product.order_de_price * product.order_de_qty)
+
+            }
+            return $scope.total;
+        }
+        $scope.getFinalTotal = function () {
+            if($scope.vat_enable == false){
+                return $scope.getTotal();
+            }else if($scope.vat_enable == true){
+                return ($scope.getTotal() + $scope.getVat());
+            }
+        }
+
+        $scope.getVat = function () {
+            return $scope.getTotal() * $scope.vat_rate / 100;
+        }
+
+        $scope.pushDuplicateCheck = function () {
+            var arr = $scope.product;
+            var results = [];
+            var idsSeen = {}, idSeenValue = {};
+            for (var i = 0, len = arr.length, id; i < len; ++i) {
+                id = arr[i].product_id;
+                if (idsSeen[id] !== idSeenValue) {
+                    results.push(arr[i]);
+                    idsSeen[id] = idSeenValue;
+                }
+            }
+            return results;
+        }
+
+        $scope.save = function (id) {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่มีการเลือกสินค้า");
+            }
+            else {
+                window.open(
+                    '/bill/order?order_id=' + id,
+                    '_blank' // <- This is what makes it open in a new window.
+                );
+                window.location.href = '/request/save';
+            }
+        }
+
+    });
+
     app.controller('courseController', function ($scope, $http) {
         $scope.course_medicine = [];
         $scope.medicine = {};

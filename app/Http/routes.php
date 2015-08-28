@@ -52,12 +52,15 @@ Route::group(['middleware' => 'permission:emp'], function () {
 Route::group(['middleware' => 'permission:order-order'], function () {
     Route::any('order/history', 'OrderController@history');
     Route::controller('order', 'OrderController');
+    Route::controller('request', 'RequestController');
+
     Route::any('bill/order', 'BillController@order');
 });
 
 //Receive
 Route::group(['middleware' => 'permission:receive-return'], function () {
     Route::controller('receive', 'ReceiveController');
+    Route::controller('receive-request', 'ReceiveRequestController');
     Route::controller('return', 'ReturnController');
 });
 
