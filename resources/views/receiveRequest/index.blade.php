@@ -1,12 +1,12 @@
 @extends('layout.master')
 @section('title','รับสินค้า')
-@section('headText','รับสินค้า')
+@section('headText','รับสินค้าจากคลัง')
 @section('headDes','คลังสินค้า')
 
 @section('content')
 
-    <div ng-controller="receiveController" id="order" ng-init="setVat({{config('shop.vat')}})">
-        <form method="POST" action="{{url('receive/save')}}" ng-submit="save($event)">
+    <div ng-controller="receiveRequestController" id="order" ng-init="setVat({{config('shop.vat')}})">
+        <form method="POST" action="{{url('receive-request/save')}}" ng-submit="save($event)">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
 
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="form-group vendorSearchBox">
-                                <label class="col-sm-4 control-label">เลขที่การสั่งซื้อ</label>
+                                <label class="col-sm-4 control-label">เลขที่การเบิก</label>
 
                                 <div class="col-sm-8">
                                     <input class="form-control typeahead  order-input "
@@ -63,40 +63,6 @@
                             </div>
 
 
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h2 class="box-title"><i class="fa fa-truck"></i> Supplier</h2>
-                        </div>
-
-                        <div class="box-body">
-                            <div class="customerSearchBox" ng-hide="boxSearch"
-                                    >
-                                <input class="form-control typeahead input-lg customer-input "
-                                       type="search"
-                                       placeholder="ระบุ ชื่อหรือรหัส Supplier">
-
-                            </div>
-
-                            <div class="customer" ng-show="boxSearch">
-                                <ul>
-                                    <li>รหัสซัพพลายเออร์ | <span class="sale"><strong>@{{vendor.ven_id}}</strong></span>.
-                                    </li>
-                                    <li>ซัพพลายเออร์ | <span
-                                                class="customer"><strong>@{{vendor.ven_name}}</strong></span>
-                                    </li>
-                                    <li>เบอร์โทร | <span
-                                                class="customer"><strong>@{{ vendor.ven_sell_tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('receive/removecustomer')}}">
-                                                เปลียนลูกค้า</a></strong></span>
-
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
 
                     </div>
@@ -245,7 +211,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/receive/productdata?q=%QUERY',
+                    url: '/receive-request/productdata?q=%QUERY',
                     //url: '/quotations/course_query?q=%QUERY',
                     wildcard: '%QUERY'
                 }
@@ -254,7 +220,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/receive/ordersearch?q=%QUERY',
+                    url: '/receive-request/ordersearch?q=%QUERY',
                     //url: '/quotations/course_query?q=%QUERY',
                     wildcard: '%QUERY'
                 }

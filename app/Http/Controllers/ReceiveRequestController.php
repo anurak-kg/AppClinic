@@ -28,10 +28,12 @@ class ReceiveRequestController extends Controller
             ->count();
         if ($receiveCount == 0) {
             $receive = new Receive();
-            $receive->receive_id = getNewReceivePK();
+            $receive->receive_id = getNewRequestReceivePK();
             $receive->emp_id = Auth::user()->getAuthIdentifier();
             $receive->branch_id = Branch::getCurrentId();
             $receive->receive_status = "WAITING";
+            $receive->receive_type = "request";
+
             $receive->save();
             return $this->render();
         } else {
@@ -43,7 +45,7 @@ class ReceiveRequestController extends Controller
     {
         $warehouse = Branch::where('branch_type','warehouse')->get();
 
-        return view('receive.index', [
+        return view('receiveRequest.index', [
             'warehouse' => $warehouse,
 
             'data' => Receive::findOrFail($this->getId())
@@ -75,14 +77,25 @@ class ReceiveRequestController extends Controller
         }
         $receive_detail = Receive_detail::where('receive_id', $this->getId())->get();
         foreach ($receive_detail as $item) {
+            //ลบจากคลัง
+            $inv = new InventoryTransaction();
+            $inv->inv_id = getNewInvTranPK();
+            $inv->product_id = $item->product_id;
+            $inv->received_id = $item->receive_id;
+            $inv->qty = -abs($item->receive_de_qty);
+            $inv->branch_id = $receive->warehouse_id;
+            $inv->expiry_date = $item->product_exp;
+            $inv->type = "ลบสต้อกจากคลังสินค้า";
+            $inv->save();
+            //เพิ่มสต้อก
             $inv = new InventoryTransaction();
             $inv->inv_id = getNewInvTranPK();
             $inv->product_id = $item->product_id;
             $inv->received_id = $item->receive_id;
             $inv->qty = $item->receive_de_qty;
-            $inv->branch_id = $receive->warehouse_id;
+            $inv->branch_id = Branch::getCurrentId();
             $inv->expiry_date = $item->product_exp;
-            $inv->type = "Receive";
+            $inv->type = "รับสินค้าจากการเบิก";
             $inv->save();
         }
 
@@ -94,7 +107,7 @@ class ReceiveRequestController extends Controller
             'logs_where'=>'receive',
             'description'=>'รับสินค้า เลขที่การรับสินค้า :' . $receive->receive_id .' เข้าสู่คลังเลขที่ : '.$receive->warehouse_id .'  เรียบร้อยแล้ว'
         ]);
-        return redirect('receive')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('receive-request')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()
@@ -174,7 +187,7 @@ class ReceiveRequestController extends Controller
         $quo = Receive::findOrFail($this->getId());
         $quo->ven_id = 0;
         $quo->save();
-        return redirect('receive');
+        return redirect('receive-request');
     }
 
     public function getOrderdata()
@@ -204,10 +217,11 @@ class ReceiveRequestController extends Controller
                 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]);
+
         }
 
 
-        return redirect('receive');
+        return redirect('receive-request');
 
     }
 
@@ -216,6 +230,7 @@ class ReceiveRequestController extends Controller
         $query = '%' . \Input::get('q') . '%';
         $order = Order::where('order_id', 'LIKE', $query)
             ->where('order_status', '=', 'PENDING')
+            ->where('order_type', '=', 'request')
             ->get();
         return response()->json($order);
     }

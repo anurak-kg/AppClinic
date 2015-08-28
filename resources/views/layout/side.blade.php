@@ -55,13 +55,14 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-medkit'></i> <span>สินค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
+                    @if(Auth::user()->can('product-read'))
+                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> รายการสินค้า</a>
+                        </li>
+                    @endif
                     <li>
                         <a href="#"><i class="fa fa-minus"></i> สินค้า <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            @if(Auth::user()->can('product-read'))
-                                <li><a href="{{url('product/index')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้า</a>
-                                </li>
-                            @endif
+
                             @if(Auth::user()->can('product-group'))
                                 <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>กลุ่มสินค้า</a>
                                 </li>
@@ -85,10 +86,10 @@
                                     </li>
                                 @endif
                                 @if(Auth::user()->can('receive-return'))
-                                    <li><a href="{{url('receive')}}"><i
+                                    <li><a href="{{url('receive-request')}}"><i
                                                     class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
-                                    <li><a href="{{url('return')}}"><i
-                                                    class='fa fa-angle-double-right'></i>คืนสินค้า</a></li>
+                                    <li><a href="{{url('request')}}"><i
+                                                    class='fa fa-angle-double-right'></i>เบิกสินค้า</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -97,14 +98,19 @@
                         <a href="#"><i class="fa fa-exchange "></i> คลังสินค้า <i
                                     class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
+                            <li>
+                                <a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
                             </li>
-
-                                <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>สั่งสินค้า</a>
-                                </li>
-                            <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
+                            <li>
+                                <a href="{{url('order/history')}}"><i  class='fa fa-angle-double-right'></i>สั่งสินค้า</a>
                             </li>
-                           </ul>
+                            <li>
+                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
+                            </li>
+                            <li>
+                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>

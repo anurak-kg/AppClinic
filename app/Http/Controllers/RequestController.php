@@ -16,22 +16,6 @@ use Zofe\Rapyd\Facades\DataGrid;
 
 class RequestController extends Controller
 {
-    public function history(){
-        $order = DB::table('order')
-            ->select('order.order_id', 'product.product_name','vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
-            ->join('users', 'order.emp_id', '=', 'users.id')
-            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
-            ->join('order_detail', 'order_detail.order_id', '=', 'order.order_id')
-            ->join('product', 'product.product_id', '=', 'order_detail.product_id');
-
-        $data = $order->get();
-
-       // return response()->json($data);
-
-        return view('order/history', [
-            'data' => $data,
-        ]);
-    }
 
     public function getIndex()
     {
@@ -89,7 +73,7 @@ class RequestController extends Controller
         $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $order->save();
-        return redirect('order')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect('request')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()
