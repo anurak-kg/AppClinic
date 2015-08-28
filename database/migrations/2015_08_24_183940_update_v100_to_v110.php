@@ -19,6 +19,13 @@ class UpdateV100ToV110 extends Migration
         DB::unprepared("ALTER TABLE `order` ADD COLUMN `warehouse_id`  int NULL AFTER `updated_at`;");
         DB::unprepared("ALTER TABLE `receive` ADD COLUMN `warehouse_id`  int NULL AFTER `updated_at`;");
 
+        //ADD Order Type
+        DB::unprepared("ALTER TABLE `order`  ADD COLUMN `order_type`  enum('order','request') NULL DEFAULT 'order' AFTER `warehouse_id`;");
+
+
+
+
+
 
 
     }
@@ -39,7 +46,7 @@ class UpdateV100ToV110 extends Migration
      */
     public function down()
     {
-
+        DB::unprepared("ALTER TABLE `order`  DROP COLUMN `order_type`");
         DB::unprepared("DELETE FROM `branch` WHERE (`branch_id`='1')");
         DB::unprepared("ALTER TABLE `branch`  DROP COLUMN `branch_type`");
         DB::unprepared("ALTER TABLE `order`  DROP COLUMN `warehouse_id`");
