@@ -14,13 +14,12 @@
                 </div>
             </div>
         @endif
-        <div class="col-md-12">
             {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
-            <div class="box  box-default">
 
-                <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
-
+            <div class="col-md-7">
+            <div class="box  box-danger">
+                <div class="box-header with-border">
+                    <h2 class="box-title">เพิ่มข้อมูล</h2>
                 </div>
 
                 <div class="box-body">
@@ -53,7 +52,8 @@
 
                         <div class="form-group">
                             <label>รายละเอียดเพิ่มเติม</label>
-                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ... " value="{{Input::old('course_detail')}}"
+                            <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ... "
+                                      value="{{Input::old('course_detail')}}"
                                       name="course_detail">{{Input::old('course_detail')}}</textarea>
                             <br>
                         </div>
@@ -61,17 +61,39 @@
 
                     <div class="col-md-6">
                         <label for="course_name" class=" required">ราคา</label>
-                        <input class=" form-control" type="number" id="course_name" value="{{Input::old('course_price')}}" name="course_price"
+                        <input class=" form-control" type="number" id="course_name"
+                               value="{{Input::old('course_price')}}" name="course_price"
                                placeholder="ระบุราคา ..." required>
                         <br>
                     </div>
                     <div class="col-md-6">
                         <label for="course_qty" class=" required">จำนวนครั้ง</label>
-                        <input class=" form-control" type="number" id="course_qty" name="course_qty" value="{{Input::old('course_qty')}}"
+                        <input class=" form-control" type="number" id="course_qty" name="course_qty"
+                               value="{{Input::old('course_qty')}}"
                                placeholder="ระบุจำนวนครั้ง ..." required>
                         <br>
                     </div>
-                    <div class="col-md-12"><br>
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-5">
+            {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
+            <div class="box  box-danger">
+                <div class="box-header with-border">
+                    <h2 class="box-title">เพิ่มตัวยา</h2>
+                    <div class="box-tools pull-right">
+                        <a href="{{url('course')}}"
+                           class="btn btn-danger">กลับหน้าคอร์ส</a>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <p>*ในกรณีที่คอร์สนั้นไม่ต้องใช้ยา  สามารถกดบันทึกได้เลย.</p>
 
                         <div class="row">
                             <table class="table table-bordered">
@@ -127,7 +149,7 @@
                                 <div class="form-group">
                                     <label class=" required">   </label>
 
-                                    <a class="btn btn-info" ng-click="addMedicine()">เพิ่มตัวยา</a>
+                                    <a class="btn btn-default" ng-click="addMedicine()">เพิ่มตัวยา</a>
                                 </div>
                             </div>
 
@@ -136,19 +158,15 @@
                     </div>
 
                 </div>
-                <div class="panel-footer">
+                <div class="box-footer">
 
                     <input ng-value="jsonData" type="hidden" name="json">
-                    <input type="submit" class="btn btn-primary btn-block" value="บันทึก">
+                    <input type="submit" class="btn btn-success btn-block" value="บันทึก">
 
                 </div>
 
             </div>
-            </form>
-
-
         </div>
-
-    </div>
+            </form>
 
 @stop
