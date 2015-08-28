@@ -4,7 +4,8 @@
 @section('headDes','สั่งสินค้า')
 
 @section('content')
-    <div ng-controller="orderController" id="order" ng-init="init('{{$data->vat}}',{{$data->vat_rate}},{{$data->order_id}})">
+    <div ng-controller="orderController" id="order"
+         ng-init="init('{{$data->vat}}',{{$data->vat_rate}},{{$data->order_id}})">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
@@ -21,17 +22,57 @@
                         <h2 class="box-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
                     <div class="box-body">
-                        เลขที่การสั่งซื้อ : <strong>{{$data->order_id}}</strong> <br>
-                        เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
-                        สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
-                        พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
-                        ภาษี: <input type="checkbox"
-                                     ng-model="vat_enable"
-                                     ng-change="vatChange()">
+                        <table>
+                            <tr>
+                                <td> เลขที่การสั่งซื้อ :</td>
+                                <td><strong>{{$data->order_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td> เวลา :</td>
+                                <td><strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>สาขา :</td>
+                                <td><strong>{{\App\Branch::getCurrentName()}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>พนักงาน :</td>
+                                <td><strong>{{Auth::user()->name}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ภาษี :
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                           ng-model="vat_enable"
+                                           ng-change="vatChange()">
+                                </td>
+                            </tr>
+                        </table>
+
 
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="box  box-default">
+                    <div class="box-header with-border">
+                        <h2 class="box-title"><i class="fa fa-exchange"></i> คลังสินค้า</h2>
+                    </div>
+                    <div class="box-body">
+                        <select class="form-control input-lg" ng-model="warehouse.id" ng-change="warehouseChange()">
+                        @foreach($warehouse as $item)
+                                <option value="{{$item->branch_id}}">{{$item->branch_id}} - {{$item->branch_name}}</option>
+                            @endforeach
+                        </select>
+                        <p ng-show="warehouse.id == 0" style="color: red;font-weight: bolder;text-align: center">กรุณาเลือกคลังสินค้าที่ต้องการสั่ง</p>
+
+
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-4">
                 <div class="box  box-default">
                     <div class="box-header with-border">
@@ -60,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -162,7 +204,8 @@
 
                                     </table>
                                     <span class="pull-right col-lg-1">
-                                        <a ng-click="save({{$data->order_id}})" class="btn btn-md btn-success pull-right"><i
+                                        <a ng-click="save({{$data->order_id}})"
+                                           class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-mail-forward "> ออกใบสั่งสินค้า </i></a>
                                     </span>
 

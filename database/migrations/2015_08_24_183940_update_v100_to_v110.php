@@ -12,13 +12,24 @@ class UpdateV100ToV110 extends Migration
      */
     public function up()
     {
-        //DB::unprepared("ALTER TABLE `quotations` MODIFY COLUMN `quo_id`  int(10) UNSIGNED NOT NULL FIRST ;");
-        //DB::unprepared("ALTER TABLE `quotations_detail` MODIFY COLUMN `quo_de_id`  int(10) UNSIGNED NOT NULL FIRST ;");
-        ///DB::unprepared("ALTER TABLE `customer` MODIFY COLUMN `cus_id`  int(10) UNSIGNED NOT NULL FIRST ;");
-        //DB::unprepared("ALTER TABLE `sales` MODIFY COLUMN `sales_id`  int(10) UNSIGNED NOT NULL FIRST ;");
-        //DB::unprepared("ALTER TABLE `order` MODIFY COLUMN `order_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+        // เพิ่ม Stock
+        DB::unprepared("ALTER TABLE `branch`  ADD COLUMN `branch_type`  enum('shop','warehouse') NULL DEFAULT 'shop' AFTER `branch_code`");
+        DB::unprepared("INSERT INTO `branch` (`branch_id`, `branch_name`, `branch_type`) VALUES ('1', 'คลังสินค้าใหญ่', 'warehouse')");
+        //Add warehouse to Order
+        DB::unprepared("ALTER TABLE `order` ADD COLUMN `warehouse_id`  int NULL AFTER `updated_at`;");
+
+
 
     }
+
+
+
+    //DB::unprepared("ALTER TABLE `quotations` MODIFY COLUMN `quo_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+    //DB::unprepared("ALTER TABLE `quotations_detail` MODIFY COLUMN `quo_de_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+    ///DB::unprepared("ALTER TABLE `customer` MODIFY COLUMN `cus_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+    //DB::unprepared("ALTER TABLE `sales` MODIFY COLUMN `sales_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+    //DB::unprepared("ALTER TABLE `order` MODIFY COLUMN `order_id`  int(10) UNSIGNED NOT NULL FIRST ;");
+
 
     /**
      * Reverse the migrations.
@@ -27,6 +38,9 @@ class UpdateV100ToV110 extends Migration
      */
     public function down()
     {
-        //
+        DB::unprepared("DELETE FROM `branch` WHERE (`branch_id`='1')");
+        DB::unprepared("ALTER TABLE `branch`  DROP COLUMN `branch_type`");
+        DB::unprepared("ALTER TABLE `order`  DROP COLUMN `warehouse_id`");
+
     }
 }

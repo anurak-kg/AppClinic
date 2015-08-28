@@ -386,7 +386,8 @@
         $scope.vat = null;
         $scope.vat_rate = 7;
         $scope.controller = '/order'
-
+        $scope.warehouse = [];
+        $scope.warehouse.id = 0;
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
@@ -434,6 +435,14 @@
                 }).error(function (data, status, headers, config) {
                     $scope.dataLoading = false;
 
+                });
+        }
+        $scope.warehouseChange = function(){
+            $http.get($scope.controller + '/warehouse?id=' + $scope.warehouse.id ).
+                success(function (data, status, headers, config) {
+                        console.log('Warehouse Changed');
+                }).
+                error(function (data, status, headers, config) {
                 });
         }
 

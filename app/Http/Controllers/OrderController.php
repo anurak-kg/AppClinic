@@ -62,7 +62,9 @@ class OrderController extends Controller
 
     private function render()
     {
+        $warehouse = Branch::where('branch_type','warehouse')->get();
         return view('order.order', [
+            'warehouse' => $warehouse,
             'data' => Order::findOrFail($this->getId())
         ]);
     }
@@ -94,6 +96,14 @@ class OrderController extends Controller
             ->where('order_id', $this->getId())
             ->get();
         return $sum[0]->total;
+    }
+    public function getWarehouse(){
+        $id = Input::get('id');
+        $order = Order::find($this->getId());
+        $order->warehouse_id = $id;
+        $order->save();
+
+        return response()->json(['status' => 'Success']);
     }
     public function getProductdata()
     {
