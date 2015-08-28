@@ -15,8 +15,9 @@ class UpdateV100ToV110 extends Migration
         // เพิ่ม Stock
         DB::unprepared("ALTER TABLE `branch`  ADD COLUMN `branch_type`  enum('shop','warehouse') NULL DEFAULT 'shop' AFTER `branch_code`");
         DB::unprepared("INSERT INTO `branch` (`branch_id`, `branch_name`, `branch_type`) VALUES ('1', 'คลังสินค้าใหญ่', 'warehouse')");
-        //Add warehouse to Order
+        //Add warehouse to Order Receive
         DB::unprepared("ALTER TABLE `order` ADD COLUMN `warehouse_id`  int NULL AFTER `updated_at`;");
+        DB::unprepared("ALTER TABLE `receive` ADD COLUMN `warehouse_id`  int NULL AFTER `updated_at`;");
 
 
 
@@ -38,9 +39,11 @@ class UpdateV100ToV110 extends Migration
      */
     public function down()
     {
+
         DB::unprepared("DELETE FROM `branch` WHERE (`branch_id`='1')");
         DB::unprepared("ALTER TABLE `branch`  DROP COLUMN `branch_type`");
         DB::unprepared("ALTER TABLE `order`  DROP COLUMN `warehouse_id`");
+        DB::unprepared("ALTER TABLE `receive`  DROP COLUMN `warehouse_id`");
 
     }
 }
