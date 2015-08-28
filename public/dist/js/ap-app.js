@@ -946,10 +946,20 @@
         $scope.SaleBoxSearch = false;
         $scope.Vat = 7;
         $scope.controller = '/receive'
-
+        $scope.warehouse = [];
         $scope.tableParams = new ngTableParams({}, {
             data: $scope.product
         })
+        $scope.warehouseChange = function(id){
+            console.log(id);
+
+            /*$http.get($scope.controller + '/warehouse?id=' + $scope.warehouse.id ).
+                success(function (data, status, headers, config) {
+                    console.log('Warehouse Changed');
+                }).
+                error(function (data, status, headers, config) {
+                });*/
+        }
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
         $scope.open = function ($event) {
@@ -1095,12 +1105,20 @@
         $scope.getVat = function () {
             return $scope.getTotal() * $scope.vat / 100;
         }
+        $scope.save = function(e)
+        {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่เพิ่มข้อมูลสินค้า");
+                e.preventDefault();
+            }
+
+        }
         $scope.pushDuplicateCheck = function () {
             var arr = $scope.product;
             var results = [];
             var idsSeen = {}, idSeenValue = {};
             for (var i = 0, len = arr.length, id; i < len; ++i) {
-                id = arr[i].id;
+                id = arr[i].product_id;
                 if (idsSeen[id] !== idSeenValue) {
                     results.push(arr[i]);
                     idsSeen[id] = idSeenValue;
