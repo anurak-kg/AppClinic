@@ -1,5 +1,7 @@
 @extends('layout.master')
 @section('title','สต๊อกสินค้า')
+@section('headDes','สต๊อกสินค้า')
+@section('headText','Stock')
 
 
 @section('content')
@@ -8,17 +10,39 @@
 
         <div class="col-md-12">
 
-            <div class="panel panel-primary">
+            <div class="box box-primary">
 
-                <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">สต๊อกสินค้า</h2>
+                <div class="box-header with-border" align="middle">
+                    <h2 class="box-title">รายการสต๊อกสินค้า</h2>
 
                 </div>
 
-                <div class="panel-body">
+                <div class="box-body">
 
-                    <div class="row">
-                        <div class="col-xs-12 table-responsive">
+                    <div class="row " style="    border-bottom: 1px solid #f4f4f4;">
+                        <div class="col-md-6 col-md-offset-3">
+                            <form class="form-horizontal" action="{{url('product/stock')}}" method="get">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">เลือกสาขา</label>
+
+                                    <div class="col-sm-8">
+                                        <select class="form-control" name="branch">
+                                            <option value="0">ทุกสาขา</option>
+                                            @foreach($branch as $item)
+                                                <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button class="col-sm-2 btn btn-default">ค้นหา</button>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row" style="    padding-top: 13px;">
+
+                        <div class="col-md-12 table-responsive">
                             <table class="table table-bordered" id="stock_table">
                                 <thead>
                                 <tr>
@@ -31,6 +55,7 @@
                                 @foreach($stock as $item)
                                     <tr>
                                         <td>{{ $item->branch_name }}</td>
+
                                         <td>{{ $item->product_id }}</td>
                                         <td>{{ $item->product_name }}</td>
                                         <td>{{ $item->total }}</td>
