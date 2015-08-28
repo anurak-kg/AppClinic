@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title','สั่งสินค้า - คลังสินค้า')
-@section('headText','คลังสินค้า')
-@section('headDes','สั่งสินค้า')
+@section('headDes','คลังสินค้า')
+@section('headText','สั่งสินค้า')
 
 @section('content')
     <div ng-controller="orderController" id="order"

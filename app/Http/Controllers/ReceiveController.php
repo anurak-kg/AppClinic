@@ -39,7 +39,11 @@ class ReceiveController extends Controller
 
     private function render()
     {
+        $warehouse = Branch::where('branch_type','warehouse')->get();
+
         return view('receive.index', [
+            'warehouse' => $warehouse,
+
             'data' => Receive::findOrFail($this->getId())
         ]);
     }
@@ -53,11 +57,12 @@ class ReceiveController extends Controller
         return $id->receive_id;
     }
 
-    public function getSave()
+    public function postSave()
     {
         $receive = Receive::find($this->getId());
         $receive->receive_total = $this->getTotal();
         $receive->receive_date = \Carbon\Carbon::now()->toDateTimeString();
+        $receive->warehouse_id = Input::get('warehouse_id');
         // $order->quo_date = null;
         if ($receive->order_id != 0) {
             $order = Order::find($receive->order_id);
@@ -71,7 +76,7 @@ class ReceiveController extends Controller
             $inv->product_id = $item->product_id;
             $inv->received_id = $item->receive_id;
             $inv->qty = $item->receive_de_qty;
-            $inv->branch_id = Branch::getCurrentId();
+            $inv->branch_id = $receive->warehouse_id;
             $inv->expiry_date = $item->product_exp;
             $inv->type = "Receive";
             $inv->save();
@@ -79,6 +84,12 @@ class ReceiveController extends Controller
 
         $receive->receive_status = "CLOSE";
         $receive->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'receive',
+            'description'=>'รับสินค้า เลขที่การรับสินค้า :' . $receive->receive_id .' เข้าสู่คลังเลขที่ : '.$receive->warehouse_id .'  เรียบร้อยแล้ว'
+        ]);
         return redirect('receive')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
@@ -119,7 +130,8 @@ class ReceiveController extends Controller
         $product = Product::find($id);
         $rec->product()->attach($product, [
             'receive_de_qty' => 1,
-            'receive_de_qty_return' => 0, //ส่วนลดจำนวนเงิน
+            'receive_de_discount' => 0, //ส่วนลดจำนวนเงิน
+            'receive_de_disamount' => 0, //ส่วนลดจำนวนเงิน
             'product_exp' => \Carbon\Carbon::now()->toDateString(),
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -199,6 +211,7 @@ class ReceiveController extends Controller
     {
         $query = '%' . \Input::get('q') . '%';
         $order = Order::where('order_id', 'LIKE', $query)
+            ->where('order_status', '=', 'PENDING')
             ->get();
         return response()->json($order);
     }
