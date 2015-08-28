@@ -80,18 +80,32 @@
                                         class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
                                 @if(Auth::user()->can('order-order'))
-                                    <li><a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
-                                    </li>
+
                                     <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
                                     </li>
                                 @endif
                                 @if(Auth::user()->can('receive-return'))
-                                    <li><a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
-                                    <li><a href="{{url('return')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a></li>
+                                    <li><a href="{{url('receive')}}"><i
+                                                    class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
+                                    <li><a href="{{url('return')}}"><i
+                                                    class='fa fa-angle-double-right'></i>คืนสินค้า</a></li>
                                 @endif
                             </ul>
                         </li>
                     @endif
+                    <li>
+                        <a href="#"><i class="fa fa-exchange "></i> คลังสินค้า <i
+                                    class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
+                            </li>
+
+                                <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>สั่งสินค้า</a>
+                                </li>
+                            <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
+                            </li>
+                           </ul>
+                    </li>
                 </ul>
             </li>
             @if(Auth::user()->can('emp'))
@@ -126,7 +140,7 @@
                             <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
                         @endif
                         @if(Auth::user()->can('setting'))
-                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i>  ตั้งค่า</a></li>
+                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i> ตั้งค่า</a></li>
                         @endif
                     </ul>
                 </li>
@@ -139,37 +153,39 @@
                     <ul class="treeview-menu">
                         {{--<li><a href="{{url('report/customer_ref')}}"><i class='fa fa-minus'></i>แหล่งที่มาของสมาชิก </a></li>--}}
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/sale')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
+                            <li><a href="{{url('report/sale')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
                         @endif
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                        <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
+                            <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
+                            <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
+                            <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
-                        </li>
+                            <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
+                            </li>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
+                            <li><a href="{{url('report/producthot')}}"><i
+                                            class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
+                            <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
                         @endif
                         @if(Auth::user()->can('report'))
-                        <li><a href="{{url('report/customer_payment')}}"><i class='fa fa-minus'></i>รายได้ทั้งหมด</a>
+                            <li><a href="{{url('report/customer_payment')}}"><i
+                                            class='fa fa-minus'></i>รายได้ทั้งหมด</a>
                         @endif
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                        <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
+                            <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
                         @endif
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                        <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
-                                Credit</a>
-                        </li>
+                            <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
+                                    Credit</a>
+                            </li>
                         @endif
                     </ul>
                 </li>

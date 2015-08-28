@@ -1,6 +1,7 @@
 @extends('layout.master')
-@section('title','การซื้อสินค้า')
-@section('headText','สั่งสินค้า')
+@section('title','สั่งสินค้า - คลังสินค้า')
+@section('headText','คลังสินค้า')
+@section('headDes','สั่งสินค้า')
 
 @section('content')
     <div ng-controller="orderController" id="order" ng-init="init('{{$data->vat}}',{{$data->vat_rate}},{{$data->order_id}})">
@@ -15,11 +16,11 @@
                 </div>
             @endif
             <div class="col-md-4">
-                <div class="panel  panel-success">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title"><i class="fa fa-info"></i> รายละเอียด</h2>
+                <div class="box  box-default">
+                    <div class="box-header with-border">
+                        <h2 class="box-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         เลขที่การสั่งซื้อ : <strong>{{$data->order_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
@@ -32,11 +33,11 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
+                <div class="box  box-default">
+                    <div class="box-header with-border">
+                        <h2 class="box-title"><i class="fa fa-truck"></i> Supplier</h2>
                     </div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div class="vendorSearchBox" ng-hide="boxSearch"
                                 >
                             <input class="form-control typeahead input-lg vendor-input "
@@ -63,10 +64,10 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="panel panel-info">
+                <div class="box box-info">
 
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title"><i class="fa fa-medkit"></i> สินค้า</h2>
+                    <div class="box-header with-border">
+                        <h2 class="box-title"><i class="fa fa-medkit"></i> รายการสินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
