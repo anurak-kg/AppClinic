@@ -69,7 +69,12 @@ function getNewSalePK()
 
 function getNewOrderPK()
 {
-    return createPkFrom('App\Order', 'order_id', 4, '0000000', '9999999');
+    return createPkFrom('App\Order', 'order_id', 4, '0000000', '4999999');
+}
+
+function getNewRequestPK()
+{
+    return createPkFrom('App\Order', 'order_id', 4, '5000000', '6999999');
 }
 
 function getNewReceivePK()
@@ -79,12 +84,19 @@ function getNewReceivePK()
 
 function getNewReturnPK()
 {
-    return createPkFrom('App\Re_turn', 'return_id', 5, '5000000', '9999999');
+    return createPkFrom('App\Re_turn', 'return_id', 5, '5000000', '6999999');
 }
+
+function getNewRequestReceivePK()
+{
+    return createPkFrom('App\Receive', 'receive_id', 5, '7000000', '9999999');
+}
+
 function getNewInvTranPK()
 {
     return createPkFrom('App\InventoryTransaction', 'inv_id', 6, '0000000', '9999999');
 }
+
 function getNewPaymentPK()
 {
     return createPkFrom('App\Payment', 'payment_id', 7, '0000000', '4999999');
