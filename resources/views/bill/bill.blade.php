@@ -1,17 +1,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ใบเสร็จรับเงิน</title>
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="/bootstrap-pdf.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        h3 {
+            font-family:angsana new;
+            font-size:150%;
+        }
+        b  {
+            font-family:angsana new;
+            font-size:150%;
+        }
+    </style>
 
 </head>
 
 <body onload="window.print();">
         <div align="right">
-            #{{ $bill->quo_id }} <br>
-            {{Jenssegers\Date\Date::now()->format('d/m/Y')}}<br><br>
+            {{ $bill->quo_id }} <br>
+
         </div>
 
        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $bill->quotations->customer->cus_name }}
@@ -59,7 +70,7 @@
                         <?php  number_format($dis1 = $bill->quo_de_discount,2) ?>
                         <?php  number_format($dis2 = $bill->quo_de_disamount,2) ?>
                         <td>  <?php echo number_format($distotal = (($subtotal*$dis1/100)+$dis2)) ?> </td>
-                        <?php echo number_format($subtotal-$distotal,2) ?>
+                        <?php  number_format($subtotal-$distotal,2) ?>
                         <td>&nbsp; &nbsp;&nbsp;&nbsp;<?php echo number_format($total+=($subtotal-$distotal)) ?></td>
                     </tr>
 

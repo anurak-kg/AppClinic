@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <label for="course_id" class=" required">เลขที่คอร์ส</label>
                         <input class=" form-control" required value="{{$course->course_id}}"
-                               type="text" readonly
+                               type="text"
                                id="course_id"
                                name="course_id" placeholder="ระบุเลขที่คอร์ส ...">
                         <br>
@@ -99,7 +99,7 @@
                                     <ui-select-match
                                             placeholder="เลือกหรือค้นหายาจากรายการ...">@{{$select.selected.product_name}}</ui-select-match>
                                     <ui-select-choices anchor='bottom'
-                                                       + repeat="item in product | filter: $select.search">
+                                                       repeat="item in product | filter: $select.search">
                                         <span ng-bind-html=" item.product_id | highlight: $select.search"></span> :
                                         <span ng-bind-html=" item.product_name | highlight: $select.search"></span>
 

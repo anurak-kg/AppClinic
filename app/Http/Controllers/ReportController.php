@@ -493,21 +493,19 @@ class ReportController extends Controller
         $date = explode('to', $rang);
         // var_dump($date);
         $dateTxt = [];
-        $suplier = DB::table('vendor')
-            ->select('vendor.ven_name as name',DB::raw('SUM(order_total) as total'))
-            ->join('order_detail', 'order_detail.order_id', '=', 'order_detail.order_id')
-            ->join('order', 'order.order_id', '=', 'order.order_id');
+        $suplier = DB::table('order')
+            ->select('vendor.ven_name as name',DB::raw('SUM(if(vat = "false",order_total,order_total+(order_total*7/100))) as total'))
+            ->join('vendor', 'vendor.ven_id', '=', 'order.ven_id');
         if ($rang != null) {
             $suplier->whereRaw("DATE(order.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
             $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
             $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
-
         }
-        $suplier->groupBy('ven_name')->orderBy('total', 'desc');
+        $suplier->groupBy('ven_name');
 
         $data = $suplier->get();
 
-        // return response()->json($doctor);
+         //return response()->json($suplier);
 
         if ($type == "excel") {
             Excel::create('สรุปรายจ่าย Suplier', function ($excel) use ($data) {
@@ -543,7 +541,7 @@ class ReportController extends Controller
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
-                'total' => $this->arrayToChartData($data, 'Total')
+                'total' => $this->arrayToChartData($data, 'total')
             ]);
         }
 

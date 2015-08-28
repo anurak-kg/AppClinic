@@ -132,25 +132,45 @@
                 </li>
             @endif
 
-            @if(Auth::user()->can('report'))
+            @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                 <li class="treeview">
                     <a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         {{--<li><a href="{{url('report/customer_ref')}}"><i class='fa fa-minus'></i>แหล่งที่มาของสมาชิก </a></li>--}}
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/sale')}}"><i class='fa fa-minus'></i>ยอดขายพนักงาน </a></li>
+                        @endif
+                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                         <li><a href="{{url('report/salesperday')}}"><i class='fa fa-minus'></i>ยอดขายรายวัน</a></li>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
                         </li>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/producthot')}}"><i class='fa fa-minus'></i>สินค้าที่ขายดีที่สุด</a>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/suplier')}}"><i class='fa fa-minus'></i>รายจ่ายจาก Suplier</a>
+                        @endif
+                        @if(Auth::user()->can('report'))
                         <li><a href="{{url('report/customer_payment')}}"><i class='fa fa-minus'></i>รายได้ทั้งหมด</a>
+                        @endif
+                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                         <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
+                        @endif
+                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                         <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
                                 Credit</a>
                         </li>
+                        @endif
                     </ul>
                 </li>
             @endif
