@@ -10,6 +10,8 @@ Route::group(['middleware' => 'permission:treatment'], function () {
     Route::get('treatment', 'TreatmentController@treatment');
     Route::get('treatment/course_data', 'TreatmentController@getCourseData');
     Route::get('treatment/add', 'TreatmentController@add');
+    Route::get('treatment/product-list', 'TreatmentController@getProductList');
+
     Route::post('treatment/save', 'TreatmentController@save');
 });
 
@@ -33,7 +35,7 @@ Route::group(['middleware' => 'permission:customer-edit'], function () {
 
 });
 Route::any('customer/create', ['uses' => 'CustomerController@create', 'middleware' => 'permission:customer-create']);
-Route::any('report/customer_payment', ['uses' => 'ReportController@reportCustomer_payment', 'middleware' => 'permission:customer-create']);
+Route::any('report/salesperday', ['uses' => 'ReportController@reportsalesperday', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCash', ['uses' => 'ReportController@reportCommissionCash', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCredit', ['uses' => 'ReportController@reportCommissionCredit', 'middleware' => 'permission:customer-create']);
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
@@ -137,10 +139,7 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
     Route::any('report/suplier', 'ReportController@reportsuplier');
-    Route::any('report/salesperday', 'ReportController@reportsalesperday');
     Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
-    Route::any('report/commissionCash', 'ReportController@reportCommissionCash');
-    Route::any('report/commissionCredit', 'ReportController@reportCommissionCredit');
     Route::any('money/manage', 'MoneyController@moneyDr');
 });
 
