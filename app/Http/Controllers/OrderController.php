@@ -22,7 +22,8 @@ class OrderController extends Controller
             ->join('users', 'order.emp_id', '=', 'users.id')
             ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
             ->join('order_detail', 'order_detail.order_id', '=', 'order.order_id')
-            ->join('product', 'product.product_id', '=', 'order_detail.product_id');
+            ->join('product', 'product.product_id', '=', 'order_detail.product_id')
+            ->where('order_type','=','order');
 
         $data = $order->get();
 
