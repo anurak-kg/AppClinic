@@ -38,6 +38,7 @@ class OrderController extends Controller
         $orderCount = Order::where('order_status', "WAITING")
             ->where('branch_id', Branch::getCurrentId())
             ->where('emp_id',Auth::user()->getAuthIdentifier())
+            ->where('order_type','=','order')
             ->count();
 
         if ($orderCount == 0) {
@@ -46,6 +47,7 @@ class OrderController extends Controller
             $order->emp_id = Auth::user()->getAuthIdentifier();
             $order->branch_id = Branch::getCurrentId();
             $order->order_status = "WAITING";
+            $order->order_type = 'order';
             $order->vat = "false";
             $order->vat_rate = getConfig('vat_rate');
             $order->save();
@@ -74,6 +76,7 @@ class OrderController extends Controller
         $quo = Order::where('order_status', "WAITING")
             ->where('emp_id', Auth::user()->getAuthIdentifier())
             ->where('branch_id', Branch::getCurrentId())
+            ->where('order_type','=','order')
             ->firstOrFail();
         return $quo->order_id;
     }
