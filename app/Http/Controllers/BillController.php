@@ -54,4 +54,18 @@ class BillController extends Controller
         return view("bill/order", ['order' => $order]);
     }
 
+    public function request()
+    {
+        $order = Order::where('order_id', \Input::get('order_id'))
+            ->with('product', 'vendor', 'branch', 'user')->get()->first();
+
+//        $mpdf = new mPDF('th', 'A4');
+//        $mpdf->ignore_invalid_utf8 = true;
+//        $mpdf->SetHTMLHeader();
+//        $mpdf->WriteHTML(view("bill/order", ['order' => $order]));
+//        $mpdf->Output('Order.pdf', 'I');
+
+        return view("bill/order", ['order' => $order]);
+    }
+
 }
