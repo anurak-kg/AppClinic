@@ -21,16 +21,16 @@
 
             <div align="right">
 
-                <b > ???????????????? : </b>  {{ $order->order_id }}<br>
-                <b >??????????????????? : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}
-                {{-- <b>???????? :</b> {{ $bill->treatment->tre_id }} <br>--}}
+                <b > เลขที่ใบสั่งซื้อ : </b>  {{ $order->order_id }}<br>
+                <b >วันที่ออกใบสั่งซื้อ : </b> {{Jenssegers\Date\Date::now()->format('d/m/Y')}}
+                {{-- <b>ใบสั่งยา :</b> {{ $bill->treatment->tre_id }} <br>--}}
             </div>
 
 
 
 
             <h3 align="center" style="font-size:200%">
-                ????????????
+                ใบเบิกสินค้า
             </h3>
 
             <div align="left">
@@ -44,8 +44,8 @@
                     <div class="pull-left info">
                         <br>
 
-                        &nbsp;&nbsp; <b> ???? :</b> {{ $order->branch->branch_name }}<br>
-                        &nbsp;&nbsp; <b> ??????? :</b> {{ $order->branch->branch_address }}
+                        &nbsp;&nbsp; <b> สาขา :</b> {{ $order->branch->branch_name }}<br>
+                        &nbsp;&nbsp; <b> ที่อยู่ :</b> {{ $order->branch->branch_address }}
                     </div>
 
                 </div>
@@ -62,15 +62,15 @@
 
         <br><br>
 
-        <b> ??????????? :</b> {{ $order->user->id }} &nbsp;
-        <b> ??????? :</b> {{ $order->user->name }}
+        <b> รหัสพนักงาน :</b> {{ $order->user->id }} &nbsp;
+        <b> พนักงาน :</b> {{ $order->user->name }}
 
 
         <br> <hr>
 
-        <b> ??????? :</b> {{ $order->vendor->ven_name }} <br>
-        <b> ??????? :</b>  {{ $order->vendor->ven_address }}<br>
-        <b> ?????????????????????????? :</b>  {{ $order->vendor->ven_license }}
+        <b> ร้านค้า :</b> {{ $order->vendor->ven_name }} <br>
+        <b> ที่อยู่ :</b>  {{ $order->vendor->ven_address }}<br>
+        <b> หมายเลขประจำตัวผู้เสียภาษี :</b>  {{ $order->vendor->ven_license }}
         <hr>
         <br>
 
@@ -84,13 +84,13 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <td><b>?????</b></td>
-                    <td><b>??????????</b></td>
-                    <th><b>??????</b></th>
-                    <td align="middle"><b>?????</b></td>
-                    <td align="middle"><b>????????</b></td>
-                    <td align="middle"><b>???????</b></td>
-                    <td align="middle"><b>?????????</b></td>
+                    <td><b>ลำดับ</b></td>
+                    <td><b>รหัสสินค้า</b></td>
+                    <th><b>สินค้า</b></th>
+                    <td align="middle"><b>จำนวน</b></td>
+                    <td align="middle"><b>หน่วยนับ</b></td>
+                    <td align="middle"><b>หน่วยละ</b></td>
+                    <td align="middle"><b>จำนวนเงิน</b></td>
 
                 </tr>
                 </thead>
@@ -120,7 +120,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td align="middle" style="width: 100px"><b>????????????</b></td>
+                    <td align="middle" style="width: 100px"><b>ยอดเงินสุทธิ</b></td>
                     <td align="middle">{{ number_format($total) }}</td>
                 </tr>
                 </tfoot>
@@ -129,10 +129,10 @@
         <br>
         <hr>
         <div align="right">
-            <b >??????????? </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <b>?????????? </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> <br>
-            <b>??????   &nbsp;&nbsp;&nbsp;&nbsp; /  &nbsp; &nbsp;&nbsp;&nbsp;  /  &nbsp;&nbsp;&nbsp;&nbsp;  </b> &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp;
-            <b>??????   &nbsp;&nbsp;&nbsp;&nbsp; /   &nbsp;&nbsp;&nbsp;&nbsp;  /  &nbsp;&nbsp;&nbsp;&nbsp;  </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b >ผู้สั่งซื้อ </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>ผู้อนุมัติ </b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> <br>
+            <b>วันที่   &nbsp;&nbsp;&nbsp;&nbsp; /  &nbsp; &nbsp;&nbsp;&nbsp;  /  &nbsp;&nbsp;&nbsp;&nbsp;  </b> &nbsp; &nbsp;&nbsp; &nbsp;  &nbsp;&nbsp;
+            <b>วันที่   &nbsp;&nbsp;&nbsp;&nbsp; /   &nbsp;&nbsp;&nbsp;&nbsp;  /  &nbsp;&nbsp;&nbsp;&nbsp;  </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         </div>
         <!-- /.col -->
