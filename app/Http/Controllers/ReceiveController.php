@@ -23,6 +23,7 @@ class ReceiveController extends Controller
         $receiveCount = Receive::where('receive_status', "WAITING")
             ->where('emp_id', Auth::user()->getAuthIdentifier())
             ->where('branch_id', Branch::getCurrentId())
+            ->where('receive_type','=','order')
             ->count();
         if ($receiveCount == 0) {
             $receive = new Receive();
@@ -30,6 +31,8 @@ class ReceiveController extends Controller
             $receive->emp_id = Auth::user()->getAuthIdentifier();
             $receive->branch_id = Branch::getCurrentId();
             $receive->receive_status = "WAITING";
+            $receive->receive_type = "order";
+
             $receive->save();
             return $this->render();
         } else {
@@ -53,6 +56,7 @@ class ReceiveController extends Controller
         $id = Receive::where('receive_status', "WAITING")
             ->where('emp_id', Auth::user()->getAuthIdentifier())
             ->where('branch_id', Branch::getCurrentId())
+            ->where('receive_type','=','order')
             ->firstOrFail();
         return $id->receive_id;
     }
