@@ -146,7 +146,7 @@ class PaymentController extends Controller
             }
 
             $this->payment = new Payment();
-            $this->payment_id = getNewPaymentPK();
+            $this->payment->payment_id = getNewPaymentPK();
             $this->payment->quo_de_id = $this->input['quo_de_id'];
             $this->payment->cus_id = $this->quo->cus_id;
             $this->payment->payment_type = "PAID_IN_FULL";
