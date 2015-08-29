@@ -77,7 +77,7 @@
                     </li>
                     @if(Auth::user()->can('order-order') || (Auth::user()->can('receive-return')))
                         <li>
-                            <a href="#"><i class="fa fa-minus"></i> การสั่งซื้อสินค้า <i
+                            <a href="#"><i class="fa fa-minus"></i> การเบิก - รับสินค้า <i
                                         class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
                                 @if(Auth::user()->can('order-order'))
@@ -102,13 +102,16 @@
                                 <a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i  class='fa fa-angle-double-right'></i>สั่งสินค้า</a>
+                                <a href="{{url('receive')}}"><i class='fa fa-angle-double-right'></i>รับสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
+                                <a href="{{url('return')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
+                                <a href="{{url('request/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
+                            </li>
+                            <li>
+                                <a href="{{url('order/history')}}"><i  class='fa fa-angle-double-right'></i>ประวัติการสั่งสินค้า</a>
                             </li>
                         </ul>
                     </li>

@@ -4,10 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/QuotationsController.php" line="244" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a76f41c-dd4e-4e5f-8420-88c42b4808c4" name="Default" comment="payment ปลิ้นใบเสร็จหลังจากกดบันทึก">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AppClinic.iml" afterPath="$PROJECT_DIR$/.idea/AppClinic.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="9a76f41c-dd4e-4e5f-8420-88c42b4808c4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
@@ -50,57 +48,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.2280703">
-              <caret line="111" column="48" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6099656">
-              <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
-              <folding>
-                <element signature="e#121#136#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResponseFactory.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Routing/ResponseFactory.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.25">
-              <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResponseFactory.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.964286">
-              <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stock.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/product/stock.blade.php">
+      <file leaf-file-name="ReceiveController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-11.535714">
-              <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5292096">
+              <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequestController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RequestController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.5">
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015_08_24_183940_update_v100_to_v110.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2015_08_24_183940_update_v100_to_v110.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.071429">
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
-                <element signature="e#479#524#0#HTML" expanded="true" />
-                <element signature="e#1686#1716#0#HTML" expanded="true" />
+                <marker date="1440794036211" expanded="true" signature="287:399" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="427:535" placeholder="INSERT INTO ..." />
+                <marker date="1440794036211" expanded="true" signature="604:678" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="707:783" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="838:949" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="978:1093" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="1784:1805" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="1861:1880" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="1934:1978" placeholder="DELETE FROM ..." />
+                <marker date="1440794036211" expanded="true" signature="2006:2026" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="2081:2100" placeholder="ALTER TABLE ..." />
+                <marker date="1440794036211" expanded="true" signature="2156:2177" placeholder="ALTER TABLE ..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReceiveRequestController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveRequestController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.607142">
+              <caret line="34" column="38" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,9 +172,7 @@
         <option value="$PROJECT_DIR$/tests/HelperTest.php" />
         <option value="$PROJECT_DIR$/resources/views/quotations/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/course/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
         <option value="$PROJECT_DIR$/resources/views/order/order.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php" />
         <option value="$PROJECT_DIR$/resources/views/receive/index.blade.php" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/app/Http/helpers.php" />
@@ -182,6 +186,8 @@
         <option value="$PROJECT_DIR$/resources/views/receiveRequest/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/product/stock.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
       </list>
     </option>
   </component>
@@ -241,7 +247,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -252,113 +258,11 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="quotations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppClinic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Project Files" />
-        <subPane subId="Tests" />
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="route&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;side&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/layout/side.blade.php&#10;Ord&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Read&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/readme.md&#10;UserCo&#9;null&#9;null&#10;Re&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Order&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;Rece&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;Data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;upda&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;ap&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/public/dist/js/ap-app.js&#10;Quo&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/QuotationsController.php&#10;he&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/tests/HelperTest.php&#10;Inven&#9;null&#9;null&#10;Payment&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;ReturnCon&#9;null&#9;null&#10;Sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;Rec&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;Sale&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/SalesController.php&#10;Customer&#9;null&#9;null&#10;t&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;Dat&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;help&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;Qu&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Quotations_detail.php&#10;Tre&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;rou&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;bill&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Pay&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;bil&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Paym&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_31_152308_create_Payment_System.php&#10;Payme&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;Paymen&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;BillCo&#9;null&#9;null&#10;PaymentC&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;sess&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/config/session.php&#10;rece&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_21_090738_create_table_receive.php&#10;login&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/login.blade.php&#10;return&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_14_172804_create_return.php&#10;rec&#9;null&#9;null&#10;receive&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_21_090738_create_table_receive.php&#10;receiv&#9;null&#9;null&#10;gu&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/gulpfile.js&#10;quo&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/QuotationsController.php&#10;order&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php" />
+    <property name="SearchEverywhereHistoryKey" value="Req&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/RequestController.php&#10;Order&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;Rec&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveRequestController.php&#10;Rece&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;route&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;side&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/layout/side.blade.php&#10;Ord&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Read&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/readme.md&#10;UserCo&#9;null&#9;null&#10;Re&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;upda&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;ap&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/public/dist/js/ap-app.js&#10;Quo&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/QuotationsController.php&#10;he&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/tests/HelperTest.php&#10;Inven&#9;null&#9;null&#10;Payment&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;ReturnCon&#9;null&#9;null&#10;Sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;Sale&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/SalesController.php&#10;Customer&#9;null&#9;null&#10;t&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;Dat&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;help&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;Qu&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Quotations_detail.php&#10;Tre&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;rou&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;bill&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Pay&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;bil&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Paym&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_31_152308_create_Payment_System.php&#10;Payme&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;Paymen&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;BillCo&#9;null&#9;null&#10;PaymentC&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;sess&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/config/session.php&#10;rece&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_21_090738_create_table_receive.php&#10;login&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/login.blade.php&#10;return&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_14_172804_create_return.php&#10;rec&#9;null&#9;null&#10;receive&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_21_090738_create_table_receive.php&#10;receiv&#9;null&#9;null&#10;gu&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/gulpfile.js&#10;quo&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/QuotationsController.php" />
     <property name="FullScreen" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -381,131 +285,6 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Http/Controllers/ProductController.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Http/Controllers/ReportController.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Http/Controllers/UserController.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Http/routes.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Models/Role.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/Receive.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/User.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/bill/bill.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/bill/billproduct.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/bill/order.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/course/edit.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/layout/master.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/layout/side.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/views/quotations/create.blade.php</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/vendor/zofe/rapyd/lang/th/rapyd.php</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/uploads/logo/logo.JPG</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -545,18 +324,6 @@
       <created>1438711036456</created>
       <option name="number" value="Default" />
       <updated>1438711036456</updated>
-    </task>
-    <task id="LOCAL-00059" summary="อัพเดท Vat">
-      <created>1440270422363</created>
-      <option name="number" value="00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1440270422363</updated>
-    </task>
-    <task id="LOCAL-00060" summary="เพิ่มตัวเลือกการตรวจสต้อกยาก่อนรักษา">
-      <created>1440273875472</created>
-      <option name="number" value="00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1440273875472</updated>
     </task>
     <task id="LOCAL-00061" summary="ซื้อคอร์ส สามารถแยก Vat ได้แล้ว">
       <created>1440273907868</created>
@@ -840,7 +607,19 @@
       <option name="project" value="LOCAL" />
       <updated>1440797946309</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="refactor code : ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้">
+      <created>1440797968942</created>
+      <option name="number" value="00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1440797968942</updated>
+    </task>
+    <task id="LOCAL-00109" summary="fix bug รับสินค้า ไพมารีคี ไม่ตรง">
+      <created>1440828092412</created>
+      <option name="number" value="00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1440828092413</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="TodoView">
@@ -856,28 +635,28 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18154311" sideWeight="0.53504676" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.108169444" sideWeight="0.46495327" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3260188" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.73510975" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30877742" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18154311" sideWeight="0.53504676" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.108169444" sideWeight="0.46495327" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18683812" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.73510975" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30877742" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -917,9 +696,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="ปลิ้นบิลขายสินค้า" />
-    <MESSAGE value="fix บั้ก เข้ารักษา คอร์สที่ไม่มียาไม่ได้ #92&#10;" />
-    <MESSAGE value="fix bug ยาไม่เพิ่มใน treat_has_medicine" />
     <MESSAGE value="Database Seed Update" />
     <MESSAGE value="เพิ่ม test case การ เข้าสู่ระบบ และ ออกจากระบบ" />
     <MESSAGE value="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Sale Pk เป็น manual" />
@@ -942,7 +718,10 @@
     <MESSAGE value="เพิ่มการเบิกยา" />
     <MESSAGE value="แก้ Inv transaction" />
     <MESSAGE value="ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้" />
-    <option name="LAST_COMMIT_MESSAGE" value="ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้" />
+    <MESSAGE value="refactor code : ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้" />
+    <MESSAGE value="fix bug รับสินค้า ไพมารีคี ไม่ตรง" />
+    <MESSAGE value="fix bug  สั่งซื้อ  ไพมารีคี ไม่ตรง" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug  สั่งซื้อ  ไพมารีคี ไม่ตรง" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1110,7 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1118,7 +896,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="28" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,7 +903,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="63" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,7 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.785714">
           <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="149" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,10 +917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.071429">
           <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="67" selection-end-column="33" />
-          <folding>
-            <element signature="e#3096#3153#0#HTML" expanded="true" />
-            <element signature="e#3277#4906#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1153,7 +924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6967509">
           <caret line="41" column="104" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="104" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1161,10 +931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.607142">
           <caret line="107" column="28" selection-start-line="107" selection-start-column="28" selection-end-line="107" selection-end-column="28" />
-          <folding>
-            <marker date="1440448150531" expanded="true" signature="-1:-1" placeholder="SELECT cours..course_medicine..." />
-            <marker date="1440448150531" expanded="true" signature="-1:-1" placeholder="SELECT SUM(i..inventory_transaction..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1172,7 +938,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="30.77193">
           <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,20 +945,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33273056">
           <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="211" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/22d25c51/4bd93866-51ce-432b-b4d7-c59f02cfd079/dbclinic..system_logs">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1201,12 +964,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.392857">
           <caret line="215" column="61" selection-start-line="215" selection-start-column="61" selection-end-line="215" selection-end-column="61" />
-          <folding>
-            <element signature="e#1962#1990#0#HTML" expanded="true" />
-            <marker date="1440790108501" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1440790108501" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1440790108501" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1214,7 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.226804">
           <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,21 +983,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.172414">
           <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/assets/css/AdminLTE.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34819898">
           <caret line="6" column="30862" selection-start-line="6" selection-start-column="30862" selection-end-line="6" selection-end-column="30862" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1249,30 +1003,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1485" column="52" selection-start-line="1485" selection-start-column="52" selection-end-line="1485" selection-end-column="52" />
-          <folding>
-            <element signature="e#179#381#0" expanded="false" />
-            <element signature="e#427#1085#0" expanded="false" />
-            <element signature="e#1124#1612#0" expanded="false" />
-            <element signature="e#1706#11592#0" expanded="false" />
-            <element signature="e#11679#13968#0" expanded="false" />
-            <element signature="e#14049#21309#0" expanded="false" />
-            <element signature="e#21392#28537#0" expanded="false" />
-            <element signature="e#28605#30153#0" expanded="false" />
-            <element signature="e#30224#33891#0" expanded="false" />
-            <element signature="e#33979#41863#0" expanded="false" />
-            <element signature="e#41946#48869#0" expanded="false" />
-            <element signature="e#55960#61700#0" expanded="false" />
-            <element signature="e#61766#62128#0" expanded="false" />
-            <element signature="e#62189#65781#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveRequestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.701756">
-          <caret line="223" column="41" selection-start-line="223" selection-start-column="25" selection-end-line="223" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1280,7 +1010,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-52.67857">
           <caret line="81" column="54" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1288,15 +1017,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2611684">
           <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RequestController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6075949">
-          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1304,58 +1024,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55498284">
           <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_08_24_183940_update_v100_to_v110.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7508591">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-            <marker date="1440794036211" expanded="true" signature="-1:-1" placeholder="ALTER TABLE ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73367697">
-          <caret line="66" column="33" selection-start-line="66" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17540687">
-          <caret line="89" column="36" selection-start-line="89" selection-start-column="36" selection-end-line="89" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2280703">
+        <state vertical-scroll-proportion="0.0">
           <caret line="111" column="48" selection-start-line="111" selection-start-column="48" selection-end-line="111" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+          <folding>
+            <element signature="e#121#136#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Routing/ResponseFactory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.25">
+        <state vertical-scroll-proportion="0.0">
           <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
           <folding />
         </state>
@@ -1363,7 +1055,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.964286">
+        <state vertical-scroll-proportion="0.0">
           <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
           <folding />
         </state>
@@ -1371,22 +1063,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/product/stock.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.535714">
+        <state vertical-scroll-proportion="0.0">
           <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_08_24_183940_update_v100_to_v110.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
-            <element signature="e#479#524#0#HTML" expanded="true" />
-            <element signature="e#1686#1716#0#HTML" expanded="true" />
+            <marker date="1440794036211" expanded="true" signature="287:399" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="427:535" placeholder="INSERT INTO ..." />
+            <marker date="1440794036211" expanded="true" signature="604:678" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="707:783" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="838:949" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="978:1093" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="1784:1805" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="1861:1880" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="1934:1978" placeholder="DELETE FROM ..." />
+            <marker date="1440794036211" expanded="true" signature="2006:2026" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="2081:2100" placeholder="ALTER TABLE ..." />
+            <marker date="1440794036211" expanded="true" signature="2156:2177" placeholder="ALTER TABLE ..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveRequestController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6099656">
-          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
-          <folding>
-            <element signature="e#121#136#0#PHP" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-15.607142">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.535714">
+          <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RequestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.5">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5292096">
+          <caret line="78" column="45" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
