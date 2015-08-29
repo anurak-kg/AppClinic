@@ -100,7 +100,7 @@
                         @foreach($order->product as $item)
                             <tr>
 
-                                <td style="width: 50px" align="center"><?php echo $index=+1 ?></td>
+                                <td style="width: 50px" align="center"><?php echo $index+=1 ?></td>
                                 <td style="width: 90px" align="center">{{$item->product_id}}</td>
                                 <td style="width: 220px" align="center">{{$item->product_name}}</td>
                                 <td  align="center" style="width: 70px">{{$qty = $item->pivot->order_de_qty}}</td>
