@@ -15,53 +15,53 @@
         <form class="form-horizontal" method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-            <div class="col-md-6">
-                <div class="box  box-default">
-                    <div class="box-header with-border" align="center">
-                        <h2 class="box-title">การรักษา</h2>
-                    </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="box  box-default">
+                        <div class="box-header with-border" align="center">
+                            <h2 class="box-title">การรักษา</h2>
+                        </div>
 
 
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
 
-                                <label for="cus_name" class=" required">ลูกค้า</label>
-                                <input class=" form-control" type="text"
-                                       value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}}"
-                                       disabled>
-                                <br>
-                            </div>
-                            <div class="col-md-12">
+                                    <label for="cus_name" class=" required">ลูกค้า</label>
+                                    <input class=" form-control" type="text"
+                                           value="{{$quo->quotations->customer->cus_id}} : {{$quo->quotations->customer->cus_name}}"
+                                           disabled>
+                                    <br>
+                                </div>
+                                <div class="col-md-12">
                             <span id="div_cus_name">
                                 <label class=" required">คอร์ส</label>
                                 <input class=" form-control" type="text" value="{{$quo->course->course_name}}" disabled>
                             </span>
-                                <br>
-                            </div>
-                            <div class="col-md-6">
+                                    <br>
+                                </div>
+                                <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">หมอ</label>
                                     <select class=" form-control dr" name="doctor" ng-model="dr">
                                         <option value="" style='display:none;'>เลือกหมอ...</option>
-
                                         @foreach($doctor as $dr)
                                             <option value="{{$dr->id}}">{{$dr->id}}
                                                 : {{$dr->name}}</option>
                                         @endforeach
                                     </select>
                             </span><br>
-                            </div>
+                                </div>
 
-                            <div class="col-md-6">
+                                <div class="col-md-6">
                             <span>
                                 <label class=" required" for="dr_price">ค่ามือหมอ</label>
                                 <input class=" form-control" type="number" value="0" name="dr_price" id="dr_price">
                             </span>
-                                <br>
-                            </div>
+                                    <br>
+                                </div>
 
-                            <div class="col-md-6">
+                                <div class="col-md-6">
                             <span id="div_cus_name">
                                 <label for="cus_name" class=" required">ผู้ช่วย 1</label>
                             <select class=" form-control dr" name="bt1" ng-model="bt1">
@@ -75,199 +75,225 @@
                                 @endforeach
                             </select>
                             </span><br>
-                            </div>
+                                </div>
 
-                            <div class="col-md-6">
+                                <div class="col-md-6">
                               <span>
                                 <label class=" required" for="bt1_price">ค่ามือผู้ช่วย 1</label>
                                 <input class=" form-control" type="number" value="0" name="bt1_price" id="bt1_price">
                             </span>
-                                <br>
-                            </div>
+                                    <br>
+                                </div>
 
-                            <div class="col-md-6">
-                                <label for="cus_name" class=" required">ผู้ช่วย 2</label>
-                                <select class=" form-control dr" name="bt2" ng-model="bt2">
-                                    <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
-                                    <option value="">ไม่มี</option>
-
-                                    @foreach($users as $user)
-                                        @if($user->name != $dr->name)
-                                            <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
-                                        @endif
-                                    @endforeach
-                                </select><br>
-                            </div>
-
-                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label for="cus_name" class=" required">ผู้ช่วย 2</label>
+                                    <select class=" form-control dr" name="bt2" ng-model="bt2">
+                                        <option value="" style='display:none;'>เลือกผู้ช่วย...</option>
+                                        <option value="">ไม่มี</option>
+                                        @foreach($users as $user)
+                                            @if($user->name != $dr->name)
+                                                <option value="{{$user->id}}">{{$user->id}} : {{$user->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select><br>
+                                </div>
+                                <div class="col-md-6">
                               <span>
                                 <label class=" required" for="bt2_price">ค่ามือผู้ช่วย 2</label>
                                 <input class=" form-control" type="number" value="0" name="bt2_price" id="bt2_price">
                             </span>
-                                <br>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label class=" required">วันที่เข้ารับการรักษา</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="treat_date" name="treat_date"
-                                           value="{{date("Y-m-d")}}">
+                                    <br>
                                 </div>
-                                <br>
-                            </div>
+                                <div class="col-md-12">
+                                    <label class=" required">วันที่เข้ารับการรักษา</label>
 
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="treat_date" name="treat_date"
+                                               value="{{date("Y-m-d")}}">
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box  box-default">
+                                <div class="box-header with-border" align="center">
+                                    <h2 class="box-title">รายละเอียดการใช้ยา</h2>
 
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box  box-default">
-                            <div class="box-header with-border" align="center">
-                                <h2 class="box-title">รายละเอียดการใช้ยา</h2>
-                                <div class="box-tools pull-right">
-                                    <a href="{{url('/treatment')}}" class="btn btn-info">กลับไปที่ข้อมูลการรักษา</a>
+                                    <div class="box-tools pull-right">
+                                        <a href="{{url('/treatment')}}" class="btn btn-info">กลับไปที่ข้อมูลการรักษา</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-body">
-                                <div class="col-md-12">
-                                    <label>ตัวยาที่ใช้</label>
+                                <div class="box-body">
+                                    <div class="col-md-12">
+                                        <label>ตัวยาที่ใช้</label>
 
-                                    <table class="table table-bordered" ng-table="tableParams" ng-init="">
-                                        <tr>
-                                            <th style="width: 20px">#</th>
-                                            <th>ตัวยา</th>
-                                            <th style="width: 60px">จำนวน</th>
-                                            <th style="width: 60px">ยาในสต้อก</th>
-
-                                            <th style="width: 120px">จำนวนที่ใช้</th>
-
-                                        </tr>
-                                        <?php
-                                        $index = 1;
-                                        $outOfStock = false;
-                                        ?>
-                                        @foreach($medicines as $medicine)
+                                        <table class="table table-bordered" ng-table="tableParams" ng-init="">
                                             <tr>
-                                                <td>
-                                                    {{$index}}
-                                                </td>
-                                                <td>
-                                                    <strong>{{$medicine->p_id}}</strong>
-                                                    {{$medicine->product_name}}
-                                                </td>
+                                                <th style="width: 20px">#</th>
+                                                <th>ตัวยา</th>
+                                                <th style="width: 60px">จำนวน</th>
+                                                <th style="width: 60px">ยาในสต้อก</th>
 
-                                                <td style="text-align: center">
-                                                    <strong>{{$medicine->qty}} </strong> {{$medicine->product_unit}}
-                                                </td>
-                                                <td style="text-align: center">
-                                                    @if($medicine->remain == null )
-                                                        <label class="badge badge-info alert-danger">0</label>
-                                                        <?php $outOfStock = true;?>
-                                                    @elseif($medicine->remain < $medicine->qty)
-                                                        <label class="badge badge-info alert-danger">{{$medicine->remain}}</label>
-                                                        <?php $outOfStock = true;?>
-                                                    @else
-                                                        <label class="badge">{{$medicine->remain}}</label>
-                                                    @endif
+                                                <th style="width: 120px">จำนวนที่ใช้</th>
 
-                                                </td>
-                                                <td>
-                                                    <div class="col-md-12">
-
-
-                                                        <input class="form-control" type="number"
-                                                               name="qty[{{$medicine->p_id}}]"
-                                                               value="{{$medicine->qty}}"> {{$medicine->product->product_unit}}
-
-                                                    </div>
-                                                </td>
                                             </tr>
-                                            <?php $index++?>
+                                            <?php
+                                            $index = 1;
+                                            $outOfStock = false;
+                                            ?>
+                                            @foreach($medicines as $medicine)
+                                                <tr>
+                                                    <td>
+                                                        {{$index}}
+                                                    </td>
+                                                    <td>
+                                                        <strong>{{$medicine->p_id}}</strong>
+                                                        {{$medicine->product_name}}
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        <strong>{{$medicine->qty}} </strong> {{$medicine->product_unit}}
+                                                    </td>
+                                                    <td style="text-align: center">
+                                                        @if($medicine->remain == null )
+                                                            <label class="badge badge-info alert-danger">0</label>
+                                                            <?php $outOfStock = true;?>
+                                                        @elseif($medicine->remain < $medicine->qty)
+                                                            <label class="badge badge-info alert-danger">{{$medicine->remain}}</label>
+                                                            <?php $outOfStock = true;?>
+                                                        @else
+                                                            <label class="badge">{{$medicine->remain}}</label>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="number"
+                                                                   name="qty[{{$medicine->p_id}}]"
+                                                                   value="{{$medicine->qty}}"> {{$medicine->product->product_unit}}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <?php $index++?>
+                                            @endforeach
+                                        </table>
+                                        <div class="col-md-6">
+                                            <label class=" required">ตัวยา</label>
 
-                                        @endforeach
-                                    </table>
-                                </div>
-                                <div class="col-md-12">
+                                            <ui-select style="width: 100%;"
+                                                       sortable="true"
+                                                       theme="select2"
+                                                       ng-model="medicine.selected"
+                                                       title="Choose a person">
+                                                <ui-select-match
+                                                        placeholder="เลือกหรือค้นหายาจากรายการ...">@{{$select.selected.product_name}}</ui-select-match>
+                                                <ui-select-choices anchor='bottom'
+                                                                   repeat="item in product | filter: $select.search">
+                                                    <span ng-bind-html=" item.product_id | highlight: $select.search"></span>
+                                                    :
+                                                    <span ng-bind-html=" item.product_name | highlight: $select.search"></span>
 
-                                    <label>รายละเอียดเพิ่มเติม</label>
+                                                </ui-select-choices>
+
+                                            </ui-select>
+                                            <br>
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="course_name" class="">จำนวน</label>
+                                                <input class=" form-control" ng-model="qtyValue" type="text"
+                                                       id="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+
+                                            <div class="form-group">
+                                                <label class=" required">   </label>
+
+                                                <a class="btn btn-info" ng-click="addMedicine()">เพิ่มตัวยา</a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <input ng-value="jsonData" type="hidden" name="json">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>รายละเอียดเพิ่มเติม</label>
                                 <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
                                           name="comment"></textarea>
-                                    <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
-                                    <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
-                                    <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
+                                        <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
+                                        <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
+                                        <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
 
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="box  box-danger">
+                                <div class="box-header with-border" align="center">
+                                    <h2 class="box-title">การชำระเงิน</h2>
+                                </div>
+                                <div class="box-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>สถานะการชำระเงิน</td>
+                                            <td>
+                                                @if($quo->payment == null)
+                                                    <span>ไม่พบข้อมูลการชำระเงิน</span>
+                                                @elseif($quo->payment->payment_status=='FULLY_PAID')
+                                                    <span class="label label-success">จ่ายเงินครบแล้ว</span>
+                                                @else
+                                                    <span class="label label-warning">ค้างจ่าย</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ประเภทการชำระ</td>
+                                            <td>
+                                                @if($quo->payment->payment_status=='REMAIN')
+                                                    <span>ผ่อนจ่าย</span>
+                                                @elseif($quo->payment->payment_status=='FULLY_PAID')
+                                                    <span>จ่ายเต็มจำนวน</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>ยอดค้างชำระ</td>
+                                            <td>{{$quo->payment_remain}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="box-footer">
+                                    @if(getConfig('product_out_stock_can_treat') == 'false' && $outOfStock )
+                                        <button type="submit" class="btn btn-danger" style="width: 100%" disabled>
+                                            ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้
+                                        </button>
+                                    @elseif($quo->payment_remain > 0)
+                                        <input type="hidden" name="payment" value="true">
+                                        <button type="submit" class="btn btn-success" style="width: 100%">
+                                            บันทึกและเข้าสู่การชำระเงิน
+                                        </button>
+
+                                    @elseif($quo->payment_remain == 0)
+                                        <button type="submit" class="btn btn-success" style="width: 100%">บันทึก
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="col-md-12">
-                        <div class="box  box-danger">
-                            <div class="box-header with-border" align="center">
-                                <h2 class="box-title">การชำระเงิน</h2>
-                            </div>
-                            <div class="box-body">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td>สถานะการชำระเงิน</td>
-                                        <td>
-                                            @if($quo->payment == null)
-                                                <span>ไม่พบข้อมูลการชำระเงิน</span>
-                                            @elseif($quo->payment->payment_status=='FULLY_PAID')
-                                                <span class="label label-success">จ่ายเงินครบแล้ว</span>
-                                            @else
-                                                <span class="label label-warning">ค้างจ่าย</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ประเภทการชำระ</td>
-                                        <td>
-                                            @if($quo->payment->payment_status=='REMAIN')
-                                                <span>ผ่อนจ่าย</span>
-                                            @elseif($quo->payment->payment_status=='FULLY_PAID')
-                                                <span>จ่ายเต็มจำนวน</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>ยอดค้างชำระ</td>
-                                        <td>{{$quo->payment_remain}}</td>
-                                    </tr>
-                                </table>
-
-                            </div>
-                            <div class="box-footer">
-                                @if(getConfig('product_out_stock_can_treat') == 'false' && $outOfStock )
-                                    <button type="submit" class="btn btn-danger" style="width: 100%" disabled>ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้</button>
-                                @elseif($quo->payment_remain > 0)
-                                    <input type="hidden" name="payment" value="true">
-                                    <button type="submit" class="btn btn-success" style="width: 100%" >บันทึกและเข้าสู่การชำระเงิน</button>
-
-                                @elseif($quo->payment_remain == 0)
-                                    <button type="submit" class="btn btn-success" style="width: 100%" >บันทึก</button>
-
-                                @endif
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
                 </div>
-
             </div>
         </form>
-
     </div>
 
     <script>
