@@ -58,6 +58,28 @@ class ProductController extends Controller
         return view('product/stock', compact('stock', 'branch'));
     }
 
+    public function stockmanage()
+    {
+        $branch_id = Input::get('branch');
+        $data = DB::table('inventory_transaction')
+            ->select('branch.branch_name', 'product.product_id', 'product.product_name',
+                DB::raw('Sum(inventory_transaction.qty) as total'))
+            ->join('product', 'product.product_id', '=', 'inventory_transaction.product_id')
+            ->join('branch', 'branch.branch_id', '=', 'inventory_transaction.branch_id');
+
+        if ($branch_id > 0) {
+            $data->where('inventory_transaction.branch_id', $branch_id);
+        }
+        $stock = $data->groupBy('product.product_id', 'branch.branch_name')
+            ->orderBy('branch.branch_name', 'asc')
+            ->get();
+
+        // dd($branch_id);
+        $branch = Branch::all();
+        //return response()->json($data);
+        return view('product/stockmanage', compact('stock', 'branch'));
+    }
+
 
     public function getDataGrid()
     {
@@ -82,7 +104,6 @@ class ProductController extends Controller
 
         return view('product/index', compact('grid'));
     }
-
 
     public function create()
     {
