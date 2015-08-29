@@ -111,7 +111,7 @@ class UserTableSeeder extends Seeder
             'email' => 'sale@fiin.in.th']);
         $sale->roles()->sync([1]);
         $bt = User::create(['username' => 'bt',
-            'branch_id' => '101', 'position_id' => 8,
+            'branch_id' => '10', 'position_id' => 8,
             'name' => 'bt',
             'email' => 'bt@fiin.in.th']);
         $bt->roles()->sync([8]);
@@ -148,7 +148,13 @@ class BranchTableSeeder extends Seeder
             'branch_tel' => 'ไม่ระบุ',
             'branch_email' => 'AV-JP@jp.com',
             'branch_code' => '4257893625145']);
+        \App\Branch::create([
+            'branch_id' => '1',
+            'branch_name' => 'คลังสินค้าใหญ่',
+            'branch_type' => 'warehouse']);
+
     }
+
 
 }
 class ProductTableSeeder extends Seeder
@@ -381,10 +387,10 @@ class RolePermissionTableSeeder extends Seeder
 
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
         $it = \App\Models\Role::create(['id' => '11', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
-        $it->perms()->sync([]);
+        $it->perms()->sync([5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 22]);
 
         $super = \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
-        $super->perms()->sync([]);
+        $super->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]);
 
         $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
         $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
