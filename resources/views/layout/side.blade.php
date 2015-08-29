@@ -102,13 +102,13 @@
                                 <a href="{{url('order')}}"><i class='fa fa-angle-double-right'></i>สั่งซื้อสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i  class='fa fa-angle-double-right'></i>สั่งสินค้า</a>
+                                <a href="{{url('return')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>คืนสินค้า</a>
+                                <a href="{{url('request/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
                             </li>
                             <li>
-                                <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
+                                <a href="{{url('order/history')}}"><i  class='fa fa-angle-double-right'></i>ประวัติการสั่งสินค้า</a>
                             </li>
                         </ul>
                     </li>
