@@ -766,7 +766,7 @@
             }
             else {
                 window.open(
-                    '/bill/order?order_id=' + id,
+                    '/bill/request?order_id=' + id,
                     '_blank' // <- This is what makes it open in a new window.
                 );
                 window.location.href = '/request/save';

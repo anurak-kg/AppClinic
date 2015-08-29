@@ -65,7 +65,7 @@ class BillController extends Controller
 //        $mpdf->WriteHTML(view("bill/order", ['order' => $order]));
 //        $mpdf->Output('Order.pdf', 'I');
 
-        return view("bill/order", ['order' => $order]);
+        return view("bill.request", ['order' => $order]);
     }
 
 }
