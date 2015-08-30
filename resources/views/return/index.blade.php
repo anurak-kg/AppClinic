@@ -141,8 +141,8 @@
                                             </td>
                                             <td  data-title="'เหตุผลที่คืน'">
                                             <input type="text"
-                                                   ng-model="item.return_comment"
-                                                   ng-change="update('return_comment',item.return_comment)"
+                                                   ng-model="item.return_de_text"
+                                                   ng-change="update('return_de_text',item.product_id,item.return_de_text)"
                                                    ng-model-options="{debounce: 750}"
                                                    class="form-control">
                                             </td>
@@ -150,19 +150,9 @@
                                                 @{{item.return_de_price }}/ @{{ item.product.product_unit }}
                                             </td>
                                         </tr>
-
                                         <tr>
-                                            <td colspan="7" class="total-price">Subtotal:</td>
-                                            <td>@{{ getTotal() | number:2}} บาท</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="7" class="total-price">Tax(7%):</td>
-                                            <td>@{{ getVat() | number:2}} บาท
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="7" class="total-price">Total:</td>
-                                            <td> @{{ getTotal()+getVat() | number:2}} บาท
+                                            <td colspan="5" class="total-price">Total:</td>
+                                            <td> @{{ getTotal() | number:2}} บาท
                                             </td>
                                         </tr>
                                     </table>

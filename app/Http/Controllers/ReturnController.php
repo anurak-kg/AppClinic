@@ -115,7 +115,7 @@ class ReturnController extends Controller
         $rec = Re_turn::find($this->getId());
         $product = Product::find($id);
         $rec->product()->attach($product, [
-            'return_de_qty' => 1, //ส่วนลดเปอร์เซ็น
+            'return_de_qty' => 1,
             'return_de_text' => "",
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
