@@ -71,14 +71,14 @@
 
 
                         <div class="box box-primary">
-                            <div class="box-header with-border">
+                            <div class="box-header with-border" >
                                 <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
                             </div><!-- /.box-header -->
-                            <div class="box-body">
-                                <ul class="products-list product-list-in-box">
+                            <div class="box-body" id="exp">
+                                <ul class="products-list product-list-in-box" >
                                     <li class="item">
 
                                         @foreach($exp as $item)
@@ -118,7 +118,7 @@
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>
                         </div><!-- /.box-header -->
-                        <div class="box-body">
+                        <div class="box-body" id="orderlast">
                             <div class="table-responsive">
                                 <table class="table no-margin">
                                     <thead>
@@ -170,7 +170,7 @@
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
                             </div><!-- /.box-header -->
-                            <div class="box-body">
+                            <div class="box-body" id="orderqty">
                                 <ul class="products-list product-list-in-box">
                                     <li class="item">
 
@@ -684,8 +684,13 @@
                // You can switch between pie and douhnut using the method below.
                pieChart.Doughnut(PieData, pieOptions);
 
+                   $('#exp').slimScroll({ height: '200'});
+                   $('#orderqty').slimScroll({ height: '200'});
+                   $('#orderlast').slimScroll({ height: '200'});
 
                });
+
+
              </script>
 
 
