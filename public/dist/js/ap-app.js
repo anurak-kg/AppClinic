@@ -349,7 +349,6 @@
                     $scope.dataLoading = false;
                 });
         }
-
         $scope.getTreatStatus = function (status) {
             var text;
             if (status == 0) {
@@ -766,7 +765,7 @@
             }
             else {
                 window.open(
-                    '/bill/order?order_id=' + id,
+                    '/bill/request?order_id=' + id,
                     '_blank' // <- This is what makes it open in a new window.
                 );
                 window.location.href = '/request/save';
@@ -774,7 +773,6 @@
         }
 
     });
-
     app.controller('courseController', function ($scope, $http) {
         $scope.course_medicine = [];
         $scope.medicine = {};
@@ -1672,8 +1670,30 @@
             return results;
         }
     });
-    app.controller('treatmentAddController', function ($scope) {
+    app.controller('treatmentAddController', function ($scope,$http) {
+        $scope.treat_has_medicine = [];
+        $scope.medicine = {};
+        $scope.qtyValue = 0;
+        $scope.jsonData = undefined;
+        $scope.addMedicine = function (id) {
+            var course =
+            {
+                id: $scope.count,
+                product_id: $scope.medicine.selected.product_id,
+                product_name: $scope.medicine.selected.product_name,
+                qty: $scope.qtyValue
+            }
+            $scope.treat_has_medicine.push(course);
+            $scope.count++;
+            $scope.jsonData = JSON.stringify($scope.treat_has_medicine);
+            console.log($scope.treat_has_medicine);
+        }
 
+        $http.get('/treatment/product-list').
+            success(function (data, status, headers, config) {
+                $scope.product = data;
+            }).error(function (data, status, headers, config) {
+            });
         $scope.save = function (e) {
             console.log(e);
             console.log($scope.bt1);

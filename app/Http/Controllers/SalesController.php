@@ -68,6 +68,7 @@ class SalesController extends Controller
             $inv->save();
         }
         $sales->sales_status = "CLOSE";
+        $sales->sales_total = $this->getTotal();
         // $order->quo_date = null;
         $sales->save();
 

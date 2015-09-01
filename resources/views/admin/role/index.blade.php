@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ซื้อคอร์ส')
+@section('title','จัดการสิทธ์')
 @section('headText','Permission Setting')
 @section('headDes','จัดการสิทธ์')
 

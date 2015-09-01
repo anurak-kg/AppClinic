@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Branch;
 use App\InventoryTransaction;
+use App\Medicine;
 use App\Product;
 use App\Quotations_detail;
+use App\TreatHasMedicine;
 use App\TreatHistory;
 use App\User;
 use App\Quotations;
@@ -91,6 +93,12 @@ class TreatmentController extends Controller
             ->update(['treat_status' => $treat_status, 'qty' => $qty]);
     }
 
+    public function getProductList()
+    {
+        $product = Product::where('pg_id', '=' ,6)->get();
+        return response()->json($product);
+    }
+
     public function add()
     {
         $course_id = \Input::get('course_id');
@@ -105,7 +113,7 @@ class TreatmentController extends Controller
         $doctor = User::where('position_id', '=', 4)->get();
         $users = User::where('position_id', '=', 8)->get();
         //return response()->json($quo);
-        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines'));
+        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines','medic'));
     }
 
     private function getMedicineRemain($courseId)
@@ -128,5 +136,36 @@ class TreatmentController extends Controller
                         course_medicine.course_id LIKE '" . $courseId . "'"));
         return $medicineData;
 
+    }
+    public function getMedicineData()
+    {
+        $medicine = TreatHasMedicine::where('treat_medicine_id', Input::get('treat_medicine_id'))
+            ->with('product')->get();
+        $data = [];
+        $index = 0;
+        foreach ($medicine as $item) {
+            $array['id'] = $index;
+            $array['product_id'] = $item->product->product_id;
+            $array['qty'] = $item->qty;
+            $array['product_name'] = $item->product->product_name;
+            array_push($data, $array);
+            $index++;
+        }
+        return response()->json($data);
+    }
+    public function getMedicineAdd()
+    {
+        $medicine = new TreatHasMedicine();
+        $medicine->treat_medicine_id = Input::get('treat_medicine_id');
+        $medicine->treat_id = Input::get('treat_id');
+        $medicine->product_id = Input::get('product_id');
+        $medicine->qty= Input::get('qty');
+        $medicine->save();
+    }
+    public function getMedicineRemove()
+    {
+        $medicine = TreatHasMedicine::where('treat_medicine_id', Input::get('treat_medicine_id'))
+            ->where('product_id', Input::get('product_id'));
+        $medicine->delete();
     }
 }

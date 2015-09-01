@@ -14,5 +14,8 @@ class TreatHistory extends Model
             ->withPivot('qty','created_at','updated_at');
 
     }
+    public function treat_has_medicine(){
+        return $this->hasMany('App\TreatHasMedicine','treat_id');
+    }
 
 }
