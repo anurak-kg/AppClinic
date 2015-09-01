@@ -43,7 +43,8 @@ Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middlewar
 //Employee
 Route::group(['middleware' => 'permission:emp'], function () {
     Route::any('user/edit','UserController@edit');
-    Route::any('user/resetpassword','UserController@resetPass');
+    Route::get('user/resetpassword','UserController@resetPass');
+    Route::post('user/resetpassword','UserController@postResetPassword');
     Route::any('user/editdoc','UserController@editdoc');
     Route::any('user/manage', 'UserController@manage');
     Route::any('user/adddoctor','UserController@adddoctor');
