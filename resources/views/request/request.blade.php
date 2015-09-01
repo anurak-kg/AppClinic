@@ -168,7 +168,7 @@
                                     <span class="pull-right col-lg-1">
                                         <a ng-click="save({{$data->order_id}})"
                                            class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-mail-forward "> ออกใบสั่งสินค้า </i></a>
+                                                    class="fa fa-mail-forward "> เบิกสินค้า </i></a>
                                     </span>
 
                                 </div>
