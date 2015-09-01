@@ -120,8 +120,7 @@ Route::any('product/index', ['uses' =>  'ProductController@grid', 'middleware' =
 
 //Branch
 Route::group(['middleware' => 'permission:branch'], function () {
-    Route::any('branch/index', 'BranchController@create');
-    Route::any('branch/create', 'BranchController@create');
+    Route::any('branch/index', 'BranchController@getDataGrid');
     Route::any('branch/edit', 'BranchController@edit');
 });
 
@@ -156,6 +155,7 @@ Route::group(['middleware' => 'permission:setting'], function () {
     Route::controller('setting', 'SettingController');
 });
 Route::group(['middleware' => 'permission:permission'], function () {
+    Route::any('branch/create', 'BranchController@create');
     Route::controller('permission', 'RoleController');
 });
 
