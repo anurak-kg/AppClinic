@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Input;
 use Jenssegers\Date\Date;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -736,6 +738,62 @@ class ReportController extends Controller
                 'Total' => $this->arrayToChartData($data, 'Total')
             ]);
         }
+
+    }
+
+    public function reportRequest(){
+        $type = \Input::get('type');
+        $branch_id = Input::get('branch');
+
+        $data = DB::table('order')
+                ->select('branch.branch_name','order.order_id','product.product_name','order_detail.order_de_qty','users.name',
+                    DB::raw('date(`order`.created_at) as date'))
+                ->join('order_detail','order_detail.order_id','=','order.order_id')
+                ->join('product','product.product_id','=','order_detail.product_id')
+                ->join('branch','branch.branch_id','=','order.branch_id')
+                ->join('users','users.id','=','order.emp_id')
+                ->where('order.order_type','=','request');
+              if ($branch_id > 0) {
+                  $data->where('order.branch_id', $branch_id);
+              }
+           $dataRe =  $data ->get();
+
+        $branch = Branch::all();
+
+        if ($type == "excel") {
+            Excel::create('รายงานการเบิกสินค้า', function ($excel) use ($dataRe) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($dataRe) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelrequest',['data'=>$dataRe]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/request',['data'=>$dataRe], compact('reportRequest', 'branch'));
+        }
+
+
 
     }
 

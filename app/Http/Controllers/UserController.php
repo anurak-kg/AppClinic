@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Position;
 use App\User;
 use App\Branch;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -63,8 +64,18 @@ class UserController extends Controller
 
         //User Table
         $grid = $this->getUserDataGrid();
+        $grid->row(function ($row) {
+            if ($row->cell('{{ $position->position_name }}') == 'admin') {
+                $row->cell('{{ $position->position_name }}')->style("display:none");
+                $row->style("display:none");
+            }
+            if ($row->cell('{{ $position->position_name }}') == 'IT') {
+                $row->cell('{{ $position->position_name }}')->style("display:none");
+                $row->style("display:none");
+            }
+        });
 
-            //User Create
+        //User Create
         $form = DataForm::create('user');
         $form->add('branch','ชื่อสาขา','select')->options(Branch::lists('branch_name','branch_id')->toArray());
         $form->text('username', 'Username')->rule('unique:users')->attributes(array('placeholder' => 'ระบุ Username ....'));
@@ -108,8 +119,9 @@ class UserController extends Controller
         return $edit->view('user/edit', compact('edit'));
     }
     public function getUserDataGridDoctor(){
-        $grid = DataGrid::source(User::with('branch','role')->where('position_id','=',4));
+        $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
+
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
         $grid->add('name','Name');
         $grid->add('email','Email');
@@ -137,13 +149,13 @@ class UserController extends Controller
         $form->saved(function () use ($form) {
             $user = new User();
             $user->branch_id = Input::get('branch');
+            $user->username = Input::get('username');
             $user->password = bcrypt(Input::get('password'));
             $user->name = Input::get('name');
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
             $user->position_id = Input::get('position_id');
-            $user->license = Input::get('license');
             $user->save();
             $form->message("ok record saved");
             $form->link("user/adddoctor", "back to the form");
@@ -176,10 +188,10 @@ class UserController extends Controller
     public function postResetPassword(){
         $user = User::find(Input::get('id'));
         $reset = \Input::get('pass');
-        //var_dump($reset);
-        $user->password = bcrypt(Input::get($reset));
+       // dd(Input::all());
+        $user->password = bcrypt(trim($reset));
         $user->save();
-       // $user->message("success");
+        // $user->message("success");
         //return Redirect::to('user/manage')->with('message', 'Login Failed');
         Session::flash('message', "ได้ทำการเปลี่ยนรหัสผ่านเรียบร้อย");
         return Redirect::back();

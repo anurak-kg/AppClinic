@@ -72,6 +72,8 @@
                                 </li>
                                 <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>สต๊อกสินค้า</a>
                                 </li>
+                                <li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>
+                                </li>
                             @endif
                         </ul>
                     </li>
@@ -150,6 +152,9 @@
                         @if(Auth::user()->can('permission'))
                             <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
                         @endif
+                        @if(Auth::user()->can('permission'))
+                            <li><a href="{{url('log/index')}}"><i class="fa fa-server"></i>System Log</a></li>
+                        @endif
                         @if(Auth::user()->can('setting'))
                             <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i> ตั้งค่า</a></li>
                         @endif
@@ -196,6 +201,10 @@
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                             <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
                                     Credit</a>
+                            </li>
+                        @endif
+                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
+                            <li><a href="{{url('report/request')}}"><i class='fa fa-minus'></i>รายงานเบิกสินค้า</a>
                             </li>
                         @endif
                     </ul>

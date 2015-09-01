@@ -116,8 +116,10 @@ Route::group(['middleware' => 'permission:product'], function () {
     Route::any('product/create', 'ProductController@create');
     Route::any('product/expday', 'ProductController@expday');
     Route::any('product/stock', 'ProductController@stock');
+    Route::any('product/stockmanage', 'ProductController@stockmanage');
     Route::any('product/edit', 'ProductController@edit');
 });
+
 Route::any('product/index', ['uses' =>  'ProductController@grid', 'middleware' => 'permission:product-read']);
 
 //Branch
@@ -142,8 +144,10 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/producthot', 'ReportController@reportProductHot');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
     Route::any('report/suplier', 'ReportController@reportsuplier');
+    Route::any('report/request', 'ReportController@reportRequest');
     Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
     Route::any('money/manage', 'MoneyController@moneyDr');
+    Route::any('log/index', 'SystemLogsController@index');
 });
 
 Route::group(['middleware' => 'permission:sales'], function () {
@@ -160,7 +164,6 @@ Route::group(['middleware' => 'permission:permission'], function () {
     Route::any('branch/create', 'BranchController@create');
     Route::controller('permission', 'RoleController');
 });
-
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
