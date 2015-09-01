@@ -37,6 +37,7 @@ class UserController extends Controller
     {
         $data = DB::table('branch')
             ->select('branch_name','branch_id')
+            ->where('branch_type','=','shop')
             ->get();
 
         return view('login',['data'=>$data]);
