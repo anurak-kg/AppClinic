@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title','รับสินค้า')
-@section('headText','รับสินค้า')
+@section('headText','รับสินค้าเข้าคลัง')
 @section('headDes','คลังสินค้า')
 
 @section('content')

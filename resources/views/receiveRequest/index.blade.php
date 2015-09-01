@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title','รับสินค้า')
-@section('headText','รับสินค้าจากคลัง')
+@section('headText','รับสินค้าเข้าร้าน')
 @section('headDes','คลังสินค้า')
 
 @section('content')
@@ -59,7 +59,7 @@
                                     <input class="form-control typeahead  order-input "
                                            type="search"
                                            value="<?php echo($data->order_id == 0 ? '' : $data->order_id)?>"
-                                           placeholder="รหัสการสั่งซื้อ"></div>
+                                           placeholder="รหัสการเบิกสินค้า"></div>
                             </div>
 
 
