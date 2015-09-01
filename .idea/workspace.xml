@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a76f41c-dd4e-4e5f-8420-88c42b4808c4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/treatment/add.blade.php" afterPath="$PROJECT_DIR$/resources/views/treatment/add.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AppClinic.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,10 +66,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TreatmentController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TreatmentController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6597938">
+            <state vertical-scroll-proportion="-13.714286">
               <caret line="97" column="63" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
               <folding>
                 <marker date="1441136160342" expanded="true" signature="4172:4911" placeholder="SELECT cours..course_medicine..." />
@@ -112,22 +112,22 @@
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="23.105263">
-              <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/treatment/add.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.321428">
-              <caret line="178" column="100" selection-start-line="178" selection-start-column="100" selection-end-line="178" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.9020619">
+              <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
               <folding>
-                <element signature="e#8182#8228#0#HTML" expanded="true" />
-                <element signature="e#10920#10940#0#HTML" expanded="true" />
-                <element signature="e#12031#12058#0#HTML" expanded="true" />
-                <element signature="e#17309#17328#0#HTML" expanded="true" />
+                <element signature="e#8856#8902#0#HTML" expanded="true" />
+                <element signature="e#11594#11614#0#HTML" expanded="true" />
+                <element signature="e#12705#12732#0#HTML" expanded="true" />
+                <element signature="e#17287#17306#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -207,9 +207,9 @@
         <option value="$PROJECT_DIR$/resources/views/layout/side.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/receiveRequest/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/resources/views/treatment/add.blade.php" />
         <option value="$PROJECT_DIR$/public/dist/js/ap-app.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" />
+        <option value="$PROJECT_DIR$/resources/views/treatment/add.blade.php" />
       </list>
     </option>
   </component>
@@ -365,12 +365,6 @@
       <created>1438711036456</created>
       <option name="number" value="Default" />
       <updated>1438711036456</updated>
-    </task>
-    <task id="LOCAL-00071" summary="update branch_id">
-      <created>1440351964599</created>
-      <option name="number" value="00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1440351964599</updated>
     </task>
     <task id="LOCAL-00072" summary="fix SQLSTATE[23000]: Integrity constraint violation: 1217">
       <created>1440352310416</created>
@@ -660,7 +654,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441136047178</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="เพิ่ม หมวด 6 เข้า #118">
+      <created>1441136217401</created>
+      <option name="number" value="00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1441136217401</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TodoView">
@@ -737,7 +737,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="ปรับโครง หน้าเพิ่มคอร์ส" />
     <MESSAGE value="แก้ คลังสินค้า" />
     <MESSAGE value="update Order ให้รองรับคลังสินค้า" />
     <MESSAGE value="fix bug รับสินค้าไม่ได้" />
@@ -762,7 +761,8 @@
     <MESSAGE value="ทดสอบเปลียนสีม่วง" />
     <MESSAGE value="add ยาหมวด 6 ในหน้ารักษา #118&#10;" />
     <MESSAGE value="เพิ่ม หมวด 6 เข้า #118" />
-    <option name="LAST_COMMIT_MESSAGE" value="เพิ่ม หมวด 6 เข้า #118" />
+    <MESSAGE value="แก้เลยเอ้าหน้ารักษาให้ใช้ง่ายขึ้น" />
+    <option name="LAST_COMMIT_MESSAGE" value="แก้เลยเอ้าหน้ารักษาให้ใช้ง่ายขึ้น" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1121,23 +1121,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/treatment/add.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.321428">
-          <caret line="178" column="100" selection-start-line="178" selection-start-column="100" selection-end-line="178" selection-end-column="100" />
-          <folding>
-            <element signature="e#8182#8228#0#HTML" expanded="true" />
-            <element signature="e#10920#10940#0#HTML" expanded="true" />
-            <element signature="e#12031#12058#0#HTML" expanded="true" />
-            <element signature="e#17309#17328#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="23.105263">
-          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1166,7 +1153,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6597938">
+        <state vertical-scroll-proportion="-13.714286">
           <caret line="97" column="63" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
           <folding>
             <marker date="1441136160342" expanded="true" signature="4172:4911" placeholder="SELECT cours..course_medicine..." />
@@ -1176,6 +1163,19 @@
             <marker date="1441136160342" expanded="true" signature="5069:5425" placeholder="SELECT produ..product..." />
             <marker date="1441136160342" expanded="true" signature="5069:5440" placeholder="SELECT produ..product..." />
             <marker date="1441136160342" expanded="true" signature="5149:5322" placeholder="SELECT SUM(i..inventory_transaction..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/treatment/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9020619">
+          <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+          <folding>
+            <element signature="e#8856#8902#0#HTML" expanded="true" />
+            <element signature="e#11594#11614#0#HTML" expanded="true" />
+            <element signature="e#12705#12732#0#HTML" expanded="true" />
+            <element signature="e#17287#17306#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

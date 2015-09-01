@@ -105,6 +105,15 @@
                                     <br>
                                 </div>
                                 <div class="col-md-12">
+                                    <label>บันทึก หรือ ความคิดเห็นเพิ่มเติม</label>
+                                <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
+                                          name="comment"></textarea>
+                                    <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
+                                    <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
+                                    <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
+
+                                </div>
+                                <div class="col-md-12">
                                     <label class=" required">วันที่เข้ารับการรักษา</label>
 
                                     <div class="input-group">
@@ -114,6 +123,7 @@
                                         <input type="text" class="form-control" id="treat_date" name="treat_date"
                                                value="{{date("Y-m-d")}}">
                                     </div>
+
                                     <br>
                                 </div>
                             </div>
@@ -220,15 +230,7 @@
                                             <input ng-value="jsonData" type="hidden" name="json">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label>บันทึก หรือ ความคิดเห็นเพิ่มเติม</label>
-                                <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
-                                          name="comment"></textarea>
-                                        <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
-                                        <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
-                                        <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
 
-                                    </div>
                                 </div>
                             </div>
 
