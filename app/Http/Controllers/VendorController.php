@@ -64,6 +64,7 @@ class VendorController extends Controller
             $form->link("vendor/index", "ย้อนกลับ");
 
         });
+
         return view('vendor/index', compact('form','grid'));
     }
 
@@ -79,7 +80,15 @@ class VendorController extends Controller
         $edit->text('ven_sell_tel', 'เบอร์โทรพนักงานขาย');
         $edit->link("vendor/index", "ย้อนกลับ");
         $edit->attributes(array("class" => " "));
+        $edit->saved(function () use ($edit) {
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'vendor',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'แก้ไขร้านค้า รหัส : ' . Input::get('ven_id')
+            ]);
 
+        });
 
         return $edit->view('vendor/edit', compact('edit'));
     }
