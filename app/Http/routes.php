@@ -145,6 +145,7 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/suplier', 'ReportController@reportsuplier');
     Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
     Route::any('money/manage', 'MoneyController@moneyDr');
+    Route::any('log/index', 'SystemLogsController@index');
 });
 
 Route::group(['middleware' => 'permission:sales'], function () {
@@ -161,7 +162,6 @@ Route::group(['middleware' => 'permission:permission'], function () {
     Route::any('branch/create', 'BranchController@create');
     Route::controller('permission', 'RoleController');
 });
-
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@dashboard');
