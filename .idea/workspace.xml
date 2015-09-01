@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/app/Http/Controllers/QuotationsController.php" line="244" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9a76f41c-dd4e-4e5f-8420-88c42b4808c4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" />
+    </list>
+    <ignored path="AppClinic.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - dbclinic@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="dbclinic" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - dbclinic@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="dbclinic" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="product" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="AppClinic" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="TreatmentController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6597938">
+              <caret line="97" column="63" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
+              <folding>
+                <marker date="1441136160342" expanded="true" signature="4172:4911" placeholder="SELECT cours..course_medicine..." />
+                <marker date="1441136160342" expanded="true" signature="4402:4599" placeholder="SELECT SUM(i..inventory_transaction..." />
+                <marker date="1441136160342" expanded="true" signature="5069:5402" placeholder="SELECT produ..product..." />
+                <marker date="1441136160342" expanded="true" signature="5069:5424" placeholder="SELECT produ..product..." />
+                <marker date="1441136160342" expanded="true" signature="5069:5425" placeholder="SELECT produ..product..." />
+                <marker date="1441136160342" expanded="true" signature="5069:5440" placeholder="SELECT produ..product..." />
+                <marker date="1441136160342" expanded="true" signature="5149:5322" placeholder="SELECT SUM(i..inventory_transaction..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ap-app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/dist/js/ap-app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.0689654">
+              <caret line="1721" column="32" selection-start-line="1721" selection-start-column="32" selection-end-line="1721" selection-end-column="32" />
+              <folding>
+                <element signature="e#179#381#0" expanded="false" />
+                <element signature="e#427#1085#0" expanded="false" />
+                <element signature="e#1124#1612#0" expanded="false" />
+                <element signature="e#11679#13967#0" expanded="false" />
+                <element signature="e#14048#21308#0" expanded="false" />
+                <element signature="e#21391#28538#0" expanded="false" />
+                <element signature="e#28605#30153#0" expanded="false" />
+                <element signature="e#30224#33891#0" expanded="false" />
+                <element signature="e#33979#41863#0" expanded="false" />
+                <element signature="e#41946#48869#0" expanded="false" />
+                <element signature="e#48959#55877#0" expanded="false" />
+                <element signature="e#55959#61699#0" expanded="false" />
+                <element signature="e#64302#67894#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="23.105263">
+              <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/treatment/add.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.321428">
+              <caret line="178" column="100" selection-start-line="178" selection-start-column="100" selection-end-line="178" selection-end-column="100" />
+              <folding>
+                <element signature="e#8182#8228#0#HTML" expanded="true" />
+                <element signature="e#10920#10940#0#HTML" expanded="true" />
+                <element signature="e#12031#12058#0#HTML" expanded="true" />
+                <element signature="e#17309#17328#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FrameworkCommandLineHistory">
+    <commandsHistory>
+      <command text="php artisan migrate:reset" />
+      <command text="php artisan migrate" />
+      <command text="php artisan migrate:reset" />
+      <command text="php artisan migrate" />
+      <command text="php artisan migrate:reset" />
+      <command text="php artisan migrate" />
+      <command text="php artisan migrate:reset" />
+      <command text="php artisan migrate" />
+      <command text="php artisan db:seed" />
+    </commandsHistory>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Developer" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/database/migrations/2015_06_30_105055_create_table_order.php" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_08_22_200902_create_table_system_logs.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_08_14_172804_create_return.php" />
+        <option value="$PROJECT_DIR$/resources/views/login.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_07_21_090738_create_table_receive.php" />
+        <option value="$PROJECT_DIR$/config/session.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_07_31_152308_create_Payment_System.php" />
+        <option value="$PROJECT_DIR$/resources/views/payment/pay.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/payment/payment.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/bill/billproduct.blade.php" />
+        <option value="$PROJECT_DIR$/app/TreatHistory.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/tests/QuoTest.php" />
+        <option value="$PROJECT_DIR$/tests/TestCase.php" />
+        <option value="$PROJECT_DIR$/tests/BranchTest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/QuotationsController.php" />
+        <option value="$PROJECT_DIR$/app/Quotations.php" />
+        <option value="$PROJECT_DIR$/app/Sales.php" />
+        <option value="$PROJECT_DIR$/app/Order.php" />
+        <option value="$PROJECT_DIR$/app/Receive.php" />
+        <option value="$PROJECT_DIR$/app/Re_turn.php" />
+        <option value="$PROJECT_DIR$/app/Payment.php" />
+        <option value="$PROJECT_DIR$/app/InventoryTransaction.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReturnController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SalesController.php" />
+        <option value="$PROJECT_DIR$/tests/HelperTest.php" />
+        <option value="$PROJECT_DIR$/resources/views/quotations/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/course/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/order/order.blade.php" />
+        <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/app/Http/helpers.php" />
+        <option value="$PROJECT_DIR$/resources/views/request/request.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_08_24_183940_update_v100_to_v110.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/RequestController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceiveRequestController.php" />
+        <option value="$PROJECT_DIR$/resources/views/product/stock.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PaymentController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/BillController.php" />
+        <option value="$PROJECT_DIR$/resources/views/receive/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layout/master.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layout/side.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/receiveRequest/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/treatment/add.blade.php" />
+        <option value="$PROJECT_DIR$/public/dist/js/ap-app.js" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+        <tasks>
+          <GulpTaskState>
+            <task-name>default</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>tdd</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch-assets</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>less</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>scripts</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>styles</task-name>
+          </GulpTaskState>
+        </tasks>
+      </GulpfileState>
+    </gulpfiles>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SqlDialectInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="blade&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/receiveRequest/index.blade.php&#10;Use&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/UserController.php&#10;ap&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/public/dist/js/ap-app.js&#10;route&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;Treat&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;master&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/layout/master.blade.php&#10;side&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/layout/side.blade.php&#10;User&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/UserController.php&#10;prod&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ProductController.php&#10;BranchT&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/tests/BranchTest.php&#10;Paymen&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;sid&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/resources/views/layout/side.blade.php&#10;Req&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/RequestController.php&#10;Order&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;Rec&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveRequestController.php&#10;Rece&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;Ord&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/OrderController.php&#10;helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Read&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/readme.md&#10;UserCo&#9;null&#9;null&#10;Re&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/ReceiveController.php&#10;trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;upda&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;Quo&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/QuotationsController.php&#10;he&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;Helper&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/tests/HelperTest.php&#10;Inven&#9;null&#9;null&#10;Payment&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;ReturnCon&#9;null&#9;null&#10;Sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;Sale&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Sales.php&#10;sa&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/SalesController.php&#10;Customer&#9;null&#9;null&#10;t&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_08_24_183940_update_v100_to_v110.php&#10;Dat&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;help&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/helpers.php&#10;data&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/seeds/DatabaseSeeder.php&#10;Qu&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Quotations_detail.php&#10;Tre&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;Trea&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/TreatmentController.php&#10;rou&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/routes.php&#10;bill&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Pay&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;bil&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/BillController.php&#10;Paym&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/database/migrations/2015_07_31_152308_create_Payment_System.php&#10;Payme&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;BillCo&#9;null&#9;null&#10;PaymentC&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/app/Http/Controllers/PaymentController.php&#10;sess&#9;FILE&#9;file://C:/xampp/htdocs/AppClinic/config/session.php" />
+    <property name="FullScreen" value="false" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="132" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="161" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="163" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="836" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="157" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="154" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="158" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="823" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/bin/git.exe" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a76f41c-dd4e-4e5f-8420-88c42b4808c4" name="Default" comment="" />
+      <created>1438711036456</created>
+      <option name="number" value="Default" />
+      <updated>1438711036456</updated>
+    </task>
+    <task id="LOCAL-00071" summary="update branch_id">
+      <created>1440351964599</created>
+      <option name="number" value="00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1440351964599</updated>
+    </task>
+    <task id="LOCAL-00072" summary="fix SQLSTATE[23000]: Integrity constraint violation: 1217">
+      <created>1440352310416</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1440352310417</updated>
+    </task>
+    <task id="LOCAL-00073" summary="เพิ่ม Vat">
+      <created>1440352340295</created>
+      <option name="number" value="00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1440352340295</updated>
+    </task>
+    <task id="LOCAL-00074" summary="เลือกสาขาหน้า Login : ถ้ามีสาขาเดียวให้เลือกไว้เลย #88">
+      <created>1440352505499</created>
+      <option name="number" value="00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1440352505499</updated>
+    </task>
+    <task id="LOCAL-00075" summary="fix bug รับสินค้า">
+      <created>1440352733402</created>
+      <option name="number" value="00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1440352733403</updated>
+    </task>
+    <task id="LOCAL-00076" summary="fix bug layout">
+      <created>1440352801395</created>
+      <option name="number" value="00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1440352801396</updated>
+    </task>
+    <task id="LOCAL-00077" summary="เพิ่มส่วนลด รับสินค้า">
+      <created>1440353203887</created>
+      <option name="number" value="00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1440353203887</updated>
+    </task>
+    <task id="LOCAL-00078" summary="เพิ่มเวลาของการอยุ่ในระบบของพนักงาน #89 เป็น 480 นาที&#10;">
+      <created>1440353364597</created>
+      <option name="number" value="00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1440353364597</updated>
+    </task>
+    <task id="LOCAL-00079" summary="แก้ bank name">
+      <created>1440355243584</created>
+      <option name="number" value="00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1440355243584</updated>
+    </task>
+    <task id="LOCAL-00080" summary="แก้ payment ให้ดึงจาก payment_bank">
+      <created>1440355435979</created>
+      <option name="number" value="00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1440355435979</updated>
+    </task>
+    <task id="LOCAL-00081" summary="payment ปลิ้นใบเสร็จหลังจากกดบันทึก">
+      <created>1440356296527</created>
+      <option name="number" value="00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1440356296527</updated>
+    </task>
+    <task id="LOCAL-00082" summary="ลบปุ่มปลิ้นบิล">
+      <created>1440356385180</created>
+      <option name="number" value="00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1440356385180</updated>
+    </task>
+    <task id="LOCAL-00083" summary="ปลิ้นบิลขายสินค้า">
+      <created>1440357531343</created>
+      <option name="number" value="00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1440357531345</updated>
+    </task>
+    <task id="LOCAL-00084" summary="fix บั้ก เข้ารักษา คอร์สที่ไม่มียาไม่ได้ #92&#10;">
+      <created>1440358499197</created>
+      <option name="number" value="00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1440358499197</updated>
+    </task>
+    <task id="LOCAL-00085" summary="fix bug ยาไม่เพิ่มใน treat_has_medicine">
+      <created>1440361198985</created>
+      <option name="number" value="00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1440361198985</updated>
+    </task>
+    <task id="LOCAL-00086" summary="Database Seed Update">
+      <created>1440440150591</created>
+      <option name="number" value="00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1440440150592</updated>
+    </task>
+    <task id="LOCAL-00087" summary="เพิ่ม test case การ เข้าสู่ระบบ และ ออกจากระบบ">
+      <created>1440440191078</created>
+      <option name="number" value="00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1440440191078</updated>
+    </task>
+    <task id="LOCAL-00088" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Sale Pk เป็น manual">
+      <created>1440445059936</created>
+      <option name="number" value="00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1440445059936</updated>
+    </task>
+    <task id="LOCAL-00089" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ ORDER  Pk เป็น manual">
+      <created>1440445655762</created>
+      <option name="number" value="00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1440445655762</updated>
+    </task>
+    <task id="LOCAL-00090" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Received  Pk เป็น manual">
+      <created>1440446395856</created>
+      <option name="number" value="00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1440446395856</updated>
+    </task>
+    <task id="LOCAL-00091" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ return  Pk เป็น manual">
+      <created>1440446906125</created>
+      <option name="number" value="00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1440446906126</updated>
+    </task>
+    <task id="LOCAL-00092" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Quo  Pk เป็น manual">
+      <created>1440446929903</created>
+      <option name="number" value="00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1440446929903</updated>
+    </task>
+    <task id="LOCAL-00093" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Payment  Pk เป็น manual">
+      <created>1440447794721</created>
+      <option name="number" value="00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1440447794721</updated>
+    </task>
+    <task id="LOCAL-00094" summary="เตรียมพร้อมสำหรับ offline version -&gt; แก้ Inv Transaction  Pk เป็น manual">
+      <created>1440448080189</created>
+      <option name="number" value="00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1440448080189</updated>
+    </task>
+    <task id="LOCAL-00095" summary="test case update">
+      <created>1440448288763</created>
+      <option name="number" value="00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1440448288763</updated>
+    </task>
+    <task id="LOCAL-00096" summary="ปรับโครง หน้าเพิ่มคอร์ส">
+      <created>1440779405593</created>
+      <option name="number" value="00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1440779405593</updated>
+    </task>
+    <task id="LOCAL-00097" summary="แก้ คลังสินค้า">
+      <created>1440782258565</created>
+      <option name="number" value="00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1440782258565</updated>
+    </task>
+    <task id="LOCAL-00098" summary="update Order ให้รองรับคลังสินค้า">
+      <created>1440785294540</created>
+      <option name="number" value="00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1440785294540</updated>
+    </task>
+    <task id="LOCAL-00099" summary="fix bug รับสินค้าไม่ได้">
+      <created>1440788937788</created>
+      <option name="number" value="00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1440788937788</updated>
+    </task>
+    <task id="LOCAL-00100" summary="fix bux คินสินค้า">
+      <created>1440789871169</created>
+      <option name="number" value="00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1440789871169</updated>
+    </task>
+    <task id="LOCAL-00101" summary="update migration เพิ่ม warehouse_id สู่ receive">
+      <created>1440789901527</created>
+      <option name="number" value="00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1440789901527</updated>
+    </task>
+    <task id="LOCAL-00102" summary="        //ADD Order Type&#10;">
+      <created>1440791838943</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1440791838944</updated>
+    </task>
+    <task id="LOCAL-00103" summary="เพิ่ม ไพมารี่คี ของ เบิกยา และ รับยา">
+      <created>1440792550114</created>
+      <option name="number" value="00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1440792550114</updated>
+    </task>
+    <task id="LOCAL-00104" summary="เพิ่มรับยาจากการเบิก">
+      <created>1440794194058</created>
+      <option name="number" value="00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1440794194058</updated>
+    </task>
+    <task id="LOCAL-00105" summary="เพิ่มการเบิกยา">
+      <created>1440794214324</created>
+      <option name="number" value="00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1440794214324</updated>
+    </task>
+    <task id="LOCAL-00106" summary="แก้ Inv transaction">
+      <created>1440796601100</created>
+      <option name="number" value="00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1440796601100</updated>
+    </task>
+    <task id="LOCAL-00107" summary="ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้">
+      <created>1440797946309</created>
+      <option name="number" value="00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1440797946309</updated>
+    </task>
+    <task id="LOCAL-00108" summary="refactor code : ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้">
+      <created>1440797968942</created>
+      <option name="number" value="00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1440797968942</updated>
+    </task>
+    <task id="LOCAL-00109" summary="fix bug รับสินค้า ไพมารีคี ไม่ตรง">
+      <created>1440828092412</created>
+      <option name="number" value="00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1440828092413</updated>
+    </task>
+    <task id="LOCAL-00110" summary="fix bug  สั่งซื้อ  ไพมารีคี ไม่ตรง">
+      <created>1440828202452</created>
+      <option name="number" value="00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1440828202453</updated>
+    </task>
+    <task id="LOCAL-00111" summary="fix bug เมนนูผิด">
+      <created>1440830966279</created>
+      <option name="number" value="00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1440830966279</updated>
+    </task>
+    <task id="LOCAL-00112" summary="fix ประวัติการสั่งซื้อสินค้าไม่ตรง">
+      <created>1440831083855</created>
+      <option name="number" value="00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1440831083855</updated>
+    </task>
+    <task id="LOCAL-00113" summary="fix เมนูเพี้ยน">
+      <created>1440831302784</created>
+      <option name="number" value="00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1440831302784</updated>
+    </task>
+    <task id="LOCAL-00114" summary="fix bug 'payment_id' cannot be null">
+      <created>1440831575400</created>
+      <option name="number" value="00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1440831575400</updated>
+    </task>
+    <task id="LOCAL-00115" summary="fix ซ่อนสาขาคลังสินค้า หน้า login">
+      <created>1440831817603</created>
+      <option name="number" value="00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1440831817603</updated>
+    </task>
+    <task id="LOCAL-00116" summary="เพิ่ม route และ ให้ปลิ้นบิล หน้าเบิกยา">
+      <created>1440835982528</created>
+      <option name="number" value="00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1440835982528</updated>
+    </task>
+    <task id="LOCAL-00117" summary="เปลี่ยนข้อความเมนู">
+      <created>1441092893342</created>
+      <option name="number" value="00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1441092893343</updated>
+    </task>
+    <task id="LOCAL-00118" summary="ทดสอบเปลียนสีม่วง">
+      <created>1441092913657</created>
+      <option name="number" value="00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1441092913657</updated>
+    </task>
+    <task id="LOCAL-00119" summary="add ยาหมวด 6 ในหน้ารักษา #118&#10;">
+      <created>1441136047177</created>
+      <option name="number" value="00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1441136047178</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.73510975" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.73510975" sideWeight="0.49394855" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30877742" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18154311" sideWeight="0.53504676" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21785174" sideWeight="0.46495327" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18683812" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3275862" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3260188" sideWeight="0.5030257" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3291536" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32288402" sideWeight="0.4969743" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3260188" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24508321" sideWeight="0.52507836" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18154311" sideWeight="0.47492164" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15128593" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291536" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="ปรับโครง หน้าเพิ่มคอร์ส" />
+    <MESSAGE value="แก้ คลังสินค้า" />
+    <MESSAGE value="update Order ให้รองรับคลังสินค้า" />
+    <MESSAGE value="fix bug รับสินค้าไม่ได้" />
+    <MESSAGE value="fix bux คินสินค้า" />
+    <MESSAGE value="update migration เพิ่ม warehouse_id สู่ receive" />
+    <MESSAGE value="        //ADD Order Type&#10;" />
+    <MESSAGE value="เพิ่ม ไพมารี่คี ของ เบิกยา และ รับยา" />
+    <MESSAGE value="เพิ่มรับยาจากการเบิก" />
+    <MESSAGE value="เพิ่มการเบิกยา" />
+    <MESSAGE value="แก้ Inv transaction" />
+    <MESSAGE value="ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้" />
+    <MESSAGE value="refactor code : ปรับปรุงสต้อกสินค้าให้สามารถเลือกสาขาได้" />
+    <MESSAGE value="fix bug รับสินค้า ไพมารีคี ไม่ตรง" />
+    <MESSAGE value="fix bug  สั่งซื้อ  ไพมารีคี ไม่ตรง" />
+    <MESSAGE value="fix bug เมนนูผิด" />
+    <MESSAGE value="fix ประวัติการสั่งซื้อสินค้าไม่ตรง" />
+    <MESSAGE value="fix เมนูเพี้ยน" />
+    <MESSAGE value="fix bug 'payment_id' cannot be null" />
+    <MESSAGE value="fix ซ่อนสาขาคลังสินค้า หน้า login" />
+    <MESSAGE value="เพิ่ม route และ ให้ปลิ้นบิล หน้าเบิกยา" />
+    <MESSAGE value="เปลี่ยนข้อความเมนู" />
+    <MESSAGE value="ทดสอบเปลียนสีม่วง" />
+    <MESSAGE value="add ยาหมวด 6 ในหน้ารักษา #118&#10;" />
+    <MESSAGE value="เพิ่ม หมวด 6 เข้า #118" />
+    <option name="LAST_COMMIT_MESSAGE" value="เพิ่ม หมวด 6 เข้า #118" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="16" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/Order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.464286">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Sales.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32646048">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Receive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.785714">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/payment/payment.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1460481">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Payment_detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.714285">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Re_turn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.75">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/InventoryTransaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6666667">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SalesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.428571">
+          <caret line="61" column="45" selection-start-line="61" selection-start-column="45" selection-end-line="61" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReturnController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2611684">
+          <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/QuotationsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.495082">
+          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/HelperTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24918033">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="19.47541">
+          <caret line="992" column="0" selection-start-line="992" selection-start-column="0" selection-end-line="992" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/course/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="25" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/course/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="28" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/quotations/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="63" selection-start-line="34" selection-start-column="63" selection-end-line="34" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.785714">
+          <caret line="143" column="0" selection-start-line="143" selection-start-column="0" selection-end-line="149" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/order/order.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="67" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/treatment/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6967509">
+          <caret line="41" column="104" selection-start-line="41" selection-start-column="102" selection-end-line="41" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/22d25c51/4bd93866-51ce-432b-b4d7-c59f02cfd079/dbclinic..system_logs">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.226804">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.214286">
+          <caret line="86" column="52" selection-start-line="86" selection-start-column="52" selection-end-line="86" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.172414">
+          <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/css/AdminLTE.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34819898">
+          <caret line="6" column="30862" selection-start-line="6" selection-start-column="30862" selection-end-line="6" selection-end-column="30862" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/request/request.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55498284">
+          <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Routing/ResponseFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/product/stock.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.071429">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/22d25c51/4bd93866-51ce-432b-b4d7-c59f02cfd079/dbclinic..branch">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.025773196">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaymentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2983725">
+          <caret line="212" column="46" selection-start-line="212" selection-start-column="46" selection-end-line="212" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/BranchTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39175257">
+          <caret line="12" column="21" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/RequestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45704466">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_08_24_183940_update_v100_to_v110.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19587629">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ReceiveRequestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7508591">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/BillController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6735395">
+          <caret line="67" column="33" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/receive/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3571428">
+          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/side.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.2611684">
+          <caret line="74" column="34" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layout/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5223368">
+          <caret line="35" column="24" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/Passwords/CanResetPassword.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35910654">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth/Authenticatable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1305842">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29381442">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6563574">
+          <caret line="79" column="26" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/4bd93866-51ce-432b-b4d7-c59f02cfd079/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/receiveRequest/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="46" selection-start-line="106" selection-start-column="46" selection-end-line="106" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/treatment/add.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.321428">
+          <caret line="178" column="100" selection-start-line="178" selection-start-column="100" selection-end-line="178" selection-end-column="100" />
+          <folding>
+            <element signature="e#8182#8228#0#HTML" expanded="true" />
+            <element signature="e#10920#10940#0#HTML" expanded="true" />
+            <element signature="e#12031#12058#0#HTML" expanded="true" />
+            <element signature="e#17309#17328#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="23.105263">
+          <caret line="12" column="66" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/js/ap-app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0689654">
+          <caret line="1721" column="32" selection-start-line="1721" selection-start-column="32" selection-end-line="1721" selection-end-column="32" />
+          <folding>
+            <element signature="e#179#381#0" expanded="false" />
+            <element signature="e#427#1085#0" expanded="false" />
+            <element signature="e#1124#1612#0" expanded="false" />
+            <element signature="e#11679#13967#0" expanded="false" />
+            <element signature="e#14048#21308#0" expanded="false" />
+            <element signature="e#21391#28538#0" expanded="false" />
+            <element signature="e#28605#30153#0" expanded="false" />
+            <element signature="e#30224#33891#0" expanded="false" />
+            <element signature="e#33979#41863#0" expanded="false" />
+            <element signature="e#41946#48869#0" expanded="false" />
+            <element signature="e#48959#55877#0" expanded="false" />
+            <element signature="e#55959#61699#0" expanded="false" />
+            <element signature="e#64302#67894#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TreatmentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6597938">
+          <caret line="97" column="63" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
+          <folding>
+            <marker date="1441136160342" expanded="true" signature="4172:4911" placeholder="SELECT cours..course_medicine..." />
+            <marker date="1441136160342" expanded="true" signature="4402:4599" placeholder="SELECT SUM(i..inventory_transaction..." />
+            <marker date="1441136160342" expanded="true" signature="5069:5402" placeholder="SELECT produ..product..." />
+            <marker date="1441136160342" expanded="true" signature="5069:5424" placeholder="SELECT produ..product..." />
+            <marker date="1441136160342" expanded="true" signature="5069:5425" placeholder="SELECT produ..product..." />
+            <marker date="1441136160342" expanded="true" signature="5069:5440" placeholder="SELECT produ..product..." />
+            <marker date="1441136160342" expanded="true" signature="5149:5322" placeholder="SELECT SUM(i..inventory_transaction..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

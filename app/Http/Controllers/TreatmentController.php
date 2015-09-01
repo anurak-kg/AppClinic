@@ -95,7 +95,7 @@ class TreatmentController extends Controller
 
     public function getProductList()
     {
-        $product =$this->getMedicineAllData();
+        $product =$this->getMedicineAllData(6); // pg id หมวด 6
         //$product = Product::where('pg_id', '=' ,6)->get();
 
         return response()->json($product);
@@ -142,7 +142,7 @@ class TreatmentController extends Controller
 
     }
 
-    private function getMedicineAllData()
+    private function getMedicineAllData($category)
     {
         $medicineData = DB::select(
             DB::raw(" SELECT product_id as p_id,product_name, product.product_unit,0 as qty,
@@ -151,6 +151,8 @@ class TreatmentController extends Controller
         ) as remain
          FROM
         product
+        WHERE pg_id = ".$category."
+
         "));
         return $medicineData;
     }
