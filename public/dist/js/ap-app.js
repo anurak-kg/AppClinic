@@ -1513,7 +1513,6 @@
             return results;
         }
     });
-
     app.controller('returnController', function ($scope, $http, ngTableParams) {
         $scope.product = [];
         $scope.return = [];
@@ -1670,23 +1669,28 @@
             return results;
         }
     });
-    app.controller('treatmentAddController', function ($scope,$http) {
+    app.controller('treatmentAddController', function ($scope,$http,ngTableParams) {
         $scope.treat_has_medicine = [];
         $scope.medicine = {};
         $scope.qtyValue = 0;
         $scope.jsonData = undefined;
-        $scope.addMedicine = function (id) {
-            var course =
-            {
-                id: $scope.count,
-                product_id: $scope.medicine.selected.product_id,
-                product_name: $scope.medicine.selected.product_name,
-                qty: $scope.qtyValue
-            }
-            $scope.treat_has_medicine.push(course);
-            $scope.count++;
-            $scope.jsonData = JSON.stringify($scope.treat_has_medicine);
-            console.log($scope.treat_has_medicine);
+        $scope.course_medicine =[];
+        $scope.product_out_stock_can_treat = null;
+        $scope.payment_remain = null;
+        $scope.tableParams = new ngTableParams({}, {
+            data: $scope.product
+        })
+
+        $scope.init = function( courseId,product_out_stock_can_treat,payment_remain){
+            $scope.product_out_stock_can_treat=product_out_stock_can_treat;
+            $scope.payment_remain = parseInt(payment_remain);
+            //console.log($scope.payment_remain + payment_remain);
+
+            $http.get('/treatment/medicine-remain?courseId='+courseId).
+                success(function (data, status, headers, config) {
+                    $scope.course_medicine = data;
+                }).error(function (data, status, headers, config) {
+                });
         }
 
         $http.get('/treatment/product-list').
@@ -1694,6 +1698,32 @@
                 $scope.product = data;
             }).error(function (data, status, headers, config) {
             });
+        $scope.addMedicine = function(){
+            $scope.course_medicine.push($scope.medicine.selected);
+        }
+        $scope.deleteById = function (id) {
+           // console.log($scope.product);
+            $scope.course_medicine = $scope.course_medicine
+                .filter(function (el) {
+                    return el.p_id !== id;
+                });
+            $scope.tableParams.reload();
+
+        }
+        $scope.outOfStock = function(){
+            var arrayLength = $scope.course_medicine.length;
+            var remain = null;
+            for (var i = 0; i < arrayLength; i++) {
+
+                if($scope.course_medicine[i].remain == null || $scope.course_medicine[i].remain <=0  ){
+                    return true;
+                }
+                else if($scope.course_medicine[i].remain < $scope.course_medicine[i].qty){
+                    return true;
+                }
+            }
+
+        }
         $scope.save = function (e) {
             console.log(e);
             console.log($scope.bt1);

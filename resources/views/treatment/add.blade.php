@@ -15,7 +15,7 @@
         <form class="form-horizontal" method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-            <div class="col-md-12">
+            <div class="col-md-12" ng-init="init('{{$course_id}}',{{getConfig('product_out_stock_can_treat')}},'{{$quo->payment_remain}}')">
                 <div class="col-md-6">
                     <div class="box  box-default">
                         <div class="box-header with-border" align="center">
@@ -128,14 +128,14 @@
                                     <h2 class="box-title">รายละเอียดการใช้ยา</h2>
 
                                     <div class="box-tools pull-right">
-                                        <a href="{{url('/treatment')}}" class="btn btn-info">กลับไปที่ข้อมูลการรักษา</a>
+                                        <a href="{{url('/treatment')}}"
+                                           class="btn btn-default">กลับไปที่ข้อมูลการรักษา</a>
                                     </div>
                                 </div>
                                 <div class="box-body">
                                     <div class="col-md-12">
                                         <label>ตัวยาที่ใช้</label>
-
-                                        <table class="table table-bordered" ng-table="tableParams" ng-init="">
+                                        <table class="table table-bordered" ng-table="tableParams">
                                             <tr>
                                                 <th style="width: 20px">#</th>
                                                 <th>ตัวยา</th>
@@ -145,45 +145,46 @@
                                                 <th style="width: 120px">จำนวนที่ใช้</th>
 
                                             </tr>
-                                            <?php
-                                            $index = 1;
-                                            $outOfStock = false;
-                                            ?>
-                                            @foreach($medicines as $medicine)
-                                                <tr>
-                                                    <td>
-                                                        {{$index}}
-                                                    </td>
-                                                    <td>
-                                                        <strong>{{$medicine->p_id}}</strong>
-                                                        {{$medicine->product_name}}
-                                                    </td>
-                                                    <td style="text-align: center">
-                                                        <strong>{{$medicine->qty}} </strong> {{$medicine->product_unit}}
-                                                    </td>
-                                                    <td style="text-align: center">
-                                                        @if($medicine->remain == null )
-                                                            <label class="badge badge-info alert-danger">0</label>
-                                                            <?php $outOfStock = true;?>
-                                                        @elseif($medicine->remain < $medicine->qty)
-                                                            <label class="badge badge-info alert-danger">{{$medicine->remain}}</label>
-                                                            <?php $outOfStock = true;?>
-                                                        @else
-                                                            <label class="badge">{{$medicine->remain}}</label>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <div class="col-md-12">
-                                                            <input class="form-control" type="number"
-                                                                   name="qty[{{$medicine->p_id}}]"
-                                                                   value="{{$medicine->qty}}"> {{$medicine->product->product_unit}}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <?php $index++?>
-                                            @endforeach
+                                            <tr ng-repeat="item in course_medicine">
+                                                <td style="font-weight: bolder;text-align: center">
+                                                    @{{ $index+1 }} <br> <a href="#"
+                                                                            ng-click="deleteById(item.p_id)">ลบ</a>
+
+                                                </td>
+                                                <td>
+                                                    @{{ item.p_id }} :
+                                                    @{{ item.product_name }}
+                                                </td>
+                                                <td>
+                                                    <span ng-show="item.qty ==null">-</span>
+                                                    <span ng-show="item.qty !=null">@{{ item.qty }}</span>
+
+
+                                                </td>
+                                                <td>
+                                                    <label class="badge badge-info alert-danger"
+                                                           ng-show="item.remain == null">0</label>
+                                                    <label class="badge badge-info alert-danger"
+                                                           ng-show="item.remain < item.qty">@{{item.remain}}</label>
+                                                    <label class="badge"
+                                                           ng-show="item.remain >= item.qty">@{{item.remain}}</label>
+                                                    <label class="badge"
+                                                           ng-show="item.remain != null && item.qty == null">@{{item.remain}}</label>
+
+
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <input class="form-control" type="number" required
+                                                               ng-model="course_medicine[$index].qty"
+                                                               name="qty[@{{item.p_id}}]"
+                                                               value="@{{item.qty}}"> @{{item.product_unit}}
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </table>
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-10">
                                             <label class=" required">ตัวยา</label>
 
                                             <ui-select style="width: 100%;"
@@ -195,9 +196,11 @@
                                                         placeholder="เลือกหรือค้นหายาจากรายการ...">@{{$select.selected.product_name}}</ui-select-match>
                                                 <ui-select-choices anchor='bottom'
                                                                    repeat="item in product | filter: $select.search">
-                                                    <span ng-bind-html=" item.product_id | highlight: $select.search"></span>
+                                                    <span ng-bind-html=" item.p_id | highlight: $select.search"></span>
                                                     :
                                                     <span ng-bind-html=" item.product_name | highlight: $select.search"></span>
+                                                    - ต่อ <span style="font-weight: bolder"
+                                                                ng-bind-html=" item.product_unit"></span>
 
                                                 </ui-select-choices>
 
@@ -205,19 +208,12 @@
                                             <br>
 
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="course_name" class="">จำนวน</label>
-                                                <input class=" form-control" ng-model="qtyValue" type="text"
-                                                       id="" required>
-                                            </div>
-                                        </div>
                                         <div class="col-md-1">
 
                                             <div class="form-group">
                                                 <label class=" required">   </label>
 
-                                                <a class="btn btn-info" ng-click="addMedicine()">เพิ่มตัวยา</a>
+                                                <a class="btn btn-default" ng-click="addMedicine()">เพิ่มตัวยา</a>
                                             </div>
                                         </div>
                                         <div class="panel-footer">
@@ -225,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>รายละเอียดเพิ่มเติม</label>
+                                        <label>บันทึก หรือ ความคิดเห็นเพิ่มเติม</label>
                                 <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
                                           name="comment"></textarea>
                                         <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
@@ -273,20 +269,25 @@
                                     </table>
                                 </div>
                                 <div class="box-footer">
-                                    @if(getConfig('product_out_stock_can_treat') == 'false' && $outOfStock )
+                                    <div ng-show="product_out_stock_can_treat == false && outOfStock()">
                                         <button type="submit" class="btn btn-danger" style="width: 100%" disabled>
                                             ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้
                                         </button>
-                                    @elseif($quo->payment_remain > 0)
-                                        <input type="hidden" name="payment" value="true">
-                                        <button type="submit" class="btn btn-success" style="width: 100%">
-                                            บันทึกและเข้าสู่การชำระเงิน
-                                        </button>
+                                    </div>
+                                    <div ng-hide="product_out_stock_can_treat == false && outOfStock()">
+                                        <div ng-show="payment_remain > 0">
+                                            <input type="hidden" name="payment" value="true">
+                                            <button type="submit" class="btn btn-success" style="width: 100%">
+                                                บันทึกและเข้าสู่การชำระเงิน
+                                            </button>
+                                        </div>
+                                        <div ng-show="payment_remain == 0">
+                                            <button type="submit" class="btn btn-success" style="width: 100%">บันทึก
+                                            </button>
+                                        </div>
+                                    </div>
 
-                                    @elseif($quo->payment_remain == 0)
-                                        <button type="submit" class="btn btn-success" style="width: 100%">บันทึก
-                                        </button>
-                                    @endif
+
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,7 @@ Route::group(['middleware' => 'permission:treatment'], function () {
     Route::get('treatment/course_data', 'TreatmentController@getCourseData');
     Route::get('treatment/add', 'TreatmentController@add');
     Route::get('treatment/product-list', 'TreatmentController@getProductList');
+    Route::get('treatment/medicine-remain', 'TreatmentController@getMedicineRemain');
 
     Route::post('treatment/save', 'TreatmentController@save');
 });

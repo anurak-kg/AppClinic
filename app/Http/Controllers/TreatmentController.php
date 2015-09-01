@@ -51,21 +51,21 @@ class TreatmentController extends Controller
         $this->updateCourseQty($input['quo_id'], $input['course_id']);
         $treat->save();
         $array = $input['qty'];
-       // dump($array);
+        // dump($array);
 
-        if (count($array) >= 1){
-        foreach ($array as $product_id => $qty) {
-            $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
-            $inv = new InventoryTransaction();
-            $inv->inv_id = getNewInvTranPK();
-            $inv->product_id = $product_id;
-            $inv->treatment_id = $treat->treat_id;
-            $inv->qty = -abs($qty);
-            $inv->branch_id = Branch::getCurrentId();
-            $inv->type = "Treatment";
-            $inv->save();
+        if (count($array) >= 1) {
+            foreach ($array as $product_id => $qty) {
+                $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
+                $inv = new InventoryTransaction();
+                $inv->inv_id = getNewInvTranPK();
+                $inv->product_id = $product_id;
+                $inv->treatment_id = $treat->treat_id;
+                $inv->qty = -abs($qty);
+                $inv->branch_id = Branch::getCurrentId();
+                $inv->type = "Treatment";
+                $inv->save();
+            }
         }
-    }
 
         if ($input['payment'] == 'true') {
             return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
@@ -95,7 +95,9 @@ class TreatmentController extends Controller
 
     public function getProductList()
     {
-        $product = Product::where('pg_id', '=' ,6)->get();
+        $product =$this->getMedicineAllData();
+        //$product = Product::where('pg_id', '=' ,6)->get();
+
         return response()->json($product);
     }
 
@@ -113,11 +115,13 @@ class TreatmentController extends Controller
         $doctor = User::where('position_id', '=', 4)->get();
         $users = User::where('position_id', '=', 8)->get();
         //return response()->json($quo);
-        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines','medic'));
+        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines', 'medic','course_id'));
     }
 
-    private function getMedicineRemain($courseId)
+
+    public function getMedicineRemain()
     {
+        $courseId = \Input::get('courseId');
         $medicineData = DB::select(
             DB::raw(" SELECT
                         course_medicine.product_id as p_id,
@@ -137,6 +141,20 @@ class TreatmentController extends Controller
         return $medicineData;
 
     }
+
+    private function getMedicineAllData()
+    {
+        $medicineData = DB::select(
+            DB::raw(" SELECT product_id as p_id,product_name, product.product_unit,0 as qty,
+        (SELECT SUM(inventory_transaction.qty)
+        FROM inventory_transaction  Where inventory_transaction.product_id = product.product_id AND inventory_transaction.branch_id =  " . Branch::getCurrentId() . "
+        ) as remain
+         FROM
+        product
+        "));
+        return $medicineData;
+    }
+
     public function getMedicineData()
     {
         $medicine = TreatHasMedicine::where('treat_medicine_id', Input::get('treat_medicine_id'))
@@ -153,15 +171,17 @@ class TreatmentController extends Controller
         }
         return response()->json($data);
     }
+
     public function getMedicineAdd()
     {
         $medicine = new TreatHasMedicine();
         $medicine->treat_medicine_id = Input::get('treat_medicine_id');
         $medicine->treat_id = Input::get('treat_id');
         $medicine->product_id = Input::get('product_id');
-        $medicine->qty= Input::get('qty');
+        $medicine->qty = Input::get('qty');
         $medicine->save();
     }
+
     public function getMedicineRemove()
     {
         $medicine = TreatHasMedicine::where('treat_medicine_id', Input::get('treat_medicine_id'))
