@@ -4,8 +4,9 @@
 
     <div class="row">
         <div class="col-md-12">
+
             <p class="text-center">
-                {!! Form::open(array('url' => 'report/commissionCash', 'class' => 'form')) !!}
+                {!! Form::open(array('url' => 'money/manage', 'class' => 'form')) !!}
                 <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
                        placeholder="เลือกระยะเวลา..">
                 </input> <br> <br>
@@ -13,6 +14,7 @@
                 <br>
                 {!! Form::close() !!}
             </p>
+
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Commission เงินสด</h3>
