@@ -28,12 +28,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="/dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/dist/css/skins/skin-purple.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
 
-<body class="skin-blue fixed sidebar-collapse sidebar-mini">
+<body class="skin-purple fixed sidebar-collapse sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
