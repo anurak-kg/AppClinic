@@ -203,6 +203,10 @@
                                     Credit</a>
                             </li>
                         @endif
+                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
+                            <li><a href="{{url('report/request')}}"><i class='fa fa-minus'></i>รายงานเบิกสินค้า</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             @endif
