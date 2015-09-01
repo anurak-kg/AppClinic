@@ -28,8 +28,8 @@ class BranchController extends Controller
         $grid->add('branch_tel', 'เบอร์โทร');
         $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
         $grid->edit('/branch/edit', 'กระทำ','modify|delete');
-
-        return $grid;
+        $grid->link('branch/create', "เพิ่มข้อมูลใหม่", "TR");
+        return view('branch/index', compact('grid'));
     }
 
     public function grid(){
@@ -56,7 +56,7 @@ class BranchController extends Controller
             $form->link("branch/index", "ย้อนกลับ");
         });
 
-        return view('branch/index', compact('form','grid'));
+        return view('branch/create', compact('form'));
     }
 
     public function edit() {

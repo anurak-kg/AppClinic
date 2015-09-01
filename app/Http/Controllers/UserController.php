@@ -63,16 +63,6 @@ class UserController extends Controller
 
         //User Table
         $grid = $this->getUserDataGrid();
-        $grid->row(function ($row) {
-            if ($row->cell('{{ $position->position_name }}') == 'admin') {
-                $row->cell('{{ $position->position_name }}')->style("display:none");
-                $row->style("display:none");
-            }
-            if ($row->cell('{{ $position->position_name }}') == 'IT') {
-                $row->cell('{{ $position->position_name }}')->style("display:none");
-                $row->style("display:none");
-            }
-        });
 
             //User Create
         $form = DataForm::create('user');
