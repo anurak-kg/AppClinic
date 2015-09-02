@@ -63,7 +63,7 @@ class ReceiveRequestController extends Controller
         return $id->receive_id;
     }
 
-    public function postSave()
+    public function anySave()
     {
         $receive = Receive::find($this->getId());
         $receive->receive_total = $this->getTotal();
