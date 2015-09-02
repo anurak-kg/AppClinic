@@ -154,7 +154,7 @@ class ProductController extends Controller
                 'emp_id' => auth()->user()->getAuthIdentifier() ,
                 'logs_type' => 'info' ,
                 'logs_where'=>'Product',
-                'description'=>'เพิ่มสินค้า : รหัสสินค้า '. Input::get('product_id')
+                'description'=>'แก้ไขสินค้า : รหัสสินค้า '. Input::get('product_id')
             ]);
         });
         return $edit->view('product/edit', compact('edit'));
