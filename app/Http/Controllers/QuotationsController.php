@@ -119,6 +119,7 @@ class QuotationsController extends Controller
         $quo = Quotations::find($this->getQuoId());
         $quo->total_net_price = $this->getCurrentSum();
         $quo->quo_status = 1;
+        $quo->bill_number = getNewBillNo();
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
         systemLogs([
