@@ -264,7 +264,7 @@ class CustomerController extends Controller
                 'emp_id' => auth()->user()->getAuthIdentifier() ,
                 'cus_id' => $user->cus_id,
                 'logs_type' => 'info' ,
-                'logs_where'=>'Course_type',
+                'logs_where'=>'Customer',
                 'description'=>'เพิ่มสมาชิก : รหัสสมาชิก '.$user->cus_id
             ]);
 
@@ -323,7 +323,7 @@ class CustomerController extends Controller
             systemLogs([
                 'emp_id' => auth()->user()->getAuthIdentifier() ,
                 'logs_type' => 'info' ,
-                'logs_where'=>'Course_type',
+                'logs_where'=>'Customer',
                 'description'=>'แก้ไขสมาชิก : ชื่อสมาชิก ' . Input::get('cus_name')
             ]);
 
