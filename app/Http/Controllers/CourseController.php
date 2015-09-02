@@ -48,6 +48,12 @@ class CourseController extends Controller
     public function getDelete(){
         $course = Course::findOrFail(Input::get('course_id'));
         $course->delete();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Course',
+            'description'=>'ลบคอร์ส'
+        ]);
         return redirect('course/index')->with('message', 'ลบคอร์สเรียบร้อยแล้ว');
     }
     public function postCreate(Request $request)
@@ -82,6 +88,13 @@ class CourseController extends Controller
         }
         //dd($medicine);
         //dd(Input::all());
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Course',
+            'description'=>'เพิ่มคอร์ส'
+        ]);
+
         return redirect('course/create')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
     public function postUpdate(){
@@ -91,6 +104,12 @@ class CourseController extends Controller
         $course->course_price = Input::get('course_price');
         $course->course_qty = Input::get('course_qty');
         $course->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Course',
+            'description'=>'แก้ไขคอร์ส'
+        ]);
         return redirect('course/index')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
     public function getEdit()
