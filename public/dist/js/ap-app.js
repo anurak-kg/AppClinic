@@ -764,10 +764,10 @@
                 alert("ยังไม่มีการเลือกสินค้า");
             }
             else {
-                window.open(
-                    '/bill/request?order_id=' + id,
-                    '_blank' // <- This is what makes it open in a new window.
-                );
+               // window.open(
+                //    '/bill/request?order_id=' + id,
+                //    '_blank' // <- This is what makes it open in a new window.
+                //);
                 window.location.href = '/request/save';
             }
         }
