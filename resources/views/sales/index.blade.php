@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="panel-body">
-                        เลขที่การสั่งซื้อ : <strong>{{$data->sales_id}}</strong> <br>
+                        เลขที่การขายสินค้า : <strong>{{$data->sales_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
