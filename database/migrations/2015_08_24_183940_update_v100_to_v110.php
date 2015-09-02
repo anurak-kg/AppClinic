@@ -22,6 +22,8 @@ class UpdateV100ToV110 extends Migration
         //ADD Order Type
         DB::unprepared("ALTER TABLE `order`  ADD COLUMN `order_type`  enum('order','request') NULL DEFAULT 'order' AFTER `warehouse_id`;");
         DB::unprepared("ALTER TABLE `receive`  ADD COLUMN `receive_type`  enum('order','request') NULL DEFAULT 'order' AFTER `warehouse_id`;");
+        //Add bill_number
+        DB::unprepared("ALTER TABLE `sales`  ADD COLUMN `bill_number`  int NULL AFTER `branch_id`;");
 
         //ลบค่า bt จาก treat history
         DB::unprepared("ALTER TABLE `treat_history` DROP COLUMN `dr_id`,DROP COLUMN `dr_price`,DROP COLUMN `bt_user_id1`,DROP COLUMN `bt1_price`,DROP COLUMN `bt_user_id2`,DROP COLUMN `bt2_price`;");
@@ -53,6 +55,7 @@ class UpdateV100ToV110 extends Migration
         ADD COLUMN `bt_user_id2`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `bt2_price`  int(11) NULL AFTER `updated_at`;");
         DB::unprepared("DELETE FROM `branch`    WHERE (`branch_id`='1')");
+        DB::unprepared("ALTER TABLE `sales`   DROP COLUMN `bill_number`");
         DB::unprepared("ALTER TABLE `receive`   DROP COLUMN `receive_type`");
         DB::unprepared("ALTER TABLE `order`     DROP COLUMN `order_type`");
         DB::unprepared("ALTER TABLE `branch`    DROP COLUMN `branch_type`");
