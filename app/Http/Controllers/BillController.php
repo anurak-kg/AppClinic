@@ -15,12 +15,14 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations_detail::where('quo_de_id',\Input::get('quo_de_id'))
-            ->with('course','Quotations.Customer','Quotations.User','Quotations.Branch')->get()->first();
+        $bill = Quotations_detail::where('quo_de_id', \Input::get('quo_de_id'))
+            ->with('course', 'Quotations.Customer', 'Quotations.User', 'Quotations.Branch')->get()->first();
 
         //return response()->json($bill);
 
+
         return view("bill/bill", ['bill' => $bill]);
+
     }
 
     public function product()
@@ -36,8 +38,8 @@ class BillController extends Controller
     {
         $sales = Sales::where('sales_id', \Input::get('sales_id'))
             ->with('product', 'Customer', 'User', 'Branch')->get()->first();
-       // return response()->json($sales);
-        return view('bill.billproduct',compact('sales'));
+        // return response()->json($sales);
+        return view('bill.billproduct', compact('sales'));
     }
 
     public function order()

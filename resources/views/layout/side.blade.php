@@ -21,7 +21,7 @@
             <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
 
             @if(Auth::user()->can('quo'))
-                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ซื้อคอร์ส</span></a></li>
+                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ขายคอร์ส</span></a></li>
             @endif
 
             @if(Auth::user()->can('treatment'))

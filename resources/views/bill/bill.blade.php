@@ -15,6 +15,10 @@
             font-family:angsana new;
             font-size:150%;
         }
+        body {
+            width : 11in;
+            height : 5.5in;
+        }
     </style>
 
 </head>
