@@ -44,6 +44,14 @@ class Course_typeController extends Controller
 
             $form->message("เสร็จสิ้น");
             $form->link("course_type", "กลับ");
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Course_type',
+                'description'=>'เพิ่มประเภทคอร์ส'
+            ]);
+
         });
         return view('course_type/course_type', compact('form','grid'));
     }
@@ -55,7 +63,16 @@ class Course_typeController extends Controller
         $edit->text('name', 'ชื่อประเภทคอร์ส');
         $edit->attributes(array("class" => " "));
         $edit->link("course_type", "กลับ");
+        $edit->saved(function () use ($edit) {
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Course_type',
+                'description'=>'แก้ไขประเภทคอร์ส'
+            ]);
+
+        });
         return $edit->view('course_type/edit', compact('edit'));
 
 
