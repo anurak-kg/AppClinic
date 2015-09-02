@@ -16,7 +16,7 @@ use Zofe\Rapyd\Facades\DataGrid;
 
 class OrderController extends Controller
 {
-    public function history(){
+    public function getHistory(){
         $order = DB::table('order')
             ->select('order.order_id', 'product.product_name','vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
             ->join('users', 'order.emp_id', '=', 'users.id')
