@@ -49,7 +49,6 @@ class QuotationsController extends Controller
     {
         $data = Quotations::all();
 
-
         return response()->json($data);
 
         return view('quotations/history', [
