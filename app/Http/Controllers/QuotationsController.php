@@ -45,6 +45,17 @@ class QuotationsController extends Controller
             return $this->quoRender();
         }
     }
+    public function getHistory()
+    {
+        $data = Quotations::all();
+
+
+        return response()->json($data);
+
+        return view('quotations/history', [
+            'quotations' => $quotations,
+        ]);
+    }
 
     public function quoRender()
     {
