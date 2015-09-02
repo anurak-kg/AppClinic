@@ -36,8 +36,12 @@
                                 <td align="middle"><b>สาขา</b></td>
                                 <td align="middle"><b>รหัสผู้ใช้</b></td>
                                 <td align="middle"><b>ชื่อผู้ใช้</b></td>
+                                <td align="middle"><b>ลูกค้า</b></td>
                                 <td align="middle"><b>ประเภท</b></td>
+                                <td align="middle"><b>หน้า</b></td>
                                 <td align="middle"><b>รายละเอียด</b></td>
+                                <td align="middle"><b>พนักงานถูกกระทำ</b></td>
+                                <td align="middle"><b>ลูกค้าถูกกระทำ</b></td>
                                 <td align="middle"><b>วันที่ / เวลา</b></td>
                             </tr>
                             </thead>
@@ -56,8 +60,30 @@
                                         else echo 'ไม่มีข้อมูล';
                                         ?></td>
                                     <td align="middle">{{$test->name}}</td>
+                                    <td align="middle"><?php
+                                        $customer = \App\Customer::find($test->cus_id);
+                                        if ($customer != null) {
+                                            echo $customer->cus_name;
+                                        } else {
+                                            echo 'ไม่มีข้อมูล';
+                                        } ?></td>
                                     <td align="middle">{{$test->logs_type}}</td>
+                                    <td align="middle">{{$test->logs_where}}</td>
                                     <td align="middle">{{$test->description}}</td>
+                                    <td align="middle"><?php
+                                        $emp = \App\User::find($test->emp_id2);
+                                        if ($emp != null) {
+                                            echo $emp->name;
+                                        } else {
+                                            echo 'ไม่มีข้อมูล';
+                                        } ?></td>
+                                    <td align="middle"><?php
+                                        $cus2 = \App\Customer::find($test->cus_id2);
+                                        if ($cus2 != null) {
+                                            echo $cus2->cus_name;
+                                        } else {
+                                            echo 'ไม่มีข้อมูล';
+                                        } ?></td>
                                     <td align="middle">{{$test->date}}</td>
 
                                 </tr>
