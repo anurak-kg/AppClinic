@@ -87,6 +87,7 @@ class OrderController extends Controller
         $order = Order::find($this->getId());
         $order->order_total = $this->getTotal();
         $order->order_status = "PENDING";
+        $order->bill_number = getNewOrderPK();
         $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
         $order->save();

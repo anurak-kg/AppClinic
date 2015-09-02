@@ -691,6 +691,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UCDN' => $vendorDir . '/mpdf/mpdf/classes/ucdn.php',
     'UpdateV100ToV110' => $baseDir . '/database/migrations/2015_08_24_183940_update_v100_to_v110.php',
+    'UpgateV110ToV111' => $baseDir . '/database/migrations/2015_09_03_010324_upgate_v1_1_0_to_v1_1_1.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'V10tov11CreateTableTreatBt' => $baseDir . '/database/migrations/2015_09_01_201224_v10tov11_create_table_treat_bt.php',
     'VendorTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

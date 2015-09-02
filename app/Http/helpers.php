@@ -45,7 +45,17 @@ function getNewBillNo()
     return $primaryKey;
 
 }
+function getOrderBillNo()
+{
+    $order = \App\Order::select('bill_number')
+        ->orderBy('order_id', 'desc')
+        ->limit(1)
+        ->get()
+        ->first();
 
+    return 0+$order->bill_number+1;
+
+}
 function zerofill($num, $zerofill = 6)
 {
     return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
