@@ -158,7 +158,7 @@
                                             </td>
 
                                             <td data-title="'คอร์ส'" style="width:380px">
-                                                @{{item.course.course_name}}<br>
+                                                <strong>@{{item.course.course_name}}</strong><br>
                                                 @{{item.course.course_detail}}
                                                 <ul>
                                                     <li ng-repeat="c in item.course.detail">
