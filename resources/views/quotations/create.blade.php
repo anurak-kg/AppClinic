@@ -19,7 +19,7 @@
                         <h2 class="box-title">รายละเอียด</h2>
                     </div>
                     <div class="box-body">
-                        เลขที่การสั่งซื้อ : <strong>{{$quo->quo_id}}</strong> <br>
+                        เลขที่การขายคอร์ส : <strong>{{$quo->quo_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
