@@ -51,9 +51,18 @@ class Product_typeController extends Controller
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
-
+            $user = new Product_type();
+            $user->pt_id = Input::get('pt_id');
+            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("product_type/index", "ย้อนกลับ");
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product_type',
+                'description'=>'เพิ่มกลุ่มสินค้า : รหัสประเภทสินค้า '. $user->pt_id
+            ]);
         });
 
         return view('product_type/create', compact('form','grid'));
@@ -67,7 +76,15 @@ class Product_typeController extends Controller
         $edit->text('pt_name', 'ชื่อประเภทสินค้า');
         $edit->attributes(array("class" => " "));
         $edit->link("product_type/index", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product_type',
+                'description'=>'เพิ่มกลุ่มสินค้า : ประเภทสินค้า '. Input::get('pt_name')
+            ]);
+        });
         return $edit->view('product_type/edit', compact('edit'));
 
     }

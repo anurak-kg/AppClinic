@@ -18,7 +18,8 @@ class SystemLogsController extends Controller
         $branch_id = Input::get('branch');
         $data = DB::table('system_logs')
                 ->select('system_logs.branch_id','system_logs.emp_id','system_logs.logs_type','system_logs.description',
-                    DB::raw('system_logs.created_at as date'));
+                    DB::raw('system_logs.created_at as date'),'users.name as name')
+                ->join('users','users.id','=','system_logs.emp_id');
             if ($branch_id > 0) {
                 $data->where('system_logs.branch_id', $branch_id);
             }

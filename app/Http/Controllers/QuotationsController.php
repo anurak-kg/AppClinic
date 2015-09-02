@@ -111,6 +111,14 @@ class QuotationsController extends Controller
         $quo->quo_status = 1;
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'cus_id2' => $quo->cus_id ,
+            'emp_id2' => $quo->sale_id ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Quotations',
+            'description'=>'???????? ????????????? :' . $quo->quo_id
+        ]);
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
             ->with('quo_id', $quo->quo_id);
 

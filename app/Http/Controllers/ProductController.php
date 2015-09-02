@@ -118,8 +118,17 @@ class ProductController extends Controller
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
+            $user = new Product();
+            $user->product_id = Input::get('product_id');
+            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("product/index", "ย้อนกลับ");
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product',
+                'description'=>'เพิ่มสินค้า : รหัสสินค้า '.  $user->product_id
+            ]);
         });
 
         return view('product/create', compact('form'));
@@ -139,7 +148,15 @@ class ProductController extends Controller
         $edit->text('product_unit', 'หน่วยนับ');
         $edit->attributes(array("class" => " "));
         $edit->link("product/index", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product',
+                'description'=>'แก้ไขสินค้า : รหัสสินค้า '. Input::get('product_id')
+            ]);
+        });
         return $edit->view('product/edit', compact('edit'));
     }
 

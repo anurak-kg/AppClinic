@@ -253,10 +253,20 @@ class CustomerController extends Controller
         $form->attributes(array("class" => " "));
 
 
-        $form->saved(function () use ($form) {
 
+        $form->saved(function () use ($form) {
+            $user = new Customer();
+            $user->cus_id = Input::get('cus_id');
+            $user->save();
             $form->message("ลงทะเบียนเสร็จสิ้น");
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'cus_id' => $user->cus_id,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Customer',
+                'description'=>'เพิ่มสมาชิก : รหัสสมาชิก '.$user->cus_id
+            ]);
 
         });
         $form->build();
@@ -308,6 +318,16 @@ class CustomerController extends Controller
 
         $edit->link("customer", "ย้อนกลับ");
 
+        $edit->saved(function () use ($edit) {
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Customer',
+                'description'=>'แก้ไขสมาชิก : ชื่อสมาชิก ' . Input::get('cus_name')
+            ]);
+
+        });
         return $edit->view('customer/edit', compact('edit'));
     }
 

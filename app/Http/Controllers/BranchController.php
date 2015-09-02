@@ -51,9 +51,18 @@ class BranchController extends Controller
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
-
+            $user = new Branch();
+            $user->branch_id = Input::get('branch_id');
+            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("branch/index", "ย้อนกลับ");
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Branch',
+                'description'=>'เพิ่มข้อมูลสาขา : รหัสสาขา '.$user->branch_id
+            ]);
         });
 
         return view('branch/create', compact('form'));
@@ -69,7 +78,15 @@ class BranchController extends Controller
         $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('numeric')->attributes(array('maxlength'=>13,'minlength'=>13));
         $edit->attributes(array("class" => " "));
         $edit->link("branch/index", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Branch',
+                'description'=>'แก้ไขข้อมูลสาขา '.Input::get('branch_name')
+            ]);
+        });
 
         return $edit->view('branch/edit', compact('edit'));
     }

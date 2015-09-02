@@ -93,6 +93,12 @@ class TreatmentController extends Controller
          if ($input['payment'] == 'true') {
              return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
          }
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Treatment',
+            'description'=>'การรักษา เลขที่การรักษา :' . $treat->treat_id
+        ]);
          return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 

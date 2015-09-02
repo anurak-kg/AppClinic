@@ -76,6 +76,12 @@ class ReturnController extends Controller
 
         $return->return_status = "CLOSE";
         $return->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Return',
+            'description'=>'คืนสินค้า เลขที่การคืน :' . $return->return_id
+        ]);
         return redirect('return')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
