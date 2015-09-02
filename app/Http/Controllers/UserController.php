@@ -206,6 +206,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials, $request->has('remember'))) {
             Session::put('branch_id',Input::get('branch'));
             systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
                 'logs_type' => 'info' ,
                 'logs_where'=>'Auth',
                 'description'=>'พนักงาน Username :'.$request->input('username') . ' ได้เข้าสู่ระบบ'
