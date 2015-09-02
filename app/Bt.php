@@ -8,6 +8,7 @@ class Bt extends Model
 {
     protected $table = 'bt';
     protected $primaryKey = 'bt_id';
+    public $incrementing = false;
 
 
     public function TreatHistory(){

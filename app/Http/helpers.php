@@ -106,7 +106,14 @@ function getNewPaymentDetailPK()
 {
     return createPkFrom('App\Payment_detail', 'payment_de_id', 7, '5000000', '9999999');
 }
-
+function getNewTreatmentPK()
+{
+    return createPkFrom('App\TreatHistory', 'treat_id', 8, '0000000', '4999999');
+}
+function getNewBtPK()
+{
+    return createPkFrom('App\Bt', 'bt_id', 8, '8000000', '9999999');
+}
 function getNewCustomerPK()
 {
     return createPkFrom('App\Customer', 'cus_id', 9, '0000000', '9999999');
