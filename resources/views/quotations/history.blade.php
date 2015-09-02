@@ -32,14 +32,14 @@
                         <tr>
                             <td>{{$item->quo_id}}</td>
                             <td>
-                                <strong>{{$item->course_name}}</strong>
+                                {{$item->course_name}}
                             </td>
                             <td>{{$item->course_price}}</td>
                             <td>{{$item->quo_de_discount }}</td>
                             <td>{{$item->quo_de_disamount }}</td>
                             <td>{{$item->net_price }}</td>
                             <td>
-                                <a href="{{url('bill/bill')}}?course_id={{$item->quo_id}}"
+                                <a href="{{url('bill/bill')}}?quo_id={{$item->quo_id}}"
                                    class="btn btn-default ">Print</a>
                             </td>
                         </tr>
