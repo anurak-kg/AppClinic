@@ -46,7 +46,7 @@ function getNewBillNo()
 
 }
 
-function zerofill($num, $zerofill = 7)
+function zerofill($num, $zerofill = 6)
 {
     return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
 }
