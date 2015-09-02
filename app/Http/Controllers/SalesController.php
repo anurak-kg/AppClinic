@@ -71,7 +71,12 @@ class SalesController extends Controller
         $sales->sales_total = $this->getTotal();
         // $order->quo_date = null;
         $sales->save();
-
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Sales',
+            'description'=>'ขายสินค้า เลขที่การขาย :' . $sales->sales_id
+        ]);
         return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
