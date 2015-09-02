@@ -47,6 +47,13 @@ class Doctor_eventController extends Controller
         $event->event_start = $input['start'];
         $event->event_end = $input['end'];
         $event->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'emp_id2'=>$event->dr_id,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Customer_event',
+            'description'=>'แก้ไขตารางการทำงานหมอ : รหัสหมอ '.$event->dr_id
+        ]);
         return response()->json(['status' => 'success']);
     }
 
@@ -54,6 +61,13 @@ class Doctor_eventController extends Controller
     {
         $event = Doctor_event::findOrFail(Input::get('id'));
         $event->delete();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'emp_id2'=>$event->dr_id,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Doctor_event',
+            'description'=>'ลบตารางการทำงานหมอ : รหัสหมอ '.$event->dr_id
+        ]);
         return response()->json(['status' => 'success']);
 
     }
@@ -81,6 +95,14 @@ class Doctor_eventController extends Controller
             $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("dr/calender", "ย้อนกลับ");
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'emp_id2'=>$user->dr_id,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Doctor_event',
+                'description'=>'เพิ่มตารางการทำงานหมอ : รหัสหมอ '.$user->dr_id
+            ]);
         });
 
         return view('dr/calender', compact('form'));
