@@ -15,7 +15,7 @@
             font-family:angsana new;
             font-size:180%;
         }
-        @page { size: A5 landscape }
+        @page { size: A5 }
     </style>
 
 </head>
