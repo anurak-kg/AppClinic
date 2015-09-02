@@ -54,6 +54,12 @@ class BranchController extends Controller
 
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("branch/index", "ย้อนกลับ");
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Branch',
+                'description'=>'เพิ่มข้อมูลสาขา'
+            ]);
         });
 
         return view('branch/create', compact('form'));
@@ -70,7 +76,12 @@ class BranchController extends Controller
         $edit->attributes(array("class" => " "));
         $edit->link("branch/index", "ย้อนกลับ");
 
-
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Branch',
+            'description'=>'แก้ไขข้อมูลสาขา'
+        ]);
         return $edit->view('branch/edit', compact('edit'));
     }
 
