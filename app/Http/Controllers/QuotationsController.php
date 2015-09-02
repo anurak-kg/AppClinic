@@ -116,7 +116,7 @@ class QuotationsController extends Controller
             'cus_id2' => $quo->cus_id ,
             'emp_id2' => $quo->sale_id ,
             'logs_type' => 'info' ,
-            'logs_where'=>'receive',
+            'logs_where'=>'Quotations',
             'description'=>'???????? ????????????? :' . $quo->quo_id
         ]);
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
