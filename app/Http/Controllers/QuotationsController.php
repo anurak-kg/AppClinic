@@ -45,6 +45,16 @@ class QuotationsController extends Controller
             return $this->quoRender();
         }
     }
+    public function getHistory()
+    {
+        $data = Quotations::all();
+
+        return response()->json($data);
+
+        return view('quotations/history', [
+            'quotations' => $quotations,
+        ]);
+    }
 
     public function quoRender()
     {
@@ -113,11 +123,11 @@ class QuotationsController extends Controller
         $quo->save();
         systemLogs([
             'emp_id' => auth()->user()->getAuthIdentifier() ,
-            'cus_id2' => $quo->cus_id ,
+            'cus_id' => $quo->cus_id ,
             'emp_id2' => $quo->sale_id ,
             'logs_type' => 'info' ,
             'logs_where'=>'Quotations',
-            'description'=>'???????? ????????????? :' . $quo->quo_id
+            'description'=>'ขายคอร์ส เลขที่การซื้อ :' . $quo->quo_id
         ]);
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
             ->with('quo_id', $quo->quo_id);
