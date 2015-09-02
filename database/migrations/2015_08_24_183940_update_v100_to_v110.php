@@ -24,14 +24,7 @@ class UpdateV100ToV110 extends Migration
         DB::unprepared("ALTER TABLE `receive`  ADD COLUMN `receive_type`  enum('order','request') NULL DEFAULT 'order' AFTER `warehouse_id`;");
 
         //ลบค่า bt จาก treat history
-        DB::unprepared("ALTER TABLE `receive`  ADD COLUMN `receive_type`  enum('order','request') NULL DEFAULT 'order' AFTER `warehouse_id`;");
         DB::unprepared("ALTER TABLE `treat_history` DROP COLUMN `dr_id`,DROP COLUMN `dr_price`,DROP COLUMN `bt_user_id1`,DROP COLUMN `bt1_price`,DROP COLUMN `bt_user_id2`,DROP COLUMN `bt2_price`;");
-
-
-
-
-
-
 
     }
 
@@ -52,18 +45,19 @@ class UpdateV100ToV110 extends Migration
     public function down()
     {
         DB::unprepared("
+        ALTER TABLE `treat_history`
         ADD COLUMN `dr_id`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `dr_price`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `bt_user_id1`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `bt1_price`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `bt_user_id2`  int(11) NULL AFTER `updated_at`;
         ADD COLUMN `bt2_price`  int(11) NULL AFTER `updated_at`;");
-        DB::unprepared("ALTER TABLE `receive`  DROP COLUMN `receive_type`");
-        DB::unprepared("ALTER TABLE `order`  DROP COLUMN `order_type`");
-        DB::unprepared("DELETE FROM `branch` WHERE (`branch_id`='1')");
-        DB::unprepared("ALTER TABLE `branch`  DROP COLUMN `branch_type`");
-        DB::unprepared("ALTER TABLE `order`  DROP COLUMN `warehouse_id`");
-        DB::unprepared("ALTER TABLE `receive`  DROP COLUMN `warehouse_id`");
+        DB::unprepared("DELETE FROM `branch`    WHERE (`branch_id`='1')");
+        DB::unprepared("ALTER TABLE `receive`   DROP COLUMN `receive_type`");
+        DB::unprepared("ALTER TABLE `order`     DROP COLUMN `order_type`");
+        DB::unprepared("ALTER TABLE `branch`    DROP COLUMN `branch_type`");
+        DB::unprepared("ALTER TABLE `order`     DROP COLUMN `warehouse_id`");
+        DB::unprepared("ALTER TABLE `receive`   DROP COLUMN `warehouse_id`");
 
     }
 }

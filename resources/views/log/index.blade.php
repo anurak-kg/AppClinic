@@ -35,6 +35,7 @@
                             <tr>
                                 <td align="middle"><b>สาขา</b></td>
                                 <td align="middle"><b>รหัสผู้ใช้</b></td>
+                                <td align="middle"><b>ชื่อผู้ใช้</b></td>
                                 <td align="middle"><b>ประเภท</b></td>
                                 <td align="middle"><b>รายละเอียด</b></td>
                                 <td align="middle"><b>วันที่ / เวลา</b></td>
@@ -54,6 +55,7 @@
                                            echo  $test->emp_id;
                                         else echo 'ไม่มีข้อมูล';
                                         ?></td>
+                                    <td align="middle">{{$test->name}}</td>
                                     <td align="middle">{{$test->logs_type}}</td>
                                     <td align="middle">{{$test->description}}</td>
                                     <td align="middle">{{$test->date}}</td>

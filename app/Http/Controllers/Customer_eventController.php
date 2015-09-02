@@ -52,6 +52,12 @@ class Customer_eventController extends Controller
         $event->event_start = $input['start'];
         $event->event_end = $input['end'];
         $event->save();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Customer_event',
+            'description'=>'แก้ไขตารางนัดลูกค้า :'.$event->event_id
+        ]);
         return response()->json(['status' => 'success']);
     }
 
@@ -59,6 +65,13 @@ class Customer_eventController extends Controller
     {
         $event = Customer_event::findOrFail(Input::get('id'));
         $event->delete();
+        systemLogs([
+            'emp_id' => auth()->user()->getAuthIdentifier() ,
+            'cus_id2'=>$event->customer_id,
+            'logs_type' => 'info' ,
+            'logs_where'=>'Customer_event',
+            'description'=>'ลบตารางนัดลูกค้า'
+        ]);
         return response()->json(['status' => 'success']);
 
     }
@@ -86,6 +99,13 @@ class Customer_eventController extends Controller
             $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("customer/calendar", "ย้อนกลับ");
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'cus_id2'=> $user->customer_id,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Customer_event',
+                'description'=>'เพิ่มตารางนัดลูกค้า'
+            ]);
         });
 
         return view('customer/calendar', compact('form'));
