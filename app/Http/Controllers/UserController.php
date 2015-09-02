@@ -119,7 +119,7 @@ class UserController extends Controller
         return $edit->view('user/edit', compact('edit'));
     }
     public function getUserDataGridDoctor(){
-        $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
+        $grid = DataGrid::source(User::with('branch','role')->where('position_id','=',4));
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
 
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
@@ -156,6 +156,7 @@ class UserController extends Controller
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
             $user->position_id = Input::get('position_id');
+            $user->license = Input::get('license');
             $user->save();
             $form->message("ok record saved");
             $form->link("user/adddoctor", "back to the form");

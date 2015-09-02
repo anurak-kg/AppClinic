@@ -17,5 +17,8 @@ class TreatHistory extends Model
     public function treat_has_medicine(){
         return $this->hasMany('App\TreatHasMedicine','treat_id');
     }
+    public function bt(){
+        return $this->hasMany('App\bt','tread_id');
+    }
 
 }
