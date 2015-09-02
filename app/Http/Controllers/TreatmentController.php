@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Bt;
 use App\InventoryTransaction;
 use App\Medicine;
 use App\Product;
@@ -13,6 +14,7 @@ use App\Quotations;
 use App\Http\Requests;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class TreatmentController extends Controller
 {
@@ -36,23 +38,18 @@ class TreatmentController extends Controller
     {
         $input = \Input::all();
         $treat = new TreatHistory();
+        $treat->treat_id= getNewTreatmentPK();
         $treat->course_id = $input['course_id'];
         $treat->quo_id = $input['quo_id'];
         $treat->emp_id = Auth::user()->getAuthIdentifier();;
-        $treat->dr_id = $input['doctor'];
-        $treat->bt_user_id1 = $input['bt1'];
-        $treat->bt_user_id2 = $input['bt2'];
-        $treat->dr_price = $input['dr_price'];
-        $treat->bt1_price = $input['bt1_price'];
-        $treat->bt2_price = $input['bt2_price'];
         $treat->comment = $input['comment'];
         $treat->treat_date = $input['treat_date'];
         $treat->branch_id = Branch::getCurrentId();
         $this->updateCourseQty($input['quo_id'], $input['course_id']);
+        //dd(Input::all());
+
         $treat->save();
         $array = $input['qty'];
-        // dump($array);
-
         if (count($array) >= 1) {
             foreach ($array as $product_id => $qty) {
                 $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
@@ -66,12 +63,37 @@ class TreatmentController extends Controller
                 $inv->save();
             }
         }
-
-        if ($input['payment'] == 'true') {
-            return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
+        if (!empty($input['doctor'])) {
+            $bt = new Bt;
+            $bt->bt_id = getNewBtPK();
+            $bt->treat_id = $treat->treat_id;
+            $bt->emp_id = $input['doctor'];
+            $bt->bt_type = 'doctor';
+            $bt->total = $input['dr_price'];
+            $bt->save();
         }
-        // dd(\Input::all());
-        return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        if (!empty($input['bt1'])) {
+            $bt = new Bt;
+            $bt->bt_id = getNewBtPK();
+            $bt->treat_id = $treat->treat_id;
+            $bt->emp_id = $input['bt1'];
+            $bt->bt_type = 'bt1';
+            $bt->total = $input['bt1_price'];
+            $bt->save();
+        }
+        if (!empty($input['bt2'])) {
+            $bt = new Bt;
+            $bt->bt_id = getNewBtPK();
+            $bt->treat_id = $treat->treat_id;
+            $bt->emp_id = $input['bt2'];
+            $bt->bt_type = 'bt2';
+            $bt->total = $input['bt2_price'];
+            $bt->save();
+        }
+         if ($input['payment'] == 'true') {
+             return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
+         }
+         return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function updateCourseQty($quo_id, $course_id)
@@ -95,7 +117,7 @@ class TreatmentController extends Controller
 
     public function getProductList()
     {
-        $product =$this->getMedicineAllData(6); // pg id หมวด 6
+        $product = $this->getMedicineAllData(6); // pg id หมวด 6
         //$product = Product::where('pg_id', '=' ,6)->get();
 
         return response()->json($product);
@@ -115,7 +137,7 @@ class TreatmentController extends Controller
         $doctor = User::where('position_id', '=', 4)->get();
         $users = User::where('position_id', '=', 8)->get();
         //return response()->json($quo);
-        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines', 'medic','course_id'));
+        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines', 'medic', 'course_id'));
     }
 
 
@@ -151,7 +173,7 @@ class TreatmentController extends Controller
         ) as remain
          FROM
         product
-        WHERE pg_id = ".$category."
+        WHERE pg_id = " . $category . "
 
         "));
         return $medicineData;
