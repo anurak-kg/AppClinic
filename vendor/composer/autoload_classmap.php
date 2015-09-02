@@ -692,6 +692,7 @@ return array(
     'UCDN' => $vendorDir . '/mpdf/mpdf/classes/ucdn.php',
     'UpdateV100ToV110' => $baseDir . '/database/migrations/2015_08_24_183940_update_v100_to_v110.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'V10tov11CreateTableTreatBt' => $baseDir . '/database/migrations/2015_09_01_201224_v10tov11_create_table_treat_bt.php',
     'VendorTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'Zizaco\\Entrust\\ClassCreatorCommand' => $vendorDir . '/zizaco/entrust/src/commands/ClassCreatorCommand.php',
     'Zizaco\\Entrust\\MigrationCommand' => $vendorDir . '/zizaco/entrust/src/commands/MigrationCommand.php',
