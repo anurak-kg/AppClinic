@@ -9,16 +9,16 @@
     <style>
         h3 {
             font-family: angsana new;
-            font-size: 150%;
+            font-size: 250%;
         }
 
         b {
             font-family: angsana new;
-            font-size: 150%;
+            font-size: 200%;
         }
 
         body {
-            width: 29cm;
+            width: 24cm;
             height: 14cm;
         }
     </style>
@@ -31,25 +31,22 @@
 <div align="right">
     <?php (Jenssegers\Date\Date::now() + 543) ?>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+
+
+        <font size="5"><?php echo zerofill($bill->quotations->bill_number) ?></font><br><br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-    <font size="5"><?php echo zerofill($bill->quotations->bill_number) ?></font><br><br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;
-    <font size="5">{{Jenssegers\Date\Date::now()->format('d/m/Y')}}</font> <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+
+        <font size="5">{{Jenssegers\Date\Date::now()->format('d/m/Y')}}</font> <br>
 
 </div>
-<br> <br><br>
+<br> <br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size="5">{{ $bill->quotations->customer->cus_name }}</font>
@@ -57,9 +54,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size="5">{{ $bill->quotations->customer->cus_id }} </font><br><br>
 
 
@@ -76,6 +72,7 @@
 <font size="5">{{ $bill->quotations->customer->cus_phone }}</font>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 <font size="5">{{ $bill->quotations->user->id }}</font>
@@ -83,22 +80,30 @@
 <br><br> <br><br>
 
 
-<?php $total = 0 ?>
-<?php $index = 0 ?>
+<br><br><br>
 
 
-<font size="5"><?php echo $index += 1?></font> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
-<font size="5">{{$bill->course->course_id }}</font> &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
-<font size="5">{{ $bill->course->course_name }}</font>
-&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
- <font size="5"> 1</font>&nbsp;
-<font size="5"> <?php echo number_format($subtotal = $bill->course->course_price)?></font>&nbsp;
-<?php  number_format($dis1 = $bill->quo_de_discount, 2) ?>&nbsp;
-<?php  number_format($dis2 = $bill->quo_de_disamount, 2) ?>&nbsp;
-<font size="5"> <?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?> </font>&nbsp;
-<?php  number_format($subtotal - $distotal, 2) ?>&nbsp;
-<font size="5"><?php echo number_format($total += ($subtotal - $distotal)) ?></font>
+        <tbody>
+        <?php $total = 0 ?>
+        <?php $index = 0 ?>
+
+        <tr>
+            <td><font size="5"><?php echo $index += 1?> &nbsp; &nbsp;</font></td>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+            <td><font size="5">{{$bill->course->course_id }}</font></td>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+            <td> <font size="5">{{ $bill->course->course_name }} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</font></td>
+            <td><font size="5"> 1</font></td>&nbsp; &nbsp;&nbsp;&nbsp;
+            <td><font size="5"> <?php echo number_format($subtotal = $bill->course->course_price)?></font></td> &nbsp;&nbsp; &nbsp;
+            <?php  number_format($dis1 = $bill->quo_de_discount, 2) ?>&nbsp; &nbsp;&nbsp;
+            <?php  number_format($dis2 = $bill->quo_de_disamount, 2) ?>&nbsp; &nbsp;&nbsp;
+            <td> <font size="5"> <?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?> </font></td>&nbsp; &nbsp;&nbsp;
+            <?php  number_format($subtotal - $distotal, 2) ?>&nbsp; &nbsp;&nbsp;
+            <td><font size="5"><?php echo number_format($total += ($subtotal - $distotal)) ?></font> </td>
+        </tr>
+
+
+        </tbody>
+
+
 
 
 </body>
