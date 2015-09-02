@@ -62,7 +62,12 @@ class VendorController extends Controller
 
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("vendor/index", "ย้อนกลับ");
-
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'vendor',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'เพิ่มร้านค้า รหัส : ' . Input::get('ven_id')
+            ]);
         });
 
         return view('vendor/index', compact('form','grid'));
