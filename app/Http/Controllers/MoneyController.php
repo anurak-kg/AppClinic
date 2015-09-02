@@ -29,10 +29,11 @@ class MoneyController extends Controller
         $branch_id = Input::get('branch');
 
 
-        $datadr =DB::table('treat_history')
-            ->select('users.id as id','users.name'
-                ,DB::raw('(SELECT SUM(dr_price) FROM treat_history WHERE treat_history.dr_id = id) as total'))
-            ->join('users','users.id','=','users.id')
+        $datadr =DB::table('bt')
+            ->select('bt.emp_id as id','users.name as n'
+                ,DB::raw('SUM(total) as total'))
+            ->join('users','users.id','=','bt.emp_id')
+            ->join('treat_history','treat_history.treat_id','=','bt.treat_id')
             ->where('users.position_id','=',4)
             ->groupBy('id');
                  if ($rang != null) {
@@ -47,12 +48,11 @@ class MoneyController extends Controller
         $data=  $datadr->get();
 
 
-        $data1 =DB::table('treat_history')
-            ->select('users.id as id','users.name'
-                ,DB::raw('(SELECT SUM(bt1_price) FROM treat_history WHERE treat_history.bt_user_id1 = id) as bt1')
-            ,DB::raw('(SELECT SUM(bt2_price) FROM treat_history WHERE treat_history.bt_user_id2 = id) as bt2')
-            )
-            ->join('users','users.id','=','users.id')
+        $data1 =DB::table('bt')
+            ->select('bt.emp_id as id','users.name as n'
+                ,DB::raw('SUM(total) as total'))
+            ->join('users','users.id','=','bt.emp_id')
+            ->join('treat_history','treat_history.treat_id','=','bt.treat_id')
             ->where('users.position_id','=',8)
             ->groupBy('id');
         if ($rang != null) {

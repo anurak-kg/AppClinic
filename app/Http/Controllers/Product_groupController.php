@@ -55,9 +55,18 @@ class Product_groupController extends Controller
         $form->text('pg_name', 'ชื่อกลุ่มสินค้า')->rule('required|unique:product_group,pg_name')->attributes(array('placeholder'=>'โปรดระบุชื่อกลุ่มสินค้า....'));
         $form->attributes(array("class" => " "));
         $form->saved(function () use ($form) {
-
+            $user = new Product_group();
+            $user->pg_id = Input::get('pg_id');
+            $user->save();
             $form->message("เพิ่มข้อมูลเรียบร้อย");
             $form->link("product_group/index", "ย้อนกลับ");
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product_group',
+                'description'=>'เพิ่มกลุ่มสินค้า : รหัสกลุ่มสินค้า '.$user->pg_id
+            ]);
         });
         return $form;
     }
@@ -69,7 +78,15 @@ class Product_groupController extends Controller
         $edit->text('pg_name', 'ชื่อกลุ่มสินค้า');
         $edit->attributes(array("class" => " "));
         $edit->link("product_group/index", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
 
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'logs_type' => 'info' ,
+                'logs_where'=>'Product_group',
+                'description'=>'เพิ่มกลุ่มสินค้า : กลุ่มสินค้า '. Input::get('pg_name')
+            ]);
+        });
         return $edit->view('product_group/edit', compact('edit'));
 
 

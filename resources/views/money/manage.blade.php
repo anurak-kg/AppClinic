@@ -88,7 +88,7 @@
                                 @foreach($data as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->n }}</td>
                                         <td>{{ $item->total }}</td>
                                     </tr>
                                 @endforeach
@@ -119,17 +119,17 @@
                                 <tr>
                                     <th>รหัสผู้ช่วย</th>
                                     <th>ผู้ช่วย</th>
-                                    <th>ค่ามือผู้ช่วย 1</th>
-                                    <th>ค่ามือผู้ช่วย 2</th>
+                                    <th>ค่ามือ</th>
+
 
                                 </tr>
                                 </thead>
                                 @foreach($data1 as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->bt1 }}</td>
-                                        <td>{{ $item->bt2 }}</td>
+                                        <td>{{ $item->n }}</td>
+                                        <td>{{ $item->total }}</td>
+
                                     </tr>
 
 
