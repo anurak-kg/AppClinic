@@ -230,7 +230,7 @@
 
                                         <td>{{ $item->course_name }}</td>
                                         <td><?php
-                                            $dr = \App\User::find($item->dr_id);
+                                            $dr = \App\User::find($item->emp_id);
                                             if ($dr != null) {
                                                 echo $dr->name;
                                             } else {
@@ -238,7 +238,7 @@
                                             } ?>
                                         </td>
                                         <td><?php
-                                            $bt1 = \App\User::find($item->bt_user_id1);
+                                            $bt1 = \App\User::find($item->emp_id);
                                             if ($bt1 != null) {
                                                 echo $bt1->name;
                                             } else {
@@ -246,7 +246,7 @@
                                             } ?>
                                         </td>
                                         <td><?php
-                                            $bt2 = \App\User::find($item->bt_user_id2);
+                                            $bt2 = \App\User::find($item->emp_id);
                                             if ($bt2 != null) {
                                                 echo $bt2->name;
                                             } else {
@@ -254,7 +254,6 @@
                                             } ?>
                                         </td>
                                         <td style="width: 300px">{{ $item->product_name }}</td>
-
                                         <td style="width: 300px">
                                             <?php
                                             if ($item->comment != null) {
