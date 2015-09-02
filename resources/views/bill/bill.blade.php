@@ -18,7 +18,7 @@
         }
 
         body {
-            width: 24cm;
+            width: 29cm;
             height: 14cm;
         }
     </style>
