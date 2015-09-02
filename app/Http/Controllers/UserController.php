@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         //
     }
-    public function getLogout()
+    public function getLogout(Request $request)
     {
         \Auth::logout();
         Session::flush();
@@ -89,6 +89,7 @@ class UserController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new User();
+            $user->id = Input::get('id');
             $user->branch_id = Input::get('branch');
             $user->username = Input::get('username');
             $user->password = bcrypt(Input::get('password'));
@@ -98,6 +99,13 @@ class UserController extends Controller
             $user->email = Input::get('email');
             $user->position_id = Input::get('role');
             $user->save();
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'user',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'เพิ่มพนักงาน'.$user->id ,
+                'emp_id2' => $user->id
+            ]);
             $user->roles()->sync([Input::get('role')]);
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("user/manage", "ย้อนกลับ");
@@ -116,6 +124,16 @@ class UserController extends Controller
         $edit->text('email', 'Email');
         $edit->attributes(array("class" => " "));
         $edit->link("user/manage", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
+
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'user',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'แก้ไขพนักงาน'.Input::get('name')
+
+            ]);
+        });
         return $edit->view('user/edit', compact('edit'));
     }
     public function getUserDataGridDoctor(){
@@ -148,13 +166,22 @@ class UserController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new User();
+            $user->id = Input::get('id');
             $user->branch_id = Input::get('branch');
             $user->name = Input::get('name');
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
             $user->position_id = Input::get('position_id');
+            $user->license = Input::get('license');
             $user->save();
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'user',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'เพิ่มหมอ'.$user->id ,
+                'emp_id2' => $user->id
+            ]);
             $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
             $form->link("user/adddoctor", "ย้อนกลับ");
         });
@@ -172,6 +199,14 @@ class UserController extends Controller
         $edit->text('license','เลขใบประกอบวิชาชีพ');
         $edit->attributes(array("class" => " "));
         $edit->link("user/adddoctor", "ย้อนกลับ");
+        $edit->saved(function () use ($edit) {
+            systemLogs([
+                'logs_type' => 'info' ,
+                'logs_where'=> 'user',
+                'emp_id' =>  auth()->user()->getAuthIdentifier(),
+                'description'=>'แก้ไขหมอ'.Input::get('name')
+            ]);
+        });
         return $edit->view('user/edit', compact('edit'));
     }
     public function test(){
@@ -189,6 +224,12 @@ class UserController extends Controller
        // dd(Input::all());
         $user->password = bcrypt(trim($reset));
         $user->save();
+        systemLogs([
+            'logs_type' => 'info' ,
+            'logs_where'=> 'user',
+            'emp_id' =>  auth()->user()->getAuthIdentifier(),
+            'description'=>'เปลี่ยนรหัสผ่าน รหัส : ' . Input::get('$user')
+        ]);
         // $user->message("success");
         //return Redirect::to('user/manage')->with('message', 'Login Failed');
         Session::flash('message', "ได้ทำการเปลี่ยนรหัสผ่านเรียบร้อย");
@@ -216,8 +257,5 @@ class UserController extends Controller
         return back()->withErrors([Lang::get('user.loginFailed')])
             ->withInput($request->only('username', 'remember'));
     }
-
-
-
 
 }
