@@ -52,7 +52,7 @@ class CourseController extends Controller
             'emp_id' => auth()->user()->getAuthIdentifier() ,
             'logs_type' => 'info' ,
             'logs_where'=>'Course',
-            'description'=>'ลบคอร์ส'
+            'description'=>'ลบคอร์ส : รหัสคอร์ส '.$course->course_id
         ]);
         return redirect('course/index')->with('message', 'ลบคอร์สเรียบร้อยแล้ว');
     }
@@ -92,7 +92,7 @@ class CourseController extends Controller
             'emp_id' => auth()->user()->getAuthIdentifier() ,
             'logs_type' => 'info' ,
             'logs_where'=>'Course',
-            'description'=>'เพิ่มคอร์ส'
+            'description'=>'เพิ่มคอร์ส : รหัสคอร์ส '.$course->course_id
         ]);
 
         return redirect('course/create')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
@@ -108,7 +108,7 @@ class CourseController extends Controller
             'emp_id' => auth()->user()->getAuthIdentifier() ,
             'logs_type' => 'info' ,
             'logs_where'=>'Course',
-            'description'=>'แก้ไขคอร์ส'
+            'description'=>'แก้ไขคอร์ส : รหัสคอร์ส '.$course->course_id
         ]);
         return redirect('course/index')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
