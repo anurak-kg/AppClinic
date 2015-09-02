@@ -17,7 +17,10 @@ function systemLogs($array)
     $log->branch_id = Branch::getCurrentId();
     $log->save();
 }
-
+function zerofill ($num, $zerofill = 5)
+{
+    return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
+}
 function getNewQuoPK()
 {
     $primaryKey = null;
