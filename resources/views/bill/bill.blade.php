@@ -82,7 +82,6 @@
 
 <br><br><br>
 
-
         <tbody>
         <?php $total = 0 ?>
         <?php $index = 0 ?>
