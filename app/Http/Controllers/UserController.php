@@ -99,8 +99,8 @@ class UserController extends Controller
             $user->position_id = Input::get('role');
             $user->save();
             $user->roles()->sync([Input::get('role')]);
-            $form->message("ok record saved");
-            $form->link("user/manage", "back to the form");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("user/manage", "ย้อนกลับ");
         });
         return view('user/manage', compact('form','grid'));
     }
@@ -119,7 +119,7 @@ class UserController extends Controller
         return $edit->view('user/edit', compact('edit'));
     }
     public function getUserDataGridDoctor(){
-        $grid = DataGrid::source(User::with('branch','position')->where('position_id','=',4));
+        $grid = DataGrid::source(User::with('branch','roles')->where('position_id','=',4));
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
 
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
@@ -149,16 +149,14 @@ class UserController extends Controller
         $form->saved(function () use ($form) {
             $user = new User();
             $user->branch_id = Input::get('branch');
-            $user->username = Input::get('username');
-            $user->password = bcrypt(Input::get('password'));
             $user->name = Input::get('name');
             $user->sex = Input::get('sex');
             $user->tel = Input::get('tel');
             $user->email = Input::get('email');
             $user->position_id = Input::get('position_id');
             $user->save();
-            $form->message("ok record saved");
-            $form->link("user/adddoctor", "back to the form");
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("user/adddoctor", "ย้อนกลับ");
         });
         return view('user/adddoctor', compact('form','grid'));
     }
