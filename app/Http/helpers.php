@@ -17,10 +17,40 @@ function systemLogs($array)
     $log->branch_id = Branch::getCurrentId();
     $log->save();
 }
-function zerofill ($num, $zerofill = 5)
+
+function getNewBillNo()
+{
+    $primaryKey = null;
+    $sale = \App\Sales::select('bill_number')
+        ->orderBy('sales_id', 'desc')
+        ->limit(1)
+        ->get()
+        ->first();
+    $quo = \App\Quotations::select('bill_number')
+        ->orderBy('quo_id', 'desc')
+        ->limit(1)
+        ->get()
+        ->first();
+    $quoPk = $sale->bill_number;
+    $salePk = $quo->bill_number;
+    if (($quoPk == 0 && $salePk == null) && ($salePk == 0 && $quoPk == null)) {
+        $primaryKey = 1;
+    } elseif ($quoPk > $salePk) {
+        $primaryKey = $quoPk + 1;
+    } elseif ($salePk > $quoPk) {
+        $primaryKey = $salePk + 1;
+    }
+    //dd($primaryKey);
+
+    return $primaryKey;
+
+}
+
+function zerofill($num, $zerofill = 5)
 {
     return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
 }
+
 function getNewQuoPK()
 {
     $primaryKey = null;
@@ -109,14 +139,17 @@ function getNewPaymentDetailPK()
 {
     return createPkFrom('App\Payment_detail', 'payment_de_id', 7, '5000000', '9999999');
 }
+
 function getNewTreatmentPK()
 {
     return createPkFrom('App\TreatHistory', 'treat_id', 8, '0000000', '4999999');
 }
+
 function getNewBtPK()
 {
     return createPkFrom('App\Bt', 'bt_id', 8, '8000000', '9999999');
 }
+
 function getNewCustomerPK()
 {
     return createPkFrom('App\Customer', 'cus_id', 9, '0000000', '9999999');
