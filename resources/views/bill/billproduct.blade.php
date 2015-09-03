@@ -1,121 +1,68 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="/bootstrap-pdf.min.css" rel="stylesheet" type="text/css"/>
-
-    <style>
-        h3 {
-            font-family:angsana new;
-            font-size:150%;
-        }
-        b  {
-            font-family:angsana new;
-            font-size:150%;
-        }
-        th  {
-            font-family:angsana new;
-            font-size:140%;
-        }
-    </style>
+    <title>ใบเสร็จรับเงิน</title>
 
 </head>
 
-<body onload="window.print();">
+<body>
 <div align="right">
-   {{ $sales->sales_id }} <br>
-
+    <font size="5"><?php echo zerofill($sales->bill_number) ?></font><br>
+    <font size="5">{{Jenssegers\Date\Date::now()->format('d/m/Y')}}</font> <br>
 </div>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $sales->customer->cus_name }}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<font size="5"> {{ $sales->customer->cus_name }}</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<font size="5">{{ $sales->customer->cus_id }}</font><br><br>
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $sales->customer->cus_id }} <br><br>
+<font size="5">{{ $sales->customer->cus_hno }}</font>
+<font size="5">{{ $sales->customer->cus_moo }}</font>
+<font size="5">{{ $sales->customer->cus_soi }}</font>
+<font size="5">{{ $sales->customer->cus_road }}</font>
+<font size="5">{{ $sales->customer->cus_subdis }}</font>
+<font size="5">{{ $sales->customer->cus_district }}</font>
+<font size="5">{{ $sales->customer->cus_province }}</font>
+<font size="5">{{ $sales->customer->cus_postal }}</font>
+<font size="5">{{ $sales->customer->cus_tel }}</font>
+<font size="5">{{ $sales->customer->cus_phone }}</font>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ $sales->customer->cus_hno }}
-{{ $sales->customer->cus_moo }}
-{{ $sales->customer->cus_soi }}
-{{ $sales->customer->cus_road }}
-{{ $sales->customer->cus_subdis }}
-{{ $sales->customer->cus_district }}
-{{ $sales->customer->cus_province }}
-{{ $sales->customer->cus_postal }}
-{{ $sales->customer->cus_tel }}
-{{ $sales->customer->cus_phone }}
+<br><br> <br><br>
+&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<tbody>
+<?php $total = 0 ?>
+<?php $index = 0 ?>
+<?php $distotal = 0 ?>
+@foreach($sales->product as $sale)
+    <tr>
+        <td><font size="5"><?php echo $index += 1?> &nbsp; &nbsp;</font></td>&nbsp;&nbsp;
 
-<br><br>
+        <td><font size="5">{{ $sale->product_id }}</font></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <td><font size="5">{{ $sale->product_name }}</font></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <td><font size="5">{{$qty = $sale->pivot->sales_de_qty }}</font></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <td><font size="5"><?php echo number_format($price = $sale->pivot->sales_de_price)?></font></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+        <?php  number_format($dis1 = $sale->pivot->sales_de_discount, 2) ?>
+        <?php  number_format($dis2 = $sale->pivot->sales_de_disamount, 2) ?>
+        <td> <font size="5"> <?php echo number_format($distotal = (($price * $dis1 / 100) + $dis2)) ?> </font></td>&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <td><font size="5"><?php echo number_format($sale->pivot->sales_de_net_price,2) ?></font></td>&nbsp;&nbsp;&nbsp;&nbsp;
+    </tr>
+@endforeach
+<tr>
+    <td><font size="5">{{$price-$distotal}}</font></td>
 
-
-<br><br>
-
-<div class="col-xs-12 table-responsive">
-
-</div>
-<!-- /.col -->
-
-
-<div id="section">
-
-
-    <!-- Table row -->
-    <div class="row">
-        <div class="col-xs-12 table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>รหัสสินค้า</th>
-                    <th>สินค้า</th>
-                    <th>จำนวน</th>
-                    <th>หน่วยละ</th>
-                    <th>ส่วนลด %</th>
-                    <th>ส่วนลด บาท</th>
-                    <th>จำนวนเงิน</th>
-
-
-                </tr>
-                </thead>
-                <tbody>
-                <tbody>
-                <?php $total = 0 ?>
-                <?php $index = 1000000 ?>
-                <?php $distotal = 0 ?>
-                @foreach($sales->product as $sale)
-                    <tr>
-                        <td><?php echo $index += 1?> &nbsp; &nbsp;</td>
-                        <td>{{ $sale->product_id }}</td>
-                        <td>{{ $sale->product_name }}</td>
-                        <td>{{$qty = $sale->pivot->sales_de_qty }}</td>
-                        <td><?php echo number_format($price = $sale->pivot->sales_de_price)?></td>
-                        <td><?php echo number_format($sale->pivot->sales_de_discount) ?></td>
-                        <td><?php echo number_format($sale->pivot->sales_de_disamount,2) ?></td>
-                        <td><?php echo number_format($sale->pivot->sales_de_net_price,2) ?></td>
-                    </tr>
-                @endforeach
-                <tr>
-                    <td colspan="7" style="text-align: right">ยอดสุทธิ</td>
-                    <td>{{$sales->sales_total}}</td>
-
-                </tr>
-                </tbody>
-
-
-            </table>
-        </div>
-        <!-- /.col -->
-    </div>
-    <!-- /.row -->
-
-
-</div>
-<!-- ./wrapper -->
+</tr>
+</tbody>
 
 </body>
 </html>
+
+
 
 
 

@@ -20,8 +20,13 @@ class BillController extends Controller
 
         //return response()->json($bill);
 
-
-        return view("bill/bill", ['bill' => $bill]);
+        $mpdf = new mPDF('th', array(280, 140));
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->useSubstitutions=false;
+        $mpdf->simpleTables = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
+        $mpdf->Output('Bill.pdf', 'I');
 
     }
 
@@ -39,7 +44,13 @@ class BillController extends Controller
         $sales = Sales::where('sales_id', \Input::get('sales_id'))
             ->with('product', 'Customer', 'User', 'Branch')->get()->first();
         // return response()->json($sales);
-        return view('bill.billproduct', compact('sales'));
+
+        $mpdf = new mPDF('th', array(280, 140));
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->SetHTMLHeader();
+        $mpdf->WriteHTML(view('bill.billproduct', compact('sales')));
+        $mpdf->Output('Billproduct.pdf', 'I');
+
     }
 
     public function order()
