@@ -20,12 +20,16 @@ class BillController extends Controller
 
         //return response()->json($bill);
 
-        $mpdf = new mPDF('th', array(280, 140));
+        $mpdf = new mPDF('th');
+       // $mpdf = new mPDF('th', 'A5-L');
+        //$mpdf->SetDisplayMode('fullpage');
         $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->useSubstitutions=false;
-        $mpdf->simpleTables = true;
+        //$mpdf->useSubstitutions=false;
+        //$mpdf->simpleTables = true;
         $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
+       // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
+
+        $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill]));
         $mpdf->Output('Bill.pdf', 'I');
 
     }
@@ -45,7 +49,7 @@ class BillController extends Controller
             ->with('product', 'Customer', 'User', 'Branch')->get()->first();
         // return response()->json($sales);
 
-        $mpdf = new mPDF('th', array(280, 140));
+        $mpdf = new mPDF('th', array(280, 140),0,0,0,0,0,0,0);
         $mpdf->ignore_invalid_utf8 = true;
         $mpdf->SetHTMLHeader();
         $mpdf->WriteHTML(view('bill.billproduct', compact('sales')));
