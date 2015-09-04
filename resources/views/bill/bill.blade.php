@@ -3,27 +3,6 @@
     <meta charset="UTF-8">
     <title>ใบเสร็จรับเงิน</title>
 
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="/bootstrap-pdf.min.css" rel="stylesheet" type="text/css"/>
-
-    <style>
-        h3 {
-            font-family: angsana new;
-            font-size: 250%;
-        }
-
-        b {
-            font-family: angsana new;
-            font-size: 200%;
-        }
-
-        body {
-            width: 24cm;
-            height: 14cm;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -82,15 +61,6 @@
 <br><br><br>
 
 </tbody>
-
-</body>
-</html>
-
-
-        </tbody>
-
-
-
 
 </body>
 </html>
