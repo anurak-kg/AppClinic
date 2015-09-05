@@ -6,16 +6,21 @@
     <style>
         @page {
             sheet-size: 228.6mm 139.7mm;
+            margin-top: 13mm;
+            margin-left: 3mm;
+            margin-right: 5mm;
         }
         body {
-            font-size: 4.2mm;
+            font-size: 3.2mm;
         }
         .warp {
             height: 139.7mm;
             width: 228.6mm;
         }
         .box {
-            border: solid;
+            /*border: 0.1mm solid;*/
+            height: 9mm;
+            line-height: 9mm;
 
         }
 
@@ -26,35 +31,36 @@
         }
 
         .detail_box {
+            margin-top: 1mm;
             width: 100%;
         }
 
         .customer_box {
             float: left;
-            width: 124mm;
+            width: 123mm;
         }
 
         .cus_name_box {
-            padding-left: 27mm;
+            padding-left: 30mm;
         }
 
         .customer_address_box {
-            padding-left: 27mm;
+            padding-left: 30mm;
 
         }
 
         .sale_box {
-            float: left;
+            float: right;
             width: 73mm;
         }
 
         .customer_id_box {
-            padding-left: 27mm;
+            padding-left: 30mm;
 
         }
 
         .customer_sale_box {
-            padding-left: 27mm;
+            padding-left: 30mm;
 
         }
 
@@ -68,7 +74,7 @@
 
         }
          .course{
-            margin-top: 10mm;
+            margin-top: 16mm;
             text-align: center;
         }
         .course tr td{
@@ -114,18 +120,18 @@
 
     <?php $total = 0 ?>
     <?php $index = 0 ?>
-    <table border="1" class="course">
+    <table class="course">
         <tr>
-            <td  width="10mm"><?php echo $index += 1?></td>
-            <td width="20mm">{{$bill->course->course_id }}</td>
-            <td width="88.5mm">{{ $bill->course->course_name }}      </td>
-            <td width="15mm">1</td>
-            <td width="15mm"><?php echo number_format($subtotal = $bill->course->course_price)?></td>
+            <td  width="11.5mm"><?php echo $index += 1?></td>
+            <td width="22mm">{{$bill->course->course_id }}</td>
+            <td width="95mm">{{ $bill->course->course_name }}      </td>
+            <td width="18mm">1</td>
+            <td width="18mm"><?php echo number_format($subtotal = $bill->course->course_price)?></td>
             <?php  number_format($dis1 = $bill->quo_de_discount, 2) ?>
             <?php  number_format($dis2 = $bill->quo_de_disamount, 2) ?>
-            <td width="15mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
+            <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
             <?php  number_format($subtotal - $distotal, 2) ?>
-            <td width="35mm"><?php echo number_format($total += ($subtotal - $distotal)) ?></td>
+            <td width="30mm"><?php echo number_format($total += ($subtotal - $distotal)) ?></td>
         </tr>
     </table>
 </div>
