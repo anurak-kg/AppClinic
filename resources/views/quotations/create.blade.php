@@ -167,8 +167,15 @@
                                                     </li>
                                                 </ul>
                                             </td>
-                                            <td data-title="'ราคา'" style="width:170px;text-align: right">
+                                            <td data-title="'ราคา'" style="width:100px;text-align: right">
                                                 @{{item.course.course_price | number:2 }}
+                                            </td>
+                                            <td data-title="'จำนวน'" style="width: 50px">
+                                                <input type="number"
+                                                       ng-model="item.qty"
+                                                       ng-change="update('qty',item.course_id,item.qty)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
                                             </td>
                                             <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 80px">
                                                 <input type="number"
@@ -188,7 +195,7 @@
                                             </td>
                                             <td data-title="'ราคารวม'"
                                                 style="width:170px;text-align: right">
-                                                @{{ (item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
+                                                @{{ (item.quo_de_price*item.qty)-(item.quo_de_price*item.quo_de_discount/100)
                                                 -item.quo_de_disamount| number:2}}
                                             </td>
 

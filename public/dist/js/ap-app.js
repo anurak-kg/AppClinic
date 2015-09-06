@@ -205,7 +205,7 @@
             $scope.total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                $scope.total += parseInt(product.quo_de_price)
+                $scope.total += parseInt(product.quo_de_price*product.qty)
 
             }
             return $scope.total;
