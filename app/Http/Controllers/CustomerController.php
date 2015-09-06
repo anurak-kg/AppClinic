@@ -8,6 +8,8 @@ use App\Course;
 use App\Customer;
 use App\CustomerPhoto;
 use App\Disease_detail;
+use App\TreatHasMedicine;
+use App\TreatHistory;
 use Auth;
 use DB;
 use Illuminate\Support\Facades\Config;
@@ -31,17 +33,18 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('Quotations.course')->where('cus_id', \Input::get('cus_id'))->get()->first();
         $data = \DB::table('treat_has_medicine')
-            ->select('treat_history.treat_id', 'treat_history.branch_id', 'course.course_name', 'users.name',
-                'treat_history.emp_id', 'treat_history.emp_id', 'treat_history.emp_id', 'product.product_name', 'treat_history.comment',
-                'treat_history.treat_date')
+            ->select('treat_history.treat_id', 'branch.branch_name', 'course.course_name', 'product.product_name','treat_has_medicine.qty'
+                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="doctor") as dr')
+                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt1") as bt1')
+                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt2") as bt2')
+                 ,'treat_history.comment', 'treat_history.treat_date')
             ->join('treat_history', 'treat_history.treat_id', '=', 'treat_has_medicine.treat_id')
             ->join('product', 'product.product_id', '=', 'treat_has_medicine.product_id')
             ->join('course', 'course.course_id', '=', 'treat_history.course_id')
             ->join('quotations', 'quotations.quo_id', '=', 'treat_history.quo_id')
-            ->join('users', 'users.id', '=', 'treat_history.emp_id')
-            ->join('bt','bt.emp_id','=','treat_history.emp_id')
+            ->join('branch', 'branch.branch_id', '=', 'treat_history.branch_id')
             ->where('quotations.cus_id', '=', $customer->cus_id)
-            ->orderby('treat_id', 'desc')
+            ->orderby('treat_date', 'asc')
             ->get();
 
         $datapayment = DB::table('payment_detail')
@@ -66,7 +69,7 @@ class CustomerController extends Controller
             ->get();
 
 
-      //return response()->json($datapayment);
+      //return response()->json($data);
 
         return view('customer/view', ['data' => $customer, 'treat' => $data,'payment' => $datapayment,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
     }
