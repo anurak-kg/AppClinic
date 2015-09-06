@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="quo">
 
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
@@ -198,7 +198,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="history">
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
                             <table class="table table-bordered">
@@ -285,7 +285,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="payment">
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
                             <table class="table table-bordered">
@@ -382,5 +382,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(function ()
+        {
+
+        $('#history').slimScroll({ height: '150'});
+        $('#quo').slimScroll({ height: '150'});
+        $('#payment').slimScroll({ height: '150'});
+
+        }
+
+        );
+    </script>
 
 @stop

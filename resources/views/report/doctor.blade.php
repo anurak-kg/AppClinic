@@ -53,6 +53,7 @@
                          {!! Form::close() !!}
                     </span>
                 </div>
+                <div class="box-body" id="datatable">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-bordered">
@@ -71,6 +72,7 @@
                             @endforeach
                         </table>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -183,6 +185,8 @@
 
         //Create the line chart
         areaChart.Line(areaChartData, areaChartOptions);
+            $('#datatable').slimScroll({ height: 500 });
+
         });
     </script>
     </body>

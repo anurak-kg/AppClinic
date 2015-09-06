@@ -178,7 +178,7 @@
                             <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                            <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์ส</a></li>
+                            <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์สต่อเดือน</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
                             <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
