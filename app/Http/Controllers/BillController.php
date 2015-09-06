@@ -45,14 +45,16 @@ class BillController extends Controller
 
     public function printBillSaleToHtml()
     {
-        $sales = Sales::where('sales_id', \Input::get('sales_id'))
+        $bill = Sales::where('sales_id', \Input::get('sales_id'))
             ->with('product', 'Customer', 'User', 'Branch')->get()->first();
-        // return response()->json($sales);
+         //return response()->json($bill);
 
-        $mpdf = new mPDF('th', array(280, 140),0,0,0,0,0,0,0);
+
+        $mpdf = new mPDF('th');
+        //$mpdf = new mPDF('th', array(280, 140),0,0,0,0,0,0,0);
         $mpdf->ignore_invalid_utf8 = true;
         $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view('bill.billproduct', compact('sales')));
+        $mpdf->WriteHTML(view("bill/billproduct", ['bill'=>$bill]));
         $mpdf->Output('Billproduct.pdf', 'I');
 
     }
