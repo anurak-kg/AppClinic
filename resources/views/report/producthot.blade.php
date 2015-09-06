@@ -52,7 +52,7 @@
                            {!! Form::close() !!}
                     </span>
                 </div>
-                <div class="box-body">
+                <div class="box-body" id="datatable">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-bordered">
