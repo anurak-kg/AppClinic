@@ -48,7 +48,6 @@ class CreateTableQuotations extends Migration
             // 1 = อยุ่ในระหว่างการรักษา ,5 = เรียบร้อยแล้ว -99 = ยกเลิก
             $table->integer('qty');
             $table->timestamps();
-            $table->unique(array('quo_id', 'course_id'));
         });
         DB::unprepared("ALTER TABLE quotations AUTO_INCREMENT = 1000000;");
 
