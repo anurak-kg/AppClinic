@@ -167,7 +167,7 @@
         }
         $scope.pushProduct = function (product) {
             $scope.product.push(product);
-            $scope.product = $scope.pushDuplicateCheck();
+            //$scope.product = $scope.pushDuplicateCheck();
             $scope.getAddProduct(product.course_id);
             $scope.tableParams.reload();
             $scope.clearSearch();
@@ -205,7 +205,7 @@
             $scope.total = 0;
             for (var i = 0; i < $scope.product.length; i++) {
                 var product = $scope.product[i];
-                $scope.total += parseInt(product.quo_de_price*product.qty)
+                $scope.total += parseInt(product.quo_de_price)
 
             }
             return $scope.total;
@@ -989,7 +989,7 @@
             $scope.clearSearch();
 
             $scope.product.push(product);
-            $scope.product = $scope.pushDuplicateCheck();
+            //$scope.product = $scope.pushDuplicateCheck();
             $scope.getAddProduct(product.product.product_id);
             console.log($scope.product);
             // $scope.clearAndReload();
