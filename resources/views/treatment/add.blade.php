@@ -15,7 +15,8 @@
         <form class="form-horizontal" method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
-            <div class="col-md-12" ng-init="init('{{$course_id}}',{{getConfig('product_out_stock_can_treat')}},'{{$quo->payment_remain}}')">
+            <div class="col-md-12"
+                 ng-init="init('{{$course_id}}',{{getConfig('product_out_stock_can_treat')}},'{{$quo->payment_remain}}')">
                 <div class="col-md-6">
                     <div class="box  box-default">
                         <div class="box-header with-border" align="center">
@@ -271,6 +272,9 @@
                                     </table>
                                 </div>
                                 <div class="box-footer">
+                                    @if($quo->payment_remain > 0)
+                                        <input type="hidden" name="payment" value="true">
+                                    @endif
                                     <div ng-show="product_out_stock_can_treat == false && outOfStock()">
                                         <button type="submit" class="btn btn-danger" style="width: 100%" disabled>
                                             ยาในสต้อกไม่พอ ไม่สามารถบันทึกได้
@@ -278,7 +282,6 @@
                                     </div>
                                     <div ng-hide="product_out_stock_can_treat == false && outOfStock()">
                                         <div ng-show="payment_remain > 0">
-                                            <input type="hidden" name="payment" value="true">
                                             <button type="submit" class="btn btn-success" style="width: 100%">
                                                 บันทึกและเข้าสู่การชำระเงิน
                                             </button>
