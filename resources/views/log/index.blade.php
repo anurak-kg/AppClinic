@@ -28,6 +28,7 @@
                         </form>
                     </div>
                 </div>
+                <div class="box-body" id="log">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
                         <table class="table table-bordered">
@@ -91,6 +92,7 @@
                         </table>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
     </div><!-- /.row -->
@@ -98,6 +100,5 @@
 
 
 
-    </body>
 
 @stop

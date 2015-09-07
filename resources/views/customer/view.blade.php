@@ -156,7 +156,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="quo">
 
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
@@ -198,7 +198,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="history">
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
                             <table class="table table-bordered">
@@ -207,10 +207,11 @@
                                     <th>รหัสการรักษา</th>
                                     <th>สาขา</th>
                                     <th>ชื่อคอร์ส</th>
+                                    <th>ตัวยา</th>
+                                    <th>จำนวน</th>
                                     <th>แพทย์</th>
                                     <th>ผู้ช่วย1</th>
                                     <th>ผู้ช่วย2</th>
-                                    <th>ตัวยาที่ใช้</th>
                                     <th>รายละเอียด</th>
                                     <th>วันที่รักษา</th>
                                 </tr>
@@ -220,46 +221,47 @@
 
                                         <td style="width: 180px;">{{ $item->treat_id }}</td>
 
-                                        <td style="width: auto;"><?php
-                                            $branch = \App\Branch::find($item->branch_id);
-                                            if ($branch != null) {
-                                                echo $branch->branch_name;
-                                            } else {
-                                                echo 'ไม่มีข้อมูล';
-                                            } ?></td>
+                                        <td style="width: auto;">{{ $item->branch_name }}</td>
 
                                         <td>{{ $item->course_name }}</td>
-                                        <td><?php
-                                            $dr = \App\User::find($item->emp_id);
-                                            if ($dr != null) {
-                                                echo $dr->name;
-                                            } else {
-                                                echo 'ไม่มีข้อมูล';
-                                            } ?>
-                                        </td>
-                                        <td><?php
-                                            $bt1 = \App\User::find($item->emp_id);
-                                            if ($bt1 != null) {
-                                                echo $bt1->name;
-                                            } else {
-                                                echo 'ไม่มีข้อมูล';
-                                            } ?>
-                                        </td>
-                                        <td><?php
-                                            $bt2 = \App\User::find($item->emp_id);
-                                            if ($bt2 != null) {
-                                                echo $bt2->name;
-                                            } else {
-                                                echo 'ไม่มีข้อมูล';
-                                            } ?>
-                                        </td>
-                                        <td style="width: 300px">{{ $item->product_name }}</td>
-                                        <td style="width: 300px">
+
+                                        <td>{{ $item->product_name }}
+
+                                        <td>{{ $item->qty }}</td>
+
+                                        <td>
+                                            <?php
+                                            if($item->dr == null) {
+                                                echo 'ไม่มีแพทย์';
+                                            }else{
+                                                echo $item->dr;
+                                            }
+                                            ?></td>
+
+                                        <td>
+                                            <?php
+                                            if($item->bt1 == null) {
+                                                echo 'ไม่มีผู้ช่วย';
+                                            }else{
+                                               echo $item->bt1;
+                                            }
+                                             ?></td>
+
+                                        <td>
+                                            <?php
+                                            if($item->bt2 == null) {
+                                                echo 'ไม่มีผู้ช่วย';
+                                            }else{
+                                                echo $item->bt2;
+                                            }
+                                            ?></td>
+
+                                        <td style="width: 150px">
                                             <?php
                                             if ($item->comment != null) {
                                                 echo $item->comment;
                                             } else {
-                                                echo 'ไม่มีข้อมูล';
+                                                echo 'ไม่มีรายละเอียด';
                                             } ?>
                                         </td>
                                         <td>{{ $item->treat_date }}</td>
@@ -283,7 +285,7 @@
                     </div>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body" id="payment">
                     <div class="row">
                         <div class="col-xs-12 table-responsive">
                             <table class="table table-bordered">
@@ -380,5 +382,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(function ()
+        {
+
+        $('#history').slimScroll({ height: '150'});
+        $('#quo').slimScroll({ height: '150'});
+        $('#payment').slimScroll({ height: '150'});
+
+        }
+
+        );
+    </script>
 
 @stop
