@@ -8,6 +8,7 @@ use App\Quotations;
 use App\Http\Requests;
 use App\Quotations_detail;
 use App\Sales;
+use Input;
 use mPDF;
 
 class BillController extends Controller
@@ -24,8 +25,8 @@ class BillController extends Controller
        // $mpdf = new mPDF('th', 'A5-L');
         //$mpdf->SetDisplayMode('fullpage');
         $mpdf->ignore_invalid_utf8 = true;
-        //$mpdf->useSubstitutions=false;
-        //$mpdf->simpleTables = true;
+        $mpdf->useSubstitutions=false;
+        $mpdf->simpleTables = true;
         $mpdf->SetHTMLHeader();
        // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
 
@@ -57,6 +58,32 @@ class BillController extends Controller
         $mpdf->WriteHTML(view("bill/billproduct", ['bill'=>$bill]));
         $mpdf->Output('Billproduct.pdf', 'I');
 
+    }
+    public function billByCourse(){
+        $quo_detail = Input::get('quo');
+
+        $quo_de = Quotations_detail::query();
+        foreach($quo_detail as $key => $item){
+            $quo_de->orWhere('quo_de_id','=',$key);
+        }
+        $data = $quo_de->with('Course')->get();
+        $quotations = Quotations::where('quo_id','=',$data[0]->quo_id)
+            ->with('Customer','User','Branch')->get()->first();
+        //return response()->json(compact('quotations','data'));
+
+        $mpdf = new mPDF('th');
+        // $mpdf = new mPDF('th', 'A5-L');
+        //$mpdf->SetDisplayMode('fullpage');
+        $mpdf->ignore_invalid_utf8 = true;
+        $mpdf->useSubstitutions=false;
+        $mpdf->simpleTables = true;
+        $mpdf->SetHTMLHeader();
+        // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
+
+        $mpdf->WriteHTML(view("bill/billByCourse", compact('quotations','data')));
+        $mpdf->Output('Bill.pdf', 'I');
+
+        //dd($data);
     }
 
     public function order()

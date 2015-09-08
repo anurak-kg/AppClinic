@@ -24,12 +24,12 @@ function getNewBillNo()
 {
     $primaryKey = null;
     $sale = \App\Sales::select('bill_number')
-        ->orderBy('sales_id', 'desc')
+        ->orderBy('bill_number', 'desc')
         ->limit(1)
         ->get()
         ->first();
     $quo = \App\Quotations::select('bill_number')
-        ->orderBy('quo_id', 'desc')
+        ->orderBy('bill_number', 'desc')
         ->limit(1)
         ->get()
         ->first();
@@ -164,9 +164,34 @@ function getNewBtPK()
     return createPkFrom('App\Bt', 'bt_id', 8, '8000000', '9999999');
 }
 
+function getCurrentThaiYear()
+{
+    return \Carbon\Carbon::now()->addYear(543)->format("y");
+
+}
+
 function getNewCustomerPK()
 {
-    return createPkFrom('App\Customer', 'cus_id', 9, '0000000', '9999999');
+    $primaryKeyAtt = 'cus_id';
+    $primaryKey = null;
+    $year = getCurrentThaiYear();
+    $minPk = $year.Branch::getCurrentId(). '0000';
+    $maxPk = $year.Branch::getCurrentId(). '9999';
+    //dd($minPk,$maxPk);
+    $count = Customer::where($primaryKeyAtt, '>=', $minPk)
+        ->where($primaryKeyAtt, '<=', $maxPk)->count();
+    if ($count == 0) {
+        $primaryKey = (int)$minPk + 1;
+    } else {
+        $data = Customer::where($primaryKeyAtt, '>=', $minPk)
+            ->where($primaryKeyAtt, '<=', $maxPk)
+            ->orderBy($primaryKeyAtt, 'desc')
+            ->limit(1)
+            ->get()
+            ->first();
+        $primaryKey = $data->$primaryKeyAtt + 1;
+    }
+    return $primaryKey;
 }
 
 function createPkFrom($model, $primaryKeyAtt, $typeNumber, $min, $max)

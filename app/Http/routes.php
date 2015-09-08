@@ -60,6 +60,7 @@ Route::group(['middleware' => 'permission:order-order'], function () {
 
     Route::any('bill/order', 'BillController@order');
     Route::any('bill/request', 'BillController@request');
+    Route::any('bill/by-course', 'BillController@billByCourse');
 
 });
 
@@ -179,6 +180,6 @@ Route::controller('user', 'UserController');
 Route::get('test', function () {
     /*echo factory('App\Customer', 50)->create();
     echo factory('App\User', 20)->create();*/
-  echo zerofill(getOrderBillNo());
+  echo getNewBillNo();
 
 });

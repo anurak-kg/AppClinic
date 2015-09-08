@@ -19,7 +19,6 @@ class PaymentController extends Controller
 {
     private $input;
     private $amount;
-
     private $quo_id;
     private $payment;
     private $quo_detail;
@@ -44,6 +43,7 @@ class PaymentController extends Controller
         // return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
+
 
     public function getSalePay()
     {

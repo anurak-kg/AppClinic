@@ -1844,20 +1844,12 @@
             );
         }
 
-        /*$scope.savePayment = function (index) {
-         var url = '/payment/quosave?quo_id=' + $scope.quo_id + '&receivedAmount=' + $scope.payment[index].receivedAmount +
-         '&course_id=' + $scope.payment[index].course_id;
-         console.log(url);
-         $http.get(url).
-         success(function (data, status, headers, config) {
-         $scope.dataLoading = false;
-         }).error(function (data, status, headers, config) {
-         $scope.dataLoading = false;
-         });
-         };*/
+    });
+    app.controller('paymentIndexController', function ($scope) {
 
 
     });
+
 })
 
 ();
