@@ -24,12 +24,12 @@ function getNewBillNo()
 {
     $primaryKey = null;
     $sale = \App\Sales::select('bill_number')
-        ->orderBy('sales_id', 'desc')
+        ->orderBy('bill_number', 'desc')
         ->limit(1)
         ->get()
         ->first();
     $quo = \App\Quotations::select('bill_number')
-        ->orderBy('quo_id', 'desc')
+        ->orderBy('bill_number', 'desc')
         ->limit(1)
         ->get()
         ->first();
