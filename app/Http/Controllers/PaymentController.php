@@ -19,7 +19,6 @@ class PaymentController extends Controller
 {
     private $input;
     private $amount;
-
     private $quo_id;
     private $payment;
     private $quo_detail;
