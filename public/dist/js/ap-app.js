@@ -29,6 +29,27 @@
             }
         };
     });
+    app.directive('datetimepicker', function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
+                $(element).datepicker({
+                    format: 'yyyy-mm-dd',
+                    language: 'th',
+                    startView: 2,
+                    todayBtn: "linked",
+                    autoclose: true,
+                    todayHighlight: true,
+                    onSelect: function (date) {
+                        ctrl.$setViewValue(date);
+                        ctrl.$render();
+                        scope.$apply();
+                    }
+                });
+            }
+        };
+    });
     app.directive('ngConfirmClick', [
         function () {
             return {
@@ -1748,6 +1769,7 @@
                  console.log($scope.payment.boxMethod);
             if ($scope.payment.boxMethod == "PAID_IN_FULL") {
                 $scope.payment.boxPaidFull = true;
+
                 $scope.payment.received_amount = 0;
                 if($scope.vat == 'true') {
                     $scope.vat_amount = $scope.course.price * $scope.vat_rate / 100;
@@ -1759,14 +1781,7 @@
             }
             if ($scope.payment.boxMethod == "PAY_BY_COURSE") {
                 $scope.payment.boxPaidFull = true;
-                if($scope.vat == 'true'){
-                    $scope.vat_amount = ($scope.course.price / $scope.course.qty) * $scope.vat_rate /100
-                }
-                $scope.payment.minPrice = ($scope.course.price / $scope.course.qty ) + $scope.vat_amount ;
-            }
 
-            if ($scope.payment.boxMethod == "PAY_BY_Transfer") {
-                $scope.payment.boxPaidFull = true;
                 if($scope.vat == 'true'){
                     $scope.vat_amount = ($scope.course.price / $scope.course.qty) * $scope.vat_rate /100
                 }
@@ -1806,9 +1821,9 @@
                 $scope.payment.creditCardBox = false;
             }
             if ($scope.payment.type == "transfer") {
-                $scope.payment.transferBox = true;
+                $scope.payment.boxTransfer = true;
             } else {
-                $scope.payment.transferBox = false;
+                $scope.payment.boxTransfer = false;
             }
         }
         $scope.receiveChange = function () {
