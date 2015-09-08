@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Input;
 use Response;
 use Validator;
 use Zofe\Rapyd\Facades\DataEdit;
+use Zofe\Rapyd\Facades\DataForm;
 use App\Http\Requests;
 use Zofe\Rapyd\Facades\DataGrid;
 
@@ -225,7 +226,7 @@ class CustomerController extends Controller
     public function create()
     {
 
-        $form = DataEdit::source(new Customer());
+        $form = DataForm::create('customer');
         $form->text('cus_name', 'ชื่อ-นามสกุล')->rule('required')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
         $form->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'))->rule('required');
         $form->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'))->rule('required');
@@ -233,17 +234,13 @@ class CustomerController extends Controller
         $form->add('cus_sex', 'เพศ', 'select')->options(Config::get('sex.sex'))->rule('required');
         $form->add('cus_blood', 'กรุ๊ปเลือด', 'select')->options(Config::get('sex.blood'))->rule('required');
         $form->text('cus_code', 'รหัสบัตรประชาชน')->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
-
         $form->text('cus_tel', 'เบอร์โทรศัพทมือถือ*')->rule('required|numeric')->attributes(array('placeholder' => '0xxxxxxxxxx'));
         $form->text('cus_phone', 'เบอร์โทรศัพท์บ้าน')->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
-        $form->text('cus_email', 'E-mail')->rule('required|email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
-
+        $form->text('cus_email', 'E-mail')->rule('email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
         $form->text('cus_height', 'ส่วนสูง')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ ส่วนสูง....'));
         $form->text('cus_weight', 'น้ำหนัก')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
-
         $form->text('allergic', 'โรคประจำตัว')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
         $form->text('disease', 'แพ้ยา')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
-
         $form->text('cus_hno', 'บ้านเลขที่')->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
         $form->text('cus_moo', 'หมู่')->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
         $form->text('cus_soi', 'ซอย/ตรอก')->attributes(array('placeholder' => 'โปรดระบุ ซอย....'));
@@ -252,14 +249,33 @@ class CustomerController extends Controller
         $form->text('cus_district', 'อำเภอ/เขต')->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
         $form->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'));
         $form->text('cus_postal', 'รหัสไปรษณีย์')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
-
         $form->attributes(array("class" => " "));
-
-
-
+        $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new Customer();
             $user->cus_id = Input::get('cus_id');
+            $user->cus_name = Input::get('cus_name');
+            $user->cus_birthday_day = Input::get('cus_birthday_day');
+            $user->cus_birthday_month = Input::get('cus_birthday_month');
+            $user->cus_birthday_year = Input::get('cus_birthday_year');
+            $user->cus_sex = Input::get('cus_sex');
+            $user->cus_blood = Input::get('cus_blood');
+            $user->cus_code = Input::get('cus_code');
+            $user->cus_tel = Input::get('cus_tel');
+            $user->cus_phone = Input::get('cus_phone');
+            $user->cus_email = Input::get('cus_email');
+            $user->cus_height = Input::get('cus_height');
+            $user->cus_weight = Input::get('cus_weight');
+            $user->allergic = Input::get('allergic');
+            $user->disease = Input::get('disease');
+            $user->cus_hno = Input::get('cus_hno');
+            $user->cus_moo = Input::get('cus_moo');
+            $user->cus_soi = Input::get('cus_soi');
+            $user->cus_road = Input::get('cus_road');
+            $user->cus_subdis = Input::get('cus_subdis');
+            $user->cus_district = Input::get('cus_district');
+            $user->cus_province = Input::get('cus_province');
+            $user->cus_postal = Input::get('cus_postal');
             $user->save();
             $form->message("ลงทะเบียนเสร็จสิ้น");
 
@@ -270,7 +286,8 @@ class CustomerController extends Controller
                 'logs_where'=>'Customer',
                 'description'=>'เพิ่มสมาชิก : รหัสสมาชิก '.$user->cus_id
             ]);
-
+            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
+            $form->link("customer", "ย้อนกลับ");
         });
         $form->build();
 
