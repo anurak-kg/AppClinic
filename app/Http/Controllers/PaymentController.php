@@ -45,6 +45,7 @@ class PaymentController extends Controller
         return view('payment.payment', compact('quo'));
     }
 
+
     public function getSalePay()
     {
         $this->sale = Sales::findOrFail(Input::get('sale_id'));
