@@ -34,6 +34,7 @@
                                                 <option ng-selected="true">> การชำระเงิน <</option>
                                                 <option value="PAID_IN_FULL"> ชำระเต็มจำนวน</option>
                                                 <option value="PAY_BY_COURSE"> แบ่งจ่ายตามจำนวนครั้งที่เข้ารักษา
+                                                <option value="PAY_BY_Transfer"> โอนเงิน
                                                 </option>
                                                 <option value="PAYABLE" disabled> ผ่อนจ่าย</option>
                                             @else
@@ -57,6 +58,7 @@
                                                             value="cash">เงินสด
                                                     </option>
                                                     <option value="credit_card">บัตรเครดิต</option>
+                                                    <option value="transfer">โอนเงิน</option>
                                                 </select>
 
                                             </div>
@@ -117,6 +119,27 @@
                                                                placeholder="EDC ID">
                                                     </td>
                                                 </tr>
+
+                                                <tr ng-show="payment.transferBox">
+                                                    <td>เลขที่บัญชี</td>
+                                                    <td>
+                                                        <input type="text" class="form-control"
+                                                               id="received_amount" name="edc"
+                                                               ng-model="payment.edc"
+                                                               placeholder="เลขที่บัญชี">
+                                                    </td>
+                                                </tr>
+
+                                                <tr ng-show="payment.transferBox">
+                                                    <td>เวลาที่โอน</td>
+                                                    <td>
+                                                        <input type="text" class="form-control"
+                                                               id="received_amount" name="edc"
+                                                               ng-model="payment.edc"
+                                                               placeholder="เวลา">
+                                                    </td>
+                                                </tr>
+
                                                 <tr>
                                                     <td>รับเงิน</td>
                                                     <td>

@@ -1765,6 +1765,14 @@
                 $scope.payment.minPrice = ($scope.course.price / $scope.course.qty ) + $scope.vat_amount ;
             }
 
+            if ($scope.payment.boxMethod == "PAY_BY_Transfer") {
+                $scope.payment.boxPaidFull = true;
+                if($scope.vat == 'true'){
+                    $scope.vat_amount = ($scope.course.price / $scope.course.qty) * $scope.vat_rate /100
+                }
+                $scope.payment.minPrice = ($scope.course.price / $scope.course.qty ) + $scope.vat_amount ;
+            }
+
         }
         $scope.init = function (value, vat,vat_rate, quo_id, courseId, qty, pay_by_course,quo_de_id) {
             $scope.payment = [];
@@ -1796,6 +1804,11 @@
                 $scope.payment.creditCardBox = true;
             } else {
                 $scope.payment.creditCardBox = false;
+            }
+            if ($scope.payment.type == "transfer") {
+                $scope.payment.transferBox = true;
+            } else {
+                $scope.payment.transferBox = false;
             }
         }
         $scope.receiveChange = function () {
