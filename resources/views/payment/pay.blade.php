@@ -34,8 +34,7 @@
                                                 <option ng-selected="true">> การชำระเงิน <</option>
                                                 <option value="PAID_IN_FULL"> ชำระเต็มจำนวน</option>
                                                 <option value="PAY_BY_COURSE"> แบ่งจ่ายตามจำนวนครั้งที่เข้ารักษา
-                                                <option value="PAY_BY_Transfer"> โอนเงิน
-                                                </option>
+
                                                 <option value="PAYABLE" disabled> ผ่อนจ่าย</option>
                                             @else
                                                 <option value="PAY_BY_COURSE" ng-selected="true">
@@ -57,8 +56,8 @@
                                                     <option ng-selected="true"
                                                             value="cash">เงินสด
                                                     </option>
-                                                    <option value="credit_card">บัตรเครดิต</option>
                                                     <option value="transfer">โอนเงิน</option>
+                                                    <option value="credit_card">บัตรเครดิต</option>
                                                 </select>
 
                                             </div>
@@ -120,23 +119,50 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr ng-show="payment.transferBox">
+                                                <tr ng-show="payment.boxTransfer">
                                                     <td>เลขที่บัญชี</td>
                                                     <td>
                                                         <input type="text" class="form-control"
-                                                               id="received_amount" name="edc"
-                                                               ng-model="payment.edc"
-                                                               placeholder="เลขที่บัญชี">
+                                                               id="account_transfer" name="id_account"
+                                                               ng-model="payment.id_account"
+                                                               placeholder="เลขที่บัญชี" >
                                                     </td>
                                                 </tr>
 
-                                                <tr ng-show="payment.transferBox">
-                                                    <td>เวลาที่โอน</td>
+                                                <tr ng-show="payment.boxTransfer">
+                                                    <td>วันที่โอน</td>
                                                     <td>
                                                         <input type="text" class="form-control"
-                                                               id="received_amount" name="edc"
-                                                               ng-model="payment.edc"
-                                                               placeholder="เวลา">
+                                                               id="day_transfer" name="transfer_day"
+                                                               ng-model="payment.transfer_day"
+                                                               placeholder="วัน" datepicker>
+                                                    </td>
+                                                </tr>
+
+                                                <tr ng-show="payment.boxTransfer">
+                                                    <td>เวลาที่โอน(โดยประมาณ)</td>
+                                                    <td>
+                                                        <select style="width: 80px" id="hour_transfer" name="transfer_hour" ng-model="payment.transfer_hour" >
+                                                            <option ng-selected="true">
+                                                                <?php echo 'ชม.' ?>
+                                                            </option>
+                                                            @for($i = 01; $i<=24;$i++)
+                                                                <option value="hour">
+                                                                    <?php echo $i; ?>
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+
+                                                        <select style="width: 80px" id="min_transfer"  name="transfer_min" ng-model="payment.transfer_min" >
+                                                            <option ng-selected="true">
+                                                                <?php echo 'นาที' ?>
+                                                            </option>
+                                                            @for($i = 01; $i<=60;$i++)
+                                                                <option value="min">
+                                                                    <?php echo $i; ?>
+                                                                </option>
+                                                            @endfor
+                                                        </select>
                                                     </td>
                                                 </tr>
 
@@ -171,6 +197,7 @@
                                         </div>
                                     </div>
 
+
                                 </form>
                             </fieldset>
                         </div>
@@ -181,4 +208,11 @@
             </div>
         </div>
     </div>
+
+<script>
+    $(function(){
+
+
+    });
+</script>
 @stop
