@@ -90,7 +90,7 @@
                                 @foreach($course as $item)
                                     <tr>
                                         {{--{{dd($cus->quotations[$index]->quotations_detail->course)}}--}}
-                                        <td>{{$index+1}}</td>
+                                        <td>{{$index+=1}}</td>
                                         <td>{{$item->course_name}} จำนวน {{$item->course_qty}} ครั้ง</td>
                                         <td>
                                             @if($item->vat == 'false')
@@ -160,7 +160,7 @@
                                 @foreach($sale as $item)
                                     <tr>
                                         {{--{{dd($sal->sales[$index]->sales_detail[$index]->product->product_name)}}--}}
-                                        <td>{{$index+1}}</td>
+                                        <td>{{$index+=1}}</td>
                                         <td>{{$item->product_name}}</td>
                                         <td>{{$item->product_price}}</td>
                                         <td>{{$item->sales_de_qty}}</td>
@@ -173,7 +173,6 @@
                                         <td><a href="{{url('payment/pay')}}?sales_id={{$item->sales_id}}"
                                                class="btn btn-success">ชำระเงิน</a></td>
                                         <td><input type="checkbox" name="sal[{{$item->sales_id}}]"></td>
-                                        <?php $index++;?>
                                     </tr>
                                 @endforeach
                                 </tbody>
