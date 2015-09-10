@@ -26,15 +26,17 @@ class Payment extends Model
     {
         return $this->belongsTo('\App\Quotations', 'quo_id');
     }
+    public function bill(){
+        return $this->hasmany('\App\Bill','payment_id');
+    }
     public function quotations_detail()
     {
-
         return $this->belongsToMany('App\Quotations_detail','payment_detail','payment_id','quo_de_id')
             ->withPivot('emp_id','branch_id','payment_type','amount','edc_id','card_id','created_at');
     }
     public function sales_detail()
     {
-        return $this->belongsToMany('App\sales_detail','payment_detail','payment_id','sales_de_id')
+            return $this->belongsToMany('App\sales_detail','payment_detail','payment_id','sales_de_id')
             ->withPivot('emp_id','branch_id','payment_type','amount','card_id','created_at');
     }
 }

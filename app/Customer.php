@@ -24,6 +24,9 @@ class Customer extends Model
     public function Branch(){
         return $this->belongsTo('\App\Branch');
     }
+    public function bill(){
+        return $this->hasmany('\App\Bill','cus_id');
+    }
 
     public function course(){
 

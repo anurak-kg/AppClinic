@@ -33,4 +33,8 @@ class Payment_detail extends Model
     {
         return $this->hasMany('\App\Bill_detail');
     }
+    public function bill()
+    {
+        return $this->hasMany('\App\Bill');
+    }
 }

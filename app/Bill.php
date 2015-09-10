@@ -16,6 +16,14 @@ class Bill extends Model
     {
         return $this->belongsTo('\App\User','emp_id');
     }
+    public function custumer()
+    {
+        return $this->belongsTo('\App\Customer','cus_id');
+    }
+    public function payment()
+    {
+        return $this->belongsTo('\App\Payment','payment_id');
+    }
     public function Branch()
     {
         return $this->belongsTo('\App\Branch','branch_id');

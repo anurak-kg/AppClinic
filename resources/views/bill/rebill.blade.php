@@ -87,48 +87,26 @@
                                 </thead>
                                 <tbody>
                                 <?php $index = 0;?>
-                                @foreach($cus as $course)
+                                @foreach($re as $bill)
                                     <tr>
                                         {{--{{dd($cus->quotations[$index]->quotations_detail->course)}}--}}
                                         <td>{{$index+1}}</td>
-                                        <td>{{$cus->quotations[$index]->quotations_detail[$index]->course->course_name}} จำนวน {{$cus->quotations[$index]->quotations_detail[$index]->course->course_qty}} ครั้ง</td>
+                                        <td>{{$re->bill[$index]->bill_id}}</td>
                                         <td>
-                                            @if($cus->vat == 'false')
-                                                {{$cus->quotations[$index]->quotations_detail[$index]->net_price}}
-                                            @else
-                                                {{$cus->quotations[$index]->quotations_detail[$index]->net_price + ($cus->quotations[$index]->quotations_detail[$index]->payment_remain * $cus->vat_rate/100)}}
-                                            @endif
-
-                                        </td>
-
-
-                                        <td>
-                                            @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='REMAIN')
-                                                <span>ผ่อนจ่าย</span>
-                                            @elseif($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
-                                                <span>จ่ายเต็มจำนวน</span>
-                                            @endif
+                                            {{$re->bill[$index]->customer->cus_id}}
                                         </td>
                                         <td>
-                                            @if($cus->vat == 'false')
-                                                {{$cus->quotations[$index]->quotations_detail[$index]->payment_remain}}
-                                            @else
-                                                {{$cus->quotations[$index]->quotations_detail[$index]->payment_remain + ($cus->quotations_detail[$index]->payment_remain * $cus->vat_rate/100)}}
-                                            @endif
+                                            {{$re->bill[$index]->customer->cus_name}}
                                         </td>
                                         <td>
-                                            @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
-                                                <span class="label label-success">จ่ายเงินครบแล้ว</span>
-                                            @else
-                                                <span class="label label-warning">ค้างจ่าย</span>
-                                            @endif
+                                            {{$re->bill[$index]->total}}
                                         </td>
-                                        <td style="text-align: center">
-                                            <input type="checkbox"
-                                                   @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
-                                                   disabled
-                                                   @endif
-                                                   name="cus[{{$cus->quotations[$index]->quotations_detail[$index]->quo_de_id}}]">
+                                        <td>
+                                            {{$re->bill[$index]->bill_date}}
+                                        </td>
+                                        <td>
+                                            <a href="{{url('#')}}?bill_id={{$re->bill[$index]->bill_id}}"
+                                               class="btn btn-default"></i> Print</a>
                                         </td>
                                         <?php $index++;?>
                                     </tr>

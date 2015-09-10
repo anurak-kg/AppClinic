@@ -9,26 +9,36 @@ use App\Quotations;
 use App\Http\Requests;
 use App\Quotations_detail;
 use App\Sales;
+use DB;
 use Input;
 use mPDF;
 use Session;
 
 class BillController extends Controller
 {
-    public function rebill(){
+    public function rebill()
+    {
         $id = null;
         if (Session::get('branch_id') != null) {
             $id = Session::get('branch_id');
         } else {
             $id = Input::get('branch_id');
         }
-        $re = Bill::where('branch_id', $id)->with('payment')
+        /*$re = DB::table('bill', 'payment_detail')->select('bill.bill_id', 'customer.cus_name', 'bill.bill_date', 'customer.cus_id',
+            'bill.total', 'bill.bill_type', 'users.branch_id', 'bill.emp_id')
+            ->join('bill_detail', 'bill_detail.bill_id', '=', 'bill.bill_id')
+            ->join('user', 'user.id', '=', 'bill.emp_id')
+            ->join('customer', 'customer.cus_id', '=', 'bill.cus_id')
+            ->where('user.branch_id', '=', 10)
+            ->get();*/
+        $re = Bill::where('branch_id', $id)->with('payment_detail')
             ->get()
             ->first();
         dd($re);
         //return response()->json($re);
         return view('bill/rebill', compact('re'));
     }
+
     public function index()
     {
         $bill = Quotations_detail::where('quo_de_id', \Input::get('quo_de_id'))
@@ -37,13 +47,13 @@ class BillController extends Controller
         //return response()->json($bill);
 
         $mpdf = new mPDF('th');
-       // $mpdf = new mPDF('th', 'A5-L');
+        // $mpdf = new mPDF('th', 'A5-L');
         //$mpdf->SetDisplayMode('fullpage');
         $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->useSubstitutions=false;
+        $mpdf->useSubstitutions = false;
         $mpdf->simpleTables = true;
         $mpdf->SetHTMLHeader();
-       // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
+        // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
 
         $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill]));
         $mpdf->Output('Bill.pdf', 'I');
@@ -63,39 +73,41 @@ class BillController extends Controller
     {
         $bill = Sales::where('sales_id', \Input::get('sales_id'))
             ->with('product', 'Customer', 'User', 'Branch')->get()->first();
-         //return response()->json($bill);
+        //return response()->json($bill);
 
 
         $mpdf = new mPDF('th');
         //$mpdf = new mPDF('th', array(280, 140),0,0,0,0,0,0,0);
         $mpdf->ignore_invalid_utf8 = true;
         $mpdf->SetHTMLHeader();
-        $mpdf->WriteHTML(view("bill/billproduct", ['bill'=>$bill]));
+        $mpdf->WriteHTML(view("bill/billproduct", ['bill' => $bill]));
         $mpdf->Output('Billproduct.pdf', 'I');
 
     }
-    public function billByCourse(){
+
+    public function billByCourse()
+    {
         $quo_detail = Input::get('quo');
 
         $quo_de = Quotations_detail::query();
-        foreach($quo_detail as $key => $item){
-            $quo_de->orWhere('quo_de_id','=',$key);
+        foreach ($quo_detail as $key => $item) {
+            $quo_de->orWhere('quo_de_id', '=', $key);
         }
         $data = $quo_de->with('Course')->get();
-        $quotations = Quotations::where('quo_id','=',$data[0]->quo_id)
-            ->with('Customer','User','Branch')->get()->first();
+        $quotations = Quotations::where('quo_id', '=', $data[0]->quo_id)
+            ->with('Customer', 'User', 'Branch')->get()->first();
         //return response()->json(compact('quotations','data'));
 
         $mpdf = new mPDF('th');
         // $mpdf = new mPDF('th', 'A5-L');
         //$mpdf->SetDisplayMode('fullpage');
         $mpdf->ignore_invalid_utf8 = true;
-        $mpdf->useSubstitutions=false;
+        $mpdf->useSubstitutions = false;
         $mpdf->simpleTables = true;
         $mpdf->SetHTMLHeader();
         // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
 
-        $mpdf->WriteHTML(view("bill/billByCourse", compact('quotations','data')));
+        $mpdf->WriteHTML(view("bill/billByCourse", compact('quotations', 'data')));
         $mpdf->Output('Bill.pdf', 'I');
 
         //dd($data);
