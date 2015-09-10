@@ -20,4 +20,9 @@ class Bill extends Model
     {
         return $this->belongsTo('\App\Branch','branch_id');
     }
+    public function payment_detail()
+    {
+        return $this->belongsToMany('App\payment_detail','bill_detail','bill_id','payment_de_id')
+            ->withPivot('created_at');
+    }
 }

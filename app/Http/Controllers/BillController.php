@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
 use App\Order;
 use App\Quotations;
 
@@ -10,10 +11,24 @@ use App\Quotations_detail;
 use App\Sales;
 use Input;
 use mPDF;
+use Session;
 
 class BillController extends Controller
 {
-
+    public function rebill(){
+        $id = null;
+        if (Session::get('branch_id') != null) {
+            $id = Session::get('branch_id');
+        } else {
+            $id = Input::get('branch_id');
+        }
+        $re = Bill::where('branch_id', $id)->with('payment')
+            ->get()
+            ->first();
+        dd($re);
+        //return response()->json($re);
+        return view('bill/rebill', compact('re'));
+    }
     public function index()
     {
         $bill = Quotations_detail::where('quo_de_id', \Input::get('quo_de_id'))

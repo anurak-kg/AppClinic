@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Customer;
 use App\Payment_bank;
 use App\Payment_detail;
 use App\Quotations;
@@ -20,6 +21,8 @@ class PaymentController extends Controller
     private $input;
     private $amount;
     private $quo_id;
+    private $cus_id;
+    private $cus;
     private $payment;
     private $quo_detail;
     private $minAmountPay;
@@ -33,15 +36,20 @@ class PaymentController extends Controller
     {
 
         $id = null;
-        if (Session::get('quo_id') != null) {
-            $id = Session::get('quo_id');
+        if (Session::get('cus_id') != null) {
+            $id = Session::get('cus_id');
         } else {
-            $id = Input::get('quo_id');
+            $id = Input::get('cus_id');
         }
-        $quo = Quotations::where('quo_id', $id)->with('course', 'Customer', 'Quotations_detail.payment')->get()->first();
-        //dd($quo);
-        // return response()->json($quo);
-        return view('payment.payment', compact('quo'));
+        $course = Customer::where('cus_id', $id)->with('quotations.quotations_detail.course','quotations.quotations_detail.payment')
+            ->get()
+            ->first();
+        $sale = Customer::where('cus_id',$id)->with('sales.sales_detail.product','sales.sales_detail.payment')
+            ->get()
+            ->first();
+        //dd($sale);
+        //return response()->json($sale);
+        return view('payment.payment', ['cus'=>$course,'sal'=>$sale]);
     }
 
 

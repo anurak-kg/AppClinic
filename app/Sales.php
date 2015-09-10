@@ -30,4 +30,8 @@ class Sales extends Model
     {
         return $this->hasmany('\App\Sales_detail');
     }
+    public function payment()
+    {
+        return $this->hasmany('\App\Payment');
+    }
 }

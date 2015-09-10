@@ -20,6 +20,7 @@ Route::group(['middleware' => 'permission:treatment'], function () {
 Route::group(['middleware' => 'permission:customer-read'], function () {
     Route::any('customer','CustomerController@index');
     Route::any('customer/view','CustomerController@view');
+    Route::any('bill/rebill','BillController@rebill');
     // Ajax Data Controller
     Route::get('data/customer_search', 'DataController@getCustomerList');
     Route::get('data/user_search', 'DataController@getUserList');
