@@ -34,7 +34,7 @@
                 <ul class="treeview-menu">
                     @if(Auth::user()->can('customer-read'))
                         <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>ข้อมูลสมาชิก</a></li>
-                        <li><a href="{{url('bill/rebill')}}?branch_id={{0}}"><i class="fa fa-file-text"></i></i>ข้อมูลการออกใบเสร็จรับเงิน</a></li>
+                        <li><a href="{{url('bill/rebill')}}?branch_id={{10}}"><i class="fa fa-file-text"></i></i>ข้อมูลการออกใบเสร็จรับเงิน</a></li>
                     @endif
                     @if(Auth::user()->can('customer-create'))
                         <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
