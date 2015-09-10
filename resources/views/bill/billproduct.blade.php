@@ -122,15 +122,15 @@
         <tr>
            {{-- {{dd($bill)}}--}}
             <td  width="11.5mm"><?php echo $index += 1?></td>
-            <td width="22mm">{{ $bill->product[0]->product_id }}</td>
-            <td width="95mm">{{ $bill->product[0]->product_name }}    </td>
-            <td width="18mm">{{$qty = $bill->product[0]->pivot->sales_de_qty }}</td>
-            <td width="18mm"><?php echo number_format($price = $bill->product[0]->pivot->sales_de_price)?></td>
-            <?php  number_format($dis1 = $bill->product[0]->pivot->sales_de_discount, 2) ?>
-            <?php  number_format($dis2 = $bill->product[0]->pivot->sales_de_disamount, 2) ?>
+            <td width="22mm">{{ $bill->product[$index]->product_id }}</td>
+            <td width="95mm">{{ $bill->product[$index]->product_name }}    </td>
+            <td width="18mm">{{$qty = $bill->product[$index]->pivot->sales_de_qty }}</td>
+            <td width="18mm"><?php echo number_format($price = $bill->product[$index]->pivot->sales_de_price)?></td>
+            <?php  number_format($dis1 = $bill->product[$index]->pivot->sales_de_discount, 2) ?>
+            <?php  number_format($dis2 = $bill->product[$index]->pivot->sales_de_disamount, 2) ?>
             <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
             <?php  number_format($distotal = (($price * $dis1 / 100) + $dis2))  ?>
-            <td width="30mm"><?php echo number_format($bill->product[0]->pivot->sales_de_net_price,2)  ?></td>
+            <td width="30mm"><?php echo number_format($bill->product[$index]->pivot->sales_de_net_price,2)  ?></td>
         </tr>
         <tr>
             <td></td>

@@ -13,4 +13,8 @@ class Sales_detail extends Model
     public function Product(){
         return $this->belongsTo('\App\Product','product_id');
     }
+    public function payment()
+    {
+        return $this->belongsTo('\App\Payment', 'sales_de_id');
+    }
 }

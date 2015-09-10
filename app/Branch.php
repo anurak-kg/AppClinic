@@ -20,7 +20,9 @@ class Branch extends Model
     {
         return $this->hasMany('App\User');
     }
-
+    public function Bill(){
+        return $this->hasMany('App\Bill');
+    }
     static  public  function  getCurrentId(){
         //dd(\Session::get('branch_id'));
         return \Session::get('branch_id');

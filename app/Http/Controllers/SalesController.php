@@ -56,7 +56,6 @@ class SalesController extends Controller
     {
         $sales = Sales::find($this->getId());
         $sales->sales_total = $this->getTotal();
-
         $sale = Sales_detail::where('sales_id', $this->getId())->get();
         foreach ($sale as $item) {
             $inv = new InventoryTransaction();

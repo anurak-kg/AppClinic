@@ -29,4 +29,12 @@ class Payment_detail extends Model
     {
         return $this->belongsTo('\App\quotations_detail', 'quo_de_id');
     }
+    public function bill_detail()
+    {
+        return $this->hasMany('\App\Bill_detail');
+    }
+    public function bill()
+    {
+        return $this->hasMany('\App\Bill');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Customer;
 use App\Payment_bank;
 use App\Payment_detail;
 use App\Quotations;
@@ -20,6 +21,8 @@ class PaymentController extends Controller
     private $input;
     private $amount;
     private $quo_id;
+    private $cus_id;
+    private $cus;
     private $payment;
     private $quo_detail;
     private $minAmountPay;
@@ -33,15 +36,20 @@ class PaymentController extends Controller
     {
 
         $id = null;
-        if (Session::get('quo_id') != null) {
-            $id = Session::get('quo_id');
+        if (Session::get('cus_id') != null) {
+            $id = Session::get('cus_id');
         } else {
-            $id = Input::get('quo_id');
+            $id = Input::get('cus_id');
         }
-        $quo = Quotations::where('quo_id', $id)->with('course', 'Customer', 'Quotations_detail.payment')->get()->first();
-        //dd($quo);
-        // return response()->json($quo);
-        return view('payment.payment', compact('quo'));
+        $course = Customer::where('cus_id', $id)->with('quotations.quotations_detail.course','quotations.quotations_detail.payment')
+            ->get()
+            ->first();
+        $sale = Customer::where('cus_id',$id)->with('sales.sales_detail.product','sales.sales_detail.payment')
+            ->get()
+            ->first();
+        //dd($sale);
+        //return response()->json($sale);
+        return view('payment.payment', ['cus'=>$course,'sal'=>$sale]);
     }
 
 
@@ -94,6 +102,8 @@ class PaymentController extends Controller
             $this->savePaidInFull();
         } elseif ($this->input['method'] == 'PAY_BY_COURSE') {
             $this->savePayPerCourse();
+        }elseif ($this->input['method'] == 'PAY_BY_Transfer') {
+            $this->savePayPerCourse();
         }
         //var_dump($this->quo);
         // dump($this->totalPrice);
@@ -110,7 +120,7 @@ class PaymentController extends Controller
 
     private function vatCalculate()
     {
-        if ($this->input['method'] == 'PAID_IN_FULL') {
+            if ($this->input['method'] == 'PAID_IN_FULL') {
             $this->totalPrice = (float)$this->quo_detail->payment_remain;
             if ($this->quo->vat == 'true') {
                 $this->setVat(($this->quo_detail->payment_remain * $this->quo->vat_rate / 100));
@@ -120,7 +130,12 @@ class PaymentController extends Controller
             if ($this->quo->vat == 'true') {
                 $this->setVat(($this->quo_detail->net_price / $this->quo_detail->Course->course_qty) * $this->quo->vat_rate / 100);
             }
+        } elseif ($this->input['method'] == 'PAY_BY_Transfer') {
+        $this->totalPrice = (float)$this->quo_detail->payment_remain;
+        if ($this->quo->vat == 'true') {
+            $this->setVat(($this->quo_detail->payment_remain * $this->quo->vat_rate / 100));
         }
+    }
     }
 
 
@@ -156,6 +171,8 @@ class PaymentController extends Controller
 
             } elseif ($this->input['type'] == "credit_card") {
                 $this->saveCredit();
+            } elseif ($this->input['type'] == "transfer") {
+                $this->saveTransfer();
             }
             $this->updateQuoPaymentStatus();
             $this->payment->save();
@@ -199,6 +216,8 @@ class PaymentController extends Controller
             $this->saveCash();
         } elseif ($this->input['type'] == "credit_card") {
             $this->saveCredit();
+        }elseif ($this->input['type'] == "transfer") {
+            $this->saveTransfer();
         }
 
         $this->updateQuoPaymentStatus();
@@ -235,6 +254,27 @@ class PaymentController extends Controller
         $paymentDetail->bank_id = $this->input['bank_id'];
         $paymentDetail->card_id = $this->input['card_id'];
         $paymentDetail->edc_id = $this->input['edc'];
+        $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
+        $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
+        $paymentDetail->save();
+    }
+
+    private function saveTransfer()
+    {
+        $paymentDetail = new Payment_detail();
+        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
+
+        $paymentDetail->payment_id = $this->payment->payment_id;
+        $paymentDetail->payment_type = 'Transfer';
+        $paymentDetail->branch_id = Branch::getCurrentId();
+        $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
+        $paymentDetail->amount = $this->totalPrice;
+        $paymentDetail->vat_amount = $this->getVat();
+        $paymentDetail->bank_id = $this->input['bank_id'];
+        $paymentDetail->id_account = $this->input['id_account'];
+        $paymentDetail->transfer_day = $this->input['transfer_day'];
+        $paymentDetail->transfer_hour = $this->input['transfer_hour'];
+        $paymentDetail->transfer_min = $this->input['transfer_min'];
         $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
         $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
         $paymentDetail->save();

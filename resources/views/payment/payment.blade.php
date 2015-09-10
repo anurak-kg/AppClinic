@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo->quo_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$cus->cus_id}}</h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
@@ -93,54 +93,54 @@
                                 </thead>
                                 <tbody>
                                 <?php $index = 0;?>
-                                @foreach($quo->course as $course)
+                                @foreach($cus as $course)
                                     <tr>
-
+                                        {{--{{dd($cus->quotations[$index]->quotations_detail->course)}}--}}
                                         <td>{{$index+1}}</td>
-                                        <td>{{$course->course_name}} จำนวน {{$course->course_qty}} ครั้ง</td>
+                                        <td>{{$cus->quotations[$index]->quotations_detail[$index]->course->course_name}} จำนวน {{$cus->quotations[$index]->quotations_detail[$index]->course->course_qty}} ครั้ง</td>
                                         <td>
-                                            @if($quo->vat == 'false')
-                                                {{$quo->quotations_detail[$index]->net_price}}
+                                            @if($cus->vat == 'false')
+                                                {{$cus->quotations[$index]->quotations_detail[$index]->net_price}}
                                             @else
-                                                {{$quo->quotations_detail[$index]->net_price + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
+                                                {{$cus->quotations[$index]->quotations_detail[$index]->net_price + ($cus->quotations[$index]->quotations_detail[$index]->payment_remain * $cus->vat_rate/100)}}
                                             @endif
 
                                         </td>
 
 
                                         <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status=='REMAIN')
+                                            @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='REMAIN')
                                                 <span>ผ่อนจ่าย</span>
-                                            @elseif($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
+                                            @elseif($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
                                                 <span>จ่ายเต็มจำนวน</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($quo->vat == 'false')
-                                                {{$quo->quotations_detail[$index]->payment_remain}}
+                                            @if($cus->vat == 'false')
+                                                {{$cus->quotations[$index]->quotations_detail[$index]->payment_remain}}
                                             @else
-                                                {{$quo->quotations_detail[$index]->payment_remain + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
+                                                {{$cus->quotations[$index]->quotations_detail[$index]->payment_remain + ($cus->quotations_detail[$index]->payment_remain * $cus->vat_rate/100)}}
                                             @endif
                                         </td>
                                         <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
+                                            @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
                                                 <span class="label label-success">จ่ายเงินครบแล้ว</span>
                                             @else
                                                 <span class="label label-warning">ค้างจ่าย</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
-                                                <a href="{{url('payment/pay')}}?quo_de_id={{$quo->quotations_detail[$index]->quo_de_id}}"
+                                            @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
+                                                <a href="{{url('payment/pay')}}?quo_de_id={{$cus->quotations->quotations_detail[$index]->quo_de_id}}"
                                                    class="btn btn-success">ชำระเงิน</a>
                                             @endif
                                         </td>
                                         <td style="text-align: center">
                                             <input type="checkbox"
-                                                   @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
+                                                   @if($cus->quotations[$index]->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
                                                    disabled
                                                    @endif
-                                                   name="quo[{{$quo->quotations_detail[$index]->quo_de_id}}]">
+                                                   name="cus[{{$cus->quotations[$index]->quotations_detail[$index]->quo_de_id}}]">
 
                                         </td>
 
@@ -150,6 +150,40 @@
                                     </tr>
                                 @endforeach
 
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <td style="width: 10px">#</td>
+                                        <td>สินค้า</td>
+                                        <td>ราคา/หน่วย</td>
+                                        <td>จำนวน</td>
+                                        <td>vat</td>
+                                        <td>ราคารวม</td>
+                                        <td style="width: 90px">ชำระเงิน</td>
+                                        <td style="width: 20px">ปลิ้นบิล</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php $index = 0;?>
+                                @foreach($sal as $prod)
+                                    <tr>
+                                        {{--{{dd($sal->sales[$index]->sales_detail[$index]->product->product_name)}}--}}
+                                        <td>{{$index+1}}</td>
+                                        <td>{{$sal->sales[$index]->sales_detail[$index]->product->product_name}}</td>
+                                        <td>{{$sal->sales[$index]->sales_detail[$index]->product->product_price}}</td>
+                                        <td>{{$sal->sales[$index]->sales_detail[$index]->sales_de_qty}}</td>
+                                        <td> @if($sal->vat == 'false')
+                                                {{0}}
+                                            @else
+                                                {{$sal->sales[$index]->sales_total * $sal->vat_rate/100}}
+                                            @endif</td>
+                                        <td>{{$sal->sales[$index]->sales_total + ($sal->sales[$index]->sales_total * $sal->vat_rate/100)}}</td>
+                                        <td><a href="{{url('payment/pay')}}?sales_de_id={{$sal->sales[$index]->sales_detail[$index]->sales_de_id}}"
+                                               class="btn btn-success">ชำระเงิน</a></td>
+                                        <td><input type="checkbox" name="sal[{{$sal->sales[$index]->sales_detail[$index]->sales_de_id}}]"></td>
+                                        <?php $index++;?>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
