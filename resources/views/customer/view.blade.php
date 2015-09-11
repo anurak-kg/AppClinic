@@ -387,9 +387,9 @@
         $(function ()
         {
 
-        $('#history').slimScroll({ height: '150'});
-        $('#quo').slimScroll({ height: '150'});
-        $('#payment').slimScroll({ height: '150'});
+        $('#history').slimScroll({ height: '300'});
+        $('#quo').slimScroll({ height: '300'});
+        $('#payment').slimScroll({ height: '300'});
 
         }
 
