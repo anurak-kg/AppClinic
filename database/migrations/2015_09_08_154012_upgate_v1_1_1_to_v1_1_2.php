@@ -24,6 +24,8 @@ class UpgateV111ToV112 extends Migration
      */
     public function down()
     {
-        DB::unprepared("ALTER TABLE `quotations`   DROP COLUMN `sale1` DROP COLUMN `sale2` DROP COLUMN `sale3`");
+        DB::unprepared("ALTER TABLE `quotations`   DROP COLUMN `sale1` ");
+        DB::unprepared("ALTER TABLE `quotations`  DROP COLUMN `sale2`");
+        DB::unprepared("ALTER TABLE `quotations`  DROP COLUMN `sale3`");
     }
 }

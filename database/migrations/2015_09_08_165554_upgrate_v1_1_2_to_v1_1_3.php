@@ -13,7 +13,6 @@ class UpgrateV112ToV113 extends Migration
     public function up()
     {
         DB::unprepared("ALTER TABLE `payment_detail`  ADD COLUMN `bill_number`  int NULL AFTER `vat_amount`");
-        DB::unprepared("ALTER TABLE `order` DROP COLUMN `bill_number`;");
         DB::unprepared("ALTER TABLE `quotations` DROP COLUMN `bill_number`;");
 
     }
@@ -25,7 +24,7 @@ class UpgrateV112ToV113 extends Migration
      */
     public function down()
     {
-        DB::unprepared("ALTER TABLE `payment_detail`    DROP COLUMN `bill_number`");
+        DB::unprepared("ALTER TABLE `payment_detail`  DROP COLUMN `bill_number`");
 
     }
 }

@@ -37,7 +37,7 @@ class UpgateV110ToV111 extends Migration
      */
     public function down()
     {
-        DB::unprepared("ALTER TABLE `order`   DROP COLUMN `bill_number`");
+
 
     }
 }
