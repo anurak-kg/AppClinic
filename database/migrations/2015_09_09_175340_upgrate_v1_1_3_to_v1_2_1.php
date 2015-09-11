@@ -43,8 +43,9 @@ class UpgrateV113ToV121 extends Migration
      */
     public function down()
     {
-        Schema::drop('bill');
         Schema::drop('bill_detail');
+        Schema::drop('bill');
+
         DB::unprepared("ALTER TABLE `payment_detail`    DROP COLUMN `cash`");
         DB::unprepared("ALTER TABLE `payment_detail`    DROP COLUMN `change`");
     }
