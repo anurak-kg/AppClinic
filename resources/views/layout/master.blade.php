@@ -33,7 +33,7 @@
 
 </head>
 
-<body class="skin-purple fixed sidebar-collapse sidebar-mini">
+<body class="skin-purple  sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
