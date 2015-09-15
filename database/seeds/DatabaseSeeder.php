@@ -35,10 +35,12 @@ class DatabaseSeeder extends Seeder
 
 class CustomerTableSeeder extends Seeder
 {
-    public function run(){
+    public function run()
+    {
         DB::table('customer')->delete();
 
         \App\Customer::create([
+            'cus_id' => getNewCustomerPK(),
             'cus_name' => 'อนุรักษ์ กิ่งแก้ว',
             'cus_tel' => '0875430262',
             'cus_email' => 'imannn.99@gmail.com',
@@ -46,9 +48,11 @@ class CustomerTableSeeder extends Seeder
         ]);
     }
 }
+
 class VendorTableSeeder extends Seeder
 {
-    public function run(){
+    public function run()
+    {
         DB::table('vendor')->delete();
 
         \App\Vendor::create([
@@ -61,24 +65,27 @@ class VendorTableSeeder extends Seeder
         ]);
     }
 }
+
 class SettingTableSeeder extends Seeder
 {
-    public function run(){
+    public function run()
+    {
         DB::table('setting')->delete();
 
         DB::table('setting')->insert([
-            ['setting_name' => 'clinicName',        'value' => 'TheRock'],
-            ['setting_name' => 'commission_rate',   'value' => '10'],
-            ['setting_name' => 'vat_mode',          'value' => 'false'], // เปิดใช้ Vat  : true มี vat  false:ไม่มี Vat
-            ['setting_name' => 'vat_rate',              'value' => '7'],
-            ['setting_name' => 'product_day_expire',    'value' => '30'],
-            ['setting_name' => 'order_sell',            'value' => 'FIFO'],
-            ['setting_name' => 'customer_photo_limit',            'value' => '5'],
-            ['setting_name' => 'product_out_stock_can_treat',            'value' => 'false'],
+            ['setting_name' => 'clinicName', 'value' => 'TheRock'],
+            ['setting_name' => 'commission_rate', 'value' => '10'],
+            ['setting_name' => 'vat_mode', 'value' => 'false'], // เปิดใช้ Vat  : true มี vat  false:ไม่มี Vat
+            ['setting_name' => 'vat_rate', 'value' => '7'],
+            ['setting_name' => 'product_day_expire', 'value' => '30'],
+            ['setting_name' => 'order_sell', 'value' => 'FIFO'],
+            ['setting_name' => 'customer_photo_limit', 'value' => '5'],
+            ['setting_name' => 'product_out_stock_can_treat', 'value' => 'false'],
 
         ]);
     }
 }
+
 class UserTableSeeder extends Seeder
 {
 
@@ -86,48 +93,64 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        $root = User::create(['username' => 'admin',
+        $root = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'admin',
             'branch_id' => '10', 'position_id' => 99,
             'name' => 'นาย ประยุท จันโอชา',
             'email' => 'admin@fiin.in.th',
             'password' => bcrypt('1234')]);
         $root->roles()->sync([99]);
 
-        $recp = User::create(['username' => 'reception',
+        $recp = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'reception',
             'branch_id' => '10', 'position_id' => 6,
             'name' => 'นางยิงลักษณ์ ชินวัต',
             'email' => 'reception@fiin.in.th',
             'password' => bcrypt('1234')]);
         $recp->roles()->sync([6]);
-        $manager = User::create(['username' => 'manager',
+        $manager = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'manager',
             'branch_id' => '10', 'position_id' => 5,
             'name' => 'นายชูวิทย์ กมลวิศิษฎ์',
             'email' => 'manager@fiin.in.th',
             'password' => bcrypt('1234')]);
         $manager->roles()->sync([5]);
-        $sale = User::create(['username' => 'sale',
+        $sale = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'sale',
             'branch_id' => '10', 'position_id' => 1,
             'name' => 'sale',
             'email' => 'sale@fiin.in.th']);
         $sale->roles()->sync([1]);
-        $bt = User::create(['username' => 'bt',
+        $bt = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'bt',
             'branch_id' => '10', 'position_id' => 8,
             'name' => 'bt',
             'email' => 'bt@fiin.in.th']);
         $bt->roles()->sync([8]);
-        $doctor = User::create(['username' => 'doctor',
+        $doctor = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'doctor',
             'branch_id' => '10', 'position_id' => 4,
             'name' => 'doctor',
             'email' => 'doctor@fiin.in.th']);
         $doctor->roles()->sync([4]);
-        $it = User::create(['username' => 'it',
-            'branch_id' => '10','position_id' => 11,
+        $it = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'it',
+            'branch_id' => '10', 'position_id' => 11,
             'name' => 'IT',
             'email' => 'IT@fiin.in.th',
             'password' => bcrypt('1234')]);
         $it->roles()->sync([11]);
-        $super = User::create(['username' => 'superadmin',
-            'branch_id' => '10','position_id' => 95,
+        $super = User::create([
+            'id' => getNewEmpId(),
+            'username' => 'superadmin',
+            'branch_id' => '10', 'position_id' => 95,
             'name' => 'superadmin',
             'email' => 'superadmin@fiin.in.th',
             'password' => bcrypt('1234')]);
@@ -135,6 +158,7 @@ class UserTableSeeder extends Seeder
     }
 
 }
+
 class BranchTableSeeder extends Seeder
 {
 
@@ -157,6 +181,7 @@ class BranchTableSeeder extends Seeder
 
 
 }
+
 class ProductTableSeeder extends Seeder
 {
 
@@ -238,6 +263,7 @@ class ProductTableSeeder extends Seeder
     }
 
 }
+
 class CourseTableSeeder extends Seeder
 {
 
@@ -256,9 +282,9 @@ class CourseTableSeeder extends Seeder
             ['course_id' => 'A001',
                 'ct_id' => '1',
                 'course_name' => 'Advence Growth Factors รายครั้ง',
-                'course_detail'=>'บริการหน้าขาว ใส ไร้สิว',
+                'course_detail' => 'บริการหน้าขาว ใส ไร้สิว',
                 'course_price' => '10000.00',
-                'course_qty'=>'1']);
+                'course_qty' => '1']);
         Medicine::create(
             ['course_id' => 'A001',
                 'product_id' => 'b011',
@@ -271,7 +297,7 @@ class CourseTableSeeder extends Seeder
                 'course_name' => 'นวดอโลมา',
                 'course_detail' => 'เป็นการนวดที่ผสมการนาบที่ลงตัวลึกสุดใจ',
                 'course_price' => '2400',
-                'course_qty'=>'1']);
+                'course_qty' => '1']);
         Medicine::create(
             ['course_id' => 'A002',
                 'product_id' => 'b016',
@@ -284,7 +310,7 @@ class CourseTableSeeder extends Seeder
                 'course_name' => 'Fake body',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '70000',
-                'course_qty'=>'5']);
+                'course_qty' => '5']);
 
         Medicine::create(
             ['course_id' => 'A003',
@@ -297,7 +323,7 @@ class CourseTableSeeder extends Seeder
                 'course_name' => 'body scrap',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '12000',
-                'course_qty'=>'5']);
+                'course_qty' => '5']);
         Medicine::create(
             ['course_id' => 'A004',
                 'product_id' => 'ad03',
@@ -314,7 +340,7 @@ class CourseTableSeeder extends Seeder
                 'course_name' => 'face scrap',
                 'course_detail' => 'กำลังอัพเดรต',
                 'course_price' => '12000',
-                'course_qty'=>'5']);
+                'course_qty' => '5']);
         Medicine::create(
             ['course_id' => 'A005',
                 'product_id' => 'b015',
@@ -328,6 +354,7 @@ class CourseTableSeeder extends Seeder
     }
 
 }
+
 class RolePermissionTableSeeder extends Seeder
 {
     public function run()
@@ -368,10 +395,10 @@ class RolePermissionTableSeeder extends Seeder
         $sale->perms()->sync([]);
 
         $po = \App\Models\Role::create(['id' => '2', 'name' => 'PO', 'display_name' => 'พนักงานสั่งซื้อสินค้า']);
-        $po->perms()->sync([5,11]);
+        $po->perms()->sync([5, 11]);
 
         $stock = \App\Models\Role::create(['id' => '3', 'name' => 'Stock', 'display_name' => 'พนักงานจัดการสินค้า']);
-        $stock->perms()->sync([10,17,18]);
+        $stock->perms()->sync([10, 17, 18]);
 
         $doctor = \App\Models\Role::create(['id' => '4', 'name' => 'Doctor', 'display_name' => 'แพทย์']);
         $doctor->perms()->sync([]);
@@ -383,7 +410,7 @@ class RolePermissionTableSeeder extends Seeder
         $manager->perms()->sync([14]);
 
         $recp = \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
-        $recp->perms()->sync([1,2,3,4,6,12,13,16,18,22]);
+        $recp->perms()->sync([1, 2, 3, 4, 6, 12, 13, 16, 18, 22]);
 
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
         $it = \App\Models\Role::create(['id' => '11', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
@@ -393,14 +420,16 @@ class RolePermissionTableSeeder extends Seeder
         $super->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]);
 
         $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
-        $root->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
-
+        $root->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
 
 
     }
 }
-class BankTableSeeder extends Seeder{
-    public  function run(){
+
+class BankTableSeeder extends Seeder
+{
+    public function run()
+    {
         DB::table('payment_bank')->delete();
 
         \App\Payment_bank::create(['bank_name' => 'ธนาคาร ซิตี้']);
