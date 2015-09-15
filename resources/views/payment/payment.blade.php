@@ -96,11 +96,7 @@
                                         <td>{{$index+1}}</td>
                                         <td>{{$course->course_name}} จำนวน {{$course->course_qty}} ครั้ง</td>
                                         <td>
-                                            @if($quo->vat == 'false')
-                                                {{$quo->quotations_detail[$index]->net_price}}
-                                            @else
-                                                {{$quo->quotations_detail[$index]->net_price + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
-                                            @endif
+                                            {{$course->course_price}}
 
                                         </td>
 
