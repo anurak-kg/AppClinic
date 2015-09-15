@@ -94,48 +94,66 @@ class ReportController extends Controller
         $date = explode('to', $rang);
         //var_dump($date);
         $dateTxt = [];
-        if($rang == null){
-           $rang = date('Y/m');
+
+//        $salesdaycourse = DB::select(DB::raw(
+//            "
+//                SELECT
+//                (calendar.datefield) AS DATE,
+//                IFNULL(SUM(total_net_price),0) AS total_sales
+//                FROM
+//                quotations
+//                RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
+//
+//                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang ."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
+//
+//                GROUP BY DATE
+//
+//                ORDER BY DATE ASC
+//            "
+//            , [$rang, $rang]));
+
+        $salesdaycourse = DB::table('quotations')
+            ->select(DB::raw('SUM(quotations.total_net_price) as Total'),DB::raw('Date(quotations.created_at) AS DATE'));
+
+        if ($rang != null) {
+            $salesdaycourse->whereRaw("DATE(quotations.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
+            $dateTxt['start'] = Date::createFromFormat('Y-m-d', trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+
         }
 
-        $salesdaycourse = DB::select(DB::raw(
-            "
-                SELECT
-                (calendar.datefield) AS DATE,
-                IFNULL(SUM(total_net_price),0) AS total_sales
-                FROM
-                quotations
-                RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
+        $data = $salesdaycourse->get();
 
-                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang ."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
 
-                GROUP BY DATE
+        $salesdaypro = DB::table('sales')
+            ->select(DB::raw('SUM(sales.sales_total) as Total'),DB::raw('Date(sales.created_at) AS DATE'));
 
-                ORDER BY DATE ASC
-            "
-            , [$rang, $rang]));
+        if ($rang != null) {
+            $salesdaypro->whereRaw("DATE(sales.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
+            $dateTxt['start'] = Date::createFromFormat('Y-m-d', trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+        }
 
-        $salesdaypro = DB::select(DB::raw(
-            "
-            SELECT
-            calendar.datefield AS DATE,
-            IFNULL(SUM(sales.sales_total),0) AS total_sales
+        $datapro = $salesdaypro->get();
 
-            FROM
-            sales
-            RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
-            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM sales) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM sales))
-            GROUP BY DATE
+//        $salesdaypro = DB::select(DB::raw(
+//            "
+//            SELECT
+//            calendar.datefield AS DATE,
+//            IFNULL(SUM(sales.sales_total),0) AS total_sales
+//
+//            FROM
+//            sales
+//            RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
+//            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM sales) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM sales))
+//            GROUP BY DATE
+//
+//            ORDER BY DATE ASC
+//            "
+//            , [$rang, $rang]));
 
-            ORDER BY DATE ASC
-            "
-            , [$rang, $rang]));
+//        return response()->json($data);
 
-        //return response()->json($salesdaypro);
-
-        $data = $salesdaycourse;
-
-        $datapro = $salesdaypro;
 
         //dd($data);
 
@@ -194,16 +212,13 @@ class ReportController extends Controller
         })->export('xls');
     }else {
             return view('report/salesperday', [
-                'datapro' => $salesdaypro,
-                'datapro1' => $salesdaypro,
+                'datapro' => $datapro,
 
-                'total1' => $this->arrayToChartData($salesdaypro, 'total_sales'),
+                'total1' => $this->arrayToChartData($datapro, 'Total'),
 
-                'data' => $salesdaycourse,
-                'data1' => $salesdaycourse,
+                'data' => $data,
 
-                'name' => $this->arrayToChartData($salesdaycourse, 'DATE'),
-                'total' => $this->arrayToChartData($salesdaycourse, 'total_sales')
+                'total' => $this->arrayToChartData($data, 'Total')
             ]);
         }
 
@@ -296,7 +311,7 @@ class ReportController extends Controller
         $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
         $data = $coursehot->get();
 
-        // return response()->json($data);
+         //return response()->json($coursehot);
 
         if ($type == "excel") {
             Excel::create('สรุปคอร์สที่ขายดีที่สุด', function ($excel) use ($data) {

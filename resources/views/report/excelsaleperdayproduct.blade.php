@@ -10,7 +10,7 @@
     <tr>
 
             <td align="middle">{{$test->DATE}}</td>
-            <td align="middle"><?php echo number_format($test->total_sales), ' บาท' ?></td>
+            <td align="middle"><?php echo number_format($test->Total), ' บาท' ?></td>
 
     </tr>
 @endforeach
