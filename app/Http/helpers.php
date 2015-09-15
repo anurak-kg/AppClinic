@@ -163,6 +163,27 @@ function getNewBtPK()
 {
     return createPkFrom('App\Bt', 'bt_id', 8, '8000000', '9999999');
 }
+function getNewEmpId(){
+    $primaryKeyAtt = 'id';
+    $primaryKey = null;
+    $minPk = '10000';
+    $maxPk = '99999';
+    //dd($minPk,$maxPk);
+    $count = User::where($primaryKeyAtt, '>=', $minPk)
+        ->where($primaryKeyAtt, '<=', $maxPk)->count();
+    if ($count == 0) {
+        $primaryKey = (int)$minPk + 1;
+    } else {
+        $data = User::where($primaryKeyAtt, '>=', $minPk)
+            ->where($primaryKeyAtt, '<=', $maxPk)
+            ->orderBy($primaryKeyAtt, 'desc')
+            ->limit(1)
+            ->get()
+            ->first();
+        $primaryKey = $data->$primaryKeyAtt + 1;
+    }
+    return $primaryKey;
+}
 
 function getCurrentThaiYear()
 {
@@ -175,8 +196,8 @@ function getNewCustomerPK()
     $primaryKeyAtt = 'cus_id';
     $primaryKey = null;
     $year = getCurrentThaiYear();
-    $minPk = $year.Branch::getCurrentId(). '0000';
-    $maxPk = $year.Branch::getCurrentId(). '9999';
+    $minPk = Branch::getCurrentId().$year. '0000';
+    $maxPk = Branch::getCurrentId().$year. '9999';
     //dd($minPk,$maxPk);
     $count = Customer::where($primaryKeyAtt, '>=', $minPk)
         ->where($primaryKeyAtt, '<=', $maxPk)->count();

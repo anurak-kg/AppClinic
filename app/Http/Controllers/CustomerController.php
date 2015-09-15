@@ -253,7 +253,7 @@ class CustomerController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new Customer();
-            $user->cus_id = Input::get('cus_id');
+            $user->cus_id = getNewCustomerPK();
             $user->cus_name = Input::get('cus_name');
             $user->cus_birthday_day = Input::get('cus_birthday_day');
             $user->cus_birthday_month = Input::get('cus_birthday_month');
