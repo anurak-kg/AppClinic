@@ -8,10 +8,15 @@
     <!-- ห้ามลบ -->
     <script src="/js/app.js"></script>
     <script src="/dist/js/ap-app.js"></script>
+
     <link href="/css/all.css" rel="stylesheet" type="text/css"/>
     <link href="/css/app.css" rel="stylesheet" type="text/css"/>
     <!-- //ห้ามลบ -->
 
+    <script src="/dist/js/script.js"></script>
+    <script src="/dist/js/datetime-picker.js"></script>
+    <script src="/dist/js/ui-bootstrap.tpls.js"></script>
+    <script src="/dist/js/style.css" rel="stylesheet" type="text/css"></script>
 
     <link media="all" type="text/css" rel="stylesheet"
           href="http://www.rapyd.com/packages/zofe/rapyd/assets/redactor/css/redactor.css">
@@ -29,6 +34,9 @@
     <![endif]-->
 
     <link href="/dist/css/skins/skin-purple.min.css" rel="stylesheet" type="text/css"/>
+    {{--datetime angular--}}
+    <script src="/dist/js/datetime-picker.js"></script>
+    <link href="/dist/js/style.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
