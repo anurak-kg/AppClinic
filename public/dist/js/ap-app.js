@@ -34,18 +34,8 @@
             restrict: 'A',
             require: 'ngModel',
             link: function (scope, element, attrs, ctrl) {
-                $(element).datepicker({
-                    format: 'yyyy-mm-dd',
-                    language: 'th',
-                    startView: 2,
-                    todayBtn: "linked",
-                    autoclose: true,
-                    todayHighlight: true,
-                    onSelect: function (date) {
-                        ctrl.$setViewValue(date);
-                        ctrl.$render();
-                        scope.$apply();
-                    }
+                $(element).datetimepicker({
+
                 });
             }
         };

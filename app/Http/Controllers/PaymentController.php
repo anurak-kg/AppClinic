@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 use App\Branch;
-use App\Customer;
 use App\Payment_bank;
 use App\Payment_detail;
 use App\Quotations;
@@ -18,8 +17,6 @@ class PaymentController extends Controller
     private $input;
     private $amount;
     private $quo_id;
-    private $cus_id;
-    private $cus;
     private $payment;
     private $quo_detail;
     private $minAmountPay;
@@ -31,38 +28,40 @@ class PaymentController extends Controller
     public function getIndex()
     {
         $id = null;
-        if (Session::get('cus_id') != null) {
-            $id = Session::get('cus_id');
+        if (Session::get('quo_id') != null) {
+            $id = Session::get('quo_id');
         } else {
-            $id = Input::get('cus_id');
+            $id = Input::get('quo_id');
         }
-//        $course = Customer::where('cus_id', $id)->with('quotations.quotations_detail.course','quotations.quotations_detail.payment')
-//            ->get()
-//            ->first();
+        $quo = Quotations::where('quo_id', $id)->with('course', 'Customer', 'Quotations_detail.payment')->get()->first();
+        //dd($quo);
+        // return response()->json($quo);
+        return view('payment.payment', compact('quo'));
+    }
+
+    public function getPaymentHistory(){
 
         $course = DB::table('quotations_detail')
-                    ->select('course.course_name','course.course_qty','quotations_detail.net_price','quotations_detail.payment_remain',
-                        'payment.payment_status','quotations.vat','quotations.vat_rate','quotations.cus_id')
-                    ->join('course','quotations_detail.course_id','=','course.course_id')
-                    ->join('payment','quotations_detail.quo_de_id','=','payment.quo_de_id')
-                    ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id')
-                    ->get();
-
-//        $sale = Customer::where('cus_id',$id)->with('sales.sales_detail.product','sales.sales_detail.payment')
-//            ->get()
-//            ->first();
+            ->select('course.course_name','course.course_qty','quotations_detail.net_price','quotations_detail.payment_remain',
+                'payment.payment_status','quotations.vat','quotations.vat_rate','quotations.cus_id')
+            ->join('course','quotations_detail.course_id','=','course.course_id')
+            ->join('payment','quotations_detail.quo_de_id','=','payment.quo_de_id')
+            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id')
+            ->get();
 
         $sale = DB::table('sales_detail')
             ->select('product.product_name','product.product_price','sales_detail.sales_de_qty','sales.sales_total'
-            ,'sales_detail.sales_id','sales.vat','sales.vat_rate')
+                ,'sales_detail.sales_id','sales.vat','sales.vat_rate')
             ->join('sales','sales_detail.sales_id','=','sales.sales_id')
             ->join('product','sales_detail.product_id','=','product.product_id')
             ->get();
 
         //dd($sale);
         //return response()->json($course);
-        return view('payment.payment', ['course'=>$course,'sale'=>$sale]);
+
+        return view('payment.paymenthistory', ['course'=>$course,'sale'=>$sale]);
     }
+
     public function getSalePay()
     {
         $this->sale = Sales::findOrFail(Input::get('sale_id'));

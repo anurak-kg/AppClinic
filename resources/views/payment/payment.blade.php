@@ -54,10 +54,13 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$course[0]->cus_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo->quo_id}}</h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
+
+                            <a class="btn btn-warning" href="{{url('payment/paymenthistory')}}">พิมพ์ใบเสร็จ</a>
+
                         </div>
                     </div>
 
@@ -65,7 +68,7 @@
                         @if( Session::get('message') != null )
                             <div class="alert alert-success alert-dismissable">
                                 <h4><i class="icon fa fa-check"></i> {{Session::get('headTxt')}} !</h4>
-                                {{Session::get('message')}}.
+                                {{Session::get('message')}}
                             </div>
                         @endif
 
@@ -73,108 +76,77 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <td style="width: 10px"><b>#</b></td>
-                                    <td><b>คอร์ส</b></td>
-                                    <td><b>ราคา</b></td>
-                                    <td><b>ประเภทการจ่าย</b></td>
-                                    <td><b>ยอดค้างชำระ</b></td>
-                                    <td><b>สถานะการจ่ายเงิน</b></td>
+                                    <td style="width: 10px">#</td>
+                                    <td>คอร์ส</td>
+                                    <td>ราคา</td>
+                                    <td>ประเภทการจ่าย</td>
+                                    <td>ยอดค้างชำระ</td>
+                                    <td>สถานะการจ่ายเงิน</td>
 
-                                    <td style="width: 90px"><b>ชำระเงิน</b></td>
-                                    <td style="width: 20px"><b>ปริ้นบิล</b></td>
+                                    <td style="width: 90px">ชำระเงิน</td>
+                                    {{--<td style="widthdth: 20px">ปลิ้นบิล</td>--}}
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $index = 0;?>
-                                @foreach($course as $item)
+                                @foreach($quo->course as $course)
                                     <tr>
-                                        {{--{{dd($cus->quotations[$index]->quotations_detail->course)}}--}}
-                                        <td>{{$index+=1}}</td>
-                                        <td>{{$item->course_name}} จำนวน {{$item->course_qty}} ครั้ง</td>
+
+                                        <td>{{$index+1}}</td>
+                                        <td>{{$course->course_name}} จำนวน {{$course->course_qty}} ครั้ง</td>
                                         <td>
-                                            @if($item->vat == 'false')
-                                                {{$item->net_price}}
+                                            @if($quo->vat == 'false')
+                                                {{$quo->quotations_detail[$index]->net_price}}
                                             @else
-                                                {{$item->net_price + ($item->payment_remain * $item->vat_rate/100)}}
+                                                {{$quo->quotations_detail[$index]->net_price + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
                                             @endif
 
                                         </td>
 
+
                                         <td>
-                                            @if($item->payment_status=='REMAIN')
+                                            @if($quo->quotations_detail[$index]->payment->payment_status=='REMAIN')
                                                 <span>ผ่อนจ่าย</span>
-                                            @elseif($item->payment_status=='FULLY_PAID')
+                                            @elseif($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
                                                 <span>จ่ายเต็มจำนวน</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($item->vat == 'false')
-                                                {{$item->payment_remain}}
+                                            @if($quo->vat == 'false')
+                                                {{$quo->quotations_detail[$index]->payment_remain}}
                                             @else
-                                                {{$item->payment_remain + ($item->payment_remain * $item->vat_rate/100)}}
+                                                {{$quo->quotations_detail[$index]->payment_remain + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
                                             @endif
                                         </td>
                                         <td>
-                                            @if($item->payment_status=='FULLY_PAID')
+                                            @if($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
                                                 <span class="label label-success">จ่ายเงินครบแล้ว</span>
                                             @else
                                                 <span class="label label-warning">ค้างจ่าย</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if($item->payment_status!='FULLY_PAID')
-                                                <a href="{{url('payment/pay')}}?quo_de_id={{$item->quo_de_id}}"
+                                            @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
+                                                <a href="{{url('payment/pay')}}?quo_de_id={{$quo->quotations_detail[$index]->quo_de_id}}"
                                                    class="btn btn-success">ชำระเงิน</a>
                                             @endif
                                         </td>
-                                        <td style="text-align: center">
-                                            <input type="checkbox"
-                                                   @if($item->payment_status!='FULLY_PAID')
-                                                   disabled
-                                                   @endif
-                                                   name="cus[{{$item->quo_de_id}}]">
+                                        {{--<td style="text-align: center">--}}
+                                            {{--<input type="checkbox"--}}
+                                                   {{--@if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')--}}
+                                                   {{--disabled--}}
+                                                   {{--@endif--}}
+                                                   {{--name="quo[{{$quo->quotations_detail[$index]->quo_de_id}}]">--}}
 
-                                        </td>
+                                        {{--</td>--}}
+
+                                        <?php $index++;?>
+
 
                                     </tr>
                                 @endforeach
 
-                                </tbody>
-
-                                <thead>
-
-                                <tr>
-                                    <td style="width: 10px"><b>#</b></td>
-                                    <td><b>สินค้า</b></td>
-                                    <td><b>ราคา/หน่วย</b></td>
-                                    <td><b>จำนวน</b></td>
-                                    <td><b>Vat</b></td>
-                                    <td><b>ราคารวม</b></td>
-                                    <td style="width: 50px"><b>ชำระเงิน</b></td>
-                                    <td style="width: 40px"><b>ปริ้นบิล</b></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php $index = 0;?>
-                                @foreach($sale as $item)
-                                    <tr>
-                                        {{--{{dd($sal->sales[$index]->sales_detail[$index]->product->product_name)}}--}}
-                                        <td>{{$index+=1}}</td>
-                                        <td>{{$item->product_name}}</td>
-                                        <td>{{$item->product_price}}</td>
-                                        <td>{{$item->sales_de_qty}}</td>
-                                        <td> @if($item->vat == 'false')
-                                                {{0}}
-                                            @else
-                                                {{$item->sales_total * $item->vat_rate/100}}
-                                            @endif</td>
-                                        <td>{{$item->sales_total + ($item->sales_total * $item->vat_rate/100)}}</td>
-                                        <td><a href="{{url('payment/pay')}}?sales_id={{$item->sales_id}}"
-                                               class="btn btn-success">ชำระเงิน</a></td>
-                                        <td><input type="checkbox" name="sal[{{$item->sales_id}}]"></td>
-                                    </tr>
-                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -185,9 +157,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>
-                                        <button type="submit" class="btn btn-default">พิมพ์</button>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<button type="submit" class="btn btn-default">พิมพ์</button>--}}
+                                    {{--</td>--}}
 
                                 </tr>
                                 </tfoot>

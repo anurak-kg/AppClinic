@@ -135,7 +135,7 @@
                                                         <input type="text" class="form-control"
                                                                id="day_transfer" name="transfer_day"
                                                                ng-model="payment.transfer_day"
-                                                               placeholder="วัน" datepicker>
+                                                               placeholder="วัน" datetimepicker>
                                                     </td>
                                                 </tr>
 
