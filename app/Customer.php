@@ -10,6 +10,7 @@ class Customer extends Model
 
     protected $table = 'customer';
     protected $primaryKey = 'cus_id';
+    public $incrementing = false;
 
     public function Quotations()
     {

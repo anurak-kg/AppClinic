@@ -8,6 +8,7 @@ class Quotations extends Model
 
     protected $table = 'quotations';
     protected $primaryKey = 'quo_id';
+    public $incrementing = false;
 
 
 
