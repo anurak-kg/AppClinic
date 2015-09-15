@@ -7,11 +7,10 @@
     <td>จำนวน</td>
 </tr>
 @foreach($data as $test)
+    {{--{{dd($test->Total)}}--}}
     <tr>
-
         <td align="middle">{{$test->coursename}}</td>
-        <td align="middle"
-            style="width: 850px;"><?php echo number_format($test->Total)?></td>
+        <td align="middle"><?php echo number_format($test->Total)?></td>
     </tr>
 @endforeach
 

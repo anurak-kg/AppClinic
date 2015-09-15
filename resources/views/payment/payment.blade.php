@@ -59,7 +59,7 @@
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
 
-                            <a class="btn btn-warning" href="{{url('payment/history')}}">พิมพ์ใบเสร็จ</a>
+                            <a class="btn btn-warning" href="{{url('payment/history')}}?quo_de_id={{$quo->cus_id}}">พิมพ์ใบเสร็จ</a>
 
                         </div>
                     </div>

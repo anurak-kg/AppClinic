@@ -26,6 +26,7 @@ class PaymentController extends Controller
     private $totalPrice;
     private $vat = 0;
     private $sale;
+    private $pay;
     public function getIndex()
     {
 
@@ -64,13 +65,20 @@ class PaymentController extends Controller
 
         $quo = Quotations::where('cus_id', $id)->with('quotations_detail.course','quotations_detail.payment.payment_detail')
             ->get();
-        //$sale = Customer::where('cus_id',$id)->with('sales.sales_detail.product','sales.sales_detail.payment')
-        //   ->get();
-        //dd($sale);
-        //return response()->json($quo);
-        return view('payment.paymenthistory', compact('quo'));
+        $sale = Sales::where('cus_id',$id)->with('sales_detail.product','payment.payment_detail')
+           ->get();
+        //dd($pay);
+        //return response()->json($sale);
+        return view('payment.paymenthistory', compact('quo','sale'));
     }
-
+    public function getPrint(){
+        $id = Input::get('cus_id');
+        $pay = Payment::where('cus_id',$id)->with('payment_detail','quotations_detail.course','sales_detail')
+        ->get();
+        //dd($pay);
+        //return response()->json($pay);
+        return view('payment.printbill',compact('pay'));
+    }
     public function getSalePay()
     {
         $this->sale = Sales::findOrFail(Input::get('sale_id'));
