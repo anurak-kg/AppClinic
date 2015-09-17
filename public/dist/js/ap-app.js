@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select']);
+    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select','ui.bootstrap.datetimepicker']);
     app.directive('onLastRepeat', function () {
         return function (scope, element, attrs) {
             if (scope.$last) setTimeout(function () {
@@ -29,17 +29,7 @@
             }
         };
     });
-    app.directive('datetimepicker', function () {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, element, attrs, ctrl) {
-                $(element).datetimepicker({
 
-                });
-            }
-        };
-    });
     app.directive('ngConfirmClick', [
         function () {
             return {
@@ -1754,6 +1744,19 @@
         $scope.vat = 7;
         $scope.quo_id = null;
         $scope.vat_amount = 0;
+        $scope.data = [];
+
+        var that = this;
+
+        this.isOpen = false;
+
+        this.openCalendar = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            that.isOpen = true;
+        };
+
         $scope.paymentMethod = function () {
             $scope.payment.buttonPay = true;
                  console.log($scope.payment.boxMethod);

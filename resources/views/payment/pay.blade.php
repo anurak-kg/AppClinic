@@ -130,39 +130,14 @@
                                                 </tr>
 
                                                 <tr ng-show="payment.boxTransfer">
-                                                    <td>วันที่โอน</td>
-                                                    <td>
-                                                        <input type="text" class="form-control"
-                                                               id="day_transfer" name="transfer_day"
-                                                               ng-model="payment.transfer_day"
-                                                               placeholder="วัน" datetimepicker>
-                                                    </td>
-                                                </tr>
-
-                                                <tr ng-show="payment.boxTransfer">
                                                     <td>เวลาที่โอน(โดยประมาณ)</td>
                                                     <td>
-                                                        <select style="width: 80px" id="hour_transfer" name="transfer_hour" ng-model="payment.transfer_hour" >
-                                                            <option ng-selected="true">
-                                                                <?php echo 'ชม.' ?>
-                                                            </option>
-                                                            @for($i = 01; $i<=24;$i++)
-                                                                <option value="hour">
-                                                                    <?php echo $i; ?>
-                                                                </option>
-                                                            @endfor
-                                                        </select>
-
-                                                        <select style="width: 80px" id="min_transfer"  name="transfer_min" ng-model="payment.transfer_min" >
-                                                            <option ng-selected="true">
-                                                                <?php echo 'นาที' ?>
-                                                            </option>
-                                                            @for($i = 01; $i<=60;$i++)
-                                                                <option value="min">
-                                                                    <?php echo $i; ?>
-                                                                </option>
-                                                            @endfor
-                                                        </select>
+                                                        <p class="input-group">
+                                                        <input type="text" class="form-control" datetime-picker="dd MMM yyyy HH:mm" ng-model="myDate" is-open="isOpen"  />
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                        </p>
                                                     </td>
                                                 </tr>
 

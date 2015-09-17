@@ -14,6 +14,12 @@ class UpgrateV121ToV122 extends Migration
     {
         DB::unprepared("ALTER TABLE `bill`  ADD COLUMN `payment_id` int NULL AFTER `emp_id`,
                                             ADD COLUMN `cus_id` int NULL AFTER `payment_id`;");
+
+        DB::unprepared("ALTER TABLE `payment_detail`
+                        DROP COLUMN `transfer_hour`,
+                        DROP COLUMN `transfer_min`,
+                        CHANGE COLUMN `transfer_day` `transfer_date`  datetime NOT NULL AFTER `id_account`;
+                        ");
     }
 
     /**
