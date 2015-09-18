@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$course[0]->cus_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$item->cus_id}}</h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
@@ -74,10 +74,9 @@
                                 {{Session::get('message')}}.
                             </div>
                         @endif
-
                         <div class="col-md-12 ">
                             @foreach($quo as $item)
-                                รหัสกรสั่งศซื้อ {{$item->quo_id}}
+                                รหัสการสั่งซื้อ {{$item->quo_id}}
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -88,11 +87,10 @@
                                         <td><b>ยอดค้างชำระ</b></td>
                                         <td><b>สถานะการจ่ายเงิน</b></td>
                                         <td style="width: 90px"><b>ชำระเงิน</b></td>
-                                        <td style="width: 20px"><b></b></td>
                                     </tr>
                                     </thead>
                                     <?php $index = 1;?>
-
+                                    {{dd($item->quotations_detail)}}
                                     @foreach($item->quotations_detail as $detail)
                                         <tr>
                                             <td>{{$index}}</td>
@@ -119,32 +117,16 @@
                                                        class="btn btn-success">ชำระเงิน</a>
                                                 @endif
                                             </td>
-                                            <td style="text-align: center">
-                                                <input type="checkbox"
-                                                       @if($detail->payment->payment_status!='FULLY_PAID')
-                                                       disabled
-                                                       @endif
-                                                       name="cus[{{$item->quo_de_id}}]">
-
-                                            </td>
-
                                         </tr>
                                         <?php $index++;?>
                                     @endforeach
-
-
                                 </table>
                             @endforeach
-
-
                         </div>
                     </div>
-
                     <div class="box-footer">
-
                     </div>
                 </div>
-
             </div>
         </form>
     </div>
