@@ -8,6 +8,7 @@ class Bill extends Model
 {
     protected $table = 'bill';
     protected $primaryKey = 'bill_id';
+
     public function bill_detail()
     {
         return $this->hasMany('\App\Bill_detail');
@@ -30,7 +31,7 @@ class Bill extends Model
     }
     public function payment_detail()
     {
-        return $this->belongsToMany('App\payment_detail','bill_detail','bill_id','payment_de_id')
-            ->withPivot('created_at');
+        return $this->belongsTo('App\Payment_detail','payment_de_id');
     }
+
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bill_detail extends Model
 {
-    protected $table = 'bill-detail';
+    protected $table = 'bill_detail';
     protected $primaryKey = 'bill_de_id';
     public function payment_detail()
     {
