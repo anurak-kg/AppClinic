@@ -41,8 +41,8 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Quotations_detail::where('quo_de_id', \Input::get('quo_de_id'))
-            ->with('course', 'Quotations.Customer', 'Quotations.User', 'Quotations.Branch')->get()->first();
+        $bill = Bill::where('bill_id', \Input::get('bill_id'))
+            ->with('bill_detail.payment_detail.payment.quotations_detail.Course', 'custumer')->get();
 
         //return response()->json($bill);
 
@@ -55,7 +55,7 @@ class BillController extends Controller
         $mpdf->SetHTMLHeader();
         // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
 
-        $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill]));
+        $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill[0]]));
         $mpdf->Output('Bill.pdf', 'I');
 
     }
