@@ -77,7 +77,7 @@ class SalesController extends Controller
             'logs_where'=>'Sales',
             'description'=>'ขายสินค้า เลขที่การขาย :' . $sales->sales_id
         ]);
-        return redirect('sales')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+        return redirect("payment/print" . "?cus_id=" . $sales->cus_id);
     }
 
     public function getTotal()
