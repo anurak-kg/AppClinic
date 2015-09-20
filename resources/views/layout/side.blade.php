@@ -72,8 +72,8 @@
                                 </li>
                                 <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>สต๊อกสินค้า</a>
                                 </li>
-                                <li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>
-                                </li>
+                                {{--<li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>--}}
+                                {{--</li>--}}
                             @endif
                         </ul>
                     </li>

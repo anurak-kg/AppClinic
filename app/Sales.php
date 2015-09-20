@@ -28,10 +28,10 @@ class Sales extends Model
     }
     public function Sales_detail()
     {
-        return $this->hasmany('\App\Sales_detail');
+        return $this->hasmany('\App\Sales_detail','sales_id');
     }
     public function payment()
     {
-        return $this->hasmany('\App\Payment');
+        return $this->hasmany('\App\Payment','sales_id');
     }
 }

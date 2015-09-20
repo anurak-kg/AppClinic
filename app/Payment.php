@@ -16,7 +16,7 @@ class Payment extends Model
     }
     public function sales()
     {
-        return $this->belongsTo('\App\Sales', 'sales_id');
+        return $this->belongsTo('\App\Sales','sales_id');
     }
     public function customer()
     {

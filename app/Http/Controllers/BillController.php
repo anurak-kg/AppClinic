@@ -45,9 +45,12 @@ class BillController extends Controller
     public function index()
     {
         $bill = Bill::where('bill_id', \Input::get('bill_id'))
-            ->with('bill_detail.payment_detail.payment.quotations_detail.Course','bill_detail.payment_detail.payment.customer')->get();
+            ->with(
+                'bill_detail.payment_detail.payment.quotations_detail.Course',
+                'bill_detail.payment_detail.payment.customer',
+                'bill_detail.payment_detail.payment.sales.product')->get();
         $customer = $bill[0]->bill_detail[0]->payment_detail->payment->customer;
-        //return response()->json($customer);
+       // return response()->json($bill);
 
         $mpdf = new mPDF('th');
         // $mpdf = new mPDF('th', 'A5-L');
@@ -73,9 +76,9 @@ class BillController extends Controller
 
     public function printBillSaleToHtml()
     {
-        $bill = Sales::where('sales_id', \Input::get('sales_id'))
-            ->with('product', 'Customer', 'User', 'Branch')->get()->first();
-        //return response()->json($bill);
+        $bill = Bill::where('bill_id', \Input::get('bill_id'))
+            ->with('bill_detail.payment_detail.payment.sales.product', 'bill_detail.payment_detail.payment.customer')->get();
+        return response()->json($bill);
 
 
         $mpdf = new mPDF('th');
