@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Bill;
 use App\Branch;
 use App\Customer;
 use App\Payment_bank;
@@ -41,9 +42,13 @@ class PaymentController extends Controller
         // return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
-
+    public function getPrintBill(){
+        $id = Input::get('cus_id');
+        $bill = Bill::where('cus_id',$id)->with('payment.payment_detail')->get();
+        //return response()->json($bill);
+        return view('payment.printbill',compact('bill'));
+    }
     public function getHistory(){
-
         /*$course = DB::table('quotations_detail')
             ->select('course.course_name','course.course_qty','quotations_detail.net_price','quotations_detail.payment_remain',
                 'payment.payment_status','quotations.vat','quotations.vat_rate','quotations.cus_id')
@@ -51,25 +56,22 @@ class PaymentController extends Controller
             ->join('payment','quotations_detail.quo_de_id','=','payment.quo_de_id')
             ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id')
             ->get();
-
         $sale = DB::table('sales_detail')
             ->select('product.product_name','product.product_price','sales_detail.sales_de_qty','sales.sales_total'
                 ,'sales_detail.sales_id','sales.vat','sales.vat_rate')
             ->join('sales','sales_detail.sales_id','=','sales.sales_id')
             ->join('product','sales_detail.product_id','=','product.product_id')
             ->get();*/
-
         //dd($course);
         //return response()->json($course);
         $id = Input::get('cus_id');
-
         $quo = Quotations::where('cus_id', $id)->with('quotations_detail.course','quotations_detail.payment.payment_detail')
             ->get();
         $sale = Sales::where('cus_id',$id)->with('sales_detail.product','payment.payment_detail')
-           ->get();
+            ->get();
         //dd($pay);
-        //return response()->json($sale);
-        return view('payment.paymenthistory', compact('quo','sale'));
+        //return response()->json($quo);
+        return view('payment/paymenthistory', compact('quo','sale'));
     }
     public function getPrint(){
         $id = Input::get('cus_id');

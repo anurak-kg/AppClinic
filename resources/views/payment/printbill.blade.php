@@ -55,6 +55,17 @@
 
         /* end .squaredThree */
     </style>
+    <div ng-controller="paymentController" id="payment">
+        <script type="text/ng-template" id="payment.html">
+            <div class="modal-header">
+                <h3 class="modal-title">รายการขาย</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                </div>
+            </div>
+        </script>
     <div class="row">
         <form method="get" target="_blank" action="{{url('bill/by-course/')}}">
             <div class="col-md-12">
@@ -77,10 +88,8 @@
                                     <thead>
                                     <tr>
                                         <td style="width: 10px"><b>#</b></td>
-                                        <td><b>คอร์ส</b></td>
+                                        <td><b>รายการสั่งซื้อ</b></td>
                                         <td><b>จำนวนเงินที่จ่าย</b></td>
-                                        <td><b>ประเภทการจ่าย</b></td>
-                                        <td><b>สถานะการจ่ายเงิน</b></td>
                                         <td><b>วันที่</b></td>
                                         <td style="width: 20px"><b></b></td>
                                     </tr>
@@ -88,24 +97,17 @@
                                     <tbody>
                                     <?php $index = 1;?>
 
-                                    @foreach($pay as $item)
-
+                                    @foreach($bill as $item)
+                                      {{--  {{dd($item->payment_detail[0]->amount)}}--}}
                                         <tr>
                                             <td>{{$index}}</td>
-                                            <td>{{$item->quotations_detail->course->course_name}}</td>
-                                            <td>{{$item->payment_detail->amount}}</td>
-                                            <td>@if($item->payment_type=='PAID_IN_FULL')
-                                                    <span class="label label-success">เต็มจำนวน</span>
-                                                @elseif($item->payment_type=='PAYABLE')
-                                                    <span class="label label-success">ผ่อนชำระ</span>
-                                                @elseif($item->payment_type=='PAY_BY_COURSE')
-                                                    <span class="label label-success">แบ่งตามจำนวนครั้ง@endif</span>
-                                            </td>
-                                            <td>@if($item->payment_status=='REMAIN')
-                                                    <span class="label label-warning">ค้างชำระ</span>
-                                                @elseif($item->payment_status=='FULLY_PAID')
-                                                    <span class="label label-success">ครบ</span>
-                                                @endif</td>
+                                            <td>@if($item->quotations_detail!=null)
+                                                    {{$item->quotations_detail->course->course_name}}
+                                            @elseif($item->sales_detail!=null)
+                                                    <a href="{{url('#')}}?sales_id={{$item->sales_detail->sales_id}}">
+                                                    {{$item->sales_detail->sales_id}}</a>
+                                            @endif</td>
+                                            <td>{{$item->payment_detail[0]->amount}}</td>
                                             <td>
                                                 {{$item->created_at}}
                                             </td>
@@ -114,6 +116,7 @@
                                     <?php $index++;?>
                                     @endforeach
                                 </table>
+                            **หมายเหตุ ในกรณีรายการสั่งซื้อเป็นตัวเลขให้คลิกเพื่อดูรายละเอียด
                         </div>
                     </div>
                     <div class="box-footer">
@@ -121,5 +124,6 @@
                 </div>
             </div>
         </form>
+    </div>
     </div>
 @stop
