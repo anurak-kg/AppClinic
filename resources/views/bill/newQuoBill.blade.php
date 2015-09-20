@@ -120,25 +120,24 @@
 
     <?php $total = 0 ?>
     <?php $index = 0 ?>
-    @foreach($bill as $test)
-        <?php $test->bill->bill_detail->bill_de_id ?>
+
     <table class="course">
-        @foreach($test as $item)
+        @foreach($bill->bill_detail as $item)
+
         <tr>
             <td  width="11.5mm"><?php echo $index += 1?></td>
-            <td width="22mm">{{$item->bill->bill_detail[0]->payment_detail->payment->quotations_detail->course->course_id }}</td>
-            <td width="95mm">{{ $item->bill->bill_detail[0]->payment_detail->payment->quotations_detail->course->course_name }}      </td>
+            <td width="22mm">{{$item->payment_detail->payment->quotations_detail->course->course_id }}</td>
+            <td width="95mm">{{ $item->payment_detail->payment->quotations_detail->course->course_name }}      </td>
             <td width="18mm">1</td>
-            <td width="18mm"><?php echo number_format($subtotal = $item->bill->bill_detail[0]->payment_detail->payment->quotations_detail->course->course_price)?></td>
-            <?php  number_format($dis1 = $bill->bill_detail[0]->payment_detail->payment->quotations_detail->quo_de_discount, 2) ?>
-            <?php  number_format($dis2 = $bill->bill_detail[0]->payment_detail->payment->quotations_detail->quo_de_disamount, 2) ?>
+            <td width="18mm"><?php echo number_format($subtotal = $item->payment_detail->payment->quotations_detail->course->course_price)?></td>
+            <?php  number_format($dis1 = $item->payment_detail->payment->quotations_detail->quo_de_discount, 2) ?>
+            <?php  number_format($dis2 = $item->payment_detail->payment->quotations_detail->quo_de_disamount, 2) ?>
             <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
             <?php  number_format($subtotal - $distotal, 2) ?>
-            <td width="30mm"><?php echo number_format($total += ($subtotal - $distotal)) ?></td>
+            <td width="30mm"><?php echo number_format($total = ($subtotal - $distotal)) ?></td>
         </tr>
        @endforeach
     </table>
-    @endforeach
 </div>
 
 
