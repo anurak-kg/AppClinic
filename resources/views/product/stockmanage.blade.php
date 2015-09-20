@@ -13,7 +13,7 @@
             <div class="box box-primary">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">รายการสต๊อกสินค้า</h2>
+                    <h2 class="box-title">ตัดสต๊อกสินค้า</h2>
 
                 </div>
 
@@ -47,7 +47,8 @@
                             <table class="table table-bordered" id="stock_table" >
                                 <thead>
                                 <tr>
-                                    <th data-checkbox="true">สาขา</th>
+                                    <th></th>
+                                    <th>สาขา</th>
                                     <th>รหัสสินค้า</th>
                                     <th>สินค้า</th>
                                     <th>จำนวน</th>
@@ -55,6 +56,9 @@
                                 </thead>
                                 @foreach($stock as $item)
                                     <tr>
+                                        <td>
+                                            <input type="checkbox">
+                                        </td>
                                         <td>{{ $item->branch_name }}</td>
 
                                         <td>{{ $item->product_id }}</td>
