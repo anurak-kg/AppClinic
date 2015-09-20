@@ -20,7 +20,7 @@ class Payment extends Model
     }
     public function customer()
     {
-        return $this->belongsTo('\App\User', 'cus_id');
+        return $this->belongsTo('\App\Customer', 'cus_id','cus_id');
     }
     public function quotations()
     {

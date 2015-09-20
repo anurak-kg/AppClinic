@@ -98,21 +98,21 @@
     </div>
     <div class="detail_box">
         <div class="box customer_box">
-            <div class="box cus_name_box">{{ $bill->custumer->cus_name }}</div>
-            <div class="box customer_address_box">{{ $bill->custumer->cus_hno }}
-                {{ $bill->custumer->cus_moo }}
-                {{ $bill->custumer->cus_soi }}
-                {{ $bill->custumer->cus_road }}
-                {{ $bill->custumer->cus_subdis }}
-                {{ $bill->custumer->cus_district }}
-                {{ $bill->custumer->cus_province }}
-                {{ $bill->custumer->cus_postal }}
-                {{ $bill->custumer->cus_tel }}
-                {{ $bill->custumer->cus_phone }}</div>
+            <div class="box cus_name_box">{{ $customer->cus_name }}</div>
+            <div class="box customer_address_box">{{ $customer->cus_hno }}
+                {{ $customer->cus_moo }}
+                {{ $customer->cus_soi }}
+                {{ $customer->cus_road }}
+                {{ $customer->cus_subdis }}
+                {{ $customer->cus_district }}
+                {{ $customer->cus_province }}
+                {{ $customer->cus_postal }}
+                {{ $customer->cus_tel }}
+                {{ $customer->cus_phone }}</div>
 
         </div>
         <div class="box sale_box">
-            <div class="box customer_id_box"> {{ $bill->custumer->cus_id }}</div>
+            <div class="box customer_id_box"> {{ $customer->cus_id }}</div>
             <div class="box customer_sale_box"> {{ $bill->emp_id }}</div>
         </div>
     </div>

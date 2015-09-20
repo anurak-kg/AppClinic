@@ -45,9 +45,9 @@ class BillController extends Controller
     public function index()
     {
         $bill = Bill::where('bill_id', \Input::get('bill_id'))
-            ->with('bill_detail.payment_detail.payment.quotations_detail.Course', 'custumer')->get();
-
-        //return response()->json($bill);
+            ->with('bill_detail.payment_detail.payment.quotations_detail.Course','bill_detail.payment_detail.payment.customer')->get();
+        $customer = $bill[0]->bill_detail[0]->payment_detail->payment->customer;
+        //return response()->json($customer);
 
         $mpdf = new mPDF('th');
         // $mpdf = new mPDF('th', 'A5-L');
@@ -58,7 +58,7 @@ class BillController extends Controller
         $mpdf->SetHTMLHeader();
         // $mpdf->WriteHTML(view("bill/bill", ['bill' => $bill]));
 
-        $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill[0]]));
+        $mpdf->WriteHTML(view("bill/newQuoBill", ['bill' => $bill[0],'customer'=>$customer]));
         $mpdf->Output('Bill.pdf', 'I');
 
     }

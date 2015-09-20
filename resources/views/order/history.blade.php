@@ -56,7 +56,7 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+     $(document).ready(function () {
             $('#history_table').DataTable({
                 "language": {
                     "url": "/Thai.json"
