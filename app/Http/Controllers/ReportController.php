@@ -691,6 +691,71 @@ class ReportController extends Controller
 
     }
 
+//report คอมมิชชั่น ยอดขาย โอนเงิน
+    public function reportCommissionTranfer()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $comcash = DB::table('payment_detail')
+            ->select(DB::raw('users.name as name'),'quotations.sale_id','payment_detail.payment_type',DB::raw('Sum(payment_detail.amount+payment_detail.amount*7/100) as Total'))
+            ->join('quotations','quotations.quo_id','=','quotations.quo_id')
+            ->join('users','users.id','=','quotations.sale_id')
+            ->where('payment_detail.payment_type','=','Transfer');
+        if ($rang != null) {
+            $comcash->whereRaw("DATE(payment_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $comcash->groupBy('name')->orderBy('Total', 'desc');
+
+        $data = $comcash->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('สรุป Commission โอนเงิน', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcommissionTranfer',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/commissionTransfer', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'Total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
+
     //report คอมมิชชั่น ยอดขาย Credit
     public function reportCommissionCredit()
     {
