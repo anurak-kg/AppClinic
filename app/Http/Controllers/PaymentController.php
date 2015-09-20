@@ -42,12 +42,6 @@ class PaymentController extends Controller
         // return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
-    public function getPrintBill(){
-        $id = Input::get('cus_id');
-        $bill = Bill::where('cus_id',$id)->with('payment.payment_detail')->get();
-        //return response()->json($bill);
-        return view('payment.printbill',compact('bill'));
-    }
     public function getHistory(){
         /*$course = DB::table('quotations_detail')
             ->select('course.course_name','course.course_qty','quotations_detail.net_price','quotations_detail.payment_remain',
@@ -73,13 +67,22 @@ class PaymentController extends Controller
         //return response()->json($quo);
         return view('payment/paymenthistory', compact('quo','sale'));
     }
+    public function getDetail(){
+        $id = Input::get('id');
+        $sale = Sales::where('sales_id',$id)->with('sales_detail.product')
+            ->get();
+        //return response()->json($sale);
+        return view('payment.salesdetail',compact('sale'));
+    }
     public function getPrint(){
         $id = Input::get('cus_id');
-        $pay = Payment::where('cus_id',$id)->with('payment_detail','quotations_detail.course','sales_detail')
+        $pay = Payment::where('cus_id',$id)->with('payment_detail','quotations_detail.course','sales_detail.product')
+        ->get();
+        $sale = Sales::where('sales_id',1030000002)->with('sales_detail.product')
         ->get();
         //dd($pay);
-        //return response()->json($pay);
-        return view('payment.printbill',compact('pay'));
+        //return response()->json($sale);
+        return view('payment.printbill',compact('pay','sale'));
     }
     public function getSalePay()
     {
