@@ -1846,7 +1846,7 @@
         $scope.print = function(){
             setTimeout(function () {
                 location.reload()
-            }, 100);        }
+            }, 300);        }
 
     });
 })
