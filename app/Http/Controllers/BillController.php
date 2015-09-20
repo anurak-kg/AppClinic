@@ -59,7 +59,6 @@ class BillController extends Controller
         $mpdf->Output('Bill.pdf', 'I');
 
     }
-
     public function product()
     {
 

@@ -56,16 +56,6 @@
         /* end .squaredThree */
     </style>
     <div ng-controller="paymentController" id="payment">
-        <script type="text/ng-template" id="payment.html">
-            <div class="modal-header">
-                <h3 class="modal-title">รายการขาย</h3>
-            </div>
-
-            <div class="modal-body">
-                <div class="row">
-                </div>
-            </div>
-        </script>
     <div class="row">
         <form method="get" target="_blank" action="{{url('bill/by-course/')}}">
             <div class="col-md-12">
@@ -97,14 +87,14 @@
                                     <tbody>
                                     <?php $index = 1;?>
 
-                                    @foreach($bill as $item)
+                                    @foreach($pay as $item)
                                       {{--  {{dd($item->payment_detail[0]->amount)}}--}}
                                         <tr>
                                             <td>{{$index}}</td>
                                             <td>@if($item->quotations_detail!=null)
                                                     {{$item->quotations_detail->course->course_name}}
                                             @elseif($item->sales_detail!=null)
-                                                    <a href="{{url('#')}}?sales_id={{$item->sales_detail->sales_id}}">
+                                                    <a  ng-click="open({{$item->sales_detail->sales_id}})">
                                                     {{$item->sales_detail->sales_id}}</a>
                                             @endif</td>
                                             <td>{{$item->payment_detail[0]->amount}}</td>
