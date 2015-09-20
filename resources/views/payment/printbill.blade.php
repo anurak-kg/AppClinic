@@ -55,14 +55,14 @@
 
         /* end .squaredThree */
     </style>
-    <div ng-controller="paymentController" id="payment">
-        <div class="row">
-            <form method="get" target="_blank" action="{{url('bill/print-bill/')}}">
-                <div class="col-md-12">
-                    <div class="box box-default ">
-                        <div class="box-header with-border">
-                            <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay->cus_id}}</h2>
-                        </div>
+    <div ng-controller="printBillController" id="payment">
+    <div class="row">
+        <form method="get" target="_blank" action="{{url('bill/print-bill/')}}" ng-submit="print()">
+            <div class="col-md-12">
+                <div class="box box-default ">
+                    <div class="box-header with-border">
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay->cus_id}}</h2>
+                    </div>
 
                         <div class="box-body">
                             @if( Session::get('message') != null )
@@ -121,6 +121,8 @@
                         </div>
                         <div class="box-footer">
                         </div>
+                    </div>
+                    <div class="box-footer">
                     </div>
                 </div>
             </form>

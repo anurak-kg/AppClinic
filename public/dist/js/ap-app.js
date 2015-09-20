@@ -1858,7 +1858,13 @@
 
 
     });
+    app.controller('printBillController', function ($scope) {
+        $scope.print = function(){
+            setTimeout(function () {
+                location.reload()
+            }, 300);        }
 
+    });
 })
 
 ();
