@@ -1028,7 +1028,7 @@
         }
         $scope.save = function () {
             if ($scope.product.length == 0) {
-                alert("ยังไม่มีการเพิ่มคอร์ส");
+                alert("ยังไม่มีการเพิ่มสินค้า");
             }
             else {
                 $scope.open();
@@ -1737,7 +1737,7 @@
         }
 
     });
-    app.controller('paymentController', function ($scope) {
+    app.controller('paymentController', function ($scope,$modal) {
         $scope.payment = [];
         $scope.box = [];
         $scope.vat_rate = null;
@@ -1836,6 +1836,22 @@
                 '_blank' // <- This is what makes it open in a new window.
             );*/
         }
+        $scope.open = function (sales_id) {
+        $scope.modalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: '/payment/detail/?id='+sales_id,
+            controller: 'paymentController',
+            scope: $scope
+
+        });
+        $scope.modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+        });
+        };
+        $scope.cancel = function () {
+            $scope.modalInstance.dismiss();
+        };
 
     });
     app.controller('paymentIndexController', function ($scope) {

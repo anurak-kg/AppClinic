@@ -49,7 +49,7 @@
                             <td>{{$customer->cus_tel}}</td>
                             <td>{{(date('Y')+543) - $customer->cus_birthday_year }} ปี</td>
                             <td align="middle">
-                                <a href="{{url('payment')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
+                                <a href="{{url('payment/history')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
                                     <i class="fa fa-balance-scale"></i>ชำระเงิน </a></td>
                             <td align="middle">
                                 <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">

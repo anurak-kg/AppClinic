@@ -33,7 +33,7 @@ class Payment_detail extends Model
     }
     public function bill_detail()
     {
-        return $this->hasMany('\App\Bill_detail');
+        return $this->belongsTo('\App\Bill_detail','payment_de_id','payment_de_id');
     }
     public function bill()
     {

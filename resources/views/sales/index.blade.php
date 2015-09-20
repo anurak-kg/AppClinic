@@ -4,72 +4,64 @@
 @section('content')
     <div ng-controller="salesController" id="sales" ng-init="init('{{$data->vat}}',{{$data->vat_rate}})">
         <script type="text/ng-template" id="payment.html">
-                <div class="modal-header">
-                    <h3 class="modal-title">ชำระเงิน</h3>
-                </div>
-
-                <div class="modal-body">
-                    <div class="row">
-
+            <div class="modal-header">
+                <h3 class="modal-title">ชำระเงิน</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-12">
-                            <div class="col-md-12">
-                                <label for="total">ประเภทการชำระ</label>
-                                <select class="form-control" disabled ng-model="paymentType">
-                                    <option value="cash" selected>เงินสด</option>
-                                </select>
-
-                            </div>
-                            <div class="col-md-12">
-                                <label for="total">ยอดที่ต้องชำระ</label>
-                                <input name="total" ng-model="finalPrice"
-                                       class="form-control input-lg"
-                                       type="number" id="total"
-                                       value="@{{ getFinalPrice() }}"
-                                       disabled/>
-
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="cashInput">รับเงิน</label>
-                                <input name="cashInput" class=" form-control input-lg" ng-model="cashInput" type="number"
-                                       id="cashInput"/>
-                                <button class="btn" ng-click="cashAdd(1000)">+1000</button>
-                                <button class="btn" ng-click="cashAdd(500)">+500</button>
-                                <button class="btn" ng-click="cashAdd(100)">+100</button>
-                                <button class="btn" ng-click="cashAdd(20)">+20</button>
-                                <button class="btn" ng-click="cashAdd(10)">+10</button>
-                                <button class="btn" ng-click="cashAdd(5)">+5</button>
-                                <button class="btn" ng-click="cashAdd(1)">+1</button>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <label for="withdrawn">เงินทอน</label>
-                                <input name="withdrawn"
-                                       class="form-control input-lg"
-                                       type="number" id="withdrawn"
-                                       value="@{{getFinalPrice() - cashInput}}"
-                                       disabled
-                                        /></div>
+                            <label for="total">ประเภทการชำระ</label>
+                            <select class="form-control" disabled ng-model="paymentType">
+                                <option value="cash" selected>เงินสด</option>
+                            </select>
                         </div>
+                        <div class="col-md-12">
+                            <label for="total">ยอดที่ต้องชำระ</label>
+                            <input name="total" ng-model="finalPrice"
+                                   class="form-control input-lg"
+                                   type="number" id="total"
+                                   value="@{{ getFinalPrice() }}"
+                                   disabled/>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="cashInput">รับเงิน</label>
+                            <input name="cashInput" class=" form-control input-lg" ng-model="cashInput" type="number"
+                                   id="cashInput"/>
+                            <button class="btn" ng-click="cashAdd(1000)">+1000</button>
+                            <button class="btn" ng-click="cashAdd(500)">+500</button>
+                            <button class="btn" ng-click="cashAdd(100)">+100</button>
+                            <button class="btn" ng-click="cashAdd(20)">+20</button>
+                            <button class="btn" ng-click="cashAdd(10)">+10</button>
+                            <button class="btn" ng-click="cashAdd(5)">+5</button>
+                            <button class="btn" ng-click="cashAdd(1)">+1</button>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="withdrawn">เงินทอน</label>
+                            <input name="withdrawn"
+                                   class="form-control input-lg"
+                                   type="number" id="withdrawn"
+                                   value="@{{getFinalPrice() - cashInput}}"
+                                   disabled
+                                    /></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    {{-- <button class="btn btn-success" ng-click="payment()">ชำระเงิน</button>--}}
-                    <button class="btn btn-success"
-                            ng-disabled="cashInput<finalPrice"
-                            ng-click="paymentAndPrint({{$data->sales_id}})" >ชำระเงิน
-                        พร้อมปลิ้นบิล
-                    </button>
-                    <button class="btn btn-danger" ng-click="cancel()">ยกเลิก</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                {{-- <button class="btn btn-success" ng-click="payment()">ชำระเงิน</button>--}}
+                <button class="btn btn-success"
+                        ng-disabled="cashInput<finalPrice"
+                        ng-click="paymentAndPrint({{$data->sales_id}})">ชำระเงิน
+                    พร้อมปลิ้นบิล
+                </button>
+                <button class="btn btn-danger" ng-click="cancel()">ยกเลิก</button>
+            </div>
         </script>
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>Success!</h4>
-
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
@@ -79,23 +71,19 @@
                     <div class="panel-heading with-border">
                         <h2 class="panel-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
-
                     <div class="panel-body">
                         เลขที่การขายสินค้า : <strong>{{$data->sales_id}}</strong> <br>
                         เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
                         สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
                         พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
                     </div>
-
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="panel panel-success">
                     <div class="panel-heading with-border">
                         <h2 class="panel-title"><i class="fa fa-users"></i> ข้อมูลลูกค้า</h2>
                     </div>
-
                     <div class="panel-body">
                         <div class="customerSearchBox" ng-hide="boxSearch"
                                 >
@@ -103,7 +91,6 @@
                                    type="search"
                                    placeholder="ระบุ ชื่อลูกค้า หรือ รหัสลูกค้า">
                         </div>
-
                         <div class="customer" ng-show="boxSearch">
                             <ul>
                                 <li>รหัสลูกค้า | <span class="sale"><strong>@{{customer.cus_id}}</strong></span>.</li>
@@ -113,20 +100,16 @@
                                             class="customer"><strong>@{{ customer.tel }}</strong></span><br>
                                     <span><strong><a href="{{url('sales/removecustomer')}}">
                                                 เปลียนลูกค้า</a></strong></span>
-
                                 </li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-
                 <div class="panel panel-info">
-
                     <div class="panel-heading with-border">
                         <h2 class="panel-title"><i class="fa fa-medkit"></i> สินค้า</h2>
                     </div>
@@ -146,10 +129,8 @@
                                             <i class="fa fa-plus-circle"></i> จัดการสินค้า
                                         </a>
                                     </div>
-
                                     <div class="col-md-1">
                                         <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
-
                                     </div>
                                 </div>
                                 <div class="row">
@@ -160,7 +141,6 @@
                                                         ng-click="deleteById(item.product_id)"><i
                                                             class="fa fa-times"></i>
                                                 </button>
-
                                             </td>
                                             <td data-title="'#'" style="width: 10px">
                                                 @{{$index+1}}
@@ -196,8 +176,6 @@
                                             <td data-title="'ราคารวม'" style="width:140px;text-align: center">
                                                 @{{(item.sales_de_price -((item.sales_de_price*item.sales_de_discount/100 )+stringToInt(item.sales_de_disamount))) * item.sales_de_qty | number:2}}
                                             </td>
-
-
                                         </tr>
                                         <tr>
                                             <td colspan="7" class="total-price">ยอดรวม:</td>
@@ -208,44 +186,30 @@
                                             <td>@{{ getDiscount() | number:2}} บาท</td>
                                         </tr>
                                         @if($data->vat== "true")
-
-                                        <tr>
-                                            <td colspan="7" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
-                                            <td>@{{ getVat() | number:2}} บาท
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="7" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
+                                                <td>@{{ getVat() | number:2}} บาท
+                                                </td>
+                                            </tr>
                                         @endif
                                         <tr>
                                             <td colspan="7" class="total-price">ยอดสุทธิ:</td>
-                                            <td> @{{ getFinalPrice() | number:2}} บาท                                            </td>
+                                            <td> @{{ getFinalPrice() | number:2}} บาท</td>
                                         </tr>
                                     </table>
-
                                         <span class="pull-right col-lg-1">
                                         <a ng-click="open()" class="btn btn-md btn-success pull-right"><i
                                                     class="fa fa-credit-card "> ชำระเงิน </i></a>
                                             </span>
-
-
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
-
-
-                <!-- /.col -->
-
             </div>
         </div>
-
         <script type="text/javascript">
             $(document).ready(function () {
-
                 var productDb = new Bloodhound({
                     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                     queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -263,7 +227,6 @@
                         wildcard: '%QUERY'
                     }
                 });
-
                 customerDb.initialize();
                 $('.customer-input').typeahead({
                             hint: true,
@@ -323,9 +286,7 @@
                             }
                             console.log(product);
                             angular.element(document.getElementById('sales')).scope().pushProduct(product);
-
                         })
-
             });
         </script>
 @stop

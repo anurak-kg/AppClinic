@@ -27,7 +27,7 @@ class Payment extends Model
         return $this->belongsTo('\App\Quotations', 'quo_id');
     }
     public function bill(){
-        return $this->hasmany('\App\Bill','payment_id');
+        return $this->belongsTo('\App\Bill','payment_id');
     }
     public function quotations_detail()
     {

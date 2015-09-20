@@ -113,7 +113,7 @@
                                                 @endif</td>
                                             <td>
                                                 @if($item->payment_status!='FULLY_PAID')
-                                                    <a href="{{url('payment/pay')}}?quo_de_id={{$item->quo_de_id}}"
+                                                    <a href="{{url('payment/pay')}}?quo_de_id={{$detail->quo_de_id}}"
                                                        class="btn btn-success">ชำระเงิน</a>
                                                 @endif
                                             </td>

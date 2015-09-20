@@ -56,22 +56,22 @@
         /* end .squaredThree */
     </style>
     <div ng-controller="paymentController" id="payment">
-    <div class="row">
-        <form method="get" target="_blank" action="{{url('bill/print-bill/')}}">
-            <div class="col-md-12">
-                <div class="box box-default ">
-                    <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay->cus_id}}</h2>
-                    </div>
+        <div class="row">
+            <form method="get" target="_blank" action="{{url('bill/print-bill/')}}">
+                <div class="col-md-12">
+                    <div class="box box-default ">
+                        <div class="box-header with-border">
+                            <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay->cus_id}}</h2>
+                        </div>
 
-                    <div class="box-body">
-                        @if( Session::get('message') != null )
-                            <div class="alert alert-success alert-dismissable">
-                                <h4><i class="icon fa fa-check"></i> {{Session::get('headTxt')}} !</h4>
-                                {{Session::get('message')}}.
-                            </div>
-                        @endif
-                        <div class="col-md-12 ">
+                        <div class="box-body">
+                            @if( Session::get('message') != null )
+                                <div class="alert alert-success alert-dismissable">
+                                    <h4><i class="icon fa fa-check"></i> {{Session::get('headTxt')}} !</h4>
+                                    {{Session::get('message')}}.
+                                </div>
+                            @endif
+                            <div class="col-md-12 ">
 
                                 รหัสการชำระเงิน {{$pay->payment_id}}
                                 <table class="table table-bordered">
@@ -81,42 +81,49 @@
                                         <td><b>รายการสั่งซื้อ</b></td>
                                         <td><b>จำนวนเงินที่จ่าย</b></td>
                                         <td><b>วันที่</b></td>
-                                        <td style="width: 20px;text-align: center"><button type="submit" class="btn btn-danger">ปลิ้นบิล</button> </td>
+                                        <td style="width: 20px;text-align: center">
+                                            <button type="submit" class="btn btn-danger">ปลิ้นบิล</button>
+                                        </td>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $index = 1;?>
 
                                     @foreach($pay as $item)
-                                      {{--  {{dd($item->payment_detail[0]->amount)}}--}}
+                                        {{--  {{dd($item->payment_detail[0]->amount)}}--}}
                                         <tr>
                                             <td>{{$index}}</td>
                                             <td>@if($item->quotations_detail!=null)
                                                     {{$item->quotations_detail->course->course_name}}
-                                            @elseif($item->sales_detail!=null)
-                                                    <a  ng-click="open({{$item->sales_detail->sales_id}})">
-                                                    {{$item->sales_detail->sales_id}}</a>
-                                            @endif</td>
+                                                @elseif($item->sales_detail!=null)
+                                                    <a ng-click="open({{$item->sales_detail->sales_id}})">
+                                                        {{$item->sales_detail->sales_id}}</a>
+                                                @endif</td>
                                             <td>{{$item->payment_detail[0]->amount}}</td>
                                             <td>
                                                 {{$item->created_at}}
                                             </td>
-                                            <td>
-                                                <input type="checkbox"  name="pay_detail[{{$item->payment_detail[0]->payment_de_id}}]">
+                                            <td align="middle">@if($item->payment_detail[0]->bill_detail===null)
+                                                    <input type="checkbox"
+                                                           name="pay_detail[{{$item->payment_detail[0]->payment_de_id}}]">
+                                                    @elseif($item->payment_detail[0]->bill_detail!=null)
+                                                    <a href="/bill/bill?bill_id={{$item->payment_detail[0]->bill_detail->bill_id}}" class="btn btn-md btn-success pull-right">เลขที่ใบเสร็จ <?php echo zerofill(($item->payment_detail[0]->bill_detail->bill_id)) ?></a>
+                                                    @endif
                                             </td>
                                         </tr>
-                                    </tbody>
-                                    <?php $index++;?>
+                                        <?php $index++;?>
                                     @endforeach
+                                    </tbody>
+
                                 </table>
-                            **หมายเหตุ ในกรณีรายการสั่งซื้อเป็นตัวเลขให้คลิกเพื่อดูรายละเอียด
+                                **หมายเหตุ ในกรณีรายการสั่งซื้อเป็นตัวเลขให้คลิกเพื่อดูรายละเอียด
+                            </div>
+                        </div>
+                        <div class="box-footer">
                         </div>
                     </div>
-                    <div class="box-footer">
-                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
     </div>
 @stop

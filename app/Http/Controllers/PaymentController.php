@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Payment;
 use Session;
+
 class PaymentController extends Controller
 {
     private $input;
@@ -39,7 +40,7 @@ class PaymentController extends Controller
         }
         $quo = Quotations::where('quo_id', $id)->with('course', 'Customer', 'Quotations_detail.payment')->get()->first();
         //dd($quo);
-        // return response()->json($quo);
+        //return response()->json($quo);
         return view('payment.payment', compact('quo'));
     }
 
@@ -64,13 +65,12 @@ class PaymentController extends Controller
     }
     public function getPrint(){
         $id = Input::get('cus_id');
-        $pay = Payment::where('cus_id',$id)->with('payment_detail','quotations_detail.course','sales_detail.product')
-        ->get();
-        $sale = Sales::where('sales_id',1030000002)->with('sales_detail.product')
-        ->get();
+        $pay = Payment::where('cus_id',$id)
+            ->with('payment_detail.bill_detail','quotations_detail.course','sales_detail.product')
+            ->get();
         //dd($pay);
-        //return response()->json($sale);
-        return view('payment.printbill',compact('pay','sale'));
+        //return response()->json($pay);
+        return view('payment.printbill',compact('pay'));
     }
     public function getSalePay()
     {
