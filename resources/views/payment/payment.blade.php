@@ -128,14 +128,7 @@
                                                    class="btn btn-success">ชำระเงิน</a>
                                             @endif
                                         </td>
-                                        {{--<td style="text-align: center">--}}
-                                            {{--<input type="checkbox"--}}
-                                                   {{--@if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')--}}
-                                                   {{--disabled--}}
-                                                   {{--@endif--}}
-                                                   {{--name="quo[{{$quo->quotations_detail[$index]->quo_de_id}}]">--}}
 
-                                        {{--</td>--}}
 
                                         <?php $index++;?>
 

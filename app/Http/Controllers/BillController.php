@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Branch;
 use App\Order;
+use App\Payment_detail;
 use App\Quotations;
 
 use App\Http\Requests;
 use App\Quotations_detail;
 use App\Sales;
+use Carbon\Carbon;
 use DB;
 use Input;
 use mPDF;
@@ -81,6 +84,39 @@ class BillController extends Controller
         $mpdf->SetHTMLHeader();
         $mpdf->WriteHTML(view("bill/billproduct", ['bill' => $bill]));
         $mpdf->Output('Billproduct.pdf', 'I');
+
+    }
+
+    public function printBillByPayment()
+    {
+        $payment = Input::get('pay_detail');
+        //dd($payment);
+        $total = 0;
+        $bill = new Bill();
+        $bill->branch_id = Branch::getCurrentId();
+        $bill->emp_id = auth()->user()->getAuthIdentifier();
+        $bill->bill_date = Carbon::now()->format('Y-m-d');
+        if ($payment == null) {
+            abort(403);
+        } else {
+            $bill->save();
+            foreach ($payment as $key => $value) {
+                $payment_detail = Payment_detail::findOrFail($key);
+                DB::table('bill_detail')->insert([
+                        'bill_id'       => $bill->bill_id,
+                        'payment_de_id' => $key,
+                        'created_at' => "now()"
+                    ]);
+                $total += $payment_detail->amount + $payment_detail->amount_vat_amount;
+            }
+            $bill->total = $total;
+            $bill->save();
+            return redirect('bill/bill?bill_id='.$bill->bill_id);
+        }
+
+
+        //return view('bill.billByCourse');
+
 
     }
 

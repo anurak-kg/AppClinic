@@ -57,7 +57,7 @@
     </style>
     <div ng-controller="paymentController" id="payment">
     <div class="row">
-        <form method="get" target="_blank" action="{{url('bill/by-course/')}}">
+        <form method="get" target="_blank" action="{{url('bill/print-bill/')}}">
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
@@ -81,7 +81,7 @@
                                         <td><b>รายการสั่งซื้อ</b></td>
                                         <td><b>จำนวนเงินที่จ่าย</b></td>
                                         <td><b>วันที่</b></td>
-                                        <td style="width: 20px"><b></b></td>
+                                        <td style="width: 20px;text-align: center"><button type="submit" class="btn btn-danger">ปลิ้นบิล</button> </td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -100,6 +100,9 @@
                                             <td>{{$item->payment_detail[0]->amount}}</td>
                                             <td>
                                                 {{$item->created_at}}
+                                            </td>
+                                            <td>
+                                                <input type="checkbox"  name="pay_detail[{{$item->payment_detail[0]->payment_de_id}}]">
                                             </td>
                                         </tr>
                                     </tbody>

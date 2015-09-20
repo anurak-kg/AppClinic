@@ -3,6 +3,8 @@
 Route::group(['middleware' => 'permission:quo'], function () {
     Route::controller('quotations', 'QuotationsController');
     Route::any('bill/bill', 'BillController@index');
+    Route::any('bill/print-bill', 'BillController@printBillByPayment');
+
 });
 
 //Treatment
@@ -182,6 +184,6 @@ Route::controller('user', 'UserController');
 Route::get('test', function () {
     /*echo factory('App\Customer', 50)->create();
     echo factory('App\User', 20)->create();*/
-  echo getNewBillNo();
+  echo getNewEmpId();
 
 });

@@ -90,7 +90,7 @@
                                     </tr>
                                     </thead>
                                     <?php $index = 1;?>
-                                    {{dd($item->quotations_detail)}}
+
                                     @foreach($item->quotations_detail as $detail)
                                         <tr>
                                             <td>{{$index}}</td>

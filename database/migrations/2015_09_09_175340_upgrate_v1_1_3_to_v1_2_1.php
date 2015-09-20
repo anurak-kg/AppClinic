@@ -31,6 +31,7 @@ class UpgrateV113ToV121 extends Migration
             $table->foreign('bill_id')
                 ->references('bill_id')->on('bill')
                 ->onDelete('cascade');
+            $table->unique(['payment_de_id']);
         });
         DB::unprepared("ALTER TABLE `payment_detail`  ADD COLUMN `cash`  decimal(12,2) NULL AFTER `updated_at`;");
         DB::unprepared("ALTER TABLE `payment_detail`  ADD COLUMN `change`  decimal(12,2) NULL AFTER `cash`;");

@@ -1831,10 +1831,10 @@
             }
         };
         $scope.saveFullPaidPayment = function() {
-            window.open(
+            /*window.open(
                 '/bill/bill?quo_de_id=' + $scope.quo_de_id,
                 '_blank' // <- This is what makes it open in a new window.
-            );
+            );*/
         }
 
     });
