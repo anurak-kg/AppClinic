@@ -55,9 +55,9 @@
 
         /* end .squaredThree */
     </style>
-    <div ng-controller="paymentController" id="payment">
+    <div ng-controller="printBillController" id="payment">
     <div class="row">
-        <form method="get" target="_blank" action="{{url('bill/print-bill/')}}">
+        <form method="get" target="_blank" action="{{url('bill/print-bill/')}}" ng-submit="print()">
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
