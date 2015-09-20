@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sales_detail extends Model
 {
     protected $table = 'sales_detail';
+    protected $primaryKey = 'sales_id';
+
     public function Sales(){
         return $this->belongsTo('\App\Sales','sales_id');
     }

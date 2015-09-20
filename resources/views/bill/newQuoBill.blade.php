@@ -10,13 +10,16 @@
             margin-left: 3mm;
             margin-right: 5mm;
         }
+
         body {
             font-size: 3.2mm;
         }
+
         .warp {
             height: 139.7mm;
             width: 228.6mm;
         }
+
         .box {
             /*border: 0.1mm solid;*/
             height: 9mm;
@@ -73,11 +76,13 @@
             padding-left: 20mm;
 
         }
-         .course{
+
+        .course {
             margin-top: 16mm;
             text-align: center;
         }
-        .course tr td{
+
+        .course tr td {
             height: 8mm;
         }
 
@@ -121,22 +126,43 @@
     <?php $total = 0 ?>
     <?php $index = 0 ?>
 
+
     <table class="course">
         @foreach($bill->bill_detail as $item)
 
-        <tr>
-            <td  width="11.5mm"><?php echo $index += 1?></td>
-            <td width="22mm">{{$item->payment_detail->payment->quotations_detail->course->course_id }}</td>
-            <td width="95mm">{{ $item->payment_detail->payment->quotations_detail->course->course_name }}      </td>
-            <td width="18mm">1</td>
-            <td width="18mm"><?php echo number_format($subtotal = $item->payment_detail->payment->quotations_detail->course->course_price)?></td>
-            <?php  number_format($dis1 = $item->payment_detail->payment->quotations_detail->quo_de_discount, 2) ?>
-            <?php  number_format($dis2 = $item->payment_detail->payment->quotations_detail->quo_de_disamount, 2) ?>
-            <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
-            <?php  number_format($subtotal - $distotal, 2) ?>
-            <td width="30mm"><?php echo number_format($total = ($subtotal - $distotal)) ?></td>
-        </tr>
-       @endforeach
+            @if($item->payment_detail->payment->quotations_detail != null)
+
+                <tr>
+                    <td width="11.5mm"><?php echo $index += 1?></td>
+
+                    <td width="22mm">{{$item->payment_detail->payment->quotations_detail->course->course_id }}</td>
+                    <td width="95mm">{{ $item->payment_detail->payment->quotations_detail->course->course_name }}      </td>
+                    <td width="18mm">1</td>
+                    <td width="18mm"><?php echo number_format($subtotal = $item->payment_detail->payment->quotations_detail->course->course_price)?></td>
+                    <?php  number_format($dis1 = $item->payment_detail->payment->quotations_detail->quo_de_discount, 2) ?>
+                    <?php  number_format($dis2 = $item->payment_detail->payment->quotations_detail->quo_de_disamount, 2) ?>
+                    <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
+                    <?php  number_format($subtotal - $distotal, 2) ?>
+                    <td width="30mm"><?php echo number_format($total = $item->payment_detail->amount) ?></td>
+                </tr>
+            @elseif($item->payment_detail->payment->sales != null )
+                @foreach($item->payment_detail->payment->sales->product as $product)
+                    <tr>
+                        <td width="11.5mm"><?php echo $index += 1?></td>
+                        <td width="22mm">{{$product->product_id }}</td>
+                        <td width="95mm">{{ $product->product_name }} </td>
+                        <td width="18mm">1</td>
+                        <td width="18mm"><?php echo number_format($subtotal = $product->pivot->sales_de_price)?></td>
+                        <?php  number_format($dis1 = $product->pivot->sales_de_discount, 2) ?>
+                        <?php  number_format($dis2 = $product->pivot->sales_de_disamount, 2) ?>
+                        <td width="18mm"><?php echo number_format($distotal = (($subtotal * $dis1 / 100) + $dis2)) ?></td>
+                        <?php  number_format($subtotal - $distotal, 2) ?>
+                        <td width="30mm"><?php echo number_format($product->pivot->sales_de_net_price) ?></td>
+                    </tr>
+                @endforeach
+            @endif
+
+        @endforeach
     </table>
 </div>
 
