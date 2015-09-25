@@ -56,7 +56,6 @@
                                                     <option ng-selected="true"
                                                             value="cash">เงินสด
                                                     </option>
-                                                    <option value="transfer" disabled>โอนเงิน</option>
                                                     <option value="credit_card">บัตรเครดิต</option>
                                                 </select>
 

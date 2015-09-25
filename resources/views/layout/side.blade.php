@@ -21,7 +21,7 @@
             <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
 
             @if(Auth::user()->can('quo'))
-                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ขายคอร์ส</span></a></li>
+                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ขายคอร์ส / สินค้า</span></a></li>
             @endif
 
             @if(Auth::user()->can('treatment'))
@@ -203,11 +203,11 @@
                                     Credit</a>
                             </li>
                         @endif
-                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                            <li><a href="{{url('report/commissionTransfer')}}"><i class='fa fa-minus'></i>Commission
-                                    โอนเงิน</a>
-                            </li>
-                        @endif
+                        {{--@if(Auth::user()->can('report') || Auth::user()->can('customer-create'))--}}
+                            {{--<li><a href="{{url('report/commissionTransfer')}}"><i class='fa fa-minus'></i>Commission--}}
+                                    {{--โอนเงิน</a>--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                             <li><a href="{{url('report/request')}}"><i class='fa fa-minus'></i>รายงานเบิกสินค้า</a>
                             </li>
