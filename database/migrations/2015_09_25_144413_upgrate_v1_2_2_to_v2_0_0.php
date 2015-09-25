@@ -12,7 +12,7 @@ class UpgrateV122ToV200 extends Migration
      */
     public function up()
     {
-        DB::unprepared("ALTER TABLE `quotations_detail`  ADD COLUMN `product_id` int NULL AFTER `course_id`
+        DB::unprepared("ALTER TABLE `quotations_detail`  ADD COLUMN `product_id` int NULL AFTER `course_id`,
                                                          ADD COLUMN `product_qty` int NULL AFTER `payment_remain`");
     }
 
@@ -23,6 +23,7 @@ class UpgrateV122ToV200 extends Migration
      */
     public function down()
     {
-        DB::unprepared("ALTER TABLE `quotations_detail`   DROP COLUMN `product_id`, DROP COLUMN `product_qty`");
+        DB::unprepared("ALTER TABLE `quotations_detail`   DROP COLUMN `product_id`");
+        DB::unprepared("ALTER TABLE `quotations_detail`   DROP COLUMN `product_qty`");
     }
 }
