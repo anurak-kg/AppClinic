@@ -4,15 +4,14 @@
 @section('headDes','เข้ารับการรักษา')
 
 @section('content')
-    <script>
 
-
-    </script>
     <link href="/packages/zofe/rapyd/assets/datepicker/datepicker3.css" rel="stylesheet" type="text/css"/>
 
 
     <div class="row" ng-controller="treatmentAddController">
-        <form class="form-horizontal" method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
+
+        <form method="POST" action="{{url('treatment/save')}}" ng-submit="save($event)">
+
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
             <div class="col-md-12"
