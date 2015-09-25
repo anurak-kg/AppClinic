@@ -29,4 +29,9 @@ class Quotations_detail extends Model
     {
         return $this->belongsTo('\App\Payment', 'quo_de_id','quo_de_id');
     }
+
+    public function product()
+    {
+        return $this->belongsTo('\App\Product', 'product_id','product_id');
+    }
 }

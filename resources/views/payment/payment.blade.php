@@ -10,6 +10,7 @@
             position: relative;
             margin: 20px auto;
         }
+
         .squaredThree label {
             width: 20px;
             height: 20px;
@@ -22,6 +23,7 @@
             border-radius: 4px;
             box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
         }
+
         .squaredThree label:after {
             content: '';
             width: 9px;
@@ -38,15 +40,19 @@
             -ms-transform: rotate(-45deg);
             transform: rotate(-45deg);
         }
+
         .squaredThree label:hover::after {
             opacity: 0.3;
         }
+
         .squaredThree input[type=checkbox] {
             visibility: hidden;
         }
+
         .squaredThree input[type=checkbox]:checked + label:after {
             opacity: 1;
         }
+
         /* end .squaredThree */
     </style>
     <div class="row">
@@ -57,7 +63,7 @@
                         <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo->quo_id}}</h2>
 
                         <div class="box-tools pull-right">
-                            <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
+                            <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
 
                             <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$quo->cus_id}}">พิมพ์ใบเสร็จ</a>
 
@@ -77,82 +83,111 @@
                                 <thead>
                                 <tr>
                                     <td style="width: 10px">#</td>
-                                    <td>คอร์ส</td>
+                                    <td>คอร์ส / สินค้า</td>
                                     <td>ราคา</td>
+                                    <td>จำนวน</td>
                                     <td>ประเภทการจ่าย</td>
-                                    <td>ยอดค้างชำระ</td>
-                                    <td>สถานะการจ่ายเงิน</td>
+                                    <td>จำนวนที่จ่าย</td>
+                                    <td>เลือกชำระเงิน</td>
+                                    <td>คงเหลือ</td>
 
-                                    <td style="width: 90px">ชำระเงิน</td>
-                                    {{--<td style="widthdth: 20px">ปลิ้นบิล</td>--}}
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $index = 0;?>
-                                @foreach($quo->course as $course)
+                                @foreach($quo[0]->quotations_detail as $item)
                                     <tr>
-
                                         <td>{{$index+1}}</td>
-                                        <td>{{$course->course_name}} จำนวน {{$course->course_qty}} ครั้ง</td>
                                         <td>
-                                            {{$course->course_price}}
-
-                                        </td>
-
-
-                                        <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status=='REMAIN')
-                                                <span>ผ่อนจ่าย</span>
-                                            @elseif($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
-                                                <span>จ่ายเต็มจำนวน</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if($quo->vat == 'false')
-                                                {{$quo->quotations_detail[$index]->payment_remain}}
+                                            @if($item->course == null)
+                                                {{$item->product->product_name}}
                                             @else
-                                                {{$quo->quotations_detail[$index]->payment_remain + ($quo->quotations_detail[$index]->payment_remain * $quo->vat_rate/100)}}
+                                            {{$item->course->course_name}} จำนวน {{$item->course->course_qty}} ครั้ง</td>
                                             @endif
-                                        </td>
                                         <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status=='FULLY_PAID')
-                                                <span class="label label-success">จ่ายเงินครบแล้ว</span>
+                                            @if($item->course == null)
+                                                {{$item->product->product_price}}
                                             @else
-                                                <span class="label label-warning">ค้างจ่าย</span>
-                                            @endif
+                                            {{$item->course->course_price}}
+                                                @endif
                                         </td>
+
+                                        <td align="middle">
+                                            @if($item->course == null)
+                                                {{$item->product_qty}}
+                                            @else
+                                            {{$item->course->course_qty}}
+                                                @endif
+                                        </td>
+
+                                        <td align="middle">
+                                            <select>
+                                                <option value="name" id="full">จ่ายเต็มจำนวน</option>
+                                                <option value="name1">ผ่อนจ่าย</option>
+                                            </select>
+                                        </td>
+
+
+
                                         <td>
-                                            @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
-                                                <a href="{{url('payment/pay')}}?quo_de_id={{$quo->quotations_detail[$index]->quo_de_id}}"
-                                                   class="btn btn-success">ชำระเงิน</a>
-                                            @endif
+                                            <?php
+                                                $price = null;
+                                            if($item->course == null){
+                                                $price = $item->product->product_price;
+                                            }else{
+                                                $price = $item->course->course_price;
+                                            }
+                                            ?>
+                                            <input type="text" value="{{$price}}">
                                         </td>
 
 
-                                        <?php $index++;?>
 
+
+                                        <td align="middle">
+                                            <input type="checkbox" checked>
+                                        </td>
+
+                                        <td>
+
+                                        </td>
 
                                     </tr>
+                                    <?php $index++;?>
+
                                 @endforeach
 
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    {{--<td>--}}
-                                        {{--<button type="submit" class="btn btn-default">พิมพ์</button>--}}
-                                    {{--</td>--}}
+                                    <tr>
+                                        <td colspan="7" class="total-price">ยอดรวม:</td>
+                                        <td> บาท</td>
+                                    </tr>
 
-                                </tr>
-                                </tfoot>
+                                    @if($quo->vat == 'true')
+                                        <tr>
+                                            <td colspan="7" class="total-price">ภาษี {{getConfig('vat_rate')}}% :</td>
+                                            <td> บาท</td>
+                                        </tr>
+                                    @endif
+                                    <tr>
+                                        <td colspan="7" class="total-price">ยอดสุทธิ:</td>
+                                        <td><strong></strong> บาท</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="8"
+                                            align="right"> @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
+                                                <a href="{{url('payment/pay')}}?quo_de_id={{$quo->quotations_detail[$index]->quo_de_id}}"
+                                                   class="btn btn-success">ชำระเงิน</a>
+                                            @endif</td>
+                                    </tr>
+
+
+
+                                </tbody>
+
                             </table>
+
 
 
                         </div>

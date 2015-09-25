@@ -58,7 +58,7 @@ class UpgrateV113ToV121 extends Migration
         DB::unprepared("ALTER TABLE `payment_detail`
                         DROP COLUMN `id_account`,
                         DROP COLUMN `transfer_day`,
-                        DROP COLUMN `transfer_day`,
-                        DROP COLUMN `transfer_day`");
+                        DROP COLUMN `transfer_hour`,
+                        DROP COLUMN `transfer_min`");
     }
 }
