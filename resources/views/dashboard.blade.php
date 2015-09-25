@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title','หน้าหลัก')
-
+@section('headText','SIAM LOFT CLINIC')
+@section('headDes','สยาม ลอฟท์ คลินิก')
 @section('content')
 
 
@@ -21,33 +22,21 @@
                     </div>
                 </div><!-- ./col -->
 
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <!-- small box -->
-                    <div class="small-box bg-aqua">
+                    <div class="small-box bg-lime-active">
                         <div class="inner">
-                            <h4>ขายคอร์ส</h4>
-                            <p>สำหรับสมาชิก</p>
+                            <h4>ขายคอร์ส / สินค้า</h4>
+                            <p>สำหรับสมาชิก / ลูกค้าทั่วไป</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
                         </div>
-                        <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส   <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส / สินค้า <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h4>ขายสินค้า</h4>
-                            <p>สำหรับสมาชิก/ลูกค้าทั่วไป</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-cart-plus"></i>
-                        </div>
-                        <a href="{{url('sales')}}" class="small-box-footer">ขายสินค้า   <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div><!-- ./col -->
+
 
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <!-- small box -->
@@ -111,50 +100,7 @@
                             </div><!-- /.box-body -->
                         </div><!-- /. box -->
 
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div><!-- /.box-header -->
-                        <div class="box-body" id="orderlast">
-                            <div class="table-responsive">
-                                <table class="table no-margin">
-                                    <thead>
-                                    <tr>
-                                        <th>เลขทีใบสั่งซื้อ</th>
-                                        <th>Supplier</th>
-                                        <th>พนักงาน</th>
-                                        <th>วันที่</th>
-                                        <th>สถานะ</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach( $dataorder as $item)
-                                        <tr>
-                                            <td>{{ $item->order_id }}</td>
-                                            <td>{{ $item->ven_name  }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->order_date }}</td>
-                                            <td>
-                                                @if($item->order_status == 'PENDING')
-                                                    <span class="label label-warning">{{ $item->order_status  }}</span>
-                                                @else
-                                                    <span class="label label-danger">{{ $item->order_status  }}</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div><!-- /.table-responsive -->
-                        </div><!-- /.box-body -->
-                        <div class="box-footer clearfix">
-                            <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
-                            <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
-                        </div><!-- /.box-footer -->
-                    </div><!-- /.box -->
+
 
                 </section><!-- /.Left col -->
 
@@ -203,84 +149,58 @@
                         </div><!-- /.box-body -->
                     </div><!-- /. box -->
 
-                    <div class="box  box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">3 อันดับ คอร์สขายดี <i class="fa fa-star"></i></h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div><!-- /.box-header -->
 
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="chart-responsive">
-                                        <canvas id="pieChart" height="150"></canvas>
-                                    </div><!-- ./chart-responsive -->
-                                </div><!-- /.col -->
-                                <div class="col-md-6">
-
-                                    <ul class="chart-legend clearfix">
-                                        @foreach($data as $item)
-                                            <li><i class="fa fa-circle-o" style="color:{{$item['color']}}"></i> {{ $item['label'] }}</li>
-                                            <br>
-                                        @endforeach
-                                    </ul>
-                                </div><!-- /.col -->
-                            </div><!-- /.row -->
-                        </div><!-- /.box-body -->
-                        <div class="box-footer no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                @foreach($data as $item)
-                                    <li><a href="#" >{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' คอร์ส' ?></span></a></li>
-
-                                @endforeach
-
-                            </ul>
-                        </div><!-- /.footer -->
-                    </div><!-- /.box -->
-
-                    <div class="box  box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">3 อันดับ สินค้าขายดี <i class="fa fa-star"></i></h3>
-                            <div class="box-tools pull-right">
-                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            </div>
-                        </div><!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="chart-responsive">
-                                        <canvas id="pieChart2" height="150"></canvas>
-                                    </div><!-- ./chart-responsive -->
-                                </div><!-- /.col -->
-                                <div class="col-md-6">
-                                    <ul class="chart-legend clearfix">
-                                        @foreach($datapro as $item)
-                                            <li><i class="fa fa-circle-o"  style="color:{{$item['color']}}"></i> {{ $item['label'] }}</li>
-                                            <br>
-                                        @endforeach
-                                    </ul>
-                                </div><!-- /.col -->
-                            </div><!-- /.row -->
-                        </div><!-- /.box-body -->
-                        <div class="box-footer no-padding">
-                            <ul class="nav nav-pills nav-stacked">
-                                @foreach($datapro as $item)
-                                    <li><a href="#">{{ $item['label'] }}<span class="pull-right" style="color:{{$item['color']}}"><?php echo 'จำนวน ', number_format( $item['value']  ),' ' ?></span></a></li>
-                                    {{--<li><a href="#">India <span class="pull-right text-red"><i class="fa fa-angle-up"></i> 4%</span></a></li>--}}
-                                    {{--<li><a href="#">China <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>--}}
-                                @endforeach
-
-                            </ul>
-                        </div><!-- /.footer -->
-                    </div><!-- /.box -->
 
                 </section><!-- right col -->
+
+
             </div><!-- /.row (main row) -->
 
 
-
+<div class="box box-info col-12-md">
+    <div class="box-header with-border">
+        <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+    </div><!-- /.box-header -->
+    <div class="box-body" id="orderlast">
+        <div class="table-responsive">
+            <table class="table no-margin">
+                <thead>
+                <tr>
+                    <th>เลขทีใบสั่งซื้อ</th>
+                    <th>Supplier</th>
+                    <th>พนักงาน</th>
+                    <th>วันที่</th>
+                    <th>สถานะ</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach( $dataorder as $item)
+                    <tr>
+                        <td>{{ $item->order_id }}</td>
+                        <td>{{ $item->ven_name  }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->order_date }}</td>
+                        <td>
+                            @if($item->order_status == 'PENDING')
+                                <span class="label label-warning">{{ $item->order_status  }}</span>
+                            @else
+                                <span class="label label-danger">{{ $item->order_status  }}</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div><!-- /.table-responsive -->
+    </div><!-- /.box-body -->
+    <div class="box-footer clearfix">
+        <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
+        <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
 
 
     <script src="/dist/js/jquery-ui.js"></script>
@@ -614,75 +534,7 @@
                $(function () {
                  "use strict";
 
-                  //-------------
-                         //- PIE CHART -
-                         //-------------
-                         // Get context with jQuery - using jQuery's .get() method.
-                         var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-                         var pieChart = new Chart(pieChartCanvas);
-                         var PieData = {!! $dataCourse !!};
-                        var pieOptions = {
-                           //Boolean - Whether we should show a stroke on each segment
-                           segmentShowStroke: true,
-                           //String - The colour of each segment stroke
-                           segmentStrokeColor: "#fff",
-                           //Number - The width of each segment stroke
-                           segmentStrokeWidth: 2,
-                           //Number - The percentage of the chart that we cut out of the middle
-                           percentageInnerCutout: 50, // This is 0 for Pie charts
-                           //Number - Amount of animation steps
-                           animationSteps: 100,
-                           //String - Animation easing effect
-                           animationEasing: "easeOutBounce",
-                           //Boolean - Whether we animate the rotation of the Doughnut
-                           animateRotate: true,
-                           //Boolean - Whether we animate scaling the Doughnut from the centre
-                           animateScale: false,
-                           //Boolean - whether to make the chart responsive to window resizing
-                           responsive: true,
-                           // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                           maintainAspectRatio: false,
-                           //String - A legend template
-                           legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-                         };
-                         //Create pie or douhnut chart
-                         // You can switch between pie and douhnut using the method below.
-                         pieChart.Doughnut(PieData, pieOptions);
 
-               //-------------
-               //- PIE CHART -
-               //-------------
-               // Get context with jQuery - using jQuery's .get() method.
-               var pieChartCanvas = $("#pieChart2").get(0).getContext("2d");
-               var pieChart = new Chart(pieChartCanvas);
-               var PieData = {!! $dataProduct !!};
-               var pieOptions = {
-                   //Boolean - Whether we should show a stroke on each segment
-                   segmentShowStroke: true,
-                   //String - The colour of each segment stroke
-                   segmentStrokeColor: "#fff",
-                   //Number - The width of each segment stroke
-                   segmentStrokeWidth: 2,
-                   //Number - The percentage of the chart that we cut out of the middle
-                   percentageInnerCutout: 50, // This is 0 for Pie charts
-                   //Number - Amount of animation steps
-                   animationSteps: 100,
-                   //String - Animation easing effect
-                   animationEasing: "easeOutBounce",
-                   //Boolean - Whether we animate the rotation of the Doughnut
-                   animateRotate: true,
-                   //Boolean - Whether we animate scaling the Doughnut from the centre
-                   animateScale: false,
-                   //Boolean - whether to make the chart responsive to window resizing
-                   responsive: true,
-                   // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-                   maintainAspectRatio: false,
-                   //String - A legend template
-                   legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
-               };
-               //Create pie or douhnut chart
-               // You can switch between pie and douhnut using the method below.
-               pieChart.Doughnut(PieData, pieOptions);
 
                    $('#exp').slimScroll({ height: '200'});
                    $('#orderqty').slimScroll({ height: '200'});
