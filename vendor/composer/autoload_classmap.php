@@ -696,6 +696,7 @@ return array(
     'UpgrateV112ToV113' => $baseDir . '/database/migrations/2015_09_08_165554_upgrate_v1_1_2_to_v1_1_3.php',
     'UpgrateV113ToV121' => $baseDir . '/database/migrations/2015_09_09_175340_upgrate_v1_1_3_to_v1_2_1.php',
     'UpgrateV121ToV122' => $baseDir . '/database/migrations/2015_09_10_211755_upgrate_v1_2_1_to_v1_2_2.php',
+    'UpgrateV122ToV200' => $baseDir . '/database/migrations/2015_09_25_144413_upgrate_v1_2_2_to_v2_0_0.php',
     'UserTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'V10tov11CreateTableTreatBt' => $baseDir . '/database/migrations/2015_09_01_201224_v10tov11_create_table_treat_bt.php',
     'VendorTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
