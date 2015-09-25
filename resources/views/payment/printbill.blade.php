@@ -61,7 +61,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay->cus_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay[0]->cus_id}}</h2>
                     </div>
 
                         <div class="box-body">
@@ -72,8 +72,6 @@
                                 </div>
                             @endif
                             <div class="col-md-12 ">
-
-                                รหัสการชำระเงิน {{$pay->payment_id}}
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -114,15 +112,10 @@
                                         <?php $index++;?>
                                     @endforeach
                                     </tbody>
-
                                 </table>
                                 **หมายเหตุ ในกรณีรายการสั่งซื้อเป็นตัวเลขให้คลิกเพื่อดูรายละเอียด
                             </div>
                         </div>
-                        <div class="box-footer">
-                        </div>
-                    </div>
-                    <div class="box-footer">
                     </div>
                 </div>
             </form>

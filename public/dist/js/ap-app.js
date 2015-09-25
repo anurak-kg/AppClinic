@@ -1129,10 +1129,10 @@
             window.location.href = '/quotations/save';
         }
         $scope.paymentAndPrint = function (id) {
-            window.open(
+            /*window.open(
                 '/bill/billproduct?sales_id=' + id,
                 '_blank' // <- This is what makes it open in a new window.
-            );
+            );*/
             window.location.href = 'payment/sale-pay?sale_id='+id+'&type='+$scope.paymentType;
         }
     });

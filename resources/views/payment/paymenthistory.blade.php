@@ -60,10 +60,11 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$item->cus_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$quo[0]->cus_id}}</h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส</a>
+                            <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$quo[0]->cus_id}}">พิมพ์ใบเสร็จ</a>
                         </div>
                     </div>
 
