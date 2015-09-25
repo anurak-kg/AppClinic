@@ -38,7 +38,7 @@ class PaymentController extends Controller
         } else {
             $id = Input::get('quo_id');
         }
-        $quo = Quotations::where('quo_id', $id)->with('course', 'Customer', 'Quotations_detail.payment')->get()->first();
+        $quo = Quotations::where('quo_id', $id)->with('Quotations_detail.course', 'Customer', 'Quotations_detail.payment','Quotations_detail.product')->get();
         //dd($quo);
         //return response()->json($quo);
         return view('payment.payment', compact('quo'));
