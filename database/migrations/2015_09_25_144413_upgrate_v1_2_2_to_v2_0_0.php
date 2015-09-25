@@ -14,6 +14,8 @@ class UpgrateV122ToV200 extends Migration
     {
         DB::unprepared("ALTER TABLE `quotations_detail`  ADD COLUMN `product_id` varchar(255) NULL AFTER `course_id`,
                                                          ADD COLUMN `product_qty` int NULL AFTER `payment_remain`");
+        DB::unprepared("ALTER TABLE `quotations_detail`
+                        MODIFY COLUMN `course_id`  varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL AFTER `quo_id`;");
     }
 
     /**
