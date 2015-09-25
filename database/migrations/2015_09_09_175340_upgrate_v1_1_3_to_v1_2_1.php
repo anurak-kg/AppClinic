@@ -35,6 +35,12 @@ class UpgrateV113ToV121 extends Migration
         });
         DB::unprepared("ALTER TABLE `payment_detail`  ADD COLUMN `cash`  decimal(12,2) NULL AFTER `updated_at`;");
         DB::unprepared("ALTER TABLE `payment_detail`  ADD COLUMN `change`  decimal(12,2) NULL AFTER `cash`;");
+        DB::unprepared("ALTER TABLE `payment_detail`
+                        ADD COLUMN `id_account`  varchar(255) NOT NULL AFTER `change`,
+                        ADD COLUMN `transfer_day`  date NOT NULL AFTER `id_account`,
+                        ADD COLUMN `transfer_hour`  varchar(255) NOT NULL AFTER `transfer_day`,
+                        ADD COLUMN `transfer_min`  varchar(255) NOT NULL AFTER `transfer_hour`;
+                        ");
     }
 
     /**
@@ -49,5 +55,10 @@ class UpgrateV113ToV121 extends Migration
 
         DB::unprepared("ALTER TABLE `payment_detail`    DROP COLUMN `cash`");
         DB::unprepared("ALTER TABLE `payment_detail`    DROP COLUMN `change`");
+        DB::unprepared("ALTER TABLE `payment_detail`
+                        DROP COLUMN `id_account`,
+                        DROP COLUMN `transfer_day`,
+                        DROP COLUMN `transfer_day`,
+                        DROP COLUMN `transfer_day`");
     }
 }

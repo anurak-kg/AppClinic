@@ -12,7 +12,7 @@ class UpgrateV122ToV200 extends Migration
      */
     public function up()
     {
-        DB::unprepared("ALTER TABLE `quotations_detail`  ADD COLUMN `product_id` int NULL AFTER `course_id`,
+        DB::unprepared("ALTER TABLE `quotations_detail`  ADD COLUMN `product_id` varchar(255) NULL AFTER `course_id`,
                                                          ADD COLUMN `product_qty` int NULL AFTER `payment_remain`");
     }
 
