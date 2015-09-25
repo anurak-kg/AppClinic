@@ -28,6 +28,8 @@ Route::group(['middleware' => 'permission:customer-read'], function () {
     Route::get('data/user_search', 'DataController@getUserList');
     Route::get('data/customer', 'DataController@getCustomerData');
     Route::get('data/product', 'DataController@getProductList');
+    Route::get('data/product_search', 'DataController@productSearch');
+
     Route::get('data/vendor_search', 'DataController@vendorSearch');
 });
 Route::group(['middleware' => 'permission:customer-edit'], function () {

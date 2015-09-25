@@ -53,6 +53,16 @@ class DataController extends Controller
         return response()->json($product);
     }
 
+    public function productSearch()
+    {
+        $query = '%' . \Input::get('q') . '%';
+        $vendor = Product::
+        where('product_name', 'LIKE', $query)
+            ->orWhere('product_id', 'LIKE', $query)
+            ->get();
+        return response()->json($vendor);
+    }
+
     public function vendorSearch()
     {
         $query = '%' . \Input::get('q') . '%';

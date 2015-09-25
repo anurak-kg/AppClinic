@@ -1,13 +1,15 @@
 @extends('layout.master')
-@section('title','ขายคอร์ส')
-@section('headText','ขายคอร์ส')
+@section('title','Point of Sale')
+@section('headText','Point of Sale')
 @section('content')
-    <div ng-controller="quotationsController" id="course" ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat}}')">
+    <div ng-controller="quotationsController" id="course"
+         ng-init="init({{config('shop.vat')}},{{$quo->quo_id}},'{{$quo->vat}}')">
         <div class="row">
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>Success!</h4>
+
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
@@ -16,6 +18,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-info"></i>
+
                         <h2 class="box-title">รายละเอียด</h2>
                     </div>
                     <div class="box-body">
@@ -32,6 +35,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-users"></i>
+
                         <h2 class="box-title">ข้อมูลลูกค้า</h2>
                     </div>
 
@@ -119,7 +123,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-cart-plus"></i>
 
-                        <h2 class="box-title">คอร์ส</h2>
+                        <h2 class="box-title">รายการขาย</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -148,7 +152,7 @@
                                         <tr data-ng-repeat="item in product">
                                             <td style="width: 5px">
                                                 <button class="btn btn-box-tool" data-widget="remove"
-                                                        ng-click="deleteById(item.course_id)"><i
+                                                        ng-click="deleteById(item.quo_de_id)"><i
                                                             class="fa fa-times"></i>
                                                 </button>
 
@@ -157,19 +161,22 @@
                                                 @{{$index+1}}
                                             </td>
 
-                                            <td data-title="'คอร์ส'" style="width:380px">
-                                                <strong>@{{item.course.course_name}}</strong><br>
-                                                @{{item.course.course_detail}}
-                                                <ul>
-                                                    <li ng-repeat="c in item.course.detail">
-                                                        @{{c.course_detail_name}}
-                                                        <strong>@{{c.course_detail_qty}}</strong> ครั้ง
-                                                    </li>
-                                                </ul>
+                                            <td data-title="'รายการ'" style="width:380px">
+                                                <strong>@{{item.name}}</strong><br>
+                                                @{{item.course_detail}}
+
                                             </td>
                                             <td data-title="'ราคา'" style="width:100px;text-align: right">
-                                                @{{item.course.course_price | number:2 }}
+                                                @{{item.price | number:2 }}
                                             </td>
+                                            <td data-title="'จำนวน'" style="width: 80px">
+                                                <input type="number"
+                                                       ng-model="item.product_qty"
+                                                       ng-change="update('sales_de_qty',item.product_id,item.sales_de_qty)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
+                                            </td>
+
                                             <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 80px">
                                                 <input type="number"
                                                        ng-model="item.quo_de_discount"
@@ -196,21 +203,22 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="6" class="total-price">ยอดรวม:</td>
+                                            <td colspan="7" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="6" class="total-price">ส่วนลด:</td>
+                                            <td colspan="7" class="total-price">ส่วนลด:</td>
                                             <td>@{{ getDiscount() | number:2}} บาท</td>
                                         </tr>
                                         @if($quo->vat == 'true')
-                                        <tr>
-                                            <td colspan="6" class="total-price">ภาษี {{getConfig('vat_rate')}}% :</td>
-                                            <td>@{{ getVat() | number:2}} บาท</td>
-                                        </tr>
+                                            <tr>
+                                                <td colspan="7" class="total-price">ภาษี {{getConfig('vat_rate')}}% :
+                                                </td>
+                                                <td>@{{ getVat() | number:2}} บาท</td>
+                                            </tr>
                                         @endif
                                         <tr>
-                                            <td colspan="6" class="total-price">ยอดสุทธิ:</td>
+                                            <td colspan="7" class="total-price">ยอดสุทธิ:</td>
                                             <td><strong>@{{ getFinalTotal() | number:2}}</strong> บาท</td>
                                         </tr>
 
@@ -245,6 +253,14 @@
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
                     url: '/quotations/course-list?q=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            var productDb = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/data/product_search?q=%QUERY',
                     wildcard: '%QUERY'
                 }
             });
@@ -334,27 +350,43 @@
                         minLength: 1
                     },
                     {
-                        displayKey: 'course_name',
-                        source: courseDb.ttAdapter(),
+                        name: 'product',
+                        displayKey: 'product_name',
+                        source: productDb.ttAdapter(),
                         templates: {
+                            header: '<h4 class="league-name">รายการสินค้า</h4>',
                             empty: [
                                 '<div class="empty-message">',
                                 'ไม่พบข้อมูลสินค้า',
                                 '</div>'
                             ].join('\n'),
+                            suggestion: Handlebars.compile('<div>@{{product_id}} - @{{product_name}}</div>')
+                        }
+                    },
+                    {
+                        name: 'course',
+                        displayKey: 'course_name',
+                        source: courseDb.ttAdapter(),
+                        templates: {
+                            header: '<h4 class="league-name">รายการคอร์ส</h4>',
+                            empty: [
+                                '<div class="empty-message">',
+                                'ไม่พบข้อมูลคอร์ส',
+                                '</div>'
+                            ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{course_id}} – @{{course_name}}</div>')
                         }
-                    })
-                    .on('typeahead:selected', function ($e, datum) {
-                        course = {
-                            course_id: datum.course_id,
-                            quo_de_discount: 0,
-                            quo_de_disamount: 0,
-                            quo_de_price: datum.course_price,
-                            course: datum
-                        };
-                        console.log(course);
-                        angular.element(document.getElementById('course')).scope().pushProduct(course);
+                    }
+            ).on('typeahead:selected', function ($e, datum) {
+                        var data = [];
+                        if (datum.course_id != null) {
+                            data.id = datum.course_id;
+                            data.type = "course";
+
+                        } else if (datum.product_id != null) {
+                            data.id = datum.product_id;
+                            data.type = "product";                        }
+                        angular.element(document.getElementById('course')).scope().pushCourse(data);
 
                     })
 
