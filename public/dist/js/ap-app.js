@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select','ui.bootstrap.datetimepicker']);
+    var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select']);
     app.directive('onLastRepeat', function () {
         return function (scope, element, attrs) {
             if (scope.$last) setTimeout(function () {
