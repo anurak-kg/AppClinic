@@ -23,6 +23,6 @@ class UpgrateV122ToV200 extends Migration
      */
     public function down()
     {
-        DB::unprepared("ALTER TABLE `quotations`   DROP COLUMN `product_id`, DROP COLUMN `product_qty`");
+        DB::unprepared("ALTER TABLE `quotations_detail`   DROP COLUMN `product_id`, DROP COLUMN `product_qty`");
     }
 }
