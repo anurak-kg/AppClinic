@@ -184,7 +184,6 @@ class QuotationsController extends Controller
         $sum = DB::select(
             DB::raw("SELECT quotations_detail.quo_id, SUM(net_price) as Total
                      FROM quotations_detail
-                     INNER JOIN course ON quotations_detail.course_id = course.course_id
                      WHERE quo_id = " . $this->getQuoId() . ""));
         return $sum[0]->Total;
     }
@@ -243,13 +242,12 @@ class QuotationsController extends Controller
         $type = Input::get('type');
         $value = Input::get('value');
         $id = Input::get('id');
-        $quo_detail = Quotations_detail::where('quo_id', "=", $this->getQuoId())
-            ->where('course_id', "=", $id)
+        $quo_detail = Quotations_detail::where('quo_de_id', "=", $id)
             ->get()
             ->first();
         $quo_detail->$type = $value;
-        if ($type == 'quo_de_discount' || $type == 'quo_de_disamount') {
-            $course_price = $quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount / 100) - $quo_detail->quo_de_disamount;
+        if ($type == 'quo_de_discount' || $type == 'quo_de_disamount' || $type == 'product_qty'  ) {
+            $course_price = ($quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount / 100) - $quo_detail->quo_de_disamount) * $quo_detail->product_qty;
             $quo_detail->net_price = $course_price;
             $quo_detail->payment_remain = $course_price;
         }
