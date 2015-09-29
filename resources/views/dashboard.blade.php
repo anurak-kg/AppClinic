@@ -22,7 +22,7 @@
                     </div>
                 </div><!-- ./col -->
 
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-3 col-sm-6 col-xs-12">
                     <!-- small box -->
                     <div class="small-box bg-lime-active">
                         <div class="inner">
@@ -33,6 +33,20 @@
                             <i class="ion ion-ios-cart"></i>
                         </div>
                         <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส / สินค้า <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h4>ชำระเงิน คอร์สค้างจ่าย</h4>
+                            <p>สำหรับสมาชิก</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-information-circled"></i>
+                        </div>
+                        <a href="{{url('customer')}}" class="small-box-footer">จ่ายยอดค้างชำระ <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 

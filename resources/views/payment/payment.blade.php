@@ -60,7 +60,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo->quo_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo[0]->quo_id}}</h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
@@ -89,35 +89,35 @@
                                     <td>ประเภทการจ่าย</td>
                                     <td>จำนวนที่จ่าย</td>
                                     <td>เลือกชำระเงิน</td>
-                                    <td>คงเหลือ</td>
+                                    <td align="middle">คงเหลือ</td>
 
 
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $index = 0;?>
-                                @foreach($quo[0]->quotations_detail as $item)
+                                @foreach($quo as $item)
                                     <tr>
                                         <td>{{$index+1}}</td>
                                         <td>
-                                            @if($item->course == null)
-                                                {{$item->product->product_name}}
+                                            @if($item->course_name == null)
+                                                {{$item->product_name}}
                                             @else
-                                            {{$item->course->course_name}} จำนวน {{$item->course->course_qty}} ครั้ง</td>
+                                            {{$item->course_name}} จำนวน {{$item->course_qty}} ครั้ง</td>
                                             @endif
                                         <td>
-                                            @if($item->course == null)
-                                                {{$item->product->product_price}}
+                                            @if($item->course_price == null)
+                                                {{$item->product_price}}
                                             @else
-                                            {{$item->course->course_price}}
+                                            {{$item->course_price}}
                                                 @endif
                                         </td>
 
                                         <td align="middle">
-                                            @if($item->course == null)
+                                            @if($item->course_qty == null)
                                                 {{$item->product_qty}}
                                             @else
-                                            {{$item->course->course_qty}}
+                                            {{$item->course_qty}}
                                                 @endif
                                         </td>
 
@@ -133,10 +133,10 @@
                                         <td>
                                             <?php
                                                 $price = null;
-                                            if($item->course == null){
-                                                $price = $item->product->product_price;
+                                            if($item->course_price == null){
+                                                $price = $item->product_price;
                                             }else{
-                                                $price = $item->course->course_price;
+                                                $price = $item->course_price;
                                             }
                                             ?>
                                             <input type="text" value="{{$price}}">
@@ -154,6 +154,7 @@
                                         </td>
 
                                     </tr>
+
                                     <?php $index++;?>
 
                                 @endforeach
@@ -174,21 +175,35 @@
                                         <td><strong></strong> บาท</td>
                                     </tr>
 
+
+
                                     <tr>
-                                        <td colspan="8"
-                                            align="right"> @if($quo->quotations_detail[$index]->payment->payment_status!='FULLY_PAID')
-                                                <a href="{{url('payment/pay')}}?quo_de_id={{$quo->quotations_detail[$index]->quo_de_id}}"
-                                                   class="btn btn-success">ชำระเงิน</a>
-                                            @endif</td>
+                                        <td colspan="7"></td>
+                                        <td width="200">
+                                            <input type="number" class="form-control  total-price input-lg"
+                                                   id="received_amount" name="receivedAmount" required
+                                                   ng-change=" "
+                                                   ng-model=" "
+                                                   placeholder="เงินที่รับ">
+                                        </td>
+
                                     </tr>
 
+                                    <tr>
+                                        <td colspan="7"></td>
 
+                                        <td>
+                                            <button class="btn btn-success btn-block pull-right"
+                                                    ng-disabled=" "
+                                                    ng-click=" ">ชำระเงิน
+                                            </button>
+                                        </td>
+
+                                    </tr>
 
                                 </tbody>
 
                             </table>
-
-
 
                         </div>
                     </div>
