@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\Commission;
 use App\Course;
 use App\Customer;
 use App\Product;
@@ -23,6 +24,8 @@ use App\Http\Requests;
 
 class QuotationsController extends Controller
 {
+    private $quo_id;
+
     public function getIndex()
     {
         $quoCount = Quotations::where('quo_status', -1)
@@ -159,13 +162,18 @@ class QuotationsController extends Controller
 
     public function anySave()
     {
-
-        $quo = Quotations::find($this->getQuoId());
+        $this->quo_id = $this->getQuoId();
+        $quo = Quotations::find($this->quo_id);
         $quo->total_net_price = $this->getCurrentSum();
         $quo->quo_status = 1;
         //$quo->bill_number = getNewBillNo();
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
+
+        //คำนวญค่า Commissions
+        $this->commissionsCalculate();
+
+
         systemLogs([
             'emp_id' => auth()->user()->getAuthIdentifier(),
             'cus_id' => $quo->cus_id,
@@ -184,7 +192,7 @@ class QuotationsController extends Controller
         $sum = DB::select(
             DB::raw("SELECT quotations_detail.quo_id, SUM(net_price) as Total
                      FROM quotations_detail
-                     WHERE quo_id = " . $this->getQuoId() . ""));
+                     WHERE quo_id = " . $this->quo_id . ""));
         return $sum[0]->Total;
     }
 
@@ -359,6 +367,30 @@ class QuotationsController extends Controller
             ->firstOrFail();
         return $quo->quo_id;
     }
+
+    private  function commissionsCalculate() {
+        $quo = Quotations::where('quo_id','=',$this->quo_id)
+            ->with("Quotations_detail.course")
+            ->get()
+            ->first();
+        $saleId = $quo->sale_id;
+        foreach($quo->Quotations_detail as $item){
+            if($item->course != null  && $item->course->commission != null && $saleId != null){
+                $commission = new Commission();
+                $commission->quo_de_id = $this->quo_id;
+                $commission->emp_id = $saleId;
+                $commission->commission = $item->course->commission;
+                $commission->save();
+            }
+        }
+    }
+
+    public function  getUnitTest(){
+        $this->quo_id = $this->getQuoId();
+        $this->commissionsCalculate();
+
+    }
+
 
 
 }
