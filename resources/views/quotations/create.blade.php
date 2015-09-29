@@ -170,9 +170,11 @@
                                                 @{{item.price | number:2 }}
                                             </td>
                                             <td data-title="'จำนวน'" style="width: 80px">
-                                                <input type="number"
+                                                <input type="number" class="form-control" value="1" disabled  ng-show="item.type == 'course'">
+
+                                                <input type="number"  ng-show="item.type == 'product'"
                                                        ng-model="item.product_qty"
-                                                       ng-change="update('sales_de_qty',item.product_id,item.sales_de_qty)"
+                                                       ng-change="update('product_qty',item.quo_de_id,item.product_qty)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
@@ -180,7 +182,7 @@
                                             <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 80px">
                                                 <input type="number"
                                                        ng-model="item.quo_de_discount"
-                                                       ng-change="update('quo_de_discount',item.course_id,item.quo_de_discount)"
+                                                       ng-change="update('quo_de_discount',item.quo_de_id,item.quo_de_discount)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
@@ -195,8 +197,8 @@
                                             </td>
                                             <td data-title="'ราคารวม'"
                                                 style="width:170px;text-align: right">
-                                                @{{ (item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
-                                                -item.quo_de_disamount| number:2}}
+                                                @{{ ((item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
+                                                -item.quo_de_disamount) * item.product_qty| number:2}}
                                             </td>
 
 
@@ -385,7 +387,8 @@
 
                         } else if (datum.product_id != null) {
                             data.id = datum.product_id;
-                            data.type = "product";                        }
+                            data.type = "product";
+                        }
                         angular.element(document.getElementById('course')).scope().pushCourse(data);
 
                     })

@@ -29,5 +29,8 @@ class Quotations_detail extends Model
     {
         return $this->belongsTo('\App\Payment', 'quo_de_id','quo_de_id');
     }
+    public function commission(){
+        return $this->hasMany('\App\Commission');
+    }
 
 }
