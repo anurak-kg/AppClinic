@@ -224,6 +224,7 @@ class QuotationsController extends Controller
                 $array['course_detail'] = $item->course->course_detail;
                 $array['price'] = $item->course->course_price;
                 $array['product_qty'] = 1;
+                $array['commission'] = $item->course->commission;
             }
 
             $array['quo_de_discount'] = $item->quo_de_discount;
