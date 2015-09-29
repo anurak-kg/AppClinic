@@ -91,11 +91,10 @@
                                         {{--  {{dd($item->payment_detail[0]->amount)}}--}}
                                         <tr>
                                             <td>{{$index}}</td>
-                                            <td>@if($item->quotations_detail!=null)
+                                            <td>@if($item->quotations_detail->course!=null)
                                                     {{$item->quotations_detail->course->course_name}}
-                                                @elseif($item->sales_detail!=null)
-                                                    <a ng-click="open({{$item->sales_detail->sales_id}})">
-                                                        {{$item->sales_detail->sales_id}}</a>
+                                                @elseif($item->quotations_detail->product!=null)
+                                                    {{$item->quotations_detail->product->product_name}}
                                                 @endif</td>
                                             <td>{{$item->payment_detail[0]->amount}}</td>
                                             <td>
