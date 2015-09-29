@@ -82,7 +82,7 @@
                                     <thead>
                                     <tr>
                                         <td style="width: 10px"><b>#</b></td>
-                                        <td><b>คอร์ส</b></td>
+                                        <td><b>คอร์ส/สินค้า</b></td>
                                         <td><b>ราคา</b></td>
                                         <td><b>ประเภทการจ่าย</b></td>
                                         <td><b>ยอดค้างชำระ</b></td>
@@ -95,8 +95,13 @@
                                     @foreach($item->quotations_detail as $detail)
                                         <tr>
                                             <td>{{$index}}</td>
-                                            <td>{{$detail->course->course_name}} จำนวน {{$detail->course->course_qty}}
-                                                ครั้ง
+                                            <td>@if($detail->course!=null)
+                                                    {{$detail->course->course_name}} จำนวน {{$detail->course->course_qty}}
+                                                    ครั้ง
+                                                @elseif($detail->product!=null)
+                                                    {{$detail->product->product_name}}
+                                                @endif
+
                                             </td>
                                             <td>{{$detail->course->course_price}}</td>
                                             <td>@if($detail->payment->payment_type=='PAID_IN_FULL')

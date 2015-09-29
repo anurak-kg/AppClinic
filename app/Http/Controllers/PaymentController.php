@@ -38,7 +38,7 @@ class PaymentController extends Controller
         } else {
             $id = Input::get('quo_id');
         }
-        $quo = Quotations::where('quo_id', $id)->with('Quotations_detail.course', 'Customer', 'Quotations_detail.payment','Quotations_detail.product')->get();
+        $quo = Quotations::where('quo_id', $id)->with('Quotations_detail.course','Quotations_detail.product', 'Customer', 'Quotations_detail.payment','Quotations_detail.product')->get();
         //dd($quo);
         //return response()->json($quo);
         return view('payment.payment', compact('quo'));
@@ -48,7 +48,7 @@ class PaymentController extends Controller
 
         $id = Input::get('cus_id');
 
-        $quo = Quotations::where('cus_id', $id)->with('quotations_detail.course','quotations_detail.payment.payment_detail')
+        $quo = Quotations::where('cus_id', $id)->with('quotations_detail.course','quotations_detail.product','quotations_detail.payment.payment_detail')
             ->get();
         /*$sale = Sales::where('cus_id',$id)->with('sales_detail.product','payment.payment_detail')
            ->get();*/
@@ -66,7 +66,7 @@ class PaymentController extends Controller
     public function getPrint(){
         $id = Input::get('cus_id');
         $pay = Payment::where('cus_id',$id)
-            ->with('payment_detail.bill_detail','quotations_detail.course','sales_detail.product')
+            ->with('payment_detail.bill_detail','quotations_detail.course','quotations_detail.product','sales_detail.product')
             ->get();
         //dd($pay);
         //return response()->json($pay);
