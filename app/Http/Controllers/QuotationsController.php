@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Branch;
 use App\Course;
 use App\Customer;
+use App\Product;
 use App\Quotations;
 use App\Quotations_detail;
 use App\User;
@@ -45,15 +46,16 @@ class QuotationsController extends Controller
             return $this->quoRender();
         }
     }
+
     public function getHistory()
     {
         $data = Quotations::all();
 
         return response()->json($data);
 
-        return view('quotations/history', [
+        /*return view('quotations/history', [
             'quotations' => $quotations,
-        ]);
+        ]);*/
     }
 
     public function quoRender()
@@ -90,26 +92,68 @@ class QuotationsController extends Controller
     public function getAdd()
     {
         $id = \Input::get('id');
-        $rec = Quotations::find($this->getQuoId());
-        $product = Course::find($id);
-        $rec->course()->attach($product, [
-            'quo_de_id' => getNewQuoDetailPK(),
-            'qty' => 0,
-            'quo_de_price' => $product->course_price,
-            'net_price' =>  $product->course_price,
-            'quo_de_discount' => 0,
-            'quo_de_disamount' => 0,
-            'payment_remain' =>  $product->course_price,
-            'treat_status' => 0,
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+        $type = \Input::get('type');
+        $price = null;
+        $quo_detail = new Quotations_detail();
+        $quo_detail->quo_de_id = getNewQuoDetailPK();
+        $quo_detail->quo_id = $this->getQuoId();
+        $quo_detail->quo_de_discount = 0;
+        $quo_detail->quo_de_disamount = 0;
+        $quo_detail->course_id = null;
+        $quo_detail->product_id = null;
+        $quo_detail->product_qty = 1;
+        $quo_detail->treat_status = 0;
+        $quo_detail->qty = 0;
 
-        ]);
-        $status = "ok";
+        if ($type == "product") {
+            $product = Product::findOrFail($id);
+            $quo_detail->product_id = $product->product_id;
+            $price = $product->product_price;
 
-        return response()->json([
-            'status' => $status,
-        ]);
+        } elseif ($type == "course") {
+            $course = Course::findOrFail($id);
+            $quo_detail->course_id = $course->course_id;
+            $price = $course->course_price;
+        }
+        $quo_detail->payment_remain = $price;
+        $quo_detail->quo_de_price = $price;
+        $quo_detail->net_price = $price;
+
+        $quo_detail->save();
+        return response()->json($this->getQuoDetailDataToArray($quo_detail->quo_de_id));
+
+    }
+
+    private function  getQuoDetailDataToArray($quo_detail_id)
+    {
+        $item = Quotations_detail::where('quo_de_id', '=', $quo_detail_id)
+            ->with(['Course', 'Product'])
+            ->get()
+            ->first();
+
+        $array = [];
+        $array['quo_id'] = $item->quo_id;
+        $array['quo_de_id'] = $item->quo_de_id;
+
+        if ($item->product != null) {
+            $array['type'] = "product";
+            $array['name'] = $item->product->product_name;
+            $array['price'] = $item->product->product_price;
+            $array['product_qty'] = $item->product_qty;
+
+        }
+        if ($item->course != null) {
+            $array['type'] = "course";
+            $array['name'] = $item->course->course_name;
+            $array['course_detail'] = $item->course->course_detail;
+            $array['price'] = $item->course->course_price;
+            $array['product_qty'] = 1;
+        }
+
+        $array['quo_de_discount'] = $item->quo_de_discount;
+        $array['quo_de_disamount'] = $item->quo_de_disamount;
+        $array['quo_de_price'] = $item->quo_de_price;
+        return $array;
 
     }
 
@@ -123,12 +167,12 @@ class QuotationsController extends Controller
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
         $quo->save();
         systemLogs([
-            'emp_id' => auth()->user()->getAuthIdentifier() ,
-            'cus_id' => $quo->cus_id ,
-            'emp_id2' => $quo->sale_id ,
-            'logs_type' => 'info' ,
-            'logs_where'=>'Quotations',
-            'description'=>'ขายคอร์ส เลขที่การซื้อ :' . $quo->quo_id
+            'emp_id' => auth()->user()->getAuthIdentifier(),
+            'cus_id' => $quo->cus_id,
+            'emp_id2' => $quo->sale_id,
+            'logs_type' => 'info',
+            'logs_where' => 'Quotations',
+            'description' => 'ขายคอร์ส เลขที่การซื้อ :' . $quo->quo_id
         ]);
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
             ->with('quo_id', $quo->quo_id);
@@ -147,9 +191,9 @@ class QuotationsController extends Controller
 
     public function getDelete()
     {
+        $id = Input::get('id');
         DB::table('quotations_detail')
-            ->where('quo_id', "=", $this->getQuoId())
-            ->where('course_id', "=", \Input::get('id'))
+            ->where('quo_de_id', "=", $id)
             ->delete();
     }
 
@@ -160,10 +204,38 @@ class QuotationsController extends Controller
             ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
             ->where('quo_id', "=", $this->getQuoId())
             ->get();*/
-        $receivedItem = Quotations_detail::with(['Course'])->
+        $receivedItem = Quotations_detail::with(['Course', 'Product'])->
         where('quo_id', "=", $this->getQuoId())->get();
+        $data = [];
+        foreach ($receivedItem as $item) {
+            $array = [];
+            $array['quo_id'] = $item->quo_id;
+            $array['quo_de_id'] = $item->quo_de_id;
+
+            if ($item->product != null) {
+                $array['type'] = "product";
+                $array['name'] = $item->product->product_name;
+                $array['price'] = $item->product->product_price;
+                $array['product_qty'] = $item->product_qty;
+
+            }
+            if ($item->course != null) {
+                $array['type'] = "course";
+                $array['name'] = $item->course->course_name;
+                $array['course_detail'] = $item->course->course_detail;
+                $array['price'] = $item->course->course_price;
+                $array['product_qty'] = 1;
+            }
+
+            $array['quo_de_discount'] = $item->quo_de_discount;
+            $array['quo_de_disamount'] = $item->quo_de_disamount;
+            $array['quo_de_price'] = $item->quo_de_price;
+
+            array_push($data, $array);
+        }
         // dd($receivedItem);
-        return response()->json($receivedItem);
+        //return response()->json($receivedItem);
+        return response()->json($data);
     }
 
     public function getUpdate()
@@ -178,8 +250,8 @@ class QuotationsController extends Controller
         $quo_detail->$type = $value;
         if ($type == 'quo_de_discount' || $type == 'quo_de_disamount') {
             $course_price = $quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount / 100) - $quo_detail->quo_de_disamount;
-            $quo_detail->net_price=$course_price;
-            $quo_detail->payment_remain=$course_price;
+            $quo_detail->net_price = $course_price;
+            $quo_detail->payment_remain = $course_price;
         }
         $quo_detail->save();
 

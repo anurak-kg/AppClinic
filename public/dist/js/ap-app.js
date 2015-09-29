@@ -166,10 +166,10 @@
                 $scope.payment();
             }
         }
-        $scope.pushProduct = function (product) {
-            $scope.product.push(product);
+        $scope.pushCourse = function (data) {
+            //
             //$scope.product = $scope.pushDuplicateCheck();
-            $scope.getAddProduct(product.course_id);
+            $scope.getAddProduct(data);
             $scope.tableParams.reload();
             $scope.clearSearch();
         }
@@ -177,12 +177,13 @@
             $scope.courseSearchBox = ""
         }
 
-        $scope.getAddProduct = function (id) {
+        $scope.getAddProduct = function (data) {
             $scope.dataLoading = true;
-            var url = $scope.controller + '/add?id=' + id;
+            var url = $scope.controller + '/add?id=' + data.id + '&type=' + data.type;
             console.log(url);
             $http.get(url).
                 success(function (data, status, headers, config) {
+                    $scope.product.push(data);
                     $scope.dataLoading = false;
                     $scope.tableParams.reload();
                 }).
@@ -252,7 +253,7 @@
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
-                    return el.course_id !== id;
+                    return el.quo_de_id !== id;
                 });
             $scope.dataLoading = true;
             $http.get('/quotations/delete?id=' + id).

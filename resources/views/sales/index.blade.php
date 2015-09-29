@@ -178,22 +178,22 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" class="total-price">ยอดรวม:</td>
+                                            <td colspan="8" class="total-price">ยอดรวม:</td>
                                             <td>@{{ getTotal() | number:2}} บาท</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" class="total-price">ส่วนลด:</td>
+                                            <td colspan="8" class="total-price">ส่วนลด:</td>
                                             <td>@{{ getDiscount() | number:2}} บาท</td>
                                         </tr>
                                         @if($data->vat== "true")
                                             <tr>
-                                                <td colspan="7" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
+                                                <td colspan="8" class="total-price">ภาษี ({{$data->vat_rate}}%):</td>
                                                 <td>@{{ getVat() | number:2}} บาท
                                                 </td>
                                             </tr>
                                         @endif
                                         <tr>
-                                            <td colspan="7" class="total-price">ยอดสุทธิ:</td>
+                                            <td colspan="8" class="total-price">ยอดสุทธิ:</td>
                                             <td> @{{ getFinalPrice() | number:2}} บาท</td>
                                         </tr>
                                     </table>
