@@ -94,16 +94,7 @@
                                 <li>ชื่อลูกค้า | <span class="sale"><strong>@{{sale.name}}</strong></span>.
                                 </li>
                                 <li>ยอดขายบิลนี้ | <span class="sale"><strong>@{{getTotal()}}</strong> บาท</span>.</li>
-                                <li>ค่าแนะนำจำนวนเงิน | <input type="text"
-                                                               ng-model="item.sale_price"
-                                                               ng-change="updatesale('sale_price',item.quo_id,item.sale_price)"
-                                            >
-                                </li>
-                                <li>ค่าแนะนำเปอร์เซ็น | <input type="number"
-                                                               ng-model="item.sale_price1"
-                                                               ng-change="updatesale('sale_price1',item.quo_id,item.sale_price1)"
-                                            >
-                                </li>
+                                <li>Commission | <span class="sale"><strong>@{{getCommission()}}</strong> บาท</span>.</li>
                                 <li><strong><a href="{{url('quotations/removesale')}}">
                                             เปลียนพนักงาน</a></strong></li>
 

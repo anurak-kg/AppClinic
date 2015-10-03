@@ -117,6 +117,7 @@ class QuotationsController extends Controller
             $course = Course::findOrFail($id);
             $quo_detail->course_id = $course->course_id;
             $price = $course->course_price;
+
         }
         $quo_detail->payment_remain = $price;
         $quo_detail->quo_de_price = $price;
@@ -151,6 +152,7 @@ class QuotationsController extends Controller
             $array['course_detail'] = $item->course->course_detail;
             $array['price'] = $item->course->course_price;
             $array['product_qty'] = 1;
+            $array['commission'] = $item->course->commission;
         }
 
         $array['quo_de_discount'] = $item->quo_de_discount;

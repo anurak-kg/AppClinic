@@ -212,6 +212,14 @@
             }
             return $scope.total;
         }
+        $scope.getCommission = function (){
+            $scope.commission = 0;
+            for (var i=0; i < $scope.product.length; i++){
+                var product = $scope.product[i];
+                $scope.commission += parseInt(product.commission)
+            }
+            return $scope.commission;
+        }
         $scope.getFinalTotal = function () {
             if($scope.vatType == 'false'){
                 return $scope.getTotal()-$scope.getDiscount();
