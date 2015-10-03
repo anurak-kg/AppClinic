@@ -14,9 +14,9 @@
                 </div>
             </div>
         @endif
-            {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
+        {!! Form::open(['url' => 'course/create', 'class' => 'ajax']) !!}
 
-            <div class="col-md-7">
+        <div class="col-md-7">
             <div class="box  box-danger">
                 <div class="box-header with-border">
                     <h2 class="box-title">เพิ่มข้อมูล</h2>
@@ -47,6 +47,17 @@
                                placeholder="ระบุชื่อคอร์ส ..." required>
                         <br>
                     </div>
+                    <div class="col-md-12">
+
+                        <label for="ct_id" class=" required">ประเภทคอร์ส</label>
+                        <select name="ct_id" id="ct_id">
+                            @foreach($ct as $item)
+                            <option value="{{$item->ct_id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+
+                        <br>
+                    </div>
 
                     <div class="col-md-12">
 
@@ -73,6 +84,13 @@
                                placeholder="ระบุจำนวนครั้ง ..." required>
                         <br>
                     </div>
+                    <div class="col-md-6">
+                        <label for="commission" class=" required">Commission</label>
+                        <input class=" form-control" type="number" id="commission"
+                               value="{{Input::old('commission')}}" name="commission"
+                               placeholder="commission ..." required>
+                        <br>
+                    </div>
 
                 </div>
 
@@ -85,6 +103,7 @@
             <div class="box  box-danger">
                 <div class="box-header with-border">
                     <h2 class="box-title">เพิ่มตัวยา</h2>
+
                     <div class="box-tools pull-right">
                         <a href="{{url('course')}}"
                            class="btn btn-danger">กลับหน้าคอร์ส</a>
@@ -93,7 +112,7 @@
 
                 <div class="box-body">
                     <div class="col-md-12">
-                        <p>*ในกรณีที่คอร์สนั้นไม่ต้องใช้ยา  สามารถกดบันทึกได้เลย.</p>
+                        <p>*ในกรณีที่คอร์สนั้นไม่ต้องใช้ยา สามารถกดบันทึกได้เลย.</p>
 
                         <div class="row">
                             <table class="table table-bordered">
@@ -167,6 +186,6 @@
 
             </div>
         </div>
-            </form>
+        </form>
 
 @stop

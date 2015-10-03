@@ -19,7 +19,7 @@
             <div class="panel  panel-primary">
 
                 <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                    <h2 class="panel-title">แก้ไขข้อมูล</h2>
 
                 </div>
 
@@ -38,6 +38,14 @@
                         <input class=" form-control" type="text" id="course_name" name="course_name"
                                placeholder="ระบุชื่อคอร์ส ..." value="{{$course->course_name}}"
                                required>
+                        <br>
+                    </div>
+                    <div class="col-md-12">
+
+                        <label for="ct_id" class=" required">ประเภทคอร์ส</label>
+                        {!! Form::select('ct_id',$ct,$course->ct_id,array('class' => 'form-control')) !!}
+
+
                         <br>
                     </div>
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Course;
+use App\Course_type;
 use App\Medicine;
 use App\Product;
 use Barryvdh\Debugbar\Middleware\Debugbar;
@@ -17,12 +18,14 @@ class CourseController extends Controller
 
         return view("course/index",compact('course'));
     }
+
     public function getView()
     {
-        $course = Course::where('course_id', \Input::get('course_id'))->with('product')->get();
+        $course = Course::findOrFail(Input::get('course_id'));
+        $ct = Course_type::all()->lists('name','ct_id')->toArray();
 
-        //return response()->json($course);
-        return view("course/view", ['course' => $course[0]]);
+        //return response()->json($ct);
+        return view('course/view', compact('course','ct'));
     }
     public function getDataGrid()
     {
@@ -33,6 +36,7 @@ class CourseController extends Controller
         $grid->add('course_name', 'ชื่อคอร์ส');
         $grid->add('course_qty', 'จำนวน');
         $grid->add('course_price', 'ราคา');
+        $grid->add('commission', 'Commission');
         $grid->add('{{$course_id}}', 'รายละเอียด')->cell(function ($course_id) {
             return '<a href="' . url('/course/view') . '?course_id=' . $course_id . '" class="btn btn-xs btn-primary" target="_blank"><i class="glyphicon glyphicon-edit"></i> ข้อมูลคอร์ส</a>';
         });
@@ -43,7 +47,11 @@ class CourseController extends Controller
 
     public function getCreate()
     {
-        return view('course/create');
+        $ct = DB::table('course_type')->select('course_type.name','course_type.ct_id')->get();
+        //dd($ct);
+        //return response()->json($ct);
+
+        return view('course/create',compact('ct'));
     }
     public function getDelete(){
         $course = Course::findOrFail(Input::get('course_id'));
@@ -70,10 +78,12 @@ class CourseController extends Controller
         $medicine = json_decode(Input::get('json'));
         $course = new Course();
         $course->course_id = Input::get('course_id');
+        $course->ct_id = Input::get('ct_id');
         $course->course_name = Input::get('course_name');
         $course->course_detail = Input::get('course_detail');
         $course->course_price = Input::get('course_price');
         $course->course_qty = Input::get('course_qty');
+        $course->commission = Input::get('commission');
         $course->save();
         if (count($medicine) != 0) {
             foreach ($medicine as $item) {
@@ -99,10 +109,12 @@ class CourseController extends Controller
     }
     public function postUpdate(){
         $course = Course::findOrFail(Input::get('course_id'));
+        $course->ct_id = Input::get('ct_id');
         $course->course_name = Input::get('course_name');
         $course->course_detail = Input::get('course_detail');
         $course->course_price = Input::get('course_price');
         $course->course_qty = Input::get('course_qty');
+        $course->commission = Input::get('commission');
         $course->save();
         systemLogs([
             'emp_id' => auth()->user()->getAuthIdentifier() ,
@@ -114,8 +126,12 @@ class CourseController extends Controller
     }
     public function getEdit()
     {
+
         $course = Course::findOrFail(Input::get('modify'));
-        return view('course/edit', compact('course'));
+        $ct = Course_type::all()->lists('name','ct_id')->toArray();
+
+        //return response()->json($ct);
+        return view('course/edit', compact('course','ct'));
     }
     public function getMedicineData()
     {
