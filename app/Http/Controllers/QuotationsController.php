@@ -12,6 +12,7 @@ use App\Branch;
 use App\Commission;
 use App\Course;
 use App\Customer;
+use App\InventoryTransaction;
 use App\Product;
 use App\Quotations;
 use App\Quotations_detail;
@@ -144,7 +145,7 @@ class QuotationsController extends Controller
             $array['name'] = $item->product->product_name;
             $array['price'] = $item->product->product_price;
             $array['product_qty'] = $item->product_qty;
-
+            $array['commission'] = 0;
         }
         if ($item->course != null) {
             $array['type'] = "course";
@@ -152,7 +153,11 @@ class QuotationsController extends Controller
             $array['course_detail'] = $item->course->course_detail;
             $array['price'] = $item->course->course_price;
             $array['product_qty'] = 1;
-            $array['commission'] = $item->course->commission;
+            if ($item->course->commission == null) {
+                $array['commission'] = 0;
+            } elseif ($item->course->commission != null) {
+                $array['commission'] = $item->course->commission;
+            }
         }
 
         $array['quo_de_discount'] = $item->quo_de_discount;
@@ -170,11 +175,23 @@ class QuotationsController extends Controller
         $quo->quo_status = 1;
         //$quo->bill_number = getNewBillNo();
         $quo->quo_date = \Carbon\Carbon::now()->toDateTimeString();
-        $quo->save();
 
         //คำนวญค่า Commissions
         $this->commissionsCalculate();
-
+        $quo_de = Quotations_detail::where('quo_id', $this->getQuoId())->get();
+        foreach ($quo_de as $item) {
+            if ($item->product != null) {
+                $inv = new InventoryTransaction();
+                $inv->inv_id = getNewInvTranPK();
+                $inv->product_id = $item->product->product_id;
+                $inv->sales_id = $item->quo_de_id;
+                $inv->qty = -abs($item->product_qty);
+                $inv->type = "SALE";
+                $inv->branch_id = Branch::getCurrentId();
+                $inv->save();
+            }
+        }
+        $quo->save();
 
         systemLogs([
             'emp_id' => auth()->user()->getAuthIdentifier(),
@@ -182,8 +199,9 @@ class QuotationsController extends Controller
             'emp_id2' => $quo->sale_id,
             'logs_type' => 'info',
             'logs_where' => 'Quotations',
-            'description' => 'ขายคอร์ส เลขที่การซื้อ :' . $quo->quo_id
+            'description' => 'ขายคอร์ส/สินค้า เลขที่การซื้อ :' . $quo->quo_id
         ]);
+        //dd($quo_de);
         return redirect("payment" . "?quo_id=" . $quo->quo_id)
             ->with('quo_id', $quo->quo_id);
 
@@ -226,7 +244,7 @@ class QuotationsController extends Controller
                 $array['name'] = $item->product->product_name;
                 $array['price'] = $item->product->product_price;
                 $array['product_qty'] = $item->product_qty;
-
+                $array['commission'] = 0;
             }
             if ($item->course != null) {
                 $array['type'] = "course";
@@ -234,9 +252,9 @@ class QuotationsController extends Controller
                 $array['course_detail'] = $item->course->course_detail;
                 $array['price'] = $item->course->course_price;
                 $array['product_qty'] = 1;
-                if($item->course->commission == null){
+                if ($item->course->commission == null) {
                     $array['commission'] = 0;
-                }elseif($item->course->commission != null){
+                } elseif ($item->course->commission != null) {
                     $array['commission'] = $item->course->commission;
                 }
             }
@@ -261,7 +279,7 @@ class QuotationsController extends Controller
             ->get()
             ->first();
         $quo_detail->$type = $value;
-        if ($type == 'quo_de_discount' || $type == 'quo_de_disamount' || $type == 'product_qty'  ) {
+        if ($type == 'quo_de_discount' || $type == 'quo_de_disamount' || $type == 'product_qty') {
             $course_price = ($quo_detail->quo_de_price - ($quo_detail->quo_de_price * $quo_detail->quo_de_discount / 100) - $quo_detail->quo_de_disamount) * $quo_detail->product_qty;
             $quo_detail->net_price = $course_price;
             $quo_detail->payment_remain = $course_price;
@@ -374,14 +392,15 @@ class QuotationsController extends Controller
         return $quo->quo_id;
     }
 
-    private  function commissionsCalculate() {
-        $quo = Quotations::where('quo_id','=',$this->quo_id)
+    private function commissionsCalculate()
+    {
+        $quo = Quotations::where('quo_id', '=', $this->quo_id)
             ->with("Quotations_detail.course")
             ->get()
             ->first();
         $saleId = $quo->sale_id;
-        foreach($quo->Quotations_detail as $item){
-            if($item->course != null  && $item->course->commission != null && $saleId != null){
+        foreach ($quo->Quotations_detail as $item) {
+            if ($item->course != null && $item->course->commission != null && $saleId != null) {
                 $commission = new Commission();
                 $commission->quo_de_id = $this->quo_id;
                 $commission->emp_id = $saleId;
@@ -391,12 +410,12 @@ class QuotationsController extends Controller
         }
     }
 
-    public function  getUnitTest(){
+    public function  getUnitTest()
+    {
         $this->quo_id = $this->getQuoId();
         $this->commissionsCalculate();
 
     }
-
 
 
 }
