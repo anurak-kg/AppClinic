@@ -25,9 +25,9 @@ class Quotations_detail extends Model
     {
         return $this->hasManyThrough('App\Course_detail', 'App\Course','course_id');
     }
-    public function payment()
+    public function payment_detail()
     {
-        return $this->belongsTo('\App\Payment', 'quo_de_id','quo_de_id');
+        return $this->hasMany('\App\Payment_detail');
     }
     public function commission(){
         return $this->hasMany('\App\Commission');
