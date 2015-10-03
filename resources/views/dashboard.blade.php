@@ -35,7 +35,6 @@
                         <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส / สินค้า <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
-
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <!-- small box -->
                     <div class="small-box bg-yellow">

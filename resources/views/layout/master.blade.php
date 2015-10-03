@@ -41,8 +41,8 @@
         <a href="{{url('')}}" class="logo">
             <!-- Logo -->
 
-            <span class="logo-mini"><b>C</b>D</span>
-            <span class="logo-lg"><b>Clinic </b>Demo </span>
+            <span class="logo-mini"><b>S</b>C</span>
+            <span class="logo-lg"><b>SIAM LOFT </b>CLINIC</span>
         </a>
 
         <!-- Header Navbar -->
