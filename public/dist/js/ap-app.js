@@ -1,3 +1,7 @@
+/**
+ * Created by Anurak on 26/06/58.
+ */
+
 (function () {
     'use strict'
     var app = angular.module('application', ['ngTable', 'ui.bootstrap', 'ngSanitize', 'ui.select']);
@@ -176,7 +180,6 @@
         $scope.clearSearch = function () {
             $scope.courseSearchBox = ""
         }
-
         $scope.getAddProduct = function (data) {
             $scope.dataLoading = true;
             var url = $scope.controller + '/add?id=' + data.id + '&type=' + data.type;
@@ -257,7 +260,6 @@
                     $scope.dataLoading = false;
                 });
         }
-
         $scope.deleteById = function (id) {
             $scope.product = $scope.product
                 .filter(function (el) {
@@ -290,11 +292,9 @@
             }, function () {
             });
         };
-
         $scope.cancel = function () {
             $scope.modalInstance.dismiss();
         };
-
         $scope.payment = function () {
             window.location.href = '/quotations/save';
         }
@@ -1874,9 +1874,76 @@
             }, 300);        }
 
     });
+    app.controller('newPaymentController', function ($scope) {
+        $scope.product = [];
+        $scope.payment = [];
+        $scope.payment.receivedAmount = 0;
+        $scope.payment.type = 'cash';
+        $scope.init = function(id,paymentType,remain,type,netPrice,qty){
+            var data= [];
+            data['id'] = id;
+            data['type'] = type;
+            data['remain'] = remain;
+            data['netPrice'] = netPrice;
+            data['paymentPrice'] = remain;
+            data['selected'] = true;
+            data['paymentType'] = paymentType;
+            if(type == "course" ){
+                data['minPayment'] = netPrice / qty;
+            }
+
+            $scope.product.push(data);
+
+        }
+        $scope.changePayType = function (index) {
+            console.log($scope.product[index].paymentType );
+            if ($scope.product[index].paymentType == "payByQty") {
+                $scope.product[index].paymentPrice = $scope.product[index].minPayment;
+            }
+
+        }
+        $scope.changeType = function () {
+            console.log($scope.payment.type);
+            if ($scope.payment.type == "credit_card") {
+                $scope.payment.creditCardBox = true;
+            } else {
+                $scope.payment.creditCardBox = false;
+            }
+            if ($scope.payment.type == "transfer") {
+                $scope.payment.boxTransfer = true;
+            } else {
+                $scope.payment.boxTransfer = false;
+            }
+        }
+        $scope.getTotalLength = function () {
+            $scope.total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                if(product.selected == true){
+                    $scope.total++;
+                }
+            }
+            return $scope.total;
+        }
+
+        $scope.getWithdrawn = function () {
+            return $scope.payment.receivedAmount - $scope.getTotal();
+        };
+        $scope.getTotal = function () {
+            $scope.total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                if(product.selected == true){
+                    $scope.total += parseInt(product.paymentPrice);
+                }
+            }
+            return $scope.total;
+        }
+
+
+
+    });
+
 })
 
 ();
-/**
- * Created by Anurak on 26/06/58.
- */

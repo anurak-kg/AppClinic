@@ -3,59 +3,7 @@
 @section('headText','Payment')
 @section('headDes','ชำระเงิน')
 @section('content')
-    <style>
-        /* .squaredThree */
-        .squaredThree {
-            width: 20px;
-            position: relative;
-            margin: 20px auto;
-        }
-
-        .squaredThree label {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
-            background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
-            border-radius: 4px;
-            box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.4);
-        }
-
-        .squaredThree label:after {
-            content: '';
-            width: 9px;
-            height: 5px;
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            border: 3px solid #fcfff4;
-            border-top: none;
-            border-right: none;
-            background: transparent;
-            opacity: 0;
-            -webkit-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        }
-
-        .squaredThree label:hover::after {
-            opacity: 0.3;
-        }
-
-        .squaredThree input[type=checkbox] {
-            visibility: hidden;
-        }
-
-        .squaredThree input[type=checkbox]:checked + label:after {
-            opacity: 1;
-        }
-
-        /* end .squaredThree */
-    </style>
-    <div class="row">
+    <div class="row" ng-controller="newPaymentController">
         <form method="get" target="_blank" action="{{url('bill/by-course/')}}">
             <div class="col-md-12">
                 <div class="box box-default ">
@@ -78,18 +26,19 @@
                             </div>
                         @endif
 
-                        <div class="col-md-12 ">
+                        <div class="col-md-9 ">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
                                     <td style="width: 10px">#</td>
                                     <td>คอร์ส / สินค้า</td>
-                                    <td>ราคา</td>
                                     <td>จำนวน</td>
+                                    <td width="20px">เข้ารักษา</td>
+
                                     <td>ประเภทการจ่าย</td>
-                                    <td>จำนวนที่จ่าย</td>
-                                    <td>เลือกชำระเงิน</td>
-                                    <td align="middle">คงเหลือ</td>
+                                    <td>ยอดค้างจ่าย</td>
+                                    <td width="20px">ชำระ</td>
+                                    <td width="150px">จำนวนที่จ่าย</td>
 
 
                                 </tr>
@@ -97,21 +46,31 @@
                                 <tbody>
                                 <?php $index = 0;?>
                                 @foreach($quo as $item)
-                                    <tr>
+                                    <?php
+                                    $type = null;$course_qty = null;
+                                    if ($item->course_name != null) {
+                                        $type = 'course';
+                                        $course_qty = $item->course_qty;
+                                    } else {
+                                        $type = 'product';
+                                        $course_qty = 0;
+                                    }
+                                    ?>
+                                    <tr ng-init="init({{$index}},'full',{{ceil($item->payment_remain)}},'{{$type}}',{{ceil($item->net_price)}},{{$course_qty}})">
                                         <td>{{$index+1}}</td>
                                         <td>
-                                            @if($item->course_name == null)
-                                                {{$item->product_name}}
-                                            @else
-                                                {{$item->course_name}} จำนวน {{$item->course_qty}} ครั้ง</td>
-                                        @endif
-                                        <td>
-                                            @if($item->course_price == null)
-                                                {{$item->product_price}}
-                                            @else
-                                                {{$item->course_price}}
-                                            @endif
+                                            <strong>
+                                                @if($item->course_name == null)
+                                                    {{$item->product_name}}
+                                                @else
+                                                    {{$item->course_name}}
+                                                @endif
+                                            </strong>
+                                            <br>
+                                            ราคารวม {{ceil($item->net_price)}} บาท
+
                                         </td>
+
 
                                         <td align="middle">
                                             @if($item->course_qty == null)
@@ -119,89 +78,151 @@
                                             @else
                                                 {{$item->course_qty}}
                                             @endif
+                                            @if($item->product_unit == null)
+                                                ครั้ง
+                                            @else
+                                                {{$item->product_unit }}
+                                            @endif
+
+
+                                        </td>
+                                        <td>
+                                            0
                                         </td>
 
                                         <td align="middle">
-                                            <select>
-                                                <option value="name" id="full">จ่ายเต็มจำนวน</option>
-                                                <option value="name1">ผ่อนจ่าย</option>
-                                            </select>
-                                        </td>
+                                            @if($type == 'course')
+                                                <select ng-change="changePayType({{$index}})"
+                                                        ng-model="product[{{$index}}].paymentType"
+                                                        ng-disabled="product[{{$index}}].type == 'product' ">
+                                                    <option value="full">จ่ายเต็มจำนวน</option>
+                                                    <option value="payByQty">ผ่อนจ่าย</option>
+                                                </select>
+                                            @else
+                                                จ่ายเต็มจำนวน
+                                            @endif
 
+                                        </td>
 
 
                                         <td>
-                                            <?php
-                                            $price = null;
-                                            if($item->course_price == null){
-                                                $price = $item->product_price;
-                                            }else{
-                                                $price = $item->course_price;
-                                            }
-                                            ?>
-                                            <input type="text" value="{{$price}}">
+                                            {{ product[<?php echo $index ;?>].remain  }}
+
                                         </td>
-
-
 
 
                                         <td align="middle">
-                                            <input type="checkbox" checked>
+                                            <input type="checkbox" ng-model="product[{{$index}}].selected">
                                         </td>
 
                                         <td>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <input type="text"
+                                                           ng-readonly="product[{{$index}}].paymentType == 'full'"
+                                                           class="form-control"
+                                                           ng-model="product[{{$index}}].paymentPrice">
+                                                </div>
+                                            </div>
 
+
+                                            <p class="minPayment"
+                                               ng-show="product[{{$index}}].paymentType == 'payByQty' ">ยอดขั้นต่ำ
+                                                {{ product[<?php echo $index ;?>].minPayment  }}
+                                                บาท</p>
                                         </td>
-
                                     </tr>
-
                                     <?php $index++;?>
-
                                 @endforeach
 
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                        <div class="col-md-3">
+                            <table class="table">
                                 <tr>
-                                    <td colspan="7" class="total-price">ยอดรวม:</td>
-                                    <td> บาท</td>
+                                    <td colspan="2"><h4>ชำระเงิน</h4></td>
+                                </tr>
+                                <tr>
+                                    <td>ลูกค้า</td>
+                                    <td class="total-price">{{$customer->cus_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>รายการที่ชำระ</td>
+                                    <td class="total-price">@{{ getTotalLength() }} รายการ</td>
+                                </tr>
+                                <tr>
+                                    <td>ส่วนลด</td>
+                                    <td class="total-price">0</td>
+                                </tr>
+                                <tr>
+                                    <td>ยอดที่ต้องชำระ</td>
+                                    <td class="total-price">@{{ getTotal() }} บาท</td>
+
+                                </tr>
+                            </table>
+
+                            <table class="table">
+                                <tr>
+                                    <td colspan="2">ประเภทการจ่าย
+                                        <select class="form-control" ng-change="changeType()"
+                                                ng-model="payment.type">
+                                            <option value="cash">เงินสด</option>
+                                            <option value="credit_card">บัตรเครดิต</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr ng-show="payment.creditCardBox">
+                                    <td colspan="2">ธนาคาร
+                                        <select class="form-control" ng-model="payment.bank_id" name="bank_id">
+                                            @foreach($bank as $item)
+                                                <option value="{{$item->bank_id}}">{{$item->bank_name}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr ng-show="payment.creditCardBox">
+                                    <td colspan="2">รหัสบัตรเครดิต
+                                        <input type="text" class="form-control" name="card_id"
+                                               id="received_amount"
+                                               ng-model="payment.card_id"
+                                               placeholder="เลขที่บัตรเครดดิต">
+                                    </td>
+                                </tr>
+                                <tr ng-show="payment.creditCardBox">
+                                    <td colspan="2">รหัส EDC
+                                        <input type="text" class="form-control"
+                                               id="received_amount" name="edc"
+                                               ng-model="payment.edc"
+                                               placeholder="EDC ID">
+                                    </td>
                                 </tr>
 
-                                @if($quo->vat == 'true')
-                                    <tr>
-                                        <td colspan="7" class="total-price">ภาษี {{getConfig('vat_rate')}}% :</td>
-                                        <td> บาท</td>
-                                    </tr>
-                                @endif
                                 <tr>
-                                    <td colspan="7" class="total-price">ยอดสุทธิ:</td>
-                                    <td><strong></strong> บาท</td>
-                                </tr>
-
-
-
-                                <tr>
-                                    <td colspan="7"></td>
-                                    <td width="200">
+                                    <td colspan="2">
+                                        รับเงิน
                                         <input type="number" class="form-control  total-price input-lg"
+                                               ng-model="payment.receivedAmount"
                                                id="received_amount" name="receivedAmount" required
-                                               ng-change=" "
-                                               ng-model=" "
                                                placeholder="เงินที่รับ">
                                     </td>
-
                                 </tr>
-
                                 <tr>
-                                    <td colspan="7"></td>
+                                    <td>เงินทอน</td>
+                                    <td class="total-price">@{{ getWithdrawn() }} บาท</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <button ng-disabled = "payment.receivedAmount < getTotal()"
+                                                style="display: block; width: 100%;"
+                                                class="btn btn-success">ชำระเงิน
 
-                                    <td>
-                                        <button class="btn btn-success btn-block pull-right"
-                                                ng-disabled=" "
-                                                ng-click=" ">ชำระเงิน
                                         </button>
                                     </td>
-
                                 </tr>
-
-                                </tbody>
 
                             </table>
 
@@ -215,5 +236,6 @@
 
             </div>
         </form>
+
     </div>
 @stop
