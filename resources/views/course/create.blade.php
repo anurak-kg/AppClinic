@@ -50,7 +50,7 @@
                     <div class="col-md-12">
 
                         <label for="ct_id" class=" required">ประเภทคอร์ส</label>
-                        <select name="ct_id" id="ct_id">
+                        <select name="ct_id" id="ct_id" class=" form-control">
                             @foreach($ct as $item)
                             <option value="{{$item->ct_id}}">{{$item->name}}</option>
                             @endforeach
