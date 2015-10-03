@@ -77,12 +77,41 @@
 
 
     <script type="text/javascript">
+        var rows_selected = [];
+
         $(document).ready(function () {
             $('#stock_table').DataTable({
                 "language": {
                     "url": "/Thai.json"
                 },
+                'rowCallback': function(row, data){
+                    // Get row ID
+                    var rowId = data[0];
+
+                    // If row ID is in the list of selected row IDs
+                    if($.inArray(rowId, rows_selected) !== -1){
+                        $(row).find('input[type="checkbox"]').prop('checked', true);
+                        $(row).addClass('selected');
+                    }
+                }
             });
+
+            $('#stock_table tbody').on('click', 'input[type="checkbox"]', function(e){
+                var $row = $(this).closest('tr');
+
+                if(this.checked){
+                    $row.addClass('selected');
+                } else {
+                    $row.removeClass('selected');
+                }
+
+            });
+
+
+            $('#stock_table').on('click', 'tbody td, thead th:first-child', function(e){
+                $(this).parent().find('input[type="checkbox"]').trigger('click');
+            });
+
         });
     </script>
 

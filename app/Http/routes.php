@@ -44,6 +44,7 @@ Route::any('customer/create', ['uses' => 'CustomerController@create', 'middlewar
 Route::any('report/salesperday', ['uses' => 'ReportController@reportsalesperday', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCash', ['uses' => 'ReportController@reportCommissionCash', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCredit', ['uses' => 'ReportController@reportCommissionCredit', 'middleware' => 'permission:customer-create']);
+Route::any('report/commission', ['uses' => 'ReportController@reportCommission', 'middleware' => 'permission:customer-create']);
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
 
 //Employee

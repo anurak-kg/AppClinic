@@ -112,8 +112,10 @@ class ReportController extends Controller
 //            "
 //            , [$rang, $rang]));
 
-        $salesdaycourse = DB::table('quotations')
-            ->select(DB::raw('SUM(quotations.total_net_price) as Total'),DB::raw('Date(quotations.created_at) AS DATE'));
+        $salesdaycourse = DB::table('quotations_detail')
+            ->select(DB::raw('Sum(course.course_price) as Total'),DB::raw('date(quotations.created_at) AS DATE'))
+            ->join('course','course.course_id','=','quotations_detail.course_id')
+            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id');
 
         if ($rang != null) {
             $salesdaycourse->whereRaw("DATE(quotations.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
@@ -125,11 +127,13 @@ class ReportController extends Controller
         $data = $salesdaycourse->get();
 
 
-        $salesdaypro = DB::table('sales')
-            ->select(DB::raw('SUM(sales.sales_total) as Total'),DB::raw('Date(sales.created_at) AS DATE'));
+        $salesdaypro = DB::table('quotations_detail')
+            ->select(DB::raw('sum(product.product_price) as Total'),DB::raw('date(quotations.created_at) AS DATE'))
+            ->join('product','product.product_id','=','quotations_detail.product_id')
+            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id');
 
         if ($rang != null) {
-            $salesdaypro->whereRaw("DATE(sales.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
+            $salesdaypro->whereRaw("DATE(quotations.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
             $dateTxt['start'] = Date::createFromFormat('Y-m-d', trim($date[0]))->format('l j F Y');
             $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
         }
@@ -362,13 +366,13 @@ class ReportController extends Controller
 
         $dateTxt = [];
         //  var_dump([trim($date[0]),trim($date[1])]);
-        $producthot = DB::table('sales_detail')
-            ->select(DB::raw('product.product_name as productname'), DB::raw('Sum(sales_detail.sales_de_qty) AS Total'))
-            ->join('product', 'product.product_id', '=', 'sales_detail.product_id');
+        $producthot = DB::table('quotations_detail')
+            ->select(DB::raw('product.product_name as productname'), DB::raw('Sum(quotations_detail.product_qty) AS Total'))
+            ->join('product', 'product.product_id', '=', 'quotations_detail.product_id');
         if ($rang != null) {
             $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
             $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
-            $producthot->whereRaw("DATE(sales_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $producthot->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
         }
         $producthot->groupBy('productname')->orderBy('Total', 'desc');
         $data = $producthot->get();
@@ -874,6 +878,69 @@ class ReportController extends Controller
         }
 
 
+
+    }
+
+    //report คอมมิชชั่น ยอดขาย Commission
+    public function reportCommission()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $comcash = DB::table('commission')
+            ->select(DB::raw('users.name as name'),DB::raw('sum(commission.commission) as Total'))
+            ->join('users','users.id','=','commission.emp_id');
+        if ($rang != null) {
+            $comcash->whereRaw("DATE(commission.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $comcash->groupBy('name');
+
+        $data = $comcash->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('รายงาน Commission ', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcommission',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/commission', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'Total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
 
     }
 
