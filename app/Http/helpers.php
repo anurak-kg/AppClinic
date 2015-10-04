@@ -184,7 +184,9 @@ function getNewEmpId(){
     }
     return $primaryKey;
 }
-
+function numberFormat($number){
+    return number_format($number);
+}
 function getCurrentThaiYear()
 {
     return \Carbon\Carbon::now()->addYear(543)->format("y");
