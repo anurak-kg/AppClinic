@@ -26,6 +26,7 @@ class PaymentController extends Controller
     private $receivedAmount;
     private $paymentType;
     private $customer;
+    private $bill_id;
 
     public function getIndex()
     {
@@ -102,6 +103,7 @@ class PaymentController extends Controller
         $this->pay();
 
         //View
+        return redirect("bill/bill?bill_id=" . $this->bill_id);
     }
 
     private function pay()
@@ -166,13 +168,19 @@ class PaymentController extends Controller
         }
     }
 
+    private function generateBillId()
+    {
+        $this->bill_id = getNewBillNo();
+    }
+
     private function createPayment()
     {
+        $this->generateBillId();
         $this->payment = new Payment();
         $this->payment->payment_id = getNewPaymentPK();
         $this->payment->amount = $this->totalPay;
         $this->payment->change = $this->receivedAmount - $this->totalPay;
-
+        $this->payment->bill_id =$this->bill_id ;
         $this->payment->branch_id = Branch::getCurrentId();
         $this->payment->cus_id = $this->customer->cus_id;
 

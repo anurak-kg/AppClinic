@@ -1,19 +1,19 @@
 @extends('layout.master')
 @section('title','ชำระเงิน')
 @section('headText','Payment')
-@section('headDes','ชำระเงิน')
+@section('headDes','บันทึกชำระเงิน')
 @section('content')
-    <div class="row" ng-controller="newPaymentController">
+    <div class="row" ng-controller="newPaymentController" >
 
         <div class="col-md-12">
-            <form method="POST" target="_blank" action="{{url('payment/pay/')}}">
+            <form method="POST" target="_blank" action="{{url('payment/pay/')}}"  >
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="customer_id"
                        value="<?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?>">
 
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน เลขที่การสั่งซื้อ #{{$quo[0]->quo_id}}</h2>
+                        <h2 class="box-title">บันทึกการชำระเงิน รหัสลูกค้า <?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?> </h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
@@ -255,7 +255,7 @@
                                     <tr>
                                         <td colspan="2">
                                             <button ng-disabled="payment.receivedAmount < getTotal()"
-                                                    style="display: block; width: 100%;"
+                                                    style="display: block; width: 100%;" ng-click="submit()"
                                                     class="btn btn-success">ชำระเงิน
 
                                             </button>
