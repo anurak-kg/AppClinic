@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Bill;
 use App\Branch;
 use App\Customer;
@@ -19,16 +20,13 @@ class PaymentController extends Controller
 {
     private $input;
     private $amount;
-    private $quo_id;
     private $payment;
-    private $quo_detail;
-    private $minAmountPay;
-    private $quo;
-    private $quoDetail;
-    private $totalPrice;
-    private $vat = 0;
-    private $sale;
-    private $pay;
+    private $item = [];
+    private $totalPay;
+    private $receivedAmount;
+    private $paymentType;
+    private $customer;
+
     public function getIndex()
     {
         $idcus = Input::get('cus_id');
@@ -43,298 +41,185 @@ class PaymentController extends Controller
         //dd($quo);
 
         $quo = DB::table('quotations_detail')
-            ->select('quotations_detail.quo_id','course.course_name','product.product_name','course.course_price','product.product_price','course.course_qty'
-            ,'quotations_detail.product_qty','quotations_detail.payment_remain','quotations.vat')
-            ->join('quotations','quotations_detail.quo_id','=','quotations.quo_id')
-            ->leftjoin('course','quotations_detail.course_id','=','course.course_id')
-            ->leftjoin('product','quotations_detail.product_id','=','product.product_id')
-            ->where('quotations.cus_id','=',$idcus)
-            ->orwhere('quotations_detail.payment_remain','!=',0)
-            ->orderBy('quotations_detail.quo_de_id','desc')
+            ->select('quotations_detail.quo_id', 'course.course_name', 'product.product_name', 'course.course_price', 'product.product_price', 'course.course_qty'
+                , 'quotations_detail.product_qty', 'quotations_detail.payment_remain', 'quotations.vat')
+            ->join('quotations', 'quotations_detail.quo_id', '=', 'quotations.quo_id')
+            ->leftjoin('course', 'quotations_detail.course_id', '=', 'course.course_id')
+            ->leftjoin('product', 'quotations_detail.product_id', '=', 'product.product_id')
+            ->where('quotations.cus_id', '=', $idcus)
+            ->orwhere('quotations_detail.payment_remain', '!=', 0)
+            ->orderBy('quotations_detail.quo_de_id', 'desc')
             ->get();
 
         //return response()->json($data);
         return view('payment.payment', compact('quo'));
     }
 
-    public function getHistory(){
+    public function getHistory()
+    {
 
         $id = Input::get('cus_id');
-
         $quo = $this->getHistoryData($id);
         $bank = Payment_bank::all();
         $customer = Customer::findOrFail($id);
-       // return response()->json($quo);
-        return view('payment.paymenthistory', compact('quo','bank','customer'));
+        // return response()->json($quo);
+        return view('payment.paymenthistory', compact('quo', 'bank', 'customer'));
     }
-    public function getDetail(){
+
+    public function getDetail()
+    {
         $id = Input::get('id');
-        $sale = Sales::where('sales_id',$id)->with('sales_detail.product')
+        $sale = Sales::where('sales_id', $id)->with('sales_detail.product')
             ->get();
         //return response()->json($sale);
-        return view('payment.salesdetail',compact('sale'));
+        return view('payment.salesdetail', compact('sale'));
     }
-    public function getPrint(){
+
+    public function getPrint()
+    {
         $id = Input::get('cus_id');
-        $pay = Payment::where('cus_id',$id)
-            ->with('payment_detail.bill_detail','quotations_detail.course','quotations_detail.product','sales_detail.product')
+        $pay = Payment::where('cus_id', $id)
+            ->with('payment_detail.bill_detail', 'quotations_detail.course', 'quotations_detail.product', 'sales_detail.product')
             ->get();
         //dd($pay);
         //return response()->json($pay);
-        return view('payment.printbill',compact('pay'));
+        return view('payment.printbill', compact('pay'));
     }
-    public function getSalePay()
-    {
-        $this->sale = Sales::findOrFail(Input::get('sale_id'));
-        $saleController = new SalesController();
-        $saleId = $saleController->getId();
-        $type = Input::get('type');
-        $this->payment = new Payment();
-        $this->payment->payment_id = getNewPaymentPK();
-        $this->payment->sales_id = $saleId;
-        $this->payment->cus_id = $this->sale->cus_id;
-        $total = DB::table('sales_detail')->where('sales_id', $saleId)->sum('sales_de_net_price');
-        //$totalVat = $total * getConfig('vat_rate') /100;
-        //$totalWithVat = $total + $totalVat;
-        if ($type == 'cash') {
-            $this->payment->payment_status = "FULLY_PAID";
-            $this->payment->payment_type = 'PAID_IN_FULL';
-            $this->payment->save();
-            $this->totalPrice = $total;
-            $this->saleVatCalculate();
-            $this->saveCash();
-            return redirect('sales/save');
-        }
-    }
-    public function getPay()
-    {
-        $this->quo_detail = Quotations_detail::where('quo_de_id', Input::get('quo_de_id'))
-            ->with('Course', 'Quotations')
-            ->get()->first();
-        $this->input['method'] = 'PAID_IN_FULL';
-        $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
-        $this->quo_id = $this->quo_detail->quo_id;
-        $this->vatCalculate();
-        $totalPrice = $this->quo_detail->net_price;
-        $bank = Payment_bank::all();
-        //return response()->json($quo);
-        return view('payment.pay', [
-            'quo' => $this->quo_detail,
-            'totalPrice' => $totalPrice,
-            'bank' => $bank]);
-    }
+
+
     public function postPay()
     {
-        $this->input = Input::all();
-        if ($this->input['method'] == 'PAID_IN_FULL') {
-            $this->savePaidInFull();
-        } elseif ($this->input['method'] == 'PAY_BY_COURSE') {
-            $this->savePayPerCourse();
-        }elseif ($this->input['method'] == 'PAY_BY_Transfer') {
-            $this->savePayPerCourse();
+        //Receive Data from Input
+        $this->receivedAmount = Input::get('receivedAmount');
+        $this->paymentType = Input::get('paymentType');
+        $this->customer = Customer::findOrFail(Input::get('customer_id'));
+        $this->setInput(Input::all());
+        //Process
+        $this->generateItemArray(Input::all());
+        $this->calculateTotalPay();
+        $this->checkBalance();
+        //PAY
+        $this->pay();
+
+        //View
+    }
+
+    private function pay()
+    {
+        DB::transaction(function () {
+            $this->createPayment();
+
+            foreach ($this->item as $item) {
+                $this->paymentDetailSave($item);
+                $this->updateQuoPaymentStatus($item['quo_de_id'], $item['amount']);
+            }
+
+        });
+    }
+
+    private function calculateTotalPay()
+    {
+        $total = 0;
+        foreach ($this->item as $item) {
+            $total += $item['amount'];
         }
-        //var_dump($this->quo);
-        // dump($this->totalPrice);
-        // dd($this->input['method']);
-        /*return redirect("payment" . "?quo_id=" . $this->quo_id)
-            ->with(['headTxt' => 'เรียบร้อยแล้ว',
-                    'message' => 'ลงบันทึกการชำระเงินเรียบร้อยแล้ว',
-                    'quo_id' => $this->quo_id]
-            );*/
-        return redirect("payment/print" . "?cus_id=" . $this->quo->cus_id);
+        $this->totalPay = $total;
+    }
+
+    private function generateItemArray($input)
+    {
+        $pay = $input['pay'];
+        $product_amount = $input['value'];
+        $type = $input['type'];
+        $this->item = [];
+        foreach ($pay as $id => $value) {
+            $array = [];
+            $array['quo_de_id'] = $id;
+            $array['amount'] = $product_amount[$id];
+
+            if ($type[$id] != null) {
+                $array['payment_type'] = $type[$id];
+            } else {
+                $array['payment_type'] = "PAID_IN_FULL";
+            }
+            array_push($this->item, $array);
+        }
 
     }
-    private function vatCalculate()
+
+    private function paymentDetailSave($item)
     {
-        if ($this->input['method'] == 'PAID_IN_FULL') {
-            $this->totalPrice = (float)$this->quo_detail->payment_remain;
-            if ($this->quo->vat == 'true') {
-                $this->setVat(($this->quo_detail->payment_remain * $this->quo->vat_rate / 100));
-            }
-        } elseif ($this->input['method'] == 'PAY_BY_COURSE') {
-            $this->totalPrice = (float)$this->quo_detail->net_price / $this->quo_detail->Course->course_qty;
-            if ($this->quo->vat == 'true') {
-                $this->setVat(($this->quo_detail->net_price / $this->quo_detail->Course->course_qty) * $this->quo->vat_rate / 100);
-            }
-        } elseif ($this->input['method'] == 'PAY_BY_Transfer') {
-            $this->totalPrice = (float)$this->quo_detail->payment_remain;
-            if ($this->quo->vat == 'true') {
-                $this->setVat(($this->quo_detail->payment_remain * $this->quo->vat_rate / 100));
-            }
+        $quo_detail = Quotations_detail::findOrFail($item['quo_de_id']);
+        $paymentDetail = new Payment_detail();
+        $paymentDetail->payment_id = $this->payment->payment_id;
+        $paymentDetail->quo_de_id = $quo_detail->quo_de_id;
+        $paymentDetail->payment_type = $item['payment_type'];
+        $paymentDetail->amount = $item['amount'];
+        //$paymentDetail->vat_amount = $this->getVat();
+        $paymentDetail->save();
+    }
+
+    private function checkBalance()
+    {
+        if ($this->totalPay > $this->receivedAmount) {
+            abort('400');
         }
     }
-    private function savePaidInFull()
+
+    private function createPayment()
     {
-        $count = Payment::where('quo_de_id', $this->input['quo_de_id'])->count();
-        if ($count == 0) {
-            $this->quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
-                ->where('course_id', $this->input['course_id'])->get()->first();
-            $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
-            $this->quo_id = $this->quo_detail->quo_id;
-            $this->vatCalculate();
-            /* ยังไม่ถูกต้อง
-             * if ($this->quo_detail->payment_remain > $this->input['receivedAmount']) {
-                abort(403, '400001 : ข้อมูลเงินสดไม่ถูกต้อง.');
-            }*/
-            if ($this->input['receivedAmount'] >= $this->totalPrice + $this->getVat()) {
-                $this->amount = $this->totalPrice;
-            } else {
-                abort(405, '0x400002 : จำนวนเงินไม่พอ.');
-            }
-            $this->payment = new Payment();
-            $this->payment->payment_id = getNewPaymentPK();
-            $this->payment->quo_de_id = $this->input['quo_de_id'];
-            $this->payment->cus_id = $this->quo->cus_id;
-            $this->payment->payment_type = "PAID_IN_FULL";
-            $this->payment->save();
-            if ($this->input['type'] == "cash") {
-                $this->saveCash();
-            } elseif ($this->input['type'] == "credit_card") {
-                $this->saveCredit();
-            } elseif ($this->input['type'] == "transfer") {
-                $this->saveTransfer();
-            }
-            $this->updateQuoPaymentStatus();
-            $this->payment->save();
-        } else {
-            abort(405, '0x400003 : พบข้อผิดพลาดทางการเงิน.');
+        $this->payment = new Payment();
+        $this->payment->payment_id = getNewPaymentPK();
+        $this->payment->amount = $this->receivedAmount;
+        $this->payment->branch_id = Branch::getCurrentId();
+        $this->payment->cus_id = $this->customer->cus_id;
+
+        if ($this->paymentType == "CASH") {
+            $this->payment->payment_type = "CASH";
+        } else if ($this->paymentType == "CREDIT") {
+            $this->payment->payment_type = "CREDIT";
+            $this->payment->bank_id = $this->input['bank_id'];
+            $this->payment->card_id = $this->input['card_id'];
+            $this->payment->edc_id = $this->input['edc'];
         }
-    }
-    private function savePayPerCourse()
-    {
-        $count = Payment::where('quo_de_id', $this->input['quo_de_id'])->count();
-        $this->quo_detail = Quotations_detail::where('quo_de_id', $this->input['quo_de_id'])
-            ->with('Course', 'Quotations')
-            ->where('course_id', $this->input['course_id'])->get()->first();
-        $this->quo = Quotations::findOrFail($this->quo_detail->quo_id);
-        $this->quo_id = $this->quo_detail->quo_id;
-        $this->vatCalculate();
-        if ($this->input['receivedAmount'] >= $this->totalPrice + $this->getVat()) {
-            $this->amount = $this->totalPrice;
-        } else {
-            abort(405, '0x400004 : จำนวนเงินไม่พอ');
-        }
-        if ($count == 0) {
-            // dd($quo_detail);
-            $this->quo_id = $this->quo_detail->quo_id;
-            $this->payment = new Payment();
-            $this->payment->payment_id = getNewPaymentPK();
-            $this->payment->quo_de_id = $this->input['quo_de_id'];
-            $this->payment->cus_id = $this->quo->cus_id;
-            $this->payment->payment_type = "PAY_BY_COURSE";
-            $this->payment->save();
-        } else {
-            $this->payment = Payment::where('quo_de_id', $this->input['quo_de_id'])->get()->first();
-        }
-        if ($this->input['type'] == "cash") {
-            $this->saveCash();
-        } elseif ($this->input['type'] == "credit_card") {
-            $this->saveCredit();
-        }elseif ($this->input['type'] == "transfer") {
-            $this->saveTransfer();
-        }
-        $this->updateQuoPaymentStatus();
+
+        $this->payment->emp_id = Auth::user()->getAuthIdentifier();
         $this->payment->save();
     }
-    private function saveCash()
+
+
+    private function updateQuoPaymentStatus($quo_de_id, $amount)
     {
-        $paymentDetail = new Payment_detail();
-        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
-        $paymentDetail->payment_type = 'CASH';
-        $paymentDetail->payment_id = $this->payment->payment_id;
-        $paymentDetail->branch_id = Branch::getCurrentId();
-        $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
-        $paymentDetail->amount = $this->totalPrice;
-        $paymentDetail->vat_amount = $this->getVat();
-        $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->save();
-    }
-    private function saveCredit()
-    {
-        $paymentDetail = new Payment_detail();
-        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
-        $paymentDetail->payment_id = $this->payment->payment_id;
-        $paymentDetail->payment_type = 'CREDIT';
-        $paymentDetail->branch_id = Branch::getCurrentId();
-        $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
-        $paymentDetail->amount = $this->totalPrice;
-        $paymentDetail->vat_amount = $this->getVat();
-        $paymentDetail->bank_id = $this->input['bank_id'];
-        $paymentDetail->card_id = $this->input['card_id'];
-        $paymentDetail->edc_id = $this->input['edc'];
-        $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->save();
-    }
-    private function saveTransfer()
-    {
-        $paymentDetail = new Payment_detail();
-        $paymentDetail->payment_de_id = getNewPaymentDetailPK();
-        $paymentDetail->payment_id = $this->payment->payment_id;
-        $paymentDetail->payment_type = 'Transfer';
-        $paymentDetail->branch_id = Branch::getCurrentId();
-        $paymentDetail->emp_id = Auth::user()->getAuthIdentifier();
-        $paymentDetail->amount = $this->totalPrice;
-        $paymentDetail->vat_amount = $this->getVat();
-        $paymentDetail->bank_id = $this->input['bank_id'];
-        $paymentDetail->id_account = $this->input['id_account'];
-        $paymentDetail->transfer_day = $this->input['transfer_day'];
-        $paymentDetail->transfer_hour = $this->input['transfer_hour'];
-        $paymentDetail->transfer_min = $this->input['transfer_min'];
-        $paymentDetail->created_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->updated_at = \Carbon\Carbon::now()->toDateTimeString();
-        $paymentDetail->save();
-    }
-    private function updateQuoPaymentStatus()
-    {
-        $quo_detail = Quotations_detail::find($this->input['quo_de_id']);
-        $quo_detail->payment_remain = $quo_detail->payment_remain - $this->amount;
+        $quo_detail = Quotations_detail::find($quo_de_id);
+        $quo_detail->payment_remain = $quo_detail->payment_remain - $amount;
         if ($quo_detail->payment_remain <= 0) {
             $quo_detail->payment_remain = 0;
-            $this->payment->payment_status = 'FULLY_PAID';
-        } else {
-            $this->payment->payment_status = 'REMAIN';
         }
-        $this->payment->save();
         $quo_detail->save();
     }
-    /**
-     * @return mixed
-     */
-    public function getVat()
-    {
-        return $this->vat;
-    }
-    /**
-     * @param mixed $vat
-     */
-    public function setVat($vat)
-    {
-        $this->vat = $vat;
-    }
-    private function saleVatCalculate()
-    {
-        if ($this->sale->vat == 'true') {
-            $vat = $this->totalPrice * $this->sale->vat_rate / 100;
-            $this->setVat($vat);
-        }
-    }
+
 
     private function getHistoryData($id)
     {
-       return DB::table('quotations_detail')
-            ->select('quotations_detail.quo_id',
-                'course.course_name','course.course_price','course.course_qty',
-                'product.product_name','product.product_price','product.product_unit',
-                'quotations_detail.product_qty','quotations_detail.payment_remain','quotations_detail.net_price',
+        return DB::table('quotations_detail')
+            ->select('quotations_detail.quo_id', 'quotations_detail.quo_de_id',
+                'course.course_name', 'course.course_price', 'course.course_qty',
+                'product.product_name', 'product.product_price', 'product.product_unit',
+                'quotations_detail.product_qty', 'quotations_detail.payment_remain', 'quotations_detail.net_price',
                 'quotations.vat')
-            ->join('quotations','quotations_detail.quo_id','=','quotations.quo_id')
-            ->leftjoin('course','quotations_detail.course_id','=','course.course_id')
-            ->leftjoin('product','quotations_detail.product_id','=','product.product_id')
-            ->where('quotations.cus_id','=',$id)
-            ->orwhere('quotations_detail.payment_remain','!=',0)
-            ->orderBy('quotations_detail.quo_de_id','desc')
+            ->join('quotations', 'quotations_detail.quo_id', '=', 'quotations.quo_id')
+            ->leftjoin('course', 'quotations_detail.course_id', '=', 'course.course_id')
+            ->leftjoin('product', 'quotations_detail.product_id', '=', 'product.product_id')
+            ->where('quotations.cus_id', '=', $id)
+            ->where('quotations_detail.payment_remain', '!=', 0)
+            ->orderBy('quotations_detail.quo_de_id', 'desc')
             ->get();
     }
+
+    private function setInput($all)
+    {
+        $this->input = $all;
+    }
+
+
 }
