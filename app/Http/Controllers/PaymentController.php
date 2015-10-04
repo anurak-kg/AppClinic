@@ -61,19 +61,11 @@ class PaymentController extends Controller
 
         $id = Input::get('cus_id');
 
-
-        $quo = DB::table('quotations_detail')
-            ->select('quotations_detail.quo_id','course.course_name','product.product_name','course.course_price','product.product_price','course.course_qty'
-                ,'quotations_detail.product_qty','quotations_detail.payment_remain','quotations.vat')
-            ->join('quotations','quotations_detail.quo_id','=','quotations.quo_id')
-            ->leftjoin('course','quotations_detail.course_id','=','course.course_id')
-            ->leftjoin('product','quotations_detail.product_id','=','product.product_id')
-            ->where('quotations.cus_id','=',$id)
-            ->orwhere('quotations_detail.payment_remain','!=',0)
-            ->orderBy('quotations_detail.quo_de_id','desc')
-            ->get();
-        //return response()->json($quo);
-        return view('payment.paymenthistory', compact('quo'));
+        $quo = $this->getHistoryData($id);
+        $bank = Payment_bank::all();
+        $customer = Customer::findOrFail($id);
+       // return response()->json($quo);
+        return view('payment.paymenthistory', compact('quo','bank','customer'));
     }
     public function getDetail(){
         $id = Input::get('id');
@@ -327,5 +319,22 @@ class PaymentController extends Controller
             $vat = $this->totalPrice * $this->sale->vat_rate / 100;
             $this->setVat($vat);
         }
+    }
+
+    private function getHistoryData($id)
+    {
+       return DB::table('quotations_detail')
+            ->select('quotations_detail.quo_id',
+                'course.course_name','course.course_price','course.course_qty',
+                'product.product_name','product.product_price','product.product_unit',
+                'quotations_detail.product_qty','quotations_detail.payment_remain','quotations_detail.net_price',
+                'quotations.vat')
+            ->join('quotations','quotations_detail.quo_id','=','quotations.quo_id')
+            ->leftjoin('course','quotations_detail.course_id','=','course.course_id')
+            ->leftjoin('product','quotations_detail.product_id','=','product.product_id')
+            ->where('quotations.cus_id','=',$id)
+            ->orwhere('quotations_detail.payment_remain','!=',0)
+            ->orderBy('quotations_detail.quo_de_id','desc')
+            ->get();
     }
 }

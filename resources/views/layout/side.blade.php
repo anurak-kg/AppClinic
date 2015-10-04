@@ -73,8 +73,8 @@
                                 </li>
                                 <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>สต๊อกสินค้า</a>
                                 </li>
-                                {{--<li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>--}}
-                                {{--</li>--}}
+                                <li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>
+                                </li>
                             @endif
                         </ul>
                     </li>
@@ -199,12 +199,16 @@
                             <li><a href="{{url('report/customer_payment')}}"><i
                                             class='fa fa-minus'></i>รายได้ทั้งหมด</a>
                         @endif
+                        {{--@if(Auth::user()->can('report') || Auth::user()->can('customer-create'))--}}
+                            {{--<li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>--}}
+                        {{--@endif--}}
+                        {{--@if(Auth::user()->can('report') || Auth::user()->can('customer-create'))--}}
+                            {{--<li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission--}}
+                                    {{--Credit</a>--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                            <li><a href="{{url('report/commissionCash')}}"><i class='fa fa-minus'></i>Commission เงินสด</a>
-                        @endif
-                        @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                            <li><a href="{{url('report/commissionCredit')}}"><i class='fa fa-minus'></i>Commission
-                                    Credit</a>
+                            <li><a href="{{url('report/commission')}}"><i class='fa fa-minus'></i>Commission</a>
                             </li>
                         @endif
                         {{--@if(Auth::user()->can('report') || Auth::user()->can('customer-create'))--}}

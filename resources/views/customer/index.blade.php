@@ -34,7 +34,7 @@
                         <td>ชื่อ</td>
                         <td>เบอร์โทร</td>
                         <td>อายุ</td>
-                        <td align="middle" style="width: 120px">รายละเอียดการชำระเงิน</td>
+                        <td align="middle" style="width: 120px">ชำระเงินค้างจ่าย</td>
                         <td align="middle" style="width: 110px">รายละเอียด</td>
                         <td align="middle" style="width: 110px">จัดการรูปภาพ</td>
                         <td align="middle"  style="width: 110px">Action</td>
@@ -50,7 +50,7 @@
                             <td>{{(date('Y')+543) - $customer->cus_birthday_year }} ปี</td>
                             <td align="middle">
                                 <a href="{{url('payment/history')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
-                                    <i class="fa fa-balance-scale"></i>ชำระเงิน </a></td>
+                                    <i class="fa fa-credit-card"></i> ชำระเงิน </a></td>
                             <td align="middle">
                                 <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
                                     <i class="fa fa-book"></i>

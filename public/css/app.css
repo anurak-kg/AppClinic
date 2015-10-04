@@ -1,6 +1,11 @@
 .checkbox {
   padding-left: 20px;
 }
+.minPayment {
+  font-size: 11px;
+  color: #ff6120;
+  margin-bottom: 0;
+}
 .checkbox label {
   display: inline-block;
   vertical-align: middle;
