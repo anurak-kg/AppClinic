@@ -202,7 +202,7 @@ class QuotationsController extends Controller
             'description' => 'ขายคอร์ส/สินค้า เลขที่การซื้อ :' . $quo->quo_id
         ]);
         //dd($quo_de);
-        return redirect("payment" . "?quo_id=" . $quo->quo_id)
+        return redirect("payment/history?cus_id=" . $quo->cus_id)
             ->with('quo_id', $quo->quo_id);
 
     }

@@ -170,7 +170,9 @@ class PaymentController extends Controller
     {
         $this->payment = new Payment();
         $this->payment->payment_id = getNewPaymentPK();
-        $this->payment->amount = $this->receivedAmount;
+        $this->payment->amount = $this->totalPay;
+        $this->payment->change = $this->receivedAmount - $this->totalPay;
+
         $this->payment->branch_id = Branch::getCurrentId();
         $this->payment->cus_id = $this->customer->cus_id;
 
