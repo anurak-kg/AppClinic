@@ -22,29 +22,13 @@ function systemLogs($array)
 
 function getNewBillNo()
 {
-    $primaryKey = null;
-    $sale = \App\Sales::select('bill_number')
-        ->orderBy('bill_number', 'desc')
+    $Payment = \App\Payment::select('bill_id')
+        ->orderBy('payment_id', 'desc')
         ->limit(1)
         ->get()
         ->first();
-    $quo = \App\Quotations::select('bill_number')
-        ->orderBy('bill_number', 'desc')
-        ->limit(1)
-        ->get()
-        ->first();
-    $quoPk = $sale->bill_number;
-    $salePk = $quo->bill_number;
-    if (($quoPk == 0 && $salePk == null) && ($salePk == 0 && $quoPk == null)) {
-        $primaryKey = 1;
-    } elseif ($quoPk > $salePk) {
-        $primaryKey = $quoPk + 1;
-    } elseif ($salePk > $quoPk) {
-        $primaryKey = $salePk + 1;
-    }
-    //dd($primaryKey);
 
-    return $primaryKey;
+    return 0 + $Payment->bill_id + 1;
 
 }
 
