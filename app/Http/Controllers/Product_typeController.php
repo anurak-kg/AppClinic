@@ -30,15 +30,12 @@ class Product_typeController extends Controller
         $grid->add('pt_id', 'รหัสประเภทสินค้า',true);
         $grid->add('pt_name', 'ชื่อประเภทสินค้า',true);
         $grid->edit('/product_type/edit', 'กระทำ','modify|delete');
-
         return $grid;
     }
     public function grid(){
 
         $grid = $this->getDataGrid();
         $form = $this->create();
-
-
         return view('product_type/index', compact('form','grid'));
     }
 
