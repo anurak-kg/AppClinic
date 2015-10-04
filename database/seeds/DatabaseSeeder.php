@@ -362,15 +362,15 @@ class RolePermissionTableSeeder extends Seeder
 
         DB::table('permissions')->delete();
         DB::table('permissions')->insert([
-            ['id' => '1', 'name' => 'customer-read', 'display_name' => 'ดูข้อมูลลูกค้า'],
-            ['id' => '2', 'name' => 'customer-create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
-            ['id' => '3', 'name' => 'customer-delete', 'display_name' => 'ลบลูกค้า'],
-            ['id' => '4', 'name' => 'customer-edit', 'display_name' => 'แก้ไขข้อมูลลูกค้า'],
-            ['id' => '5', 'name' => 'order-order', 'display_name' => 'สั่งสิ้นค้า'],
-            ['id' => '6', 'name' => 'quo', 'display_name' => 'ขายคอร์ส'],
-            ['id' => '7', 'name' => 'emp', 'display_name' => 'การจัดการพนักงาน'],
-            ['id' => '8', 'name' => 'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
-            ['id' => '9', 'name' => 'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
+            ['id' => '1',  'name' => 'customer-read', 'display_name' => 'ดูข้อมูลลูกค้า'],
+            ['id' => '2',  'name' => 'customer-create', 'display_name' => 'เพิ่มข้อมูลลูกค้า'],
+            ['id' => '3',  'name' => 'customer-delete', 'display_name' => 'ลบลูกค้า'],
+            ['id' => '4',  'name' => 'customer-edit', 'display_name' => 'แก้ไขข้อมูลลูกค้า'],
+            ['id' => '5',  'name' => 'order-order', 'display_name' => 'สั่งสิ้นค้า'],
+            ['id' => '6',  'name' => 'quo', 'display_name' => 'ขายคอร์ส'],
+            ['id' => '7',  'name' => 'emp', 'display_name' => 'เพิ่มพนักงาน'],
+            ['id' => '8',  'name' => 'course', 'display_name' => 'เพิ่ม แก้ไข และลบคอร์ส'],
+            ['id' => '9',  'name' => 'course-read', 'display_name' => 'ดูข้อมูลคอร์ส'],
             ['id' => '10', 'name' => 'product-group', 'display_name' => 'เพิ่ม ลบ และแก้ไขกลุ่มสินค้า'],
             ['id' => '11', 'name' => 'receive-return', 'display_name' => 'รับสินค้าและคืนสินค้า'],
             ['id' => '12', 'name' => 'treatment', 'display_name' => 'รักษา'],
@@ -380,12 +380,17 @@ class RolePermissionTableSeeder extends Seeder
             ['id' => '16', 'name' => 'appointment', 'display_name' => 'ตารางนัดลูกค้า'],
             ['id' => '17', 'name' => 'product', 'display_name' => 'เพิ่ม แก้ไข และลบสินค้า'],
             ['id' => '18', 'name' => 'product-read', 'display_name' => 'ดูข้อมูลสินค้า'],
-            ['id' => '19', 'name' => 'branch', 'display_name' => 'การจัดการสาขา'],
+            ['id' => '19', 'name' => 'branch-read', 'display_name' => 'ดูข้อมูลสาขา'],
             ['id' => '20', 'name' => 'vendor', 'display_name' => 'การจัดการ suppiler'],
             ['id' => '21', 'name' => 'course-type', 'display_name' => 'เพิ่ม ลบ และแก้ไขประเภทคอร์ส'],
             ['id' => '22', 'name' => 'payment', 'display_name' => 'ชำระเงิน'],
             ['id' => '23', 'name' => 'setting', 'display_name' => 'ตั้งค่า'],
             ['id' => '24', 'name' => 'permission', 'display_name' => 'กำหนดสิทธิ'],
+            ['id' => '25', 'name' => 'order-to-stock', 'display_name' => 'เบิกสินค้า'],
+            ['id' => '26', 'name' => 'emp-read', 'display_name' => 'ดูข้อมูลพนักงาน'],
+            ['id' => '27', 'name' => 'receive-return-to-stock', 'display_name' => 'รับสินค้าและคืนสินค้า คลังสินค้า'],
+            ['id' => '28', 'name' => 'branch', 'display_name' => 'การจัดการสาขา'],
+            ['id' => '29', 'name' => 'log', 'display_name' => 'System Log'],
 
 
         ]);
@@ -410,17 +415,19 @@ class RolePermissionTableSeeder extends Seeder
         $manager->perms()->sync([14]);
 
         $recp = \App\Models\Role::create(['id' => '6', 'name' => 'Reception', 'display_name' => 'พนักงานต้อนรับ']);
-        $recp->perms()->sync([1, 2, 3, 4, 6, 12, 13, 16, 18, 22]);
+        $recp->perms()->sync([1, 2, 3, 4, 6, 12, 13, 16, 18, 22, 25 , 27, 9, 15]);
 
         \App\Models\Role::create(['id' => '7', 'name' => 'Marketing', 'display_name' => 'พนักงานการตลาด']);
         $it = \App\Models\Role::create(['id' => '11', 'name' => 'IT', 'display_name' => 'พนักงานไอที']);
-        $it->perms()->sync([5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 22]);
+        $it->perms()->sync([5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 19, 20, 21, 22,25 ,26, 27,29]);
 
         $super = \App\Models\Role::create(['id' => '95', 'name' => 'super-admin', 'display_name' => 'Super Admin']);
-        $super->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]);
+        $super->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,25 ,26,
+                               27,29]);
 
         $root = \App\Models\Role::create(['id' => '99', 'name' => 'root', 'display_name' => 'Root']);
-        $root->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
+        $root->perms()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                              25,26,27,28,29]);
 
 
     }
