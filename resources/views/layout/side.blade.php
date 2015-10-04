@@ -60,6 +60,7 @@
                         <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> รายการสินค้า</a>
                         </li>
                     @endif
+                        @if(Auth::user()->can('product'))
                     <li>
                         <a href="#"><i class="fa fa-minus"></i> สินค้า <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
@@ -78,7 +79,8 @@
                             @endif
                         </ul>
                     </li>
-                    @if(Auth::user()->can('order-order') || (Auth::user()->can('receive-return')))
+                        @endif
+                    @if(Auth::user()->can('order-order') || Auth::user()->can('receive-return') ||  Auth::user()->can('order-to-stock'))
                         <li>
                             <a href="#"><i class="fa fa-minus"></i> การเบิก - รับสินค้าเข้าร้าน <i
                                         class="fa fa-angle-left pull-right"></i></a>
@@ -88,7 +90,7 @@
                                     <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
                                     </li>
                                 @endif
-                                @if(Auth::user()->can('receive-return'))
+                                @if(Auth::user()->can('receive-return') ||  Auth::user()->can('order-to-stock'))
                                     <li><a href="{{url('receive-request')}}"><i
                                                     class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
                                     <li><a href="{{url('request')}}"><i
@@ -98,6 +100,7 @@
                                 @endif
                             </ul>
                         </li>
+                            @if(Auth::user()->can('order-order') || Auth::user()->can('receive-return'))
                         <li>
                             <a href="#"><i class="fa fa-exchange "></i> จัดการคลังสินค้า <i
                                         class="fa fa-angle-left pull-right"></i></a>
@@ -120,6 +123,7 @@
                                 </li>
                             </ul>
                         </li>
+                            @endif
                     @endif
 
                 </ul>

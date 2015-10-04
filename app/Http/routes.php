@@ -55,13 +55,16 @@ Route::group(['middleware' => 'permission:emp'], function () {
     Route::any('user/adddoctor','UserController@adddoctor');
 });
 
-
 //order
+Route::group(['middleware' => 'permission:order-to-stock'], function () {
+    //Route::any('order/history', 'OrderController@history');
+    Route::controller('request', 'RequestController');
+
+
+});
 Route::group(['middleware' => 'permission:order-order'], function () {
     //Route::any('order/history', 'OrderController@history');
     Route::controller('order', 'OrderController');
-    Route::controller('request', 'RequestController');
-
     Route::any('bill/order', 'BillController@order');
     Route::any('bill/request', 'BillController@request');
     Route::any('bill/by-course', 'BillController@billByCourse');
@@ -69,11 +72,16 @@ Route::group(['middleware' => 'permission:order-order'], function () {
 });
 
 //Receive
+
+Route::group(['middleware' => 'permission:receive-return-to-stock'], function () {
+    Route::controller('receive-request', 'ReceiveRequestController');
+    Route::controller('returntostock', 'ReturntostockController');
+});
 Route::group(['middleware' => 'permission:receive-return'], function () {
     Route::controller('receive', 'ReceiveController');
-    Route::controller('receive-request', 'ReceiveRequestController');
+
     Route::controller('return', 'ReturnController');
-    Route::controller('returntostock', 'ReturntostockController');
+
 });
 
 //Course
@@ -129,6 +137,9 @@ Route::group(['middleware' => 'permission:product'], function () {
 Route::any('product/index', ['uses' =>  'ProductController@grid', 'middleware' => 'permission:product-read']);
 
 //Branch
+Route::group(['middleware' => 'permission:branch-read'], function () {
+    Route::any('branch/index', 'BranchController@getDataGrid');
+});
 Route::group(['middleware' => 'permission:branch'], function () {
     Route::any('branch/index', 'BranchController@getDataGrid');
     Route::any('branch/edit', 'BranchController@edit');
