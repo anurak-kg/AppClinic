@@ -2051,6 +2051,9 @@
             }
 
         }
+        $scope.submit = function(){
+
+        }
         $scope.changeType = function () {
             console.log($scope.payment.type);
             if ($scope.payment.type == "CREDIT") {
@@ -2087,7 +2090,6 @@
             }
             return $scope.total;
         }
-
 
 
     });
