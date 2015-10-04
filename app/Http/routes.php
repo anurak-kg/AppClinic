@@ -14,7 +14,6 @@ Route::group(['middleware' => 'permission:treatment'], function () {
     Route::get('treatment/add', 'TreatmentController@add');
     Route::get('treatment/product-list', 'TreatmentController@getProductList');
     Route::get('treatment/medicine-remain', 'TreatmentController@getMedicineRemain');
-
     Route::post('treatment/save', 'TreatmentController@save');
 });
 
@@ -29,7 +28,6 @@ Route::group(['middleware' => 'permission:customer-read'], function () {
     Route::get('data/customer', 'DataController@getCustomerData');
     Route::get('data/product', 'DataController@getProductList');
     Route::get('data/product_search', 'DataController@productSearch');
-
     Route::get('data/vendor_search', 'DataController@vendorSearch');
 });
 Route::group(['middleware' => 'permission:customer-edit'], function () {
@@ -74,6 +72,7 @@ Route::group(['middleware' => 'permission:receive-return'], function () {
     Route::controller('receive', 'ReceiveController');
     Route::controller('receive-request', 'ReceiveRequestController');
     Route::controller('return', 'ReturnController');
+    Route::controller('returntostock', 'ReturntostockController');
 });
 
 //Course

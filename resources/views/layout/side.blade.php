@@ -21,7 +21,8 @@
             <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
 
             @if(Auth::user()->can('quo'))
-                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ขายคอร์ส / สินค้า</span></a></li>
+                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i>
+                        <span>ขายคอร์ส / สินค้า</span></a></li>
             @endif
 
             @if(Auth::user()->can('treatment'))
@@ -92,6 +93,8 @@
                                                     class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
                                     <li><a href="{{url('request')}}"><i
                                                     class='fa fa-angle-double-right'></i>เบิกสินค้า</a></li>
+                                    <li><a href="{{url('returntostock')}}"><i
+                                                    class='fa fa-angle-double-right'></i>คืนสินค้า</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -178,7 +181,8 @@
                             <li><a href="{{url('report/doctor')}}"><i class='fa fa-minus'></i>ยอดขายแพทย์</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                            <li><a href="{{url('report/coursemonth')}}"><i class='fa fa-minus'></i>ยอดขายคอร์สต่อเดือน</a></li>
+                            <li><a href="{{url('report/coursemonth')}}"><i
+                                            class='fa fa-minus'></i>ยอดขายคอร์สต่อเดือน</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
                             <li><a href="{{url('report/coursehot')}}"><i class='fa fa-minus'></i>คอร์สที่ขายดีที่สุด</a>
@@ -204,9 +208,9 @@
                             </li>
                         @endif
                         {{--@if(Auth::user()->can('report') || Auth::user()->can('customer-create'))--}}
-                            {{--<li><a href="{{url('report/commissionTransfer')}}"><i class='fa fa-minus'></i>Commission--}}
-                                    {{--โอนเงิน</a>--}}
-                            {{--</li>--}}
+                        {{--<li><a href="{{url('report/commissionTransfer')}}"><i class='fa fa-minus'></i>Commission--}}
+                        {{--โอนเงิน</a>--}}
+                        {{--</li>--}}
                         {{--@endif--}}
                         @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
                             <li><a href="{{url('report/request')}}"><i class='fa fa-minus'></i>รายงานเบิกสินค้า</a>

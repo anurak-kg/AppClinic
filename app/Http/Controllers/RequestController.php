@@ -16,7 +16,6 @@ use Zofe\Rapyd\Facades\DataGrid;
 
 class RequestController extends Controller
 {
-
     public function getIndex()
     {
         $orderCount = Order::where('order_status', "WAITING")
@@ -24,7 +23,6 @@ class RequestController extends Controller
             ->where('emp_id',Auth::user()->getAuthIdentifier())
             ->where('order_type','=','request')
             ->count();
-
         if ($orderCount == 0) {
             $order = new Order();
             $order->order_id = getNewRequestPK();

@@ -36,5 +36,8 @@ class Re_turn extends Model
     {
         return $this->belongsTo('\App\Receive', 'receive_id');
     }
-
+    public function branch()
+    {
+        return $this->belongsTo('\App\Branch', 'branch_id');
+    }
 }

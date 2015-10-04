@@ -1679,6 +1679,137 @@
             return results;
         }
     });
+    app.controller('returntostockController', function ($scope, $http, ngTableParams) {
+        $scope.product = [];
+        $scope.return = [];
+        $scope.return_detail = [];
+        $scope.dataLoading = true;
+        $scope.boxSearch = false;
+        $scope.SaleBoxSearch = false;
+        $scope.controller = '/returntostock'
+        $scope.warehouse = [];
+        $scope.warehouse.id = 0;
+        $scope.tableParams = new ngTableParams({}, {
+            data: $scope.product
+        })
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $http.get($scope.controller + '/data').
+            success(function (data, status, headers, config) {
+                $scope.product = data;
+                $scope.dataLoading = false;
+                $scope.tableParams.reload();
+            }).error(function (data, status, headers, config) {
+                $scope.dataLoading = false;
+
+            });
+
+        $scope.warehouseChange = function(){
+            $http.get($scope.controller + '/warehouse?id=' + $scope.warehouse.id ).
+                success(function (data, status, headers, config) {
+                    console.log('Warehouse Changed');
+                }).
+                error(function (data, status, headers, config) {
+                });
+        }
+
+        $scope.pushProduct = function (product) {
+            $scope.product.push(product);
+            $scope.product = $scope.pushDuplicateCheck();
+            $scope.getAddProduct(product.product.product_id);
+            console.log($scope.product);
+            // $scope.clearAndReload();
+            $scope.clearSearch();
+        }
+        $scope.clearSearch = function () {
+            $scope.productSearchBox = ""
+        }
+        $scope.update = function (type, product_id, value) {
+            $scope.dataLoading = true;
+
+            var url = $scope.controller + '/update?id=' + product_id + '&type=' + type + '&value=' + value;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                });
+        }
+
+        $scope.getAddProduct = function (id) {
+            $scope.dataLoading = true;
+            var url = $scope.controller + '/addproduct?id=' + id;
+            console.log(url);
+            $http.get(url).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
+                }).
+                error(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                    $scope.tableParams.reload();
+
+                });
+        }
+        $scope.deleteById = function (id) {
+            console.log($scope.product);
+            $scope.product = $scope.product
+                .filter(function (el) {
+                    return el.product_id !== id;
+                });
+            $scope.dataLoading = true;
+            $http.get($scope.controller + '/delete?id=' + id).
+                success(function (data, status, headers, config) {
+                    $scope.dataLoading = false;
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(status)
+                    $scope.dataLoading = false;
+                });
+            $scope.tableParams.reload();
+
+        }
+        $scope.getTotal = function () {
+            $scope.total = 0;
+            for (var i = 0; i < $scope.product.length; i++) {
+                var product = $scope.product[i];
+                var receive = $scope.return[i];
+                //console.log(product);
+                $scope.total += parseInt((product.return_de_qty * product.return_de_price) -
+                    ((product.return_de_price * product.return_de_qty) * product.return_de_discount / 100)
+                    - product.return_de_disamount);
+            }
+            return $scope.total;
+        }
+
+        $scope.pushDuplicateCheck = function () {
+            var arr = $scope.product;
+            var results = [];
+            var idsSeen = {}, idSeenValue = {};
+            for (var i = 0, len = arr.length, id; i < len; ++i) {
+                id = arr[i].id;
+                if (idsSeen[id] !== idSeenValue) {
+                    results.push(arr[i]);
+                    idsSeen[id] = idSeenValue;
+                }
+            }
+            return results;
+        }
+        $scope.save = function (id) {
+            if ($scope.product.length == 0) {
+                alert("ยังไม่มีการเลือกสินค้า");
+            }
+            else {
+                // window.open(
+                //    '/bill/request?order_id=' + id,
+                //    '_blank' // <- This is what makes it open in a new window.
+                //);
+                window.location.href = '/returntostock/save';
+            }
+        }
+    });
     app.controller('treatmentAddController', function ($scope,$http,ngTableParams) {
         $scope.treat_has_medicine = [];
         $scope.medicine = {};
