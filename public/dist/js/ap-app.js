@@ -2026,9 +2026,27 @@
             $scope.product.push(data);
 
         }
+        $scope.checkAll = function () {
+            if ($scope.selectedAll) {
+                $scope.selectedAll = true;
+            } else {
+                $scope.selectedAll = false;
+            }
+            angular.forEach($scope.product, function (item) {
+                item.selected = $scope.selectedAll;
+            });
+
+        };
+        $scope.trClick = function(index){
+          if($scope.product[index].selected == true){
+              $scope.product[index].selected = false;
+          }  else{
+              $scope.product[index].selected = true;
+          }
+        };
         $scope.changePayType = function (index) {
             console.log($scope.product[index].paymentType );
-            if ($scope.product[index].paymentType == "payByQty") {
+            if ($scope.product[index].paymentType == "PAY_BY_COURSE") {
                 $scope.product[index].paymentPrice = $scope.product[index].minPayment;
             }
 
@@ -2056,7 +2074,6 @@
             }
             return $scope.total;
         }
-
         $scope.getWithdrawn = function () {
             return $scope.payment.receivedAmount - $scope.getTotal();
         };
