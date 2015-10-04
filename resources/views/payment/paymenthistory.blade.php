@@ -207,8 +207,8 @@
                                         <td colspan="2">ประเภทการจ่าย
                                             <select class="form-control" ng-change="changeType()"
                                                     ng-model="payment.type" name="paymentType">
-                                                <option value="cash">เงินสด</option>
-                                                <option value="credit_card">บัตรเครดิต</option>
+                                                <option value="CASH">เงินสด</option>
+                                                <option value="CREDIT">บัตรเครดิต</option>
                                             </select>
                                         </td>
                                     </tr>

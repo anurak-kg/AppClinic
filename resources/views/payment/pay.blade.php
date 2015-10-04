@@ -54,7 +54,7 @@
                                                 <select class="form-control" ng-change="changeType()"
                                                         ng-model="payment.type" name="type">
                                                     <option ng-selected="true"
-                                                            value="cash">เงินสด
+                                                            value="CASH">เงินสด
                                                     </option>
                                                     <option value="credit_card">บัตรเครดิต</option>
                                                 </select>

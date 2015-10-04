@@ -2009,7 +2009,7 @@
         $scope.product = [];
         $scope.payment = [];
         $scope.payment.receivedAmount = 0;
-        $scope.payment.type = 'cash';
+        $scope.payment.type = 'CASH';
         $scope.init = function(id,paymentType,remain,type,netPrice,qty){
             var data= [];
             data['id'] = id;
@@ -2053,7 +2053,7 @@
         }
         $scope.changeType = function () {
             console.log($scope.payment.type);
-            if ($scope.payment.type == "credit_card") {
+            if ($scope.payment.type == "CREDIT") {
                 $scope.payment.creditCardBox = true;
             } else {
                 $scope.payment.creditCardBox = false;
