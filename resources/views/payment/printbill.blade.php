@@ -80,7 +80,7 @@
                                         <td><b>จำนวนเงินที่จ่าย</b></td>
                                         <td><b>วันที่</b></td>
                                         <td style="width: 20px;text-align: center">
-                                            <button type="submit" class="btn btn-danger">ปลิ้นบิล</button>
+
                                         </td>
                                     </tr>
                                     </thead>
@@ -100,12 +100,7 @@
                                             <td>
                                                 {{$item->created_at}}
                                             </td>
-                                            <td align="middle">@if($item->payment_detail[0]->bill_detail===null)
-                                                    <input type="checkbox"
-                                                           name="pay_detail[{{$item->payment_detail[0]->payment_de_id}}]">
-                                                    @elseif($item->payment_detail[0]->bill_detail!=null)
-                                                    <a href="/bill/bill?bill_id={{$item->payment_detail[0]->bill_detail->bill_id}}" class="btn btn-md btn-success pull-right">เลขที่ใบเสร็จ <?php echo zerofill(($item->payment_detail[0]->bill_detail->bill_id)) ?></a>
-                                                    @endif
+                                            <td align="middle"> <button type="submit" class="btn btn-danger">ปลิ้นบิล</button>
                                             </td>
                                         </tr>
                                         <?php $index++;?>

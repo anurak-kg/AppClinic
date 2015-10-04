@@ -18,10 +18,12 @@ class ReportController extends Controller
 
     public $data1 = null;
 
-
+    public function index(){
+      return view('report/index');
+    }
 
     //ยอดขาย Sale
-    public function reportSalesTest()
+    public function reportSalesGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -74,7 +76,69 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/sale', [
+            return view('report/saleGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+    }
+
+    public function reportSalesDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        //var_dump($date);
+        $dateTxt = [];
+        $sales = DB::table('quotations_detail')
+            ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
+            ->join('users', 'quotations.sale_id', '=', 'users.id')
+            ->where('users.position_id', '=', 1);
+        if ($rang != null) {
+            $sales->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+        }
+        $sales
+            ->groupBy('quotations.sale_id')
+            ->orderBy('Total', 'desc');
+        $data = $sales->get();
+        //dd($data);
+        //return response()->json($data);
+        if ($type == "excel") {
+            Excel::create('ยอดขายพนักงาน', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsale',['data'=>$data]);
+                });
+
+            })->export('xls');
+        } else {
+            return view('report/saleDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
@@ -87,7 +151,7 @@ class ReportController extends Controller
 
 
     //ยอดขายรายวัน
-    public function reportsalesperday()
+    public function reportsalesperdayGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -215,7 +279,7 @@ class ReportController extends Controller
 
         })->export('xls');
     }else {
-            return view('report/salesperday', [
+            return view('report/saleperdayGraphic', [
                 'datapro' => $datapro,
 
                 'total1' => $this->arrayToChartData($datapro, 'Total'),
@@ -225,15 +289,153 @@ class ReportController extends Controller
                 'total' => $this->arrayToChartData($data, 'Total')
             ]);
         }
+    }
+
+    //ยอดขายรายวัน
+    public function reportsalesperdayDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        //var_dump($date);
+        $dateTxt = [];
+
+//        $salesdaycourse = DB::select(DB::raw(
+//            "
+//                SELECT
+//                (calendar.datefield) AS DATE,
+//                IFNULL(SUM(total_net_price),0) AS total_sales
+//                FROM
+//                quotations
+//                RIGHT JOIN calendar ON DATE(quotations.created_at) = calendar.datefield
+//
+//                WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('".$rang ."-01')) FROM quotations) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM quotations))
+//
+//                GROUP BY DATE
+//
+//                ORDER BY DATE ASC
+//            "
+//            , [$rang, $rang]));
+
+        $salesdaycourse = DB::table('quotations_detail')
+            ->select(DB::raw('Sum(course.course_price) as Total'),DB::raw('date(quotations.created_at) AS DATE'))
+            ->join('course','course.course_id','=','quotations_detail.course_id')
+            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id');
+
+        if ($rang != null) {
+            $salesdaycourse->whereRaw("DATE(quotations.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
+            $dateTxt['start'] = Date::createFromFormat('Y-m-d', trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+
+        }
+
+        $data = $salesdaycourse->get();
 
 
+        $salesdaypro = DB::table('quotations_detail')
+            ->select(DB::raw('sum(product.product_price) as Total'),DB::raw('date(quotations.created_at) AS DATE'))
+            ->join('product','product.product_id','=','quotations_detail.product_id')
+            ->join('quotations','quotations.quo_id','=','quotations_detail.quo_id');
+
+        if ($rang != null) {
+            $salesdaypro->whereRaw("DATE(quotations.created_at) between ? and ?", [trim($date[0]), trim($date[0])]);
+            $dateTxt['start'] = Date::createFromFormat('Y-m-d', trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+        }
+
+        $datapro = $salesdaypro->get();
+
+//        $salesdaypro = DB::select(DB::raw(
+//            "
+//            SELECT
+//            calendar.datefield AS DATE,
+//            IFNULL(SUM(sales.sales_total),0) AS total_sales
+//
+//            FROM
+//            sales
+//            RIGHT JOIN calendar ON DATE(sales.created_at) = calendar.datefield
+//            WHERE (calendar.datefield BETWEEN (SELECT MIN(DATE('" . $rang . "-01')) FROM sales) AND (SELECT MAX(DATE(DATE('" . $rang . "-31'))) FROM sales))
+//            GROUP BY DATE
+//
+//            ORDER BY DATE ASC
+//            "
+//            , [$rang, $rang]));
+
+//        return response()->json($data);
 
 
+        //dd($data);
+
+        if ($type == "excel") {
+            Excel::create('ยอดขายคอร์สรายวัน', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsaleperdaycourse',['data'=>$data]);
+                });
+
+            })->export('xls');
+        } elseif ($type == "excel1") {
+            Excel::create('ยอดขายสินค้ารายวัน', function ($excel) use ($datapro) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($datapro) {
+
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsaleperdayproduct',['datapro'=>$datapro]);
+                });
+
+            })->export('xls');
+        }else {
+            return view('report/saleperdayDetail', [
+                'datapro' => $datapro,
+
+                'total1' => $this->arrayToChartData($datapro, 'Total'),
+
+                'data' => $data,
+
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
     }
 
 
+
     //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
-    public function reportCourseMonthTest()
+    public function reportCourseMonthGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -282,7 +484,69 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/coursemonth', [
+            return view('report/coursemonthGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'coursename'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+
+        //   return response()->json($coursemonth);
+    }
+
+    //ยอดขายพวกคอร์ต่างๆ ต่อเดือน
+    public function reportCourseMonthDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        $dateTxt = [];
+        // var_dump($date);
+        $coursemonth = DB::table('quotations_detail')
+            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
+        if ($rang != null) {
+            $coursemonth->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+        }
+        $coursemonth
+            ->groupBy('coursename')->orderBy('Total', 'desc');
+        $data = $coursemonth->get();
+
+        if ($type == "excel") {
+            Excel::create('ยอดขายคอร์ส', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcoursemonth',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/coursemonthDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'coursename'),
@@ -296,7 +560,7 @@ class ReportController extends Controller
 
 
     //สรุปคอร์สที่ขายดีที่สุด
-    public function reportCourseHotTest()
+    public function reportCourseHotGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -347,7 +611,68 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/coursehot', [
+            return view('report/coursehotGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'coursename'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+    }
+
+    //สรุปคอร์สที่ขายดีที่สุด
+    public function reportCourseHotDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        //var_dump($date);
+        $dateTxt = [];
+        $coursehot = DB::table('quotations_detail')
+            ->select('course.course_id', DB::raw('course.course_name as coursename'), DB::raw('count(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id');
+        if ($rang != null) {
+            $coursehot->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $coursehot->groupBy('coursename')->orderBy('Total', 'desc');
+        $data = $coursehot->get();
+
+        //return response()->json($coursehot);
+
+        if ($type == "excel") {
+            Excel::create('สรุปคอร์สที่ขายดีที่สุด', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcoursehot',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/coursehotDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'coursename'),
@@ -357,7 +682,7 @@ class ReportController extends Controller
     }
 
     //สินค้าที่ขายดีที่สุด
-    public function reportProductHot()
+    public function reportProductHotGraphic()
     {
 
         $rang = \Input::get('rang');
@@ -407,7 +732,69 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/producthot', [
+            return view('report/producthotGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'productname'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+
+    }
+
+    //สินค้าที่ขายดีที่สุด
+    public function reportProductHotDetail()
+    {
+
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+
+        $dateTxt = [];
+        //  var_dump([trim($date[0]),trim($date[1])]);
+        $producthot = DB::table('quotations_detail')
+            ->select(DB::raw('product.product_name as productname'), DB::raw('Sum(quotations_detail.product_qty) AS Total'))
+            ->join('product', 'product.product_id', '=', 'quotations_detail.product_id');
+        if ($rang != null) {
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+            $producthot->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+        }
+        $producthot->groupBy('productname')->orderBy('Total', 'desc');
+        $data = $producthot->get();
+
+
+        // return response()->json($data);
+        if ($type == "excel") {
+            Excel::create('สรุปสินค้าที่ขายดีที่สุด', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelproducthot',['data'=>$data]);
+                });
+
+            })->export('xls');
+        } else {
+            return view('report/producthotDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'productname'),
@@ -419,7 +806,7 @@ class ReportController extends Controller
     }
 
     //ยอดขายแพทย์
-    public function reportDoctorTest()
+    public function reportDoctorGraphic()
     {
         $doc = \Input::get('rang');
         $type = \Input::get('type');
@@ -474,7 +861,73 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/doctor', [
+            return view('report/doctorGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
+
+    //ยอดขายแพทย์
+    public function reportDoctorDetail()
+    {
+        $doc = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $doc);
+        // var_dump($date);
+        $dateTxt = [];
+        $doctor = DB::table('quotations_detail')
+            ->select('users.id', 'users.name', DB::raw('SUM(quo_de_price) as Total'))
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
+            ->join('users', 'quotations.sale_id', '=', 'users.id');
+        if ($doc != null) {
+            $doctor->whereRaw("DATE(quotations_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $doctor->where('users.position_id', '=', 4)
+            ->groupBy('quotations.sale_id')
+            ->orderBy('Total', 'desc');
+        $data = $doctor->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('ยอดขายแพทย์', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.exceldoctor',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/doctorDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
@@ -507,7 +960,7 @@ class ReportController extends Controller
 //    }
 
         //รายจ่าย suplier
-    public function reportsuplier()
+    public function reportsuplierGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -558,7 +1011,69 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/suplier', [
+            return view('report/suplierGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'total' => $this->arrayToChartData($data, 'total')
+            ]);
+        }
+
+    }
+
+    //รายจ่าย suplier
+    public function reportsuplierDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $suplier = DB::table('order')
+            ->select('vendor.ven_name as name',DB::raw('SUM(if(vat = "false",order_total,order_total+(order_total*7/100))) as total'))
+            ->join('vendor', 'vendor.ven_id', '=', 'order.ven_id');
+        if ($rang != null) {
+            $suplier->whereRaw("DATE(order.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+        }
+        $suplier->groupBy('ven_name');
+
+        $data = $suplier->get();
+
+        //return response()->json($suplier);
+
+        if ($type == "excel") {
+            Excel::create('สรุปรายจ่าย Suplier', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelsuplier',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/suplierDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
@@ -569,7 +1084,7 @@ class ReportController extends Controller
     }
 
     //รายได้ทั้งหมดจากลูกค้า แบ่งเป็น ประเภทการชำระเงิน
-    public function reportCustomer_payment()
+    public function reportCustomer_paymentGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -620,7 +1135,69 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/customer_payment', [
+            return view('report/customer_paymentGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'Total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
+
+    //รายได้ทั้งหมดจากลูกค้า แบ่งเป็น ประเภทการชำระเงิน
+    public function reportCustomer_paymentDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $pay = DB::table('payment_detail')
+            ->select('payment_detail.payment_type as name',DB::raw('Sum(payment_detail.amount+payment_detail.amount*7/100) AS Total'));
+        if ($rang != null) {
+            $pay->whereRaw("DATE(payment_detail.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $pay->groupBy('name')->orderBy('Total', 'desc');
+
+        $data = $pay->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('สรุปรายได้ทั้งหมดจากลูกค้า', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcustomer_payment',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/customer_paymentDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
@@ -882,7 +1459,7 @@ class ReportController extends Controller
     }
 
     //report คอมมิชชั่น ยอดขาย Commission
-    public function reportCommission()
+    public function reportCommissionGraphic()
     {
         $rang = \Input::get('rang');
         $type = \Input::get('type');
@@ -934,7 +1511,70 @@ class ReportController extends Controller
 
             })->export('xls');
         } else {
-            return view('report/commission', [
+            return view('report/commisstionGraphic', [
+                'data' => $data,
+                'date' => $dateTxt,
+                'name' => $this->arrayToChartData($data, 'name'),
+                'Total' => $this->arrayToChartData($data, 'Total')
+            ]);
+        }
+
+    }
+
+    //report คอมมิชชั่น ยอดขาย Commission
+    public function reportCommissionDetail()
+    {
+        $rang = \Input::get('rang');
+        $type = \Input::get('type');
+        $date = explode('to', $rang);
+        // var_dump($date);
+        $dateTxt = [];
+        $comcash = DB::table('commission')
+            ->select(DB::raw('users.name as name'),DB::raw('sum(commission.commission) as Total'))
+            ->join('users','users.id','=','commission.emp_id');
+        if ($rang != null) {
+            $comcash->whereRaw("DATE(commission.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+
+        }
+        $comcash->groupBy('name');
+
+        $data = $comcash->get();
+
+        // return response()->json($doctor);
+
+        if ($type == "excel") {
+            Excel::create('รายงาน Commission ', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name'      =>  'Angsana new',
+                            'size'      =>  18,
+                            'bold'      =>  false
+                        )
+                    ));
+                    $sheet->loadView('report.excelcommission',['data'=>$data]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('report/commisstionDetail', [
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),

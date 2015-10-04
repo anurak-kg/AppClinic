@@ -193,6 +193,6 @@
 
         });
     </script>
-    </body>
+
 
 @stop

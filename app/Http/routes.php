@@ -39,10 +39,12 @@ Route::group(['middleware' => 'permission:customer-edit'], function () {
 
 });
 Route::any('customer/create', ['uses' => 'CustomerController@create', 'middleware' => 'permission:customer-create']);
-Route::any('report/salesperday', ['uses' => 'ReportController@reportsalesperday', 'middleware' => 'permission:customer-create']);
+Route::any('report/saleperdayGraphic', ['uses' => 'ReportController@reportsalesperdayGraphic', 'middleware' => 'permission:customer-create']);
+Route::any('report/saleperdayDetail', ['uses' => 'ReportController@reportsalesperdayDetail', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCash', ['uses' => 'ReportController@reportCommissionCash', 'middleware' => 'permission:customer-create']);
 Route::any('report/commissionCredit', ['uses' => 'ReportController@reportCommissionCredit', 'middleware' => 'permission:customer-create']);
-Route::any('report/commission', ['uses' => 'ReportController@reportCommission', 'middleware' => 'permission:customer-create']);
+Route::any('report/commisstionGraphic', ['uses' => 'ReportController@reportCommissionGraphic', 'middleware' => 'permission:customer-create']);
+Route::any('report/commisstionDetail', ['uses' => 'ReportController@reportCommissionDetail', 'middleware' => 'permission:customer-create']);
 Route::any('customer/delete', ['uses' => 'CustomerController@delete', 'middleware' => 'permission:customer-delete']);
 
 //Employee
@@ -154,15 +156,23 @@ Route::group(['middleware' => 'permission:vendor'], function () {
 
 //Report
 Route::group(['middleware' => 'permission:report'], function () {
-    Route::any('report/doctor', 'ReportController@reportDoctorTest');
-    Route::any('report/sale', 'ReportController@reportSalesTest');
-    Route::any('report/coursemonth', 'ReportController@reportCourseMonthTest');
-    Route::any('report/coursehot', 'ReportController@reportCourseHotTest');
-    Route::any('report/producthot', 'ReportController@reportProductHot');
+    Route::any('report/index', 'ReportController@index');
+    Route::any('report/doctorGraphic', 'ReportController@reportDoctorGraphic');
+    Route::any('report/doctorDetail', 'ReportController@reportDoctorDetail');
+    Route::any('report/saleGraphic', 'ReportController@reportSalesGraphic');
+    Route::any('report/saleDetail', 'ReportController@reportSalesDetail');
+    Route::any('report/coursemonthGraphic', 'ReportController@reportCourseMonthGraphic');
+    Route::any('report/coursemonthDetail', 'ReportController@reportCourseMonthDetail');
+    Route::any('report/coursehotGraphic', 'ReportController@reportCourseHotGraphic');
+    Route::any('report/coursehotDetail', 'ReportController@reportCourseHotDetail');
+    Route::any('report/producthotGraphic', 'ReportController@reportProductHotGraphic');
+    Route::any('report/producthotDetail', 'ReportController@reportProductHotDetail');
     Route::any('report/customer_ref', 'ReportController@reportCustomerref');
-    Route::any('report/suplier', 'ReportController@reportsuplier');
+    Route::any('report/suplierGraphic', 'ReportController@reportsuplierGraphic');
+    Route::any('report/suplierDetail', 'ReportController@reportsuplierDetail');
     Route::any('report/request', 'ReportController@reportRequest');
-    Route::any('report/customer_payment', 'ReportController@reportCustomer_payment');
+    Route::any('report/customer_paymentGraphic', 'ReportController@reportCustomer_paymentGraphic');
+    Route::any('report/customer_paymentDetail', 'ReportController@reportCustomer_paymentDetail');
     Route::any('report/commissionTransfer', 'ReportController@reportCommissionTranfer');
     Route::any('money/manage', 'MoneyController@moneyDr');
     Route::any('log/index', 'SystemLogsController@index');
