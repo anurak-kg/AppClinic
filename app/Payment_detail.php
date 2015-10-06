@@ -27,7 +27,7 @@ class Payment_detail extends Model
 
     public function quotations_detail()
     {
-        return $this->belongsTo('\App\quotations_detail', 'quo_de_id');
+        return $this->belongsTo('\App\Quotations_detail', 'quo_de_id');
     }
     public function bill_detail()
     {

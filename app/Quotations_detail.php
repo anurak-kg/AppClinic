@@ -29,6 +29,10 @@ class Quotations_detail extends Model
     {
         return $this->hasMany('\App\Payment_detail');
     }
+    public function bill()
+    {
+        return $this->hasMany('\App\Bill');
+    }
     public function commission(){
         return $this->hasMany('\App\Commission');
     }
