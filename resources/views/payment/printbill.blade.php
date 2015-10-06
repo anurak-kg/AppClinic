@@ -61,7 +61,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$pay[0]->cus_id}}</h2>
+                        <h2 class="box-title">ชำระเงิน รหัสลูกค้า #{{$id}}</h2>
                     </div>
 
                         <div class="box-body">
@@ -76,11 +76,9 @@
                                     <thead>
                                     <tr>
                                         <td style="width: 10px"><b>#</b></td>
-                                        <td><b>รายการสั่งซื้อ</b></td>
-                                        <td><b>จำนวนเงินที่จ่าย</b></td>
                                         <td><b>วันที่</b></td>
+                                        <td><b>จำนวนเงินที่จ่าย</b></td>
                                         <td style="width: 20px;text-align: center">
-                                            <button type="submit" class="btn btn-danger">ปลิ้นบิล</button>
                                         </td>
                                     </tr>
                                     </thead>
@@ -91,21 +89,9 @@
                                         {{--  {{dd($item->payment_detail[0]->amount)}}--}}
                                         <tr>
                                             <td>{{$index}}</td>
-                                            <td>@if($item->quotations_detail->course!=null)
-                                                    {{$item->quotations_detail->course->course_name}}
-                                                @elseif($item->quotations_detail->product!=null)
-                                                    {{$item->quotations_detail->product->product_name}}
-                                                @endif</td>
-                                            <td>{{$item->payment_detail[0]->amount}}</td>
-                                            <td>
-                                                {{$item->created_at}}
-                                            </td>
-                                            <td align="middle">@if($item->payment_detail[0]->bill_detail===null)
-                                                    <input type="checkbox"
-                                                           name="pay_detail[{{$item->payment_detail[0]->payment_de_id}}]">
-                                                    @elseif($item->payment_detail[0]->bill_detail!=null)
-                                                    <a href="/bill/bill?bill_id={{$item->payment_detail[0]->bill_detail->bill_id}}" class="btn btn-md btn-success pull-right">เลขที่ใบเสร็จ <?php echo zerofill(($item->payment_detail[0]->bill_detail->bill_id)) ?></a>
-                                                    @endif
+                                            <td>{{$item->created_at}}</td>
+                                            <td>{{$item->amount}}</td>
+                                            <td align="middle"> <button type="submit" class="btn btn-danger"> <?php echo zerofill($item->bill_id) ?></button>
                                             </td>
                                         </tr>
                                         <?php $index++;?>

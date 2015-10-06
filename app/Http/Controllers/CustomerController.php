@@ -8,6 +8,7 @@ use App\Course;
 use App\Customer;
 use App\CustomerPhoto;
 use App\Disease_detail;
+use App\Payment;
 use App\TreatHasMedicine;
 use App\TreatHistory;
 use Auth;
@@ -48,12 +49,8 @@ class CustomerController extends Controller
             ->orderby('treat_date', 'asc')
             ->get();
 
-        $datapayment = DB::table('payment_detail')
-            ->select('payment_detail.branch_id', 'payment_detail.bank_id','payment_detail.payment_id',
-                'payment_detail.payment_type','payment_detail.amount','payment_detail.card_id','payment_detail.edc_id',
-                DB::raw('date(payment_detail.created_at) as date'))
-            ->join('payment','payment.payment_id','=','payment_detail.payment_id')
-            ->where('payment.cus_id', '=', $customer->cus_id)
+        $datapayment = Payment::where('payment.cus_id', '=', $customer->cus_id)
+            ->with('payment_detail')
             ->orderby('payment_id', 'desc')
             ->get();
 
@@ -70,7 +67,7 @@ class CustomerController extends Controller
             ->get();
 
 
-      //return response()->json($data);
+      //return response()->json($datapayment);
 
         return view('customer/view', ['data' => $customer, 'treat' => $data,'payment' => $datapayment,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
     }

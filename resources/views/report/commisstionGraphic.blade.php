@@ -1,95 +1,44 @@
 @extends('layout.master')
-@section('title','Commission')
+@section('title','Report')
+@section('headText','Report')
+@section('headDes','รายงาน Commission')
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12">
+    <p class="text-center">
+        {!! Form::open(array('url' => 'report/commisstionGraphic', 'class' => 'form')) !!}
+        <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
+               placeholder="เลือกระยะเวลา..">
+        </input> <br> <br>
+        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <br>
+        {!! Form::close() !!}
+    </p>
 
+
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Commission</h3>
+
+            <div class="box-tools pull-right">
+                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
+                <a class="btn btn-warning" href="{{url('report/commisstionDetail')}}">ตารางข้อมูล</a>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
             <p class="text-center">
-                {!! Form::open(array('url' => 'report/commission', 'class' => 'form')) !!}
-                <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-                       placeholder="เลือกระยะเวลา..">
-                </input> <br> <br>
-                <input type="submit" class="btn btn-block btn-primary" value="แสดง">
-                <br>
-                {!! Form::close() !!}
+                <strong> @if( isset( $date['start']))
+                        <?php echo $date['start'];?> - <?php echo $date['end'];?>
+                    @else
+                        <?php 'ว่าง' ?>
+                    @endif</strong>
             </p>
-
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Commission</h3>
-
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    </div>
-
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="text-center">
-                                <strong> @if( isset( $date['start']))
-                                        <?php echo $date['start'];?> - <?php echo $date['end'];?>
-                                    @else
-                                        <?php 'ว่าง' ?>
-                                    @endif</strong>
-                            </p>
-
-                            <div class="chart">
-                                <!-- Sales Chart Canvas -->
-                                <canvas id="areaChart" height="50"></canvas>
-                            </div>
-                            <!-- /.chart-responsive -->
-                        </div>
-                        <!-- /.col -->
-
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                </div>
-                <!-- ./box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">ตารางสรุปข้อมูล</h2>
-                      <span class="pull-right">
-                         {!! Form::open(array('url' => 'report/commission?type=excel', 'class' => 'form')) !!}
-                          <input type="submit" class="btn btn-block btn-success" value="Export" >
-                          {!! Form::close() !!}
-                    </span>
-                </div>
-                <div class="box-body" id="datatable">
-                    <div class="row">
-                        <div class="col-xs-12 table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <td align="middle"><b>พนักงาน</b></td>
-                                    <td align="middle"><b>Commission</b></td>
-                                </tr>
-                                </thead>
-                                @foreach($data as $test)
-                                    <tr>
-
-                                        <td align="middle">{{$test->name}}</td>
-                                        <td align="middle"
-                                            style="width: 850px;"><?php echo number_format($test->Total)?> บาท</td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            <div class="chart" align="middle">
+                <canvas id="areaChart" height="100"></canvas>
             </div>
         </div>
-    </div><!-- /.row -->
-
+    </div>
 
 
     <!-- date-range-picker -->
@@ -100,9 +49,11 @@
     <!-- ChartJS 1.0.1 -->
     <script src="../../plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
+
     <!-- page script -->
     <script type="text/javascript">
         $(function () {
+
             $('#daterange').dateRangePicker(
                     {
                         autoClose: true,
@@ -194,13 +145,7 @@
             };
             //Create the line chart
             areaChart.Line(areaChartData, areaChartOptions);
-
-            $('#datatable').slimScroll({ height: 500 });
         });
     </script>
-
-
-
-    </body>
 
 @stop

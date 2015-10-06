@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Branch;
 use App\Order;
+use App\Payment;
 use App\Payment_detail;
 use App\Quotations;
 
@@ -44,13 +45,13 @@ class BillController extends Controller
 
     public function index()
     {
-        $bill = Bill::where('bill_id', \Input::get('bill_id'))
+        $bill = Payment::where('bill_id', \Input::get('bill_id'))
             ->with(
-                'bill_detail.payment_detail.payment.quotations_detail.Course',
-                'bill_detail.payment_detail.payment.customer',
-                'bill_detail.payment_detail.payment.sales.product')->get();
-        $customer = $bill[0]->bill_detail[0]->payment_detail->payment->customer;
-       // return response()->json($bill);
+                'payment_detail.Quotations_detail.Course',
+                'customer',
+                'payment_detail.Quotations_detail.Product')->get();
+        $customer = $bill[0]->customer;
+        //return response()->json($bill);
 
         $mpdf = new mPDF('th');
         // $mpdf = new mPDF('th', 'A5-L');

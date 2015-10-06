@@ -301,7 +301,6 @@
                                     <th>เลขที่เครื่อง EDC</th>
                                 </tr>
                                 </thead>
-
                                 @foreach($payment as $item)
                                     <tr>
 
@@ -318,7 +317,7 @@
                                             } ?>
                                         </td>
                                         <td style="width: 180px;">{{ $item->amount }}</td>
-                                        <td style="width: 180px;">{{ $item->date }}</td>
+                                        <td style="width: 180px;">{{ $item->created_at }}</td>
                                         <td><?php
                                             $bt2 = \App\Branch::find($item->branch_id);
                                             if ($bt2 != null) {
