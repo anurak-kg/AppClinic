@@ -63,7 +63,7 @@ class PaymentController extends Controller
         $quo = $this->getHistoryData($id);
         $bank = Payment_bank::all();
         $customer = Customer::findOrFail($id);
-        // return response()->json($quo);
+        //return response()->json($customer);
         return view('payment.paymenthistory', compact('quo', 'bank', 'customer'));
     }
 
@@ -80,11 +80,11 @@ class PaymentController extends Controller
     {
         $id = Input::get('cus_id');
         $pay = Payment::where('cus_id', $id)
-            ->with('payment_detail.bill_detail', 'quotations_detail.course', 'quotations_detail.product', 'sales_detail.product')
+            ->with('payment_detail.quotations_detail')
             ->get();
-        //dd($pay);
+        //dd($id);
         //return response()->json($pay);
-        return view('payment.printbill', compact('pay'));
+        return view('payment.printbill', compact('pay','id'));
     }
 
 

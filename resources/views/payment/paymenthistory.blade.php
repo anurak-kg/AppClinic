@@ -18,7 +18,7 @@
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
 
-                            <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$quo->cus_id}}">พิมพ์ใบเสร็จ</a>
+                            <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$customer->cus_id}}">พิมพ์ใบเสร็จ</a>
 
                         </div>
                     </div>
