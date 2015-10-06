@@ -17,6 +17,10 @@ class Bill extends Model
     {
         return $this->belongsTo('\App\User','emp_id');
     }
+    public function Quotations_detail()
+    {
+        return $this->belongsTo('\App\Quotations_detail','quo_de_id');
+    }
     public function custumer()
     {
         return $this->belongsTo('\App\Customer','cus_id');

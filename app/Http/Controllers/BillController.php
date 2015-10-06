@@ -8,7 +8,6 @@ use App\Order;
 use App\Payment;
 use App\Payment_detail;
 use App\Quotations;
-
 use App\Http\Requests;
 use App\Quotations_detail;
 use App\Sales;
