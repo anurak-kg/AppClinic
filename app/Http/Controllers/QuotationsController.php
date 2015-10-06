@@ -160,8 +160,8 @@ class QuotationsController extends Controller
             }
         }
 
-        $array['quo_de_discount'] = $item->quo_de_discount;
-        $array['quo_de_disamount'] = $item->quo_de_disamount;
+        $array['quo_de_discount'] = 0;
+        $array['quo_de_disamount'] =0;
         $array['quo_de_price'] = $item->quo_de_price;
         return $array;
 
