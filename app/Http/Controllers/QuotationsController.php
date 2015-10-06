@@ -144,7 +144,7 @@ class QuotationsController extends Controller
             $array['type'] = "product";
             $array['name'] = $item->product->product_name;
             $array['price'] = $item->product->product_price;
-            $array['product_qty'] = $item->product_qty;
+            $array['product_qty'] = 1;
             $array['commission'] = 0;
         }
         if ($item->course != null) {
