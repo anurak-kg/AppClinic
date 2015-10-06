@@ -11,8 +11,12 @@
 
 @else
     <div class="form-group{!!$field->has_error!!}">
-        <label for="{!! $field->name !!}" class="{!! $field->req !!}">{!! $field->label !!}</label>
+
+        <label for="{!! $field->name !!}" class="col-sm-2 control-label{!! $field->req !!}">{!! $field->label !!}</label>
+        <div class="col-sm-10" id="div_{!! $field->name !!}">
+
             {!! $field->output !!}
+
             @if(count($field->messages))
                 @foreach ($field->messages as $message)
                     <span class="help-block">
@@ -21,5 +25,8 @@
                     </span>
                 @endforeach
             @endif
+
+        </div>
+
     </div>
 @endif

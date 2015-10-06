@@ -23,6 +23,12 @@ There is a service provider included for integration with the Laravel framework.
 'Jenssegers\Date\DateServiceProvider',
 ```
 
+You can also add it as a Facade in `config/app.php`:
+
+```php
+'Date' => Jenssegers\Date\Date::class,
+```
+
 Languages
 ---------
 
@@ -47,6 +53,7 @@ This package contains language files for the following languages:
  - German
  - Greek
  - Hebrew
+ - Hindi
  - Hungarian
  - Icelandic
  - Indonesian

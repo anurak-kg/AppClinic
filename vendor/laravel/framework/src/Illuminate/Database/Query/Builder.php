@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\Query\Grammars\Grammar;
@@ -17,6 +18,10 @@ use Illuminate\Database\Query\Processors\Processor;
 
 class Builder
 {
+    use Macroable {
+        __call as macroCall;
+    }
+
     /**
      * The database connection instance.
      *
@@ -173,7 +178,7 @@ class Builder
 
     /**
      * The binding backups currently in use.
-     * 
+     *
      * @var array
      */
     protected $bindingBackups = [];
@@ -189,7 +194,7 @@ class Builder
         '&', '|', '^', '<<', '>>',
         'rlike', 'regexp', 'not regexp',
         '~', '~*', '!~', '!~*', 'similar to',
-                'not similar to',
+        'not similar to',
     ];
 
     /**
@@ -1267,6 +1272,10 @@ class Builder
     {
         $this->lock = $value;
 
+        if ($this->lock) {
+            $this->useWritePdo();
+        }
+
         return $this;
     }
 
@@ -1395,11 +1404,12 @@ class Builder
      * @param  int  $perPage
      * @param  array  $columns
      * @param  string  $pageName
+     * @param  int|null  $page
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page')
+    public function paginate($perPage = 15, $columns = ['*'], $pageName = 'page', $page = null)
     {
-        $page = Paginator::resolveCurrentPage($pageName);
+        $page = $page ?: Paginator::resolveCurrentPage($pageName);
 
         $total = $this->getCountForPagination($columns);
 
@@ -1566,12 +1576,8 @@ class Builder
      * @param  string  $glue
      * @return string
      */
-    public function implode($column, $glue = null)
+    public function implode($column, $glue = '')
     {
-        if (is_null($glue)) {
-            return implode($this->lists($column));
-        }
-
         return implode($glue, $this->lists($column));
     }
 
@@ -1582,13 +1588,15 @@ class Builder
      */
     public function exists()
     {
-        $limit = $this->limit;
+        $sql = $this->grammar->compileExists($this);
 
-        $result = $this->limit(1)->count() > 0;
+        $results = $this->connection->select($sql, $this->getBindings(), ! $this->useWritePdo);
 
-        $this->limit($limit);
+        if (isset($results[0])) {
+            $results = (array) $results[0];
 
-        return $result;
+            return (bool) $results['exists'];
+        }
     }
 
     /**
@@ -1650,6 +1658,17 @@ class Builder
     public function avg($column)
     {
         return $this->aggregate(__FUNCTION__, [$column]);
+    }
+
+    /**
+     * Alias for the "avg" method.
+     *
+     * @param  string  $column
+     * @return float|int
+     */
+    public function average($column)
+    {
+        return $this->avg($key);
     }
 
     /**
@@ -2015,6 +2034,10 @@ class Builder
      */
     public function __call($method, $parameters)
     {
+        if (static::hasMacro($method)) {
+            return $this->macroCall($method, $parameters);
+        }
+
         if (Str::startsWith($method, 'where')) {
             return $this->dynamicWhere($method, $parameters);
         }

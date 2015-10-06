@@ -218,6 +218,7 @@ class DataEdit extends DataForm
         $saveButtonPosition = Config::get('rapyd.data_edit.button_position.save') != '' ? Config::get('rapyd.data_edit.button_position.save') : 'BL';
         $showButtonPosition = Config::get('rapyd.data_edit.button_position.show') != '' ? Config::get('rapyd.data_edit.button_position.show') : 'TR';
         $modifyButtonPosition = Config::get('rapyd.data_edit.button_position.modify') != '' ? Config::get('rapyd.data_edit.button_position.modify') : 'TR';
+        $undoButtonPosition = Config::get('rapyd.data_edit.button_position.undo') != '' ? Config::get('rapyd.data_edit.button_position.undo') : 'TR';
         $deleteButtonPosition = Config::get('rapyd.data_edit.button_position.delete') != '' ? Config::get('rapyd.data_edit.button_position.delete') : 'BL';
 
         //show
@@ -230,7 +231,7 @@ class DataEdit extends DataForm
         //modify
         if ($this->status == "modify") {
             if (in_array('update',$this->back_on)) {
-
+                $this->link($this->back_url, trans('rapyd::rapyd.undo'), $undoButtonPosition);
             } else {
                 $this->link($this->url->replace('modify' . $this->cid, 'show' . $this->cid)->replace('update' . $this->cid, 'show' . $this->cid)->get(), trans('rapyd::rapyd.undo'), $modifyButtonPosition);
             }
@@ -244,8 +245,9 @@ class DataEdit extends DataForm
         //delete
         if ($this->status == "delete") {
             if (in_array('do_delete',$this->back_on)) {
-
+                $this->link($this->back_url, trans('rapyd::rapyd.undo'), $undoButtonPosition);
             } else {
+                $this->link($this->url->replace('delete' . $this->cid, 'show' . $this->cid)->replace('do_delete' . $this->cid, 'show' . $this->cid)->get(), trans('rapyd::rapyd.undo'), $deleteButtonPosition);
             }
 
             $do_delete_url = $this->url->replace('delete' . $this->cid, 'do_delete' . $this->cid)->get();

@@ -592,6 +592,10 @@ class PHPUnit_TextUI_Command
                 $this->arguments['stderr'] = $phpunit['stderr'];
             }
 
+            if (isset($phpunit['columns']) && ! isset($this->arguments['columns'])) {
+                $this->arguments['columns'] = $phpunit['columns'];
+            }
+
             if (isset($phpunit['printerClass'])) {
                 if (isset($phpunit['printerFile'])) {
                     $file = $phpunit['printerFile'];

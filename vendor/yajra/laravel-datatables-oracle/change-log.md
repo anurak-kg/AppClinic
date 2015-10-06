@@ -8,6 +8,47 @@
 
 ##Change Log
 
+###v5.11.10
+    - CollectionEngine: fix sorting of relation columns by using seralize (like filtering). PR #197.
+
+###v5.11.9
+    - Add fix for QueryBuilder: ORDER BY *. PR #194.
+
+###v5.11.8
+    - Skip search, order and pagination on empty records.
+    - Fix #149 and #176 empty collection error when using make(false).
+    - Fix credits to @gabrielwelsche.
+
+###v5.11.7
+    - Fix escaping of row when using eager loading. Fix #164
+    - Add support for escaping rows using array dot notation when declaring escapeColumns.
+        Example: `->escapeColumns(['name', 'post.title'])`
+
+###v5.11.6
+    - Refactor eloquent and query builder engine duplicate codes.
+
+###v5.11.5
+    - Fix issues on database prefix. #161 and #162
+    - Fix database prefix value when using Eloquent.
+
+###v5.11.4
+    - Fix Undefined offset issue when using addColumn.
+    - Credits to @openvast for PR #158
+
+###v5.11.3
+    - Pass object or array to transformer. PR #155
+
+###v5.11.2
+    - Add support for regular expressions search on column.
+
+###v5.11.1
+    - Collection engine enhancement.
+    - Add support for filtering compound key PR #146.
+    - Add support for ordering using compound key.
+
+###v5.11.0
+    - Add support for rendering view directly on addColumn and editColumn.
+
 ###v5.10.0
     - Add LaravelDataTables on js window namespace. Issue #129. Credits to @greabock.
 

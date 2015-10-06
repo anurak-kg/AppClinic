@@ -1,7 +1,7 @@
 
 @section('df.header')
     {!! $df->open !!}
-
+    @include('rapyd::toolbar', array('label'=>$df->label, 'buttons_right'=>$df->button_container['TR']))
 @show
 
 @if ($df->message != '')

@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Kris\LaravelFormBuilder\Form;
 use Kris\LaravelFormBuilder\FormHelper;
+use Kris\LaravelFormBuilder\RulesParser;
 
 /**
  * Class FormField
@@ -121,6 +122,14 @@ abstract class FormField
     abstract protected function getTemplate();
 
     /**
+     * @return string
+     */
+    protected function getViewTemplate()
+    {
+        return $this->getOption('template', $this->template);
+    }
+
+    /**
      * @param array $options
      * @param bool  $showLabel
      * @param bool  $showField
@@ -129,30 +138,20 @@ abstract class FormField
      */
     public function render(array $options = [], $showLabel = true, $showField = true, $showError = true)
     {
-        $val = null;
-        $value = array_get($options, $this->valueProperty);
-        $defaultValue = array_get($options, $this->defaultValueProperty);
+        $this->prepareOptions($options);
+        $value = $this->getValue();
+        $defaultValue = $this->getDefaultValue();
 
         if ($showField) {
             $this->rendered = true;
         }
 
-        // Check if default value is passed to render function from view.
-        // If it is, we save it to a variable and then override it before
-        // rendering the view
-        if ($value) {
-            $val = $value;
-        } elseif ($defaultValue && !$this->getOption($this->valueProperty)) {
-            $val = $defaultValue;
+        // Override default value with value
+        if (!$value && $defaultValue) {
+            $this->setOption($this->valueProperty, $defaultValue);
         }
 
-        $options = $this->prepareOptions($options);
-
-        if ($val) {
-            $options[$this->valueProperty] = $val;
-        }
-
-        if (!$this->needsLabel($options)) {
+        if (!$this->needsLabel()) {
             $showLabel = false;
         }
 
@@ -161,12 +160,12 @@ abstract class FormField
         }
 
         return $this->formHelper->getView()->make(
-            $this->template,
+            $this->getViewTemplate(),
             [
                 'name' => $this->name,
                 'nameKey' => $this->getNameKey(),
                 'type' => $this->type,
-                'options' => $options,
+                'options' => $this->options,
                 'showLabel' => $showLabel,
                 'showField' => $showField,
                 'showError' => $showError
@@ -213,41 +212,48 @@ abstract class FormField
     protected function prepareOptions(array $options = [])
     {
         $helper = $this->formHelper;
+        $this->options = $helper->mergeOptions($this->options, $options);
 
-        if (array_get($this->options, 'template') !== null) {
-            $this->template = array_pull($this->options, 'template');
+        if ($this->getOption('attr.multiple') && !$this->getOption('tmp.multipleBracesSet')) {
+            $this->name = $this->name.'[]';
+            $this->setOption('tmp.multipleBracesSet', true);
         }
-
-        $options = $this->options = $helper->mergeOptions($this->options, $options);
 
         if ($this->parent->haveErrorsEnabled()) {
-            $this->addErrorClass($options);
-        }
-
-        if ($this->getOption('attr.multiple')) {
-            $this->name = $this->name.'[]';
+            $this->addErrorClass();
         }
 
         if ($this->getOption('required') === true) {
-            $options['label_attr']['class'] .= ' ' . $this->formHelper
-                ->getConfig('defaults.required_class', 'required');
-            $options['attr']['required'] = 'required';
+            $lblClass = $this->getOption('label_attr.class', '');
+            $requiredClass = $helper->getConfig('defaults.required_class', 'required');
+            if (!str_contains($lblClass, $requiredClass)) {
+                $lblClass .= ' ' . $requiredClass;
+                $this->setOption('label_attr.class', $lblClass);
+                $this->setOption('attr.required', 'required');
+            }
         }
 
-        $options['wrapperAttrs'] = $helper->prepareAttributes($options['wrapper']);
-        $options['errorAttrs'] = $helper->prepareAttributes($options['errors']);
-
-        if ($options['is_child']) {
-            $options['labelAttrs'] = $helper->prepareAttributes($options['label_attr']);
+        if ($this->parent->clientValidationEnabled() && $rules = $this->getOption('rules')) {
+            $rulesParser = new RulesParser($this);
+            $attrs = $this->getOption('attr') + $rulesParser->parse($rules);
+            $this->setOption('attr', $attrs);
         }
 
-        if ($options['help_block']['text']) {
-            $options['help_block']['helpBlockAttrs'] = $helper->prepareAttributes(
-                $options['help_block']['attr']
+        $this->setOption('wrapperAttrs', $helper->prepareAttributes($this->getOption('wrapper')));
+        $this->setOption('errorAttrs', $helper->prepareAttributes($this->getOption('errors')));
+
+        if ($this->getOption('is_child')) {
+            $this->setOption('labelAttrs', $helper->prepareAttributes($this->getOption('label_attr')));
+        }
+
+        if ($this->getOption('help_block.text')) {
+            $this->setOption(
+                'help_block.helpBlockAttrs',
+                $helper->prepareAttributes($this->getOption('help_block.attr'))
             );
         }
 
-        return $options;
+        return $this->options;
     }
 
     /**
@@ -454,22 +460,20 @@ abstract class FormField
 
     /**
      * Add error class to wrapper if validation errors exist
-     *
-     * @param $options
      */
-    protected function addErrorClass(&$options)
+    protected function addErrorClass()
     {
         $errors = $this->parent->getRequest()->session()->get('errors');
 
         if ($errors && $errors->has($this->getNameKey())) {
             $errorClass = $this->formHelper->getConfig('defaults.wrapper_error_class');
+            $wrapperClass = $this->getOption('wrapper.class');
 
-            if ($options['wrapper'] && !str_contains($options['wrapper']['class'], $errorClass)) {
-                $options['wrapper']['class'] .= ' '.$errorClass;
+            if ($this->getOption('wrapper') && !str_contains($wrapperClass, $errorClass)) {
+                $wrapperClass .= ' ' . $errorClass;
+                $this->setOption('wrapper.class', $wrapperClass);
             }
         }
-
-        return $options;
     }
 
 
@@ -487,13 +491,12 @@ abstract class FormField
     /**
      * Check if fields needs label
      *
-     * @param array $options
      * @return bool
      */
-    protected function needsLabel(array $options = [])
+    protected function needsLabel()
     {
         // If field is <select> and child of choice, we don't need label for it
-        $isChildSelect = $this->type == 'select' && array_get($options, 'is_child') === true;
+        $isChildSelect = $this->type == 'select' && $this->getOption('is_child') === true;
 
         if ($this->type == 'hidden' || $isChildSelect) {
             return false;

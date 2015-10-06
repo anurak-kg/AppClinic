@@ -766,9 +766,9 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
             $e = $_e;
         }
 
-        if (isset($e)) {
+        if (isset($_e)) {
             $this->status        = PHPUnit_Runner_BaseTestRunner::STATUS_ERROR;
-            $this->statusMessage = $e->getMessage();
+            $this->statusMessage = $_e->getMessage();
         }
 
         // Clean up the mock objects.
@@ -846,6 +846,11 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
         if (isset($e)) {
             if ($e instanceof PredictionException) {
                 $e = new PHPUnit_Framework_AssertionFailedError($e->getMessage());
+            }
+
+            if (!$e instanceof Exception) {
+                // Rethrow Error directly on PHP 7 as onNotSuccessfulTest does not support it
+                throw $e;
             }
 
             $this->onNotSuccessfulTest($e);

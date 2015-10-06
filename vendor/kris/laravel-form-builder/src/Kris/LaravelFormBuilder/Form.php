@@ -52,6 +52,13 @@ class Form
     protected $showFieldErrors = true;
 
     /**
+     * Enable html5 validation
+     *
+     * @var bool
+     */
+    protected $clientValidationEnabled = true;
+
+    /**
      * Name of the parent form if any
      *
      * @var string|null
@@ -437,14 +444,26 @@ class Form
     public function setFormOptions($formOptions)
     {
         $this->formOptions = $this->formHelper->mergeOptions($this->formOptions, $formOptions);
-
-        $this->getModelFromOptions();
-
-        $this->getDataFromOptions();
-
         $this->checkIfNamedForm();
+        $this->pullFromOptions('model', 'setModel');
+        $this->pullFromOptions('data', 'addData');
+        $this->pullFromOptions('errors_enabled', 'setErrorsEnabled');
+        $this->pullFromOptions('client_validation', 'setClientValidationEnabled');
 
         return $this;
+    }
+
+    /**
+     * Get an option from provided options and call method with that value
+     *
+     * @param $name
+     * @param $method
+     */
+    protected function pullFromOptions($name, $method)
+    {
+        if (array_get($this->formOptions, $name) !== null) {
+            $this->{$method}(array_pull($this->formOptions, $name));
+        }
     }
 
     /**
@@ -503,14 +522,17 @@ class Form
 
     /**
      * @param string $name
+     * @param bool $rebuild
      *
      * @return $this
      */
-    public function setName($name)
+    public function setName($name, $rebuild = true)
     {
         $this->name = $name;
 
-        $this->rebuildForm();
+        if ($rebuild) {
+            $this->rebuildForm();
+        }
 
         return $this;
     }
@@ -605,6 +627,42 @@ class Form
     public function haveErrorsEnabled()
     {
         return $this->showFieldErrors;
+    }
+
+    /**
+     * Enable or disable showing errors under fields
+     *
+     * @param boolean $enabled
+     * @return $this
+     */
+    public function setErrorsEnabled($enabled)
+    {
+        $this->showFieldErrors = (boolean) $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Is client validation enabled?
+     *
+     * @return boolean
+     */
+    public function clientValidationEnabled()
+    {
+        return $this->clientValidationEnabled;
+    }
+
+    /**
+     * Enable/disable client validation
+     *
+     * @param boolean $enable
+     * @return $this
+     */
+    public function setClientValidationEnabled($enable)
+    {
+        $this->clientValidationEnabled = (boolean) $enable;
+
+        return $this;
     }
 
     /**
@@ -714,16 +772,6 @@ class Form
     }
 
     /**
-     * Get the model from the options
-     */
-    private function getModelFromOptions()
-    {
-        if (array_get($this->formOptions, 'model')) {
-            $this->setModel(array_pull($this->formOptions, 'model'));
-        }
-    }
-
-    /**
      * Get all fields that are not rendered
      *
      * @return array
@@ -787,24 +835,14 @@ class Form
      */
     protected function setupFieldOptions($name, &$options)
     {
+        $options['real_name'] = $name;
+
         if (!$this->getName()) {
             return;
         }
 
-        $options['real_name'] = $name;
-
         if (!isset($options['label'])) {
             $options['label'] = $this->formHelper->formatLabel($name);
-        }
-    }
-
-    /**
-     * Get any data from options and remove it
-     */
-    protected function getDataFromOptions()
-    {
-        if (array_get($this->formOptions, 'data')) {
-            $this->addData(array_pull($this->formOptions, 'data'));
         }
     }
 

@@ -36,7 +36,12 @@ class IdeHelperServiceProvider extends ServiceProvider
         $this->loadViewsFrom($viewPath, 'ide-helper');
         
         $configPath = __DIR__ . '/../config/ide-helper.php';
-        $this->publishes([$configPath => config_path('ide-helper.php')], 'config');
+        if (function_exists('config_path')) {
+            $publishPath = config_path('ide-helper.php');
+        } else {
+            $publishPath = base_path('config/ide-helper.php');
+        }
+        $this->publishes([$configPath => $publishPath], 'config');
     }
 
     /**
@@ -56,8 +61,8 @@ class IdeHelperServiceProvider extends ServiceProvider
         );
 
         $this->app['command.ide-helper.models'] = $this->app->share(
-            function () {
-                return new ModelsCommand();
+            function ($app) {
+                return new ModelsCommand($app['files']);
             }
         );
         

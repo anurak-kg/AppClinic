@@ -226,11 +226,7 @@ class QuotationsController extends Controller
 
     public function getData()
     {
-        /*$receivedItem = DB::table('quotations_detail')
-            ->select('course.course_id', 'course_name')
-            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
-            ->where('quo_id', "=", $this->getQuoId())
-            ->get();*/
+
         $receivedItem = Quotations_detail::with(['Course', 'Product'])->
         where('quo_id', "=", $this->getQuoId())->get();
         $data = [];
@@ -243,7 +239,7 @@ class QuotationsController extends Controller
                 $array['type'] = "product";
                 $array['name'] = $item->product->product_name;
                 $array['price'] = $item->product->product_price;
-                $array['product_qty'] = $item->product_qty;
+                $array['product_qty'] = (int) $item->product_qty;
                 $array['commission'] = 0;
             }
             if ($item->course != null) {
@@ -259,7 +255,7 @@ class QuotationsController extends Controller
                 }
             }
 
-            $array['quo_de_discount'] = $item->quo_de_discount;
+            $array['quo_de_discount'] = (int) $item->quo_de_discount;
             $array['quo_de_disamount'] = $item->quo_de_disamount;
             $array['quo_de_price'] = $item->quo_de_price;
 
