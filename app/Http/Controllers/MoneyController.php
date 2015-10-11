@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Jenssegers\Date\Date;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MoneyController extends Controller
 {
@@ -24,6 +25,7 @@ class MoneyController extends Controller
      */
     public function moneyDr(){
         $rang = \Input::get('rang');
+        $type = \Input::get('type');
         $date = explode('to', $rang);
         $dateTxt = [];
         $branch_id = Input::get('branch');
@@ -71,11 +73,71 @@ class MoneyController extends Controller
 
         //return response()->json($data);
 
-        return view('money/manage',[
-            'data'=>$data,
-            'data1'=>$databt,
-            'date' => $dateTxt,
-        ], compact('moneyDr', 'branch'));
+        if ($type == "excel") {
+            Excel::create('ข้อมูลการเงินหมอ', function ($excel) use ($data) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name' => 'Angsana new',
+                            'size' => 18,
+                            'bold' => false
+                        )
+                    ));
+                    $sheet->loadView('money.excelmoneyDR', ['data' => $data]);
+                });
+
+
+            })->export('xls');
+        } elseif ($type == "excel1") {
+            Excel::create('ข้อมูลการเงินผู้ช่วย', function ($excel) use ($data1) {
+
+                // Set the title
+                $excel->setTitle('Our new awesome title');
+
+                // Chain the settersp
+                $excel->setCreator('Maatwebsite')
+                    ->setCompany('Maatwebsite');
+
+                // Call them separately
+                $excel->setDescription('A demonstration to change the file properties');
+
+                $excel->sheet('Sheetname', function ($sheet) use ($data1) {
+
+                    //dd($data);
+
+                    $sheet->setStyle(array(
+                        'font' => array(
+                            'name' => 'Angsana new',
+                            'size' => 18,
+                            'bold' => false
+                        )
+                    ));
+                    $sheet->loadView('money.excelmoneyBt', ['data' => $data1]);
+                });
+
+
+            })->export('xls');
+        } else {
+            return view('money/manage',[
+                'data'=>$data,
+                'data1'=>$databt,
+                'date' => $dateTxt,
+            ], compact('moneyDr', 'branch'));
+        }
     }
 
 

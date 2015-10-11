@@ -2080,7 +2080,13 @@
             return $scope.total;
         }
         $scope.getWithdrawn = function () {
-            return $scope.payment.receivedAmount - $scope.getTotal();
+            $scope.change = 0;
+            if($scope.payment.receivedAmount == 0){
+                $scope.change;
+            } else {
+                $scope.change = $scope.payment.receivedAmount - $scope.getTotal();
+            }
+            return  $scope.change;
         };
         $scope.getTotal = function () {
             $scope.total = 0;
