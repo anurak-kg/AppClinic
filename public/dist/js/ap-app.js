@@ -2007,16 +2007,26 @@
     app.controller('newPaymentController', function ($scope) {
         $scope.product = [];
         $scope.payment = [];
+        $scope.quo_de_id = null;
         $scope.payment.receivedAmount = 0;
         $scope.payment.type = 'CASH';
-        $scope.init = function (id, paymentType, remain, type, netPrice, qty) {
+        $scope.paymentInit = function(currentQuoDeId){
+            $scope.quo_de_id = currentQuoDeId;
+        }
+        $scope.init = function (id, paymentType, remain, type, netPrice, qty,quo_de_id) {
             var data = [];
             data['id'] = id;
             data['type'] = type;
             data['remain'] = remain;
             data['netPrice'] = netPrice;
             data['paymentPrice'] = remain;
-            data['selected'] = true;
+            if($scope.quo_de_id == null){
+                data['selected'] = true;
+            }else if($scope.quo_de_id == quo_de_id){
+                data['selected'] = true;
+            }else{
+                data['selected'] = false;
+            }
             data['paymentType'] = paymentType;
             if (type == "course") {
                 data['minPayment'] = netPrice / qty;

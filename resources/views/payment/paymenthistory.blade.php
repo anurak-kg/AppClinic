@@ -3,9 +3,10 @@
 @section('headText','Payment')
 @section('headDes','บันทึกชำระเงิน')
 @section('content')
+
     <div class="row" ng-controller="newPaymentController" >
 
-        <div class="col-md-12">
+        <div class="col-md-12" ng-init="paymentInit({{\Illuminate\Support\Facades\Input::get('quo_de_id')}})">
             <form method="POST" target="_blank" action="{{url('payment/pay/')}}"  >
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="customer_id"
@@ -73,8 +74,9 @@
                                         }
 
                                         ?>
-                                        <tr ng-init="init({{$index}},'{{$paidType}}',{{ceil($item->payment_remain)}},'{{$type}}',{{ceil($item->net_price)}},{{$course_qty}})"
-                                            ng-click="trClick({{$index}})" style="cursor: pointer;">
+                                        <tr ng-init="init({{$index}},'{{$paidType}}',{{ceil($item->payment_remain)}},'{{$type}}',{{ceil($item->net_price)}},{{$course_qty}},{{$item->quo_de_id}})"
+                                            ng-click="trClick({{$index}})"
+                                            style="cursor: pointer;" class="{{(Input::get('quo_de_id') == $item->quo_de_id ? "payment-current-select" : "")}}">
                                             <td>{{$index+1}}</td>
                                             <td>
                                                 <strong>
@@ -136,8 +138,11 @@
 
 
                                             <td align="middle" ng-click="$event.stopPropagation()">
+
                                                 <input type="checkbox" name="pay[{{$item->quo_de_id}}]"
                                                        ng-model="product[{{$index}}].selected">
+
+
                                             </td>
 
                                             <td ng-click="$event.stopPropagation()">

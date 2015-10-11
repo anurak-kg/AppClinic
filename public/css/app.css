@@ -3,8 +3,8 @@
 }
 .minPayment {
   font-size: 11px;
-  color: #ff6120;
-  margin-bottom: 0;
+  color: #ff0018;
+  margin-bottom: -7px;
 }
 .checkbox label {
   display: inline-block;
@@ -244,6 +244,9 @@ input[type="radio"] .styled:checked + label::after {
 .loading {
   font-size: 45px;
   color: #024665;
+}
+.payment-current-select {
+  background-color: #E3FFE5;
 }
 
 /*# sourceMappingURL=app.css.map */
