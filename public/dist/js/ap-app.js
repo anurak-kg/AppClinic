@@ -372,9 +372,9 @@
             }
             return $sce.trustAsHtml(text);
         }
-        $scope.getCheck = function (status, quo_id, course_id) {
+        $scope.getCheck = function (status, quo_de_id) {
             var text;
-            var url = "/treatment/add?course_id=" + course_id + "&quo_id=" + quo_id
+            var url = "/treatment/add?quo_de_id=" + quo_de_id
             if (status == 5) {
                 text = "<span class=\"label label-success\">เสร็จแล้ว</span>";
             }

@@ -108,9 +108,8 @@
                                     <label>บันทึก หรือ ความคิดเห็นเพิ่มเติม</label>
                                 <textarea class="form-control" rows="3" placeholder="ระบุรายละเอียด ..."
                                           name="comment"></textarea>
-                                    <input type="hidden" name="course_id" value="{{Input::get('course_id')}}">
-                                    <input type="hidden" name="quo_id" value="{{Input::get('quo_id')}}">
                                     <input type="hidden" name="quo_de_id" value="{{$quo->quo_de_id}}">
+                                    <input type="hidden" name="customer_id" value="{{$quo->quotations->customer->cus_id}}">
 
                                 </div>
                                 <div class="col-md-12">
@@ -245,9 +244,9 @@
                                         <tr>
                                             <td>สถานะการชำระเงิน</td>
                                             <td>
-                                                @if($quo->payment == null)
+                                                @if($payment == null)
                                                     <span>ไม่พบข้อมูลการชำระเงิน</span>
-                                                @elseif($quo->payment->payment_status=='FULLY_PAID')
+                                                @elseif($quo->payment_remain=='0')
                                                     <span class="label label-success">จ่ายเงินครบแล้ว</span>
                                                 @else
                                                     <span class="label label-warning">ค้างจ่าย</span>
@@ -255,14 +254,8 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>ประเภทการชำระ</td>
-                                            <td>
-                                                @if($quo->payment->payment_status=='REMAIN')
-                                                    <span>ผ่อนจ่าย</span>
-                                                @elseif($quo->payment->payment_status=='FULLY_PAID')
-                                                    <span>จ่ายเต็มจำนวน</span>
-                                                @endif
-                                            </td>
+                                            <td>ยอดที่ชำระแล้ว</td>
+                                            <td>{{number_format($totalAmount)}}</td>
                                         </tr>
                                         <tr>
                                             <td>ยอดค้างชำระ</td>
