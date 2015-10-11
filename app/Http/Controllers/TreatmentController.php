@@ -5,6 +5,7 @@ use App\Branch;
 use App\Bt;
 use App\InventoryTransaction;
 use App\Medicine;
+use App\Payment_detail;
 use App\Product;
 use App\Quotations_detail;
 use App\TreatHasMedicine;
@@ -27,87 +28,119 @@ class TreatmentController extends Controller
     public function getCourseData()
     {
         $customerId = \Input::get('id');
-        $course = Quotations::with('course')
+        $course = Quotations::with('Quotations_detail.Course')
             ->where('cus_id', '=', $customerId)
             ->where('quo_status', '>=', 1)
+            ->orderBy('quo_id', 'DESC')
             ->get();
-        return response()->json($course);
+        $data = [];
+
+        foreach ($course as $item) {
+            foreach ($item->quotations_detail as $quoDetail) {
+                if ($quoDetail->Course != null) {
+                    $array = null;
+                    $array['quo_status'] = $item->quo_status;
+
+                    //ข้อมูลการสั่งซื้อ และการรักษา
+                    $array['quo_de_id'] = $quoDetail->quo_de_id;
+                    $array['course_id'] = $quoDetail->course_id;
+                    $array['qty'] = $quoDetail->qty;
+                    $array['treat_status'] = $quoDetail->treat_status;
+                    $array['payment_remain'] = (float)$quoDetail->payment_remain;
+
+                    //ข้อมูลของคอร์ส
+                    $array['course_name'] = $quoDetail->Course->course_name;
+                    $array['course_qty'] = $quoDetail->Course->course_qty;
+                    $array['course_detail'] = $quoDetail->Course->course_detail;
+
+                    array_push($data, $array);
+
+                }
+            }
+        }
+
+        return response()->json($data);
     }
 
     public function save()
     {
-        $input = \Input::all();
-        $treat = new TreatHistory();
-        $treat->treat_id= getNewTreatmentPK();
-        $treat->course_id = $input['course_id'];
-        $treat->quo_id = $input['quo_id'];
-        $treat->emp_id = Auth::user()->getAuthIdentifier();;
-        $treat->comment = $input['comment'];
-        $treat->treat_date = $input['treat_date'];
-        $treat->branch_id = Branch::getCurrentId();
-        $this->updateCourseQty($input['quo_id'], $input['course_id']);
-        //dd(Input::all());
 
-        $treat->save();
-        $array = $input['qty'];
-        if (count($array) >= 1) {
-            foreach ($array as $product_id => $qty) {
-                $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
-                $inv = new InventoryTransaction();
-                $inv->inv_id = getNewInvTranPK();
-                $inv->product_id = $product_id;
-                $inv->treatment_id = $treat->treat_id;
-                $inv->qty = -abs($qty);
-                $inv->branch_id = Branch::getCurrentId();
-                $inv->type = "Treatment";
-                $inv->save();
+        DB::transaction(function () {
+            $input = \Input::all();
+            $customer_id = Input::get('customer_id');
+            $quo_de_id = Input::get('quo_de_id');
+
+            $treat = new TreatHistory();
+            $treat->treat_id = getNewTreatmentPK();
+            $treat->quo_de_id = $quo_de_id;
+            $treat->emp_id = Auth::user()->getAuthIdentifier();;
+            $treat->comment = $input['comment'];
+            $treat->treat_date = $input['treat_date'];
+            $treat->branch_id = Branch::getCurrentId();
+            $this->updateCourseQty($quo_de_id);
+            $treat->save();
+            $array = $input['qty'];
+            if (count($array) >= 1) {
+                foreach ($array as $product_id => $qty) {
+                    $treat->product()->attach(Product::findOrFail($product_id), ['qty' => $qty]);
+                    $inv = new InventoryTransaction();
+                    $inv->inv_id = getNewInvTranPK();
+                    $inv->product_id = $product_id;
+                    $inv->treatment_id = $treat->treat_id;
+                    $inv->qty = -abs($qty);
+                    $inv->branch_id = Branch::getCurrentId();
+                    $inv->type = "Treatment";
+                    $inv->save();
+                }
             }
+            if (!empty($input['doctor'])) {
+                $bt = new Bt;
+                $bt->bt_id = getNewBtPK();
+                $bt->treat_id = $treat->treat_id;
+                $bt->emp_id = $input['doctor'];
+                $bt->bt_type = 'doctor';
+                $bt->total = $input['dr_price'];
+                $bt->save();
+            }
+            if (!empty($input['bt1'])) {
+                $bt = new Bt;
+                $bt->bt_id = getNewBtPK();
+                $bt->treat_id = $treat->treat_id;
+                $bt->emp_id = $input['bt1'];
+                $bt->bt_type = 'bt1';
+                $bt->total = $input['bt1_price'];
+                $bt->save();
+            }
+            if (!empty($input['bt2'])) {
+                $bt = new Bt;
+                $bt->bt_id = getNewBtPK();
+                $bt->treat_id = $treat->treat_id;
+                $bt->emp_id = $input['bt2'];
+                $bt->bt_type = 'bt2';
+                $bt->total = $input['bt2_price'];
+                $bt->save();
+            }
+
+            systemLogs([
+                'emp_id' => auth()->user()->getAuthIdentifier(),
+                'logs_type' => 'info',
+                'logs_where' => 'Treatment',
+                'description' => 'การรักษา เลขที่การรักษา :' . $treat->treat_id
+            ]);
+        });
+        if (Input::get('payment') == true) {
+            return redirect("payment/history?cus_id=" . Input::get('customer_id') . "&quo_de_id=" . Input::get('quo_de_id'));
+        } else {
+            return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
         }
-        if (!empty($input['doctor'])) {
-            $bt = new Bt;
-            $bt->bt_id = getNewBtPK();
-            $bt->treat_id = $treat->treat_id;
-            $bt->emp_id = $input['doctor'];
-            $bt->bt_type = 'doctor';
-            $bt->total = $input['dr_price'];
-            $bt->save();
-        }
-        if (!empty($input['bt1'])) {
-            $bt = new Bt;
-            $bt->bt_id = getNewBtPK();
-            $bt->treat_id = $treat->treat_id;
-            $bt->emp_id = $input['bt1'];
-            $bt->bt_type = 'bt1';
-            $bt->total = $input['bt1_price'];
-            $bt->save();
-        }
-        if (!empty($input['bt2'])) {
-            $bt = new Bt;
-            $bt->bt_id = getNewBtPK();
-            $bt->treat_id = $treat->treat_id;
-            $bt->emp_id = $input['bt2'];
-            $bt->bt_type = 'bt2';
-            $bt->total = $input['bt2_price'];
-            $bt->save();
-        }
-         if ($input['payment'] == 'true') {
-             return redirect('payment/pay?quo_de_id=' . $input['quo_de_id']);
-         }
-        systemLogs([
-            'emp_id' => auth()->user()->getAuthIdentifier() ,
-            'logs_type' => 'info' ,
-            'logs_where'=>'Treatment',
-            'description'=>'การรักษา เลขที่การรักษา :' . $treat->treat_id
-        ]);
-         return redirect('treatment')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+
     }
 
-    public function updateCourseQty($quo_id, $course_id)
+    public function updateCourseQty($quo_de_id)
     {
         $treat_status = 1;
         $quo = Quotations_detail::with(['Course'])
-            ->where('quo_id', '=', $quo_id)
-            ->where('course_id', '=', $course_id)
+            ->where('quo_de_id', '=', $quo_de_id)
             ->get()
             ->first();
         $course_qty = $quo->course->course_qty;
@@ -115,9 +148,8 @@ class TreatmentController extends Controller
         if ($course_qty == $qty) {
             $treat_status = 5;
         }
-        $quo_detail = DB::table('quotations_detail')
-            ->where('quo_id', '=', $quo_id)
-            ->where('course_id', '=', $course_id)
+        DB::table('quotations_detail')
+            ->where('quo_de_id', '=', $quo_de_id)
             ->update(['treat_status' => $treat_status, 'qty' => $qty]);
     }
 
@@ -131,19 +163,20 @@ class TreatmentController extends Controller
 
     public function add()
     {
-        $course_id = \Input::get('course_id');
-        $quo_id = \Input::get('quo_id');
-        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer', 'payment'])
-            ->where('quo_id', '=', $quo_id)
-            ->where('course_id', '=', $course_id)
+        $quo_de_id = \Input::get('quo_de_id');
+        $quo = Quotations_detail::with(['Course.course_medicine.product', 'Quotations.Customer'])
+            ->where('quo_de_id', '=', $quo_de_id)
             ->get()
             ->first();
+        $payment = Payment_detail::where("quo_de_id", "=", $quo_de_id)->get();
+        $totalAmount = $payment->sum('amount');
         // dd($this->getMedicineRemain($quo->course_id));
         $medicines = $this->getMedicineRemain($quo->course_id);
+        $course_id = $quo->course_id;
         $doctor = User::where('position_id', '=', 4)->get();
         $users = User::where('position_id', '=', 8)->get();
-        //return response()->json($quo);
-        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines', 'medic', 'course_id'));
+        //return response()->json($payment);
+        return view('treatment.add', compact('quo', 'doctor', 'users', 'medicines', 'medic', 'course_id', 'payment', 'totalAmount'));
     }
 
 
