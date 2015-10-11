@@ -65,8 +65,11 @@
                     <h2 class="box-title">ข้อมูลการเงินหมอ</h2>
 
                     <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
-                                    class="fa fa-minus"></i></button>
+                        <span class="pull-right">
+                         {!! Form::open(array('url' => 'money/manage?type=excel', 'class' => 'form')) !!}
+                            <input type="submit" class="btn btn-block btn-success" value="Excel Export" >
+                            {!! Form::close() !!}
+                         </span>
                     </div>
                 </div>
 
@@ -103,10 +106,12 @@
                 <div class="box-header" align="middle">
                     <h2 class="box-title">ข้อมูลการเงินผู้ช่วย</h2>
 
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"><i
-                                    class="fa fa-minus"></i></button>
-                    </div>
+                       <span class="pull-right">
+                         {!! Form::open(array('url' => 'money/manage?type=excel1', 'class' => 'form')) !!}
+                           <input type="submit" class="btn btn-block btn-success" value="Excel Export" >
+                           {!! Form::close() !!}
+                         </span>
+
                 </div>
 
                 <div class="box-body">
