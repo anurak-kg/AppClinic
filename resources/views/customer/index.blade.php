@@ -1,7 +1,6 @@
 @extends('layout.master')
-@section('title','ข้อมูลลูกค้า')
-@section('headText','Customers')
-@section('headDes','จัดการข้อมูลลูกค้า')
+@section('title',trans("customer.customer data"))
+@section('headText',trans("customer.management"))
 
 @section('content')
     @if( Session::get('message') != null )
@@ -17,10 +16,10 @@
     <div class="box box-danger">
 
         <div class="box-header with-border">
-            <h2 class="box-title">ข้อมูลลูกค้า</h2>
+            <h2 class="box-title">{{trans("customer.customer data")}}</h2>
             <div class="box-tools pull-right">
                 <a href="{{url('customer/create')}}"
-                   class="btn btn-danger">เพิ่มข้อมูลลูกค้า</a>
+                   class="btn btn-danger">{{trans("customer.registry")}}</a>
             </div>
         </div>
 
@@ -30,14 +29,14 @@
                 <table class="table table-bordered" id="customer_table">
                     <thead>
                     <tr>
-                        <td style="width: 80px">รหัสลูกค้า</td>
-                        <td>ชื่อ</td>
-                        <td>เบอร์โทร</td>
-                        <td>อายุ</td>
-                        <td align="middle" style="width: 120px">ชำระเงินค้างจ่าย</td>
-                        <td align="middle" style="width: 110px">รายละเอียด</td>
-                        <td align="middle" style="width: 110px">จัดการรูปภาพ</td>
-                        <td align="middle"  style="width: 110px">Action</td>
+                        <td style="width: 80px">{{trans("customer.customer id")}}</td>
+                        <td>{{trans("customer.name")}}</td>
+                        <td>{{trans("customer.phone")}}</td>
+                        <td>{{trans("customer.age")}}</td>
+                        <td style="width: 120px"></td>
+                        <td style="width: 120px"></td>
+                        <td style="width: 120px"></td>
+                        <td style="width: 120px"></td>
 
                     </tr>
                     </thead>
@@ -50,21 +49,21 @@
                             <td>{{(date('Y')+543) - $customer->cus_birthday_year }} ปี</td>
                             <td align="middle">
                                 <a href="{{url('payment/history')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
-                                    <i class="fa fa-credit-card"></i> ชำระเงิน </a></td>
+                                    <i class="fa fa-credit-card"></i> {{trans("customer.pay")}} </a></td>
                             <td align="middle">
                                 <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
                                     <i class="fa fa-book"></i>
-                                    ข้อมูลลูกค้า</a>
+                                    {{trans("customer.customer data")}}</a>
                             </td>
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
-                                                  class="btn btn-default"><i class="fa fa-upload"></i> อัพโหลดรูป</a>
+                                                  class="btn btn-default"><i class="fa fa-upload"></i> {{trans("customer.add photo")}}</a>
                             </td>
                             <td>
                                 <a href="{{url('customer/edit')}}?modify={{$customer->cus_id}}"
-                                   class="btn btn-success">แก้ไข</a>
+                                   class="btn btn-success">{{trans("customer.edit")}}</a>
                                 <a href="{{url('customer/delete')}}?cus_id={{$customer->cus_id}}"
                                    class="btn btn-danger"
-                                   onclick="return confirm('แน่ใจว่าจะลบ การกระทำนี้ไม่สารถกู้คืนได้ ?');">ลบ</a>
+                                   onclick="return confirm('{{trans("customer.confirm delete")}}');">{{trans("customer.delete")}}</a>
 
                             </td>
                         </tr>

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลลูกค้า')
+@section('title',trans("customer.customer data"))
 @section('headText',$data->cus_name)
 @section('headDes',$data->cus_id)
 @section('content')
@@ -11,7 +11,7 @@
             <div class="box box-soild box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                    <h2 class="box-title">{{trans("customer.customer data")}}</h2>
 
 
                 </div>
@@ -19,64 +19,64 @@
                 <div class="box-body">
 
                     <div class="col-md-12">
-                        <b>รหัสลูกค้า : </b> {{  $data->cus_id }}
+                        <b>{{trans("customer.customer id")}} : </b> {{  $data->cus_id }}
                         <br> <br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ชื่อลูกค้า : </b> {{  $data->cus_name }}
+                        <b>{{trans("customer.name")}} : </b> {{  $data->cus_name }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>เลขประจำตัวประชาชน : </b> {{  $data->cus_code }}
+                        <b>{{trans("customer.identification Code")}} : </b> {{  $data->cus_code }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>วันเกิด : </b> {{  $data->cus_birthday_day }}
+                        <b>{{trans("customer.birthday")}} : </b> {{  $data->cus_birthday_day }}
                         {{  $data->cus_birthday_month }}
                         {{  $data->cus_birthday_year }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>เพศ : </b> {{  $data->cus_sex }}
+                        <b>{{trans("customer.gender")}} : </b> {{  $data->cus_sex }}
                         <br><br>
                     </div>
 
                     <div class="col-md-12">
-                        <b>กรุ๊ปเลือด : </b> {{  $data->cus_blood }}
+                        <b>{{trans("customer.blood")}} : </b> {{  $data->cus_blood }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ส่วนสูง : </b> {{  $data->cus_height }}
+                        <b>{{trans("customer.height")}} : </b> {{  $data->cus_height }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>น้ำหนัก : </b> {{  $data->cus_weight }}
+                        <b>{{trans("customer.weight")}} : </b> {{  $data->cus_weight }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>โรคประจำตัว : </b> {{  $data->allergic }}
+                        <b>{{trans("customer.allergic")}} : </b> {{  $data->allergic }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>แพ้ยา : </b> {{  $data->disease }}
+                        <b>{{trans("customer.disease")}} : </b> {{  $data->disease }}
                         <br><br>
                     </div>
 
                     <div class="col-md-12">
-                        <b>เบอร์โทร : </b> {{  $data->cus_phone }}
+                        <b>{{trans("customer.phone")}} : </b> {{  $data->cus_phone }}
                         <br><br>
                     </div>
 
                     <div class="col-md-12">
-                        <b>E-mail : </b> {{  $data->cus_email }}
+                        <b>{{trans("customer.email")}} : </b> {{  $data->cus_email }}
                         <br><br>
                     </div>
 
@@ -89,10 +89,10 @@
             <div class="box box-soild box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">&nbsp; ที่อยู่</h2>
+                    <h2 class="box-title">{{trans("customer.address")}}</h2>
 
                     <div class="box-tools pull-right">
-                        <a href="{{url('/customer')}}" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
+                        <a href="{{url('/customer')}}" class="btn btn-success">{{trans("customer.back")}}</a>
                     </div>
 
                 </div>
@@ -100,42 +100,42 @@
                 <div class="box-body">
 
                     <div class="col-md-6">
-                        <b>บ้านเลขที่ : </b> {{  $data->cus_hno }}
+                        <b>{{trans("customer.village no")}} : </b> {{  $data->cus_hno }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>หมู่ : </b> {{  $data->cus_moo }}
+                        <b>{{trans("customer.house no")}} : </b> {{  $data->cus_moo }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ซอย/ตรอก : </b> {{  $data->cus_soi }}
+                        <b>{{trans("customer.lane")}} : </b> {{  $data->cus_soi }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ถนน : </b> {{  $data->cus_road }}
+                        <b>{{trans("customer.road")}} : </b> {{  $data->cus_road }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>ตำบล/แขวง : </b> {{  $data->cus_subdis }}
+                        <b>{{trans("customer.sub-district/ sub-area")}} : </b> {{  $data->cus_subdis }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>อำเภอ/เขต : </b> {{  $data->cus_district }}
+                        <b>{{trans("customer.district / area")}} : </b> {{  $data->cus_district }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>จังหวัด : </b> {{  $data->cus_province }}
+                        <b>{{trans("customer.province")}} : </b> {{  $data->cus_province }}
                         <br><br>
                     </div>
 
                     <div class="col-md-12">
-                        <b>รหัสไปรษณีย์ : </b> {{  $data->cus_postal }}
+                        <b>{{trans("customer.postal code")}} : </b> {{  $data->cus_postal }}
                         <br><br>
                     </div>
 

@@ -1,7 +1,5 @@
 @extends('layout.master')
-@section('title','แก้ไขข้อมูล')
-
-
+@section('title',trans("customer.edit data"))
 @section('content')
 
     {!! Rapyd::scripts() !!}
@@ -22,7 +20,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">แก้ไขข้อมูลลูกค้า</h2>
+                    <h2 class="box-title">{{trans("customer.edit data")}}</h2>
 
                 </div>
 

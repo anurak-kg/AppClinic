@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลลูกค้า')
+@section('title',trans("customer.customer data"))
 @section('content')
 
     <div class="row">
@@ -12,7 +12,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                    <h2 class="box-title">{{trans("customer.customer data")}}</h2>
 
                 </div>
 

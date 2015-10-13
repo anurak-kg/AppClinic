@@ -35,11 +35,11 @@ class CustomerController extends Controller
     {
         $customer = Customer::with('Quotations.course')->where('cus_id', \Input::get('cus_id'))->get()->first();
         $data = \DB::table('treat_has_medicine')
-            ->select('treat_history.treat_id', 'branch.branch_name', 'course.course_name', 'product.product_name','treat_has_medicine.qty'
-                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="doctor") as dr')
-                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt1") as bt1')
-                 ,DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt2") as bt2')
-                 ,'treat_history.comment', 'treat_history.treat_date')
+            ->select('treat_history.treat_id', 'branch.branch_name', 'course.course_name', 'product.product_name', 'treat_has_medicine.qty'
+                , DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="doctor") as dr')
+                , DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt1") as bt1')
+                , DB::raw('(SELECT users.name from bt INNER JOIN users on users.id = bt.emp_id where bt.bt_type ="bt2") as bt2')
+                , 'treat_history.comment', 'treat_history.treat_date')
             ->join('treat_history', 'treat_history.treat_id', '=', 'treat_has_medicine.treat_id')
             ->join('product', 'product.product_id', '=', 'treat_has_medicine.product_id')
             ->join('course', 'course.course_id', '=', 'treat_history.course_id')
@@ -67,9 +67,9 @@ class CustomerController extends Controller
             ->get();
 
 
-      //return response()->json($datapayment);
+        //return response()->json($datapayment);
 
-        return view('customer/view', ['data' => $customer, 'treat' => $data,'payment' => $datapayment,'dataphotoBefore'=>$dataphotoBefore,'dataphotoAfter'=>$dataphotoAfter]);
+        return view('customer/view', ['data' => $customer, 'treat' => $data, 'payment' => $datapayment, 'dataphotoBefore' => $dataphotoBefore, 'dataphotoAfter' => $dataphotoAfter]);
     }
 
     public function upload()
@@ -84,7 +84,7 @@ class CustomerController extends Controller
         $input = Input::all();
 
         $rules = array(
-           // 'file' => 'image',
+            // 'file' => 'image',
             'customer_id' => 'required',
             'type' => 'required',
 
@@ -99,14 +99,14 @@ class CustomerController extends Controller
         $type = Input::get('type');
         $destinationPath = 'uploads/customer'; // upload path
         $upload_success = null;
-        foreach($input['file'] as $file ){
+        foreach ($input['file'] as $file) {
             $extension = $file->getClientOriginalExtension(); // getting file extension
-            $fileName = $cus_id .'-'.$type.'-'.rand(111111, 991999) . '.' . $extension; // renameing image
+            $fileName = $cus_id . '-' . $type . '-' . rand(111111, 991999) . '.' . $extension; // renameing image
             $upload_success = $file->move($destinationPath, $fileName); // uploading file to given path
             $customerPhoto = new CustomerPhoto();
             $customerPhoto->emp_id = Auth::user()->getAuthIdentifier();
-            $customerPhoto->branch_id =  Branch::getCurrentId();
-            $customerPhoto->cus_id =  $cus_id;
+            $customerPhoto->branch_id = Branch::getCurrentId();
+            $customerPhoto->cus_id = $cus_id;
             $customerPhoto->photo_type = $type;
             $customerPhoto->photo_file_name = $fileName;
             $customerPhoto->save();
@@ -118,22 +118,26 @@ class CustomerController extends Controller
             return Response::json('error', 400);
         }
     }
-    public function getJsonPhotoList(){
-        $customerPhoto = CustomerPhoto::where('cus_id',Input::get('cus_id'))->where('photo_type',Input::get('type'))->get();
+
+    public function getJsonPhotoList()
+    {
+        $customerPhoto = CustomerPhoto::where('cus_id', Input::get('cus_id'))->where('photo_type', Input::get('type'))->get();
         $data = [];
-        foreach($customerPhoto as $photo){
-            array_push($data,[
-                'name'=> $photo->photo_file_name,
-                'size'=>1024
+        foreach ($customerPhoto as $photo) {
+            array_push($data, [
+                'name' => $photo->photo_file_name,
+                'size' => 1024
             ]);
         }
         return response()->json($data);
     }
-    public function getDeletePhotoById(){
-        $filename=Input::get('filename');
-        $customer_photo = CustomerPhoto::where('photo_file_name',$filename)->first();
+
+    public function getDeletePhotoById()
+    {
+        $filename = Input::get('filename');
+        $customer_photo = CustomerPhoto::where('photo_file_name', $filename)->first();
         $customer_photo->delete();
-        \File::delete(public_path().'/uploads/customer/'.$filename);
+        \File::delete(public_path() . '/uploads/customer/' . $filename);
         return Response::json('success', 200);
     }
 
@@ -224,28 +228,28 @@ class CustomerController extends Controller
     {
 
         $form = DataForm::create('customer');
-        $form->text('cus_name', 'ชื่อ-นามสกุล')->rule('required')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
-        $form->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'))->rule('required');
+        $form->text('cus_name', trans("customer.name"))->rule('required')->attributes(array('placeholder' => 'โปรดระบุ ชื่อ-นามสกุล....'));
+        $form->add('cus_birthday_day', trans("customer.birthday"), 'select')->options(Config::get('sex.day'))->rule('required');
         $form->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'))->rule('required');
         $form->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'))->rule('required');
-        $form->add('cus_sex', 'เพศ', 'select')->options(Config::get('sex.sex'))->rule('required');
-        $form->add('cus_blood', 'กรุ๊ปเลือด', 'select')->options(Config::get('sex.blood'))->rule('required');
-        $form->text('cus_code', 'รหัสบัตรประชาชน')->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
-        $form->text('cus_tel', 'เบอร์โทรศัพทมือถือ*')->rule('required|numeric')->attributes(array('placeholder' => '0xxxxxxxxxx'));
-        $form->text('cus_phone', 'เบอร์โทรศัพท์บ้าน')->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
-        $form->text('cus_email', 'E-mail')->rule('email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
-        $form->text('cus_height', 'ส่วนสูง')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ ส่วนสูง....'));
-        $form->text('cus_weight', 'น้ำหนัก')->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
-        $form->text('allergic', 'โรคประจำตัว')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
-        $form->text('disease', 'แพ้ยา')->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
-        $form->text('cus_hno', 'บ้านเลขที่')->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
-        $form->text('cus_moo', 'หมู่')->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
-        $form->text('cus_soi', 'ซอย/ตรอก')->attributes(array('placeholder' => 'โปรดระบุ ซอย....'));
-        $form->text('cus_road', 'ถนน')->attributes(array('placeholder' => 'โปรดระบุ ถนน....'));
-        $form->text('cus_subdis', 'ตำบล/แขวง')->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
-        $form->text('cus_district', 'อำเภอ/เขต')->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
-        $form->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'));
-        $form->text('cus_postal', 'รหัสไปรษณีย์')->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
+        $form->add('cus_sex', trans("customer.gender"), 'select')->options(Config::get('sex.sex'))->rule('required');
+        $form->add('cus_blood', trans("customer.blood"), 'select')->options(Config::get('sex.blood'))->rule('required');
+        $form->text('cus_code', trans("customer.identification Code"))->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
+        $form->text('cus_tel', trans("customer.phone"))->rule('required|numeric')->attributes(array('placeholder' => '0xxxxxxxxxx'));
+        $form->text('cus_phone', trans("customer.phone"))->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
+        $form->text('cus_email', trans("customer.email"))->rule('email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
+        $form->text('cus_height', trans("customer.height"))->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ ส่วนสูง....'));
+        $form->text('cus_weight', trans("customer.weight"))->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
+        $form->text('allergic', trans("customer.allergic"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
+        $form->text('disease', trans("customer.disease"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
+        $form->text('cus_hno', trans("customer.house no"))->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
+        $form->text('cus_moo', trans("customer.village no"))->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
+        $form->text('cus_soi', trans("customer.lane"))->attributes(array('placeholder' => 'โปรดระบุ ซอย....'));
+        $form->text('cus_road', trans("customer.road"))->attributes(array('placeholder' => 'โปรดระบุ ถนน....'));
+        $form->text('cus_subdis', trans("customer.sub-district/ sub-area"))->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
+        $form->text('cus_district', trans("customer.district / area"))->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
+        $form->add('cus_province', trans("customer.province"), 'select')->options(Config::get('sex.province'));
+        $form->text('cus_postal', trans("customer.postal code"))->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
@@ -274,26 +278,28 @@ class CustomerController extends Controller
             $user->cus_province = Input::get('cus_province');
             $user->cus_postal = Input::get('cus_postal');
             $user->save();
-            $form->message("ลงทะเบียนเสร็จสิ้น");
+            $form->message(trans("customer.registration finished"));
 
             systemLogs([
-                'emp_id' => auth()->user()->getAuthIdentifier() ,
+                'emp_id' => auth()->user()->getAuthIdentifier(),
                 'cus_id' => $user->cus_id,
-                'logs_type' => 'info' ,
-                'logs_where'=>'Customer',
-                'description'=>'เพิ่มสมาชิก : รหัสสมาชิก '.$user->cus_id
+                'logs_type' => 'info',
+                'logs_where' => 'Customer',
+                'description' => 'เพิ่มสมาชิก : รหัสสมาชิก ' . $user->cus_id
             ]);
-            $form->message("เพิ่มข้อมูลเรียบร้อยแล้ว");
-            $form->link("customer", "ย้อนกลับ");
+            $form->message(trans("customer.already more information"));
+            $form->link("customer", trans("customer.back"));
         });
         $form->build();
 
         return view('customer/create', compact('form'));
     }
-    public function delete(){
+
+    public function delete()
+    {
         $customer = Customer::findOrFail(Input::get('cus_id'));
         $customer->delete();
-        return redirect('customer')->with('message', 'ลบข้อมูลลูกค้าเรียบร้อยแล้ว');
+        return redirect('customer')->with('message', trans("customer.finished delete"));
 
     }
 
@@ -303,45 +309,39 @@ class CustomerController extends Controller
 
         $edit = DataEdit::source(new Customer());
 
-        $edit->text('cus_name', 'ชื่อ-นามสกุล');
-        $edit->add('cus_birthday_day', 'วันเกิด', 'select')->options(Config::get('sex.day'));
+        $edit->text('cus_name', trans("customer.name"));
+        $edit->add('cus_birthday_day', trans("customer.birthday"), 'select')->options(Config::get('sex.day'));
         $edit->add('cus_birthday_month', ' ', 'select')->options(Config::get('sex.month'));
         $edit->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'));
-        $edit->add('cus_sex', 'เพศ', 'select')->options(Config::get('sex.sex'));
-        $edit->add('cus_blood', 'กรุ๊ปเลือด', 'select')->options(Config::get('sex.blood'));
-        $edit->text('cus_code', 'รหัสบัตรประชาชน')->rule('numeric');
-
-        $edit->text('cus_tel', 'เบอร์โทรศัพทมือถือ')->rule('numeric');
-        $edit->text('cus_phone', 'เบอร์โทรศัพท์บ้าน')->rule('numeric');
-        $edit->text('cus_email', 'E-mail')->rule('email');
-
-        $edit->text('cus_height', 'ส่วนสูง')->rule('numeric');
-        $edit->text('cus_weight', 'น้ำหนัก')->rule('numeric');
-
-        $edit->add('allergic', 'โรคประจำตัว', 'text')->attributes(array('data-role' => "tagsinput"));
-        $edit->add('disease', 'แพ้ยา', 'text')->attributes(array('data-role' => "tagsinput"));
-        $edit->add('cus_reference', 'แหล่งที่มา', 'select')->options(['Web Site' => 'Web Site', 'Booth' => 'Booth', 'Offline' => 'Offline']);
-
-        $edit->text('cus_hno', 'บ้านเลขที่');
-        $edit->text('cus_moo', 'หมู่');
-        $edit->text('cus_soi', 'ซอย/ตรอก');
-        $edit->text('cus_road', 'ถนน');
-        $edit->text('cus_subdis', 'ตำบล/แขวง');
-        $edit->text('cus_district', 'อำเภอ/เขต');
-        $edit->add('cus_province', 'จังหวัด', 'select')->options(Config::get('sex.province'));
-        $edit->text('cus_postal', 'รหัสไปรษณีย์');
-
+        $edit->add('cus_sex', trans("customer.gender"), 'select')->options(Config::get('sex.sex'));
+        $edit->add('cus_blood', trans("customer.blood"), 'select')->options(Config::get('sex.blood'));
+        $edit->text('cus_code', trans("customer.identification Code"))->rule('numeric');
+        $edit->text('cus_tel', trans("customer.phone"))->rule('numeric');
+        $edit->text('cus_phone', trans("customer.phone"))->rule('numeric');
+        $edit->text('cus_email', trans("customer.email"))->rule('email');
+        $edit->text('cus_height', trans("customer.height"))->rule('numeric');
+        $edit->text('cus_weight', trans("customer.weight"))->rule('numeric');
+        $edit->add('allergic', trans("customer.allergic"), 'text')->attributes(array('data-role' => "tagsinput"));
+        $edit->add('disease', trans("customer.disease"), 'text')->attributes(array('data-role' => "tagsinput"));
+        $edit->add('cus_reference', trans("customer.source"), 'select')->options(['Web Site' => 'Web Site', 'Booth' => 'Booth', 'Offline' => 'Offline']);
+        $edit->text('cus_hno', trans("customer.house no"));
+        $edit->text('cus_moo', trans("customer.village no"));
+        $edit->text('cus_soi', trans("customer.lane"));
+        $edit->text('cus_road', trans("customer.road"));
+        $edit->text('cus_subdis', trans("customer.sub-district/ sub-area"));
+        $edit->text('cus_district', trans("customer.district / area"));
+        $edit->add('cus_province', trans("customer.province"), 'select')->options(Config::get('sex.province'));
+        $edit->text('cus_postal', trans("customer.postal code"));
         $edit->attributes(array("class" => " "));
-
-        $edit->link("customer", "ย้อนกลับ");
+        $edit->link("customer", trans("customer.back"));
 
         $edit->saved(function () use ($edit) {
 
             systemLogs([
-                'emp_id' => auth()->user()->getAuthIdentifier() ,
-                'logs_type' => 'info' ,
-                'logs_where'=>'Customer',
-                'description'=>'แก้ไขสมาชิก : ชื่อสมาชิก ' . Input::get('cus_name')
+                'emp_id' => auth()->user()->getAuthIdentifier(),
+                'logs_type' => 'info',
+                'logs_where' => 'Customer',
+                'description' => 'แก้ไขสมาชิก : ชื่อสมาชิก ' . Input::get('cus_name')
             ]);
 
         });

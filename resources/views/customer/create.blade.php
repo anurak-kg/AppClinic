@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ลงทะเบียน')
+@section('title',trans("customer.registry"))
 @section('content')
 
     {!! Rapyd::scripts() !!}
@@ -15,7 +15,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">ข้อมูลลูกค้า</h2>
+                    <h2 class="panel-title">{{trans("customer.customer data")}}</h2>
 
                 </div>
 
@@ -113,7 +113,7 @@
             <div class="panel panel-primary" >
 
                 <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title" >ที่อยู่</h2>
+                    <h2 class="panel-title" >{{trans("customer.address")}}</h2>
                 </div>
 
                 <div class="panel-body">

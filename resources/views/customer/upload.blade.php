@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','จัดการรูปถ่าย')
+@section('title',trans("customer.add photo"))
 @section('headDes',$customer->cus_name)
 @section('headText','Customer Photo')
 @section('content')
@@ -9,23 +9,21 @@
 
         <div class="box box-success">
             <div class="box-header with-border">
-                <h2 class="box-title">จัดการรูปถ่าย :: {{$customer->cus_id}} - {{$customer->cus_name}}</h2>
+                <h2 class="box-title">{{trans("customer.photo")}} :: {{$customer->cus_id}} - {{$customer->cus_name}}</h2>
 
                 <div class="box-tools pull-right">
-                    <a href="{{url('/customer/view?cus_id='.$customer->cus_id.'')}}" class="btn btn-info">ดูข้อมูลลูกค้า</a>
+                    <a href="{{url('/customer/view?cus_id='.$customer->cus_id.'')}}" class="btn btn-info">{{trans("customer.view")}}</a>
 
-                    <a href="{{url('/customer')}}" class="btn btn-success">กลับไปที่ข้อมูลลูกค้า</a>
+                    <a href="{{url('/customer')}}" class="btn btn-success">{{trans("customer.back")}}</a>
                 </div>
             </div>
             <div class="box-body">
 
-                    <p><strong>ขั้นตอนการอัพโหลดรูป. </strong> คุณสามารถลากรูปภาพของลูกค้าจาก Folder ในคอมพิวเตอร์ เข้ามาในกล่องสีแดงด้านล่าง
-                        หรือ คลิกที่กล่องเพื่อเลือกไฟล์ โดยสามารถคลิกลาก หรือ กด ctrl เพื่อเลือกภาพพร้อมกันหลายภาพ</p>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="box box-danger">
                             <div class="box-header with-border">
-                                <h2 class="box-title">Before : ก่อน [ สูงสุด 5 รูปภาพ ]</h2>
+                                <h2 class="box-title">Before : {{trans("customer.limit")}}</h2>
                             </div>
                             <div class="box-body">
                                 <div class="dropzone" id="beforeZone"></div>
@@ -37,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="box box-danger">
                             <div class="box-header with-border">
-                                <h2 class="box-title">After : หลัง  [ สูงสุด 5 รูปภาพ ]</h2>
+                                <h2 class="box-title">After :  {{trans("customer.limit")}}</h2>
                             </div>
                             <div class="box-body">
                                 <div class="dropzone" id="afterZone"></div>
@@ -68,13 +66,13 @@
             acceptedFiles:'image/*',
             uploadMultiple: true,
             addRemoveLinks: true,
-            dictRemoveFile: "ลบรูป",
+            dictRemoveFile: '{{trans("customer.delete")}}',
             maxFilesize: 4,//MB
-            dictRemoveFileConfirmation: 'แน่ใจว่าต้องการลบรูป ?',
-            dictDefaultMessage: "คลิก หรือลากไฟล์มาไว้ในช่องสีเหลี่ยมเพื่ออัพโหลดภาพ",
-            maxFiles: {{getConfig('customer_photo_limit')}},
+            dictRemoveFileConfirmation: '{{trans("customer.confirm delete")}}',
+            dictDefaultMessage: '{{trans("customer.uploads")}}',
+            maxFiles: '{{getConfig('customer_photo_limit')}}',
             params: {
-                customer_id: {{ $customer->cus_id }},
+                customer_id: '{{ $customer->cus_id }}',
                 type: 'before'
             },
             init: function () {
@@ -101,13 +99,13 @@
             acceptedFiles:'image/*',
             uploadMultiple: true,
             addRemoveLinks: true,
-            dictRemoveFile: "ลบรูป",
+            dictRemoveFile:'{{trans("customer.delete")}}',
             maxFilesize: 4,//MB
-            dictRemoveFileConfirmation: 'แน่ใจว่าต้องการลบรูป ?',
-            dictDefaultMessage: "คลิก หรือลากไฟล์มาไว้ในช่องสีเหลี่ยมเพื่ออัพโหลดภาพ",
-            maxFiles: {{getConfig('customer_photo_limit')}},
+            dictRemoveFileConfirmation: '{{trans("customer.confirm delete")}}',
+            dictDefaultMessage: '{{trans("customer.uploads")}}',
+            maxFiles: '{{getConfig('customer_photo_limit')}}',
             params: {
-                customer_id: {{ $customer->cus_id }},
+                customer_id: '{{ $customer->cus_id }}',
                 type: 'after'
             },
             init: function () {
