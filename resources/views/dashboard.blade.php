@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','หน้าหลัก')
+@section('title',trans('dashboard.home'))
 @section('headText','SIAM LOFT CLINIC')
 @section('headDes','สยาม ลอฟท์ คลินิก')
 @section('content')
@@ -12,13 +12,13 @@
                     <!-- small box -->
                     <div class="small-box bg-blue">
                         <div class="inner">
-                            <h4>สมัครสมาชิก</h4>
-                            <p>สำหรับลูกค้าใหม่</p>
+                            <h4>{{trans('dashboard.register')}}</h4>
+                            <p>{{trans('dashboard.new member')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{url('customer/create')}}" class="small-box-footer">สมัครสมาชิก   <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('customer/create')}}" class="small-box-footer">{{trans('dashboard.register')}}   <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
@@ -26,26 +26,26 @@
                     <!-- small box -->
                     <div class="small-box bg-lime-active">
                         <div class="inner">
-                            <h4>ขายคอร์ส / สินค้า</h4>
-                            <p>สำหรับสมาชิก / ลูกค้าทั่วไป</p>
+                            <h4>{{trans('dashboard.sales courses & products')}}</h4>
+                            <p>{{trans('dashboard.member / guest')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
                         </div>
-                        <a href="{{url('quotations')}}" class="small-box-footer">ขายคอร์ส / สินค้า <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('quotations')}}" class="small-box-footer">{{trans('dashboard.sales courses & products')}}<i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h4>ชำระเงิน คอร์สค้างจ่าย</h4>
-                            <p>สำหรับสมาชิก</p>
+                            <h4>{{trans('dashboard.outstanding balance')}}</h4>
+                            <p>{{trans('dashboard.member')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-information-circled"></i>
                         </div>
-                        <a href="{{url('customer')}}" class="small-box-footer">จ่ายยอดค้างชำระ <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('customer')}}" class="small-box-footer">{{trans('dashboard.outstanding balance')}}<i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
@@ -55,13 +55,13 @@
                     <!-- small box -->
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h4>รักษา</h4>
-                            <p>สำหรับสมาชิก</p>
+                            <h4>{{trans('dashboard.treatment')}}</h4>
+                            <p>{{trans('dashboard.member')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-heart"></i>
                         </div>
-                        <a href="{{url('treatment')}}" class="small-box-footer">รักษา   <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('treatment')}}" class="small-box-footer">{{trans('dashboard.treatment')}}   <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
             </div><!-- /.row -->
@@ -74,7 +74,7 @@
 
                         <div class="box box-primary">
                             <div class="box-header with-border" >
-                                <h3 class="box-title">สินค้ากำลังหมดอายุ</h3>
+                                <h3 class="box-title">{{trans('dashboard.expired products')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
@@ -84,9 +84,9 @@
                                     <li class="item">
 
                                         @foreach($exp as $item)
-                                            <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลืออีก {{ $item->day }} วัน</span></a>
+                                            <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">{{trans('dashboard.remain')}} {{ $item->day }}{{trans('dashboard.day')}}</span></a>
                                             <span class="product-description">
-                                              รหัสสินค้า {{ $item->product_id }} / วันที่หมดอายุ {{ $item->product_exp  }}
+                                              {{trans('dashboard.id')}} {{ $item->product_id }} / {{trans('dashboard.expiration date')}} {{ $item->product_exp  }}
                                                 </span> <br>
                                         @endforeach
 
@@ -95,14 +95,14 @@
                                 </ul>
                             </div><!-- /.box-body -->
                             <div class="box-footer text-center">
-                                <a href="{{url('product/expday')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                                <a href="{{url('product/expday')}}" class="uppercase">{{trans('dashboard.total')}}</a>
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
 
                         <div class="box  box-warning">
                             <div class="box-header with-border" align="middle">
 
-                                <h3 class="box-title">ตารางการทำงานหมอ</h3>
+                                <h3 class="box-title">{{trans('dashboard.doctor schedule')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
                                 </div><!-- /.box-tools -->
@@ -124,7 +124,7 @@
 
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">สินค้าที่ถึงจำนวนต้องสั่งซื้อ</h3>
+                                <h3 class="box-title">{{trans('dashboard.products must be ordered')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
@@ -134,9 +134,9 @@
                                     <li class="item">
 
                                         @foreach($stock as $item)
-                                            <a href="{{url('product/stock')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">เหลือจำนวน {{ $item->total }} </span></a>
+                                            <a href="{{url('product/stock')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">{{trans('dashboard.remain')}} {{ $item->total }} </span></a>
                                             <span class="product-description">
-                                              รหัสสินค้า {{ $item->product_id }} / สาขา {{ $item->branch_name  }}
+                                              {{trans('dashboard.id')}} {{ $item->product_id }} / {{trans('dashboard.branch')}} {{ $item->branch_name  }}
                                                 </span> <br>
                                         @endforeach
 
@@ -144,14 +144,14 @@
                                 </ul>
                             </div><!-- /.box-body -->
                             <div class="box-footer text-center">
-                                <a href="{{url('product/stock')}}" class="uppercase">ดูข้อมูลทั้งหมด</a>
+                                <a href="{{url('product/stock')}}" class="uppercase">{{trans('dashboard.total')}}</a>
                             </div><!-- /.box-footer -->
                         </div><!-- /.box -->
 
                     <div class="box box-danger">
                         <div class="box-header with-border" align="middle">
 
-                            <h3 class="box-title">ตารางนัดคิวลูกค้า</h3>
+                            <h3 class="box-title">{{trans('dashboard.customer schedule')}}</h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
                             </div><!-- /.box-tools -->
@@ -172,7 +172,7 @@
 
 <div class="box box-info col-12-md">
     <div class="box-header with-border">
-        <h3 class="box-title">การสั่งซื้อสินค้าล่าสุด</h3>
+        <h3 class="box-title">{{trans('dashboard.ordering products')}}</h3>
         <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
@@ -182,11 +182,11 @@
             <table class="table no-margin">
                 <thead>
                 <tr>
-                    <th>เลขทีใบสั่งซื้อ</th>
-                    <th>Supplier</th>
-                    <th>พนักงาน</th>
-                    <th>วันที่</th>
-                    <th>สถานะ</th>
+                    <th>{{trans('dashboard.order id')}}</th>
+                    <th>{{trans('dashboard.supplier')}}</th>
+                    <th>{{trans('dashboard.employee')}}</th>
+                    <th>{{trans('dashboard.date')}}</th>
+                    <th>{{trans('dashboard.status')}}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -210,8 +210,8 @@
         </div><!-- /.table-responsive -->
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
-        <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">สั่งซื้อสินค้าใหม่</a>
-        <a href="{{ url('order/history') }}" class=" pull-right">ดูข้อมูลทั้งหมด</a>
+        <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">{{trans('dashboard.ordering products')}}</a>
+        <a href="{{ url('order/history') }}" class=" pull-right">{{trans('dashboard.total')}}</a>
     </div><!-- /.box-footer -->
 </div><!-- /.box -->
 

@@ -1,0 +1,28 @@
+<?php
+return [
+    'register' => 'สมัครสมาชิก',
+    'new member' => 'สำหรับลูกค้าใหม่',
+    'sales' => 'ขาย คอร์ส / สินค้า',
+    'member / guest' => 'สำหรับสมาชิก / ลูกค้าทั่วไป',
+    'member' => 'สำหรับสมาชิก',
+    'outstanding balance' => 'ยอดค้างชำระ',
+    'treatment' => 'การรักษา',
+    'expired products' => 'สินค้าหมดอายุ',
+    'id' => 'รหัสสินค้า',
+    'day' => 'วัน',
+    'expiration date' => 'วันที่หมดอายุ',
+    'remain' => 'คงเหลือ',
+    'total' => 'ดูข้อมูลทั้งหมด',
+    'doctor schedule' => 'ตารางการทำงานแพทย์',
+    'branch' => 'สาขา',
+    'customer schedule' => 'ตารางนัดคิวลูกค้า',
+    'supplier' => 'Supplier',
+    'employee' => 'พนักงาน',
+    'date' => 'วันที่',
+    'status' => 'สถานะ',
+    'ordering products' => 'การสั่งซื้อสินค้า',
+    'order id' => 'เลขทีใบสั่งซื้อ',
+    'home' => 'หน้าหลัก',
+    'products must be ordered' => 'สินค้าต้องสั่งซื้อ',
+
+];
