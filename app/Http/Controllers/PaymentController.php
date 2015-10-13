@@ -43,7 +43,7 @@ class PaymentController extends Controller
 
         $quo = DB::table('quotations_detail')
             ->select('quotations_detail.quo_id', 'course.course_name', 'product.product_name', 'course.course_price', 'product.product_price', 'course.course_qty'
-                ,'quotations_detail.quo_de_id', 'quotations_detail.product_qty', 'quotations_detail.payment_remain', 'quotations.vat')
+                ,'quotations_detail.quo_de_id', 'quotations_detail.product_qty', 'quotations_detail.qty', 'quotations_detail.payment_remain', 'quotations.vat')
             ->join('quotations', 'quotations_detail.quo_id', '=', 'quotations.quo_id')
             ->leftjoin('course', 'quotations_detail.course_id', '=', 'course.course_id')
             ->leftjoin('product', 'quotations_detail.product_id', '=', 'product.product_id')

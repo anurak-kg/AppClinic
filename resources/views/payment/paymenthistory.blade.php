@@ -4,17 +4,18 @@
 @section('headDes','บันทึกชำระเงิน')
 @section('content')
 
-    <div class="row" ng-controller="newPaymentController" >
+    <div class="row" ng-controller="newPaymentController">
 
         <div class="col-md-12" ng-init="paymentInit({{\Illuminate\Support\Facades\Input::get('quo_de_id')}})">
-            <form method="POST" target="_blank" action="{{url('payment/pay/')}}"  >
+            <form method="POST" target="_blank" action="{{url('payment/pay/')}}">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <input type="hidden" name="customer_id"
                        value="<?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?>">
 
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">บันทึกการชำระเงิน รหัสลูกค้า <?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?> </h2>
+                        <h2 class="box-title">บันทึกการชำระเงิน
+                            รหัสลูกค้า <?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?> </h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
@@ -76,7 +77,8 @@
                                         ?>
                                         <tr ng-init="init({{$index}},'{{$paidType}}',{{ceil($item->payment_remain)}},'{{$type}}',{{ceil($item->net_price)}},{{$course_qty}},{{$item->quo_de_id}})"
                                             ng-click="trClick({{$index}})"
-                                            style="cursor: pointer;" class="{{(Input::get('quo_de_id') == $item->quo_de_id ? "payment-current-select" : "")}}">
+                                            style="cursor: pointer;"
+                                            class="{{(Input::get('quo_de_id') == $item->quo_de_id ? "payment-current-select" : "")}}">
                                             <td>{{$index+1}}</td>
                                             <td>
                                                 <strong>
@@ -87,7 +89,7 @@
                                                     @endif
                                                 </strong>
                                                 <br>
-                                                ราคารวม {{numberFormat(ceil($item->net_price))}} บาท
+                                                ราคา {{numberFormat(ceil($item->net_price))}} บาท
                                                 @if($item->net_price > $item->payment_remain)
                                                     <span style="font-size: 12px;color: red;">ชำระไปแล้ว <strong>{{ numberFormat($item->net_price - $item->payment_remain)}} </strong> บาท</span>
                                                 @endif
@@ -110,7 +112,10 @@
 
                                             </td>
                                             <td>
-                                                0
+                                                @if($item->course_name != null)
+                                                    {{$item->qty}}
+                                                @endif
+
                                             </td>
 
                                             <td align="middle" ng-click="$event.stopPropagation()">
