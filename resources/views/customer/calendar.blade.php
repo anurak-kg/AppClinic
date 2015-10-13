@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ตารางนัดคิวลูกค้า')
+@section('title',trans("customer.appointment"))
 @section('content')
 
     <script src="/packages/zofe/rapyd/assets/datetimepicker/bootstrap-datetimepicker.js"></script>
@@ -14,7 +14,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                    <h2 class="panel-title">{{trans("customer.date")}}</h2>
                 </div>
 
                 <div class="panel-body">
@@ -26,7 +26,7 @@
             <div class="box box-solid box-danger" align="middle">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title" align="middle">ลบข้อมูล</h2>
+                    <h2 class="box-title" align="middle">{{trans("customer.delete")}}</h2>
                 </div>
 
                 <div class="box-body">
@@ -127,7 +127,7 @@
                 droppable: true,
                 eventDragStop: function (event, jsEvent, ui, view) {
                     if (isElemOverDiv()) {
-                        var con = confirm('คุณแน่ใจว่าต้องการลบเหตุการณ์นี้');
+                        var con = confirm('{{trans("customer.confirm delete")}}');
                         if (con == true) {
                             $.ajax({
                                 url: '{{url('customer_calendar/delete/')}}',
