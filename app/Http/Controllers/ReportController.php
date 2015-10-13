@@ -1584,6 +1584,114 @@ class ReportController extends Controller
 
     }
 
+//    public function reportCommisstionSaleCourseType(){
+//        $rang = \Input::get('rang');
+//        $type = \Input::get('type');
+//        $date = explode('to', $rang);
+//        // var_dump($date);
+//        $dateTxt = [];
+//        $comcash = DB::table('quotations')
+//            ->select(DB::raw('sum((SELECT
+//            Sum((
+//            CASE
+//                WHEN quotations.sale2 Is NULL And quotations.sale3 Is NULL THEN course.commission
+//                WHEN quotations.sale2 Is Not NULL And quotations.sale3 Is NULL THEN course.commission/2
+//                WHEN quotations.sale2 Is Not NULL And quotations.sale3 Is Not NULL THEN course.commission/3
+//            END
+//                ))
+//
+//            FROM
+//            quotations
+//
+//            where sale1
+//            )) as com1,'),
+////            DB::raw('sum((SELECT
+////                 Sum((
+////                    CASE
+////                        WHEN quotations.sale3 Is NULL  THEN course.commission/2
+////                        WHEN quotations.sale3 Is Not NULL  THEN course.commission/3
+////
+////                    END
+////                    ))
+////
+////            FROM
+////            quotations
+////
+////            where sale2
+////
+////
+////            )) as com2,
+////            '),
+////             DB::raw('sum((SELECT
+////
+////                Sum(
+////                (CASE
+////                    WHEN quotations.sale1 Is not NULL and quotations.sale2 Is not NULL THEN course.commission/3
+////                END)
+////                )
+////
+////                FROM
+////                quotations
+////
+////                where sale3
+////
+////
+////                ) ) as com3,'),
+////             DB::raw('course_type.name as Type')
+////            )
+//
+//            ->join('users','users.id','=','commission.emp_id');
+//        if ($rang != null) {
+//            $comcash->whereRaw("DATE(commission.created_at) between ? and ?", [trim($date[0]), trim($date[1])]);
+//            $dateTxt['start'] = Date::createFromFormat("Y-m-d", trim($date[0]))->format('l j F Y');
+//            $dateTxt['end'] = Date::createFromFormat("Y-m-d", trim($date[1]))->format('l j F Y');
+//
+//        }
+//        $comcash->groupBy('name');
+//
+//        $data = $comcash->get();
+//
+//        // return response()->json($doctor);
+//
+//        if ($type == "excel") {
+//            Excel::create('รายงาน Commission ', function ($excel) use ($data) {
+//
+//                // Set the title
+//                $excel->setTitle('Our new awesome title');
+//
+//                // Chain the settersp
+//                $excel->setCreator('Maatwebsite')
+//                    ->setCompany('Maatwebsite');
+//
+//                // Call them separately
+//                $excel->setDescription('A demonstration to change the file properties');
+//
+//                $excel->sheet('Sheetname', function ($sheet) use ($data) {
+//
+//                    //dd($data);
+//
+//                    $sheet->setStyle(array(
+//                        'font' => array(
+//                            'name'      =>  'Angsana new',
+//                            'size'      =>  18,
+//                            'bold'      =>  false
+//                        )
+//                    ));
+//                    $sheet->loadView('report.excelcommission',['data'=>$data]);
+//                });
+//
+//
+//            })->export('xls');
+//        } else {
+//            return view('report/commisstionDetail', [
+//                'data' => $data,
+//                'date' => $dateTxt,
+//                'name' => $this->arrayToChartData($data, 'name'),
+//                'Total' => $this->arrayToChartData($data, 'Total')
+//            ]);
+//        }
+//    }
+
     public function arrayToChartData($db, $name)
     {
         $text = "[";
@@ -1593,5 +1701,68 @@ class ReportController extends Controller
         $text .= ']';
         return $text;
     }
-
+//SELECT
+//
+//sum((SELECT
+//
+//Sum((
+//CASE
+//WHEN quotations.sale2 Is NULL And quotations.sale3 Is NULL THEN course.commission
+//WHEN quotations.sale2 Is Not NULL And quotations.sale3 Is NULL THEN course.commission/2
+//WHEN quotations.sale2 Is Not NULL And quotations.sale3 Is Not NULL THEN course.commission/3
+//END
+//) )
+//
+//FROM
+//quotations
+//
+//where sale1
+//
+//)) as com1,
+//
+//sum((SELECT
+//
+//Sum((
+//CASE
+//WHEN quotations.sale3 Is NULL  THEN course.commission/2
+//WHEN quotations.sale3 Is Not NULL  THEN course.commission/3
+//
+//END
+//) )
+//
+//FROM
+//quotations
+//
+//where sale2
+//
+//
+//)) as com2,
+//
+//sum((SELECT
+//
+//Sum(
+//(CASE
+//WHEN quotations.sale1 Is not NULL and quotations.sale2 Is not NULL THEN course.commission/3
+//END)
+//)
+//
+//FROM
+//quotations
+//
+//where sale3
+//
+//
+//) ) as com3,
+//
+//course.course_name,
+//course_type.`name` as Type
+//
+//FROM
+//quotations
+//
+//INNER JOIN quotations_detail ON quotations_detail.quo_id = quotations.quo_id
+//INNER JOIN course ON course.course_id = quotations_detail.course_id
+//LEFT OUTER JOIN course_type on course_type.ct_id = course.ct_id
+//
+//GROUP BY type
 }
