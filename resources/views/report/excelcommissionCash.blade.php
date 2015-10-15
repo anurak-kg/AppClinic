@@ -11,7 +11,7 @@
 
         <td align="middle">{{$test->name}}</td>
         <td align="middle"
-            style="width: 850px;"><?php echo number_format($test->Total)?></td>
+            ><?php echo number_format($test->Total)?></td>
     </tr>
 @endforeach
 

@@ -79,10 +79,10 @@
                             </thead>
                             @foreach($data as $test)
                                 <tr>
-                                    @if( $test->total_sales != 0)
+
                                         <td align="middle">{{$test->DATE}}</td>
-                                        <td align="middle"><?php echo number_format($test->total_sales), ' บาท' ?></td>
-                                        @endif
+                                        <td align="middle"><?php echo number_format($test->Total), ' บาท' ?></td>
+
                                 </tr>
                             @endforeach
                         </table>
@@ -113,12 +113,10 @@
                                 <td align="middle"><b>ยอดขาย</b></td>
                             </tr>
                             </thead>
-                            @foreach($datapro1 as $test)
+                            @foreach($datapro as $test)
                                 <tr>
-                                    @if( $test->total_sales != 0)
                                         <td align="middle">{{$test->DATE}}</td>
-                                        <td align="middle"><?php echo number_format($test->total_sales), ' บาท' ?></td>
-                                    @endif
+                                        <td align="middle"><?php echo number_format($test->Total), ' บาท' ?></td>
                                 </tr>
                             @endforeach
                         </table>
@@ -145,9 +143,7 @@
     <script type="text/javascript">
         $(function () {
                     $('#daterange').datepicker({
-                        format: "yyyy-mm",
-                        startView: 2,
-                        minViewMode: 1,
+                        format: "yyyy-mm-dd",
                         language: "th",
                         autoclose: true
                     })
@@ -163,7 +159,7 @@
                     var areaChart = new Chart(areaChartCanvas);
 
                     var areaChartData = {
-                        labels: {!! $name !!},
+                        labels: [''],
                 datasets :
         [
             {
