@@ -50,6 +50,7 @@ class UserController extends Controller
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
 
         $grid->add('{{ $branch->branch_name }}', 'ชื่อสาขา');
+        $grid->add('id','รหัสพนักงาน');
         $grid->add('name','Name');
         $grid->add('email','Email');
         $grid->add('{{ $role->display_name }}', 'ตำแหน่ง');
