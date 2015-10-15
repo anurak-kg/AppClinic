@@ -90,7 +90,7 @@ class UserController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new User();
-            $user->id = Input::get('id');
+            $user->id = getNewEmpId();
             $user->branch_id = Input::get('branch');
             $user->username = Input::get('username');
             $user->password = bcrypt(Input::get('password'));
@@ -167,7 +167,7 @@ class UserController extends Controller
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
             $user = new User();
-            $user->id = Input::get('id');
+            $user->id = getNewEmpId();
             $user->branch_id = Input::get('branch');
             $user->name = Input::get('name');
             $user->sex = Input::get('sex');
