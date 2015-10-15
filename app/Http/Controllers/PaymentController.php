@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Branch;
+use App\Customer;
 use App\Payment_bank;
 use App\Payment_detail;
 use App\Quotations;
@@ -27,6 +28,7 @@ class PaymentController extends Controller
     private $sale;
     public function getIndex()
     {
+
         $id = null;
         if (Session::get('quo_id') != null) {
             $id = Session::get('quo_id');
@@ -39,9 +41,9 @@ class PaymentController extends Controller
         return view('payment.payment', compact('quo'));
     }
 
-    public function getPaymentHistory(){
+    public function getHistory(){
 
-        $course = DB::table('quotations_detail')
+        /*$course = DB::table('quotations_detail')
             ->select('course.course_name','course.course_qty','quotations_detail.net_price','quotations_detail.payment_remain',
                 'payment.payment_status','quotations.vat','quotations.vat_rate','quotations.cus_id')
             ->join('course','quotations_detail.course_id','=','course.course_id')
@@ -54,12 +56,19 @@ class PaymentController extends Controller
                 ,'sales_detail.sales_id','sales.vat','sales.vat_rate')
             ->join('sales','sales_detail.sales_id','=','sales.sales_id')
             ->join('product','sales_detail.product_id','=','product.product_id')
-            ->get();
+            ->get();*/
 
-        //dd($sale);
+        //dd($course);
         //return response()->json($course);
+        $id = Input::get('cus_id');
 
-        return view('payment.paymenthistory', ['course'=>$course,'sale'=>$sale]);
+        $quo = Quotations::where('cus_id', $id)->with('quotations_detail.course','quotations_detail.payment.payment_detail')
+            ->get();
+        //$sale = Customer::where('cus_id',$id)->with('sales.sales_detail.product','sales.sales_detail.payment')
+        //   ->get();
+        //dd($sale);
+        //return response()->json($quo);
+        return view('payment.paymenthistory', compact('quo'));
     }
 
     public function getSalePay()
