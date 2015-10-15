@@ -31,12 +31,10 @@ class Payment extends Model
     }
     public function quotations_detail()
     {
-        return $this->belongsToMany('App\Quotations_detail','payment_detail','payment_id','quo_de_id')
-            ->withPivot('emp_id','branch_id','payment_type','amount','edc_id','card_id','created_at');
+        return $this->belongsTo('\App\Quotations_detail', 'quo_de_id','quo_de_id');
     }
     public function sales_detail()
     {
-            return $this->belongsToMany('App\sales_detail','payment_detail','payment_id','sales_de_id')
-            ->withPivot('emp_id','branch_id','payment_type','amount','card_id','created_at');
+        return $this->belongsTo('\App\Sales_detail', 'sales_id','sales_id');
     }
 }
