@@ -6,6 +6,7 @@
  * Time: 5:26 PM
  */
 return [
+
     'Report'=>'Report',
     'employee'=>'Employee',
     'doctor'=>'Doctor',
