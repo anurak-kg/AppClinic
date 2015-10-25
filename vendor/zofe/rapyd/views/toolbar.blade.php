@@ -1,6 +1,6 @@
 
 
-<div class="btn-toolbar" role="toolbar">
+<div role="toolbar">
 
     @if (isset($label))
     <div class="pull-left">
