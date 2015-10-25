@@ -7,6 +7,7 @@
  */
 return [
     'product'=>'Product',
+    'product_list'=>'Product list',
     'product_code'=>'Product Code',
     'Product_groups'=>'Product Groups',
     'Product_name'=>'Product Name',
