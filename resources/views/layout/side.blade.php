@@ -33,7 +33,7 @@
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->can('customer-read'))
-                        <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>{{trans('dashboard.member information')}}</a></li>
+                        <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>{{trans('dashboard.member_information')}}</a></li>
                     @endif
                     @if(Auth::user()->can('customer-create'))
                         <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>{{trans('dashboard.register')}}</a></li>
@@ -48,8 +48,8 @@
                     <a href="#"><i class='fa fa-database'></i> <span>{{trans('dashboard.course')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>{{trans('course.Course Management')}}</a></li>
-                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>{{trans('course.course category')}}</a></li>
+                        <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>{{trans('course.Course_Management')}}</a></li>
+                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>{{trans('course.course_category')}}</a></li>
                     </ul>
                 </li>
             @endif
@@ -124,47 +124,47 @@
             </li>
             @if(Auth::user()->can('emp'))
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-user-md'></i> <span>หมอ</span> <i
+                    <a href="#"><i class='fa fa-user-md'></i> <span>{{trans('customer.doctor')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('user/adddoctor')}}"><i class='fa fa-minus'></i>ข้อมูลหมอ</a></li>
-                        <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>ตารางการทำงาน</a></li>
+                        <li><a href="{{url('user/adddoctor')}}"><i class='fa fa-minus'></i>{{trans('customer.doctors_information')}}</a></li>
+                        <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>{{trans('customer.work_schedule')}}</a></li>
                     </ul>
                 </li>
             @endif
             @if(Auth::user()->can('branch') || Auth::user()->can('vendor') || Auth::user()->can('emp') || Auth::user()->can('permission'))
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-gears'></i> <span>การจัดการ</span> <i
+                    <a href="#"><i class='fa fa-gears'></i> <span>{{trans('dashboard.Management')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         @if(Auth::user()->can('branch'))
-                            <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>จัดการข้อมูลสาขา</a></li>
+                            <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Information_Management_Branch')}}</a></li>
                         @endif
                         @if(Auth::user()->can('vendor'))
-                            <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>จัดการข้อมูลร้านค้า</a>
+                            <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Management_information_stores')}}</a>
                             </li>
                         @endif
                         @if(Auth::user()->can('emp'))
-                            <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>จัดการข้อมูลพนักงาน</a></li>
+                            <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Management_Information_Officer')}}</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                            <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>จัดการการเงิน</a></li>
+                            <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>{{trans('dashboard.financial_management')}}</a></li>
                         @endif
                         @if(Auth::user()->can('permission'))
-                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
+                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>{{trans('dashboard.securable')}}</a></li>
                         @endif
                         @if(Auth::user()->can('permission'))
                             <li><a href="{{url('log/index')}}"><i class="fa fa-server"></i>System Log</a></li>
                         @endif
                         @if(Auth::user()->can('setting'))
-                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i> ตั้งค่า</a></li>
+                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i>{{trans('dashboard.setting')}}</a></li>
                         @endif
                     </ul>
                 </li>
             @endif
 
             @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                <li><a href="{{url('report/index')}}"><i class='fa fa-pie-chart'></i> <span>รายงาน</span></a></li>
+                <li><a href="{{url('report/index')}}"><i class='fa fa-pie-chart'></i> <span>{{trans('dashboard.report')}}</span></a></li>
 
                 {{--<li class="treeview">--}}
                     {{--<a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i--}}
@@ -223,7 +223,7 @@
                 {{--</li>--}}
             @endif
 
-            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
+            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>{{trans('dashboard.Sign_out')}}</span></a></li>
 
         </ul>
         <!-- /.sidebar-menu -->
