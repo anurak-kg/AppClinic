@@ -7,15 +7,16 @@
  */
 return [
     'product'=>'สินค้า',
-    'product list'=>'รายการสินค้า',
-    'product code'=>'รหัสสินค้า',
-    'Product groups'=>'กลุ่มสินค้า',
-    'Product name'=>'ชื่อสินค้า',
-    'Order point'=>'Order point',
-    'price / Unit'=>'ราคา/หน่วย',
+    'product_list'=>'รายการสินค้า',
+    'product_code'=>'รหัสสินค้า',
+    'Product_groups'=>'กลุ่มสินค้า',
+    'Product_name'=>'ชื่อสินค้า',
+    'Order_point'=>'Order point',
+    'price_Unit'=>'ราคา/หน่วย',
     'Unit'=>'หน่วยนับ',
     'Action'=>'กระทำ',
     'Add'=>'เพิ่มข้อมูลใหม่',
+    'Edit'=>'แก้ไขข้อมูลใหม่',
     'Medication and Product Management'=>'จัดการยาและสินค้า',
 
 ];

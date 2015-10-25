@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','สินค้า')
+@section('title',trans('product.product'))
 
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                    <h2 class="panel-title">{{trans('product.Add')}}</h2>
                 </div>
 
                 <div class="panel-body">
