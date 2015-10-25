@@ -41,20 +41,14 @@ class Course_typeController extends Controller
         $form->text('name', 'ชื่อประเภทคอร์ส')->rule('required|unique:course_type,ct_id')->attributes(array('placeholder'=>'....'));
         $form->attributes(array("class" => " "));
         $form->saved(function () use ($form) {
-
-            $user = new Course_type();
-            $user->ct_id = Input::get('ct_id');
-            $user->save();
             $form->message("เสร็จสิ้น");
             $form->link("course_type", "กลับ");
-
             systemLogs([
                 'emp_id' => auth()->user()->getAuthIdentifier() ,
                 'logs_type' => 'info' ,
                 'logs_where'=>'Course_type',
                 'description'=>'เพิ่มประเภทคอร์ส : รหัสประเภทคอร์ส '.$user->ct_id
             ]);
-
         });
         return view('course_type/course_type', compact('form','grid'));
     }

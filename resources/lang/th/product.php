@@ -13,7 +13,8 @@ return [
     'Order point'=>'Order point',
     'price / Unit'=>'ราคา/หน่วย',
     'Unit'=>'หน่วยนับ',
-    'Action'=>'กระทำ', 'Add'=>'เพิ่มข้อมูลใหม่',
+    'Action'=>'กระทำ',
+    'Add'=>'เพิ่มข้อมูลใหม่',
     'Medication and Product Management'=>'จัดการยาและสินค้า',
 
 ];
