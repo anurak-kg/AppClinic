@@ -7,11 +7,11 @@
  */
 return [
     'product'=>'Product',
-    'product code'=>'Product Code',
-    'Product groups'=>'Product Groups',
-    'Product name'=>'Product Name',
-    'Order point'=>'Order point',
-    'price / Unit'=>'Price / Unit',
+    'product_code'=>'Product Code',
+    'Product_groups'=>'Product Groups',
+    'Product_name'=>'Product Name',
+    'Order_ point'=>'Order point',
+    'price_Unit'=>'Price / Unit',
     'Unit'=>'Unit',
     'Action'=>'Action',
     'Add'=>'Add',

@@ -6,8 +6,8 @@
  * Time: 02:26 PM
  */
 return [
-  'Course Management'=>'ข้อมูลคอร์ส',
-  'add'=>'เพิ่มข้อมูลคอร์ส',
+  'Course_Management'=>'ข้อมูลคอร์ส',
+  'add'=>'เพิ่มข้อมูล',
   'course_id'=>'รหัสคอร์ส',
   'course_name'=>'ชื่อคอร์ส',
   'qty'=>'จำนวน',
@@ -22,9 +22,9 @@ return [
   'back'=>'กลับหน้าคอร์ส',
   'detail'=>'*ในกรณีที่คอร์สนั้นไม่ต้องใช้ยา สามารถกดบันทึกได้เลย.',
   'Commission'=>'Commission',
-  'course category'=>'ประเภทคอร์ส',
-  'course category code'=>'รหัสประเภทคอร์ส',
-  'course category name'=>'ชื่อประเภทคอร์ส',
+  'course_category'=>'ประเภทคอร์ส',
+  'course_category_code'=>'รหัสประเภทคอร์ส',
+  'course_category_name'=>'ชื่อประเภทคอร์ส',
   'Type'=>'ประเภทคอร์ส',
   'medicine_id'=>'รหัสยา',
   'save'=>'บันทึก',

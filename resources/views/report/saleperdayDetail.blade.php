@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน ยอดขายพนักงาน')
+@section('headDes',trans('report.daily'))
 @section('content')
 
     <p class="text-center">
@@ -18,11 +18,11 @@
 
         <div class="box">
             <div class="box-header with-border" align="middle">
-                <h2 class="box-title">ตารางสรุปยอดขายคอร์ส</h2>
+                <h2 class="box-title">{{trans('report.table')}}{{trans('report.course')}}</h2>
 
                 <div class="box-tools pull-right">
-                    <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                    <a class="btn btn-warning" href="{{url('report/saleperdayGraphic')}}">กราฟ</a>
+                    <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                    <a class="btn btn-warning" href="{{url('report/saleperdayGraphic')}}">{{trans('report.graph')}}</a>
                 </div>
             </div>
             <div class="box-body" id="data1">
@@ -44,15 +44,15 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <td align="middle"><b>วันที่</b></td>
-                                <td align="middle"><b>ยอดขาย</b></td>
+                                <td align="middle"><b>{{trans('report.date')}}</b></td>
+                                <td align="middle"><b>{{trans('report.sale')}}</b></td>
                             </tr>
                             </thead>
                             @foreach($data as $test)
                                 <tr>
 
                                     <td align="middle">{{$test->DATE}}</td>
-                                    <td align="middle"><?php echo number_format($test->Total), ' บาท' ?></td>
+                                    <td align="middle"><?php echo number_format($test->Total), trans('report.baht') ?></td>
 
                                 </tr>
                             @endforeach
@@ -66,7 +66,7 @@
 
         <div class="box">
             <div class="box-header with-border" align="middle">
-                <h2 class="box-title">ตารางสรุปยอดขายสินค้า</h2>
+                <h2 class="box-title">{{trans('report.table')}}{{trans('report.product')}}</h2>
                     <span class="pull-right">
                          {!! Form::open(array('url' => 'report/saleperdayDetail?type=excel1', 'class' => 'form')) !!}
                         <input type="submit" class="btn btn-block btn-info" value="Excel Export" >
@@ -86,14 +86,14 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <td align="middle"><b>วันที่</b></td>
-                                <td align="middle"><b>ยอดขาย</b></td>
+                                <td align="middle"><b>{{trans('report.date')}}</b></td>
+                                <td align="middle"><b>{{trans('report.sale')}}</b></td>
                             </tr>
                             </thead>
                             @foreach($datapro as $test)
                                 <tr>
                                     <td align="middle">{{$test->DATE}}</td>
-                                    <td align="middle"><?php echo number_format($test->Total), ' บาท' ?></td>
+                                    <td align="middle"><?php echo number_format($test->Total), trans('report.baht') ?></td>
                                 </tr>
                             @endforeach
                         </table>

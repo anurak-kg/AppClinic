@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน รายจ่าย Suplier')
+@section('headDes',trans('report.Suplier'))
 @section('content')
 
     <p class="text-center">
@@ -9,7 +9,7 @@
         <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
                placeholder="เลือกระยะเวลา..">
         </input> <br> <br>
-        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <input type="submit" class="btn btn-block btn-primary" value="{{trans('report.show')}}">
         <br>
         {!! Form::close() !!}
     </p>
@@ -17,11 +17,11 @@
 
     <div class="box">
         <div class="box-header with-border" align="middle">
-            <h2 class="box-title">ตารางสรุปข้อมูล รายจ่าย Suplier</h2>
+            <h2 class="box-title">{{trans('report.Suplier')}}</h2>
 
             <div class="box-tools pull-right">
-                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                <a class="btn btn-warning" href="{{url('report/suplierGraphic')}}">กราฟ</a>
+                <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                <a class="btn btn-warning" href="{{url('report/suplierGraphic')}}">{{trans('report.graph')}}</a>
             </div>
 
         </div>
@@ -47,15 +47,15 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <td align="middle"><b>ร้าน</b></td>
-                            <td align="middle"><b>รายจ่ายทั้งหมด</b></td>
+                            <td align="middle"><b>{{trans('report.Suplier')}}</b></td>
+                            <td align="middle"><b>{{trans('report.expenditure')}}</b></td>
                         </tr>
                         </thead>
                         @foreach($data as $test)
                             <tr>
 
                                 <td align="middle">{{$test->name}}</td>
-                                <td align="middle" style="width: 850px;"><?php echo number_format($test->total), ' บาท' ?></td>
+                                <td align="middle" style="width: 850px;"><?php echo number_format($test->total), trans('report.baht') ?></td>
                             </tr>
                         @endforeach
                     </table>

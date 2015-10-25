@@ -1,7 +1,7 @@
 @extends('layout.master')
-@section('title','สินค้า')
+@section('title',trans('product.product'))
 @section('headText','Product')
-@section('headDes','จัดการยาและสินค้า')
+@section('headDes',trans('product.Medication and Product Management'))
 @section('content')
 
     <div class="row">
@@ -10,10 +10,10 @@
             <div class="box box-success ">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลสินค้า</h2>
+                    <h2 class="box-title">{{trans('product.product')}}</h2>
                     <div class="box-tools pull-right">
                         <a href="{{url('product/create')}}"
-                           class="btn btn-success">เพิ่มข้อมูลใหม่</a>
+                           class="btn btn-success">{{trans('product.Add')}}</a>
                     </div>
                 </div>
 

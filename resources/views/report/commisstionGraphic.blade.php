@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน Commission')
+@section('headDes',trans('report.Commission'))
 @section('content')
 
     <p class="text-center">
@@ -9,7 +9,7 @@
         <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
                placeholder="เลือกระยะเวลา..">
         </input> <br> <br>
-        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <input type="submit" class="btn btn-block btn-primary" value="{{trans('report.show')}}">
         <br>
         {!! Form::close() !!}
     </p>
@@ -20,8 +20,8 @@
             <h3 class="box-title">Commission</h3>
 
             <div class="box-tools pull-right">
-                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                <a class="btn btn-warning" href="{{url('report/commisstionDetail')}}">ตารางข้อมูล</a>
+                <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                <a class="btn btn-warning" href="{{url('report/commisstionDetail')}}">{{trans('report.table')}}</a>
             </div>
 
         </div>

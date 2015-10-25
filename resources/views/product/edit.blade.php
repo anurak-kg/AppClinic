@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','แก้ไขข้อมูล')
+@section('title',trans('product.Edit'))
 
 
 @section('content')
@@ -16,7 +16,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">แก้ไขข้อมูล</h2>
+                    <h2 class="box-title">{{trans('product.Edit')}}</h2>
 
                 </div>
 
