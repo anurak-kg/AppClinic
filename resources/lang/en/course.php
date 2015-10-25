@@ -20,7 +20,7 @@ return [
     'back'=>'Back',
     'detail'=>'*If the course does not require medication. Save it.',
     'Commission'=>'Commission',
-    'course_category'=>'Course Category',
-    'course_category_code'=>'Course Category Code',
-    'course_category_name'=>'Course Category Name',
+    'course_type'=>'Course type',
+    'course_type_code'=>'Course type Code',
+    'course_type_name'=>'Course type Name',
 ];

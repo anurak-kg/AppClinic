@@ -6,6 +6,7 @@
  * Time: 02:49 PM
  */
 return [
+    'customer'=>'ลูกค้า',
     'customer_data' => 'ข้อมูลลูกค้า',
     'edit' => 'แก้ไข',
     'edit_data' => 'แก้ไขข้อมูล',

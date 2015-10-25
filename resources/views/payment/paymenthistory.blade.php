@@ -1,7 +1,6 @@
 @extends('layout.master')
-@section('title','ชำระเงิน')
+@section('title',trans('payment.Payment'))
 @section('headText','Payment')
-@section('headDes','บันทึกชำระเงิน')
 @section('content')
 
     <div class="row" ng-controller="newPaymentController">
@@ -14,13 +13,13 @@
 
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title">บันทึกการชำระเงิน
+                        <h2 class="box-title">{{trans('payment.Payment')}}
                             รหัสลูกค้า <?php echo \Illuminate\Support\Facades\Input::get('cus_id') ?> </h2>
 
                         <div class="box-tools pull-right">
                             <a class="btn btn-danger" href="{{url('quotations')}}">กลับสู่หน้าขายคอร์ส / สินค้า</a>
 
-                            <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$customer->cus_id}}">พิมพ์ใบเสร็จ</a>
+                            <a class="btn btn-warning" href="{{url('payment/print')}}?cus_id={{$customer->cus_id}}">{{trans('payment.Print_receipt')}}</a>
 
                         </div>
                     </div>
@@ -42,10 +41,10 @@
                                         <td>จำนวน</td>
                                         <td width="20px">เข้ารักษา</td>
 
-                                        <td>ประเภทการจ่าย</td>
-                                        <td>ยอดค้างจ่าย</td>
-                                        <td width="20px">ชำระ</td>
-                                        <td width="150px">จำนวนที่จ่าย</td>
+                                        <td>{{trans('payment.Supply_Type')}}</td>
+                                        <td>{{trans('payment.unpaid')}}</td>
+                                        <td width="20px">{{trans('payment.Pay')}}</td>
+                                        <td width="150px">{{trans('payment.Amount_paid')}}</td>
 
 
                                     </tr>
@@ -89,9 +88,9 @@
                                                     @endif
                                                 </strong>
                                                 <br>
-                                                ราคา {{numberFormat(ceil($item->net_price))}} บาท
+                                                {{trans('course.price')}} {{numberFormat(ceil($item->net_price))}} {{trans('payment.baht')}}
                                                 @if($item->net_price > $item->payment_remain)
-                                                    <span style="font-size: 12px;color: red;">ชำระไปแล้ว <strong>{{ numberFormat($item->net_price - $item->payment_remain)}} </strong> บาท</span>
+                                                    <span style="font-size: 12px;color: red;">{{trans('payment.paid')}} <strong>{{ numberFormat($item->net_price - $item->payment_remain)}} </strong> {{trans('course.price')}}</span>
                                                 @endif
 
                                             </td>
@@ -104,7 +103,7 @@
                                                     {{$item->course_qty}}
                                                 @endif
                                                 @if($item->product_unit == null)
-                                                    ครั้ง
+                                                    {{trans('payment.time')}}
                                                 @else
                                                     {{$item->product_unit }}
                                                 @endif
@@ -125,12 +124,12 @@
                                                             ng-model="product[{{$index}}].paymentType"
                                                             ng-disabled="product[{{$index}}].type == 'product' ">
                                                         @if($readOnly != true)
-                                                            <option value="PAID_IN_FULL">จ่ายเต็มจำนวน</option>
+                                                            <option value="PAID_IN_FULL">{{trans('payment.Pay_in_full')}}</option>
                                                         @endif
-                                                        <option value="PAY_BY_COURSE">ผ่อนจ่าย</option>
+                                                        <option value="PAY_BY_COURSE">{{trans('payment.installment')}}</option>
                                                     </select>
                                                 @else
-                                                    จ่ายเต็มจำนวน
+                                                    {{trans('payment.Pay_in_full')}}
                                                 @endif
 
                                             </td>
@@ -162,7 +161,7 @@
 
                                                 <p class="minPayment"
                                                    ng-show="product[{{$index}}].paymentType == 'PAY_BY_COURSE' ">
-                                                    ยอดขั้นต่ำ
+                                                    {{trans('payment.Minimum_balance')}}
                                                     {{ product[<?php echo $index ;?>].minPayment | number }}
                                                     บาท</p>
                                             </td>
@@ -191,39 +190,39 @@
                             <div class="col-md-3">
                                 <table class="table">
                                     <tr>
-                                        <td colspan="2"><h4>ชำระเงิน</h4></td>
+                                        <td colspan="2"><h4>{{trans('payment.Pay')}}</h4></td>
                                     </tr>
                                     <tr>
-                                        <td>ลูกค้า</td>
+                                        <td>{{trans('customer.customer')}}</td>
                                         <td class="total-price">{{$customer->cus_name}}</td>
                                     </tr>
                                     <tr>
-                                        <td>รายการที่ชำระ</td>
-                                        <td class="total-price">@{{ getTotalLength() }} รายการ</td>
+                                        <td>{{trans('payment.Items_paid')}}</td>
+                                        <td class="total-price">@{{ getTotalLength() }} {{trans('payment.items')}}</td>
                                     </tr>
                                     <tr>
-                                        <td>ส่วนลด</td>
+                                        <td>{{trans('payment.Discount')}}</td>
                                         <td class="total-price">0</td>
                                     </tr>
                                     <tr>
-                                        <td>ยอดที่ต้องชำระ</td>
-                                        <td class="total-price">@{{ getTotal() }} บาท</td>
+                                        <td>{{trans('payment.Total_to_be_paid')}}</td>
+                                        <td class="total-price">@{{ getTotal() }} {{trans('payment.baht')}}</td>
 
                                     </tr>
                                 </table>
 
                                 <table class="table">
                                     <tr>
-                                        <td colspan="2">ประเภทการจ่าย
+                                        <td colspan="2">{{trans('payment.Supply_Type')}}
                                             <select class="form-control" ng-change="changeType()"
                                                     ng-model="payment.type" name="paymentType">
-                                                <option value="CASH">เงินสด</option>
-                                                <option value="CREDIT">บัตรเครดิต</option>
+                                                <option value="CASH">{{trans('payment.cash')}}</option>
+                                                <option value="CREDIT">{{trans('payment.change')}}</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr ng-show="payment.creditCardBox">
-                                        <td colspan="2">ธนาคาร
+                                        <td colspan="2">{{trans('payment.bank')}}
                                             <select class="form-control" ng-model="payment.bank_id" name="bank_id">
                                                 @foreach($bank as $item)
                                                     <option value="{{$item->bank_id}}">{{$item->bank_name}}</option>
@@ -233,7 +232,7 @@
                                         </td>
                                     </tr>
                                     <tr ng-show="payment.creditCardBox">
-                                        <td colspan="2">รหัสบัตรเครดิต
+                                        <td colspan="2">{{trans('payment.Credit_card')}}
                                             <input type="text" class="form-control" name="card_id"
                                                    id="received_amount"
                                                    ng-model="payment.card_id"
@@ -241,7 +240,7 @@
                                         </td>
                                     </tr>
                                     <tr ng-show="payment.creditCardBox">
-                                        <td colspan="2">รหัส EDC
+                                        <td colspan="2">{{trans('payment.EDC_ID')}}
                                             <input type="text" class="form-control"
                                                    id="received_amount" name="edc"
                                                    ng-model="payment.edc"
@@ -251,7 +250,7 @@
 
                                     <tr>
                                         <td colspan="2">
-                                            รับเงิน
+                                            {{trans('payment.cash')}}
                                             <input type="number" class="form-control  total-price input-lg"
                                                    ng-model="payment.receivedAmount"
                                                    id="received_amount" name="receivedAmount" required
@@ -259,14 +258,14 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>เงินทอน</td>
+                                        <td>{{trans('payment.change')}}</td>
                                         <td class="total-price">@{{ getWithdrawn() }} บาท</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
                                             <button ng-disabled="payment.receivedAmount < getTotal()"
                                                     style="display: block; width: 100%;" ng-click="submit()"
-                                                    class="btn btn-success">ชำระเงิน
+                                                    class="btn btn-success">{{trans('payment.Pay')}}
 
                                             </button>
                                         </td>
@@ -276,7 +275,7 @@
 
                             </div>
                         @else
-                            <p class="lead">ไม่พบข้อมูลการค้างชำระสินค้าหรือบริการ.</p>
+                            <p class="lead">{{trans('payment.None_overdue')}}.</p>
                         @endif
                     </div>
 
