@@ -18,11 +18,11 @@
             <div class="box box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">จัดการคอร์ส</h2>
+                    <h2 class="box-title">{{trans('course.Course Management')}}</h2>
 
                     <div class="box-tools pull-right">
                         <a href="{{url('course/create')}}"
-                           class="btn btn-default">เพิ่มคอร์สใหม่</a>
+                           class="btn btn-default">{{trans('course.add')}}</a>
                     </div>
                 </div>
 
@@ -33,13 +33,13 @@
                             <thead>
 
                             <tr>
-                                <td style="width: 90px">รหัสคอร์ส</td>
-                                <td>ชื่อคอร์ส</td>
-                                <td style="width: 100px">จำนวนครั้ง</td>
-                                <td style="width: 120px">ราคา</td>
-                                <td style="width: 120px">รายละเอียด</td>
+                                <td style="width: 90px">{{trans('course.course_id')}}</td>
+                                <td>{{trans('course.course_name')}}</td>
+                                <td style="width: 100px">{{trans('course.qty_course')}}</td>
+                                <td style="width: 120px">{{trans('course.price')}}</td>
+                                <td style="width: 120px">{{trans('course.Item_Information')}}</td>
 
-                                <td style="width: 120px">Action</td>
+                                <td style="width: 120px">{{trans('course.Action')}}</td>
                             </tr>
                             </thead>
 
@@ -55,14 +55,14 @@
                                     <td>{{$item->course_price}}</td>
                                     <td>
                                         <a href="{{url('course/view')}}?course_id={{$item->course_id}}"
-                                           class="btn btn-default ">รายละเอียดคอร์ส</a>
+                                           class="btn btn-default ">{{trans('course.Item_Information')}}</a>
                                     </td>
                                     <td>
                                         <a href="{{url('course/edit')}}?modify={{$item->course_id}}"
-                                           class="btn btn-success">แก้ไข</a>
+                                           class="btn btn-success">{{trans('course.edit')}}</a>
                                         <a href="{{url('course/delete')}}?course_id={{$item->course_id}}"
                                            class="btn btn-danger"
-                                           onclick="return confirm('แน่ใจว่าจะลบ การกระทำนี้ไม่สารถกู้คืนได้ ?');">ลบ</a>
+                                           onclick="return confirm('แน่ใจว่าจะลบ การกระทำนี้ไม่สามารถกู้คืนได้ ?');">ลบ</a>
 
                                     </td>
                                 </tr>
