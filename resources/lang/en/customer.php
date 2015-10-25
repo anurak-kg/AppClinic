@@ -48,6 +48,8 @@ return [
     'registration_finished' => 'Registration Finished',
     'already_more_information' => 'Already more information',
     'source' => 'Source',
-
+    'doctor' => 'Doctor',
+    'doctors_information' => 'Doctors information',
+    'work_schedule' => 'Work schedule',
 
 ];

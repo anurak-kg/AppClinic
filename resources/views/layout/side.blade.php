@@ -57,7 +57,7 @@
                 <a href="#"><i class='fa fa-medkit'></i> <span>{{trans('product.product')}}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->can('product-read'))
-                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> {{trans('product.product list')}}</a>
+                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> {{trans('product.product_list')}}</a>
                         </li>
                     @endif
                     <li>
@@ -65,7 +65,7 @@
                         <ul class="treeview-menu">
 
                             @if(Auth::user()->can('product-group'))
-                                <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>{{trans('product.Product groups')}}</a>
+                                <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>{{trans('product.Product_groups')}}</a>
                                 </li>
                             @endif
                             @if(Auth::user()->can('product'))

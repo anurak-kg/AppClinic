@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','สินค้าหมดอายุ')
+@section('title',trans('dashboard.expired_products'))
 
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">สินค้าหมดอายุ</h2>
+                    <h2 class="panel-title">{{trans('dashboard.expired_products')}}</h2>
 
                 </div>
 
@@ -22,10 +22,10 @@
                             <table class="table table-bordered" id="data-table">
                                 <thead>
                                 <tr>
-                                    <th>รหัสสินค้า</th>
-                                    <th>สินค้า</th>
-                                    <th>วันที่หมดอายุ</th>
-                                    <th>เหลืออีก</th>
+                                    <th>{{trans('product.product_code')}}</th>
+                                    <th>{{trans('product.Product_name')}}</th>
+                                    <th>{{trans('dashboard.expiration_date')}}</th>
+                                    <th>{{trans('dashboard.remain')}}</th>
                                 </tr>
                                 </thead>
                                 @foreach($exp as $item)
@@ -33,7 +33,7 @@
                                         <td>{{ $item->product_id }}</td>
                                         <td>{{ $item->product_name }}</td>
                                         <td>{{ $item->product_exp }}</td>
-                                        <td>{{ $item->day }} วัน</td>
+                                        <td>{{ $item->day }} {{trans('dashboard.day')}}</td>
                                     </tr>
                                 @endforeach
                             </table>
