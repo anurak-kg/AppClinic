@@ -10,7 +10,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">แก้ไขข้อมูล</h2>
+                    <h2 class="box-title">{{trans('customer.edit_data')}}</h2>
                 </div>
 
                 <div class="box-body">

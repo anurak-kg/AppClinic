@@ -69,9 +69,9 @@
                                 </li>
                             @endif
                             @if(Auth::user()->can('product'))
-                                <li><a href="{{url('product/expday')}}"><i class='fa fa-angle-double-right'></i>ข้อมูลสินค้าหมดอายุ</a>
+                                <li><a href="{{url('product/expday')}}"><i class='fa fa-angle-double-right'></i>{{trans('dashboard.expired_products')}}</a>
                                 </li>
-                                <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>สต๊อกสินค้า</a>
+                                <li><a href="{{url('product/stock')}}"><i class='fa fa-angle-double-right'></i>{{trans('stock.stock')}}</a>
                                 </li>
                                 <li><a href="{{url('product/stockmanage')}}"><i class='fa fa-angle-double-right'></i>ตัดสต๊อกสินค้า</a>
                                 </li>
