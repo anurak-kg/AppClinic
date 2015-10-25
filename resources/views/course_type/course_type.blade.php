@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title','ประเภทคอร์ส')
-@section('headText','ประเภทคอร์ส')
+@section('title',trans('course.course_category'))
+@section('headText',trans('course.course_category'))
 @section('content')
 
     <div class="row">
@@ -8,7 +8,7 @@
             <!-- general form elements -->
             <div class="panel panel-primary table-responsive no-padding">
                 <div class="panel-heading">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                    <h2 class="panel-title">{{trans('course.course_category')}}</h2>
                 </div>
                 <div class="panel-body">
                     {!! $form !!}
@@ -20,7 +20,7 @@
             <div class="panel panel-primary table-responsive no-padding">
 
                 <div class="panel-heading ">
-                    <h2 class="panel-title">ประเภทคอร์ส</h2>
+                    <h2 class="panel-title">{{trans('course.course_category')}}</h2>
                 </div>
 
                 <div class="panel-body ">
