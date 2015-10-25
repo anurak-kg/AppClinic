@@ -16,10 +16,40 @@
                 </a>
 
             </li>
+            <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    @if(\Illuminate\Support\Facades\Session::get('language') == "th")
+                        ภาษาไทย (THAI)
+                    @elseif(\Illuminate\Support\Facades\Session::get('language') == "en")
+                        English
+                    @endif
+
+                </a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <ul class="menu">l
+                            <li>
+                                <a href="{{url("/update/lang?lang=en")}}">
+                                    <img src="{{url("images/flag/flag_united_kingdom.png")}}" width="16px"
+                                         height="16px"> ภาษาอังกฤษ (English)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url("/update/lang?lang=th")}}">
+                                    <img src="{{url("images/flag/flag_thailand.png")}}" width="16px" height="16px">
+                                    ภาษาไทย (Thai)
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
             <li>
 
             </li>
-          
+
         </ul>
     </div>
 </nav>

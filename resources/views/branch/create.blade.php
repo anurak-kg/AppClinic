@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title',trans('branch.branch information'))
 
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="box box-solid box-default">
                 <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                    <h2 class="box-title">{{trans('branch.Add')}}</h2>
                 </div>
                 <div class="box-body">
                     {!! $form !!}

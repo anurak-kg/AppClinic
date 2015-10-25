@@ -13,4 +13,8 @@ return [
     'tel'=>'เบอร์โทรศัพท์',
     'Tax Identification Number'=>'หมายเลขประจำตัวผู้เสียภาษี',
     'Action'=>'กระทำ',
+    'branch information'=>'ข้อมูลสาขา',
+    'successfully'=>'Successfully',
+    'back'=>'Back',
+    'edit'=>'Edit',
 ];

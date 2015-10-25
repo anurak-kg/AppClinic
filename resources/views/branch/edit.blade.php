@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title',trans('branch.branch information'))
 
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">แก้ไขข้อมูล</h2>
+                    <h2 class="box-title">{{trans('branch.edit')}}</h2>
                 </div>
 
                 <div class="box-body">

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title','ข้อมูลสาขา')
+@section('title',trans('branch.branch information'))
 
 
 @section('content')
@@ -10,7 +10,7 @@
             <div class="panel panel-primary table-responsive no-padding  ">
 
                 <div class="panel-heading ">
-                    <h2 class="panel-title">ข้อมูลสาขา</h2>
+                    <h2 class="panel-title">{{trans('branch.branch information')}}</h2>
 
                 </div>
 
