@@ -248,5 +248,10 @@ input[type="radio"] .styled:checked + label::after {
 .payment-current-select {
   background-color: #E3FFE5;
 }
+.customer_link {
+  font-weight: bold;
+  color: #9C27B0;
+  text-decoration: underline;
+}
 
 /*# sourceMappingURL=app.css.map */

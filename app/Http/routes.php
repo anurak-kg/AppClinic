@@ -207,6 +207,6 @@ Route::controller('user', 'UserController');
 Route::get('test', function () {
     /*echo factory('App\Customer', 50)->create();
     echo factory('App\User', 20)->create();*/
-  echo getNewEmpId();
+  return view("test");
 
 });
