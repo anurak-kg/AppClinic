@@ -18,9 +18,9 @@
                         <a href="#" class="list-group-item" id="coursemonth"><i class="fa fa-calendar-o"></i>	{{trans('report.course')}}</a>
 
 
-                        <a href="#" class="list-group-item" id="coursehot"><i class="fa fa-star"></i>	{{trans('report.best seller(course)')}}</a>
+                        <a href="#" class="list-group-item" id="coursehot"><i class="fa fa-star"></i>	{{trans('report.best_seller(course)')}}</a>
 
-                        <a href="#" class="list-group-item" id="producthot"><i class="fa fa-star"></i>	{{trans('report.best seller(product)')}}</a>
+                        <a href="#" class="list-group-item" id="producthot"><i class="fa fa-star"></i>	{{trans('report.best_seller(product)')}}</a>
 
                         <a href="#" class="list-group-item" id="suplier"><i class="fa fa-reply-all"></i>	{{trans('report.Suplier')}}</a>
 

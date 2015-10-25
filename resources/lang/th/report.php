@@ -26,6 +26,12 @@ return [
     'baht'=>'บาท',
     'product'=>'สินค้า',
     'date'=>'วันที่',
+    'expenditure'=>'รายจ่าย',
+    'payment_type'=>'รายจ่าย',
+    'branch '=>'สาขา',
+    'all '=>'ทุกสาขา',
+    'search '=>'ค้นหา',
+    'requisition_id '=>'ค้นหา',
 
 
 

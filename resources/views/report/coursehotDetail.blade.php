@@ -1,15 +1,15 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน คอร์สที่ขายดีที่สุด')
+@section('headDes',trans('report.best_seller(course)'))
 @section('content')
 
     <p class="text-center">
         {!! Form::open(array('url' => 'report/coursehotDetail', 'class' => 'form')) !!}
         <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-               placeholder="เลือกระยะเวลา..">
+               placeholder="..">
         </input> <br> <br>
-        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <input type="submit" class="btn btn-block btn-primary" value="{{trans('report.show')}}">
         <br>
         {!! Form::close() !!}
     </p>
@@ -17,11 +17,11 @@
 
     <div class="box">
         <div class="box-header with-border" align="middle">
-            <h2 class="box-title">ตารางสรุปข้อมูล คอร์สที่ขายดีที่สุด</h2>
+            <h2 class="box-title">{{trans('report.table')}}</h2>
 
             <div class="box-tools pull-right">
-                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                <a class="btn btn-warning" href="{{url('report/coursehotGraphic')}}">กราฟ</a>
+                <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                <a class="btn btn-warning" href="{{url('report/coursehotGraphic')}}">{{trans('report.graph')}}</a>
             </div>
 
         </div>
@@ -47,8 +47,8 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <td align="middle"><b>คอร์ส</b></td>
-                            <td align="middle"><b>จำนวน</b></td>
+                            <td align="middle"><b>{{trans('report.course')}}</b></td>
+                            <td align="middle"><b>{{trans('course.qty')}}</b></td>
                         </tr>
                         </thead>
                         @foreach($data as $test)
