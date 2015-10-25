@@ -1,15 +1,15 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน ยอดขายรายวัน')
+@section('headDes',trans('report.daily'))
 @section('content')
 
     <p class="text-center">
         {!! Form::open(array('url' => 'report/saleperdayGraphic', 'class' => 'form')) !!}
         <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-               placeholder="เลือกระยะเวลา..">
+               placeholder="..">
         </input> <br> <br>
-        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <input type="submit" class="btn btn-block btn-primary" value="{{trans('report.show')}}">
         <br>
         {!! Form::close() !!}
     </p>
@@ -17,11 +17,11 @@
 
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">ยอดขายพนักงาน</h3>
+            <h3 class="box-title">{{trans('report.daily')}}</h3>
 
             <div class="box-tools pull-right">
-                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                <a class="btn btn-warning" href="{{url('report/saleperdayDetail')}}">ตารางข้อมูล</a>
+                <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                <a class="btn btn-warning" href="{{url('report/saleperdayDetail')}}">{{trans('report.table')}}</a>
             </div>
 
         </div>
@@ -41,11 +41,11 @@
 
                 <div class="progress-group">
 
-                    <span class="progress-text">คอร์ส</span>
+                    <span class="progress-text">{{trans('report.course')}}</span>
                     <div class="progress sm">
                         <div class="progress-bar progress-bar-aqua" style="width: 100%"></div>
                     </div> <br>
-                    <span class="progress-text"> สินค้า</span>
+                    <span class="progress-text"> {{trans('report.product')}}</span>
                     <div class="progress sm">
                         <div class="progress-bar progress-bar-green" style="width: 100%"></div>
                     </div>
