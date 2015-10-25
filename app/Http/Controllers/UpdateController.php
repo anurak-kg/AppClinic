@@ -11,6 +11,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use Redirect;
+use Session;
 
 class UpdateController extends Controller
 {
@@ -26,5 +28,11 @@ class UpdateController extends Controller
     {
         return env('APP_KEY');
 
+    }
+
+    public function getLang(){
+        echo $lang = \Input::get("lang");
+       Session::put('language',$lang);
+        return Redirect::back();
     }
 }
