@@ -13,7 +13,7 @@
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <h4>{{trans('dashboard.register')}}</h4>
-                            <p>{{trans('dashboard.new member')}}</p>
+                            <p>{{trans('dashboard.new_member')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -27,7 +27,7 @@
                     <div class="small-box bg-lime-active">
                         <div class="inner">
                             <h4>{{trans('dashboard.sales')}}</h4>
-                            <p>{{trans('dashboard.member / guest')}}</p>
+                            <p>{{trans('dashboard.member_guest')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
@@ -39,13 +39,13 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h4>{{trans('dashboard.outstanding balance')}}</h4>
+                            <h4>{{trans('dashboard.outstanding_balance')}}</h4>
                             <p>{{trans('dashboard.member')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-information-circled"></i>
                         </div>
-                        <a href="{{url('customer')}}" class="small-box-footer">{{trans('dashboard.outstanding balance')}}<i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('customer')}}" class="small-box-footer">{{trans('dashboard.outstanding_balance')}}<i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
 
@@ -74,7 +74,7 @@
 
                         <div class="box box-primary">
                             <div class="box-header with-border" >
-                                <h3 class="box-title">{{trans('dashboard.expired products')}}</h3>
+                                <h3 class="box-title">{{trans('dashboard.expired_products')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
@@ -86,7 +86,7 @@
                                         @foreach($exp as $item)
                                             <a href="{{url('product/expday')}}" class="product-title">{{ $item->product_name }}<span class="label label-danger pull-right">{{trans('dashboard.remain')}} {{ $item->day }}{{trans('dashboard.day')}}</span></a>
                                             <span class="product-description">
-                                              {{trans('dashboard.id')}} {{ $item->product_id }} / {{trans('dashboard.expiration date')}} {{ $item->product_exp  }}
+                                              {{trans('dashboard.id')}} {{ $item->product_id }} / {{trans('dashboard.expiration_date')}} {{ $item->product_exp  }}
                                                 </span> <br>
                                         @endforeach
 
@@ -102,7 +102,7 @@
                         <div class="box  box-warning">
                             <div class="box-header with-border" align="middle">
 
-                                <h3 class="box-title">{{trans('dashboard.doctor schedule')}}</h3>
+                                <h3 class="box-title">{{trans('dashboard.doctor_schedule')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
                                 </div><!-- /.box-tools -->
@@ -124,7 +124,7 @@
 
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{{trans('dashboard.products must be ordered')}}</h3>
+                                <h3 class="box-title">{{trans('dashboard.products_must_be_ordered')}}</h3>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                 </div>
@@ -151,7 +151,7 @@
                     <div class="box box-danger">
                         <div class="box-header with-border" align="middle">
 
-                            <h3 class="box-title">{{trans('dashboard.customer schedule')}}</h3>
+                            <h3 class="box-title">{{trans('dashboard.customer_schedule')}}</h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" ><i class="fa fa-minus"></i></button>
                             </div><!-- /.box-tools -->
@@ -172,7 +172,7 @@
 
 <div class="box box-info col-12-md">
     <div class="box-header with-border">
-        <h3 class="box-title">{{trans('dashboard.ordering products')}}</h3>
+        <h3 class="box-title">{{trans('dashboard.ordering_products')}}</h3>
         <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
@@ -182,7 +182,7 @@
             <table class="table no-margin">
                 <thead>
                 <tr>
-                    <th>{{trans('dashboard.order id')}}</th>
+                    <th>{{trans('dashboard.order_id')}}</th>
                     <th>{{trans('dashboard.supplier')}}</th>
                     <th>{{trans('dashboard.employee')}}</th>
                     <th>{{trans('dashboard.date')}}</th>
@@ -210,7 +210,7 @@
         </div><!-- /.table-responsive -->
     </div><!-- /.box-body -->
     <div class="box-footer clearfix">
-        <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">{{trans('dashboard.ordering products')}}</a>
+        <a href="{{ url('order') }}" class="btn btn-sm btn-info btn-flat pull-left">{{trans('dashboard.ordering_products')}}</a>
         <a href="{{ url('order/history') }}" class=" pull-right">{{trans('dashboard.total')}}</a>
     </div><!-- /.box-footer -->
 </div><!-- /.box -->
