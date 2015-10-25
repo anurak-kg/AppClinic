@@ -16,7 +16,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border">
-                    <h2 class="panel-title">เพิ่มข้อมูล</h2>
+                    <h2 class="panel-title">{{trans('customer.add')}}</h2>
                 </div>
 
                 <div class="panel-body">
@@ -28,7 +28,7 @@
             <div class="box box-solid box-danger" align="middle">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title" align="middle">ลบข้อมูล</h2>
+                    <h2 class="box-title" align="middle">{{trans('customer.delete')}}</h2>
                 </div>
 
                 <div class="box-body">

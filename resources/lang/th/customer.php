@@ -8,7 +8,7 @@
 return [
     'customer_data' => 'ข้อมูลลูกค้า',
     'edit' => 'แก้ไข',
-    'edit_data' => 'แก้ไขข้อมูลลูกค้า',
+    'edit_data' => 'แก้ไขข้อมูล',
     'delete' => 'ลบ',
     'view' => 'ดูข้อมูล',
     'add_photo' => 'เพิ่มรูป',
@@ -51,4 +51,5 @@ return [
     'doctor' => 'แพทย์',
     'doctors_information' => 'ข้อมูลแพทย์',
     'work_schedule' => 'ตารางงาน',
+    'add' => 'เพิ่มข้อมูล',
 ];

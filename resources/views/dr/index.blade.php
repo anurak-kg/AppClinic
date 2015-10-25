@@ -10,7 +10,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">เพิ่มข้อมูล</h2>
+                    <h2 class="box-title">{{trans('customer.add')}}</h2>
                 </div>
 
                 <div class="box-body">
@@ -24,7 +24,7 @@
             <div class="box box-solid box-default table-responsive no-padding">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">ข้อมูลหมอ</h2>
+                    <h2 class="box-title">{{trans('customer.doctors_information')}}</h2>
                 </div>
 
                 <div class="box-body">
