@@ -26,13 +26,13 @@
                     <!-- small box -->
                     <div class="small-box bg-lime-active">
                         <div class="inner">
-                            <h4>{{trans('dashboard.sales courses & products')}}</h4>
+                            <h4>{{trans('dashboard.sales')}}</h4>
                             <p>{{trans('dashboard.member / guest')}}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-cart"></i>
                         </div>
-                        <a href="{{url('quotations')}}" class="small-box-footer">{{trans('dashboard.sales courses & products')}}<i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{url('quotations')}}" class="small-box-footer">{{trans('dashboard.sales')}}<i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div><!-- ./col -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
