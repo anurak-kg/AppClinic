@@ -1839,7 +1839,11 @@
             }).error(function (data, status, headers, config) {
             });
         $scope.addMedicine = function () {
-            $scope.course_medicine.push($scope.medicine.selected);
+            if($scope.medicine.selected === undefined || $scope.medicine.selected  === null  ){
+                alert("กรุณาเลือกยาก่อนค่ะ")
+            }else {
+                $scope.course_medicine.push($scope.medicine.selected);
+            }
         }
         $scope.deleteById = function (id) {
             // console.log($scope.product);
