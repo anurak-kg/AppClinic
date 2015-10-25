@@ -18,54 +18,54 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
-            <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>หน้าหลัก</span></a></li>
+            <li><a href="{{url('')}}"><i class='fa fa-home'></i> <span>{{trans('dashboard.home')}}</span></a></li>
 
             @if(Auth::user()->can('quo'))
-                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>ขายคอร์ส / สินค้า</span></a></li>
+                <li><a href="{{url('quotations')}}"><i class='fa fa-shopping-cart'></i> <span>{{trans('dashboard.sales')}}</span></a></li>
             @endif
 
             @if(Auth::user()->can('treatment'))
-                <li><a href="{{url('treatment')}}"><i class='fa fa-heartbeat'></i> <span>การรักษา</span></a></li>
+                <li><a href="{{url('treatment')}}"><i class='fa fa-heartbeat'></i> <span>{{trans('dashboard.treatment')}}</span></a></li>
             @endif
 
             <li class="treeview">
-                <a href="#"><i class='fa fa-edit'></i> <span>สมาชิก</span> <i
+                <a href="#"><i class='fa fa-edit'></i> <span>{{trans('dashboard.member')}}</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->can('customer-read'))
-                        <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>ข้อมูลสมาชิก</a></li>
+                        <li><a href="{{url('customer')}}"><i class='fa fa-minus fa-sm'></i>{{trans('dashboard.member_information')}}</a></li>
                     @endif
                     @if(Auth::user()->can('customer-create'))
-                        <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>สมัครสมาชิก</a></li>
+                        <li><a href="{{url('customer/create')}}"><i class='fa fa-minus'></i>{{trans('dashboard.register')}}</a></li>
                     @endif
                     @if(Auth::user()->can('appointment'))
-                        <li><a href="{{url('customer/calendar')}}"><i class='fa fa-minus'></i>ตารางนัด</a></li>
+                        <li><a href="{{url('customer/calendar')}}"><i class='fa fa-minus'></i>{{trans('customer.appointment')}}</a></li>
                     @endif
                 </ul>
             </li>
             @if(Auth::user()->can('course-read'))
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-database'></i> <span>คอร์ส</span> <i
+                    <a href="#"><i class='fa fa-database'></i> <span>{{trans('dashboard.course')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>ข้อมูลคอร์ส</a></li>
-                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>ประเภทคอร์ส</a></li>
+                        <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>{{trans('course.Course_Management')}}</a></li>
+                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>{{trans('course.course_category')}}</a></li>
                     </ul>
                 </li>
             @endif
             <li class="treeview">
-                <a href="#"><i class='fa fa-medkit'></i> <span>สินค้า</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-medkit'></i> <span>{{trans('product.product')}}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->can('product-read'))
-                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> รายการสินค้า</a>
+                        <li><a href="{{url('product/index')}}"><i class='fa fa-minus'> </i> {{trans('product.product list')}}</a>
                         </li>
                     @endif
                     <li>
-                        <a href="#"><i class="fa fa-minus"></i> สินค้า <i class="fa fa-angle-left pull-right"></i></a>
+                        <a href="#"><i class="fa fa-minus"></i> {{trans('product.product')}} <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
 
                             @if(Auth::user()->can('product-group'))
-                                <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>กลุ่มสินค้า</a>
+                                <li><a href="{{url('product_group/index')}}"><i class='fa fa-angle-double-right'></i>{{trans('product.Product groups')}}</a>
                                 </li>
                             @endif
                             @if(Auth::user()->can('product'))
@@ -124,47 +124,47 @@
             </li>
             @if(Auth::user()->can('emp'))
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-user-md'></i> <span>หมอ</span> <i
+                    <a href="#"><i class='fa fa-user-md'></i> <span>{{trans('customer.doctor')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('user/adddoctor')}}"><i class='fa fa-minus'></i>ข้อมูลหมอ</a></li>
-                        <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>ตารางการทำงาน</a></li>
+                        <li><a href="{{url('user/adddoctor')}}"><i class='fa fa-minus'></i>{{trans('customer.doctors_information')}}</a></li>
+                        <li><a href="{{url('dr/calender')}}"><i class='fa fa-minus'></i>{{trans('customer.work_schedule')}}</a></li>
                     </ul>
                 </li>
             @endif
             @if(Auth::user()->can('branch') || Auth::user()->can('vendor') || Auth::user()->can('emp') || Auth::user()->can('permission'))
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-gears'></i> <span>การจัดการ</span> <i
+                    <a href="#"><i class='fa fa-gears'></i> <span>{{trans('dashboard.Management')}}</span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         @if(Auth::user()->can('branch'))
-                            <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>จัดการข้อมูลสาขา</a></li>
+                            <li><a href="{{url('branch/index')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Information_Management_Branch')}}</a></li>
                         @endif
                         @if(Auth::user()->can('vendor'))
-                            <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>จัดการข้อมูลร้านค้า</a>
+                            <li><a href="{{url('vendor/index')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Management_information_stores')}}</a>
                             </li>
                         @endif
                         @if(Auth::user()->can('emp'))
-                            <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>จัดการข้อมูลพนักงาน</a></li>
+                            <li><a href="{{url('user/manage')}}"><i class='fa fa-minus'></i>{{trans('dashboard.Management_Information_Officer')}}</a></li>
                         @endif
                         @if(Auth::user()->can('report'))
-                            <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>จัดการการเงิน</a></li>
+                            <li><a href="{{url('money/manage')}}"><i class='fa fa-minus'></i>{{trans('dashboard.financial_management')}}</a></li>
                         @endif
                         @if(Auth::user()->can('permission'))
-                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>กำหนดสิทธ์</a></li>
+                            <li><a href="{{url('permission')}}"><i class='fa fa-minus'></i>{{trans('dashboard.securable')}}</a></li>
                         @endif
                         @if(Auth::user()->can('permission'))
                             <li><a href="{{url('log/index')}}"><i class="fa fa-server"></i>System Log</a></li>
                         @endif
                         @if(Auth::user()->can('setting'))
-                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i> ตั้งค่า</a></li>
+                            <li><a href="{{url('setting')}}"><i class="fa fa-gears"></i>{{trans('dashboard.setting')}}</a></li>
                         @endif
                     </ul>
                 </li>
             @endif
 
             @if(Auth::user()->can('report') || Auth::user()->can('customer-create'))
-                <li><a href="{{url('report/index')}}"><i class='fa fa-pie-chart'></i> <span>รายงาน</span></a></li>
+                <li><a href="{{url('report/index')}}"><i class='fa fa-pie-chart'></i> <span>{{trans('dashboard.report')}}</span></a></li>
 
                 {{--<li class="treeview">--}}
                     {{--<a href="#"><i class='fa fa-pie-chart'></i> <span>รายงาน</span> <i--}}
@@ -223,7 +223,7 @@
                 {{--</li>--}}
             @endif
 
-            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>ออกจากระบบ</span></a></li>
+            <li><a href="{{url('user/logout')}}"><i class='fa fa-sign-out '></i> <span>{{trans('dashboard.Sign_out')}}</span></a></li>
 
         </ul>
         <!-- /.sidebar-menu -->

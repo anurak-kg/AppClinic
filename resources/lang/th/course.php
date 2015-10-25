@@ -6,7 +6,7 @@
  * Time: 02:26 PM
  */
 return [
-  'Course Management'=>'จัดการคอร์ส',
+  'Course Management'=>'ข้อมูลคอร์ส',
   'add'=>'เพิ่มข้อมูลคอร์ส',
   'course_id'=>'รหัสคอร์ส',
   'course_name'=>'ชื่อคอร์ส',

@@ -8,7 +8,7 @@
             @if( Session::get('message') != null )
                 <div class="col-md-12">
                     <div class="callout callout-success">
-                        <h4>Success!</h4>
+                        <h4>{{trans("pointofsale.success")}}</h4>
 
                         <p>{{Session::get('message')}}.</p>
                     </div>
@@ -19,13 +19,13 @@
                     <div class="box-header with-border">
                         <i class="fa fa-info"></i>
 
-                        <h2 class="box-title">รายละเอียด</h2>
+                        <h2 class="box-title">{{trans("pointofsale.detail")}}</h2>
                     </div>
                     <div class="box-body">
-                        เลขที่การขายคอร์ส : <strong>{{$quo->quo_id}}</strong> <br>
-                        เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
-                        สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
-                        พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
+                        {{trans("pointofsale.number_of_sale")}} : <strong>{{$quo->quo_id}}</strong> <br>
+                        {{trans("pointofsale.date")}}  : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
+                        {{trans("pointofsale.branch")}}  : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
+                        {{trans("pointofsale.employee")}}  : <strong>{{Auth::user()->name}}</strong> <br>
                     </div>
 
                 </div>
@@ -36,7 +36,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-users"></i>
 
-                        <h2 class="box-title">ข้อมูลลูกค้า</h2>
+                        <h2 class="box-title"> {{trans("pointofsale.customer_detail")}}</h2>
                     </div>
 
                     <div class="box-body">
@@ -77,8 +77,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-user"></i>
 
-                        <h2 class="box-title">พนักงานขาย / แพทย์</h2>
-                    </div>
+                        <h2 class="box-title"> {{trans("pointofsale.sale_and_doctor")}} </h2>                  </div>
 
                     <div class="box-body">
                         <div class="saleSearchBox" ng-hide="SaleBoxSearch"
@@ -90,13 +89,13 @@
 
                         <div class="sale" ng-show="SaleBoxSearch">
                             <ul>
-                                <li>รหัสพนักงาน | <span class="sale"><strong>@{{sale.id}}</strong></span>.</li>
+                                <li>{{trans("pointofsale.emp_id")}} | <span class="sale"><strong>@{{sale.id}}</strong></span>.</li>
                                 <li>ชื่อลูกค้า | <span class="sale"><strong>@{{sale.name}}</strong></span>.
                                 </li>
-                                <li>ยอดขายบิลนี้ | <span class="sale"><strong>@{{getTotal()}}</strong> บาท</span>.</li>
-                                <li>Commission | <span class="sale"><strong>@{{getCommission()}}</strong> บาท</span>.</li>
+                                <li>{{trans("pointofsale.total")}} | <span class="sale"><strong>@{{getTotal()}}</strong> บาท</span>.</li>
+                                <li>{{trans("pointofsale.commission")}} | <span class="sale"><strong>@{{getCommission()}}</strong> บาท</span>.</li>
                                 <li><strong><a href="{{url('quotations/removesale')}}">
-                                            เปลียนพนักงาน</a></strong></li>
+                                            {{trans("pointofsale.change_customer")}}</a></strong></li>
 
                             </ul>
                         </div>
@@ -114,7 +113,7 @@
                     <div class="box-header with-border">
                         <i class="fa fa-cart-plus"></i>
 
-                        <h2 class="box-title">รายการขาย</h2>
+                        <h2 class="box-title">Sale items</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -129,7 +128,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <a class="btn btn-app" href="{{url('course/index')}}">
-                                            <i class="fa fa-plus-circle"></i> จัดการคอร์ส
+                                            <i class="fa fa-plus-circle"></i>  {{trans("pointofsale.course_management")}}
                                         </a>
                                     </div>
 
@@ -152,15 +151,15 @@
                                                 @{{$index+1}}
                                             </td>
 
-                                            <td data-title="'รายการ'" style="width:380px">
+                                            <td data-title="'{{trans("pointofsale.item")}}'" style="width:380px">
                                                 <strong>@{{item.name}}</strong><br>
                                                 @{{item.course_detail}}
 
                                             </td>
-                                            <td data-title="'ราคา'" style="width:100px;text-align: right">
+                                            <td data-title="' {{trans("pointofsale.price")}}'" style="width:100px;text-align: right">
                                                 @{{item.price | number:2 }}
                                             </td>
-                                            <td data-title="'จำนวน'" style="width: 80px">
+                                            <td data-title="'{{trans("pointofsale.quantity")}}'" style="width: 80px">
                                                 <input type="number" class="form-control" value="1" disabled  ng-show="item.type == 'course'">
 
                                                 <input type="number"  ng-show="item.type == 'product'"
@@ -170,14 +169,14 @@
                                                        class="form-control">
                                             </td>
 
-                                            <td data-title="'ส่วนลดเปอร์เซ็น'" style="width: 80px">
+                                            <td data-title="' {{trans("pointofsale.percent_discount")}}'" style="width: 80px">
                                                 <input type="number"
                                                        ng-model="item.quo_de_discount"
                                                        ng-change="update('quo_de_discount',item.quo_de_id,item.quo_de_discount)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
-                                            <td data-title="'ส่วนลดจำนวนเงิน'" style="width: 80px">
+                                            <td data-title="' {{trans("pointofsale.discount")}}'" style="width: 80px">
                                                 <div class="input-group">
                                                     <input type="text"
                                                            ng-model="item.quo_de_disamount"
@@ -186,7 +185,7 @@
                                                            class="form-control">
                                                 </div>
                                             </td>
-                                            <td data-title="'ราคารวม'"
+                                            <td data-title="' {{trans("pointofsale.total")}}'"
                                                 style="width:170px;text-align: right">
                                                 @{{ ((item.quo_de_price)-(item.quo_de_price*item.quo_de_discount/100)
                                                 -item.quo_de_disamount) * item.product_qty| number:2}}
@@ -196,30 +195,30 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="7" class="total-price">ยอดรวม:</td>
-                                            <td>@{{ getTotal() | number:2}} บาท</td>
+                                            <td colspan="7" class="total-price"> {{trans("pointofsale.sub_total")}} : </td>
+                                            <td>@{{ getTotal() | number:2}} {{trans("general.currency")}}</td>
                                         </tr>
                                         <tr>
-                                            <td colspan="7" class="total-price">ส่วนลด:</td>
-                                            <td>@{{ getDiscount() | number:2}} บาท</td>
+                                            <td colspan="7" class="total-price"> {{trans("pointofsale.discount")}} : </td>
+                                            <td>@{{ getDiscount() | number:2}} {{trans("general.currency")}}</td>
                                         </tr>
                                         @if($quo->vat == 'true')
                                             <tr>
-                                                <td colspan="7" class="total-price">ภาษี {{getConfig('vat_rate')}}% :
+                                                <td colspan="7" class="total-price"> {{trans("pointofsale.vat")}} {{getConfig('vat_rate')}}% :
                                                 </td>
-                                                <td>@{{ getVat() | number:2}} บาท</td>
+                                                <td>@{{ getVat() | number:2}} </td>
                                             </tr>
                                         @endif
                                         <tr>
-                                            <td colspan="7" class="total-price">ยอดสุทธิ:</td>
-                                            <td><strong>@{{ getFinalTotal() | number:2}}</strong> บาท</td>
+                                            <td colspan="7" class="total-price"> {{trans("pointofsale.total")}}:</td>
+                                            <td><strong>@{{ getFinalTotal() | number:2}}</strong> {{trans("general.currency")}}</td>
                                         </tr>
 
                                     </table>
 
                                     <span class="pull-right col-lg-1">
                                         <a href="#" ng-click="save()" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> ยืนยันการชำระเงิน </i></a>
+                                                    class="fa fa-credit-card "> {{trans("pointofsale.confirm_and_payment")}} </i></a>
                                     </span>
 
                                 </div>
@@ -288,7 +287,7 @@
                         templates: {
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบข้อมูลลูกค้า',
+                                ' {{trans("pointofsale.not_found_customer")}}',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}}</div>')
@@ -318,7 +317,7 @@
                         templates: {
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบพนักงาน',
+                                ' {{trans("pointofsale.not_found_emp")}}',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{id}} - @{{name}}</div>')
@@ -347,10 +346,10 @@
                         displayKey: 'product_name',
                         source: productDb.ttAdapter(),
                         templates: {
-                            header: '<h4 class="league-name">รายการสินค้า</h4>',
+                            header: '<h4 class="league-name">{{trans("pointofsale.item_product")}}</h4>',
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบข้อมูลสินค้า',
+                                '{{trans("pointofsale.not_found_product")}}',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{product_id}} - @{{product_name}}</div>')
@@ -361,10 +360,10 @@
                         displayKey: 'course_name',
                         source: courseDb.ttAdapter(),
                         templates: {
-                            header: '<h4 class="league-name">รายการคอร์ส</h4>',
+                            header: '<h4 class="league-name">{{trans("pointofsale.item_course")}}</h4>',
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบข้อมูลคอร์ส',
+                                '{{trans("pointofsale.not_found_course")}}',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{course_id}} – @{{course_name}}</div>')

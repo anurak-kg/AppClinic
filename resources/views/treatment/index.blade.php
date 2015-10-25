@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title','รักษา')
-@section('headText','การรักษา')
+@section('title',trans("treatment.treatment"))
+@section('headText',trans("treatment.treatment"))
 
 
 @section('content')
@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="box box-default ">
                     <div class="box-header with-border">
-                        <h2 class="box-title"><i class="fa fa-search"></i> ข้อมูลลูกค้า</h2>
+                        <h2 class="box-title"><i class="fa fa-search"></i> {{trans("pointofsale.customer_detail")}}</h2>
                     </div>
 
                     <div class="box-body">
@@ -41,7 +41,7 @@
                                 <label for="cus_id" class=" required">รหัสสมาชิก</label>
                                 <input class=" form-control" type="text" ng-model="customer.cus_id" disabled>
                                 <br>
-                                 <label for="cus_name" class=" required">Email</label>
+                                 <label for="cus_name" class=" required"> {{trans("customer.email")}}</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.cus_email" disabled>
 
                             </span>
@@ -49,27 +49,27 @@
                             <div class="col-md-2">
                             <span id="div_cus_name">
                                  <br>
-                                 <label for="cus_name" class=" required">ชื่อ - นามสกุล</label>
+                                 <label for="cus_name" class=" required"> {{trans("customer.name")}}</label>
                                 <input class=" form-control" type="text" ng-model="customer.cus_name" disabled>
                                 <br>
-                                   <label for="cus_name" class=" required">แพ้ยา</label>
+                                   <label for="cus_name" class=" required">{{trans("customer.disease")}}</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.disease" disabled>
                             </span>
                             </div>
                             <div class="col-md-2">
                             <span id="div_cus_name">
                                  <br>
-                                <label for="cus_name" class=" required">เบอร์โทรศัพท์</label>
+                                <label for="cus_name" class=" required">{{trans("customer.phone")}}</label>
                                 <input class=" form-control" type="text" value="@{{ customer.cus_phone }}" disabled>
                                 <br>
-                                <label for="cus_name" class=" required">โรคประจำตัว</label>
+                                <label for="cus_name" class=" required">{{trans("customer.allergic")}}</label>
                                 <input class=" form-control" type="taginput" ng-model="customer.allergic" disabled>
                             </span>
                             </div>
                             <div class="col-md-1">
                             <span id="div_cus_name">
                                  <br>
-                                <label for="cus_name" class=" required">อายุ</label>
+                                <label for="cus_name" class=" required">{{trans("customer.age")}}</label>
 
 
                                 <input class=" form-control" type="text"
@@ -79,7 +79,7 @@
                             <div class="col-md-2">
                             <span id="div_cus_name">
                                  <br>
-                                <label for="cus_name" class=" required">เบอร์โทรศัพทมือถือ</label>
+                                <label for="cus_name" class=" required">{{trans("customer.phone")}}</label>
                                 <input class=" form-control" type="text" value="@{{ customer.cus_tel }}" disabled>
                             </span>
                             </div>
@@ -94,7 +94,7 @@
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h2 class="box-title">ข้อมูล คอร์ส</h2>
+                        <h2 class="box-title">{{trans("treatment.course_detail")}}</h2>
                     </div>
 
                     <div class="box-body">
@@ -105,26 +105,26 @@
                                         @{{$index+1 }}
                                     </td>
 
-                                    <td data-title="'คอร์ส'" style="width: 500px">
+                                    <td data-title="'{{trans("treatment.course")}}'" style="width: 500px">
                                         <strong>@{{ item.course_id }} : @{{item.course_name}}</strong> <br>
                                         - @{{item.course_detail}}
                                     </td>
 
-                                    <td data-title="'จำนวน'" align="middle" style="width: 100px">
+                                    <td data-title="'{{trans("treatment.quantity")}}'" align="middle" style="width: 100px">
                                         @{{item.course_qty}}
                                     </td>
 
-                                    <td style="width: 100px" data-title="'ยอดค้างชำระ'" align="middle"
+                                    <td style="width: 100px" data-title="'{{trans("treatment.outstanding_balance")}}'" align="middle"
                                         style="width: 100px">
                                         @{{item.payment_remain | number}}
                                     </td>
 
-                                    <td style="width: 100px" data-title="'รักษาแล้ว'" align="middle"
+                                    <td style="width: 100px" data-title="'{{trans("treatment.treatment_already")}}'" align="middle"
                                         style="width: 100px">
                                         @{{item.qty}}
                                     </td>
 
-                                    <td data-title="'สถานะ'" style="width: 200px">
+                                    <td data-title="'{{trans("treatment.status")}}'" style="width: 200px">
                                         <div ng-bind-html="getTreatStatus(item.treat_status)"
                                              align="middle"></div>
                                     </td>
@@ -169,7 +169,7 @@
                         templates: {
                             empty: [
                                 '<div class="empty-message">',
-                                'ไม่พบข้อมูลลูกค้า',
+                                '{{trans("pointofsale.not_found_customer")}}',
                                 '</div>'
                             ].join('\n'),
                             suggestion: Handlebars.compile('<div>@{{cus_id}} - @{{cus_name}}</div>')
