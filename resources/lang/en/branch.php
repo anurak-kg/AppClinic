@@ -13,4 +13,8 @@ return [
     'tel'=>'Phone Number',
     'Tax Identification Number'=>'Tax Identification Number',
     'Action'=>'Action',
+    'branch information'=>'Branch information',
+    'successfully'=>'เพิ่มข้อมูลเรียบร้อย',
+    'back'=>'กลับ',
+    'edit'=>'แก้ไขข้อมูล',
 ];

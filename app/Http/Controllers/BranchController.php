@@ -22,13 +22,13 @@ class BranchController extends Controller
         $grid = DataGrid::source(new Branch());
         $grid->attributes(array("class"=>"table table-bordered",'id'=>'data-table'));
 
-        $grid->add('branch_id', 'รหัสสาขา');
-        $grid->add('branch_name', 'ชื่อสาขา');
-        $grid->add('branch_address', 'ที่อยู่สาขา');
-        $grid->add('branch_tel', 'เบอร์โทร');
-        $grid->add('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี');
-        $grid->edit('/branch/edit', 'กระทำ','modify|delete');
-        $grid->link('branch/create', "เพิ่มข้อมูลใหม่", "TR");
+        $grid->add('branch_id', trans('branch.branch Code'));
+        $grid->add('branch_name', trans('branch.branch name'));
+        $grid->add('branch_address', trans('branch.address'));
+        $grid->add('branch_tel', trans('branch.tel'));
+        $grid->add('branch_code', trans('branch.Tax Identification Number'));
+        $grid->edit('/branch/edit', trans('branch.Action'),'modify|delete');
+        $grid->link('branch/create', trans('branch.Add'), "TR");
         return view('branch/index', compact('grid'));
     }
 
@@ -44,18 +44,18 @@ class BranchController extends Controller
     {
         $grid = $this->getDataGrid();
         $form = DataEdit::source(new Branch());
-        $form->text('branch_name', 'ชื่อสาขา')->rule('required|unique:branch,branch_name')->attributes(array('maxlength'=>30,'placeholder'=>'โปรดระบุชื่อสาขา....'));
-        $form->textarea('branch_address', 'ที่อยู่สาขา')->rule('required')->attributes(array('rows'=>4,'placeholder'=>'โปรดระบุที่อยู่สาขา....'));
-        $form->text('branch_tel', 'เบอร์โทร')->rule('required')->attributes(array('placeholder'=>'โปรดระบุเบอร์โทรสาขา....'));
-        $form->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('required|numeric|unique:branch,branch_code')->attributes(array('maxlength'=>13,'minlength'=>13,'placeholder'=>'โปรดระบุหมายเลขประจำตัวผู้เสียภาษี....'));
+        $form->text('branch_name', trans('branch.branch name'))->rule('required|unique:branch,branch_name')->attributes(array('maxlength'=>30));
+        $form->textarea('branch_address', trans('branch.address'))->rule('required')->attributes(array('rows'=>4));
+        $form->text('branch_tel', trans('branch.tel'))->rule('required');
+        $form->text('branch_code', trans('branch.Tax Identification Number'))->rule('required|numeric|unique:branch,branch_code')->attributes(array('maxlength'=>13,'minlength'=>13));
         $form->attributes(array("class" => " "));
 
         $form->saved(function () use ($form) {
             $user = new Branch();
             $user->branch_id = Input::get('branch_id');
             $user->save();
-            $form->message("เพิ่มข้อมูลเรียบร้อย");
-            $form->link("branch/index", "ย้อนกลับ");
+            $form->message(trans('branch.successfully'));
+            $form->link("branch/index", trans('branch.back'));
 
             systemLogs([
                 'emp_id' => auth()->user()->getAuthIdentifier() ,
@@ -72,12 +72,12 @@ class BranchController extends Controller
         if (Input::get('do_delete')==1) return  "not the first";
 
         $edit = DataEdit::source(new Branch());
-        $edit->text('branch_name', 'ชื่อสาขา');
-        $edit->textarea('branch_address', 'ที่อยู่สาขา')->attributes(array('rows'=>4));
-        $edit->text('branch_tel', 'เบอร์โทร')->rule('numeric');
-        $edit->text('branch_code', 'หมายเลขประจำตัวผู้เสียภาษี')->rule('numeric')->attributes(array('maxlength'=>13,'minlength'=>13));
+        $edit->text('branch_name', trans('branch.branch name'));
+        $edit->textarea('branch_address', trans('branch.address'))->attributes(array('rows'=>4));
+        $edit->text('branch_tel', trans('branch.tel'))->rule('numeric');
+        $edit->text('branch_code', trans('branch.Tax Identification Number'))->rule('numeric')->attributes(array('maxlength'=>13,'minlength'=>13));
         $edit->attributes(array("class" => " "));
-        $edit->link("branch/index", "ย้อนกลับ");
+        $edit->link("branch/index", trans('branch.back'));
         $edit->saved(function () use ($edit) {
 
             systemLogs([
