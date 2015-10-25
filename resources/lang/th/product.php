@@ -7,6 +7,7 @@
  */
 return [
     'product'=>'สินค้า',
+    'product list'=>'รายการสินค้า',
     'product code'=>'รหัสสินค้า',
     'Product groups'=>'กลุ่มสินค้า',
     'Product name'=>'ชื่อสินค้า',
