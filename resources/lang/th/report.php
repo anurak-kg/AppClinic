@@ -31,7 +31,7 @@ return [
     'branch '=>'สาขา',
     'all '=>'ทุกสาขา',
     'search '=>'ค้นหา',
-    'requisition_id '=>'ค้นหา',
+    'requisition_id '=>'เลขที่การเบิก',
 
 
 
