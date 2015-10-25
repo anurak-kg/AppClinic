@@ -49,6 +49,7 @@
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>ข้อมูลคอร์ส</a></li>
+                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>ประเภทคอร์ส</a></li>
                     </ul>
                 </li>
             @endif
