@@ -11,8 +11,8 @@ return [
     'doctor'=>'แพทย์',
     'daily'=>'รายวัน',
     'course'=>'คอร์ส',
-    'best seller(course)'=>'คอร์สขายดี',
-    'best seller(product)'=>'สินค้าขายดี',
+    'best_seller(course)'=>'คอร์สขายดี',
+    'best_seller(product)'=>'สินค้าขายดี',
     'Suplier'=>'Suplier',
     'Commission'=>'Commission',
     'income'=>'รายได้ทั้งหมด',
@@ -24,6 +24,8 @@ return [
     'show'=>'แสดง',
     'sale'=>'ยอดขาย',
     'baht'=>'บาท',
+    'product'=>'สินค้า',
+    'date'=>'วันที่',
 
 
 

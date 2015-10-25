@@ -1,15 +1,15 @@
 @extends('layout.master')
 @section('title','Report')
 @section('headText','Report')
-@section('headDes','รายงาน ยอดขายแพทย์')
+@section('headDes',trans('report.doctor'))
 @section('content')
 
     <p class="text-center">
         {!! Form::open(array('url' => 'report/doctorGraphic', 'class' => 'form')) !!}
         <input class="btn btn-default btn-block pull-right" id="daterange" name="rang"
-               placeholder="เลือกระยะเวลา..">
+               placeholder="..">
         </input> <br> <br>
-        <input type="submit" class="btn btn-block btn-primary" value="แสดง">
+        <input type="submit" class="btn btn-block btn-primary" value="{{trans('report.show')}}">
         <br>
         {!! Form::close() !!}
     </p>
@@ -17,11 +17,11 @@
 
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">ยอดขายพนักงาน</h3>
+            <h3 class="box-title">{{trans('report.doctor')}}</h3>
 
             <div class="box-tools pull-right">
-                <a class="btn btn-success" href="{{url('report/index')}}">ย้อนกลับ</a>
-                <a class="btn btn-warning" href="{{url('report/doctorDetail')}}">ตารางข้อมูล</a>
+                <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
+                <a class="btn btn-warning" href="{{url('report/doctorDetail')}}">{{trans('report.table')}}</a>
             </div>
 
         </div>
