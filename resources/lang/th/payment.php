@@ -29,4 +29,6 @@ return [
     'EDC_ID'=>'EDC ID',
     'None_overdue'=>'ไม่พบข้อมูลการค้างชำระสินค้าหรือบริการ',
     'time'=>'ครั้ง',
+    'cash_payment'=>'เงินสด',
+    'credit_payment'=>'บัตรเครดิต',
 ];

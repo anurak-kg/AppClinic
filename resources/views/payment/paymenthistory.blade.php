@@ -216,8 +216,8 @@
                                         <td colspan="2">{{trans('payment.Supply_Type')}}
                                             <select class="form-control" ng-change="changeType()"
                                                     ng-model="payment.type" name="paymentType">
-                                                <option value="CASH">{{trans('payment.cash')}}</option>
-                                                <option value="CREDIT">{{trans('payment.change')}}</option>
+                                                <option value="CASH">{{trans('payment.cash_payment')}}</option>
+                                                <option value="CREDIT">{{trans('payment.credit_payment')}}</option>
                                             </select>
                                         </td>
                                     </tr>

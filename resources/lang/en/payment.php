@@ -13,7 +13,7 @@ return [
     'Items_paid'=>'Items paid',
     'Discount'=>'Discount',
     'Total_to_be_paid'=>'Total to be paid',
-    'cash'=>'Cash',
+    'cash'=>'Receive Money',
     'change'=>'Change',
     'Pay_in_full'=>'Pay in full',
     'installment'=>'Installment',
@@ -29,4 +29,6 @@ return [
     'EDC_ID'=>'EDC ID',
     'None_overdue'=>'None overdue',
     'time'=>'Times',
+    'cash_payment'=>'Cash',
+    'credit_payment'=>'Credit',
 ];
