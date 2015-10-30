@@ -9,7 +9,6 @@
                 <div class="col-md-12">
                     <div class="callout callout-success">
                         <h4>{{trans("pointofsale.success")}}</h4>
-
                         <p>{{Session::get('message')}}.</p>
                     </div>
                 </div>
