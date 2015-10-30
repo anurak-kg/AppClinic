@@ -206,7 +206,7 @@ class ReturnController extends Controller
     {
         $query = '%' . \Input::get('q') . '%';
         $receive = Receive::where('receive_id', 'LIKE', $query)
-            ->where('order_type', '=', 'return')
+            ->where('receive_type', '=', 'order')
             ->get();
         return response()->json($receive);
     }

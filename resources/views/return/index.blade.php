@@ -47,39 +47,6 @@
 
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-success">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="customerSearchBox" ng-hide="boxSearch"
-                                >
-                            <input class="form-control typeahead input-lg customer-input "
-                                   type="search"
-                                   placeholder="ระบุ ชื่อหรือรหัส Supplier">
-
-                        </div>
-
-                        <div class="customer" ng-show="boxSearch">
-                            <ul>
-                                <li>รหัสซัพพลายเออร์ | <span class="sale"><strong>@{{vendor.ven_id}}</strong></span>.
-                                </li>
-                                <li>ซัพพลายเออร์ | <span class="customer"><strong>@{{vendor.ven_name}}</strong></span>
-                                </li>
-                                <li>เบอร์โทร | <span
-                                            class="customer"><strong>@{{ vendor.ven_sell_tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('return/removecustomer')}}">
-                                                เปลียนลูกค้า</a></strong></span>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
         <div class="row">

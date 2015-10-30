@@ -49,7 +49,7 @@
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="{{url('course/index')}}"><i class='fa fa-minus'></i>{{trans('course.Course_Management')}}</a></li>
-                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>{{trans('course.course_category')}}</a></li>
+                        <li><a href="{{url('course_type')}}"><i class='fa fa-minus'></i>{{trans('course.course_type')}}</a></li>
                     </ul>
                 </li>
             @endif

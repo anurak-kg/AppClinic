@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title',trans("customer.add photo"))
+@section('title',trans("customer.add_photo"))
 @section('headDes',$customer->cus_name)
 @section('headText','Customer Photo')
 @section('content')

@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title',trans("customer.edit data"))
+@section('title',trans("customer.edit_data"))
 @section('content')
 
     {!! Rapyd::scripts() !!}
@@ -20,7 +20,7 @@
             <div class="box box-solid box-default">
 
                 <div class="box-header with-border" align="middle">
-                    <h2 class="box-title">{{trans("customer.edit data")}}</h2>
+                    <h2 class="box-title">{{trans("customer.edit_data")}}</h2>
 
                 </div>
 

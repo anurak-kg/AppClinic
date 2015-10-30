@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title','คอร์ส')
-@section('headText','Course Management')
+@section('headText',trans('course.Course_Management'))
 @section('content')
 
     <div class="row">
@@ -18,7 +18,7 @@
             <div class="box box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">{{trans('course.Course Management')}}</h2>
+                    <h2 class="box-title">{{trans('course.Course_Management')}}</h2>
 
                     <div class="box-tools pull-right">
                         <a href="{{url('course/create')}}"
