@@ -42,8 +42,10 @@ class CustomerController extends Controller
                 , 'treat_history.comment', 'treat_history.treat_date')
             ->join('treat_history', 'treat_history.treat_id', '=', 'treat_has_medicine.treat_id')
             ->join('product', 'product.product_id', '=', 'treat_has_medicine.product_id')
-            ->join('course', 'course.course_id', '=', 'treat_history.course_id')
-            ->join('quotations', 'quotations.quo_id', '=', 'treat_history.quo_id')
+            ->join('quotations_detail', 'quotations_detail.quo_de_id', '=', 'treat_history.quo_de_id')
+            ->join('course', 'course.course_id', '=', 'quotations_detail.course_id')
+            ->join('quotations', 'quotations.quo_id', '=', 'quotations_detail.quo_id')
+            ->join('customer', 'customer.cus_id', '=', 'quotations.cus_id')
             ->join('branch', 'branch.branch_id', '=', 'treat_history.branch_id')
             ->where('quotations.cus_id', '=', $customer->cus_id)
             ->orderby('treat_date', 'asc')
@@ -234,7 +236,7 @@ class CustomerController extends Controller
         $form->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'))->rule('required');
         $form->add('cus_sex', trans("customer.gender"), 'select')->options(Config::get('sex.sex'))->rule('required');
         $form->add('cus_blood', trans("customer.blood"), 'select')->options(Config::get('sex.blood'))->rule('required');
-        $form->text('cus_code', trans("customer.identification_Code"))->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
+        $form->text('cus_code', trans("customer.identification Code"))->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
         $form->text('cus_tel', trans("customer.phone"))->rule('required|numeric')->attributes(array('placeholder' => '0xxxxxxxxxx'));
         $form->text('cus_phone', trans("customer.phone"))->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
         $form->text('cus_email', trans("customer.email"))->rule('email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
@@ -242,14 +244,14 @@ class CustomerController extends Controller
         $form->text('cus_weight', trans("customer.weight"))->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
         $form->text('allergic', trans("customer.allergic"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
         $form->text('disease', trans("customer.disease"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
-        $form->text('cus_hno', trans("customer.house_no"))->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
-        $form->text('cus_moo', trans("customer.village_no"))->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
+        $form->text('cus_hno', trans("customer.house no"))->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
+        $form->text('cus_moo', trans("customer.village no"))->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
         $form->text('cus_soi', trans("customer.lane"))->attributes(array('placeholder' => 'โปรดระบุ ซอย....'));
         $form->text('cus_road', trans("customer.road"))->attributes(array('placeholder' => 'โปรดระบุ ถนน....'));
-        $form->text('cus_subdis', trans("customer.sub-district_sub-area"))->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
-        $form->text('cus_district', trans("customer.district_area"))->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
+        $form->text('cus_subdis', trans("customer.sub-district/ sub-area"))->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
+        $form->text('cus_district', trans("customer.district / area"))->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
         $form->add('cus_province', trans("customer.province"), 'select')->options(Config::get('sex.province'));
-        $form->text('cus_postal', trans("customer.postal_code"))->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
+        $form->text('cus_postal', trans("customer.postalcode"))->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {

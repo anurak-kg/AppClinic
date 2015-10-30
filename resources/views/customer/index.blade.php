@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title',trans("customer.customer data"))
+@section('title',trans("customer.customer_data"))
 @section('headText',trans("customer.management"))
 
 @section('content')
@@ -16,7 +16,7 @@
     <div class="box box-danger">
 
         <div class="box-header with-border">
-            <h2 class="box-title">{{trans("customer.customer data")}}</h2>
+            <h2 class="box-title">{{trans("customer.customer_data")}}</h2>
 
             <div class="box-tools pull-right">
                 <a href="{{url('customer/create')}}"
@@ -30,7 +30,7 @@
                 <table class="table table-bordered" id="customer_table">
                     <thead>
                     <tr>
-                        <td style="width: 80px">{{trans("customer.customer id")}}</td>
+                        <td style="width: 80px">{{trans("customer.customer_id")}}</td>
                         <td>{{trans("customer.name")}}</td>
                         <td>{{trans("customer.phone")}}</td>
                         <td>{{trans("customer.age")}}</td>
@@ -56,18 +56,18 @@
                             <td align="middle">
                                 <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
                                     <i class="fa fa-book"></i>
-                                    {{trans("customer.customer data")}}</a>
+                                    {{trans("customer.customer_data")}}</a>
                             </td>
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
                                                   class="btn btn-default"><i
-                                            class="fa fa-upload"></i> {{trans("customer.add photo")}}</a>
+                                            class="fa fa-upload"></i> {{trans("customer.add_photo")}}</a>
                             </td>
                             <td>
                                 <a href="{{url('customer/edit')}}?modify={{$customer->cus_id}}"
                                    class="btn btn-success">{{trans("customer.edit")}}</a>
                                 <a href="{{url('customer/delete')}}?cus_id={{$customer->cus_id}}"
                                    class="btn btn-danger"
-                                   onclick="return confirm('{{trans("customer.confirm delete")}}');">{{trans("customer.delete")}}</a>
+                                   onclick="return confirm('{{trans("customer.confirm_delete")}}');">{{trans("customer.delete")}}</a>
 
                             </td>
                         </tr>

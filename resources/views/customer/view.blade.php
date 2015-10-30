@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title',trans("customer.customer data"))
+@section('title',trans("customer.customer_data"))
 @section('headText',$data->cus_name)
 @section('headDes',$data->cus_id)
 @section('content')
@@ -11,7 +11,7 @@
             <div class="box box-soild box-default">
 
                 <div class="box-header with-border">
-                    <h2 class="box-title">{{trans("customer.customer data")}}</h2>
+                    <h2 class="box-title">{{trans("customer.customer_data")}}</h2>
 
 
                 </div>
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <b>{{trans("customer.identification Code")}} : </b> {{  $data->cus_code }}
+                        <b>{{trans("customer.identification_Code")}} : </b> {{  $data->cus_code }}
                         <br><br>
                     </div>
 
@@ -100,12 +100,12 @@
                 <div class="box-body">
 
                     <div class="col-md-6">
-                        <b>{{trans("customer.village no")}} : </b> {{  $data->cus_hno }}
+                        <b>{{trans("customer.village_no")}} : </b> {{  $data->cus_hno }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>{{trans("customer.house no")}} : </b> {{  $data->cus_moo }}
+                        <b>{{trans("customer.house_no")}} : </b> {{  $data->cus_moo }}
                         <br><br>
                     </div>
 
@@ -120,12 +120,12 @@
                     </div>
 
                     <div class="col-md-6">
-                        <b>{{trans("customer.sub-district/ sub-area")}} : </b> {{  $data->cus_subdis }}
+                        <b>{{trans("customer.sub-district_sub-area")}} : </b> {{  $data->cus_subdis }}
                         <br><br>
                     </div>
 
                     <div class="col-md-6">
-                        <b>{{trans("customer.district / area")}} : </b> {{  $data->cus_district }}
+                        <b>{{trans("customer.district_area")}} : </b> {{  $data->cus_district }}
                         <br><br>
                     </div>
 
@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        <b>{{trans("customer.postal code")}} : </b> {{  $data->cus_postal }}
+                        <b>{{trans("customer.postal_code")}} : </b> {{  $data->cus_postal }}
                         <br><br>
                     </div>
 

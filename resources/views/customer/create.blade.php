@@ -15,7 +15,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading with-border" align="middle">
-                    <h2 class="panel-title">{{trans("customer.customer data")}}</h2>
+                    <h2 class="panel-title">{{trans("customer.customer_data")}}</h2>
 
                 </div>
 
