@@ -234,7 +234,7 @@ class CustomerController extends Controller
         $form->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'))->rule('required');
         $form->add('cus_sex', trans("customer.gender"), 'select')->options(Config::get('sex.sex'))->rule('required');
         $form->add('cus_blood', trans("customer.blood"), 'select')->options(Config::get('sex.blood'))->rule('required');
-        $form->text('cus_code', trans("customer.identification Code"))->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
+        $form->text('cus_code', trans("customer.identification_Code"))->rule('required|numeric|unique:customer,cus_code')->attributes(array('maxlength' => 13, 'minlength' => 13, 'placeholder' => 'โปรดระบุ เลขประจำตัวประชาชน....'));
         $form->text('cus_tel', trans("customer.phone"))->rule('required|numeric')->attributes(array('placeholder' => '0xxxxxxxxxx'));
         $form->text('cus_phone', trans("customer.phone"))->rule('numeric')->attributes(array('placeholder' => 'xxxxxx'));
         $form->text('cus_email', trans("customer.email"))->rule('email|unique:customer,cus_email')->attributes(array('placeholder' => 'demo@demo.com'));
@@ -242,14 +242,14 @@ class CustomerController extends Controller
         $form->text('cus_weight', trans("customer.weight"))->rule('numeric')->attributes(array('placeholder' => 'โปรดระบุ น้ำหนัก....'));
         $form->text('allergic', trans("customer.allergic"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ โรคประจำตัว....'));
         $form->text('disease', trans("customer.disease"))->attributes(array('data-role' => "tagsinput", 'placeholder' => 'โปรดระบุ ยาที่แพ้....'));
-        $form->text('cus_hno', trans("customer.house no"))->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
-        $form->text('cus_moo', trans("customer.village no"))->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
+        $form->text('cus_hno', trans("customer.house_no"))->attributes(array('placeholder' => 'โปรดระบุ บ้านเลขที่....'));
+        $form->text('cus_moo', trans("customer.village_no"))->attributes(array('placeholder' => 'โปรดระบุ หมู่....'));
         $form->text('cus_soi', trans("customer.lane"))->attributes(array('placeholder' => 'โปรดระบุ ซอย....'));
         $form->text('cus_road', trans("customer.road"))->attributes(array('placeholder' => 'โปรดระบุ ถนน....'));
-        $form->text('cus_subdis', trans("customer.sub-district/ sub-area"))->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
-        $form->text('cus_district', trans("customer.district / area"))->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
+        $form->text('cus_subdis', trans("customer.sub-district_sub-area"))->attributes(array('placeholder' => 'โปรดระบุ ตำบล/แขวง....'));
+        $form->text('cus_district', trans("customer.district_area"))->attributes(array('placeholder' => 'โปรดระบุ อำเภอ/เขต....'));
         $form->add('cus_province', trans("customer.province"), 'select')->options(Config::get('sex.province'));
-        $form->text('cus_postal', trans("customer.postal code"))->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
+        $form->text('cus_postal', trans("customer.postal_code"))->attributes(array('placeholder' => 'โปรดระบุ รหัสไปรษณีย์....'));
         $form->attributes(array("class" => " "));
         $form->submit('บันทึก');
         $form->saved(function () use ($form) {
@@ -287,7 +287,7 @@ class CustomerController extends Controller
                 'logs_where' => 'Customer',
                 'description' => 'เพิ่มสมาชิก : รหัสสมาชิก ' . $user->cus_id
             ]);
-            $form->message(trans("customer.already more information"));
+            $form->message(trans("customer.already_more_information"));
             $form->link("customer", trans("customer.back"));
         });
         $form->build();
@@ -299,7 +299,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail(Input::get('cus_id'));
         $customer->delete();
-        return redirect('customer')->with('message', trans("customer.finished delete"));
+        return redirect('customer')->with('message', trans("customer.finished_delete"));
 
     }
 
@@ -315,7 +315,7 @@ class CustomerController extends Controller
         $edit->add('cus_birthday_year', ' ', 'select')->options(Config::get('sex.year'));
         $edit->add('cus_sex', trans("customer.gender"), 'select')->options(Config::get('sex.sex'));
         $edit->add('cus_blood', trans("customer.blood"), 'select')->options(Config::get('sex.blood'));
-        $edit->text('cus_code', trans("customer.identification Code"))->rule('numeric');
+        $edit->text('cus_code', trans("customer.identification_Code"))->rule('numeric');
         $edit->text('cus_tel', trans("customer.phone"))->rule('numeric');
         $edit->text('cus_phone', trans("customer.phone"))->rule('numeric');
         $edit->text('cus_email', trans("customer.email"))->rule('email');
@@ -324,14 +324,14 @@ class CustomerController extends Controller
         $edit->add('allergic', trans("customer.allergic"), 'text')->attributes(array('data-role' => "tagsinput"));
         $edit->add('disease', trans("customer.disease"), 'text')->attributes(array('data-role' => "tagsinput"));
         $edit->add('cus_reference', trans("customer.source"), 'select')->options(['Web Site' => 'Web Site', 'Booth' => 'Booth', 'Offline' => 'Offline']);
-        $edit->text('cus_hno', trans("customer.house no"));
-        $edit->text('cus_moo', trans("customer.village no"));
+        $edit->text('cus_hno', trans("customer.house_no"));
+        $edit->text('cus_moo', trans("customer.village_no"));
         $edit->text('cus_soi', trans("customer.lane"));
         $edit->text('cus_road', trans("customer.road"));
-        $edit->text('cus_subdis', trans("customer.sub-district/ sub-area"));
-        $edit->text('cus_district', trans("customer.district / area"));
+        $edit->text('cus_subdis', trans("customer.sub-district_sub-area"));
+        $edit->text('cus_district', trans("customer.district_area"));
         $edit->add('cus_province', trans("customer.province"), 'select')->options(Config::get('sex.province'));
-        $edit->text('cus_postal', trans("customer.postal code"));
+        $edit->text('cus_postal', trans("customer.postal_code"));
         $edit->attributes(array("class" => " "));
         $edit->link("customer", trans("customer.back"));
 
