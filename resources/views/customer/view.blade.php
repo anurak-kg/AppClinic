@@ -19,7 +19,7 @@
                 <div class="box-body">
 
                     <div class="col-md-12">
-                        <b>{{trans("customer.customer id")}} : </b> {{  $data->cus_id }}
+                        <b>{{trans("customer.customer_id")}} : </b> {{  $data->cus_id }}
                         <br> <br>
                     </div>
 
