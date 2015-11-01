@@ -28,10 +28,10 @@ return [
     'date'=>'วันที่',
     'expenditure'=>'รายจ่าย',
     'payment_type'=>'รายจ่าย',
-    'branch '=>'สาขา',
-    'all '=>'ทุกสาขา',
-    'search '=>'ค้นหา',
-    'requisition_id '=>'เลขที่การเบิก',
+    'branch'=>'สาขา',
+    'all'=>'ทุกสาขา',
+    'search'=>'ค้นหา',
+    'requisition_id'=>'เลขที่การเบิก',
 
 
 

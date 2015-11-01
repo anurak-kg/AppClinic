@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="list-group saleperday hidden">
-                        <a class="list-group-item" href="{{url('report/saleperdayGraphic')}}" ><i class="fa fa-bar-chart-o"></i> {{trans('report.graph')}}</a>
+                        {{--<a class="list-group-item" href="{{url('report/saleperdayGraphic')}}" ><i class="fa fa-bar-chart-o"></i> {{trans('report.graph')}}</a>--}}
                         <a class="list-group-item" href="{{url('report/saleperdayDetail')}}" ><i class="fa fa-building-o"></i> {{trans('report.table')}}</a>
                     </div>
 

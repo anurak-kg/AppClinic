@@ -17,13 +17,13 @@
 
                                 <div class="col-sm-8">
                                     <select class="form-control" name="branch">
-                                        <option value="0">{{trans('report.all ')}}</option>
+                                        <option value="0">{{trans('report.all')}}</option>
                                         @foreach($branch as $item)
                                             <option value="{{$item->branch_id}}">{{$item->branch_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <button class="col-sm-2 btn btn-default">{{trans('report.search ')}}</button>
+                                <button class="col-sm-2 btn btn-default">{{trans('report.search')}}</button>
 
                             </div>
 
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="box-tools pull-right">
-                        <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back ')}}</a>
+                        <a class="btn btn-success" href="{{url('report/index')}}">{{trans('report.back')}}</a>
                     </div>
 
                     <span class="pull-right">
@@ -46,12 +46,12 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <td align="middle"><b>{{trans('report.branch  ')}}</b></td>
-                                    <td align="middle"><b>{{trans('report.employee ')}}</b></td>
-                                    <td align="middle"><b>{{trans('report.requisition_id ')}}</b></td>
-                                    <td align="middle"><b>{{trans('report.product ')}}</b></td>
-                                    <td align="middle"><b>{{trans('course.qty.requisition_id ')}}</b></td>
-                                    <td align="middle"><b>{{trans('report.date ')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.branch')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.employee')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.requisition_id')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.product')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.requisition_id')}}</b></td>
+                                    <td align="middle"><b>{{trans('report.date')}}</b></td>
                                 </tr>
                                 </thead>
                                 @foreach($data as $test)
