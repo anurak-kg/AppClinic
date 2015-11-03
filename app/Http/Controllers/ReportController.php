@@ -1139,7 +1139,7 @@ class ReportController extends Controller
                 'data' => $data,
                 'date' => $dateTxt,
                 'name' => $this->arrayToChartData($data, 'name'),
-                'Total' => $this->arrayToChartData($data, 'Total')
+                'total' => $this->arrayToChartData($data, 'Total')
             ]);
         }
 
