@@ -229,9 +229,21 @@ function sendEmailSummary()
     $branch = Branch::all();
     $appKey = env('APP_KEY');
     Mail::send('emails.summary', compact('user', 'branch', 'appKey'), function ($message) {
-        $email = "imannn.99@gmail.com";
+        $email = "democlinic@smartss9168.com";
         //$message->from('fiin@fiin.in.th', 'fiin tech.');
         $message->subject("[AppClinic] รายงานประจำวัน");
+        $message->from('anurak.kg@gmail.com');
+        $message->to($email);
+    });
+}
+
+function sendEmailToStock($id)
+{
+    $order = \App\Order::where('order_id',$id)->with('branch','product','user')->get()->first();
+
+    Mail::send('emails.request', compact('order'), function ($message) {
+        $email = "democlinic@smartss9168.com";
+        $message->subject("[AppClinic] การเบิกสินค้า");
         $message->from('anurak.kg@gmail.com');
         $message->to($email);
     });

@@ -70,8 +70,15 @@ class RequestController extends Controller
         $order->order_status = "PENDING";
         $order->order_date = \Carbon\Carbon::now()->toDateTimeString();
         // $order->quo_date = null;
-        $order->save();
-        return redirect('request')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
+
+        //$order->save();
+        $user = User::all()->count();
+        $branch = Branch::all();
+        $order = \App\Order::where('order_id',$order->order_id)->with('branch','product')->get()->first();
+        sendEmailToStock($order->order_id);
+
+
+        //return redirect('request')->with('message', 'ลงบันทึกเรียบร้อยแล้ว');
     }
 
     public function getTotal()

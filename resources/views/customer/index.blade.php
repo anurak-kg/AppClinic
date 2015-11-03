@@ -37,7 +37,7 @@
                         <td style="width: 120px"></td>
                         <td style="width: 120px"></td>
                         <td style="width: 120px"></td>
-                        <td style="width: 120px"></td>
+                        {{--<td style="width: 120px"></td>--}}
 
                     </tr>
                     </thead>
@@ -53,11 +53,11 @@
                                 <a href="{{url('payment/history')}}?cus_id={{$customer->cus_id}}"
                                    class="btn btn-default">
                                     <i class="fa fa-credit-card"></i> {{trans("customer.pay")}} </a></td>
-                            <td align="middle">
-                                <a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">
-                                    <i class="fa fa-book"></i>
-                                    {{trans("customer.customer_data")}}</a>
-                            </td>
+                            {{--<td align="middle">--}}
+                                {{--<a href="{{url('customer/view')}}?cus_id={{$customer->cus_id}}" class="btn btn-default">--}}
+                                    {{--<i class="fa fa-book"></i>--}}
+                                    {{--{{trans("customer.customer_data")}}</a>--}}
+                            {{--</td>--}}
                             <td align="middle"><a href="{{url('customer/upload')}}?cus_id={{$customer->cus_id}}"
                                                   class="btn btn-default"><i
                                             class="fa fa-upload"></i> {{trans("customer.add_photo")}}</a>
