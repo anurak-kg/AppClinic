@@ -61,8 +61,6 @@ Route::group(['middleware' => 'permission:emp'], function () {
 Route::group(['middleware' => 'permission:order-to-stock'], function () {
     //Route::any('order/history', 'OrderController@history');
     Route::controller('request', 'RequestController');
-
-
 });
 Route::group(['middleware' => 'permission:order-order'], function () {
     //Route::any('order/history', 'OrderController@history');
@@ -76,11 +74,12 @@ Route::group(['middleware' => 'permission:order-order'], function () {
 //Receive
 
 Route::group(['middleware' => 'permission:receive-return-to-stock'], function () {
-    Route::controller('receive-request', 'ReceiveRequestController');
+    Route::controller('receiveRequest', 'ReceiveRequestController');
     Route::controller('returntostock', 'ReturntostockController');
 });
 Route::group(['middleware' => 'permission:receive-return'], function () {
     Route::controller('receive', 'ReceiveController');
+    Route::controller('returnproduct', 'ReturnproductController');
 
     Route::controller('return', 'ReturnController');
 
@@ -134,6 +133,7 @@ Route::group(['middleware' => 'permission:product'], function () {
     Route::any('product/stock', 'ProductController@stock');
     Route::any('product/stockmanage', 'ProductController@stockmanage');
     Route::any('product/edit', 'ProductController@edit');
+    Route::any('product/delivery', 'ProductController@delivery');
 });
 
 Route::any('product/index', ['uses' =>  'ProductController@grid', 'middleware' => 'permission:product-read']);
@@ -171,6 +171,7 @@ Route::group(['middleware' => 'permission:report'], function () {
     Route::any('report/suplierGraphic', 'ReportController@reportsuplierGraphic');
     Route::any('report/suplierDetail', 'ReportController@reportsuplierDetail');
     Route::any('report/request', 'ReportController@reportRequest');
+    Route::any('report/customer_paymentGraphic', 'ReportController@reportCustomer_paymentGraphic');
     Route::any('report/customer_paymentGraphic', 'ReportController@reportCustomer_paymentGraphic');
     Route::any('report/customer_paymentDetail', 'ReportController@reportCustomer_paymentDetail');
     Route::any('report/commissionTransfer', 'ReportController@reportCommissionTranfer');

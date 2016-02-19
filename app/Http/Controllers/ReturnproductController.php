@@ -16,26 +16,9 @@ use App\Http\Requests;
 use DB;
 use Illuminate\Support\Facades\Input;
 
-class ReceiveRequestController extends Controller
+class ReturnproductController extends Controller
 {
 
-    public function getList(){
-        $order = DB::table('order')
-            ->select('order.order_id', 'product.product_name','vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
-            ->join('users', 'order.emp_id', '=', 'users.id')
-            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
-            ->join('order_detail', 'order_detail.order_id', '=', 'order.order_id')
-            ->join('product', 'product.product_id', '=', 'order_detail.product_id')
-            ->where('order_type','=','order');
-
-        $data = $order->get();
-
-       // return response()->json($data);
-
-        return view('receiveRequest/list', [
-            'data' => $data,
-        ]);
-    }
 
     public function getIndex()
     {
@@ -64,7 +47,7 @@ class ReceiveRequestController extends Controller
     {
         $warehouse = Branch::where('branch_type','warehouse')->get();
 
-        return view('receiveRequest.index', [
+        return view('returnproduct.index', [
             'warehouse' => $warehouse,
 
             'data' => Receive::findOrFail($this->getId())

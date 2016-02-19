@@ -1,35 +1,43 @@
 @extends('layout.master')
-@section('title','รายการเบิกสินค้า')
+@section('title','รายการรับยา')
+
+
 @section('content')
 
     <div class="panel panel-primary">
 
         <div class="panel-heading" align="middle">
-            <h2 class="panel-title">รายการเบิกสินค้า</h2>
+            <h2 class="panel-title">รายการรับยา</h2>
         </div>
 
         <div class="panel-body">
+
+            <div class="col-md-12" align="right">
+                <div class="row">
+
+                    <a href="#" class="btn btn-instagram "><b>รายการรับยา</b></a>
+
+
+                </div>
+                <br>
+            </div>
             <div class="row">
                 <div class="col-xs-12 table-responsive">
                     <table class="table tablesorter table-bordered table-striped table-hover" id="history_table">
                         <thead>
                         <tr>
-                            <th>เลขที่เบิก</th>
+                            <th>เลขที่ใบส่ง</th>
+                            <th>เลขที่ใบเบิก</th>
                             <th>วันที่</th>
-                            <th>สาขา</th>
                             <th>พนักงาน</th>
-                            <th>สถานะ</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         @foreach($data as $test)
                             <tr>
-                                <td><a href="">00000</a></td>
+                                <td><a href="">00004</a></td>
+                                <td> 00066</td>
                                 <td> 19/2/59</td>
-                                <td> ทดสอบสาขา</td>
                                 <td> ทดสอบพนักงาน</td>
-                                <td> ทดสอบสถานะ</td>
-                                <td> ทดสอบ Action</td>
                             </tr>
                         @endforeach
                     </table>

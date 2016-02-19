@@ -80,24 +80,27 @@
                     </li>
                     @if(Auth::user()->can('order-order') || (Auth::user()->can('receive-return')))
                         <li>
-                            <a href="#"><i class="fa fa-minus"></i> การเบิก - รับสินค้าเข้าร้าน <i
+                            <a href="#"><i class="fa fa-minus"></i> ห้องยา <i
                                         class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
                                 @if(Auth::user()->can('order-order'))
 
-                                    <li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>
-                                    </li>
+                                    {{--<li><a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งซื้อ</a>--}}
+                                    {{--</li>--}}
                                 @endif
                                 @if(Auth::user()->can('receive-return'))
-                                    <li><a href="{{url('receive-request')}}"><i
-                                                    class='fa fa-angle-double-right'></i>รับสินค้า</a></li>
                                     <li><a href="{{url('request')}}"><i
-                                                    class='fa fa-angle-double-right'></i>เบิกสินค้า</a></li>
+                                                        class='fa fa-angle-double-right'></i>เบิกยา</a></li>
+                                    <li><a href="{{url('receiveRequest')}}"><i class='fa fa-angle-double-right'></i>รับยาเข้าสาขา</a></li>
+                                    <li><a href="{{url('returnproduct')}}"><i class='fa fa-angle-double-right'></i>ส่งคืน</a></li>
+                                    <li><a href="{{url('receiveRequest/list')}}"><i class='fa fa-angle-double-right'></i>รายการรับยา</a></li>
+                                    <li><a href="{{url('request/list')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกยา</a></li>
+
                                 @endif
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-exchange "></i> จัดการคลังสินค้า <i
+                            <a href="#"><i class="fa fa-exchange "></i>คลังสินค้า <i
                                         class="fa fa-angle-left pull-right"></i></a>
                             <ul class="treeview-menu">
                                 <li>
@@ -114,8 +117,11 @@
                                     <a href="{{url('request/history')}}"><i class='fa fa-angle-double-right'></i>รายการเบิกสินค้า</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งสินค้า</a>
+                                    <a href="{{url('product/delivery')}}"><i class='fa fa-angle-double-right'></i>รายการส่งสินค้า</a>
                                 </li>
+                                {{--<li>--}}
+                                    {{--<a href="{{url('order/history')}}"><i class='fa fa-angle-double-right'></i>ประวัติการสั่งสินค้า</a>--}}
+                                {{--</li>--}}
                             </ul>
                         </li>
                     @endif

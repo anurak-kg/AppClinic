@@ -20,6 +20,25 @@ use Zofe\Rapyd\Facades\DataEdit;
 
 class ProductController extends Controller
 {
+
+    public function delivery(){
+        $order = DB::table('order')
+            ->select('order.order_id', 'product.product_name','vendor.ven_name','users.name','order.order_date','order.order_total','order.order_status')
+            ->join('users', 'order.emp_id', '=', 'users.id')
+            ->join('vendor', 'order.ven_id', '=', 'vendor.ven_id')
+            ->join('order_detail', 'order_detail.order_id', '=', 'order.order_id')
+            ->join('product', 'product.product_id', '=', 'order_detail.product_id')
+            ->where('order_type','=','order');
+
+        $data = $order->get();
+
+         //return response()->json($data);
+
+        return view('product/delivery', [
+            'data' => $data,
+        ]);
+    }
+
     public function expday()
     {
 
@@ -34,7 +53,6 @@ class ProductController extends Controller
 
         return view("product/expday", ['exp' => $exp]);
     }
-
 
     public function stock()
     {

@@ -6,45 +6,135 @@
 
     <div ng-controller="returnController" id="return" ng-init="setVat({{config('shop.vat')}})">
 
-        <div class="row">
-            @if( Session::get('message') != null )
-                <div class="col-md-12">
-                    <div class="callout callout-success">
-                        <h4>Success!</h4>
 
-                        <p>{{Session::get('message')}}.</p>
-                    </div>
+        @if( Session::get('message') != null )
+            <div class="col-md-12">
+                <div class="callout callout-success">
+                    <h4>Success!</h4>
+
+                    <p>{{Session::get('message')}}.</p>
                 </div>
-            @endif
+            </div>
+        @endif
+
+        <div class="row">
             <div class="col-md-5">
-                <div class="panel  panel-success">
+                <div class="panel  panel-default">
                     <div class="panel-heading with-border">
 
                         <h2 class="panel-title"><i class="fa fa-info-circle"></i> รายละเอียด</h2>
                     </div>
                     <div class="panel-body">
-                        เลขที่การคืนสินค้า : <strong>{{$data->return_id}}</strong> <br>
-                        เวลา : <strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong><br>
-                        สาขา : <strong>{{\App\Branch::getCurrentName()}}</strong> <br>
-                        พนักงาน : <strong>{{Auth::user()->name}}</strong> <br>
+                        <table class="table tablesorter table-bordered table-striped table-hover">
+                            <tr>
+                                <td> เลขที่การคืนสินค้า :</td>
+                                <td><strong>{{$data->return_id}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td> วัน/เวลา :</td>
+                                <td><strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>สาขา :</td>
+                                <td><strong>{{\App\Branch::getCurrentName()}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>พนักงาน :</td>
+                                <td><strong>{{Auth::user()->name}}</strong></td>
+                            </tr>
+
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="panel panel-success">
-                    <div class="panel-heading with-border">
-                        <h2 class="panel-title"><i class="fa fa-level-up"></i> อ้างอิง เลขที่ใบรับสินค้า</h2>
-                    </div>
 
+            <div class="col-md-7">
+
+                <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="vendorSearchBox">
-                            <input class="form-control typeahead receive-input "
-                                   type="search" value="{{$data->receive_id}}"
-                                   placeholder="รหัสรับสินค้า">
-                            <br> <br>
+                        <div class="row">
+                            <div class="col-md-12" align="right">
+                                <div class="col-md-12">
+                                    <a href="{{url('order')}}" class="btn btn-instagram "><b>สั่งซื้อสินค้า</b></a>
+                                    <a href="{{url('receive')}}" class="btn btn-instagram "><b>รับสินค้าเข้าคลัง</b></a>
+                                    <a href="{{url('return')}}" class="btn btn-dropbox "><b>คืนสินค้า</b></a>
+                                    <a href="{{url('product/stock')}}" class="btn btn-instagram "><b>สินค้าคงคลัง</b></a>
+                                    <a href="{{url('product/expday')}}" class="btn btn-instagram "><b>สินค้าใกล้หมดอายุ</b></a>
+                                    <a href="{{url('request/history')}}" class="btn btn-instagram "><b>รายการเบิกสินค้า</b></a>
+                                    <a href="{{url('product/delivery')}}" class="btn btn-instagram "><b>รายการส่งสินค้า</b></a>
+                                    <a href="{{url('order/history')}}" class="btn btn-instagram "><b>รายการสั่งซื้อ</b></a>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading with-border">
+                                    <h2 class="panel-title"><i class="fa fa-level-up"></i> เลขที่ใบรับสินค้า
+                                    </h2>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="vendorSearchBox">
+                                        <input class="form-control typeahead receive-input "
+                                               type="search" value="{{$data->receive_id}}"
+                                               placeholder="รหัสรับสินค้า">
+                                        <br> <br>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="panel  panel-default">
+                                <div class="panel-heading with-border">
+                                    <h2 class="panel-title"><i class="fa fa-user"></i> พนักงาน</h2>
+                                </div>
+                                <div class="panel-body">
+
+                                    <input class="form-control typeahead input-md "
+                                           value="{{Auth::user()->name}}" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="panel  panel-default">
+                                <div class="panel-heading with-border">
+                                    <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="search">
+                                        <div class="vendorSearchBox" ng-hide="boxSearch">
+
+                                            <input class="form-control typeahead input-md vendor-input "
+                                                   type="search"
+                                                   placeholder="ระบุ ชื่อร้าน หรือ รหัสร้าน">
+                                        </div>
+                                    </div>
+                                    <div class="vendor" ng-show="boxSearch">
+                                        <ul>
+                                            <li>รหัส | <span
+                                                        class="vendor"><strong>@{{vendor.ven_id}}</strong></span>.
+                                            </li>
+                                            <li>ชื่อร้าน | <span
+                                                        class="vendor"><strong>@{{vendor.ven_name}}</strong></span>
+                                            <li>ชื่อ | <span
+                                                        class="vendor"><strong>@{{vendor.ven_sell_name}}</strong></span>
+                                            </li>
+                                            <li>เบอร์โทร | <span
+                                                        class="vendor"><strong>@{{ vendor.ven_sell_tel }}</strong></span><br>
+                                    <span><strong><a href="{{url('order/removevendor')}}">
+                                                เปลี่ยน Supplier</a></strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -52,7 +142,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                <div class="panel panel-info">
+                <div class="panel panel-default">
                     <div class="panel-heading with-border">
                         <h2 class="panel-title"><i class="fa fa-mail-reply"></i> คืนสินค้า</h2>
                     </div>
@@ -61,14 +151,14 @@
                             <div class="panel-body">
                                 <div class="div row">
                                     <div class="col-md-5">
-                                        <input class="form-control typeahead input-lg productInput"
+                                        <input class="form-control typeahead input-md productInput"
                                                type="search"
                                                id="product"
                                                ng-model="productSearchBox"
                                                placeholder="ระบุ ชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค้ด ">
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-app" href="{{url('course/index')}}">
+                                        <a class="btn btn-bitbucket" href="{{url('course/index')}}">
                                             <i class="fa fa-plus-circle"></i> จัดการสินค้า
                                         </a>
                                     </div>
@@ -78,13 +168,15 @@
 
                                     </div>
                                 </div>
+                                <br>
                                 <div class="div row">
                                     <div class="col-md-1">
                                         <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table class="table table-bordered" ng-table="tableParams">
+                                    <table class="table tablesorter table-bordered table-striped table-hover"
+                                           ng-table="tableParams">
                                         <tr ng-repeat="item in product">
                                             <td style="width: 5px">
                                                 <button class="btn btn-box-tool" data-widget="remove"
@@ -99,19 +191,19 @@
                                                 @{{item.product.product_name }}
                                             </td>
 
-                                            <td data-title="'จำนวนที่คืน'" style="width: 80px">
+                                            <td data-title="'จำนวนที่คืน'" style="width: 100px">
                                                 <input type="number"
                                                        ng-model="item.return_de_qty"
                                                        ng-change="update('return_de_qty',item.product_id,item.return_de_qty)"
                                                        ng-model-options="{debounce: 750}"
                                                        class="form-control">
                                             </td>
-                                            <td  data-title="'เหตุผลที่คืน'">
-                                            <input type="text"
-                                                   ng-model="item.return_de_text"
-                                                   ng-change="update('return_de_text',item.product_id,item.return_de_text)"
-                                                   ng-model-options="{debounce: 750}"
-                                                   class="form-control">
+                                            <td data-title="'เหตุผลที่คืน'">
+                                                <input type="text"
+                                                       ng-model="item.return_de_text"
+                                                       ng-change="update('return_de_text',item.product_id,item.return_de_text)"
+                                                       ng-model-options="{debounce: 750}"
+                                                       class="form-control">
                                             </td>
                                             <td data-title="'ราคาทุน'">
                                                 @{{item.return_de_price }}/ @{{ item.product.product_unit }}
@@ -122,11 +214,12 @@
                                             <td> @{{ getTotal() | number:2}} บาท
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="5" class="total-price"></td>
+                                            <td><a href="{{url('return/save')}}"
+                                                   class="btn btn-md btn-bitbucket btn-block pull-right"> คืนสินค้า</a></td>
+                                        </tr>
                                     </table>
-                                    <div class="col-md-10">
-                                        <a href="{{url('return/save')}}" class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-credit-card "> คืนสินค้า </i></a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

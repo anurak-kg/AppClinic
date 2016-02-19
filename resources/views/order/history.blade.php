@@ -13,7 +13,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 table-responsive">
-                    <table class="table table-bordered" id="history_table">
+                    <table class="table tablesorter table-bordered table-striped table-hover" id="history_table">
                         <thead>
                         <tr>
                             <th>รหัสใบสั่งซื้อ</th>
@@ -23,12 +23,12 @@
                             <th>วันที่สั่งซื้อ</th>
                             <th>จำนวนเงิน</th>
                             <th>สถานะ</th>
-                            <th>#</th>
+                            <th>สถานะ</th>
                         </tr>
                         </thead>
                         @foreach($data as $test)
                             <tr>
-                                <td> {{$test->order_id}}</td>
+                                <td><a href="">{{$test->order_id}}</a></td>
                                 <td> {{$test->ven_name}}</td>
                                 <td> {{$test->product_name}}</td>
                                 <td> {{$test->name}}</td>

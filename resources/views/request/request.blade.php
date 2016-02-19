@@ -16,19 +16,21 @@
                     </div>
                 </div>
             @endif
+
+
             <div class="col-md-4">
-                <div class="box  box-default">
-                    <div class="box-header with-border">
-                        <h2 class="box-title"><i class="fa fa-info"></i> รายละเอียด</h2>
+                <div class="panel  panel-default">
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title"><i class="fa fa-info"></i> รายละเอียด</h2>
                     </div>
-                    <div class="box-body">
-                        <table>
+                    <div class="panel-body">
+                    <table class="table tablesorter table-bordered table-striped table-hover">
                             <tr>
-                                <td> เลขที่การเบิกสินค้า :</td>
+                                <td> เลขที่การคืนสินค้า :</td>
                                 <td><strong>{{$data->order_id}}</strong></td>
                             </tr>
                             <tr>
-                                <td> เวลา :</td>
+                                <td> วัน/เวลา :</td>
                                 <td><strong>{{Jenssegers\Date\Date::now()->format('l j F Y H:i:s')}}</strong></td>
                             </tr>
                             <tr>
@@ -38,54 +40,68 @@
                             <tr>
                                 <td>พนักงาน :</td>
                                 <td><strong>{{Auth::user()->name}}</strong></td>
-
+                            </tr>
                         </table>
-
-
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="box  box-default">
-                    <div class="box-header with-border">
-                        <h2 class="box-title"><i class="fa fa-exchange"></i> คลังสินค้า</h2>
-                    </div>
-                    <div class="box-body">
-                        <select class="form-control input-lg" ng-model="warehouse.id" ng-change="warehouseChange()">
-                        @foreach($warehouse as $item)
-                                <option value="{{$item->branch_id}}">{{$item->branch_id}} - {{$item->branch_name}}</option>
-                            @endforeach
-                        </select>
-                        <p ng-show="warehouse.id == 0" style="color: red;font-weight: bolder;text-align: center">กรุณาเลือกคลังสินค้าที่ต้องการเบิกก่อนคะ</p>
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
 
+                        <div class="col-md-12" align="right">
+                            <div class="row">
+                                {{--<a href="{{url('request')}}" class="btn btn-instagram "><b>เบิกสินค้าจากคลัง</b></a>--}}
+                                {{--<a href="{{url('receive-request')}}" class="btn btn-dropbox "><b>รับสินค้าเข้าร้าน</b></a>--}}
+                                <a href="#" class="btn btn-instagram "><b>เบิกยา</b></a>
+                                <a href="#" class="btn btn-dropbox "><b>รับยา</b></a>
+                                <a href="#" class="btn btn-instagram "><b>ส่งคืน</b></a>
+                                <a href="#" class="btn btn-instagram "><b>รายการเบิก</b></a>
+                                <a href="#" class="btn btn-instagram "><b>สินค้าคงคลัง</b></a>
+                                {{--<a href="#" class="btn btn-instagram "><b>รายการรับยา</b></a>--}}
+                            </div>
+                            <br>
+                        </div>
 
+                        <div class="col-md-12">
+                            <div class="panel  panel-default">
+                                <div class="panel-heading with-border">
+                                    <h2 class="panel-title"> พนักงาน</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <input class="form-control typeahead  order-input "
+                                           type="search"
+                                           value="{{Auth::user()->name}}"
+                                           placeholder="พนักงานส่งยา" disabled></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
         <div class="row" ng-hide="warehouse.id == 0">
             <div class="col-md-12">
 
-                <div class="box box-info">
+                <div class="panel panel-default">
 
-                    <div class="box-header with-border">
-                        <h2 class="box-title"><i class="fa fa-medkit"></i> รายการสินค้า</h2>
+                    <div class="panel-heading with-border">
+                        <h2 class="panel-title"><i class="fa fa-th"></i> รายการสินค้า</h2>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="box-body">
+                            <div class="panel-body">
                                 <div class="div row">
                                     <div class="col-md-5">
-                                        <input class="form-control typeahead input-lg productInput"
+                                        <input class="form-control typeahead input-md productInput"
                                                type="search"
                                                id="product"
                                                ng-model="productSearchBox"
                                                placeholder="ระบุ ชื่อสินค้า รหัสสินค้า หรือสแกนบาร์โค้ด ">
                                     </div>
-                                    <div class="col-md-6">
-                                        <a class="btn btn-app" href="{{url('product/index')}}">
+                                    <div class="col-md-5">
+                                        <a class="btn btn-bitbucket" href="{{url('product/index')}}">
                                             <i class="fa fa-plus-circle"></i> จัดการสินค้า
                                         </a>
                                     </div>
@@ -95,8 +111,9 @@
 
                                     </div>
                                 </div>
+                                <br>
                                 <div class="row">
-                                    <table class="table table-bordered" ng-table="tableParams">
+                                    <table class="table tablesorter table-bordered table-striped table-hover" ng-table="tableParams">
                                         <tr ng-repeat="item in product">
                                             <td style="width: 5px">
                                                 <button class="btn btn-box-tool" data-widget="remove"
@@ -109,7 +126,7 @@
                                                 @{{$index+1}}
                                             </td>
                                             <td data-title="'สินค้า'">
-                                                @{{item.product.product_name }}
+                                                <a href=""> @{{item.product.product_name }} </a>
                                             </td>
                                             <td data-title="'จำนวน'" style="width: 80px">
                                                 <input type="number"
@@ -163,27 +180,18 @@
                                             <td> @{{ getFinalTotal() | number:2}} บาท
                                             </td>
                                         </tr>
-
+                                        <tr>
+                                            <td colspan="5" class="total-price"></td>
+                                            <td><a ng-click="save({{$data->order_id}})"
+                                                   class="btn btn-md btn-bitbucket btn-block pull-right"> เบิกสินค้า</a>
+                                            </td>
+                                        </tr>
                                     </table>
-                                    <span class="pull-right col-lg-1">
-                                        <a ng-click="save({{$data->order_id}})"
-                                           class="btn btn-md btn-success pull-right"><i
-                                                    class="fa fa-mail-forward "> เบิกสินค้า </i></a>
-                                    </span>
-
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-
-
                 </div>
-
-
-                <!-- /.col -->
-
             </div>
         </div>
 

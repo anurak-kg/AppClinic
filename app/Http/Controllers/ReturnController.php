@@ -20,6 +20,7 @@ use App\Http\Controllers\Controller;
 
 class ReturnController extends Controller
 {
+
     public function getIndex()
     {
         $returnCount = Re_turn::where('return_status', "WAITING")

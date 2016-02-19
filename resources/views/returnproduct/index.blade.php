@@ -1,35 +1,35 @@
 @extends('layout.master')
-@section('title','รับสินค้า')
-@section('headText','รับสินค้าเข้าคลัง')
+@section('title','ส่งคืนสินค้า')
+@section('headText','ส่งคืน')
 @section('headDes','คลังสินค้า')
 
 @section('content')
 
-    <div ng-controller="receiveController" id="order" ng-init="setVat({{config('shop.vat')}})">
-        <form method="POST" action="{{url('receive/save')}}" ng-submit="save($event)">
+    <div ng-controller="receiveRequestController" id="order" ng-init="setVat({{config('shop.vat')}})">
+        <form method="POST" action="{{url('receive-request/save')}}" ng-submit="save($event)">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
 
-            @if( Session::get('message') != null )
-                <div class="col-md-12">
-                    <div class="callout callout-success">
-                        <h4>Success!</h4>
-
-                        <p>{{Session::get('message')}}.</p>
-                    </div>
-                </div>
-            @endif
-
             <div class="row">
+                @if( Session::get('message') != null )
+                    <div class="col-md-12">
+                        <div class="callout callout-success">
+                            <h4>Success!</h4>
+
+                            <p>{{Session::get('message')}}.</p>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-md-4">
                     <div class="panel  panel-default">
                         <div class="panel-heading with-border">
                             <h2 class="panel-title"><i class="fa fa-info-circle"></i> รายละเอียด</h2>
                         </div>
                         <div class="panel-body">
-                         <table class="table tablesorter table-bordered table-striped table-hover">
+                            <table class="table tablesorter table-bordered table-striped table-hover">
                                 <tr>
-                                    <td> เลขที่การรับสินค้า :</td>
+                                    <td> เลขที่การคืนสินค้า :</td>
                                     <td><strong>{{$data->receive_id}}</strong></td>
                                 </tr>
                                 <tr>
@@ -53,98 +53,76 @@
                 <div class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12" align="right">
-                                    <div class="col-md-12">
-                                        <a href="{{url('order')}}" class="btn btn-instagram "><b>สั่งซื้อสินค้า</b></a>
-                                        <a href="{{url('receive')}}" class="btn btn-dropbox "><b>รับสินค้าเข้าคลัง</b></a>
-                                        <a href="{{url('return')}}" class="btn btn-instagram "><b>คืนสินค้า</b></a>
-                                        <a href="{{url('product/stock')}}" class="btn btn-instagram "><b>สินค้าคงคลัง</b></a>
-                                        <a href="{{url('product/expday')}}" class="btn btn-instagram "><b>สินค้าใกล้หมดอายุ</b></a>
-                                        <a href="{{url('request/history')}}" class="btn btn-instagram "><b>รายการเบิกสินค้า</b></a>
-                                        <a href="{{url('product/delivery')}}" class="btn btn-instagram "><b>รายการส่งสินค้า</b></a>
-                                        <a href="{{url('order/history')}}" class="btn btn-instagram "><b>รายการสั่งซื้อ</b></a>
-                                        <br>
-                                        <br>
-                                    </div>
+                            <div class="col-md-12" align="right">
+                                <div class="row">
+                                    {{--<a href="{{url('request')}}" class="btn btn-instagram "><b>เบิกสินค้าจากคลัง</b></a>--}}
+                                    {{--<a href="{{url('receive-request')}}" class="btn btn-dropbox "><b>รับสินค้าเข้าร้าน</b></a>--}}
+                                    <a href="#" class="btn btn-instagram "><b>เบิกยา</b></a>
+                                    <a href="#" class="btn btn-instagram "><b>รับยา</b></a>
+                                    <a href="#" class="btn btn-dropbox "><b>ส่งคืน</b></a>
+                                    <a href="#" class="btn btn-instagram "><b>รายการเบิก</b></a>
+                                    <a href="#" class="btn btn-instagram "><b>สินค้าคงคลัง</b></a>
+                                    {{--<a href="#" class="btn btn-instagram "><b>รายการรับยา</b></a>--}}
                                 </div>
+                                <br>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading with-border">
-                                        <h2 class="panel-title"><i class="fa fa-level-up"></i> อ้างอิง </h2>
+                                        <h2 class="panel-title">เลขที่ใบรับยา </h2>
                                     </div>
-
                                     <div class="panel-body">
-                                        <div class="form-group" style="margin-bottom: 40px;">
-                                            <label class="col-sm-4 control-label">คลังสินค้า</label>
+                                        {{--<div class="form-group" style="margin-bottom: 40px;">--}}
+                                        {{--<label class="col-sm-4 control-label">คลังสินค้า</label>--}}
 
-                                            <div class="col-sm-8">
-                                                <select class="form-control" name="warehouse_id">
-                                                    @foreach($warehouse as $item)
-                                                        <option value="{{$item->branch_id}}">{{$item->branch_id}}
-                                                            - {{$item->branch_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+                                        {{--<div class="col-sm-8">--}}
+                                        {{--<select class="form-control" name="warehouse_id">--}}
+                                        {{--@foreach($warehouse as $item)--}}
+                                        {{--<option value="{{$item->branch_id}}">{{$item->branch_id}}--}}
+                                        {{--- {{$item->branch_name}}</option>--}}
+                                        {{--@endforeach--}}
+                                        {{--</select>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
                                         <div class="form-group vendorSearchBox">
-                                            <label class="col-sm-4 control-label">เลขที่การสั่งซื้อ</label>
+                                            <label class="col-sm-4 control-label">เลขที่ใบรับยา</label>
 
                                             <div class="col-sm-8">
                                                 <input class="form-control typeahead  order-input "
                                                        type="search"
                                                        value="<?php echo($data->order_id == 0 ? '' : $data->order_id)?>"
-                                                       placeholder="รหัสการสั่งซื้อ"></div>
+                                                       placeholder="เลขที่ใบรับยา"></div>
                                         </div>
-
-
                                     </div>
-
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="panel panel-default">
                                     <div class="panel-heading with-border">
-                                        <h2 class="panel-title"><i class="fa fa-truck"></i> Supplier</h2>
+                                        <h2 class="panel-title"><i class="fa fa-user"></i> พนักงาน </h2>
                                     </div>
-
                                     <div class="panel-body">
-                                        <div class="customerSearchBox" ng-hide="boxSearch"
-                                        >
-                                            <input class="form-control typeahead input-lg customer-input "
-                                                   type="search"
-                                                   placeholder="ระบุ ชื่อหรือรหัส Supplier">
+                                        <div class="form-group vendorSearchBox">
+                                            <label class="col-sm-4 control-label">พนักงาน</label>
 
-                                        </div>
-
-                                        <div class="customer" ng-show="boxSearch">
-                                            <ul>
-                                                <li>รหัสซัพพลายเออร์ | <span
-                                                            class="sale"><strong>@{{vendor.ven_id}}</strong></span>.
-                                                </li>
-                                                <li>ซัพพลายเออร์ | <span
-                                                            class="customer"><strong>@{{vendor.ven_name}}</strong></span>
-                                                </li>
-                                                <li>เบอร์โทร | <span
-                                                            class="customer"><strong>@{{ vendor.ven_sell_tel }}</strong></span><br>
-                                    <span><strong><a href="{{url('receive/removecustomer')}}">
-                                                เปลียนลูกค้า</a></strong></span>
-
-                                                </li>
-                                            </ul>
+                                            <div class="col-sm-8">
+                                                <input class="form-control typeahead  order-input "
+                                                       type="search"
+                                                       value="{{Auth::user()->name}}"
+                                                       placeholder="พนักงานส่งยา" disabled></div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="row">
 
+            <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading with-border">
@@ -173,13 +151,10 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="div row">
-                                        <div class="col-md-1">
-                                            <i ng-if="dataLoading" class="fa fa-spinner fa-spin loading"></i>
-                                        </div>
-                                    </div>
+
                                     <div class="row">
-                                        <table class="table tablesorter table-bordered table-striped table-hover" ng-table="tableParams">
+                                        <table class="table tablesorter table-bordered table-striped table-hover"
+                                               ng-table="tableParams">
                                             <tr ng-repeat="item in product">
                                                 <td style="width: 5px">
                                                     <button class="btn btn-box-tool" data-widget="remove"
@@ -200,7 +175,7 @@
                                                            ng-change="update('product_exp',item.product_id,item.product_exp)"
                                                            datepicker/>
                                                 </td>
-                                                <td data-title="'จำนวนที่รับ'" style="width: 100px">
+                                                <td data-title="'จำนวนที่รับ'" style="width: 80px">
                                                     <input type="number"
                                                            ng-model="item.receive_de_qty"
                                                            ng-change="update('receive_de_qty',item.product_id,item.receive_de_qty)"
@@ -219,14 +194,14 @@
                                                             / @{{ item.product.product_unit }}</div>
                                                     </div>
                                                 </td>
-                                                <td data-title="'ส่วนลดเปอร์เช็น'" style="width: 150px">
+                                                <td data-title="'ส่วนลดเปอร์เช็น'" style="width: 80px">
                                                     <input type="number"
                                                            ng-model="item.receive_de_discount"
                                                            ng-change="update('receive_de_discount',item.product_id,item.receive_de_discount)"
                                                            ng-model-options="{debounce: 750}"
                                                            class="form-control">
                                                 </td>
-                                                <td data-title="'ส่วนลดจำนวนเงิน'" style="width: 150px">
+                                                <td data-title="'ส่วนลดจำนวนเงิน'" style="width: 100px">
                                                     <input type="text"
                                                            ng-model="item.receive_de_disamount"
                                                            ng-change="update('receive_de_disamount',item.product_id,item.receive_de_disamount)"
@@ -255,10 +230,14 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="8" class="total-price"></td>
-                                               <td><button href="{{url('receive/save')}}"
-                                                           class="btn btn-md btn-bitbucket btn-block pull-right">รับสินค้า</button></td>
+                                                <td>
+                                                    <button href="{{url('receive/save')}}"
+                                                            class="btn btn-md btn-bitbucket btn-block pull-right">รับสินค้า
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -283,12 +262,11 @@
         var today = dd + '/' + mm + '/' + yyyy;
         $(document).ready(function () {
 
-
             var productDb = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/receive/productdata?q=%QUERY',
+                    url: '/receive-request/productdata?q=%QUERY',
                     //url: '/quotations/course_query?q=%QUERY',
                     wildcard: '%QUERY'
                 }
@@ -297,7 +275,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '/receive/ordersearch?q=%QUERY',
+                    url: '/receive-request/ordersearch?q=%QUERY',
                     //url: '/quotations/course_query?q=%QUERY',
                     wildcard: '%QUERY'
                 }
